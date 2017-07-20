@@ -7,7 +7,7 @@ public:
 	Status( );
 	virtual ~Status( );	
 public:
-	struct STATUS{
+	struct STATUS {
 		Vector device_dir;
 		unsigned char device_button;
 		unsigned char state;

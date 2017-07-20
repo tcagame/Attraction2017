@@ -2,6 +2,7 @@
 #include "Drawer.h"
 #include "define.h"
 #include "Status.h"
+#include "Device.h"
 
 const int STATUS_FLAME_X = 5;
 const int STATUS_FLAME_Y = 5;
@@ -32,6 +33,8 @@ const int DEVICE_FLAME_HEIGHT = 30;
 StatusDrawer::StatusDrawer( ) {
 	for ( int i = 0; i < PLAYER_NUM; i++ ) {
 		_status[ i ] = Status::STATUS( );
+		_status[ i ].continue_num = i * 2;
+		_status[ i ].power = i + i * 2;
 		_status[ i ].device_dir = Vector( );
 		_status[ i ].device_button = 0x00000000;
 	}
@@ -84,10 +87,10 @@ void StatusDrawer::drawDeviceNum( ) const {
 	drawer->drawLine( DEVICE_FLAME_X, DEVICE_FLAME_Y, DEVICE_FLAME_X, DEVICE_FLAME_Y + DEVICE_FLAME_HEIGHT );
 	drawer->drawLine( DEVICE_FLAME_X + 100, DEVICE_FLAME_Y, DEVICE_FLAME_X + 100, DEVICE_FLAME_Y + DEVICE_FLAME_HEIGHT );
 	drawer->drawLine( DEVICE_FLAME_X + DEVICE_FLAME_WIDTH, DEVICE_FLAME_Y, DEVICE_FLAME_X + DEVICE_FLAME_WIDTH, DEVICE_FLAME_Y + DEVICE_FLAME_HEIGHT );
-	//string
+	//device num •\Ž¦
 	int sx = STATUS_FLAME_X + 5;
 	int sy = STATUS_FLAME_Y + BOX_HEIGHT * 5 + 20;
-	drawer->drawString( sx, sy, "Device Num   %d", 0 );
+	drawer->drawString( sx, sy, "Device Num   %d", Device::getTask( )->getDeviceNum( ) );
 }
 
 void StatusDrawer::drawPlayer( ) const {
