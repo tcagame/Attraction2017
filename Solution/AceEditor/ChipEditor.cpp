@@ -7,7 +7,7 @@
 #include "Drawer.h"
 #include "ace_define.h"
 
-const std::string DIRECTORY = "../Resource/MapData/";
+const std::string DIRECTORY = "../Resource/Ace/MapData/";
 
 ChipEditor::ChipEditor( DataPtr data, ChipCursorConstPtr chip_cursor ) :
 _data( data ),

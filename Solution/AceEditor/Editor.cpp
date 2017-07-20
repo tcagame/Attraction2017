@@ -33,7 +33,7 @@ Editor::~Editor( ) {
 
 void Editor::initialize( ) {
 	// drawer‰Šú‰»Œã
-	ImagePtr menu_image = Drawer::getTask( )->createImage( "Ace/Editor/Menu/menu.png" );
+	ImagePtr menu_image = Drawer::getTask( )->createImage( "Menu/menu.png" );
 	GroundPtr ground = GroundPtr( new Ground );
 	StructurePtr structure = StructurePtr( new Structure );
 
