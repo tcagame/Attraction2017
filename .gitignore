@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Solution/RockServer/x64/
 Solution/RockCommon/x64/
 Solution/RockServer/Log.txt
@@ -7,3 +8,15 @@ Solution/RockApp/Log.txt
 *.suo
 *.db
 *.opendb
+=======
+*.db
+*.opendb
+Solution/x64/
+Solution/AceCommon/x64/
+*.suo
+Solution/RockEditor/x64/
+Solution/AceEditor/x64/
+Solution/AceApp/x64/
+>>>>>>> 958b8a1d77a4972a63cbc9a96a1b1faad78c0229
+Solution/AceApp/Log.txt
+Solution/AceEditor/Log.txt
