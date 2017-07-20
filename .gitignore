@@ -1,0 +1,9 @@
+Solution/RockServer/x64/
+Solution/RockCommon/x64/
+Solution/RockServer/Log.txt
+Solution/x64/
+Solution/RockApp/x64/
+Solution/RockApp/Log.txt
+*.suo
+*.db
+*.opendb
