@@ -1,0 +1,6 @@
+*.db
+*.opendb
+Solution/x64/
+Solution/AceCommon/x64/
+*.suo
+Solution/RockEditor/x64/
