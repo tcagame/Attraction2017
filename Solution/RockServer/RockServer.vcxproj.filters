@@ -2,5 +2,15 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Command.cpp" />
+    <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="Log.cpp" />
+    <ClCompile Include="StatusDrawer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Command.h" />
+    <ClInclude Include="Controller.h" />
+    <ClInclude Include="Log.h" />
+    <ClInclude Include="StatusDrawer.h" />
   </ItemGroup>
 </Project>

@@ -158,12 +158,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Command.cpp" />
+    <ClCompile Include="Controller.cpp" />
+    <ClCompile Include="Log.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="StatusDrawer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Framework2017ver2\Framework2017Ver2.vcxproj">
       <Project>{0bd19263-3452-4219-af86-db8b26e4ee02}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\RockCommon\RockCommon.vcxproj">
+      <Project>{8952960e-64a2-407e-9ed9-004d9a7d129b}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Command.h" />
+    <ClInclude Include="Controller.h" />
+    <ClInclude Include="Log.h" />
+    <ClInclude Include="StatusDrawer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
