@@ -257,7 +257,7 @@ void ChipMenu::draw( ) const {
 					if ( idx != 0 ) {
 						int tw = 0;
 						int th = 0;
-						ImagePtr ground = _ground->getImage( idx );
+						ImagePtr ground = _ground->getImage( idx - 1 );
 						ground->getImageSize( tw, th );
 						ground->setRect( 0, 0, tw, th );
 						ground->setPos( sx1, sy1, sx2, sy2 );
@@ -303,7 +303,7 @@ void ChipMenu::draw( ) const {
 					if ( idx != 0 ) {
 						int tw = 0;
 						int th = 0;
-						ImagePtr structure = _structure->getImage( idx );
+						ImagePtr structure = _structure->getImage( idx - 1 );
 						structure->getImageSize( tw, th );
 						structure->setRect( 0, 0, tw, th );
 						structure->setPos( sx1, sy1, sx2, sy2 );
