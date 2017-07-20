@@ -21,6 +21,7 @@ public:
 	StatusDrawer( );
 	virtual ~StatusDrawer( );
 public:
+	void update( ); // debug用　クライアント出来次第削除
 	void draw( ) const;
 private:
 	void drawFlame( ) const;

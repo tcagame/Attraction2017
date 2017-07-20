@@ -33,16 +33,29 @@ const int DEVICE_FLAME_HEIGHT = 30;
 StatusDrawer::StatusDrawer( ) {
 	for ( int i = 0; i < PLAYER_NUM; i++ ) {
 		_status[ i ] = Status::STATUS( );
-		_status[ i ].continue_num = i * 2;
+		_status[ i ].state = STATE_STREET_2;
+		_status[ i ].continue_num = ( i + 1 ) * 2;
 		_status[ i ].power = i + i * 2;
-		_status[ i ].device_dir = Vector( );
-		_status[ i ].device_button = 0x00000000;
 	}
 }
 
 
 StatusDrawer::~StatusDrawer( ) {
 
+}
+
+void StatusDrawer::update( ) {
+	DevicePtr device( Device::getTask( ) );
+	for ( int i = 0; i < PLAYER_NUM; i++ ) {
+		_status[ i ].device_dir = Vector( device->getDirX( i ), device->getDirY( i ) );
+		_status[ i ].device_button = device->getButton( i );
+	}
+	for ( int i = 0; i < PLAYER_NUM; i++ ) {
+		if ( _status[ i ].device_button == 0x00001111 ) {
+			_status[ i ] = Status::STATUS( );
+			_status[ i ].state = STATE_ENTRY;
+		}
+	}
 }
 
 void StatusDrawer::draw( ) const {
@@ -147,7 +160,7 @@ void StatusDrawer::drawState( ) const {
 	drawer->drawString( sx, sy, "STATE" );
 	for ( int i = 0; i < PLAYER_NUM; i++ ) {
 		sy += BOX_HEIGHT;
-		drawer->drawString( sx, sy, "%d", _status[ i ].state );
+		drawer->drawString( sx, sy, "%s", Status::BToS( _status[ i ].state ).c_str( ) );
 	}
 }
 

@@ -8,6 +8,8 @@ Status::~Status( ) {
 }
 
 Status::STATUS::STATUS( ) :
+device_dir( Vector( ) ),
+device_button( 0x00000000 ),
 state( 0x00000000 ),
 continue_num( 0x00000000 ),
 toku( 0x00000000 ),
