@@ -25,7 +25,7 @@ void ObjectGuide::draw( ) const {
 	int sy = GUIDE_Y + _object_cursor->getGY( ) * OBJECT_GUIDE_SIZE;
 	if ( _object_cursor->getGX( ) >= 0 ||
 		 _object_cursor->getGY( ) >= 0 ) {
-		_image->setPos( Vector( sx, sy ) );
+		_image->setPos( sx, sy );
 		_image->draw( );
 	}
 	// ƒ‰ƒCƒ“

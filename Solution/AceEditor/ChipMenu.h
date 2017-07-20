@@ -32,8 +32,6 @@ private:
 	TAG _select_tag;
 	int _ground_page_num;
 	int _structure_page_num;
-	std::array< GRAPH, GROUND_LIST_NUM	  > _graph_ground;
-	std::array< GRAPH, STRUCTURE_LIST_NUM > _graph_structure;
 	int _page;
 	ImagePtr _image;
 	GroundConstPtr _ground;

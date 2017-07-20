@@ -37,7 +37,7 @@ void ObjectMenu::draw( ) const {
 		int th = 32;
 		int sx2 = sx1 + WINDOW_WIDTH;
 		int sy2 = sy1 + WINDOW_HEIGHT;
-		_image->setPos( Vector( sx1, sy1 ), Vector( sx2, sy2 ) );
+		_image->setPos( sx1, sy1, sx2, sy2 );
 		_image->setRect( tx, ty, tw, th );
 		_image->draw( );
 	}

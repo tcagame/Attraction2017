@@ -82,7 +82,7 @@ void ChipGuide::draw( ) const {
 			int sy = GUIDE_Y + gy * CHIP_HEIGHT / 2;
 			sx += ( gy % 2 ) * CHIP_WIDTH / 2;	//‰¡‚É‚¸‚ç‚·
 
-			_image_chip_guide->setPos( Vector( sx, sy ) );
+			_image_chip_guide->setPos( sx, sy );
 			_image_chip_guide->setRect( tx, ty, CHIP_WIDTH, CHIP_HEIGHT );
 			_image_chip_guide->draw( );
 			if ( height > 0 ) {

@@ -47,8 +47,8 @@ _ground( ground ),
 _structure( structure ) {
 	int ground_size = ground->getSize( );
 	int structure_size = structure->getSize( );
-	_ground_page_num = ( ground->getSize( ) + 1 ) / ( GROUND_HEIGHT_NUM * GROUND_WIDTH_NUM );
-	_structure_page_num = ( structure->getSize( ) + 1 ) / ( STRUCTURE_HEIGHT_NUM * STRUCTURE_WIDTH_NUM );
+	_ground_page_num = ( ground->getSize( ) - 1 ) / ( GROUND_HEIGHT_NUM * GROUND_WIDTH_NUM );
+	_structure_page_num = ( structure->getSize( ) - 1 ) / ( STRUCTURE_HEIGHT_NUM * STRUCTURE_WIDTH_NUM );
 
 }
 
@@ -173,7 +173,7 @@ void ChipMenu::draw( ) const {
 		int th = 32;
 		int sx2 = sx1 + FRAME_WINDOW_WIDTH;
 		int sy2 = sy1 + FRAME_WINDOW_HEIGHT;
-		_image->setPos( Vector( sx1, sy1 ), Vector( sx2, sy2 ) );
+		_image->setPos( sx1, sy1, sx2, sy2 );
 		_image->setRect( tx, ty, tw, th );
 		_image->draw( );
 	}
@@ -186,7 +186,7 @@ void ChipMenu::draw( ) const {
 		int th = 32;
 		int sx2 = sx1 + BG_WIDTH;
 		int sy2 = sy1 + BG_HEIGHT;
-		_image->setPos( Vector( sx1, sy1 ), Vector( sx2, sy2 ) );
+		_image->setPos( sx1, sy1, sx2, sy2 );
 		_image->setRect( tx, ty, tw, th );
 		_image->draw( );
 	}
@@ -203,13 +203,16 @@ void ChipMenu::draw( ) const {
 			if ( _select_tag == i ) {
 				tx -= 32;
 			}
-			_image->setPos( Vector( sx1, sy1 ), Vector( sx2, sy2 ) );
+			tw = 32;
+			ty = 32;
+			_image->setPos( sx1, sy1, sx2, sy2 );
 			_image->setRect( tx, ty, tw, th );
 			_image->draw( );
+
 			tx = 0;
 			ty = 64 + i * 32;
 			tw = TAG_GRAPH_WIDTH;
-			_image->setPos( Vector( sx1, sy1 ), Vector( sx2, sy2 ) );
+			_image->setPos( sx1, sy1, sx2, sy2 );
 			_image->setRect( tx, ty, tw, th );
 			_image->draw( );
 			drawer->drawLine( sx2, sy1, sx2, sy2 );
@@ -227,17 +230,18 @@ void ChipMenu::draw( ) const {
 			int ty = 32 * 1;
 			int sx2 = sx1 + PAGE_ARROW_SIZE;
 			int sy2 = sy1 + PAGE_ARROW_SIZE;
-			_image->setPos( Vector( sx1, sy1 ), Vector( sx2, sy2 ) );
+			_image->setPos( sx1, sy1, sx2, sy2 );
 			_image->setRect( tx, ty, PAGE_ARROW_SIZE, PAGE_ARROW_SIZE );
 			_image->draw( );
 			sx1 = ( int )_pos.x + FRAME_WINDOW_WIDTH / 2 + PAGE_ARROW_DISTANCE_CENTER + PAGE_ARROW_SIZE;
 			sx2 = sx1 - PAGE_ARROW_SIZE;
-			_image->setPos( Vector( sx1, sy1 ), Vector( sx2, sy2 ) );
+			_image->setPos( sx1, sy1, sx2, sy2 );
 			_image->setRect( tx, ty, PAGE_ARROW_SIZE, PAGE_ARROW_SIZE );
 			_image->draw( );
 		}
 		{//ground
 			int add = _page * GROUND_HEIGHT_NUM * GROUND_WIDTH_NUM;
+			int ground_size = _ground->getSize( );
 			for ( int i = 0; i < GROUND_HEIGHT_NUM; i++ ) {
 				int y = i;
 				int sx1 = ( int )_pos.x + GROUND_X;
@@ -247,8 +251,7 @@ void ChipMenu::draw( ) const {
 				for ( int j = 0; j < GROUND_WIDTH_NUM; j++ ) {
 					int x = j;
 					int idx = x + y * GROUND_WIDTH_NUM + add;
-					GRAPH graph = _graph_ground[ idx ];
-					if ( graph == GRAPH_CHIP_GROUND_END ) {
+					if ( idx >= ground_size ) {
 						break;
 					}
 					if ( idx != 0 ) {
@@ -257,7 +260,7 @@ void ChipMenu::draw( ) const {
 						ImagePtr ground = _ground->getImage( idx );
 						ground->getImageSize( tw, th );
 						ground->setRect( 0, 0, tw, th );
-						ground->setPos( Vector( sx1, sy1 ), Vector( sx2, sy2 ) );
+						ground->setPos( sx1, sy1, sx2, sy2 );
 						ground->draw( );
 					}
 					sx1 += GROUND_SIZE;
@@ -272,16 +275,18 @@ void ChipMenu::draw( ) const {
 			int sy1 = ( int )_pos.y + PAGE_ARROW_Y;
 			int tx = 32 * 4;
 			int ty = 32 * 1;
+			int sx2 = sx1 + PAGE_ARROW_SIZE;
+			int sy2 = sy1 + PAGE_ARROW_SIZE;
 			_image->setRect( tx, ty, PAGE_ARROW_SIZE, PAGE_ARROW_SIZE );
-			_image->setPos( Vector( sx1, sy1 ) );
+			_image->setPos( sx1, sy1, sx2, sy2 );
 			_image->draw( );
 			sx1 = ( int )_pos.x + FRAME_WINDOW_WIDTH / 2 + PAGE_ARROW_DISTANCE_CENTER + PAGE_ARROW_SIZE;
-			int sx2 = sx1 - PAGE_ARROW_SIZE;
-			int sy2 = sy1 + PAGE_ARROW_SIZE;
-			_image->setPos( Vector( sx1, sy1 ) );
+			sx2 = sx1 - PAGE_ARROW_SIZE;
+			_image->setPos( sx1, sy1, sx2, sy2 );
 			_image->draw( );
 		}
-		{
+		{//structure
+			int structure_size = _structure->getSize( );
 			int add = _page * STRUCTURE_HEIGHT_NUM * STRUCTURE_WIDTH_NUM;
 			for ( int i = 0; i < STRUCTURE_HEIGHT_NUM; i++ ) {
 				int y = i;
@@ -292,8 +297,7 @@ void ChipMenu::draw( ) const {
 				for ( int j = 0; j < STRUCTURE_WIDTH_NUM; j++ ) {
 					int x = j;
 					int idx = x + y * STRUCTURE_WIDTH_NUM + add;
-					GRAPH graph = _graph_structure[ idx ];
-					if ( graph == GRAPH_CHIP_STRUCTURE_END ) {
+					if ( idx >= structure_size ) {
 						break;
 					}
 					if ( idx != 0 ) {
@@ -302,7 +306,7 @@ void ChipMenu::draw( ) const {
 						ImagePtr structure = _structure->getImage( idx );
 						structure->getImageSize( tw, th );
 						structure->setRect( 0, 0, tw, th );
-						structure->setPos( Vector( sx1, sy1 ), Vector( sx2, sy2 ) );
+						structure->setPos( sx1, sy1, sx2, sy2 );
 						structure->draw( );
 					}
 					sx1 += STRUCTURE_SIZE;
@@ -318,7 +322,7 @@ void ChipMenu::draw( ) const {
 			for ( int i = 0; i < 10; i++ ) {
 				int tx = ( i % 8 ) * NUMBER_CHIP_SIZE;
 				int ty = ( i / 8 ) * NUMBER_CHIP_SIZE;
-				_image->setPos( Vector( sx, sy ) );
+				_image->setPos( sx, sy );
 				_image->setRect( tx, ty, NUMBER_CHIP_SIZE, NUMBER_CHIP_SIZE );
 				_image->draw( );
 				sx += NUMBER_CHIP_SIZE;

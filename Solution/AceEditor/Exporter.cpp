@@ -34,13 +34,13 @@ void Exporter::draw( ) {
 
 	
 	{
-		_image_progress->setPos( Vector( sx, sy ) );
+		_image_progress->setPos( sx, sy );
 		_image_progress->setRect(  0, PROGRESS_HEIGHT, PROGRESS_WIDTH * _now / _max, PROGRESS_HEIGHT );
 		_image_progress->draw( );
 	}
 
 	{
-		_image_progress->setPos( Vector( sx, sy ) );
+		_image_progress->setPos( sx, sy );
 		_image_progress->setRect(  0, 0, PROGRESS_WIDTH, PROGRESS_HEIGHT );
 		_image_progress->draw( );
 	}

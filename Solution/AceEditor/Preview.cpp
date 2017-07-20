@@ -67,13 +67,14 @@ void Preview::draw( ) const {
 				}
 			}
 			if ( select ) { // 選んでいるチップ表示
-				_image_choice_back->setPos( Vector( sx, 0 ) );
+				_image_choice_back->setPos( sx, 0 );
 				_image_choice_back->draw( );
 			}
 			int ground_num = _data->getGroundData( mx, my );
 			if ( ground_num > 0 ) { //地面
 				ImagePtr ground = _ground->getImage( ground_num - 1 );
-				ground->setPos( Vector( sx, sy ) );
+				ground->setPos( sx, sy );
+				ground->setRect( );
 				ground->draw( );
 			}
 			int structure_num = _data->getStructureData( mx, my );
@@ -82,19 +83,20 @@ void Preview::draw( ) const {
 				int width = 0;
 				int height = 0;
 				structure->getImageSize( width, height );
-				structure->setPos( Vector( sx, sy - height + CHIP_HEIGHT ) );
+				structure->setPos( sx, sy - height + CHIP_HEIGHT );
+				structure->setRect( );
 				structure->draw( );
 			}
 
 			if ( select ) {// 選んでいるチップ表示
-				_image_choice_front->setPos( Vector( sx, 0 ) );
+				_image_choice_front->setPos( sx, 0 );
 				_image_choice_front->draw( );
 			}
 		}
 	}
 	{//作成した画像を描画
 		drawer->setImageTarget( );
-		_image_background->setPos( Vector( PREVIEW_X, PREVIEW_Y ) );
+		_image_background->setPos( PREVIEW_X, PREVIEW_Y );
 		_image_background->draw( );
 	}
 }
