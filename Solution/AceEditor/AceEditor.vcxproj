@@ -158,12 +158,42 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ChipCursor.cpp" />
+    <ClCompile Include="ChipEditor.cpp" />
+    <ClCompile Include="ChipGuide.cpp" />
+    <ClCompile Include="ChipMenu.cpp" />
+    <ClCompile Include="Data.cpp" />
+    <ClCompile Include="Editor.cpp" />
+    <ClCompile Include="Exporter.cpp" />
+    <ClCompile Include="Ground.cpp" />
+    <ClCompile Include="Information.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ObjectCursor.cpp" />
+    <ClCompile Include="ObjectGuide.cpp" />
+    <ClCompile Include="ObjectMenu.cpp" />
+    <ClCompile Include="Preview.cpp" />
+    <ClCompile Include="Structure.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Framework2017ver2\Framework2017Ver2.vcxproj">
       <Project>{0bd19263-3452-4219-af86-db8b26e4ee02}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ChipCursor.h" />
+    <ClInclude Include="ChipEditor.h" />
+    <ClInclude Include="ChipGuide.h" />
+    <ClInclude Include="ChipMenu.h" />
+    <ClInclude Include="Data.h" />
+    <ClInclude Include="Editor.h" />
+    <ClInclude Include="Exporter.h" />
+    <ClInclude Include="Ground.h" />
+    <ClInclude Include="Information.h" />
+    <ClInclude Include="ObjectCursor.h" />
+    <ClInclude Include="ObjectGuide.h" />
+    <ClInclude Include="ObjectMenu.h" />
+    <ClInclude Include="Preview.h" />
+    <ClInclude Include="Structure.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
