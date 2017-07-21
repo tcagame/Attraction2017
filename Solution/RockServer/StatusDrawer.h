@@ -36,6 +36,7 @@ private:
 	void drawMoney( ) const;
 	void drawPower( ) const;
 private:
+	std::array< int, PLAYER_NUM > _reset_count;
 	std::array<Status::STATUS, PLAYER_NUM > _status;
 };
 
