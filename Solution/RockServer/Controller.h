@@ -6,6 +6,7 @@
 PTR( Controller );
 PTR( Command );
 PTR( StatusDrawer );
+PTR( StatusSender );
 
 class Controller : public Task {
 public:
@@ -25,5 +26,6 @@ private:
 private:
 	CommandPtr _command;
 	StatusDrawerPtr _status_drawer;
+	StatusSenderPtr _status_sender;
 };
 

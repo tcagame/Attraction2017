@@ -3,6 +3,7 @@
 #include "define.h"
 #include "Command.h"
 #include "StatusDrawer.h"
+#include "StatusSender.h"
 
 const int STATUS_FLAME_X = 5;
 const int STATUS_FLAME_Y = 5;
@@ -21,11 +22,11 @@ Controller::~Controller( ) {
 
 void Controller::initialize( ) {
 	_command = CommandPtr ( new Command );
-	_status_drawer = StatusDrawerPtr( new StatusDrawer );
+	_status_sender = StatusSenderPtr( new StatusSender );
+	_status_drawer = StatusDrawerPtr( new StatusDrawer( _status_sender ) );
 }
 
 void Controller::update( ) {
-	_status_drawer->update( );
 	Drawer::getTask( )->flip( );
 	drawFlame( );
 	_command->update( );

@@ -1,7 +1,9 @@
 #pragma once
 #include <array>
-#include "Status.h"
 #include "Server.h"
+#include <string>
+
+PTR( StatusSender );
 
 class StatusDrawer {
 public:
@@ -18,10 +20,9 @@ public:
 		MAX_TAG,
 	};
 public:
-	StatusDrawer( );
+	StatusDrawer( StatusSenderConstPtr status_sender );
 	virtual ~StatusDrawer( );
 public:
-	void update( ); // debug用　クライアント出来次第削除
 	void draw( ) const;
 private:
 	void drawFlame( ) const;
@@ -35,8 +36,8 @@ private:
 	void drawItem( ) const;
 	void drawMoney( ) const;
 	void drawPower( ) const;
+	std::string BToS( unsigned char b ) const;
 private:
-	std::array< int, PLAYER_NUM > _reset_count;
-	std::array<Status::STATUS, PLAYER_NUM > _status;
+	StatusSenderConstPtr _status_sender; 
 };
 

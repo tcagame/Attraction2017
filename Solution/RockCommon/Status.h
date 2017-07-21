@@ -2,13 +2,12 @@
 #include <string>
 #include "mathmatics.h"
 
-class Status{
-public:
-	Status( );
-	virtual ~Status( );	
-public:
+const int ROCK_PLAYER_NUM = 4;
+
+struct ROCK_DATA {
 	struct STATUS {
-		Vector device_dir;
+		char device_x;
+		char device_y;
 		unsigned char device_button;
 		unsigned char state;
 		unsigned char continue_num;
@@ -16,9 +15,18 @@ public:
 		unsigned char item;
 		unsigned char money;
 		unsigned char power;
-		STATUS( );
+		STATUS( ) :
+			device_x( 0 ),
+			device_y( 0 ),
+			device_button( 0x00000000 ),
+			state( 0x00000000 ),
+			continue_num( 0x00000000 ),
+			toku( 0x00000000 ),
+			item( 0x00000000 ),
+			money( 0x00000000 ),
+			power( 0x00000000 ) {
+		}
 	};
-public:
-	static std::string BToS( unsigned char b );
+	STATUS player[ ROCK_PLAYER_NUM ];
 };
 
