@@ -5,7 +5,8 @@
 #include "ObjectCursor.h"
 #include "Image.h"
 
-ObjectGuide::ObjectGuide( ObjectCursorConstPtr object_cursor ) :
+ObjectGuide::ObjectGuide( DataConstPtr data, ObjectCursorConstPtr object_cursor ) :
+_data( data ),
 _object_cursor( object_cursor ) {
 	DrawerPtr drawer = Drawer::getTask( );
 	_image = drawer->createImage( "guide/object_guide_cursor.png" );
@@ -20,12 +21,25 @@ void ObjectGuide::update( ) {
 
 void ObjectGuide::draw( ) const {
 	DrawerPtr drawer( Drawer::getTask( ) );
+	// block表示
+	for ( int i = 0; i < OBJECT_CHIP_WIDTH_NUM; i++ ) {
+		for ( int j = 0; j < OBJECT_CHIP_HEIGHT_NUM; j++ ) {
+			int ox = ( i + _object_cursor->getScrollX( ) ) % ( _data->getPageNum( ) * PAGE_OBJECT_WIDTH_NUM );
+			int oy = j;
+			if ( _data->getBlockData( ox, oy ) == OBJECT_BLOCK ) {
+				_image->setPos( PREVIEW_X + i * OBJECT_GUIDE_SIZE, GUIDE_Y + j * OBJECT_GUIDE_SIZE );
+				_image->setRect( 0, 0, 16, 16 );
+				_image->draw( );
+			}
+		}
+	}
 	// カーソル
 	int sx = PREVIEW_X + _object_cursor->getGX( ) * OBJECT_GUIDE_SIZE;
 	int sy = GUIDE_Y + _object_cursor->getGY( ) * OBJECT_GUIDE_SIZE;
 	if ( _object_cursor->getGX( ) >= 0 ||
 		 _object_cursor->getGY( ) >= 0 ) {
 		_image->setPos( sx, sy );
+		_image->setRect( 0, 16, 16, 32 );
 		_image->draw( );
 	}
 	// ライン

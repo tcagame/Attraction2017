@@ -9,6 +9,7 @@ public:
 	virtual ~ChipCursor( );
 public:
 	void update( );
+	void setScrollX( int scroll_x );
 	int getScrollX( ) const;
 	int getGX( ) const;
 	int getGY( ) const;

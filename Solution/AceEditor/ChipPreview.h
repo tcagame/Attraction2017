@@ -11,10 +11,10 @@ PTR( ImageTarget );
 PTR( Ground );
 PTR( Structure );
 
-class Preview {
+class ChipPreview {
 public:
-	Preview( DataConstPtr data, ChipCursorConstPtr chip_cursor, ChipEditorConstPtr chip_editor, GroundConstPtr ground, StructureConstPtr structure );
-	virtual ~Preview( );
+	ChipPreview( DataConstPtr data, ChipCursorConstPtr chip_cursor, ChipEditorConstPtr chip_editor, GroundConstPtr ground, StructureConstPtr structure );
+	virtual ~ChipPreview( );
 public:
 	void update( );
 	void draw( ) const;
