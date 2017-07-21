@@ -1,21 +1,26 @@
 #include "Editor.h"
-#include "Drawer.h"
+
 #include "Application.h"
-#include "ChipPreview.h"
-#include "ChipGuide.h"
-#include "Data.h"
-#include "Information.h"
-#include "ChipCursor.h"
-#include "ChipEditor.h"
-#include "Exporter.h"
-#include "ChipMenu.h"
-#include "ObjectGuide.h"
-#include "ObjectPreview.h"
-#include "ObjectCursor.h"
-#include "ObjectEditor.h"
-#include "ObjectMenu.h"
+#include "Drawer.h"
 #include "Mouse.h"
 #include "Keyboard.h"
+
+#include "ChipCursor.h"
+#include "ChipEditor.h"
+#include "ChipGuide.h"
+#include "ChipPreview.h"
+#include "ChipMenu.h"
+#include "ChipDrawer.h"
+
+#include "ObjectCursor.h"
+#include "ObjectEditor.h"
+#include "ObjectGuide.h"
+#include "ObjectPreview.h"
+#include "ObjectMenu.h"
+
+#include "Data.h"
+#include "Information.h"
+#include "Exporter.h"
 #include "Ground.h"
 #include "Structure.h"
 
@@ -40,18 +45,21 @@ void Editor::initialize( ) {
 	StructurePtr structure = StructurePtr( new Structure );
 
 	DataPtr data    = DataPtr		  ( new Data );
+	ChipDrawerPtr chip_drawer = ChipDrawerPtr( new ChipDrawer( data, ground, structure ) );
+	_exporter       = ExporterPtr     ( new Exporter     ( data, chip_drawer ) );
+
 	_chip_cursor    = ChipCursorPtr	  ( new ChipCursor   ( data ) );
 	_chip_editor    = ChipEditorPtr	  ( new ChipEditor   ( data, _chip_cursor ) );
 	_chip_guide     = ChipGuidePtr	  ( new ChipGuide	 ( data, _chip_cursor, _chip_editor ) );
-	_chip_preview   = ChipPreviewPtr  ( new ChipPreview  ( data, _chip_cursor, _chip_editor, ground, structure ) );
+	_chip_preview   = ChipPreviewPtr  ( new ChipPreview  ( data, _chip_cursor, _chip_editor, chip_drawer ) );
 	_chip_menu	    = ChipMenuPtr	  ( new ChipMenu	 ( menu_image, _chip_editor, ground, structure ) );
+
 	_object_cursor  = ObjectCursorPtr ( new ObjectCursor ( data ) );
 	_object_editor  = ObjectEditorPtr ( new ObjectEditor ( data, _object_cursor ) );
 	_object_guide   = ObjectGuidePtr  ( new ObjectGuide  ( data, _object_cursor ) );
 	_object_preview = ObjectPreviewPtr( new ObjectPreview( data, _object_cursor ) );
 	_object_menu    = ObjectMenuPtr   ( new ObjectMenu   ( menu_image ) );
 	_information    = InformationPtr  ( new Information  ( data, _chip_cursor, _object_cursor, _chip_editor ) );
-	_exporter       = ExporterPtr	  ( new Exporter     ( data ) );
 }
 
 

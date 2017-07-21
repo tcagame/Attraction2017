@@ -19,6 +19,7 @@ PTR( ObjectMenu );
 PTR( Exporter );
 PTR( Ground );
 PTR( Structure );
+PTR( ChipDrawer );
 
 class Editor : public Task {
 public:

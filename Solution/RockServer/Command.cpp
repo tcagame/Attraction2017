@@ -5,6 +5,8 @@
 #include "Log.h"
 #include <sstream>
 #include "Server.h"
+#include <algorithm>
+#include <iostream>
 
 const unsigned char BACKSPACE = 0x08;
 const unsigned char ENTER = 0x0d;
@@ -91,7 +93,9 @@ void Command::drawString( ) const {
 
 std::vector< std::string > Command::getSpritCommand( ) const {
 	std::vector< std::string > result = { };
-	std::stringstream ss( _command );
+	std::string str = _command;
+	std::transform( str.begin( ), str.end( ), str.begin( ), tolower );//¬•¶š‚É•ÏŠ·
+	std::stringstream ss( str );
 	std::string buffer;
 	while ( std::getline( ss, buffer, ' ' ) ) {
 		result.push_back( buffer );

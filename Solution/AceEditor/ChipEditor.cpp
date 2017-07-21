@@ -51,47 +51,6 @@ int ChipEditor::getRange( ) const {
 void ChipEditor::updateMode( ) {
 	// sutructuer&ground chip の編集
 	KeyboardPtr key = Keyboard::getTask( );
-	// sutructrue 削除
-	if ( key->isPushKey( "0" ) ) {
-		_mode = MODE_STRUCTURE;
-		_number = 0;
-	}
-	// sutructure 配置
-	for ( int i = 1; i < 7; i++ ) {
-		KeyboardPtr keyboard = Keyboard::getTask( );
-		std::string num = std::to_string( i );
-		if ( keyboard->isPushKey( num ) ) {
-			_number = i;
-			_mode = MODE_STRUCTURE;
-		}
-	}
-
-	// ground 削除
-	if ( key->isPushKey( "Q" ) ) {
-		_mode = MODE_GROUND;
-		_number = 0;
-	}
-	// ground 配置
-	if ( key->isPushKey( "W" ) ) {
-		_mode = MODE_GROUND;
-		_number = 1;
-	}
-	if ( key->isPushKey( "E" ) ) {
-		_mode = MODE_GROUND;
-		_number = 2;
-	}
-	if ( key->isPushKey( "R" ) ) {
-		_mode = MODE_GROUND;
-		_number = 3;
-	}
-	if ( key->isPushKey( "T" ) ) {
-		_mode = MODE_GROUND;
-		_number = 4;
-	}
-	if ( key->isPushKey( "Y" ) ) {
-		_mode = MODE_GROUND;
-		_number = 5;
-	}
 	if ( key->isPushKey( "C" ) ) {
 		if ( _mode != MODE_COPY ) {
 			_before_mode = _mode;
@@ -177,7 +136,6 @@ void ChipEditor::editChip( ) {
 		}
 		if ( _mode == MODE_COPY ) {
 			_data->paste( mx, my );
-			_mode = _before_mode;
 			_click_active = false;
 		}
 	}
