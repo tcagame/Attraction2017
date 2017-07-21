@@ -29,6 +29,7 @@ const int DEVICE_FLAME_X = 5;
 const int DEVICE_FLAME_Y = STATUS_FLAME_Y + STATUS_FLAME_HEIGHT + 10;
 const int DEVICE_FLAME_WIDTH = 150;
 const int DEVICE_FLAME_HEIGHT = 30;
+const int RESET_TIME = 60;
 
 StatusDrawer::StatusDrawer( ) {
 	for ( int i = 0; i < PLAYER_NUM; i++ ) {
@@ -36,6 +37,7 @@ StatusDrawer::StatusDrawer( ) {
 		_status[ i ].state = STATE_STREET_2;
 		_status[ i ].continue_num = ( i + 1 ) * 2;
 		_status[ i ].power = i + i * 2;
+		_reset_count[ i ] = 0;
 	}
 }
 
@@ -51,7 +53,15 @@ void StatusDrawer::update( ) {
 		_status[ i ].device_button = device->getButton( i );
 	}
 	for ( int i = 0; i < PLAYER_NUM; i++ ) {
-		if ( _status[ i ].device_button == 0x00001111 ) {
+		if ( _status[ i ].device_button == 15 ) {
+			_reset_count[ i ]++;
+		} else {
+			_reset_count[ i ] = 0;
+		}
+	}
+	
+	for ( int i = 0; i < PLAYER_NUM; i++ ) {
+		if ( _reset_count[ i ] > RESET_TIME ) {
 			_status[ i ] = Status::STATUS( );
 			_status[ i ].state = STATE_ENTRY;
 		}
