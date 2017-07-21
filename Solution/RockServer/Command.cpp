@@ -94,7 +94,7 @@ void Command::drawString( ) const {
 std::vector< std::string > Command::getSpritCommand( ) const {
 	std::vector< std::string > result = { };
 	std::string str = _command;
-	std::transform( str.begin( ), str.end( ), str.begin( ), tolower );
+	std::transform( str.begin( ), str.end( ), str.begin( ), tolower );//¬•¶š‚É•ÏŠ·
 	std::stringstream ss( str );
 	std::string buffer;
 	while ( std::getline( ss, buffer, ' ' ) ) {

@@ -5,12 +5,14 @@
 
 const int PROGRESS_WIDTH = 1000;
 const int PROGRESS_HEIGHT= 100;
+const std::string DIRECTORY = "../Resource/Ace/MapData/Img/";
 
 Exporter::Exporter( DataConstPtr data ) :
 _data( data ) {
 	DrawerPtr drawer = Drawer::getTask( );
 	_image_export = ImageTargetPtr( new ImageTarget );
 	_image_export->create( GRAPH_SIZE, GRAPH_SIZE );
+	_image_export->save( DIRECTORY + "filename" );
 	_image_progress = drawer->createImage( "export/progress.png" );
 }
 
