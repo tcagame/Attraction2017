@@ -11,6 +11,7 @@ public:
 	enum COMMAND {
 		COMMAND_IP,
 		COMMAND_CONTINUE,
+		COMMAND_DEVICE,
 		MAX_COMMAND
 	};
 public:

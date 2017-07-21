@@ -2,6 +2,7 @@
 #include "Keyboard.h"
 #include "define.h"
 #include "Drawer.h"
+#include "Device.h"
 #include "Log.h"
 #include "StatusSender.h"
 #include <sstream>
@@ -17,6 +18,7 @@ const int COMMAND_Y = SCREEN_HEIGHT - COMMAND_HEIGHT - 10;
 const std::string COMMAND_FIRST_WORD[ Command::MAX_COMMAND ] = {
 	"ip",//IP
 	"continue",//CONTINUE
+	"device",//DEVICE
 };
 
 Command::Command( StatusSenderPtr status_sender ) :
@@ -75,6 +77,10 @@ void Command::excute( ) {
 						message = "[SUCCESS] " + _command;
 					}
 				}
+				break;
+			case COMMAND_DEVICE:
+				Device::getTask( )->resetup( );
+				message = "[SUCCESS] device‚ğÄÚ‘±‚µ‚Ü‚µ‚½!";
 				break;
 			}
 			break;//for•¶‚ğ”²‚¯‚é
