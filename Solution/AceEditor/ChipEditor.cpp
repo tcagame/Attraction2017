@@ -93,7 +93,9 @@ void ChipEditor::updateMode( ) {
 		_number = 5;
 	}
 	if ( key->isPushKey( "C" ) ) {
-		_before_mode = _mode;
+		if ( _mode != MODE_COPY ) {
+			_before_mode = _mode;
+		}
 		_mode = MODE_COPY;
 		std::vector< int > mx;
 		std::vector< int > my;
