@@ -15,13 +15,10 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="Structure.cpp" />
-<<<<<<< HEAD
     <ClCompile Include="ChipPreview.cpp" />
     <ClCompile Include="ObjectPreview.cpp" />
     <ClCompile Include="ObjectEditor.cpp" />
-=======
     <ClCompile Include="ChipDrawer.cpp" />
->>>>>>> 60ea03ab617490e3907fff054fa5faa515eda0a5
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChipMenu.h" />
@@ -37,12 +34,9 @@
     <ClInclude Include="ChipGuide.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="Structure.h" />
-<<<<<<< HEAD
     <ClInclude Include="ChipPreview.h" />
     <ClInclude Include="ObjectPreview.h" />
     <ClInclude Include="ObjectEditor.h" />
-=======
     <ClInclude Include="ChipDrawer.h" />
->>>>>>> 60ea03ab617490e3907fff054fa5faa515eda0a5
   </ItemGroup>
 </Project>
