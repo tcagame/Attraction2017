@@ -39,7 +39,7 @@ void ObjectGuide::draw( ) const {
 	if ( _object_cursor->getGX( ) >= 0 ||
 		 _object_cursor->getGY( ) >= 0 ) {
 		_image->setPos( sx, sy );
-		_image->setRect( 0, 16, 16, 32 );
+		_image->setRect( 16, 16, 16, 16 );
 		_image->draw( );
 	}
 	// ƒ‰ƒCƒ“

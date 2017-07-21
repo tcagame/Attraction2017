@@ -1,4 +1,5 @@
 #include "ChipPreview.h"
+#include "Editor.h"
 #include "Drawer.h"
 #include "ace_define.h"
 #include "Keyboard.h"
@@ -61,6 +62,9 @@ void ChipPreview::draw( ) const {
 				if ( gx == select_gx[ k ] && gy == select_gy[ k ] ) {
 					select = true;
 				}
+			}
+			if ( Editor::getTask( )->getMode( ) == Editor::MODE_OBJECT ) {
+				select = false;
 			}
 			_chip_drawer->draw( mx, my, gx, gy, select );
 		}
