@@ -3,9 +3,9 @@
 #include "define.h"
 #include "Drawer.h"
 #include "Log.h"
+#include "StatusSender.h"
 #include <sstream>
 #include "Server.h"
-#include <algorithm>
 #include <iostream>
 
 const unsigned char BACKSPACE = 0x08;
@@ -15,11 +15,12 @@ const int COMMAND_HEIGHT = 30;
 const int COMMAND_X = SCREEN_WIDTH - COMMAND_WIDTH - 10;
 const int COMMAND_Y = SCREEN_HEIGHT - COMMAND_HEIGHT - 10;
 const std::string COMMAND_FIRST_WORD[ Command::MAX_COMMAND ] = {
-	"test",//TEST
-	"ip"//IP
+	"ip",//IP
+	"continue",//CONTINUE
 };
 
-Command::Command( ) {
+Command::Command( StatusSenderPtr status_sender ) :
+_status_sender( status_sender ) {
 	_log = LogPtr( new Log );
 }
 
@@ -61,13 +62,19 @@ void Command::excute( ) {
 	for ( int i = 0; i < MAX_COMMAND; i++ ) {
 		if ( command[ 0 ] == COMMAND_FIRST_WORD[ i ] ) {
 			switch ( i ) {//Å‰‚É‘‚¢‚Ä‚ ‚é’PŒê
-			case COMMAND_TEST:
-				message = "[SUCCESS] test";
-				break;
 			case COMMAND_IP:
 				//‚±‚±‚Åip¶¬
 				Server::getTask( )->saveIP( );
 				message = "[SUCCESS] IP.ini‚ð¶¬‚µ‚Ü‚µ‚½";
+				break;
+			case COMMAND_CONTINUE:
+				if ( command.size( ) == 3 ) {
+					int player_num = std::atoi( command[ 1 ].c_str( ) );
+					int continue_num = std::atoi( command[ 2 ].c_str( ) );
+					if ( _status_sender->setContinueNum( player_num, continue_num ) ) {
+						message = "[SUCCESS] " + _command;
+					}
+				}
 				break;
 			}
 			break;//for•¶‚ð”²‚¯‚é

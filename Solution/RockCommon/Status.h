@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <array>
 #include "mathmatics.h"
 
 const int ROCK_PLAYER_NUM = 4;
@@ -27,6 +28,6 @@ struct ROCK_DATA {
 			power( 0x00000000 ) {
 		}
 	};
-	STATUS player[ ROCK_PLAYER_NUM ];
+	std::array< STATUS, ROCK_PLAYER_NUM > player;
 };
 

@@ -4,16 +4,17 @@
 #include "smart_ptr.h"
 
 PTR( Log );
+PTR( StatusSender );
 
 class Command {
 public:
 	enum COMMAND {
-		COMMAND_TEST,
 		COMMAND_IP,
+		COMMAND_CONTINUE,
 		MAX_COMMAND
 	};
 public:
-	Command( );
+	Command( StatusSenderPtr status_sender );
 	virtual ~Command( );
 public:
 	void update( );
@@ -26,5 +27,6 @@ private:
 private:
 	std::string _command;
 	LogPtr _log;
+	StatusSenderPtr _status_sender;
 };
 

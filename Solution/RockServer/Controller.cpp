@@ -21,9 +21,9 @@ Controller::~Controller( ) {
 }
 
 void Controller::initialize( ) {
-	_command = CommandPtr ( new Command );
 	_status_sender = StatusSenderPtr( new StatusSender );
 	_status_drawer = StatusDrawerPtr( new StatusDrawer( _status_sender ) );
+	_command = CommandPtr ( new Command( _status_sender ) );
 }
 
 void Controller::update( ) {
