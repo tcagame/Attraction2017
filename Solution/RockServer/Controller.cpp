@@ -28,6 +28,7 @@ void Controller::initialize( ) {
 
 void Controller::update( ) {
 	Drawer::getTask( )->flip( );
+	_status_sender->update( );
 	drawFlame( );
 	_command->update( );
 	_status_drawer->draw( );
