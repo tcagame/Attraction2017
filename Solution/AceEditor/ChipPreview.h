@@ -12,10 +12,10 @@ PTR( Ground );
 PTR( Structure );
 PTR( ChipDrawer );
 
-class Preview {
+class ChipPreview {
 public:
-	Preview( DataConstPtr data, ChipCursorConstPtr chip_cursor, ChipEditorConstPtr chip_editor, ChipDrawerConstPtr chip_drawer );
-	virtual ~Preview( );
+	ChipPreview( DataConstPtr data, ChipCursorConstPtr chip_cursor, ChipEditorConstPtr chip_editor, ChipDrawerConstPtr chip_drawer );
+	virtual ~ChipPreview( );
 public:
 	void update( );
 	void draw( ) const;

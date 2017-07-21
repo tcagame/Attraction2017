@@ -170,9 +170,11 @@
     <ClCompile Include="Information.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ObjectCursor.cpp" />
+    <ClCompile Include="ObjectEditor.cpp" />
     <ClCompile Include="ObjectGuide.cpp" />
     <ClCompile Include="ObjectMenu.cpp" />
-    <ClCompile Include="Preview.cpp" />
+    <ClCompile Include="ChipPreview.cpp" />
+    <ClCompile Include="ObjectPreview.cpp" />
     <ClCompile Include="Structure.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -192,9 +194,11 @@
     <ClInclude Include="Ground.h" />
     <ClInclude Include="Information.h" />
     <ClInclude Include="ObjectCursor.h" />
+    <ClInclude Include="ObjectEditor.h" />
     <ClInclude Include="ObjectGuide.h" />
     <ClInclude Include="ObjectMenu.h" />
-    <ClInclude Include="Preview.h" />
+    <ClInclude Include="ChipPreview.h" />
+    <ClInclude Include="ObjectPreview.h" />
     <ClInclude Include="Structure.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

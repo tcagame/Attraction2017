@@ -1,4 +1,4 @@
-#include "Preview.h"
+#include "ChipPreview.h"
 #include "Drawer.h"
 #include "ace_define.h"
 #include "Keyboard.h"
@@ -15,7 +15,7 @@ const int BASE_X = - CHIP_WIDTH / 2;
 const int BASE_Y = - CHIP_HEIGHT / 2;
 const std::string EDITOR_PATH = "../Resource/Ace/Editor/";
 
-Preview::Preview( DataConstPtr data, ChipCursorConstPtr chip_cursor, ChipEditorConstPtr chip_editor, ChipDrawerConstPtr chip_drawer ) :
+ChipPreview::ChipPreview( DataConstPtr data, ChipCursorConstPtr chip_cursor, ChipEditorConstPtr chip_editor, ChipDrawerConstPtr chip_drawer ) :
 _data( data ),
 _covor( true ),
 _chip_cursor( chip_cursor ),
@@ -27,17 +27,17 @@ _chip_drawer( chip_drawer ) {
 }
 
 
-Preview::~Preview( ) {
+ChipPreview::~ChipPreview( ) {
 }
 
-void Preview::update( ) {
+void ChipPreview::update( ) {
 	KeyboardPtr key = Keyboard::getTask( );
 	if ( key->isPushKey( "SPACE" ) ) {
 		_covor = !_covor;
 	}
 }
 
-void Preview::draw( ) const {
+void ChipPreview::draw( ) const {
 	std::vector< int > select_gx;
 	std::vector< int > select_gy;
 	_chip_editor->getReplacePos( select_gx, select_gy );

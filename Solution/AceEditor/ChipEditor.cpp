@@ -176,6 +176,7 @@ void ChipEditor::save( ) const {
 	}
 	_data->save( DIRECTORY + filename );
 }
+
 void ChipEditor::load( ) {
 	std::string filename = Application::getInstance( )->inputString( 0, 20 );
 	if ( filename.size( ) == 0 ) {
@@ -183,6 +184,7 @@ void ChipEditor::load( ) {
 	}
 	_data->load( DIRECTORY + filename );
 }
+
 void ChipEditor::savePage( ) const {
 	std::string filename = Application::getInstance( )->inputString( 0, 20 );
 	if ( filename.size( ) == 0 ) {
@@ -192,6 +194,7 @@ void ChipEditor::savePage( ) const {
 	page %= _data->getPageNum( );
 	_data->savePage( DIRECTORY + filename, page );
 }
+
 void ChipEditor::loadPage( ) {
 	std::string filename = Application::getInstance( )->inputString( 0, 20 );
 	if ( filename.size( ) == 0 ) {

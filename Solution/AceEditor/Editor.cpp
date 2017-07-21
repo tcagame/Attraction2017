@@ -1,22 +1,28 @@
 #include "Editor.h"
-#include "Drawer.h"
+
 #include "Application.h"
-#include "Preview.h"
-#include "ChipGuide.h"
-#include "Data.h"
-#include "Information.h"
-#include "ChipCursor.h"
-#include "ChipEditor.h"
-#include "Exporter.h"
-#include "ChipMenu.h"
-#include "ObjectGuide.h"
-#include "ObjectCursor.h"
-#include "ObjectMenu.h"
+#include "Drawer.h"
 #include "Mouse.h"
 #include "Keyboard.h"
+
+#include "ChipCursor.h"
+#include "ChipEditor.h"
+#include "ChipGuide.h"
+#include "ChipPreview.h"
+#include "ChipMenu.h"
+#include "ChipDrawer.h"
+
+#include "ObjectCursor.h"
+#include "ObjectEditor.h"
+#include "ObjectGuide.h"
+#include "ObjectPreview.h"
+#include "ObjectMenu.h"
+
+#include "Data.h"
+#include "Information.h"
+#include "Exporter.h"
 #include "Ground.h"
 #include "Structure.h"
-#include "ChipDrawer.h"
 
 EditorPtr Editor::getTask( ) {
 	ApplicationPtr app = Application::getInstance( );
@@ -38,18 +44,22 @@ void Editor::initialize( ) {
 	GroundPtr ground = GroundPtr( new Ground );
 	StructurePtr structure = StructurePtr( new Structure );
 
-	DataPtr	data			  = DataPtr( new Data );
+	DataPtr data    = DataPtr		  ( new Data );
 	ChipDrawerPtr chip_drawer = ChipDrawerPtr( new ChipDrawer( data, ground, structure ) );
-	_chip_cursor   = ChipCursorPtr	( new ChipCursor  ( data ) );
-	_chip_editor   = ChipEditorPtr	( new ChipEditor  ( data, _chip_cursor ) );
-	_chip_guide    = ChipGuidePtr	( new ChipGuide	  ( data, _chip_cursor, _chip_editor ) );
-	_preview	   = PreviewPtr		( new Preview	  ( data, _chip_cursor, _chip_editor, chip_drawer ) );
-	_chip_menu	   = ChipMenuPtr	( new ChipMenu	  ( menu_image, _chip_editor, ground, structure ) );
-	_object_cursor = ObjectCursorPtr( new ObjectCursor( ) );
-	_object_guide  = ObjectGuidePtr	( new ObjectGuide ( _object_cursor ) );
-	_object_menu   = ObjectMenuPtr	( new ObjectMenu  ( menu_image ) );
-	_information   = InformationPtr	( new Information ( data, _chip_cursor, _object_cursor, _chip_editor ) );
-	_exporter      = ExporterPtr    ( new Exporter    ( data, chip_drawer ) );
+	_exporter       = ExporterPtr     ( new Exporter     ( data, chip_drawer ) );
+
+	_chip_cursor    = ChipCursorPtr	  ( new ChipCursor   ( data ) );
+	_chip_editor    = ChipEditorPtr	  ( new ChipEditor   ( data, _chip_cursor ) );
+	_chip_guide     = ChipGuidePtr	  ( new ChipGuide	 ( data, _chip_cursor, _chip_editor ) );
+	_chip_preview   = ChipPreviewPtr  ( new ChipPreview  ( data, _chip_cursor, _chip_editor, chip_drawer ) );
+	_chip_menu	    = ChipMenuPtr	  ( new ChipMenu	 ( menu_image, _chip_editor, ground, structure ) );
+
+	_object_cursor  = ObjectCursorPtr ( new ObjectCursor ( data ) );
+	_object_editor  = ObjectEditorPtr ( new ObjectEditor ( data, _object_cursor ) );
+	_object_guide   = ObjectGuidePtr  ( new ObjectGuide  ( data, _object_cursor ) );
+	_object_preview = ObjectPreviewPtr( new ObjectPreview( data, _object_cursor ) );
+	_object_menu    = ObjectMenuPtr   ( new ObjectMenu   ( menu_image ) );
+	_information    = InformationPtr  ( new Information  ( data, _chip_cursor, _object_cursor, _chip_editor ) );
 }
 
 
@@ -106,10 +116,12 @@ void Editor::updateMode( ) {
 		if ( keyboard->isPushKey( "F5" ) ) {
 			_mode = MODE_CHIP;
 			_phase = PHASE_EDIT_BG;
+			_chip_cursor->setScrollX( _object_cursor->getScrollX( ) );
 		}
 		if ( keyboard->isPushKey( "F6" ) ) {	
 			_mode = MODE_OBJECT;
 			_phase = PHASE_EDIT_BG;
+			_object_cursor->setScrollX( _chip_cursor->getScrollX( ) );
 		}
 		if ( keyboard->isPushKey( "F9" ) ) {
 			_mode = MODE_EXPORT;
@@ -121,7 +133,7 @@ void Editor::updateMode( ) {
 void Editor::drawMode( ) {
 	// í‚É•`‰æ
 	_information->draw( );
-	_preview->draw( );
+	_chip_preview->draw( );
 	DrawerPtr drawer = Drawer::getTask( );
 	switch ( _mode ) {
 	case MODE_CHIP:
@@ -156,8 +168,9 @@ void Editor::drawMode( ) {
 void Editor::updateChipMode( ) {
 	switch( _phase ) {
 	case PHASE_EDIT_BG:
-		_preview->update( );
+		_chip_preview->update( );
 		_chip_cursor->update( );
+		_object_cursor->setScrollX( _chip_cursor->getScrollX( ) );
 		_chip_editor->update( );
 		break;
 	case PHASE_MENU:
@@ -172,6 +185,8 @@ void Editor::updateObjectMode( ) {
 	switch( _phase ) {
 	case PHASE_EDIT_BG:
 		_object_cursor->update( );
+		_chip_cursor->setScrollX( _object_cursor->getScrollX( ) );
+		_object_editor->update( );
 		break;
 	case PHASE_MENU:
 		_object_menu->update( );
@@ -222,6 +237,7 @@ void Editor::drawChipMode( ) const {
 
 void Editor::drawObjectMode( ) const {
 	_object_guide->draw( );
+	_object_preview->draw( );
 	if ( _phase == PHASE_MENU ) {
 		_object_menu->draw( );
 	}

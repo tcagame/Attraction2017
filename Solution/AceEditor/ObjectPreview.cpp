@@ -1,0 +1,27 @@
+#include "ObjectPreview.h"
+#include "Drawer.h"
+#include "ace_define.h"
+#include "Data.h"
+#include "ObjectCursor.h"
+
+ObjectPreview::ObjectPreview( DataConstPtr data, ObjectCursorConstPtr object_cursor ) :
+_data( data ),
+_object_cursor( object_cursor ) {
+	DrawerPtr drawer( Drawer::getTask( ) );
+	_block = drawer->createImage( "block/block.png" );
+}
+
+ObjectPreview::~ObjectPreview( ) {
+}
+
+void ObjectPreview::draw( ) const {
+	for ( int i = 0; i < OBJECT_CHIP_WIDTH_NUM; i++ ) {
+		for ( int j = 0; j < OBJECT_CHIP_HEIGHT_NUM; j++ ) {
+			int ox = ( i + _object_cursor->getScrollX( ) ) % ( _data->getPageNum( ) * PAGE_OBJECT_WIDTH_NUM );
+			if ( _data->getBlockData( ox, j ) == OBJECT_BLOCK ) {
+				_block->setPos( PREVIEW_X + i * OBJECT_GUIDE_SIZE, PREVIEW_Y + j * OBJECT_GUIDE_SIZE );
+				_block->draw( );
+			}
+		}
+	}
+}

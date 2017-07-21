@@ -114,3 +114,7 @@ int ChipCursor::getGY( ) const {
 bool ChipCursor::isOnChip( ) const {
 	return _gx >= 0 && _gy >= 0;
 }
+
+void ChipCursor::setScrollX( int scroll_x ) {
+	_scroll_x = scroll_x / 4;
+}

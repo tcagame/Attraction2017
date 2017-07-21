@@ -16,6 +16,11 @@ Data::Data( ) {
 		_chips[ i ].structure = 0;
 		_chips[ i ].height = 0;
 	}
+	const int MAX_OBJ = _page_num * PAGE_OBJECT_WIDTH_NUM * OBJECT_CHIP_HEIGHT_NUM;
+	_objects.resize( MAX_OBJ );
+	for ( int i = 0; i < MAX_OBJ; i++ ) {
+		_objects[ i ].block = ( i % 3 ) ? OBJECT_NONE : OBJECT_BLOCK;
+	}
 }
 
 
@@ -35,6 +40,10 @@ int Data::getHeightData( int mx, int my ) const {
 	return getChip( mx, my ).height;
 }
 
+int Data::getBlockData( int ox, int oy ) const {
+	return getObject( ox, oy ).block;
+}
+
 void Data::setHeightData( int mx, int my, int height ) {
 	mx %= _page_num * PAGE_CHIP_WIDTH_NUM;
 	getChip( mx, my ).height = height;
@@ -50,6 +59,11 @@ void Data::setGroundData( int mx, int my, int num ) {
 	getChip( mx, my ).ground = num;
 }
 
+void Data::setBlockData( int ox, int oy, int num ) {
+	ox %= _page_num * PAGE_OBJECT_WIDTH_NUM;
+	getObject( ox, oy ).block = num;
+}
+
 const Data::Chip& Data::getChip( int mx, int my ) const {
 	return _chips[ mx + my * _page_num * PAGE_CHIP_WIDTH_NUM ];
 }
@@ -58,47 +72,81 @@ Data::Chip& Data::getChip( int mx, int my ) {
 	return _chips[ mx + my * _page_num * PAGE_CHIP_WIDTH_NUM ];
 }
 
+const Data::Object& Data::getObject( int ox, int oy ) const {
+	return _objects[ ox + oy * _page_num * PAGE_OBJECT_WIDTH_NUM ];
+}
+
+Data::Object& Data::getObject( int ox, int oy ) {
+	return _objects[ ox + oy * _page_num * PAGE_OBJECT_WIDTH_NUM ];
+}
+
 int Data::getPageNum( ) const {
 	return _page_num;
 }
-
 
 void Data::insert( int page ) {
 	std::vector< Chip > chips;
 	int new_max_chip = ( _page_num + 1 ) * PAGE_CHIP_WIDTH_NUM * MAP_HEIGHT;
 	chips.resize( new_max_chip );
-	int old_width_num = _page_num * PAGE_CHIP_WIDTH_NUM;
-	int new_width_num = ( _page_num + 1 ) * PAGE_CHIP_WIDTH_NUM;
-	int front_width_num = page * PAGE_CHIP_WIDTH_NUM;
+	int old_chip_width_num = _page_num * PAGE_CHIP_WIDTH_NUM;
+	int new_chip_width_num = ( _page_num + 1 ) * PAGE_CHIP_WIDTH_NUM;
+	int front_chip_width_num = page * PAGE_CHIP_WIDTH_NUM;
+
+	std::vector< Object > objects;
+	int new_max_object = ( _page_num + 1 ) * PAGE_OBJECT_WIDTH_NUM * OBJECT_CHIP_HEIGHT_NUM;
+	objects.resize( new_max_object );
+	int old_object_width_num = _page_num * PAGE_OBJECT_WIDTH_NUM;
+	int new_object_width_num = ( _page_num + 1 ) * PAGE_OBJECT_WIDTH_NUM;
+	int front_object_width_num = page * PAGE_OBJECT_WIDTH_NUM;
 
 	//初期化
-	for ( int i = 0; i < new_width_num * MAP_HEIGHT; i++ ) {
+	for ( int i = 0; i < new_chip_width_num * MAP_HEIGHT; i++ ) {
 		chips[ i ] = Chip( );
 		chips[ i ].ground = 1;
 	}
+	for ( int i = 0; i < new_object_width_num * OBJECT_CHIP_HEIGHT_NUM; i++ ) {
+		objects[ i ] = Object( );
+	}
 
 	//挿入位置まで代入
-	for ( int i = 0; i < front_width_num; i++ ) {
+	for ( int i = 0; i < front_chip_width_num; i++ ) {
 		int mx = i;
 		for ( int j = 0; j < MAP_HEIGHT; j++ ) {
 			int my = j;
-			int idx = new_width_num * my + mx;
+			int idx = new_chip_width_num * my + mx;
 			chips[ idx ] = getChip( mx, my );
+		}
+	}
+	for ( int i = 0; i < front_object_width_num; i++ ) {
+		for ( int j = 0; j < OBJECT_CHIP_HEIGHT_NUM; j++ ) {
+			int ox = i;
+			int oy = j;
+			int idx = ox + new_object_width_num * oy;
+			objects[ idx ] = getObject( ox, oy );
 		}
 	}
 
 	//挿入位置の一ページ後から代入
-	int back_start_width_num = front_width_num;
-	for ( int i = back_start_width_num; i < old_width_num; i++ ) {
+	int back_chip_start_width_num = front_chip_width_num;
+	for ( int i = back_chip_start_width_num; i < old_chip_width_num; i++ ) {
 		int mx = i;
 		for ( int j = 0; j < MAP_HEIGHT; j++ ) {
 			int my = j;
-			int idx = new_width_num * my + ( mx + PAGE_CHIP_WIDTH_NUM );
+			int idx = new_chip_width_num * my + ( mx + PAGE_CHIP_WIDTH_NUM );
 			chips[ idx ] = getChip( mx, my );
 		}
 	}
-
+	int back_object_start_width_num = front_object_width_num;
+	for ( int i = back_object_start_width_num; i < old_object_width_num; i++ ) {
+		for ( int j = 0; j < OBJECT_CHIP_HEIGHT_NUM; j++ ) {
+			int ox = i;
+			int oy = j;
+			int idx = ( ox + PAGE_OBJECT_WIDTH_NUM ) + new_object_width_num * oy;
+			objects[ idx ] = getObject( ox, oy );
+		}
+	}
 	_chips = chips;
+	_objects = objects;
 	_page_num++;
 }
 

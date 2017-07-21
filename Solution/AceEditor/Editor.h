@@ -5,14 +5,16 @@
 #include <string>
 
 PTR( Editor );
-PTR( Preview );
+PTR( ChipPreview );
 PTR( ChipGuide );
 PTR( Information );
 PTR( ChipCursor );
 PTR( ChipEditor );
 PTR( ChipMenu );
 PTR( ObjectGuide );
+PTR( ObjectPreview );
 PTR( ObjectCursor );
+PTR( ObjectEditor );
 PTR( ObjectMenu );
 PTR( Exporter );
 PTR( Ground );
@@ -56,12 +58,14 @@ private:
 private:
 	InformationPtr _information;
 	ChipGuidePtr _chip_guide;
-	PreviewPtr _preview;
+	ChipPreviewPtr _chip_preview;
 	ChipCursorPtr _chip_cursor;
 	ChipEditorPtr _chip_editor;
 	ChipMenuPtr _chip_menu;
 	ObjectGuidePtr _object_guide;
+	ObjectPreviewPtr _object_preview;
 	ObjectCursorPtr _object_cursor;
+	ObjectEditorPtr _object_editor;
 	ObjectMenuPtr _object_menu;
 	ExporterPtr _exporter;
 	PHASE _phase;
