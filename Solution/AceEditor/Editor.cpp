@@ -16,6 +16,7 @@
 #include "Keyboard.h"
 #include "Ground.h"
 #include "Structure.h"
+#include "ChipDrawer.h"
 
 EditorPtr Editor::getTask( ) {
 	ApplicationPtr app = Application::getInstance( );
@@ -37,17 +38,18 @@ void Editor::initialize( ) {
 	GroundPtr ground = GroundPtr( new Ground );
 	StructurePtr structure = StructurePtr( new Structure );
 
-	DataPtr data   = DataPtr		( new Data );
+	DataPtr	data			  = DataPtr( new Data );
+	ChipDrawerPtr chip_drawer = ChipDrawerPtr( new ChipDrawer( data, ground, structure ) );
 	_chip_cursor   = ChipCursorPtr	( new ChipCursor  ( data ) );
 	_chip_editor   = ChipEditorPtr	( new ChipEditor  ( data, _chip_cursor ) );
 	_chip_guide    = ChipGuidePtr	( new ChipGuide	  ( data, _chip_cursor, _chip_editor ) );
-	_preview	   = PreviewPtr		( new Preview	  ( data, _chip_cursor, _chip_editor, ground, structure ) );
+	_preview	   = PreviewPtr		( new Preview	  ( data, _chip_cursor, _chip_editor, chip_drawer ) );
 	_chip_menu	   = ChipMenuPtr	( new ChipMenu	  ( menu_image, _chip_editor, ground, structure ) );
 	_object_cursor = ObjectCursorPtr( new ObjectCursor( ) );
 	_object_guide  = ObjectGuidePtr	( new ObjectGuide ( _object_cursor ) );
 	_object_menu   = ObjectMenuPtr	( new ObjectMenu  ( menu_image ) );
 	_information   = InformationPtr	( new Information ( data, _chip_cursor, _object_cursor, _chip_editor ) );
-	_exporter      = ExporterPtr    ( new Exporter    ( data ) );
+	_exporter      = ExporterPtr    ( new Exporter    ( data, chip_drawer ) );
 }
 
 

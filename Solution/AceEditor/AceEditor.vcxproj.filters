@@ -16,6 +16,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="Structure.cpp" />
+    <ClCompile Include="ChipDrawer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ChipMenu.h" />
@@ -32,5 +33,6 @@
     <ClInclude Include="ChipGuide.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="Structure.h" />
+    <ClInclude Include="ChipDrawer.h" />
   </ItemGroup>
 </Project>
