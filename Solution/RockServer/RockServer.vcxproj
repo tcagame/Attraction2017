@@ -163,6 +163,7 @@
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="StatusDrawer.cpp" />
+    <ClCompile Include="StatusSender.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Framework2017ver2\Framework2017Ver2.vcxproj">
@@ -177,6 +178,7 @@
     <ClInclude Include="Controller.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="StatusDrawer.h" />
+    <ClInclude Include="StatusSender.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -4,7 +4,4 @@
     <ClInclude Include="define.h" />
     <ClInclude Include="Status.h" />
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Status.cpp" />
-  </ItemGroup>
 </Project>
