@@ -136,7 +136,6 @@ void ChipEditor::editChip( ) {
 		}
 		if ( _mode == MODE_COPY ) {
 			_data->paste( mx, my );
-			_mode = _before_mode;
 			_click_active = false;
 		}
 	}

@@ -12,9 +12,9 @@ Data::Data( ) {
 	_chips.resize( max_chip );
 	for ( int i = 0; i < max_chip; i++ ) {
 		//_chips[ i ].ground = ( i % ( PAGE_NUM * PAGE_CHIP_WIDTH_NUM ) % 4 == 0 && ( i / ( PAGE_NUM * PAGE_CHIP_WIDTH_NUM ) ) % 2 == 0 );
-		_chips[ i ].ground = i % 6;
-		_chips[ i ].structure = i % 7;
-		_chips[ i ].height = ( i / 7 ) % 9;
+		_chips[ i ].ground = 1;
+		_chips[ i ].structure = 0;
+		_chips[ i ].height = 0;
 	}
 }
 
