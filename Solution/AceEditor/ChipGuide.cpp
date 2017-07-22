@@ -62,7 +62,7 @@ void ChipGuide::draw( ) const {
 				ty = 48;
 			}
 			// たろすけが歩ける
-			if ( gy == MAP_COVER_HEIGHT ) {
+			if ( gy >= MAP_COVER_HEIGHT ) {
 				ty = 32;
 			}
 			// 選択チップ
