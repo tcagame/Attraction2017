@@ -17,5 +17,6 @@ private:
 private:
 	FamilyConstPtr _family;
 	std::array< ImagePtr, ACE_PLAYER_NUM > _image_family;
+	std::array< int, ACE_PLAYER_NUM > _player_count;
 };
 
