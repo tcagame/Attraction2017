@@ -34,6 +34,8 @@ void Player::update( ) {
 	case ACTION_FLOAT:
 		actOnFloating( );
 		break;
+	case ACTION_ATTACK:
+		actOnAttack( );
 	}
 	_standing = false;
 	_vec.y += GRAVITY;
@@ -167,6 +169,14 @@ void Player::actOnFloating( ) {
 		}
 	}
 }
+
+void Player::actOnAttack( ) {
+	DevicePtr device( Device::getTask( ) );
+	if ( device->getButton( ) & BUTTON_A ) {
+
+	}
+}
+
 
 Vector Player::getPos( ) const {
 	return _pos;

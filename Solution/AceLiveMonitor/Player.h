@@ -8,6 +8,7 @@ public:
 		ACTION_WALK,
 		ACTION_BRAKE,
 		ACTION_FLOAT,
+		ACTION_ATTACK,
 	};
 	enum DIR {
 		DIR_LEFT,
@@ -27,6 +28,7 @@ private:
 	void actOnWalking( );
 	void actOnBreaking( );
 	void actOnFloating( );
+	void actOnAttack( );
 	void checkDir( );
 private:
 	int _act_count;
