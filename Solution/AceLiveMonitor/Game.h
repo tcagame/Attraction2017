@@ -5,6 +5,7 @@
 PTR( Game );
 PTR( Viewer );
 PTR( Family );
+PTR( PsychicManager );
 
 class Game : public Task {
 public:
@@ -16,7 +17,9 @@ public:
 public:
 	void initialize( );
 	void update( );
+	PsychicManagerPtr getPsychicManager( );
 private:
+	PsychicManagerPtr _psychic_manager;
 	ViewerPtr _viewer;
 	FamilyPtr _family;
 };

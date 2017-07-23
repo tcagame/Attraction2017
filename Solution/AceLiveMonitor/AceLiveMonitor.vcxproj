@@ -162,12 +162,16 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Psychic.cpp" />
+    <ClCompile Include="PsychicManager.cpp" />
     <ClCompile Include="Viewer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Family.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Psychic.h" />
+    <ClInclude Include="PsychicManager.h" />
     <ClInclude Include="Viewer.h" />
   </ItemGroup>
   <ItemGroup>

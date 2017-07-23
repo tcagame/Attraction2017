@@ -1,5 +1,7 @@
 #include "Player.h"
 #include "Device.h"
+#include "PsychicManager.h"
+#include "Game.h"
 #include "ace_define.h"
 
 const int MAX_SPEED = 20;
@@ -13,6 +15,7 @@ _act_count( 0 ),
 _pos( pos ),
 _vec( Vector( ) ),
 _action( ACTION_WAIT ) {
+	_dir = DIR_RIGHT;
 }
 
 Player::~Player( ) {
@@ -79,6 +82,10 @@ void Player::actOnWaiting( ) {
 		_act_count = 0;
 		return;
 	}
+	if ( device->getPush( ) & BUTTON_A ) {
+		_action = ACTION_ATTACK;
+	}
+
 }
 
 void Player::actOnWalking( ) {
@@ -167,13 +174,17 @@ void Player::actOnFloating( ) {
 			}
 		}
 	}
+	if ( device->getPush( ) & BUTTON_A ) {
+		_action = ACTION_ATTACK;
+	}
+
 }
 
 void Player::actOnAttack( ) {
-	DevicePtr device( Device::getTask( ) );
-	if ( device->getButton( ) & BUTTON_A ) {
-
-	}
+	GamePtr game = Game::getTask( );
+	PsychicManagerPtr psychicmanager = game->getPsychicManager( );
+	psychicmanager->shot( _pos, _dir );
+	_action = ACTION_WAIT;
 }
 
 

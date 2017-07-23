@@ -1,6 +1,8 @@
 #include "Viewer.h"
 #include "Family.h"
 #include "Player.h"
+#include "Psychic.h"
+#include "PsychicManager.h"
 #include "Drawer.h"
 #include <string>
 
@@ -9,13 +11,15 @@ const int PLAYER_FOOT = 7;
 const int PLAYER_ANIM_WAIT_COUNT = 12;
 const int PLAYER_ANIM_WIDTH_NUM = 8;
 
-Viewer::Viewer( FamilyConstPtr family ) :
-_family( family ) {
+Viewer::Viewer( FamilyConstPtr family, PsychicManagerConstPtr psychic_manager ) :
+_family( family ),
+_psychic_manager( psychic_manager ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
 	_image_family[ 0 ] = drawer->createImage( "Family/tarosuke.png" );
 	_image_family[ 1 ] = drawer->createImage( "Family/tarojiro.png" );
 	_image_family[ 2 ] = drawer->createImage( "Family/garisuke.png" );
 	_image_family[ 3 ] = drawer->createImage( "Family/taromi.png" );
+	_image_psychic = drawer->createImage( "Efect/psychic.png" );
 	_player_count = { };
 	for ( int i = 0; i < ACE_MAP_NUM; i++ ) {
 		char buf[ 256 ];
@@ -41,6 +45,7 @@ void Viewer::update( ) {
 	Drawer::getTask( )->flip( );
 	drawStreet( );
 	drawFamily( );
+	drawPsychic( );
 }
 
 void Viewer::drawFamily( ) const {
@@ -123,3 +128,28 @@ void Viewer::drawStreet( ) const{
 		_image_front[ i % ACE_MAP_NUM ]->draw( );
 	}
 }
+
+void Viewer::drawPsychic( ) const {
+	for ( int i = 0; i < _psychic_manager->getPsychicNum(); i++ ) {
+		int tx = 64;
+		int ty = 128;
+		int tx2 = 64;
+		int ty2 = 64;
+		int sy1 = _psychic_manager->getPsychic( i )->getPos( ).y - PLAYER_CHIP_SIZE + PLAYER_FOOT * 2;
+		int sx1 = _psychic_manager->getPsychic( i )->getPos( ).x;
+		int dir = _psychic_manager->getPsychic( i )->getDir( );
+		{
+			_image_psychic->setRect( tx, ty, tx2, tx2 );
+			_image_psychic->setPos( sx1, sy1, sx1 - PLAYER_CHIP_SIZE * dir, sy1 + PLAYER_CHIP_SIZE );
+			_image_psychic->draw( );
+		}
+		{
+			tx += 64;
+			_image_psychic->setRect( tx, ty, tx2, tx2 );
+			_image_psychic->setPos( sx1, sy1, sx1 - PLAYER_CHIP_SIZE * dir, sy1 + PLAYER_CHIP_SIZE );
+			_image_psychic->draw( );
+		}
+
+	}
+}
+
