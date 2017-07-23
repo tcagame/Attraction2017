@@ -4,6 +4,8 @@ const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 720;
 
 const int ACE_PLAYER_NUM = 4;
+const int ACE_MAP_NUM = 4;
+const int ACE_MAP_SIZE = 5;
 
 const int GRAVITY = 1;
 
