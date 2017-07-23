@@ -10,7 +10,7 @@ const Vector INIT_PLAYER_POS[ ACE_PLAYER_NUM ] = {
 
 Family::Family( ) {
 	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
-		_player[ i ] = PlayerPtr( new Player( INIT_PLAYER_POS[ i ] ) );
+		_player[ i ] = PlayerPtr( new Player( i, INIT_PLAYER_POS[ i ] ) );
 	}
 }
 

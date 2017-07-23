@@ -3,8 +3,9 @@
 #include "Binary.h"
 #include "ace_define.h"
 
-std::string EXTENSION_ALL  = ".map";
-std::string EXTENSION_PAGE = ".page";
+std::string EXTENSION_CHIP_ALL  = ".map";
+std::string EXTENSION_CHIP_PAGE = ".page";
+std::string EXTEMSION_OBJECT = ".objdat";
 
 Data::Data( ) {
 	_page_num = 4;
@@ -189,9 +190,9 @@ void Data::erase( int page ) {
 	_page_num--;
 }
 
-void Data::save( std::string filename ) const {
-	if ( filename.find( EXTENSION_ALL ) == std::string::npos ) {
-		filename += EXTENSION_ALL;
+void Data::saveChip( std::string filename ) const {
+	if ( filename.find( EXTENSION_CHIP_ALL ) == std::string::npos ) {
+		filename += EXTENSION_CHIP_ALL;
 	}
 	BinaryPtr binary( new Binary );
 	int size = (int)( sizeof( Chip ) * _chips.size( ) );
@@ -201,9 +202,9 @@ void Data::save( std::string filename ) const {
 	app->saveBinary( filename, binary );
 }
 
-void Data::load( std::string filename ) {
-	if ( filename.find( EXTENSION_ALL ) == std::string::npos ) {
-		filename += EXTENSION_ALL;
+void Data::loadChip( std::string filename ) {
+	if ( filename.find( EXTENSION_CHIP_ALL ) == std::string::npos ) {
+		filename += EXTENSION_CHIP_ALL;
 	}
 	BinaryPtr binary( new Binary );
 	ApplicationPtr app( Application::getInstance( ) );
@@ -219,9 +220,9 @@ void Data::load( std::string filename ) {
 }
 
 
-void Data::savePage( std::string filename, int page ) const {
-	if ( filename.find( EXTENSION_PAGE ) == std::string::npos ) {
-		filename += EXTENSION_PAGE;
+void Data::saveChipPage( std::string filename, int page ) const {
+	if ( filename.find( EXTENSION_CHIP_PAGE ) == std::string::npos ) {
+		filename += EXTENSION_CHIP_PAGE;
 	}
 	std::vector< Chip > page_chip;
 	int max = PAGE_CHIP_WIDTH_NUM * MAP_HEIGHT;
@@ -247,9 +248,9 @@ void Data::savePage( std::string filename, int page ) const {
 	app->saveBinary( filename, binary );
 }
 
-void Data::loadPage( std::string filename, int page ) {
-	if ( filename.find( EXTENSION_PAGE ) == std::string::npos ) {
-		filename += EXTENSION_PAGE;
+void Data::loadChipPage( std::string filename, int page ) {
+	if ( filename.find( EXTENSION_CHIP_PAGE ) == std::string::npos ) {
+		filename += EXTENSION_CHIP_PAGE;
 	}
 	BinaryPtr binary( new Binary );
 	ApplicationPtr app( Application::getInstance( ) );
@@ -273,6 +274,53 @@ void Data::loadPage( std::string filename, int page ) {
 			int page_chip_idx = x + y * PAGE_CHIP_WIDTH_NUM;
 			int chips_idx = mx + my * _page_num * PAGE_CHIP_WIDTH_NUM;
 			_chips[ chips_idx ] = page_chip[ page_chip_idx ];
+		}
+	}
+}
+
+void Data::saveObject( std::string filename ) const {
+	if ( filename.find( EXTEMSION_OBJECT ) == std::string::npos ) {
+		filename += EXTEMSION_OBJECT;
+	}
+	BinaryPtr binary( new Binary );
+	int size = (int)( sizeof( Object ) * _objects.size( ) );
+	binary->ensure( size );
+	binary->write( (void*)_objects.data( ), size );
+	ApplicationPtr app( Application::getInstance( ) );
+	app->saveBinary( filename, binary );
+}
+
+void Data::loadObject( std::string filename ) {
+	if ( filename.find( EXTEMSION_OBJECT ) == std::string::npos ) {
+		filename += EXTEMSION_OBJECT;
+	}
+	BinaryPtr binary( new Binary );
+	ApplicationPtr app( Application::getInstance( ) );
+	if ( !app->loadBinary( filename, binary ) ) {
+		return;
+	}
+	std::vector< Object > objects = { };
+	int size = binary->getSize( ) / (int)( sizeof( Object ) );
+	objects.resize( size );
+	binary->read( (void*)objects.data( ), binary->getSize( ) );
+	int now_width = _page_num * PAGE_OBJECT_WIDTH_NUM;
+	int load_width = size / OBJECT_CHIP_HEIGHT_NUM;
+	for ( int i = 0; i < OBJECT_CHIP_HEIGHT_NUM; i++ ) {
+		for ( int j = 0; j < now_width; j++ ) {
+			int idx = j + i * now_width;
+			_objects[ idx ] = Object( );
+		}
+	}
+	for ( int i = 0; i < OBJECT_CHIP_HEIGHT_NUM; i++ ) {
+		for ( int j = 0; j < now_width; j++ ) {
+			int x = j;
+			int y = i;
+			if ( x >= load_width ) {
+				break;
+			}
+			int load_idx = x + y * load_width;
+			int now_idx = x + y * now_width;
+			_objects[ now_idx ] = objects[ load_idx ];
 		}
 	}
 }

@@ -17,10 +17,12 @@ public:
 	void setBlockData( int ox, int oy, int num );
 	void insert( int page );	//‘}“ü
 	void erase( int page );		//íœ
-	void save( std::string filename ) const;
-	void load( std::string filename );
-	void savePage( std::string filename, int page ) const;
-	void loadPage( std::string filename, int page );
+	void saveChip( std::string filename ) const;
+	void loadChip( std::string filename );
+	void saveChipPage( std::string filename, int page ) const;
+	void loadChipPage( std::string filename, int page );
+	void saveObject( std::string filename ) const;
+	void loadObject( std::string filename );
 	void copy( std::vector< int >& mx, std::vector< int >& my );
 	void paste( std::vector< int >& mx, std::vector< int >& my );
 private:

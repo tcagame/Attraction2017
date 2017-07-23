@@ -8,7 +8,8 @@ const int BRAKE_ACCEL = 1;
 const int WIDTH = 38;
 const int JUMP_POWER = -15;
 
-Player::Player( Vector pos ) :
+Player::Player( int player_id, Vector pos ) :
+_id( player_id ),
 _act_count( 0 ),
 _pos( pos ),
 _vec( Vector( ) ),
@@ -67,12 +68,12 @@ void Player::actOnWaiting( ) {
 		_action = ACTION_BRAKE;
 	}
 	DevicePtr device( Device::getTask( ) );
-	if ( _standing && device->getButton( ) & BUTTON_C ) {
+	if ( _standing && device->getButton( _id ) & BUTTON_C ) {
 		_vec.y = JUMP_POWER;
 		_action = ACTION_FLOAT;
 		return;
 	}
-	if ( abs( device->getDirX( ) ) > 50 ) {
+	if ( abs( device->getDirX( _id ) ) > 50 ) {
 		_action = ACTION_WALK;
 		_act_count = 0;
 		return;
@@ -82,8 +83,8 @@ void Player::actOnWaiting( ) {
 void Player::actOnWalking( ) {
 	//スティックの入力が無い場合action_wait
 	DevicePtr device( Device::getTask( ) );
-	if ( device->getDirX( ) * _vec.x < 0 ||
-		 device->getDirX( ) == 0 ) {
+	if ( device->getDirX( _id ) * _vec.x < 0 ||
+		 device->getDirX( _id ) == 0 ) {
 		if ( ( int )_vec.x == 0 ) {
 			_action = ACTION_WAIT;
 		} else {
@@ -92,7 +93,7 @@ void Player::actOnWalking( ) {
 		_act_count = 0;
 		return;
 	}
-	if ( _standing && device->getButton( ) & BUTTON_C ) {
+	if ( _standing && device->getButton( _id ) & BUTTON_C ) {
 		_vec.y = JUMP_POWER;
 		_action = ACTION_FLOAT;
 		return;
@@ -102,10 +103,10 @@ void Player::actOnWalking( ) {
 		_act_count = 0;
 		return;
 	}
-	if ( device->getDirX( ) < 50 ) {
+	if ( device->getDirX( _id ) < 50 ) {
 		_vec.x = -MOVE_SPEED;
 	}
-	if ( device->getDirX( ) > 50 ) {
+	if ( device->getDirX( _id ) > 50 ) {
 		_vec.x = MOVE_SPEED;
 	}
 }
@@ -116,7 +117,7 @@ void Player::actOnBreaking( ) {
 		_act_count = 0;
 	}
 	DevicePtr device( Device::getTask( ) );
-	if ( _standing && device->getButton( ) & BUTTON_C ) {
+	if ( _standing && device->getButton( _id ) & BUTTON_C ) {
 		_vec.y = JUMP_POWER;
 		_action = ACTION_FLOAT;
 		return;
@@ -149,7 +150,7 @@ void Player::actOnFloating( ) {
 		return;
 	}	
 	DevicePtr device( Device::getTask( ) );
-	if ( device->getDirX( ) * _vec.x < 0 ) {
+	if ( device->getDirX( _id ) * _vec.x < 0 ) {
 		if ( _vec.x < 0 ) {
 			if ( _vec.x < -BRAKE_ACCEL ) {
 				_vec.x += BRAKE_ACCEL;

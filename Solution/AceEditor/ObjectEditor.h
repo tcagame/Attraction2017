@@ -10,6 +10,8 @@ public:
 	virtual ~ObjectEditor( );
 public:
 	void update( );
+	void save( ) const;
+	void load( );
 private:
 	DataPtr _data;
 	ObjectCursorConstPtr _object_cursor;

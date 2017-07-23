@@ -3,6 +3,9 @@
 #include "ObjectCursor.h"
 #include "Data.h"
 #include "ace_define.h"
+#include "Application.h"
+
+const std::string DIRECTORY = "../Resource/Ace/MapData/";
 
 ObjectEditor::ObjectEditor( DataPtr data, ObjectCursorConstPtr object_cursor ) :
 _data( data ),
@@ -19,4 +22,20 @@ void ObjectEditor::update( ) {
 		int oy = _object_cursor->getGY( );
 		_data->setBlockData( ox, oy, OBJECT_BLOCK );
 	}
+}
+
+void ObjectEditor::save( ) const {
+	std::string filename = Application::getInstance( )->inputString( 0, 20 );
+	if ( filename.size( ) == 0 ) {
+		return;
+	}
+	_data->saveObject( DIRECTORY + filename );
+}
+
+void ObjectEditor::load( ) {
+	std::string filename = Application::getInstance( )->inputString( 0, 20 );
+	if ( filename.size( ) == 0 ) {
+		return;
+	}
+	_data->loadObject( DIRECTORY + filename );
 }

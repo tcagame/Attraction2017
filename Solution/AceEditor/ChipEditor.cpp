@@ -174,7 +174,7 @@ void ChipEditor::save( ) const {
 	if ( filename.size( ) == 0 ) {
 		return;
 	}
-	_data->save( DIRECTORY + filename );
+	_data->saveChip( DIRECTORY + filename );
 }
 
 void ChipEditor::load( ) {
@@ -182,7 +182,7 @@ void ChipEditor::load( ) {
 	if ( filename.size( ) == 0 ) {
 		return;
 	}
-	_data->load( DIRECTORY + filename );
+	_data->loadChip( DIRECTORY + filename );
 }
 
 void ChipEditor::savePage( ) const {
@@ -192,7 +192,7 @@ void ChipEditor::savePage( ) const {
 	}
 	int page = ( _chip_cursor->getScrollX( ) + _chip_cursor->getGX( ) ) / PAGE_CHIP_WIDTH_NUM;
 	page %= _data->getPageNum( );
-	_data->savePage( DIRECTORY + filename, page );
+	_data->saveChipPage( DIRECTORY + filename, page );
 }
 
 void ChipEditor::loadPage( ) {
@@ -202,5 +202,5 @@ void ChipEditor::loadPage( ) {
 	}
 	int page = ( _chip_cursor->getScrollX( ) + _chip_cursor->getGX( ) ) / PAGE_CHIP_WIDTH_NUM;
 	page %= _data->getPageNum( );
-	_data->loadPage( DIRECTORY + filename, page );
+	_data->loadChipPage( DIRECTORY + filename, page );
 }
