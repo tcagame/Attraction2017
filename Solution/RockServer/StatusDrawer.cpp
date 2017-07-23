@@ -142,7 +142,31 @@ void StatusDrawer::drawState( ) const {
 	drawer->drawString( sx, sy, "STATE" );
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		sy += BOX_HEIGHT;
-		drawer->drawString( sx, sy, "%s", BToS( _status_sender->getData( ).player[ i ].state ).c_str( ) );
+		std::string state = "\0";
+		switch ( _status_sender->getData( ).player[ i ].state ) {
+		case STATE_NONE:
+			state = "NONE";
+			break;
+		case STATE_ENTRY:
+			state = "ENTRY";
+			break;
+		case STATE_STREET_1:
+			state = "“¹’†1";
+			break;
+		case STATE_STREET_2:
+			state = "“¹’†2";
+			break;
+		case STATE_STREET_3:
+			state = "“¹’†3";
+			break;
+		case STATE_BOSS:
+			state = "BOSS";
+			break;
+		case STATE_RESULT:
+			state = "RESULT";
+			break;
+		}
+		drawer->drawString( sx, sy, "%s", state.c_str( ) );
 	}
 }
 

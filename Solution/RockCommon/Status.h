@@ -1,7 +1,6 @@
 #pragma once
-#include <string>
 #include <array>
-#include "mathmatics.h"
+#include "define.h"
 
 const int ROCK_PLAYER_NUM = 4;
 
@@ -19,13 +18,13 @@ struct ROCK_DATA {
 		STATUS( ) :
 			device_x( 0 ),
 			device_y( 0 ),
-			device_button( 0x00000000 ),
-			state( 0x00000000 ),
-			continue_num( 0x00000000 ),
-			toku( 0x00000000 ),
-			item( 0x00000000 ),
-			money( 0x00000000 ),
-			power( 0x00000000 ) {
+			device_button( 0b00000000 ),
+			state( STATE_NONE ),
+			continue_num( 0 ),
+			toku( 0 ),
+			item( 0b00000000 ),
+			money( 0 ),
+			power( 0 ) {
 		}
 	};
 	std::array< STATUS, ROCK_PLAYER_NUM > player;
