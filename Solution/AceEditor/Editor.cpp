@@ -73,24 +73,32 @@ void Editor::updateMode( ) {
 	case MODE_CHIP:
 		updateChipMode( );
 		break;
-	case MODE_OBJECT:
-		updateObjectMode( );
-		break;
-	case MODE_SAVEALL:
+	case MODE_CHIP_SAVEALL:
 		_chip_editor->save( );
 		_mode = MODE_CHIP;
 		break;
-	case MODE_LOADALL:
+	case MODE_CHIP_LOADALL:
 		_chip_editor->load( );
 		_mode = MODE_CHIP;
 		break;
-	case MODE_SAVEPAGE:
+	case MODE_CHIP_SAVEPAGE:
 		_chip_editor->savePage( );
 		_mode = MODE_CHIP;
 		break;
-	case MODE_LOADPAGE:
+	case MODE_CHIP_LOADPAGE:
 		_chip_editor->loadPage( );
 		_mode = MODE_CHIP;
+		break;
+	case MODE_OBJECT:
+		updateObjectMode( );
+		break;
+	case MODE_OBJECT_SAVE:
+		_object_editor->save( );
+		_mode = MODE_OBJECT;
+		break;
+	case MODE_OBJECT_LOAD:
+		_object_editor->load( );
+		_mode = MODE_OBJECT;
 		break;
 	case MODE_EXPORT:
 		if ( !_exporter->update( ) ) {
@@ -102,16 +110,26 @@ void Editor::updateMode( ) {
 	if ( _mode != MODE_EXPORT ) {
 		KeyboardPtr keyboard( Keyboard::getTask( ) );
 		if ( keyboard->isPushKey( "F1" ) ) {
-			_mode = MODE_SAVEALL;
+			if ( _mode == MODE_CHIP ) {
+				_mode = MODE_CHIP_SAVEALL;
+			}
+			if ( _mode == MODE_OBJECT ) {
+				_mode = MODE_OBJECT_SAVE;
+			}
 		}
 		if ( keyboard->isPushKey( "F2" ) ) {
-			_mode = MODE_LOADALL;
+			if ( _mode == MODE_CHIP ) {
+				_mode = MODE_CHIP_LOADALL;
+			}
+			if ( _mode == MODE_OBJECT ) {
+				_mode = MODE_OBJECT_LOAD;
+			}
 		}
 		if ( keyboard->isPushKey( "F3" ) ) {
-			_mode = MODE_SAVEPAGE;
+			_mode = MODE_CHIP_SAVEPAGE;
 		}
 		if ( keyboard->isPushKey( "F4" ) ) {
-			_mode = MODE_LOADPAGE;
+			_mode = MODE_CHIP_LOADPAGE;
 		}
 		if ( keyboard->isPushKey( "F5" ) ) {
 			_mode = MODE_CHIP;
@@ -150,16 +168,18 @@ void Editor::drawMode( ) {
 	drawer->flip( );
 
 	switch ( _mode ) {
-	case MODE_SAVEALL:
+	case MODE_CHIP_SAVEALL:
+	case MODE_OBJECT_SAVE:
 		drawer->drawString( 0, 0, "セーブ" );
 		break;
-	case MODE_LOADALL:
+	case MODE_CHIP_LOADALL:
+	case MODE_OBJECT_LOAD:
 		drawer->drawString( 0, 0, "ロード" );
 		break;
-	case MODE_SAVEPAGE:
+	case MODE_CHIP_SAVEPAGE:
 		drawer->drawString( 0, 0, "ページセーブ" );
 		break;
-	case MODE_LOADPAGE:
+	case MODE_CHIP_LOADPAGE:
 		drawer->drawString( 0, 0, "ページロード" );
 		break;
 	}

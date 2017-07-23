@@ -22,9 +22,9 @@ void ObjectCursor::update( ) {
 		add = 4;
 	}
 	if ( keyboard->isPushKey( "ARROW_LEFT" ) ) {
-		add = _data->getPageNum( ) * PAGE_CHIP_WIDTH_NUM - 4;
+		add = _data->getPageNum( ) * PAGE_OBJECT_WIDTH_NUM - 4;
 	}
-	_scroll_x = ( _scroll_x + add ) % ( _data->getPageNum( ) * PAGE_CHIP_WIDTH_NUM );
+	_scroll_x = ( _scroll_x + add ) % ( _data->getPageNum( ) * PAGE_OBJECT_WIDTH_NUM );
 
 	// gx gy ‚ðŒŸo@‚à‚µobjectMode‚Ìchipã‚É‚È‚¢ê‡‚Í -1‚ð‘ã“ü
 	_gx = -1;

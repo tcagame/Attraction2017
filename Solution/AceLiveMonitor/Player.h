@@ -15,7 +15,7 @@ public:
 		DIR_RIGHT,
 	};
 public:
-	Player( Vector pos );
+	Player( int player_id, Vector pos );
 	virtual ~Player( );
 public:
 	void update( );
@@ -36,6 +36,7 @@ private:
 	Vector _vec;
 	ACTION _action;
 	bool _standing;
+	int _id;
 	DIR _dir;
 };
 
