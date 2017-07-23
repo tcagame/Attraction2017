@@ -2,10 +2,10 @@
 #include "Player.h"
 
 const Vector INIT_PLAYER_POS[ ACE_PLAYER_NUM ] = {
-	Vector( 10, 10 ),
-	Vector( 110, 10 ),
-	Vector( 210, 10 ),
-	Vector( 310, 10 )
+	Vector( 50, 10 ),
+	Vector( 150, 10 ),
+	Vector( 250, 10 ),
+	Vector( 350, 10 )
 };
 
 Family::Family( ) {

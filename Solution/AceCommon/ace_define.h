@@ -5,6 +5,8 @@ const int SCREEN_HEIGHT = 720;
 
 const int ACE_PLAYER_NUM = 4;
 
+const int GRAVITY = 1;
+
 // Editor—p
 const int GRAPH_SIZE = 256;
 const int CHIP_WIDTH = 64;

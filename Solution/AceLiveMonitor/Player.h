@@ -10,5 +10,6 @@ public:
 	Vector getPos( ) const;
 private:
 	Vector _pos;
+	Vector _vec;
 };
 
