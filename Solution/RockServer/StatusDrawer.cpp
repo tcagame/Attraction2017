@@ -98,7 +98,7 @@ void StatusDrawer::drawPlayer( ) const {
 	drawer->drawString( sx, sy, "PLAYER" );
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		sy += BOX_HEIGHT;
-		drawer->drawString( sx, sy, NAME[ i ] );
+		drawer->drawString( sx, sy, "%d:%s", i, NAME[ i ] );
 	}
 }
 
