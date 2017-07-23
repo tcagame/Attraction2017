@@ -2,10 +2,11 @@
 #include "Device.h"
 #include "ace_define.h"
 
-const int MAX_SPEED = 10;
+const int MAX_SPEED = 20;
 const int MOVE_SPEED = 7;
 const int BRAKE_ACCEL = 1;
 const int WIDTH = 38;
+const int JUMP_POWER = -15;
 
 Player::Player( Vector pos ) :
 _act_count( 0 ),
@@ -62,7 +63,15 @@ void Player::actOnWaiting( ) {
 		_act_count = 0;
 		return;
 	}
+	if ( fabs( _vec.x ) > 0 ) {
+		_action = ACTION_BRAKE;
+	}
 	DevicePtr device( Device::getTask( ) );
+	if ( _standing && device->getButton( ) & BUTTON_C ) {
+		_vec.y = JUMP_POWER;
+		_action = ACTION_FLOAT;
+		return;
+	}
 	if ( abs( device->getDirX( ) ) > 50 ) {
 		_action = ACTION_WALK;
 		_act_count = 0;
@@ -83,6 +92,11 @@ void Player::actOnWalking( ) {
 		_act_count = 0;
 		return;
 	}
+	if ( _standing && device->getButton( ) & BUTTON_C ) {
+		_vec.y = JUMP_POWER;
+		_action = ACTION_FLOAT;
+		return;
+	}
 	if ( !_standing ) {
 		_action = ACTION_FLOAT;
 		_act_count = 0;
@@ -100,6 +114,12 @@ void Player::actOnBreaking( ) {
 	if ( ( int )_vec.x == 0 ) {
 		_action = ACTION_WAIT;
 		_act_count = 0;
+	}
+	DevicePtr device( Device::getTask( ) );
+	if ( _standing && device->getButton( ) & BUTTON_C ) {
+		_vec.y = JUMP_POWER;
+		_action = ACTION_FLOAT;
+		return;
 	}
 	if ( !_standing ) {
 		_action = ACTION_FLOAT;
@@ -128,6 +148,23 @@ void Player::actOnFloating( ) {
 		_act_count = 0;
 		return;
 	}	
+	DevicePtr device( Device::getTask( ) );
+	if ( device->getDirX( ) * _vec.x < 0 ) {
+		if ( _vec.x < 0 ) {
+			if ( _vec.x < -BRAKE_ACCEL ) {
+				_vec.x += BRAKE_ACCEL;
+			} else {
+				_vec.x = 0;
+			}
+		}
+		if ( _vec.x > 0 ) {
+			if ( _vec.x > BRAKE_ACCEL ) {
+				_vec.x -= BRAKE_ACCEL;
+			} else {
+				_vec.x = 0;
+			}
+		}
+	}
 }
 
 Vector Player::getPos( ) const {
