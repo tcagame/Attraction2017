@@ -83,7 +83,7 @@ void Player::actOnWaiting( ) {
 		_act_count = 0;
 		return;
 	}
-	if ( device->getPush( ) & BUTTON_A ) {
+	if ( device->getPush( _id ) & BUTTON_A ) {
 		_action = ACTION_ATTACK;
 	}
 
@@ -175,7 +175,7 @@ void Player::actOnFloating( ) {
 			}
 		}
 	}
-	if ( device->getPush( ) & BUTTON_A ) {
+	if ( device->getPush( _id ) & BUTTON_A ) {
 		_action = ACTION_ATTACK;
 	}
 
