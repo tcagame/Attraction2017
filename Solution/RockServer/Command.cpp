@@ -31,7 +31,7 @@ Command::~Command( ) {
 }
 
 void Command::update( ) {
-	KeyboardPtr keyboard = Keyboard::getTask( );
+	KeyboardPtr keyboard( Keyboard::getTask( ) );
 	char key = keyboard->getInputChar( );
 	if ( key == 0 ) {
 		return;
@@ -91,7 +91,7 @@ void Command::excute( ) {
 }
 
 void Command::drawFrame( ) const{
-	DrawerPtr drawer = Drawer::getTask( );
+	DrawerPtr drawer( Drawer::getTask( ) );
 	drawer->drawLine( COMMAND_X, COMMAND_Y, COMMAND_X + COMMAND_WIDTH, COMMAND_Y );
 	drawer->drawLine( COMMAND_X, COMMAND_Y + COMMAND_HEIGHT , COMMAND_X + COMMAND_WIDTH, COMMAND_Y + COMMAND_HEIGHT );
 	drawer->drawLine( COMMAND_X, COMMAND_Y, COMMAND_X, COMMAND_Y + COMMAND_HEIGHT );
@@ -99,7 +99,7 @@ void Command::drawFrame( ) const{
 }
 
 void Command::drawString( ) const {
-	DrawerPtr drawer = Drawer::getTask( );
+	DrawerPtr drawer( Drawer::getTask( ) );
 	std::string str = "command : " + _command;
 	drawer->drawString( COMMAND_X + 10, COMMAND_Y + 6, str.c_str( ) );
 }

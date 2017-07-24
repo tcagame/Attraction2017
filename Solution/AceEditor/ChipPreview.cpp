@@ -22,7 +22,7 @@ _covor( true ),
 _chip_cursor( chip_cursor ),
 _chip_editor( chip_editor ),
 _chip_drawer( chip_drawer ) {
-	DrawerPtr drawer = Drawer::getTask( );
+	DrawerPtr drawer( Drawer::getTask( ) );
 	_image_background = ImageTargetPtr( new ImageTarget );
 	_image_background->create( DISP_WIDTH, PREVIEW_HEIGHT );
 }
@@ -32,7 +32,7 @@ ChipPreview::~ChipPreview( ) {
 }
 
 void ChipPreview::update( ) {
-	KeyboardPtr key = Keyboard::getTask( );
+	KeyboardPtr key( Keyboard::getTask( ) );
 	if ( key->isPushKey( "SPACE" ) ) {
 		_covor = !_covor;
 	}

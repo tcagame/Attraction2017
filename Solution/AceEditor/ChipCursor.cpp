@@ -16,7 +16,7 @@ ChipCursor::~ChipCursor( ) {
 }
 
 void ChipCursor::update( ) {
-	KeyboardPtr keyboard = Keyboard::getTask( );
+	KeyboardPtr keyboard( Keyboard::getTask( ) );
 	int add = 0;
 	if ( keyboard->isPushKey( "ARROW_RIGHT" ) ) {
 		add = 1;
@@ -29,7 +29,7 @@ void ChipCursor::update( ) {
 	// gx gy ‚ðŒŸo@‚à‚µchipMode‚Ìchipã‚É‚È‚¢ê‡‚Í -1‚ð‘ã“ü
 	_gx = -1;
 	_gy = -1;
-	MousePtr mouse = Mouse::getTask( );
+	MousePtr mouse( Mouse::getTask( ) );
 	Vector pos = mouse->getPos( );
 
 	int dx = -1;

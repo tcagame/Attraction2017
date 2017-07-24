@@ -10,6 +10,6 @@ public:
 public:
 	void draw( ) const;
 private:
-	std::array< ImagePtr, ACE_PLAYER_NUM > _image_family;
+	std::array< ImagePtr, ACE_PLAYER_NUM > _image;
 };
 

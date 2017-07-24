@@ -1,6 +1,6 @@
 #include "Shot.h"
 
-const int Shot_SPEED = 10; 
+const int SHOT_SPEED = 10; 
 
 Shot::Shot( const Vector& pos, Player::DIR dir ) {
 	_pos = pos;
@@ -20,8 +20,7 @@ Vector Shot::getPos( ) const {
 }
 
 void Shot::update( ) {
-	
-	_pos.x += Shot_SPEED * _dir;
+	_pos.x += SHOT_SPEED * _dir;
 }
 
 int Shot::getDir( ) {

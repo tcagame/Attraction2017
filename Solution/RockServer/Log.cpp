@@ -27,7 +27,7 @@ void Log::draw( ) {
 }
 
 void Log::drawFrame( ) const{
-	DrawerPtr drawer = Drawer::getTask( );
+	DrawerPtr drawer( Drawer::getTask( ) );
 	drawer->drawLine( LOG_X, LOG_Y, LOG_X + LOG_WIDTH, LOG_Y );
 	drawer->drawLine( LOG_X, LOG_Y + LOG_HEIGHT , LOG_X + LOG_WIDTH, LOG_Y + LOG_HEIGHT );
 	drawer->drawLine( LOG_X, LOG_Y, LOG_X, LOG_Y + LOG_HEIGHT );
@@ -39,7 +39,7 @@ void Log::drawString( ) const{
 	int x = MESSAGE_X;
 	int y = MESSAGE_Y;
 	for ( int i = 0; i < MESSAGE_COUNT; i++ ) {
-		DrawerPtr drawer = Drawer::getTask( );
+		DrawerPtr drawer( Drawer::getTask( ) );
 		drawer->drawString( x, y, _message[ i ].c_str( ) );
 		y -= MESSAGE_HEIGHT;
 	}

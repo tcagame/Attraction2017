@@ -29,7 +29,7 @@ Information::~Information( ) {
 }
 
 void Information::draw( ) const {
-	DrawerPtr drawer = Drawer::getTask( );
+	DrawerPtr drawer( Drawer::getTask( ) );
 	drawer->drawString( VIEW_CHIP_POS_X, VIEW_CHIP_POS_Y, "チップ座標:%d", _chip_cursor->getScrollX( ) );
 	
 

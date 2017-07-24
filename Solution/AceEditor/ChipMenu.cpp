@@ -56,7 +56,7 @@ ChipMenu::~ChipMenu( ) {
 }
 
 void ChipMenu::update( ) {
-	MousePtr mouse = Mouse::getTask( );
+	MousePtr mouse( Mouse::getTask( ) );
 	if ( mouse->isPushLeftButton( ) ) {
 		Vector mouse_pos = mouse->getPos( ); 
 		_active = false;
@@ -163,7 +163,7 @@ void ChipMenu::update( ) {
 }
 
 void ChipMenu::draw( ) const {
-	DrawerPtr drawer = Drawer::getTask( );
+	DrawerPtr drawer( Drawer::getTask( ) );
 	{//frame
 		int sx1 = ( int )_pos.x + FRAME_X;
 		int sy1 = ( int )_pos.y + FRAME_Y;

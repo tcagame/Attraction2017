@@ -152,7 +152,6 @@ void Editor::drawMode( ) {
 	// í‚É•`‰æ
 	_information->draw( );
 	_chip_preview->draw( );
-	DrawerPtr drawer = Drawer::getTask( );
 	switch ( _mode ) {
 	case MODE_CHIP:
 		drawChipMode( );
@@ -165,6 +164,7 @@ void Editor::drawMode( ) {
 		break;
 	}
 	
+	DrawerPtr drawer( Drawer::getTask( ) );
 	drawer->flip( );
 
 	switch ( _mode ) {
@@ -217,7 +217,7 @@ void Editor::updateObjectMode( ) {
 }
 
 void Editor::checkPhase( ) {
-	MousePtr mouse = Mouse::getTask( );
+	MousePtr mouse( Mouse::getTask( ) );
 	if ( mouse->isPushRightButton( ) ) {
 		PHASE phase = _phase;
 		if ( _phase == PHASE_EDIT_BG ) {

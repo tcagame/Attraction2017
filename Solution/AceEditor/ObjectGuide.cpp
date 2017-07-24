@@ -8,7 +8,7 @@
 ObjectGuide::ObjectGuide( DataConstPtr data, ObjectCursorConstPtr object_cursor ) :
 _data( data ),
 _object_cursor( object_cursor ) {
-	DrawerPtr drawer = Drawer::getTask( );
+	DrawerPtr drawer( Drawer::getTask( ) );
 	_image = drawer->createImage( "guide/object_guide_cursor.png" );
 }
 

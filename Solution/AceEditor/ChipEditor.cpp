@@ -50,7 +50,7 @@ int ChipEditor::getRange( ) const {
 
 void ChipEditor::updateMode( ) {
 	// sutructuer&ground chip �̕ҏW
-	KeyboardPtr key = Keyboard::getTask( );
+	KeyboardPtr key( Keyboard::getTask( ) );
 	if ( key->isPushKey( "C" ) ) {
 		if ( _mode != MODE_COPY ) {
 			_before_mode = _mode;
@@ -102,7 +102,7 @@ void ChipEditor::getReplacePos( std::vector< int >& x, std::vector< int >& y, bo
 }
 
 void ChipEditor::editWidth( ) {
-	KeyboardPtr keyboard = Keyboard::getTask( );
+	KeyboardPtr keyboard( Keyboard::getTask( ) );
 	int mx = _chip_cursor->getScrollX( ) + _chip_cursor->getGX( );
 	if ( keyboard->isPushKey( "+" ) ) {
 		_data->insert( ( mx * CHIP_WIDTH / GRAPH_SIZE ) % _data->getPageNum( ) );
@@ -113,7 +113,7 @@ void ChipEditor::editWidth( ) {
 }
 
 void ChipEditor::editChip( ) {
-	MousePtr mouse = Mouse::getTask( );
+	MousePtr mouse( Mouse::getTask( ) );
 	if ( mouse->isHoldLeftButton( ) && _click_active ) {
 		std::vector< int > mx;
 		std::vector< int > my;
@@ -157,7 +157,7 @@ void ChipEditor::changeRange( ) {
 		"NUM8",
 		"NUM9",
 	};
-	KeyboardPtr keyboard = Keyboard::getTask( );
+	KeyboardPtr keyboard( Keyboard::getTask( ) );
 	for ( int i = 0; i < 9; i++ ) {
 		if ( keyboard->isPushKey( KEY[ i ] ) ) {
 			_range = i + 1;

@@ -27,7 +27,7 @@ void ObjectMenu::update( ) {
 }
 
 void ObjectMenu::draw( ) const {
-	DrawerPtr drawer = Drawer::getTask( );
+	DrawerPtr drawer( Drawer::getTask( ) );
 	{//frame
 		int sx1 = ( int )_pos.x;
 		int sy1 = ( int )_pos.y;

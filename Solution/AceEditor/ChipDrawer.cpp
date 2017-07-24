@@ -14,7 +14,7 @@ ChipDrawer::ChipDrawer( DataConstPtr data, GroundConstPtr ground, StructureConst
 _data( data ),
 _ground( ground ),
 _structure( structure ) {
-	DrawerPtr drawer = Drawer::getTask( );
+	DrawerPtr drawer( Drawer::getTask( ) );
 	_image_choice_front = drawer->createImage( "preview/preview_cursor_front.png" );
 	_image_choice_back = drawer->createImage( "preview/preview_cursor_back.png" );
 }

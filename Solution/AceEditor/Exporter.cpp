@@ -13,7 +13,7 @@ const int FRONT_HEIGHT_NUM = MAP_HEIGHT - MAP_COVER_HEIGHT;
 Exporter::Exporter( DataConstPtr data, ChipDrawerConstPtr chip_drawer ) :
 _data( data ),
 _chip_drawer( chip_drawer ) {
-	DrawerPtr drawer = Drawer::getTask( );
+	DrawerPtr drawer( Drawer::getTask( ) );
 	_image_export_front = ImageTargetPtr( new ImageTarget );
 	_image_export_back = ImageTargetPtr( new ImageTarget );
 	_image_export_front->create( GRAPH_SIZE, GRAPH_SIZE );
@@ -31,7 +31,7 @@ void Exporter::start( ) {
 }
 
 bool Exporter::update( ) {
-	DrawerPtr drawer = Drawer::getTask( );
+	DrawerPtr drawer( Drawer::getTask( ) );
 	{//back
 		_image_export_front->clear( );
 		drawer->setImageTarget( _image_export_front );
