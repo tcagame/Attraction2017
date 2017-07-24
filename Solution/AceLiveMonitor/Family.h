@@ -11,7 +11,8 @@ public:
 	virtual ~Family( );
 public:
 	void update( );
-	PlayerPtr getPlayer( int player_id ) const;
+	PlayerConstPtr getPlayer( int player_id ) const;
+	PlayerPtr getPlayer( int player_id );
 private:
 	std::array< PlayerPtr, ACE_PLAYER_NUM > _player;
 };

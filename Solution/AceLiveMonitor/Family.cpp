@@ -1,5 +1,6 @@
 #include "Family.h"
 #include "Player.h"
+#include <assert.h>
 
 const Vector INIT_PLAYER_POS[ ACE_PLAYER_NUM ] = {
 	Vector( 50, 10 ),
@@ -24,6 +25,14 @@ void Family::update( ) {
 	}
 }
 
-PlayerPtr Family::getPlayer( int player_id ) const {
+PlayerConstPtr Family::getPlayer( int player_id ) const {
+	assert( player_id < ACE_PLAYER_NUM );
+	assert( player_id >= 0 );
+	return _player[ player_id ];
+}
+
+PlayerPtr Family::getPlayer( int player_id ) {
+	assert( player_id < ACE_PLAYER_NUM );
+	assert( player_id >= 0 );
 	return _player[ player_id ];
 }
