@@ -3,10 +3,10 @@
 #include <array>
 #include "ace_define.h"
 
-class ViewerPsychic {
+class ViewerShot {
 public:
-	ViewerPsychic( );
-	virtual ~ViewerPsychic( );
+	ViewerShot( );
+	virtual ~ViewerShot( );
 public:
 	void draw( ) const;
 private:

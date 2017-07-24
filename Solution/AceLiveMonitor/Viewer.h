@@ -1,23 +1,26 @@
 #pragma once
+#include "Task.h"
+#include <string>
 #include "smart_ptr.h"
-#include "Image.h"
-#include <array>
-#include "ace_define.h"
 
+PTR( Viewer );
 PTR( ViewerFamily );
 PTR( ViewerStreet );
-PTR( ViewerPsychic );
+PTR( ViewerShot );
 
-
-class Viewer {
+class Viewer : public Task {
+public:
+	static std::string getTag( ) { return "VIEWER"; };
+	static ViewerPtr getTask( );
 public:
 	Viewer( );
 	virtual ~Viewer( );
 public:
+	void initialize( );
 	void update( );
 private:
 	ViewerFamilyConstPtr _viewer_family;
 	ViewerStreetConstPtr _viewer_street;
-	ViewerPsychicConstPtr _viewer_psychic;
+	ViewerShotConstPtr _viewer_shot;
 };
 

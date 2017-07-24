@@ -7,8 +7,7 @@ const int PLAYER_FOOT = 7;
 const int PLAYER_ANIM_WAIT_COUNT = 12;
 const int PLAYER_ANIM_WIDTH_NUM = 8;
 
-ViewerFamily::ViewerFamily( FamilyConstPtr family ) :
-_family( family ) {
+ViewerFamily::ViewerFamily( ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
 	_image_family[ 0 ] = drawer->createImage( "Family/tarosuke.png" );
 	_image_family[ 1 ] = drawer->createImage( "Family/tarojiro.png" );
@@ -22,8 +21,9 @@ ViewerFamily::~ViewerFamily( ) {
 }
 
 void ViewerFamily::draw( ) const {
+	FamilyPtr family( Family::getTask( ) );
 	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
-		PlayerConstPtr player = _family->getPlayer( i );
+		PlayerConstPtr player = family->getPlayer( i );
 		Vector pos = player->getPos( );
 		Player::ACTION action = player->getAction( );
 		int cx = 0;

@@ -1,5 +1,6 @@
 #include "Family.h"
 #include "Player.h"
+#include "Application.h"
 #include <assert.h>
 
 const Vector INIT_PLAYER_POS[ ACE_PLAYER_NUM ] = {
@@ -9,14 +10,22 @@ const Vector INIT_PLAYER_POS[ ACE_PLAYER_NUM ] = {
 	Vector( 350, 10 )
 };
 
+FamilyPtr Family::getTask( ) {
+	return std::dynamic_pointer_cast< Family >( Application::getInstance( )->getTask( getTag( ) ) );
+}
+
+
 Family::Family( ) {
-	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
-		_player[ i ] = PlayerPtr( new Player( i, INIT_PLAYER_POS[ i ] ) );
-	}
 }
 
 
 Family::~Family( ) {
+}
+
+void Family::initialize( ) {
+	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
+		_player[ i ] = PlayerPtr( new Player( i, INIT_PLAYER_POS[ i ] ) );
+	}
 }
 
 void Family::update( ) {

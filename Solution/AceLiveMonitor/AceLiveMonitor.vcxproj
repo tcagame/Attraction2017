@@ -160,24 +160,22 @@
   <ItemGroup>
     <ClCompile Include="Family.cpp" />
     <ClCompile Include="ViewerFamily.cpp" />
-    <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Psychic.cpp" />
-    <ClCompile Include="PsychicManager.cpp" />
+    <ClCompile Include="Shot.cpp" />
+    <ClCompile Include="Armoury.cpp" />
     <ClCompile Include="Viewer.cpp" />
-    <ClCompile Include="ViewerPsychic.cpp" />
+    <ClCompile Include="ViewerShot.cpp" />
     <ClCompile Include="ViewerStreet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Family.h" />
     <ClInclude Include="ViewerFamily.h" />
-    <ClInclude Include="Game.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="Psychic.h" />
-    <ClInclude Include="PsychicManager.h" />
+    <ClInclude Include="Shot.h" />
+    <ClInclude Include="Armoury.h" />
     <ClInclude Include="Viewer.h" />
-    <ClInclude Include="ViewerPsychic.h" />
+    <ClInclude Include="ViewerShot.h" />
     <ClInclude Include="ViewerStreet.h" />
   </ItemGroup>
   <ItemGroup>
