@@ -159,7 +159,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Family.cpp" />
-    <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Shot.cpp" />
@@ -168,7 +167,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Family.h" />
-    <ClInclude Include="Game.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Shot.h" />
     <ClInclude Include="Armoury.h" />

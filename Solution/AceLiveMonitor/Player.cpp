@@ -1,7 +1,6 @@
 #include "Player.h"
 #include "Device.h"
 #include "Armoury.h"
-#include "Game.h"
 #include "ace_define.h"
 
 const int MAX_SPEED = 20;
@@ -182,7 +181,6 @@ void Player::actOnFloating( ) {
 }
 
 void Player::actOnAttack( ) {
-	GamePtr game = Game::getTask( );
 	ArmouryPtr Armoury = Armoury::getTask( );
 	Armoury->shot( _pos, _dir );
 	_action = ACTION_WAIT;
