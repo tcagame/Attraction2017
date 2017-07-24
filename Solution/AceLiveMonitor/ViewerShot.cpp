@@ -4,7 +4,7 @@
 
 ViewerShot::ViewerShot( ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
-	_image = drawer->createImage( "Efect/psychic.png" );
+	_image = drawer->createImage( "Effect/psychic.png" );
 }
 
 
@@ -13,14 +13,21 @@ ViewerShot::~ViewerShot( ) {
 
 void ViewerShot::draw( ) const {
 	ArmouryPtr armoury( Armoury::getTask( ) );
-	for ( int i = 0; i < armoury->getShotNum( ); i++ ) {
+	std::vector< ShotPtr > shot_list = armoury->getShotList( );
+	if ( shot_list.empty( ) ) {
+		return;
+	}
+
+	std::vector< ShotPtr >::iterator ite = shot_list.begin( );
+	while ( ite != shot_list.end( ) ) {
+		ShotPtr shot = ( *ite );
 		int tx = 64;
 		int ty = 128;
 		int tx2 = 64;
 		int ty2 = 64;
-		int sy1 = (int)armoury->getShot( i )->getPos( ).y - NOMAL_CHAR_GRAPH_SIZE;
-		int sx1 = (int)armoury->getShot( i )->getPos( ).x + NOMAL_CHAR_GRAPH_SIZE / 2;
-		int dir = armoury->getShot( i )->getDir( );
+		int sy1 = (int)shot->getPos( ).y - NOMAL_CHAR_GRAPH_SIZE;
+		int sx1 = (int)shot->getPos( ).x + NOMAL_CHAR_GRAPH_SIZE / 2;
+		int dir = shot->getDir( );
 		{
 			_image->setRect( tx, ty, tx2, tx2 );
 			_image->setPos( sx1, sy1, sx1 - NOMAL_CHAR_GRAPH_SIZE * dir, sy1 + NOMAL_CHAR_GRAPH_SIZE );
@@ -32,5 +39,6 @@ void ViewerShot::draw( ) const {
 			_image->setPos( sx1, sy1, sx1 - NOMAL_CHAR_GRAPH_SIZE * dir, sy1 + NOMAL_CHAR_GRAPH_SIZE );
 			_image->draw( );
 		}
+		ite++;
 	}
 }

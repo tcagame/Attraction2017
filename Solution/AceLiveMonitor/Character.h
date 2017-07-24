@@ -14,11 +14,13 @@ public:
 	Vector getPos( ) const;
 	DIR getDir( ) const;
 	void update( );
+	virtual void getChipIndex( int* cx, int* cy ) const;
 protected:
 	void setVec( const Vector& vec );
 	void setPos( const Vector& pos );
 	bool isStanding( ) const;
 	virtual void act( ) = 0;
+	int getActCount( ) const;
 private:
 	void updateDir( );
 private:
@@ -27,5 +29,6 @@ private:
 	DIR _dir;
 	bool _standing;
 	int _chip_size;
+	int _act_count;
 };
 

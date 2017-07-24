@@ -16,17 +16,15 @@ public:
 	virtual ~Player( );
 public:
 	void act( );
+	void getChipIndex( int& cx, int& cy ) const;
 	ACTION getAction( ) const;
-	int getActCount( ) const;
 private:
 	void actOnWaiting( );
 	void actOnWalking( );
 	void actOnBreaking( );
 	void actOnFloating( );
 	void actOnAttack( );
-	void checkDir( );
 private:
-	int _act_count;
 	ACTION _action;
 	int _id;
 };

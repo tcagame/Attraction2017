@@ -20,9 +20,8 @@ public:
 public:
 	void shot( Vector pos, Player::DIR dir );
 	void update( );
-	ShotPtr getShot( int index ) const;
-	int getShotNum( ) const;
+	std::vector< ShotPtr > getShotList( ) const;
 private:
-	std::vector< ShotPtr> _shot_list;
+	std::vector< ShotPtr > _shot_list;
 };
 

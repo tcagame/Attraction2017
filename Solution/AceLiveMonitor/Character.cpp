@@ -6,8 +6,10 @@ const int MAX_SPEED_Y = 10;
 Character::Character( const Vector& pos, int chip_size ) :
 _pos( pos ),
 _vec( Vector( ) ),
+_dir( DIR_RIGHT ),
 _standing( false ),
-_chip_size( chip_size ) {
+_chip_size( chip_size ),
+_act_count( 0 ) {
 }
 
 
@@ -17,6 +19,7 @@ Character::~Character( ) {
 void Character::update( ) {
 	act( );
 
+	_act_count++;
 	_standing = false;
 	_vec.y += GRAVITY;
 	if ( _vec.y > MAX_SPEED_Y ) {
@@ -50,7 +53,6 @@ Character::DIR Character::getDir( ) const {
 	 return _dir;
 }
 
-
 Vector Character::getVec( ) const{
 	return _vec;
 }
@@ -80,3 +82,11 @@ void Character::updateDir( ) {
 	}
 }
 
+void Character::getChipIndex( int* cx, int* cy ) const {
+	cx = 0;
+	cy = 0;
+}
+
+int Character::getActCount( ) const {
+	return _act_count;
+}

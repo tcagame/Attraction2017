@@ -25,12 +25,8 @@ void Armoury::update( ) {
 	}
 }
 
-ShotPtr Armoury::getShot( int index ) const {
-	return _shot_list[ index ];
-}
-
-int Armoury::getShotNum( ) const {
-	return ( int )_shot_list.size( );
+std::vector< ShotPtr > Armoury::getShotList( ) const {
+	return _shot_list;
 }
 
 void Armoury::shot( Vector pos, Player::DIR dir ){

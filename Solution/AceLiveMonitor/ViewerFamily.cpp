@@ -4,8 +4,6 @@
 #include "Drawer.h"
 
 const int PLAYER_FOOT = 7;
-const int PLAYER_ANIM_WAIT_COUNT = 12;
-const int PLAYER_ANIM_WIDTH_NUM = 8;
 
 ViewerFamily::ViewerFamily( ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
@@ -28,49 +26,7 @@ void ViewerFamily::draw( ) const {
 		Player::ACTION action = player->getAction( );
 		int cx = 0;
 		int cy = 0;
-		switch ( action ) {
-		case Player::ACTION_WAIT:
-			{
-				const int ANIM[ ] = {
-					0,
-				};
-				int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-				int act_count = player->getActCount( );
-				cx = ANIM[ ( act_count / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] % PLAYER_ANIM_WIDTH_NUM;
-				cy = ANIM[ ( act_count / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] / PLAYER_ANIM_WIDTH_NUM;
-			}
-			break;
-		case Player::ACTION_WALK:
-			{
-				const int ANIM[ ] = {
-					0, 1, 2, 1, 0, 3, 4, 3
-				};
-				int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-				cx = ANIM[ ( ( int )pos.x / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] % PLAYER_ANIM_WIDTH_NUM;
-				cy = ANIM[ ( ( int )pos.x / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] / PLAYER_ANIM_WIDTH_NUM;
-			}
-			break;
-		case Player::ACTION_BRAKE:
-			{
-				const int ANIM[ ] = {
-					6,
-				};
-				int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-				cx = ANIM[ ( ( int )pos.x / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] % PLAYER_ANIM_WIDTH_NUM;
-				cy = ANIM[ ( ( int )pos.x / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] / PLAYER_ANIM_WIDTH_NUM;
-			}
-			break;
-		case Player::ACTION_FLOAT:
-			{
-				const int ANIM[ ] = {
-					5,
-				};
-				int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-				cx = ANIM[ ( ( int )pos.x / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] % PLAYER_ANIM_WIDTH_NUM;
-				cy = ANIM[ ( ( int )pos.x / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] / PLAYER_ANIM_WIDTH_NUM;
-			}
-			break;
-		}
+		player->getChipIndex( cx, cy );
 		int tx = cx * NOMAL_CHAR_GRAPH_SIZE;
 		int ty = cy * NOMAL_CHAR_GRAPH_SIZE;
 		_image_family[ i ]->setRect( tx, ty, NOMAL_CHAR_GRAPH_SIZE, NOMAL_CHAR_GRAPH_SIZE );
