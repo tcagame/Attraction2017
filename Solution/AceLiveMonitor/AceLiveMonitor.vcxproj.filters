@@ -6,15 +6,15 @@
     <ClCompile Include="Family.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Viewer.cpp" />
-    <ClCompile Include="Psychic.cpp" />
-    <ClCompile Include="PsychicManager.cpp" />
+    <ClCompile Include="Shot.cpp" />
+    <ClCompile Include="Armoury.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
     <ClInclude Include="Family.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Viewer.h" />
-    <ClInclude Include="Psychic.h" />
-    <ClInclude Include="PsychicManager.h" />
+    <ClInclude Include="Shot.h" />
+    <ClInclude Include="Armoury.h" />
   </ItemGroup>
 </Project>

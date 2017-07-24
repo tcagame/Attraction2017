@@ -1,25 +1,36 @@
 #include "Viewer.h"
 #include "Family.h"
 #include "Player.h"
-#include "Psychic.h"
-#include "PsychicManager.h"
+#include "Shot.h"
+#include "Armoury.h"
 #include "Drawer.h"
 #include <string>
+#include "Application.h"
 
 const int PLAYER_CHIP_SIZE = 64;
 const int PLAYER_FOOT = 7;
 const int PLAYER_ANIM_WAIT_COUNT = 12;
 const int PLAYER_ANIM_WIDTH_NUM = 8;
 
-Viewer::Viewer( FamilyConstPtr family, PsychicManagerConstPtr psychic_manager ) :
-_family( family ),
-_psychic_manager( psychic_manager ) {
+ViewerPtr Viewer::getTask( ) {
+	return std::dynamic_pointer_cast< Viewer >( Application::getInstance( )->getTask( getTag( ) ) );
+}
+
+
+Viewer::Viewer( ) {
+}
+
+
+Viewer::~Viewer( ) {
+}
+
+void Viewer::initialize( ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
 	_image_family[ 0 ] = drawer->createImage( "Family/tarosuke.png" );
 	_image_family[ 1 ] = drawer->createImage( "Family/tarojiro.png" );
 	_image_family[ 2 ] = drawer->createImage( "Family/garisuke.png" );
 	_image_family[ 3 ] = drawer->createImage( "Family/taromi.png" );
-	_image_psychic = drawer->createImage( "Efect/psychic.png" );
+	_image_shot = drawer->createImage( "Efect/psychic.png" );
 	_player_count = { };
 	for ( int i = 0; i < ACE_MAP_NUM; i++ ) {
 		char buf[ 256 ];
@@ -37,20 +48,17 @@ _psychic_manager( psychic_manager ) {
 	}
 }
 
-
-Viewer::~Viewer( ) {
-}
-
 void Viewer::update( ) {
 	Drawer::getTask( )->flip( );
 	drawStreet( );
 	drawFamily( );
-	drawPsychic( );
+	drawShot( );
 }
 
 void Viewer::drawFamily( ) const {
+	FamilyPtr family = Family::getTask( );
 	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
-		PlayerConstPtr player = _family->getPlayer( i );
+		PlayerConstPtr player = family->getPlayer( i );
 		Vector pos = player->getPos( );
 		Player::ACTION action = player->getAction( );
 		int cx = 0;
@@ -129,25 +137,26 @@ void Viewer::drawStreet( ) const{
 	}
 }
 
-void Viewer::drawPsychic( ) const {
-	for ( int i = 0; i < _psychic_manager->getPsychicNum(); i++ ) {
-		int tx = 64;
+void Viewer::drawShot( ) const {
+	ArmouryPtr armoury = Armoury::getTask( );
+	for ( int i = 0; i < armoury->getShotNum( ); i++ ) {
+		int tx = 0;
 		int ty = 128;
 		int tx2 = 64;
 		int ty2 = 64;
-		int sy1 = _psychic_manager->getPsychic( i )->getPos( ).y - PLAYER_CHIP_SIZE + PLAYER_FOOT * 2;
-		int sx1 = _psychic_manager->getPsychic( i )->getPos( ).x;
-		int dir = _psychic_manager->getPsychic( i )->getDir( );
+		int sy1 = armoury->getShot( i )->getPos( ).y - PLAYER_CHIP_SIZE + PLAYER_FOOT * 2;
+		int sx1 = armoury->getShot( i )->getPos( ).x;
+		int dir = armoury->getShot( i )->getDir( );
 		{
-			_image_psychic->setRect( tx, ty, tx2, tx2 );
-			_image_psychic->setPos( sx1, sy1, sx1 - PLAYER_CHIP_SIZE * dir, sy1 + PLAYER_CHIP_SIZE );
-			_image_psychic->draw( );
+			_image_shot->setRect( tx, ty, tx2, tx2 );
+			_image_shot->setPos( sx1, sy1, sx1 - PLAYER_CHIP_SIZE * dir, sy1 + PLAYER_CHIP_SIZE );
+			_image_shot->draw( );
 		}
 		{
 			tx += 64;
-			_image_psychic->setRect( tx, ty, tx2, tx2 );
-			_image_psychic->setPos( sx1, sy1, sx1 - PLAYER_CHIP_SIZE * dir, sy1 + PLAYER_CHIP_SIZE );
-			_image_psychic->draw( );
+			_image_shot->setRect( tx, ty, tx2, tx2 );
+			_image_shot->setPos( sx1, sy1, sx1 - PLAYER_CHIP_SIZE * dir, sy1 + PLAYER_CHIP_SIZE );
+			_image_shot->draw( );
 		}
 
 	}

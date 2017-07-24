@@ -3,12 +3,12 @@
 #include "mathmatics.h"
 #include "Player.h"
 
-PTR( Psychic );
+PTR( Shot );
 
-class Psychic {
+class Shot {
 public:
-	Psychic( const Vector& pos, Player::DIR dir );
-	virtual ~Psychic( );
+	Shot( const Vector& pos, Player::DIR dir );
+	virtual ~Shot( );
 public:
 	Vector getPos( ) const;
 	void update( );
