@@ -7,15 +7,12 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Shot.cpp" />
     <ClCompile Include="Armoury.cpp" />
-<<<<<<< HEAD
     <ClCompile Include="Viewer.cpp" />
     <ClCompile Include="ViewerStreet.cpp" />
     <ClCompile Include="ViewerShot.cpp" />
-=======
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Military.cpp" />
->>>>>>> 7923bddbe22cba3f43e06e815c8b429d0c7755ea
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Family.h" />
@@ -23,14 +20,11 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Shot.h" />
     <ClInclude Include="Armoury.h" />
-<<<<<<< HEAD
     <ClInclude Include="Viewer.h" />
     <ClInclude Include="ViewerStreet.h" />
     <ClInclude Include="ViewerShot.h" />
-=======
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Military.h" />
->>>>>>> 7923bddbe22cba3f43e06e815c8b429d0c7755ea
   </ItemGroup>
 </Project>
