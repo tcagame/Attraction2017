@@ -1,7 +1,8 @@
 #pragma once
 #include "mathmatics.h"
+#include "Character.h"
 
-class Player {
+class Player : public Character {
 public:
 	enum ACTION {
 		ACTION_WAIT,
@@ -10,19 +11,13 @@ public:
 		ACTION_FLOAT,
 		ACTION_ATTACK,
 	};
-	enum DIR {
-		DIR_LEFT,
-		DIR_RIGHT,
-	};
 public:
 	Player( int player_id, Vector pos );
 	virtual ~Player( );
 public:
-	void update( );
-	Vector getPos( ) const;
+	void act( );
 	ACTION getAction( ) const;
 	int getActCount( ) const;
-	DIR getDir( ) const;
 private:
 	void actOnWaiting( );
 	void actOnWalking( );
@@ -32,11 +27,7 @@ private:
 	void checkDir( );
 private:
 	int _act_count;
-	Vector _pos;
-	Vector _vec;
 	ACTION _action;
-	bool _standing;
 	int _id;
-	DIR _dir;
 };
 

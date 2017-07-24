@@ -2,11 +2,9 @@
 
 
 
-Military::Military()
-{
+Military::Military( ) {
 }
 
 
-Military::~Military()
-{
+Military::~Military( ) {
 }
