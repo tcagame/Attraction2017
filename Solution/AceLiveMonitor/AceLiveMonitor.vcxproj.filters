@@ -8,6 +8,9 @@
     <ClCompile Include="Viewer.cpp" />
     <ClCompile Include="Psychic.cpp" />
     <ClCompile Include="PsychicManager.cpp" />
+    <ClCompile Include="ViewerStreet.cpp" />
+    <ClCompile Include="ViewerPsychic.cpp" />
+    <ClCompile Include="ViewerFamily.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
@@ -16,5 +19,8 @@
     <ClInclude Include="Viewer.h" />
     <ClInclude Include="Psychic.h" />
     <ClInclude Include="PsychicManager.h" />
+    <ClInclude Include="ViewerStreet.h" />
+    <ClInclude Include="ViewerPsychic.h" />
+    <ClInclude Include="ViewerFamily.h" />
   </ItemGroup>
 </Project>

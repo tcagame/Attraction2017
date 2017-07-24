@@ -19,7 +19,7 @@ Game::~Game( ) {
 void Game::initialize( ) {
 	_family = FamilyPtr( new Family );
 	_psychic_manager = PsychicManagerPtr( new PsychicManager );
-	_viewer = ViewerPtr( new Viewer( _family, _psychic_manager ) );
+	_viewer = ViewerPtr( new Viewer );
 }
 
 void Game::update( ) {

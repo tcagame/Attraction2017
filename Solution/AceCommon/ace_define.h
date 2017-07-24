@@ -9,6 +9,8 @@ const int ACE_MAP_SIZE = 5;
 
 const int GRAVITY = 1;
 
+const int NOMAL_CHAR_GRAPH_SIZE = 64;
+
 // Editor—p
 const int GRAPH_SIZE = 256;
 const int CHIP_WIDTH = 64;

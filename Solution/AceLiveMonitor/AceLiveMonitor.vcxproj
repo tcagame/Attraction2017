@@ -159,20 +159,26 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Family.cpp" />
+    <ClCompile Include="ViewerFamily.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Psychic.cpp" />
     <ClCompile Include="PsychicManager.cpp" />
     <ClCompile Include="Viewer.cpp" />
+    <ClCompile Include="ViewerPsychic.cpp" />
+    <ClCompile Include="ViewerStreet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Family.h" />
+    <ClInclude Include="ViewerFamily.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Psychic.h" />
     <ClInclude Include="PsychicManager.h" />
     <ClInclude Include="Viewer.h" />
+    <ClInclude Include="ViewerPsychic.h" />
+    <ClInclude Include="ViewerStreet.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Framework2017ver2\Framework2017Ver2.vcxproj">
