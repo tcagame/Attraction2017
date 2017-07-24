@@ -14,8 +14,14 @@ Armoury::~Armoury( ) {
 }
 
 void Armoury::update( ) {
-	for ( int i = 0; i < _shot_list.size( ); i++ ) {
-		_shot_list[ i ]->update( );
+	std::vector< ShotPtr >::iterator ite = _shot_list.begin( );
+	while ( ite != _shot_list.end( ) ) {
+		if ( !( *ite ) ) {
+			ite++;
+			continue;
+		}
+		( *ite )->update( );
+		ite++;
 	}
 }
 
