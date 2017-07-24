@@ -1,10 +1,8 @@
 #pragma once
 #include "Character.h"
-class Enemy :
-	public Character
-{
+class Enemy : public Character {
 public:
-	Enemy();
-	virtual ~Enemy();
+	Enemy( const Vector& pos, const int width );
+	virtual ~Enemy( );
 };
 

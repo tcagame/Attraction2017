@@ -1,8 +1,7 @@
 #pragma once
-class Military
-{
+class Military {
 public:
-	Military();
-	virtual ~Military();
+	Military( );
+	virtual ~Military( );
 };
 
