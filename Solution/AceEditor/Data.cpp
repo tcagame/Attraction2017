@@ -12,7 +12,6 @@ Data::Data( ) {
 	int max_chip = _page_num * PAGE_CHIP_WIDTH_NUM * MAP_HEIGHT;
 	_chips.resize( max_chip );
 	for ( int i = 0; i < max_chip; i++ ) {
-		//_chips[ i ].ground = ( i % ( PAGE_NUM * PAGE_CHIP_WIDTH_NUM ) % 4 == 0 && ( i / ( PAGE_NUM * PAGE_CHIP_WIDTH_NUM ) ) % 2 == 0 );
 		_chips[ i ].ground = 1;
 		_chips[ i ].structure = 0;
 		_chips[ i ].height = 0;
@@ -20,37 +19,32 @@ Data::Data( ) {
 	const int MAX_OBJ = _page_num * PAGE_OBJECT_WIDTH_NUM * OBJECT_CHIP_HEIGHT_NUM;
 	_objects.resize( MAX_OBJ );
 	for ( int i = 0; i < MAX_OBJ; i++ ) {
-		_objects[ i ].block = ( i % 3 ) ? OBJECT_NONE : OBJECT_BLOCK;
+		_objects[ i ] = OBJECT_NONE;
 	}
 }
-
 
 Data::~Data( ) {
 	_chips.clear( );
 }
 
-int Data::getGroundData( int mx, int my ) const {
+int Data::getGround( int mx, int my ) const {
 	return getChip( mx, my ).ground;
 }
 
-int Data::getStructureData( int mx, int my ) const {
+int Data::getStructure( int mx, int my ) const {
 	return getChip( mx, my ).structure;
 }
 
-int Data::getHeightData( int mx, int my ) const {
+int Data::getHeight( int mx, int my ) const {
 	return getChip( mx, my ).height;
 }
 
-int Data::getBlockData( int ox, int oy ) const {
-	return getObject( ox, oy ).block;
-}
-
-void Data::setHeightData( int mx, int my, int height ) {
+void Data::setHeight( int mx, int my, int height ) {
 	mx %= _page_num * PAGE_CHIP_WIDTH_NUM;
 	getChip( mx, my ).height = height;
 }
 
-void Data::setStructureData( int mx, int my, int num )  {
+void Data::setStructure( int mx, int my, int num )  {
 	mx %= _page_num * PAGE_CHIP_WIDTH_NUM;
 	getChip( mx, my ).structure = num;
 }
@@ -60,9 +54,9 @@ void Data::setGroundData( int mx, int my, int num ) {
 	getChip( mx, my ).ground = num;
 }
 
-void Data::setBlockData( int ox, int oy, int num ) {
+void Data::setObject( int ox, int oy, unsigned char object ) {
 	ox %= _page_num * PAGE_OBJECT_WIDTH_NUM;
-	getObject( ox, oy ).block = num;
+	_objects[ ox + oy * _page_num * PAGE_OBJECT_WIDTH_NUM ] = object;
 }
 
 const Data::Chip& Data::getChip( int mx, int my ) const {
@@ -73,11 +67,7 @@ Data::Chip& Data::getChip( int mx, int my ) {
 	return _chips[ mx + my * _page_num * PAGE_CHIP_WIDTH_NUM ];
 }
 
-const Data::Object& Data::getObject( int ox, int oy ) const {
-	return _objects[ ox + oy * _page_num * PAGE_OBJECT_WIDTH_NUM ];
-}
-
-Data::Object& Data::getObject( int ox, int oy ) {
+unsigned char Data::getObject( int ox, int oy ) const {
 	return _objects[ ox + oy * _page_num * PAGE_OBJECT_WIDTH_NUM ];
 }
 
@@ -93,7 +83,7 @@ void Data::insert( int page ) {
 	int new_chip_width_num = ( _page_num + 1 ) * PAGE_CHIP_WIDTH_NUM;
 	int front_chip_width_num = page * PAGE_CHIP_WIDTH_NUM;
 
-	std::vector< Object > objects;
+	std::vector< unsigned char > objects;
 	int new_max_object = ( _page_num + 1 ) * PAGE_OBJECT_WIDTH_NUM * OBJECT_CHIP_HEIGHT_NUM;
 	objects.resize( new_max_object );
 	int old_object_width_num = _page_num * PAGE_OBJECT_WIDTH_NUM;
@@ -106,7 +96,7 @@ void Data::insert( int page ) {
 		chips[ i ].ground = 1;
 	}
 	for ( int i = 0; i < new_object_width_num * OBJECT_CHIP_HEIGHT_NUM; i++ ) {
-		objects[ i ] = Object( );
+		objects[ i ] = OBJECT_NONE;
 	}
 
 	//‘}“üˆÊ’u‚Ü‚Å‘ã“ü
@@ -190,7 +180,7 @@ void Data::erase( int page ) {
 	_page_num--;
 }
 
-void Data::saveChip( std::string filename ) const {
+void Data::save( std::string filename ) const {
 	if ( filename.find( EXTENSION_CHIP_ALL ) == std::string::npos ) {
 		filename += EXTENSION_CHIP_ALL;
 	}
@@ -202,7 +192,7 @@ void Data::saveChip( std::string filename ) const {
 	app->saveBinary( filename, binary );
 }
 
-void Data::loadChip( std::string filename ) {
+void Data::load( std::string filename ) {
 	if ( filename.find( EXTENSION_CHIP_ALL ) == std::string::npos ) {
 		filename += EXTENSION_CHIP_ALL;
 	}
@@ -220,7 +210,7 @@ void Data::loadChip( std::string filename ) {
 }
 
 
-void Data::saveChipPage( std::string filename, int page ) const {
+void Data::savePage( std::string filename, int page ) const {
 	if ( filename.find( EXTENSION_CHIP_PAGE ) == std::string::npos ) {
 		filename += EXTENSION_CHIP_PAGE;
 	}
@@ -248,7 +238,7 @@ void Data::saveChipPage( std::string filename, int page ) const {
 	app->saveBinary( filename, binary );
 }
 
-void Data::loadChipPage( std::string filename, int page ) {
+void Data::loadPage( std::string filename, int page ) {
 	if ( filename.find( EXTENSION_CHIP_PAGE ) == std::string::npos ) {
 		filename += EXTENSION_CHIP_PAGE;
 	}
@@ -283,7 +273,7 @@ void Data::saveObject( std::string filename ) const {
 		filename += EXTEMSION_OBJECT;
 	}
 	BinaryPtr binary( new Binary );
-	int size = (int)( sizeof( Object ) * _objects.size( ) );
+	int size = (int)( sizeof( unsigned char ) * _objects.size( ) );
 	binary->ensure( size );
 	binary->write( (void*)_objects.data( ), size );
 	ApplicationPtr app( Application::getInstance( ) );
@@ -299,8 +289,8 @@ void Data::loadObject( std::string filename ) {
 	if ( !app->loadBinary( filename, binary ) ) {
 		return;
 	}
-	std::vector< Object > objects = { };
-	int size = binary->getSize( ) / (int)( sizeof( Object ) );
+	std::vector< unsigned char > objects = { };
+	int size = binary->getSize( ) / (int)( sizeof( unsigned char ) );
 	objects.resize( size );
 	binary->read( (void*)objects.data( ), binary->getSize( ) );
 	int now_width = _page_num * PAGE_OBJECT_WIDTH_NUM;
@@ -308,7 +298,7 @@ void Data::loadObject( std::string filename ) {
 	for ( int i = 0; i < OBJECT_CHIP_HEIGHT_NUM; i++ ) {
 		for ( int j = 0; j < now_width; j++ ) {
 			int idx = j + i * now_width;
-			_objects[ idx ] = Object( );
+			_objects[ idx ] = OBJECT_NONE;
 		}
 	}
 	for ( int i = 0; i < OBJECT_CHIP_HEIGHT_NUM; i++ ) {

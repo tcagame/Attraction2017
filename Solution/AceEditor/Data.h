@@ -1,26 +1,28 @@
 #pragma once
 #include <vector>
 
+#include "ace_define.h"
+
 class Data {
 public:
 	Data( );
 	virtual ~Data( );
 public:
 	int getPageNum( ) const;
-	int getGroundData( int mx, int my ) const;
-	int getStructureData( int mx, int my ) const;
-	int getHeightData( int mx, int my ) const;
-	int getBlockData( int ox, int oy ) const;
+	int getGround( int mx, int my ) const;
+	int getStructure( int mx, int my ) const;
+	int getHeight( int mx, int my ) const;
+	unsigned char getObject( int ox, int oy ) const;
 	void setGroundData( int mx, int my, int num );
-	void setStructureData( int mx, int my, int num );
-	void setHeightData( int mx, int my, int height );
-	void setBlockData( int ox, int oy, int num );
+	void setStructure( int mx, int my, int num );
+	void setHeight( int mx, int my, int height );
+	void setObject( int ox, int oy, unsigned char object );
 	void insert( int page );	//ë}ì¸
 	void erase( int page );		//çÌèú
-	void saveChip( std::string filename ) const;
-	void loadChip( std::string filename );
-	void saveChipPage( std::string filename, int page ) const;
-	void loadChipPage( std::string filename, int page );
+	void save( std::string filename ) const;
+	void load( std::string filename );
+	void savePage( std::string filename, int page ) const;
+	void loadPage( std::string filename, int page );
 	void saveObject( std::string filename ) const;
 	void loadObject( std::string filename );
 	void copy( std::vector< int >& mx, std::vector< int >& my );
@@ -31,18 +33,13 @@ private:
 		unsigned char structure;
 		unsigned char height;
 	};
-	struct Object {
-		unsigned char block;
-	};
 private:
 	const Chip& getChip( int mx, int my ) const;
 	Chip& getChip( int mx, int my );
-	const Object& getObject( int ox, int oy ) const;
-	Object& getObject( int ox, int oy );
 private:
 	std::vector< Chip > _copy;
 	std::vector< Chip > _chips;
-	std::vector< Object > _objects;
+	std::vector< unsigned char > _objects;
 	int _page_num;
 };
 

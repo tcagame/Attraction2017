@@ -20,7 +20,7 @@ void ObjectEditor::update( ) {
 	if ( mouse->isHoldLeftButton( ) && _object_cursor->isOnChip( ) ) {
 		int ox = _object_cursor->getGX( ) + _object_cursor->getScrollX( );
 		int oy = _object_cursor->getGY( );
-		_data->setBlockData( ox, oy, OBJECT_BLOCK );
+		_data->setObject( ox, oy, OBJECT_BLOCK );
 	}
 }
 

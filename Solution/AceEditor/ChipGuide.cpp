@@ -71,11 +71,11 @@ void ChipGuide::draw( ) const {
 					ty = 16;
 				}
 			}
-			if ( _data->getGroundData( mx, my ) > 0 && _ground_graph_data[ _data->getGroundData( mx, my ) - 1 ] ) {
+			if ( _data->getGround( mx, my ) > 0 && _ground_graph_data[ _data->getGround( mx, my ) - 1 ] ) {
 				tx += 64;
-				height = _data->getHeightData( mx, my );
+				height = _data->getHeight( mx, my );
 			}
-			if ( _data->getStructureData( mx, my ) > 0 && _struct_graph_data[ _data->getStructureData( mx, my ) - 1 ] ) {
+			if ( _data->getStructure( mx, my ) > 0 && _struct_graph_data[ _data->getStructure( mx, my ) - 1 ] ) {
 				tx += 128;
 			}
 			int sx = GUIDE_X + gx * CHIP_WIDTH;
