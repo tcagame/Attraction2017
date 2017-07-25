@@ -26,7 +26,7 @@ void ObjectGuide::draw( ) const {
 		for ( int j = 0; j < OBJECT_CHIP_HEIGHT_NUM; j++ ) {
 			int ox = ( i + _object_cursor->getScrollX( ) ) % ( _data->getPageNum( ) * PAGE_OBJECT_WIDTH_NUM );
 			int oy = j;
-			if ( _data->getBlockData( ox, oy ) == OBJECT_BLOCK ) {
+			if ( _data->getObject( ox, oy ) == OBJECT_BLOCK ) {
 				_image->setPos( PREVIEW_X + i * OBJECT_GUIDE_SIZE, GUIDE_Y + j * OBJECT_GUIDE_SIZE );
 				_image->setRect( 0, 0, 16, 16 );
 				_image->draw( );

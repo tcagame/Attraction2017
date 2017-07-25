@@ -7,7 +7,7 @@
 #include "Drawer.h"
 #include "ace_define.h"
 
-const std::string DIRECTORY = "../Resource/Ace/MapData/";
+const std::string DIRECTORY_DATA   = "MapData/";
 
 ChipEditor::ChipEditor( DataPtr data, ChipCursorConstPtr chip_cursor ) :
 _data( data ),
@@ -123,10 +123,10 @@ void ChipEditor::editChip( ) {
 			if ( mx[ i ] >= 0 && my[ i ] >= 0 ) {
 				switch ( _mode ) {
 				case MODE_HEIGHT:
-					_data->setHeightData( mx[ i ], my[ i ], _number );
+					_data->setHeight( mx[ i ], my[ i ], _number );
 					break;
 				case MODE_STRUCTURE:
-					_data->setStructureData( mx[ i ], my[ i ], _number );
+					_data->setStructure( mx[ i ], my[ i ], _number );
 					break;
 				case MODE_GROUND:
 					_data->setGroundData( mx[ i ], my[ i ], _number );
@@ -174,7 +174,7 @@ void ChipEditor::save( ) const {
 	if ( filename.size( ) == 0 ) {
 		return;
 	}
-	_data->saveChip( DIRECTORY + filename );
+	_data->save( DIRECTORY_DATA + filename );
 }
 
 void ChipEditor::load( ) {
@@ -182,7 +182,7 @@ void ChipEditor::load( ) {
 	if ( filename.size( ) == 0 ) {
 		return;
 	}
-	_data->loadChip( DIRECTORY + filename );
+	_data->load( DIRECTORY_DATA + filename );
 }
 
 void ChipEditor::savePage( ) const {
@@ -192,7 +192,7 @@ void ChipEditor::savePage( ) const {
 	}
 	int page = ( _chip_cursor->getScrollX( ) + _chip_cursor->getGX( ) ) / PAGE_CHIP_WIDTH_NUM;
 	page %= _data->getPageNum( );
-	_data->saveChipPage( DIRECTORY + filename, page );
+	_data->savePage( DIRECTORY_DATA + filename, page );
 }
 
 void ChipEditor::loadPage( ) {
@@ -202,5 +202,5 @@ void ChipEditor::loadPage( ) {
 	}
 	int page = ( _chip_cursor->getScrollX( ) + _chip_cursor->getGX( ) ) / PAGE_CHIP_WIDTH_NUM;
 	page %= _data->getPageNum( );
-	_data->loadChipPage( DIRECTORY + filename, page );
+	_data->loadPage( DIRECTORY_DATA + filename, page );
 }

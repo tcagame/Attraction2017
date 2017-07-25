@@ -26,21 +26,21 @@ ChipDrawer::~ChipDrawer( ) {
 
 void ChipDrawer::draw( int mx, int my, int gx, int gy, bool select ) const {
 	int sy = BASE_Y + gy * CHIP_HEIGHT / 2;
-	sy -= CHIP_HEIGHT * _data->getHeightData( mx, my );	//高さ
+	sy -= CHIP_HEIGHT * _data->getHeight( mx, my );	//高さ
 	int sx = BASE_X + gx  * CHIP_WIDTH;
 	sx += ( my % 2 ) * CHIP_WIDTH / 2;	//横にずらす
 	if ( select ) { // 選んでいるチップ表示
 		_image_choice_back->setPos( sx, 0 );
 		_image_choice_back->draw( );
 	}
-	int ground_num = _data->getGroundData( mx, my );
+	int ground_num = _data->getGround( mx, my );
 	if ( ground_num > 0 ) { //地面
 		ImagePtr ground = _ground->getImage( ground_num - 1 );
 		ground->setPos( sx, sy );
 		ground->setRect( );
 		ground->draw( );
 	}
-	int structure_num = _data->getStructureData( mx, my );
+	int structure_num = _data->getStructure( mx, my );
 	if ( structure_num > 0 ) { // ストラクチャー
 		ImagePtr structure = _structure->getImage( structure_num - 1 );
 		int width = 0;
