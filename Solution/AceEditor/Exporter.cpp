@@ -4,10 +4,13 @@
 #include "ImageTarget.h"
 #include "Data.h"
 #include "ChipDrawer.h"
+#include "Binary.h"
+#include "Application.h"
+#include <direct.h>
 
 const int PROGRESS_WIDTH = 1000;
 const int PROGRESS_HEIGHT= 100;
-const std::string DIRECTORY = "../Resource/Ace/MapData/Img/";
+const std::string DIRECTORY = "MapExport/";
 const int FRONT_HEIGHT_NUM = MAP_HEIGHT - MAP_COVER_HEIGHT;
 
 Exporter::Exporter( DataConstPtr data, ChipDrawerConstPtr chip_drawer ) :
@@ -26,11 +29,14 @@ Exporter::~Exporter( ) {
 }
 
 void Exporter::start( ) {
+	_mkdir( DIRECTORY.c_str( ) );
+
 	_max = _data->getPageNum( );
 	_now = 0;
 }
 
 bool Exporter::update( ) {
+
 	DrawerPtr drawer( Drawer::getTask( ) );
 	{//back
 		_image_export_front->clear( );
@@ -74,7 +80,34 @@ bool Exporter::update( ) {
 	}
 	drawer->setImageTarget( );
 	_now++;
-	return _max > _now;
+	if ( _max > _now ) {
+		return true;
+	}
+
+	// ƒf[ƒ^•Û‘¶
+	{
+		std::string filename = DIRECTORY + "mapdata";
+
+		BinaryPtr binary( new Binary );
+
+		int page = _data->getPageNum( );
+		int size_object = (int)( sizeof( unsigned char ) *
+			page * OBJECT_CHIP_WIDTH_NUM * OBJECT_CHIP_HEIGHT_NUM );
+		binary->ensure( size_object + sizeof( int ) );
+	
+		binary->write( (void*)&page, sizeof( int ) );
+		for ( int i = 0; i < PAGE_OBJECT_WIDTH_NUM; i++ ) {
+			for ( int j = 0; j < page * PAGE_OBJECT_WIDTH_NUM; j++ ) {
+				unsigned char object = _data->getObject( j, i );
+				binary->write( (void*)&object, sizeof( unsigned char ) );
+			}
+		}
+
+		ApplicationPtr app( Application::getInstance( ) );
+		app->saveBinary( filename, binary );
+	}
+
+	return false;
 }
 
 void Exporter::draw( ) {

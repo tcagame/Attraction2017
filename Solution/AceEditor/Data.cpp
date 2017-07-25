@@ -295,54 +295,6 @@ void Data::loadPage( std::string directory, std::string filename, int page ) {
 		}
 	}
 }
-/*
-void Data::saveObject( std::string filename ) const {
-	if ( filename.find( EXTEMSION_OBJECT ) == std::string::npos ) {
-		filename += EXTEMSION_OBJECT;
-	}
-	BinaryPtr binary( new Binary );
-	int size = (int)( sizeof( unsigned char ) * _objects.size( ) );
-	binary->ensure( size );
-	binary->write( (void*)_objects.data( ), size );
-	ApplicationPtr app( Application::getInstance( ) );
-	app->saveBinary( filename, binary );
-}
-
-void Data::loadObject( std::string filename ) {
-	if ( filename.find( EXTEMSION_OBJECT ) == std::string::npos ) {
-		filename += EXTEMSION_OBJECT;
-	}
-	BinaryPtr binary( new Binary );
-	ApplicationPtr app( Application::getInstance( ) );
-	if ( !app->loadBinary( filename, binary ) ) {
-		return;
-	}
-	std::vector< unsigned char > objects = { };
-	int size = binary->getSize( ) / (int)( sizeof( unsigned char ) );
-	objects.resize( size );
-	binary->read( (void*)objects.data( ), binary->getSize( ) );
-	int now_width = _page_num * PAGE_OBJECT_WIDTH_NUM;
-	int load_width = size / OBJECT_CHIP_HEIGHT_NUM;
-	for ( int i = 0; i < OBJECT_CHIP_HEIGHT_NUM; i++ ) {
-		for ( int j = 0; j < now_width; j++ ) {
-			int idx = j + i * now_width;
-			_objects[ idx ] = OBJECT_NONE;
-		}
-	}
-	for ( int i = 0; i < OBJECT_CHIP_HEIGHT_NUM; i++ ) {
-		for ( int j = 0; j < now_width; j++ ) {
-			int x = j;
-			int y = i;
-			if ( x >= load_width ) {
-				break;
-			}
-			int load_idx = x + y * load_width;
-			int now_idx = x + y * now_width;
-			_objects[ now_idx ] = objects[ load_idx ];
-		}
-	}
-}
-*/
 
 void Data::copy( std::vector< int >& mx, std::vector< int >& my ) {
 	_copy = { };
