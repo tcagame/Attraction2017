@@ -1,20 +1,11 @@
-[Viewer修正]
-Viewerは描画するのに必要なコードのみにする
-描画に必要な情報はViewer以外のクラスで生成する
+[vector禁止]
+Armouryのshot_listはstd::arrayに変更
 
-[PschicManagerの名前修正]
-Managerという名前を廃止したいとおもいます。
-PschicManagerの代わりの名前を考えてください
+[getChipIndexってなに？]
 
+[../Resource禁止]
+本番で困る
 
-[クラスをTask化]
-起動から終了まで削除されないクラスはすべてTask化する
-FamilyとPschicManager(rename)
+[getMaxShotNum削除]
 
-[取得メンバ関数は二つ]
-以下のように変更
-PlayerConstPtr Family::getPlayer( int player_id ) const;
-PlayerPtr Family::getPlayer( int player_id );
-
-[int player_id]
-intによる指定なので、assetを使って範囲外指定した場合、例外を発生させるように
+[ページ挿入削除をするとObjectが壊れる]

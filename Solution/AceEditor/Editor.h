@@ -20,6 +20,7 @@ PTR( Exporter );
 PTR( Ground );
 PTR( Structure );
 PTR( ChipDrawer );
+PTR( Data );
 
 class Editor : public Task {
 public:
@@ -55,11 +56,12 @@ private:
 	void drawChipMode( ) const;
 	void drawObjectMode( ) const;
 	void checkPhase( );
-	void saveAll( );
+	void saveAll( ) const;
 	void loadAll( );
-	void savePage( );
+	void savePage( ) const;
 	void loadPage( );
 private:
+	DataPtr _data;
 	InformationPtr _information;
 	ChipGuidePtr _chip_guide;
 	ChipPreviewPtr _chip_preview;

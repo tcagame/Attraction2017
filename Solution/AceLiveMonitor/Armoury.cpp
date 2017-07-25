@@ -11,7 +11,6 @@ Armoury::Armoury( ) :
 _shot_id( 0 ) {
 }
 
-
 Armoury::~Armoury( ) {
 }
 

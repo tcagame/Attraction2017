@@ -24,11 +24,12 @@
 #include "Ground.h"
 #include "Structure.h"
 
+const std::string DIRECTORY_DATA = "MapData/";
+
 EditorPtr Editor::getTask( ) {
 	ApplicationPtr app = Application::getInstance( );
 	return std::dynamic_pointer_cast< Editor >( app->getTask( getTag( ) ) );
 }
-
 
 Editor::Editor( ) :
 _phase( PHASE_EDIT_BG ),
@@ -44,22 +45,23 @@ void Editor::initialize( ) {
 	GroundPtr ground = GroundPtr( new Ground );
 	StructurePtr structure = StructurePtr( new Structure );
 
-	DataPtr data    = DataPtr		  ( new Data );
-	ChipDrawerPtr chip_drawer = ChipDrawerPtr( new ChipDrawer( data, ground, structure ) );
-	_exporter       = ExporterPtr     ( new Exporter     ( data, chip_drawer ) );
+	_data = DataPtr( new Data );
 
-	_chip_cursor    = ChipCursorPtr	  ( new ChipCursor   ( data ) );
-	_chip_editor    = ChipEditorPtr	  ( new ChipEditor   ( data, _chip_cursor ) );
-	_chip_guide     = ChipGuidePtr	  ( new ChipGuide	 ( data, _chip_cursor, _chip_editor ) );
-	_chip_preview   = ChipPreviewPtr  ( new ChipPreview  ( data, _chip_cursor, _chip_editor, chip_drawer ) );
+	ChipDrawerPtr chip_drawer = ChipDrawerPtr( new ChipDrawer( _data, ground, structure ) );
+	_exporter       = ExporterPtr     ( new Exporter     ( _data, chip_drawer ) );
+
+	_chip_cursor    = ChipCursorPtr	  ( new ChipCursor   ( _data ) );
+	_chip_editor    = ChipEditorPtr	  ( new ChipEditor   ( _data, _chip_cursor ) );
+	_chip_guide     = ChipGuidePtr	  ( new ChipGuide	 ( _data, _chip_cursor, _chip_editor ) );
+	_chip_preview   = ChipPreviewPtr  ( new ChipPreview  ( _data, _chip_cursor, _chip_editor, chip_drawer ) );
 	_chip_menu	    = ChipMenuPtr	  ( new ChipMenu	 ( menu_image, _chip_editor, ground, structure ) );
 
-	_object_cursor  = ObjectCursorPtr ( new ObjectCursor ( data ) );
-	_object_editor  = ObjectEditorPtr ( new ObjectEditor ( data, _object_cursor ) );
-	_object_guide   = ObjectGuidePtr  ( new ObjectGuide  ( data, _object_cursor ) );
-	_object_preview = ObjectPreviewPtr( new ObjectPreview( data, _object_cursor ) );
+	_object_cursor  = ObjectCursorPtr ( new ObjectCursor ( _data ) );
+	_object_editor  = ObjectEditorPtr ( new ObjectEditor ( _data, _object_cursor ) );
+	_object_guide   = ObjectGuidePtr  ( new ObjectGuide  ( _data, _object_cursor ) );
+	_object_preview = ObjectPreviewPtr( new ObjectPreview( _data, _object_cursor ) );
 	_object_menu    = ObjectMenuPtr   ( new ObjectMenu   ( menu_image ) );
-	_information    = InformationPtr  ( new Information  ( data, _chip_cursor, _object_cursor, _chip_editor ) );
+	_information    = InformationPtr  ( new Information  ( _data, _chip_cursor, _object_cursor, _chip_editor ) );
 }
 
 
@@ -248,18 +250,39 @@ Editor::MODE Editor::getMode( ) const {
 	return _mode;
 }
 
-void Editor::saveAll( ) {
-	_chip_editor->save( );
+void Editor::saveAll( ) const {
+	std::string filename = Application::getInstance( )->inputString( 0, 20 );
+	if ( filename.size( ) == 0 ) {
+		return;
+	}
+
+	_data->save( DIRECTORY_DATA , filename );
 }
 
 void Editor::loadAll( ) {
-	_chip_editor->load( );
+	std::string filename = Application::getInstance( )->inputString( 0, 20 );
+	if ( filename.size( ) == 0 ) {
+		return;
+	}
+	_data->load( DIRECTORY_DATA, filename );
 }
 
-void Editor::savePage( ) {
-	_chip_editor->savePage( );
+void Editor::savePage( ) const {
+	std::string filename = Application::getInstance( )->inputString( 0, 20 );
+	if ( filename.size( ) == 0 ) {
+		return;
+	}
+	int page = ( _chip_cursor->getScrollX( ) + _chip_cursor->getGX( ) ) / PAGE_CHIP_WIDTH_NUM;
+	page %= _data->getPageNum( );
+	_data->savePage( DIRECTORY_DATA, filename, page );
 }
 
 void Editor::loadPage( ) {
-	_chip_editor->loadPage( );
+	std::string filename = Application::getInstance( )->inputString( 0, 20 );
+	if ( filename.size( ) == 0 ) {
+		return;
+	}
+	int page = ( _chip_cursor->getScrollX( ) + _chip_cursor->getGX( ) ) / PAGE_CHIP_WIDTH_NUM;
+	page %= _data->getPageNum( );
+	_data->loadPage( DIRECTORY_DATA, filename, page );
 }
