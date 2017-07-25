@@ -19,9 +19,9 @@ public:
 	void add( ShotPtr shot );
 	void update( );
 	ShotConstPtr getShot( int idx ) const;
-public:
-	static const int MAX_SHOT_NUM = 100;
+	int getMaxShotNum( ) const;
 private:
+	static const int MAX_SHOT_NUM = 100;
 	int _shot_id;
 	std::array< ShotPtr, MAX_SHOT_NUM > _shot_list;
 };

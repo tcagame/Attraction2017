@@ -23,6 +23,7 @@ void ViewerFamily::draw( ) const {
 	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
 		PlayerConstPtr player = family->getPlayer( i );
 		Vector pos = player->getPos( );
+		pos.x = ( pos.x - family->getPlayersPosX( ) ) + SCREEN_WIDTH / 2;
 		int cx = 0;
 		int cy = 0;
 		player->getChipIndex( cx, cy );

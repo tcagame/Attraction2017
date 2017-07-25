@@ -33,11 +33,13 @@ ShotConstPtr Armoury::getShot( int idx ) const {
 	return _shot_list[ idx ];
 }
 
+int Armoury::getMaxShotNum( ) const {
+	return MAX_SHOT_NUM;
+}
+
 void Armoury::add( ShotPtr shot ) {
 	_shot_list[ _shot_id ] = shot;
 	_shot_id++;
-	if ( _shot_id >= MAX_SHOT_NUM ) {
-		_shot_id = 0;
-	}
+	_shot_id %= MAX_SHOT_NUM;
 }
 

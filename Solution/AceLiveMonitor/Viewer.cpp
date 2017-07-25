@@ -1,6 +1,7 @@
 #include "Viewer.h"
 #include "Application.h"
 #include "Drawer.h"
+#include "Family.h"
 
 #include "ViewerFamily.h"
 #include "ViewerStreet.h"
@@ -23,8 +24,10 @@ void Viewer::initialize( ) {
 }
 
 void Viewer::update( ) {
+	FamilyConstPtr family( Family::getTask( ) );
+	double pos_x = family->getPlayersPosX( );
 	Drawer::getTask( )->flip( );
-	_viewer_street->draw( );
+	_viewer_street->draw( pos_x );
 	_viewer_family->draw( );
 	_viewer_armoury->draw( );
 }
