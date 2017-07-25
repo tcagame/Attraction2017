@@ -6,7 +6,7 @@
 PTR( Viewer );
 PTR( ViewerFamily );
 PTR( ViewerStreet );
-PTR( ViewerShot );
+PTR( ViewerArmoury );
 
 class Viewer : public Task {
 public:
@@ -21,6 +21,6 @@ public:
 private:
 	ViewerFamilyConstPtr _viewer_family;
 	ViewerStreetConstPtr _viewer_street;
-	ViewerShotConstPtr _viewer_shot;
+	ViewerArmouryConstPtr _viewer_armoury;
 };
 

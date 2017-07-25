@@ -1,17 +1,17 @@
-#include "ViewerShot.h"
+#include "ViewerArmoury.h"
 #include "Drawer.h"
 #include "Armoury.h"
 
-ViewerShot::ViewerShot( ) {
+ViewerArmoury::ViewerArmoury( ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
 	_image = drawer->createImage( "Effect/psychic.png" );
 }
 
 
-ViewerShot::~ViewerShot( ) {
+ViewerArmoury::~ViewerArmoury( ) {
 }
 
-void ViewerShot::draw( ) const {
+void ViewerArmoury::draw( ) const {
 	ArmouryPtr armoury( Armoury::getTask( ) );
 	std::vector< ShotPtr > shot_list = armoury->getShotList( );
 	if ( shot_list.empty( ) ) {

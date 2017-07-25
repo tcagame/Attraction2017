@@ -9,10 +9,10 @@
     <ClCompile Include="Armoury.cpp" />
     <ClCompile Include="Viewer.cpp" />
     <ClCompile Include="ViewerStreet.cpp" />
-    <ClCompile Include="ViewerShot.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Military.cpp" />
+    <ClCompile Include="ViewerArmoury.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Family.h" />
@@ -22,9 +22,9 @@
     <ClInclude Include="Armoury.h" />
     <ClInclude Include="Viewer.h" />
     <ClInclude Include="ViewerStreet.h" />
-    <ClInclude Include="ViewerShot.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Character.h" />
     <ClInclude Include="Military.h" />
+    <ClInclude Include="ViewerArmoury.h" />
   </ItemGroup>
 </Project>
