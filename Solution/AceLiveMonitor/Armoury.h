@@ -2,8 +2,6 @@
 #include "Task.h"
 #include <string>
 #include "Shot.h"
-#include "Player.h"
-#include "Shot.h"
 #include "smart_ptr.h"
 #include <array>
 
@@ -24,6 +22,7 @@ public:
 public:
 	static const int MAX_SHOT_NUM = 100;
 private:
+	int _shot_id;
 	std::array< ShotPtr, MAX_SHOT_NUM > _shot_list;
 };
 

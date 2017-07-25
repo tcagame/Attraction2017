@@ -1,12 +1,14 @@
 #include "Armoury.h"
 #include "Shot.h"
 #include "Application.h"
+#include <assert.h>
 
 ArmouryPtr Armoury::getTask( ) {
 	return std::dynamic_pointer_cast< Armoury >( Application::getInstance( )->getTask( getTag( ) ) );
 }
 
-Armoury::Armoury( ) {
+Armoury::Armoury( ) :
+_shot_id( 0 ) {
 }
 
 
@@ -26,17 +28,15 @@ void Armoury::update( ) {
 }
 
 ShotConstPtr Armoury::getShot( int idx ) const {
+	assert( idx < MAX_SHOT_NUM );
 	return _shot_list[ idx ];
 }
 
 void Armoury::add( ShotPtr shot ) {
-	for ( int i = 0; i < MAX_SHOT_NUM; i++ )  {
-		if ( _shot_list[ i ] ) {
-			continue;
-		}
-
-		_shot_list[ i ] = shot;
-		break;
+	_shot_list[ _shot_id ] = shot;
+	_shot_id++;
+	if ( _shot_id >= MAX_SHOT_NUM ) {
+		_shot_id = 0;
 	}
 }
 
