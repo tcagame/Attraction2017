@@ -7,8 +7,6 @@
 #include "Drawer.h"
 #include "ace_define.h"
 
-const std::string DIRECTORY_DATA   = "MapData/";
-
 ChipEditor::ChipEditor( DataPtr data, ChipCursorConstPtr chip_cursor ) :
 _data( data ),
 _chip_cursor( chip_cursor ),
@@ -168,39 +166,3 @@ void ChipEditor::changeRange( ) {
 	}
 }
 
-
-void ChipEditor::save( ) const {
-	std::string filename = Application::getInstance( )->inputString( 0, 20 );
-	if ( filename.size( ) == 0 ) {
-		return;
-	}
-	_data->save( DIRECTORY_DATA + filename );
-}
-
-void ChipEditor::load( ) {
-	std::string filename = Application::getInstance( )->inputString( 0, 20 );
-	if ( filename.size( ) == 0 ) {
-		return;
-	}
-	_data->load( DIRECTORY_DATA + filename );
-}
-
-void ChipEditor::savePage( ) const {
-	std::string filename = Application::getInstance( )->inputString( 0, 20 );
-	if ( filename.size( ) == 0 ) {
-		return;
-	}
-	int page = ( _chip_cursor->getScrollX( ) + _chip_cursor->getGX( ) ) / PAGE_CHIP_WIDTH_NUM;
-	page %= _data->getPageNum( );
-	_data->savePage( DIRECTORY_DATA + filename, page );
-}
-
-void ChipEditor::loadPage( ) {
-	std::string filename = Application::getInstance( )->inputString( 0, 20 );
-	if ( filename.size( ) == 0 ) {
-		return;
-	}
-	int page = ( _chip_cursor->getScrollX( ) + _chip_cursor->getGX( ) ) / PAGE_CHIP_WIDTH_NUM;
-	page %= _data->getPageNum( );
-	_data->loadPage( DIRECTORY_DATA + filename, page );
-}

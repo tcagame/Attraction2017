@@ -2,10 +2,10 @@
 #include "Application.h"
 #include "Binary.h"
 #include "ace_define.h"
+#include <direct.h>
 
-std::string EXTENSION_CHIP_ALL  = ".map";
-std::string EXTENSION_CHIP_PAGE = ".page";
-std::string EXTEMSION_OBJECT = ".objdat";
+std::string EXTENSION_ALL  = ".map";
+std::string EXTENSION_PAGE = ".page";
 
 Data::Data( ) {
 	_page_num = 4;
@@ -180,39 +180,67 @@ void Data::erase( int page ) {
 	_page_num--;
 }
 
-void Data::save( std::string filename ) const {
-	if ( filename.find( EXTENSION_CHIP_ALL ) == std::string::npos ) {
-		filename += EXTENSION_CHIP_ALL;
+void Data::save( std::string directory, std::string filename ) const {
+	
+	_mkdir( directory.c_str( ) );
+
+	if ( filename.find( EXTENSION_ALL ) == std::string::npos ) {
+		filename += EXTENSION_ALL;
 	}
+
+	filename = directory + filename;
+
 	BinaryPtr binary( new Binary );
-	int size = (int)( sizeof( Chip ) * _chips.size( ) );
-	binary->ensure( size );
-	binary->write( (void*)_chips.data( ), size );
+
+	int size_chip   = (int)( sizeof( Chip          ) * _chips.size( ) );
+	int size_object = (int)( sizeof( unsigned char ) * _objects.size( ) );
+	binary->ensure( size_chip + size_object + sizeof( int ) * 2 );
+	
+	binary->write( (void*)&size_chip      , sizeof( int ) );
+	binary->write( (void*)&size_object    , sizeof( int ) );
+	binary->write( (void*)_chips.data( )  , size_chip     );
+	binary->write( (void*)_objects.data( ), size_object   );
+
 	ApplicationPtr app( Application::getInstance( ) );
 	app->saveBinary( filename, binary );
 }
 
-void Data::load( std::string filename ) {
-	if ( filename.find( EXTENSION_CHIP_ALL ) == std::string::npos ) {
-		filename += EXTENSION_CHIP_ALL;
+void Data::load( std::string directory, std::string filename ) {
+
+	if ( filename.find( EXTENSION_ALL ) == std::string::npos ) {
+		filename += EXTENSION_ALL;
 	}
+
+	filename = directory + filename;
+
 	BinaryPtr binary( new Binary );
+
 	ApplicationPtr app( Application::getInstance( ) );
 	if ( !app->loadBinary( filename, binary ) ) {
 		return;
 	}
-	_chips = { };
-	int size = binary->getSize( ) / (int)( sizeof( Chip ) );
-	_chips.resize( size );
-	binary->read( (void*)_chips.data( ), binary->getSize( ) );
-	int width = (int)( _chips.size( ) / MAP_HEIGHT );
+	
+	int size_chip;
+	binary->read( (void*)&size_chip, sizeof( int ) );
+
+	int size_object;
+	binary->read( (void*)&size_object, sizeof( int ) );
+
+	_chips.resize( size_chip / sizeof( Chip ) );
+	binary->read( (void*)_chips.data( ), size_chip );
+
+	_objects.resize( size_object / sizeof( unsigned char ) );
+	binary->read( (void*)_objects.data( ), size_object );
+
+	int width = ( int )( _chips.size( ) / MAP_HEIGHT );
 	_page_num = width / PAGE_CHIP_WIDTH_NUM;
 }
 
 
-void Data::savePage( std::string filename, int page ) const {
-	if ( filename.find( EXTENSION_CHIP_PAGE ) == std::string::npos ) {
-		filename += EXTENSION_CHIP_PAGE;
+void Data::savePage( std::string directory, std::string filename, int page ) const {
+
+	if ( filename.find( EXTENSION_PAGE ) == std::string::npos ) {
+		filename += EXTENSION_PAGE;
 	}
 	std::vector< Chip > page_chip;
 	int max = PAGE_CHIP_WIDTH_NUM * MAP_HEIGHT;
@@ -238,9 +266,9 @@ void Data::savePage( std::string filename, int page ) const {
 	app->saveBinary( filename, binary );
 }
 
-void Data::loadPage( std::string filename, int page ) {
-	if ( filename.find( EXTENSION_CHIP_PAGE ) == std::string::npos ) {
-		filename += EXTENSION_CHIP_PAGE;
+void Data::loadPage( std::string directory, std::string filename, int page ) {
+	if ( filename.find( EXTENSION_PAGE ) == std::string::npos ) {
+		filename += EXTENSION_PAGE;
 	}
 	BinaryPtr binary( new Binary );
 	ApplicationPtr app( Application::getInstance( ) );
@@ -267,7 +295,7 @@ void Data::loadPage( std::string filename, int page ) {
 		}
 	}
 }
-
+/*
 void Data::saveObject( std::string filename ) const {
 	if ( filename.find( EXTEMSION_OBJECT ) == std::string::npos ) {
 		filename += EXTEMSION_OBJECT;
@@ -314,6 +342,7 @@ void Data::loadObject( std::string filename ) {
 		}
 	}
 }
+*/
 
 void Data::copy( std::vector< int >& mx, std::vector< int >& my ) {
 	_copy = { };
@@ -337,5 +366,4 @@ void Data::paste( std::vector< int >& mx, std::vector< int >& my ) {
 		}
 		getChip( mx[ i ], my[ i ] ) = _copy[ i ];
 	}
-	//_copy = { };
 }

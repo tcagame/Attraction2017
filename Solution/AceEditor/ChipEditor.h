@@ -23,10 +23,6 @@ public:
 	void getMode( MODE& mode, int& number ) const;
 	int getRange( ) const;
 	void getReplacePos( std::vector< int >& x, std::vector< int >& y, bool mx_my = false ) const;
-	void save( ) const;
-	void load( );
-	void savePage( ) const;
-	void loadPage( );
 private:
 	void edit( );
 	void updateMode( );

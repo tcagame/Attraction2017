@@ -20,6 +20,7 @@ PTR( Exporter );
 PTR( Ground );
 PTR( Structure );
 PTR( ChipDrawer );
+PTR( Data );
 
 class Editor : public Task {
 public:
@@ -28,13 +29,11 @@ public:
 public:
 	enum MODE {
 		MODE_CHIP,
-		MODE_CHIP_SAVEALL,
-		MODE_CHIP_LOADALL,
-		MODE_CHIP_SAVEPAGE,
-		MODE_CHIP_LOADPAGE,
 		MODE_OBJECT,
-		MODE_OBJECT_SAVE,
-		MODE_OBJECT_LOAD,
+		MODE_SAVEALL,
+		MODE_LOADALL,
+		MODE_SAVEPAGE,
+		MODE_LOADPAGE,
 		MODE_EXPORT,
 	};
 public:
@@ -57,7 +56,12 @@ private:
 	void drawChipMode( ) const;
 	void drawObjectMode( ) const;
 	void checkPhase( );
+	void saveAll( ) const;
+	void loadAll( );
+	void savePage( ) const;
+	void loadPage( );
 private:
+	DataPtr _data;
 	InformationPtr _information;
 	ChipGuidePtr _chip_guide;
 	ChipPreviewPtr _chip_preview;
@@ -72,5 +76,6 @@ private:
 	ExporterPtr _exporter;
 	PHASE _phase;
 	MODE _mode;
+	MODE _return_mode;
 };
 
