@@ -23,7 +23,7 @@ void ObjectEditor::update( ) {
 		_data->setObject( ox, oy, OBJECT_BLOCK );
 	}
 }
-
+/*
 void ObjectEditor::save( ) const {
 	std::string filename = Application::getInstance( )->inputString( 0, 20 );
 	if ( filename.size( ) == 0 ) {
@@ -39,3 +39,4 @@ void ObjectEditor::load( ) {
 	}
 	_data->loadObject( DIRECTORY + filename );
 }
+*/

@@ -19,12 +19,10 @@ public:
 	void setObject( int ox, int oy, unsigned char object );
 	void insert( int page );	//‘}“ü
 	void erase( int page );		//íœ
-	void save( std::string filename ) const;
-	void load( std::string filename );
-	void savePage( std::string filename, int page ) const;
-	void loadPage( std::string filename, int page );
-	void saveObject( std::string filename ) const;
-	void loadObject( std::string filename );
+	void save( std::string directory, std::string filename ) const;
+	void load( std::string directory, std::string filename );
+	void savePage( std::string directory, std::string filename, int page ) const;
+	void loadPage( std::string directory, std::string filename, int page );
 	void copy( std::vector< int >& mx, std::vector< int >& my );
 	void paste( std::vector< int >& mx, std::vector< int >& my );
 private:

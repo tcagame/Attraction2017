@@ -73,63 +73,46 @@ void Editor::updateMode( ) {
 	case MODE_CHIP:
 		updateChipMode( );
 		break;
-	case MODE_CHIP_SAVEALL:
-		_chip_editor->save( );
-		_mode = MODE_CHIP;
-		break;
-	case MODE_CHIP_LOADALL:
-		_chip_editor->load( );
-		_mode = MODE_CHIP;
-		break;
-	case MODE_CHIP_SAVEPAGE:
-		_chip_editor->savePage( );
-		_mode = MODE_CHIP;
-		break;
-	case MODE_CHIP_LOADPAGE:
-		_chip_editor->loadPage( );
-		_mode = MODE_CHIP;
-		break;
 	case MODE_OBJECT:
 		updateObjectMode( );
 		break;
-	case MODE_OBJECT_SAVE:
-		_object_editor->save( );
-		_mode = MODE_OBJECT;
+	case MODE_SAVEALL:
+		saveAll( );
+		_mode = _return_mode;
 		break;
-	case MODE_OBJECT_LOAD:
-		_object_editor->load( );
-		_mode = MODE_OBJECT;
+	case MODE_LOADALL:
+		loadAll( );
+		_mode = _return_mode;
+		break;
+	case MODE_SAVEPAGE:
+		savePage( );
+		_mode = _return_mode;
+		break;
+	case MODE_LOADPAGE:
+		loadPage( );
+		_mode = _return_mode;
 		break;
 	case MODE_EXPORT:
 		if ( !_exporter->update( ) ) {
-			_mode = MODE_CHIP;
+			_mode = _return_mode;
 		}
 		break;
 	}
 
 	if ( _mode != MODE_EXPORT ) {
+		_return_mode = _mode;
 		KeyboardPtr keyboard( Keyboard::getTask( ) );
 		if ( keyboard->isPushKey( "F1" ) ) {
-			if ( _mode == MODE_CHIP ) {
-				_mode = MODE_CHIP_SAVEALL;
-			}
-			if ( _mode == MODE_OBJECT ) {
-				_mode = MODE_OBJECT_SAVE;
-			}
+			_mode = MODE_SAVEALL;
 		}
 		if ( keyboard->isPushKey( "F2" ) ) {
-			if ( _mode == MODE_CHIP ) {
-				_mode = MODE_CHIP_LOADALL;
-			}
-			if ( _mode == MODE_OBJECT ) {
-				_mode = MODE_OBJECT_LOAD;
-			}
+			_mode = MODE_LOADALL;
 		}
 		if ( keyboard->isPushKey( "F3" ) ) {
-			_mode = MODE_CHIP_SAVEPAGE;
+			_mode = MODE_SAVEPAGE;
 		}
 		if ( keyboard->isPushKey( "F4" ) ) {
-			_mode = MODE_CHIP_LOADPAGE;
+			_mode = MODE_LOADPAGE;
 		}
 		if ( keyboard->isPushKey( "F5" ) ) {
 			_mode = MODE_CHIP;
@@ -168,18 +151,16 @@ void Editor::drawMode( ) {
 	drawer->flip( );
 
 	switch ( _mode ) {
-	case MODE_CHIP_SAVEALL:
-	case MODE_OBJECT_SAVE:
-		drawer->drawString( 0, 0, "セーブ" );
+	case MODE_SAVEALL:
+		drawer->drawString( 0, 0, "オールセーブ" );
 		break;
-	case MODE_CHIP_LOADALL:
-	case MODE_OBJECT_LOAD:
-		drawer->drawString( 0, 0, "ロード" );
+	case MODE_LOADALL:
+		drawer->drawString( 0, 0, "オールロード" );
 		break;
-	case MODE_CHIP_SAVEPAGE:
+	case MODE_SAVEPAGE:
 		drawer->drawString( 0, 0, "ページセーブ" );
 		break;
-	case MODE_CHIP_LOADPAGE:
+	case MODE_LOADPAGE:
 		drawer->drawString( 0, 0, "ページロード" );
 		break;
 	}
@@ -265,4 +246,20 @@ void Editor::drawObjectMode( ) const {
 
 Editor::MODE Editor::getMode( ) const {
 	return _mode;
+}
+
+void Editor::saveAll( ) {
+	_chip_editor->save( );
+}
+
+void Editor::loadAll( ) {
+	_chip_editor->load( );
+}
+
+void Editor::savePage( ) {
+	_chip_editor->savePage( );
+}
+
+void Editor::loadPage( ) {
+	_chip_editor->loadPage( );
 }
