@@ -4,10 +4,10 @@
 #include <assert.h>
 
 const Vector INIT_PLAYER_POS[ ACE_PLAYER_NUM ] = {
-	Vector( 50, 10 ),
-	Vector( 150, 10 ),
 	Vector( 250, 10 ),
-	Vector( 350, 10 )
+	Vector( 350, 10 ),
+	Vector( 450, 10 ),
+	Vector( 550, 10 )
 };
 
 FamilyPtr Family::getTask( ) {
@@ -44,4 +44,8 @@ PlayerPtr Family::getPlayer( int player_id ) {
 	assert( player_id < ACE_PLAYER_NUM );
 	assert( player_id >= 0 );
 	return _player[ player_id ];
+}
+
+double Family::getPlayersPosX( ) const {
+	return ( ( _player[ 0 ]->getPos( ).x + _player[ 1 ]->getPos( ).x + _player[ 2 ]->getPos( ).x + _player[ 3 ]->getPos( ).x ) * 0.25 );
 }

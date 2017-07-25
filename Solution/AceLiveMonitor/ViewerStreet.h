@@ -8,7 +8,7 @@ public:
 	ViewerStreet( );
 	virtual ~ViewerStreet( );
 public:
-	void draw( ) const;
+	void draw( double camera_pos ) const;
 private:
 	std::array< ImagePtr, ACE_MAP_NUM > _image_back;
 	std::array< ImagePtr, ACE_MAP_NUM > _image_front;

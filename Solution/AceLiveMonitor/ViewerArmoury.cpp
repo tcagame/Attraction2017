@@ -13,7 +13,7 @@ ViewerArmoury::~ViewerArmoury( ) {
 
 void ViewerArmoury::draw( ) const {
 	ArmouryPtr armoury( Armoury::getTask( ) );
-	for ( int i = 0; i < Armoury::MAX_SHOT_NUM; i++ ) {
+	for ( int i = 0; i < armoury->getMaxShotNum( ); i++ ) {
 		ShotConstPtr shot = armoury->getShot( i );
 		if ( !shot ) {
 			continue;

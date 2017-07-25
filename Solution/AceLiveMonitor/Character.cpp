@@ -1,5 +1,6 @@
 #include "Character.h"
 #include "ace_define.h"
+#include "Family.h"
 
 const int MAX_SPEED_Y = 10;
 
@@ -37,8 +38,13 @@ void Character::update( ) {
 		_pos.x = _chip_size / 2;
 		_vec.x = 0;
 	}
-	if ( _pos.x + _vec.x + _chip_size / 2 > SCREEN_WIDTH ) {
-		_pos.x = SCREEN_WIDTH - _chip_size / 2;
+	double c_pos = Family::getTask( )->getPlayersPosX( );
+	if ( _pos.x + _vec.x - _chip_size / 2 < c_pos - SCREEN_WIDTH / 2 ) {
+		_pos.x = ( c_pos - SCREEN_WIDTH / 2 ) + _chip_size / 2;
+		_vec.x = 0;
+	}
+	if ( _pos.x + _vec.x + _chip_size / 2 > c_pos + SCREEN_WIDTH / 2 ) {
+		_pos.x = ( c_pos + SCREEN_WIDTH / 2 ) - _chip_size / 2;
 		_vec.x = 0;
 	}
 	updateDir( );

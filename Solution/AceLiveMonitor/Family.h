@@ -20,6 +20,7 @@ public:
 	void update( );
 	PlayerConstPtr getPlayer( int player_id ) const;
 	PlayerPtr getPlayer( int player_id );
+	double getPlayersPosX( ) const;
 private:
 	std::array< PlayerPtr, ACE_PLAYER_NUM > _player;
 };
