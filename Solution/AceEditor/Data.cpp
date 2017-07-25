@@ -191,9 +191,16 @@ void Data::save( std::string directory, std::string filename ) const {
 	filename = directory + filename;
 
 	BinaryPtr binary( new Binary );
-	int size = (int)( sizeof( Chip ) * _chips.size( ) );
-	binary->ensure( size );
-	binary->write( (void*)_chips.data( ), size );
+
+	int size_chip   = (int)( sizeof( Chip          ) * _chips.size( ) );
+	int size_object = (int)( sizeof( unsigned char ) * _objects.size( ) );
+	binary->ensure( size_chip + size_object + sizeof( int ) * 2 );
+	
+	binary->write( (void*)&size_chip      , sizeof( int ) );
+	binary->write( (void*)&size_object    , sizeof( int ) );
+	binary->write( (void*)_chips.data( )  , size_chip     );
+	binary->write( (void*)_objects.data( ), size_object   );
+
 	ApplicationPtr app( Application::getInstance( ) );
 	app->saveBinary( filename, binary );
 }
@@ -207,15 +214,25 @@ void Data::load( std::string directory, std::string filename ) {
 	filename = directory + filename;
 
 	BinaryPtr binary( new Binary );
+
 	ApplicationPtr app( Application::getInstance( ) );
 	if ( !app->loadBinary( filename, binary ) ) {
 		return;
 	}
-	_chips = { };
-	int size = binary->getSize( ) / (int)( sizeof( Chip ) );
-	_chips.resize( size );
-	binary->read( (void*)_chips.data( ), binary->getSize( ) );
-	int width = (int)( _chips.size( ) / MAP_HEIGHT );
+	
+	int size_chip;
+	binary->read( (void*)&size_chip, sizeof( int ) );
+
+	int size_object;
+	binary->read( (void*)&size_object, sizeof( int ) );
+
+	_chips.resize( size_chip / sizeof( Chip ) );
+	binary->read( (void*)_chips.data( ), size_chip );
+
+	_objects.resize( size_object / sizeof( unsigned char ) );
+	binary->read( (void*)_objects.data( ), size_object );
+
+	int width = ( int )( _chips.size( ) / MAP_HEIGHT );
 	_page_num = width / PAGE_CHIP_WIDTH_NUM;
 }
 
