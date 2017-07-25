@@ -14,7 +14,7 @@ Armoury::~Armoury( ) {
 }
 
 void Armoury::update( ) {
-	std::vector< ShotPtr >::iterator ite = _shot_list.begin( );
+	std::array< ShotPtr, MAX_SHOT_NUM >::iterator ite = _shot_list.begin( );
 	while ( ite != _shot_list.end( ) ) {
 		if ( !( *ite ) ) {
 			ite++;
@@ -25,12 +25,18 @@ void Armoury::update( ) {
 	}
 }
 
-std::vector< ShotPtr > Armoury::getShotList( ) const {
-	return _shot_list;
+ShotConstPtr Armoury::getShot( int idx ) const {
+	return _shot_list[ idx ];
 }
 
-void Armoury::shot( Vector pos, Player::DIR dir ){
-	ShotPtr shot = ShotPtr( new Shot( pos, dir ) );
-	_shot_list.push_back( shot );
+void Armoury::add( ShotPtr shot ) {
+	for ( int i = 0; i < MAX_SHOT_NUM; i++ )  {
+		if ( _shot_list[ i ] ) {
+			continue;
+		}
+
+		_shot_list[ i ] = shot;
+		break;
+	}
 }
 

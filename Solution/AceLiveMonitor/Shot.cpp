@@ -23,10 +23,6 @@ void Shot::update( ) {
 	_pos.x += SHOT_SPEED * _dir;
 }
 
-int Shot::getDir( ) {
+int Shot::getDir( ) const {
 	return _dir;
 }
-
-
-
-

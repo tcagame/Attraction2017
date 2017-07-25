@@ -5,7 +5,7 @@
 #include "Player.h"
 #include "Shot.h"
 #include "smart_ptr.h"
-#include <vector>
+#include <array>
 
 PTR( Shot );
 PTR( Armoury );
@@ -18,10 +18,12 @@ public:
 	Armoury( );
 	virtual ~Armoury( );
 public:
-	void shot( Vector pos, Player::DIR dir );
+	void add( ShotPtr shot );
 	void update( );
-	std::vector< ShotPtr > getShotList( ) const;
+	ShotConstPtr getShot( int idx ) const;
+public:
+	static const int MAX_SHOT_NUM = 100;
 private:
-	std::vector< ShotPtr > _shot_list;
+	std::array< ShotPtr, MAX_SHOT_NUM > _shot_list;
 };
 

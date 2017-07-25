@@ -13,14 +13,12 @@ ViewerArmoury::~ViewerArmoury( ) {
 
 void ViewerArmoury::draw( ) const {
 	ArmouryPtr armoury( Armoury::getTask( ) );
-	std::vector< ShotPtr > shot_list = armoury->getShotList( );
-	if ( shot_list.empty( ) ) {
-		return;
-	}
+	for ( int i = 0; i < Armoury::MAX_SHOT_NUM; i++ ) {
+		ShotConstPtr shot = armoury->getShot( i );
+		if ( !shot ) {
+			continue;
+		}
 
-	std::vector< ShotPtr >::iterator ite = shot_list.begin( );
-	while ( ite != shot_list.end( ) ) {
-		ShotPtr shot = ( *ite );
 		int tx = 64;
 		int ty = 128;
 		int tx2 = 64;
@@ -39,6 +37,5 @@ void ViewerArmoury::draw( ) const {
 			_image->setPos( sx1, sy1, sx1 - NOMAL_CHAR_GRAPH_SIZE * dir, sy1 + NOMAL_CHAR_GRAPH_SIZE );
 			_image->draw( );
 		}
-		ite++;
 	}
 }

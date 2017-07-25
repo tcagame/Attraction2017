@@ -157,7 +157,8 @@ void Player::actOnFloating( ) {
 }
 
 void Player::actOnAttack( ) {
-	Armoury::getTask( )->shot( getPos( ), getDir( ) );
+	ShotPtr shot( new Shot( getPos( ), getDir( ) ) );
+	Armoury::getTask( )->add( shot );
 	_action = ACTION_WAIT;
 }
 

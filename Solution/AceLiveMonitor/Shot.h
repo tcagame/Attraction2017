@@ -12,7 +12,7 @@ public:
 public:
 	Vector getPos( ) const;
 	void update( );
-	int getDir( );
+	int getDir( ) const;
 private:
 	Vector _pos;
 	int _dir;
