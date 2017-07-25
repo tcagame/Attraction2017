@@ -29,6 +29,7 @@ void Armoury::update( ) {
 
 ShotConstPtr Armoury::getShot( int idx ) const {
 	assert( idx < MAX_SHOT_NUM );
+	assert( idx >= 0 );
 	return _shot_list[ idx ];
 }
 
