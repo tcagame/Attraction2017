@@ -1,6 +1,6 @@
 #include "ViewerStreet.h"
 #include "Drawer.h"
-
+#include "Family.h"
 
 ViewerStreet::ViewerStreet( ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
@@ -24,7 +24,9 @@ ViewerStreet::ViewerStreet( ) {
 ViewerStreet::~ViewerStreet( ) {
 }
 
-void ViewerStreet::draw( double camera_pos ) const {
+void ViewerStreet::draw( ) const {
+	FamilyConstPtr family( Family::getTask( ) );
+	double camera_pos = family->getCameraPos( );
 	//back
 	for ( int i = 0; i < ACE_MAP_SIZE; i++ ) {
 		int sx1 = GRAPH_SIZE * i - ( (int)camera_pos % GRAPH_SIZE );
