@@ -1,16 +1,21 @@
 #pragma once
 #include "Image.h"
-#include <array>
 #include "ace_define.h"
+#include <vector>
 
 class ViewerStreet {
 public:
 	ViewerStreet( );
 	virtual ~ViewerStreet( );
 public:
-	void draw( ) const;
+	enum LAYER {
+		LAYER_BACK,
+		LAYER_FRONT,
+	};
+public:
+	void draw( LAYER layer ) const;
 private:
-	std::array< ImagePtr, ACE_MAP_NUM > _image_back;
-	std::array< ImagePtr, ACE_MAP_NUM > _image_front;
+	std::vector< ImagePtr > _images;
+	int _num;
 };
 

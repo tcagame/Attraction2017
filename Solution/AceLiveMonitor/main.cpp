@@ -5,20 +5,17 @@
 #include "Family.h"
 #include "Armoury.h"
 #include "Viewer.h"
-
+#include "Map.h"
 
 void main( ) {
-	TaskPtr drawer( new Drawer( "../Resource/Ace" ) );
-	TaskPtr device( new Device( ) );
-	
-	TaskPtr family = FamilyPtr( new Family( ) );
-	TaskPtr armoury = ArmouryPtr( new Armoury( ) );
-	TaskPtr viewer = ViewerPtr( new Viewer( ) );
 	ApplicationPtr app( Application::getInstance( ) );
 	app->setWindowSize( SCREEN_WIDTH, SCREEN_HEIGHT );
-	app->addTask( Drawer::getTag( ), drawer );
-	app->addTask( Device::getTag( ), device );
-	app->addTask( Family::getTag( ), family );
-	app->addTask( Armoury::getTag( ), armoury );
-	app->addTask( Viewer::getTag( ), viewer );
+
+	app->addTask( Drawer::getTag( ), DrawerPtr( new Drawer( "../Resource/Ace" ) ) );
+	app->addTask( Device::getTag( ), DevicePtr( new Device( ) ) );
+
+	app->addTask( Map    ::getTag( ), MapPtr    ( new Map    ( ) ) );
+	app->addTask( Family ::getTag( ), FamilyPtr ( new Family ( ) ) );
+	app->addTask( Armoury::getTag( ), ArmouryPtr( new Armoury( ) ) );
+	app->addTask( Viewer ::getTag( ), ViewerPtr ( new Viewer ( ) ) );
 }

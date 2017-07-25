@@ -92,7 +92,7 @@ bool Exporter::update( ) {
 
 		int page = _data->getPageNum( );
 		int size_object = (int)( sizeof( unsigned char ) *
-			page * OBJECT_CHIP_WIDTH_NUM * OBJECT_CHIP_HEIGHT_NUM );
+			page * PAGE_OBJECT_WIDTH_NUM * PAGE_OBJECT_WIDTH_NUM );
 		binary->ensure( size_object + sizeof( int ) );
 	
 		binary->write( (void*)&page, sizeof( int ) );

@@ -161,6 +161,7 @@
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Family.cpp" />
+    <ClCompile Include="Map.cpp" />
     <ClCompile Include="ViewerFamily.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Military.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Family.h" />
+    <ClInclude Include="Map.h" />
     <ClInclude Include="ViewerFamily.h" />
     <ClInclude Include="Military.h" />
     <ClInclude Include="Player.h" />

@@ -25,7 +25,8 @@ void Viewer::initialize( ) {
 
 void Viewer::update( ) {
 	Drawer::getTask( )->flip( );
-	_viewer_street->draw( );
+	_viewer_street->draw( ViewerStreet::LAYER_BACK );
 	_viewer_family->draw( );
 	_viewer_armoury->draw( );
+	_viewer_street->draw( ViewerStreet::LAYER_FRONT );
 }

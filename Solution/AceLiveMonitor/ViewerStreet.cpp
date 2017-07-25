@@ -1,44 +1,42 @@
 #include "ViewerStreet.h"
 #include "Drawer.h"
 #include "Family.h"
+#include "Map.h"
 
 ViewerStreet::ViewerStreet( ) {
-	DrawerPtr drawer( Drawer::getTask( ) );
-	for ( int i = 0; i < ACE_MAP_NUM; i++ ) {
-		char buf[ 256 ];
-		sprintf_s( buf, "back_%003d", i );
-		std::string numstr = buf;
-		std::string path = "MapData/Img/" + numstr + ".png";
-		_image_back[ i ] = drawer->createImage( path.c_str( ) );
-	}
-	for ( int i = 0; i < ACE_MAP_NUM; i++ ) {
-		char buf[ 256 ];
-		sprintf_s( buf, "front_%003d", i );
-		std::string numstr = buf;
-		std::string path = "MapData/Img/" + numstr + ".png";
-		_image_front[ i ] = drawer->createImage( path.c_str( ) );
-	}
-}
+	MapPtr map = Map::getTask( );
+	_num = map->getPageNum( );
 
+	DrawerPtr drawer( Drawer::getTask( ) );
+	char buf[ 256 ];
+
+	for ( int i = 0; i < _num; i++ ) {
+		sprintf_s( buf, "Map/back_%003d.png", i );
+		_images.push_back( drawer->createImage( buf ) );
+	}
+
+	for ( int i = 0; i < _num; i++ ) {
+		sprintf_s( buf, "Map/front_%003d.png", i );
+		_images.push_back( drawer->createImage( buf ) );
+	}
+
+}
 
 ViewerStreet::~ViewerStreet( ) {
 }
 
-void ViewerStreet::draw( ) const {
+void ViewerStreet::draw( LAYER layer ) const {
 	FamilyConstPtr family( Family::getTask( ) );
 	double camera_pos = family->getCameraPos( );
-	//back
-	for ( int i = 0; i < ACE_MAP_SIZE; i++ ) {
-		int sx1 = GRAPH_SIZE * i - ( (int)camera_pos % GRAPH_SIZE );
-		int page_num = ( (int)camera_pos / GRAPH_SIZE ) + i;
-		_image_back[ page_num % ACE_MAP_NUM ]->setPos( sx1, SCREEN_HEIGHT - GRAPH_SIZE );
-		_image_back[ page_num % ACE_MAP_NUM ]->draw( );
+	int origin = ( int )camera_pos / GRAPH_SIZE;
+	int offset = 0;
+	if ( layer == LAYER_FRONT ) {
+		offset = _num;
 	}
-	//front
 	for ( int i = 0; i < ACE_MAP_SIZE; i++ ) {
 		int sx1 = GRAPH_SIZE * i - ( (int)camera_pos % GRAPH_SIZE );
-		int page_num = ( (int)camera_pos / GRAPH_SIZE ) + i;
-		_image_front[ page_num % ACE_MAP_NUM ]->setPos( sx1, SCREEN_HEIGHT - GRAPH_SIZE );
-		_image_front[ page_num % ACE_MAP_NUM ]->draw( );
+		int idx = ( origin + i) % _num + offset;
+		_images[ idx ]->setPos( sx1, SCREEN_HEIGHT - GRAPH_SIZE );
+		_images[ idx ]->draw( );
 	}
 }
