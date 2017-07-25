@@ -20,8 +20,11 @@ public:
 	void update( );
 	PlayerConstPtr getPlayer( int player_id ) const;
 	PlayerPtr getPlayer( int player_id );
-	double getPlayersPosX( ) const;
+	double getCameraPos( ) const;
 private:
+	void updateCameraPos( );
+private:
+	double _camera_pos;
 	std::array< PlayerPtr, ACE_PLAYER_NUM > _player;
 };
 

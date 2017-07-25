@@ -3,11 +3,14 @@
 #include "Application.h"
 #include <assert.h>
 
+const int CAMERA_SCROLL_SPEED = 5;
+const int SCROLL_BUFFER = SCREEN_WIDTH / 10;
+
 const Vector INIT_PLAYER_POS[ ACE_PLAYER_NUM ] = {
-	Vector( 250, 10 ),
-	Vector( 350, 10 ),
-	Vector( 450, 10 ),
-	Vector( 550, 10 )
+	Vector( SCREEN_WIDTH / 2 + 150, 10 ),
+	Vector( SCREEN_WIDTH / 2 + 250, 10 ),
+	Vector( SCREEN_WIDTH / 2 + 350, 10 ),
+	Vector( SCREEN_WIDTH / 2 + 450, 10 )
 };
 
 FamilyPtr Family::getTask( ) {
@@ -26,11 +29,23 @@ void Family::initialize( ) {
 	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
 		_player[ i ] = PlayerPtr( new Player( i, INIT_PLAYER_POS[ i ] ) );
 	}
+	double camera_pos = 0.0;
+	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
+		camera_pos += _player[ i ]->getPos( ).x;
+	}
+	_camera_pos = camera_pos * 0.25;
 }
 
 void Family::update( ) {
+	bool update_camera = true;
 	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
 		_player[ i ]->update( );
+		if ( ( _camera_pos - SCREEN_WIDTH / 2 ) + SCROLL_BUFFER > _player[ i ]->getPos( ).x ) {
+			update_camera = false;
+		}
+	}
+	if ( update_camera ) {
+		updateCameraPos( );
 	}
 }
 
@@ -46,6 +61,26 @@ PlayerPtr Family::getPlayer( int player_id ) {
 	return _player[ player_id ];
 }
 
-double Family::getPlayersPosX( ) const {
-	return ( ( _player[ 0 ]->getPos( ).x + _player[ 1 ]->getPos( ).x + _player[ 2 ]->getPos( ).x + _player[ 3 ]->getPos( ).x ) * 0.25 );
+void Family::updateCameraPos( ) {
+	double camera_pos = 0.0;
+	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
+		camera_pos += _player[ i ]->getPos( ).x;
+	}
+	camera_pos *= 0.25; //•½‹Ï‚ð‚Æ‚é
+	if ( _camera_pos - camera_pos > 0 ) {
+		return;
+	}
+	if ( _camera_pos - camera_pos > CAMERA_SCROLL_SPEED ) {
+		_camera_pos -= CAMERA_SCROLL_SPEED;
+	}
+	if ( _camera_pos - camera_pos < -CAMERA_SCROLL_SPEED ) {
+		_camera_pos += CAMERA_SCROLL_SPEED;
+	}
+	if ( fabs( _camera_pos - camera_pos ) < CAMERA_SCROLL_SPEED ) {
+		_camera_pos = camera_pos;
+	}
+}
+
+double Family::getCameraPos( ) const {
+	return _camera_pos;
 }
