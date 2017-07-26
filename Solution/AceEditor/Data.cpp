@@ -76,68 +76,78 @@ int Data::getPageNum( ) const {
 }
 
 void Data::insert( int page ) {
-	std::vector< Chip > chips;
-	int new_max_chip = ( _page_num + 1 ) * PAGE_CHIP_WIDTH_NUM * MAP_HEIGHT;
-	chips.resize( new_max_chip );
-	int old_chip_width_num = _page_num * PAGE_CHIP_WIDTH_NUM;
-	int new_chip_width_num = ( _page_num + 1 ) * PAGE_CHIP_WIDTH_NUM;
-	int front_chip_width_num = page * PAGE_CHIP_WIDTH_NUM;
-
-	std::vector< unsigned char > objects;
-	int new_max_object = ( _page_num + 1 ) * PAGE_OBJECT_WIDTH_NUM * OBJECT_CHIP_HEIGHT_NUM;
-	objects.resize( new_max_object );
-	int old_object_width_num = _page_num * PAGE_OBJECT_WIDTH_NUM;
-	int new_object_width_num = ( _page_num + 1 ) * PAGE_OBJECT_WIDTH_NUM;
-	int front_object_width_num = page * PAGE_OBJECT_WIDTH_NUM;
-
-	//初期化
-	for ( int i = 0; i < new_chip_width_num * MAP_HEIGHT; i++ ) {
-		chips[ i ] = Chip( );
-		chips[ i ].ground = 1;
-	}
-	for ( int i = 0; i < new_object_width_num * OBJECT_CHIP_HEIGHT_NUM; i++ ) {
-		objects[ i ] = OBJECT_NONE;
-	}
-
-	//挿入位置まで代入
-	for ( int i = 0; i < front_chip_width_num; i++ ) {
-		int mx = i;
-		for ( int j = 0; j < MAP_HEIGHT; j++ ) {
-			int my = j;
-			int idx = new_chip_width_num * my + mx;
-			chips[ idx ] = getChip( mx, my );
+	{//chip
+		std::vector< Chip > chips;
+		//挿入地点
+		int insert_pos = page * PAGE_CHIP_WIDTH_NUM;
+		//ページ追加前の横の数
+		int chip_width_num_old = _page_num * PAGE_CHIP_WIDTH_NUM;
+		//ページ追加後の数
+		int chip_width_num_new = ( _page_num + 1 ) * PAGE_CHIP_WIDTH_NUM;
+		//リサイズ
+		int max_new = chip_width_num_new * MAP_HEIGHT;
+		chips.resize( max_new );
+		//chip初期化
+		for ( int i = 0; i < max_new; i++ ) {
+			chips[ i ] = Chip( );
+			chips[ i ].ground = 1;
 		}
+		//代入
+		for ( int i = 0; i < chip_width_num_old; i++ ) {
+			int mx = i;
+			if ( mx >= insert_pos && mx < insert_pos + PAGE_CHIP_WIDTH_NUM ) {
+				//挿入地点はスルーする
+				continue;
+			}
+			int mx_old = mx;
+			if ( mx > insert_pos ) {
+				mx_old -= PAGE_CHIP_WIDTH_NUM;
+			}
+			for ( int j = 0; j < MAP_HEIGHT; j++ ) {
+				int my = j;
+				int idx = chip_width_num_new * my + mx;
+				chips[ idx ] = getChip( mx_old, my );
+			}
+		}
+		_chips = chips;
 	}
-	for ( int i = 0; i < front_object_width_num; i++ ) {
-		for ( int j = 0; j < OBJECT_CHIP_HEIGHT_NUM; j++ ) {
+
+	{//object
+		std::vector< unsigned char > objects;
+		//挿入地点
+		int insert_pos = page * PAGE_OBJECT_WIDTH_NUM;
+		//ページ追加前の横の数
+		int width_num_old = _page_num * PAGE_OBJECT_WIDTH_NUM;
+		//ページ追加後の横の数
+		int width_num_new = ( _page_num + 1 ) * PAGE_OBJECT_WIDTH_NUM;
+		//ページ追加後のサイズ
+		int max_new = width_num_new * OBJECT_CHIP_HEIGHT_NUM;
+		//リサイズ
+		objects.resize( max_new );
+		//配列初期化
+		for ( int i = 0; i < max_new; i++ ) {
+			objects[ i ] = OBJECT_NONE;
+		}
+		//代入
+		for ( int i = 0; i < width_num_old; i++ ) {
 			int ox = i;
-			int oy = j;
-			int idx = ox + new_object_width_num * oy;
-			objects[ idx ] = getObject( ox, oy );
+			if ( ox >= insert_pos && ox < insert_pos + PAGE_OBJECT_WIDTH_NUM ) {
+				//挿入地点はスルーする
+				continue;
+			}
+			int ox_old = ox;
+			if ( ox > insert_pos ) {
+				ox_old -= PAGE_OBJECT_WIDTH_NUM;
+			}
+			for ( int j = 0; j < OBJECT_CHIP_HEIGHT_NUM; j++ ) {
+				int oy = j;
+				int idx = ox + width_num_new * oy;
+				objects[ idx ] = getObject( ox_old, oy );
+			}
 		}
+		_objects = objects;
 	}
-
-	//挿入位置の一ページ後から代入
-	int back_chip_start_width_num = front_chip_width_num;
-	for ( int i = back_chip_start_width_num; i < old_chip_width_num; i++ ) {
-		int mx = i;
-		for ( int j = 0; j < MAP_HEIGHT; j++ ) {
-			int my = j;
-			int idx = new_chip_width_num * my + ( mx + PAGE_CHIP_WIDTH_NUM );
-			chips[ idx ] = getChip( mx, my );
-		}
-	}
-	int back_object_start_width_num = front_object_width_num;
-	for ( int i = back_object_start_width_num; i < old_object_width_num; i++ ) {
-		for ( int j = 0; j < OBJECT_CHIP_HEIGHT_NUM; j++ ) {
-			int ox = i;
-			int oy = j;
-			int idx = ( ox + PAGE_OBJECT_WIDTH_NUM ) + new_object_width_num * oy;
-			objects[ idx ] = getObject( ox, oy );
-		}
-	}
-	_chips = chips;
-	_objects = objects;
+	//ページをひとつ増やす(get系関数に影響するので最後に行う)
 	_page_num++;
 }
 
@@ -145,38 +155,84 @@ void Data::erase( int page ) {
 	if ( _page_num <= 1 ) {
 		return;
 	}
-	std::vector< Chip > chips;
-	int new_max_chip = ( _page_num - 1 ) * PAGE_CHIP_WIDTH_NUM * MAP_HEIGHT;
-	chips.resize( new_max_chip );
-	int new_width_num = ( _page_num - 1 ) * PAGE_CHIP_WIDTH_NUM;
-	int front_width_num = page * PAGE_CHIP_WIDTH_NUM;
+	{//chip
+		std::vector< Chip > chips;
+		//削除地点
+		int erase_pos = page * PAGE_CHIP_WIDTH_NUM;
+		//ページ削除前の横の数
+		int width_num_old = _page_num * PAGE_CHIP_WIDTH_NUM;
+		//ページ削除後の横の数
+		int width_num_new = ( _page_num - 1 ) * PAGE_CHIP_WIDTH_NUM;
+		//ページ削除後のサイズ
+		int max_new = width_num_new * MAP_HEIGHT;
+		//リサイズ
+		chips.resize( max_new );
 
-	//初期化
-	for ( int i = 0; i < new_width_num * MAP_HEIGHT; i++ ) {
-		chips[ i ] = Chip( );
-	}
-
-	//挿入位置まで代入
-	for ( int i = 0; i < front_width_num; i++ ) {
-		int mx = i;
-		for ( int j = 0; j < MAP_HEIGHT; j++ ) {
-			int my = j;
-			int idx = new_width_num * my + mx;
-			chips[ idx ] = getChip( mx, my );
+		//配列初期化
+		for ( int i = 0; i < max_new; i++ ) {
+			chips[ i ] = Chip( );
 		}
-	}
-	int old_width_num = _page_num * PAGE_CHIP_WIDTH_NUM;
-	int back_start_width_num = front_width_num + PAGE_CHIP_WIDTH_NUM;
-	for ( int i = back_start_width_num; i < old_width_num; i++ ) {
-		int mx = i;
-		for ( int j = 0; j < MAP_HEIGHT; j++ ) {
-			int my = j;
-			int idx = new_width_num * my + ( mx - PAGE_CHIP_WIDTH_NUM );
-			chips[ idx ] = getChip( mx, my );
+
+		//挿入位置まで代入
+		for ( int i = 0; i < width_num_old; i++ ) {
+			int mx_old = i;
+			if ( mx_old >= erase_pos && mx_old < erase_pos + PAGE_CHIP_WIDTH_NUM ) {
+				//削除地点はスルー
+				continue;
+			}
+			int mx = i;
+			if ( mx_old > erase_pos ) {
+				//削除分mxを減らす
+				mx -= PAGE_CHIP_WIDTH_NUM;
+			}
+			for ( int j = 0; j < MAP_HEIGHT; j++ ) {
+				int my = j;
+				int idx = width_num_new * my + mx;
+				chips[ idx ] = getChip( mx_old, my );
+			}
 		}
+		_chips = chips;
 	}
 
-	_chips = chips;
+	{//object
+		std::vector< unsigned char > objects;
+		//削除地点
+		int erase_pos = page * PAGE_OBJECT_WIDTH_NUM;
+		//ページ削除前の横の数
+		int width_num_old = _page_num * PAGE_OBJECT_WIDTH_NUM;
+		//ページ削除後の横の数
+		int width_num_new = ( _page_num - 1 ) * PAGE_OBJECT_WIDTH_NUM;
+		//ページ削除後のサイズ
+		int max_new = width_num_new * OBJECT_CHIP_HEIGHT_NUM;
+		//リサイズ
+		objects.resize( max_new );
+
+		//配列初期化
+		for ( int i = 0; i < max_new; i++ ) {
+			objects[ i ] = OBJECT_NONE;
+		}
+
+		//挿入位置まで代入
+		for ( int i = 0; i < width_num_old; i++ ) {
+			int ox_old = i;
+			if ( ox_old >= erase_pos && ox_old < erase_pos + PAGE_OBJECT_WIDTH_NUM ) {
+				//削除地点はスルー
+				continue;
+			}
+			int ox = i;
+			if ( ox_old > erase_pos ) {
+				//削除分oxを減らす
+				ox -= PAGE_OBJECT_WIDTH_NUM;
+			}
+			for ( int j = 0; j < OBJECT_CHIP_HEIGHT_NUM; j++ ) {
+				int oy = j;
+				int idx = width_num_new * oy + ox;
+				objects[ idx ] = getObject( ox_old, oy );
+			}
+		}
+		_objects = objects;
+	}
+	//ページをひとつ減らす(get系関数に影響するので最後に行う)
 	_page_num--;
 }
 
