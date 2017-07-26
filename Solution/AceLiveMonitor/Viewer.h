@@ -7,6 +7,7 @@ PTR( Viewer );
 PTR( ViewerFamily );
 PTR( ViewerStreet );
 PTR( ViewerArmoury );
+PTR( ViewerEvent );
 
 class Viewer : public Task {
 public:
@@ -22,5 +23,6 @@ private:
 	ViewerFamilyConstPtr _viewer_family;
 	ViewerStreetConstPtr _viewer_street;
 	ViewerArmouryConstPtr _viewer_armoury;
+	ViewerEventConstPtr _viewer_event;
 };
 

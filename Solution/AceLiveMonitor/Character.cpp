@@ -4,6 +4,7 @@
 #include "Player.h"
 
 const int MAX_SPEED_Y = 10;
+const int MAX_ACT_COUNT = 2100000000;
 
 Character::Character( const Vector& pos, int chip_size ) :
 _pos( pos ),
@@ -22,6 +23,7 @@ void Character::update( ) {
 	act( );
 
 	_act_count++;
+	_act_count %= MAX_ACT_COUNT;
 	_standing = false;
 	_vec.y += GRAVITY;
 	if ( _vec.y > MAX_SPEED_Y ) {
@@ -37,16 +39,6 @@ void Character::update( ) {
 	}
 	if ( _pos.x + _vec.x - _chip_size / 2 < 0 ) {
 		_pos.x = _chip_size / 2;
-		_vec.x = 0;
-	}
-	FamilyPtr family( Family::getTask( ) );
-	double camera_pos = family->getCameraPos( );
-	if ( _pos.x + _vec.x - _chip_size / 2 < camera_pos - SCREEN_WIDTH / 2 ) {
-		_pos.x = ( camera_pos - SCREEN_WIDTH / 2 ) + _chip_size / 2;
-		_vec.x = 0;
-	}
-	if ( _pos.x + _vec.x + _chip_size / 2 > camera_pos + SCREEN_WIDTH / 2 ) {
-		_pos.x = ( camera_pos + SCREEN_WIDTH / 2 ) - _chip_size / 2;
 		_vec.x = 0;
 	}
 	updateDir( );

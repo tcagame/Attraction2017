@@ -24,6 +24,7 @@ private:
 	void actOnBreaking( );
 	void actOnFloating( );
 	void actOnAttack( );
+	void actOnCamera( );
 private:
 	ACTION _action;
 	int _id;

@@ -14,6 +14,7 @@
     <ClCompile Include="Military.cpp" />
     <ClCompile Include="ViewerArmoury.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="ViewerEvent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Family.h" />
@@ -28,5 +29,6 @@
     <ClInclude Include="Military.h" />
     <ClInclude Include="ViewerArmoury.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="ViewerEvent.h" />
   </ItemGroup>
 </Project>
