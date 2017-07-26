@@ -154,8 +154,8 @@ void ObjectMenu::draw( ) const {
 			int sx = ( int )_pos.x + BLOCK_X;
 			int sy = ( int )_pos.y + BLOCK_Y;
 			for ( int i = 0; i < BLOCK_WIDTH_NUM; i++, sx += BLOCK_DRAW_SIZE ) {
-				int tx = ( i % 2 ) * BLOCK_SPRITE_SIZE;
-				int ty = ( i / 2 ) * BLOCK_SPRITE_SIZE;
+				int tx = ( i % 3 ) * BLOCK_SPRITE_SIZE;
+				int ty = 0;
 				_block->setRect( tx, ty, BLOCK_SPRITE_SIZE, BLOCK_SPRITE_SIZE );
 				_block->setPos( sx, sy, sx + BLOCK_DRAW_SIZE, sy + BLOCK_DRAW_SIZE );
 				_block->draw( );

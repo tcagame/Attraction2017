@@ -1,42 +1,94 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="ChipMenu.cpp" />
     <ClCompile Include="Data.cpp" />
     <ClCompile Include="Editor.cpp" />
     <ClCompile Include="Exporter.cpp" />
     <ClCompile Include="Information.cpp" />
-    <ClCompile Include="ObjectCursor.cpp" />
-    <ClCompile Include="ObjectGuide.cpp" />
-    <ClCompile Include="ObjectMenu.cpp" />
-    <ClCompile Include="ChipCursor.cpp" />
-    <ClCompile Include="ChipEditor.cpp" />
-    <ClCompile Include="ChipGuide.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Ground.cpp" />
     <ClCompile Include="Structure.cpp" />
-    <ClCompile Include="ChipPreview.cpp" />
-    <ClCompile Include="ObjectPreview.cpp" />
-    <ClCompile Include="ObjectEditor.cpp" />
-    <ClCompile Include="ChipDrawer.cpp" />
+    <ClCompile Include="ChipCursor.cpp">
+      <Filter>ChipMode</Filter>
+    </ClCompile>
+    <ClCompile Include="ChipDrawer.cpp">
+      <Filter>ChipMode</Filter>
+    </ClCompile>
+    <ClCompile Include="ChipEditor.cpp">
+      <Filter>ChipMode</Filter>
+    </ClCompile>
+    <ClCompile Include="ChipGuide.cpp">
+      <Filter>ChipMode</Filter>
+    </ClCompile>
+    <ClCompile Include="ChipMenu.cpp">
+      <Filter>ChipMode</Filter>
+    </ClCompile>
+    <ClCompile Include="ChipPreview.cpp">
+      <Filter>ChipMode</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectCursor.cpp">
+      <Filter>ObjectMode</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectEditor.cpp">
+      <Filter>ObjectMode</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectGuide.cpp">
+      <Filter>ObjectMode</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectMenu.cpp">
+      <Filter>ObjectMode</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectPreview.cpp">
+      <Filter>ObjectMode</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ChipMenu.h" />
     <ClInclude Include="Data.h" />
     <ClInclude Include="Editor.h" />
     <ClInclude Include="Exporter.h" />
     <ClInclude Include="Information.h" />
-    <ClInclude Include="ObjectCursor.h" />
-    <ClInclude Include="ObjectGuide.h" />
-    <ClInclude Include="ObjectMenu.h" />
-    <ClInclude Include="ChipCursor.h" />
-    <ClInclude Include="ChipEditor.h" />
-    <ClInclude Include="ChipGuide.h" />
     <ClInclude Include="Ground.h" />
     <ClInclude Include="Structure.h" />
-    <ClInclude Include="ChipPreview.h" />
-    <ClInclude Include="ObjectPreview.h" />
-    <ClInclude Include="ObjectEditor.h" />
-    <ClInclude Include="ChipDrawer.h" />
+    <ClInclude Include="ChipCursor.h">
+      <Filter>ChipMode</Filter>
+    </ClInclude>
+    <ClInclude Include="ChipDrawer.h">
+      <Filter>ChipMode</Filter>
+    </ClInclude>
+    <ClInclude Include="ChipEditor.h">
+      <Filter>ChipMode</Filter>
+    </ClInclude>
+    <ClInclude Include="ChipGuide.h">
+      <Filter>ChipMode</Filter>
+    </ClInclude>
+    <ClInclude Include="ChipMenu.h">
+      <Filter>ChipMode</Filter>
+    </ClInclude>
+    <ClInclude Include="ChipPreview.h">
+      <Filter>ChipMode</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectCursor.h">
+      <Filter>ObjectMode</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectEditor.h">
+      <Filter>ObjectMode</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectGuide.h">
+      <Filter>ObjectMode</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectMenu.h">
+      <Filter>ObjectMode</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectPreview.h">
+      <Filter>ObjectMode</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="ChipMode">
+      <UniqueIdentifier>{df8ea5d4-ddd6-4d56-98d6-2c5318614230}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ObjectMode">
+      <UniqueIdentifier>{171194da-61dc-41eb-b2f5-9aa3447aa521}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

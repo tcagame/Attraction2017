@@ -32,13 +32,24 @@ void ObjectGuide::draw( ) const {
 
 			int ox = ( i + _object_cursor->getScrollX( ) ) % ( _data->getPageNum( ) * PAGE_OBJECT_WIDTH_NUM );
 			int oy = j;
-			if ( _data->getObject( ox, oy ) == OBJECT_BLOCK ) { // 不可侵ブロック
-				tx = 16;
-				ty = 0;
+			// 選択ページ
+			int adjust = _object_cursor->getScrollX( ) % PAGE_OBJECT_WIDTH_NUM;
+			int now_page = ( _object_cursor->getGX( ) / PAGE_OBJECT_WIDTH_NUM ) % _data->getPageNum( );
+			if ( _object_cursor->getGX( ) % PAGE_OBJECT_WIDTH_NUM >= PAGE_OBJECT_WIDTH_NUM - adjust ) {
+				now_page++;
+				now_page %= _data->getPageNum( );
 			}
-			if ( _data->getObject( ox, oy ) == OBJECT_ONE_WAY ) { // 上方侵入ブロック
+			if ( now_page == ( ox + adjust ) / PAGE_OBJECT_WIDTH_NUM ) {
 				tx = 0;
 				ty = 16;
+			}
+			// 不可侵ブロック
+			if ( _data->getObject( ox, oy ) == OBJECT_BLOCK ) {
+				tx = 16;
+			}
+			// 上方侵入ブロック
+			if ( _data->getObject( ox, oy ) == OBJECT_ONE_WAY ) {
+				tx = 16 * 2;
 			}
 
 			_image->setRect( tx, ty, TEX_SIZE, TEX_SIZE );
@@ -51,7 +62,7 @@ void ObjectGuide::draw( ) const {
 	int sy = GUIDE_Y + _object_cursor->getGY( ) * OBJECT_GUIDE_SIZE;
 	if ( _object_cursor->isOnChip( ) ) {
 		_image->setPos( sx, sy );
-		_image->setRect( 16, 16, TEX_SIZE, TEX_SIZE );
+		_image->setRect( 0, 32, TEX_SIZE, TEX_SIZE );
 		_image->draw( );
 	}
 }

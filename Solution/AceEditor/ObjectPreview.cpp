@@ -33,7 +33,7 @@ void ObjectPreview::draw( ) const {
 			if ( _object_cursor->getGX( )  == ox
 				 && _object_cursor->getGY( ) == oy ) {
 				_choise->setPos( PREVIEW_X + ox * OBJECT_GUIDE_SIZE, PREVIEW_Y + oy * OBJECT_GUIDE_SIZE );
-				_choise->setRect( 16, 16, 16, 16 );
+				_choise->setRect( 0, 32, 16, 16 );
 				_choise->draw( );
 			}
 		}
