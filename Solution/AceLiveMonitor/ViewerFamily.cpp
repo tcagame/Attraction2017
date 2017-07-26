@@ -3,7 +3,6 @@
 #include "Player.h"
 #include "Drawer.h"
 
-const int PLAYER_FOOT = 7;
 
 ViewerFamily::ViewerFamily( ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
@@ -23,22 +22,11 @@ void ViewerFamily::draw( ) const {
 	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
 		PlayerConstPtr player = family->getPlayer( i );
 		Vector pos = player->getPos( );
-		pos.x = ( pos.x - family->getCameraPos( ) ) + SCREEN_WIDTH / 2;
-		int cx = 0;
-		int cy = 0;
-		player->getChipIndex( cx, cy );
-		int tx = cx * NOMAL_CHAR_GRAPH_SIZE;
-		int ty = cy * NOMAL_CHAR_GRAPH_SIZE;
-		_image[ i ]->setRect( tx, ty, NOMAL_CHAR_GRAPH_SIZE, NOMAL_CHAR_GRAPH_SIZE );
-		if ( player->getDir( ) == Player::DIR_LEFT ) {
-			int sx = (int)pos.x - NOMAL_CHAR_GRAPH_SIZE / 2;
-			int sy = (int)pos.y - NOMAL_CHAR_GRAPH_SIZE + PLAYER_FOOT;
-			_image[ i ]->setPos( sx, sy );
-		} else {
-			int sx = (int)pos.x - NOMAL_CHAR_GRAPH_SIZE / 2 + NOMAL_CHAR_GRAPH_SIZE;
-			int sy = (int)pos.y - NOMAL_CHAR_GRAPH_SIZE + PLAYER_FOOT;
-			_image[ i ]->setPos( sx, sy, sx - NOMAL_CHAR_GRAPH_SIZE, sy + NOMAL_CHAR_GRAPH_SIZE );
-		}
+		Chip chip = player->getChip( );
+		chip.sx1 += - family->getCameraPos( ) + SCREEN_WIDTH / 2;
+		chip.sx2 += - family->getCameraPos( ) + SCREEN_WIDTH / 2;
+		_image[ i ]->setRect( chip.tx, chip.ty, chip.size, chip.size );
+		_image[ i ]->setPos( chip.sx1, chip.sy1, chip.sx2, chip.sy2 );
 		_image[ i ]->draw( );
 	}
 }

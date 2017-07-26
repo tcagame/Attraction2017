@@ -1,21 +1,19 @@
 #pragma once
 #include "mathmatics.h"
+#include "ace_define.h"
+
 class Character {
-public:
-	enum DIR {
-		DIR_LEFT,
-		DIR_RIGHT,
-	};
 public:
 	Character( const Vector& pos, int chip_size );
 	virtual ~Character( );
 public:
 	Vector getVec( ) const;
 	Vector getPos( ) const;
-	DIR getDir( ) const;
 	void update( );
-	virtual void getChipIndex( int* cx, int* cy ) const;
+	virtual Chip getChip( ) const = 0;
 protected:
+	void setDir( DIR dir );
+	DIR getDir( ) const;
 	void setVec( const Vector& vec );
 	void setPos( const Vector& pos );
 	bool isStanding( ) const;

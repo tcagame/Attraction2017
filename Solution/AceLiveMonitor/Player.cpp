@@ -3,17 +3,19 @@
 #include "Armoury.h"
 #include "ace_define.h"
 
+//サイズ
+const int PLAYER_FOOT = 7;
+//速度
 const int MAX_SPEED = 20;
 const int MOVE_SPEED = 7;
 const int BRAKE_ACCEL = 1;
-const int WIDTH = 38;
 const int JUMP_POWER = -15;
-
+//アニメーション
 const int PLAYER_ANIM_WAIT_COUNT = 12;
 const int PLAYER_ANIM_WIDTH_NUM = 8;
 
 Player::Player( int player_id, Vector pos ) :
-Character( pos, WIDTH ),
+Character( pos, NOMAL_CHAR_GRAPH_SIZE ),
 _id( player_id ),
 _action( ACTION_WAIT ) {
 }
@@ -166,47 +168,68 @@ Player::ACTION Player::getAction( ) const {
 	return _action;
 }
 
-void Player::getChipIndex( int& cx, int& cy ) const {
-		switch ( _action ) {
-		case ACTION_WAIT:
-			{
-				const int ANIM[ ] = {
-					0,
-				};
-				int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-				cx = ANIM[ ( getActCount( ) / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] % PLAYER_ANIM_WIDTH_NUM;
-				cy = ANIM[ ( getActCount( ) / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] / PLAYER_ANIM_WIDTH_NUM;
-			}
-			break;
-		case ACTION_WALK:
-			{
-				const int ANIM[ ] = {
-					0, 1, 2, 1, 0, 3, 4, 3
-				};
-				int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-				cx = ANIM[ ( ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] % PLAYER_ANIM_WIDTH_NUM;
-				cy = ANIM[ ( ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] / PLAYER_ANIM_WIDTH_NUM;
-			}
-			break;
-		case ACTION_BRAKE:
-			{
-				const int ANIM[ ] = {
-					6,
-				};
-				int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-				cx = ANIM[ ( ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] % PLAYER_ANIM_WIDTH_NUM;
-				cy = ANIM[ ( ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] / PLAYER_ANIM_WIDTH_NUM;
-			}
-			break;
-		case ACTION_FLOAT:
-			{
-				const int ANIM[ ] = {
-					5,
-				};
-				int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-				cx = ANIM[ ( ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] % PLAYER_ANIM_WIDTH_NUM;
-				cy = ANIM[ ( ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] / PLAYER_ANIM_WIDTH_NUM;
-			}
-			break;
+Chip Player::getChip( ) const {
+	Chip chip = Chip( );
+	chip.size = NOMAL_CHAR_GRAPH_SIZE;
+	int cx = 0;
+	int cy = 0;
+	switch ( _action ) {
+	case ACTION_WAIT:
+		{
+			const int ANIM[ ] = {
+				0,
+			};
+			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
+			cx = ANIM[ ( getActCount( ) / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] % PLAYER_ANIM_WIDTH_NUM;
+			cy = ANIM[ ( getActCount( ) / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] / PLAYER_ANIM_WIDTH_NUM;
 		}
+		break;
+	case ACTION_WALK:
+		{
+			const int ANIM[ ] = {
+				0, 1, 2, 1, 0, 3, 4, 3
+			};
+			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
+			cx = ANIM[ ( ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] % PLAYER_ANIM_WIDTH_NUM;
+			cy = ANIM[ ( ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] / PLAYER_ANIM_WIDTH_NUM;
+		}
+		break;
+	case ACTION_BRAKE:
+		{
+			const int ANIM[ ] = {
+				6,
+			};
+			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
+			cx = ANIM[ ( ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] % PLAYER_ANIM_WIDTH_NUM;
+			cy = ANIM[ ( ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] / PLAYER_ANIM_WIDTH_NUM;
+		}
+		break;
+	case ACTION_FLOAT:
+		{
+			const int ANIM[ ] = {
+				5,
+			};
+			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
+			cx = ANIM[ ( ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] % PLAYER_ANIM_WIDTH_NUM;
+			cy = ANIM[ ( ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] / PLAYER_ANIM_WIDTH_NUM;
+		}
+		break;
+	}
+
+	
+	chip.tx = cx * NOMAL_CHAR_GRAPH_SIZE;
+	chip.ty = cy * NOMAL_CHAR_GRAPH_SIZE;
+	Vector pos = getPos( );
+	if ( getDir( ) == DIR_LEFT ) {
+		chip.sx1 = (int)pos.x - NOMAL_CHAR_GRAPH_SIZE / 2;
+		chip.sy1 = (int)pos.y - NOMAL_CHAR_GRAPH_SIZE + PLAYER_FOOT;
+		chip.sx2 = chip.sx1 + NOMAL_CHAR_GRAPH_SIZE;
+		chip.sy2 = chip.sy1 + NOMAL_CHAR_GRAPH_SIZE;
+	} else {
+		chip.sx1 = (int)pos.x - NOMAL_CHAR_GRAPH_SIZE / 2 + NOMAL_CHAR_GRAPH_SIZE;
+		chip.sy1 = (int)pos.y - NOMAL_CHAR_GRAPH_SIZE + PLAYER_FOOT;
+		chip.sx2 = chip.sx1 - NOMAL_CHAR_GRAPH_SIZE;
+		chip.sy2 = chip.sy1 + NOMAL_CHAR_GRAPH_SIZE;
+	}
+	return chip;
 }

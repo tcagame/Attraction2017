@@ -57,7 +57,7 @@ void Character::update( ) {
 
 }
 
-Character::DIR Character::getDir( ) const {
+DIR Character::getDir( ) const {
 	 return _dir;
 }
 
@@ -77,6 +77,11 @@ void  Character::setPos( const Vector& pos ) {
 	_pos = pos;
 }
 
+void Character::setDir( DIR dir ) {
+	_dir = dir;
+}
+
+
 bool Character::isStanding( ) const {
 	return _standing;
 }
@@ -88,11 +93,6 @@ void Character::updateDir( ) {
 	if ( _vec.x > 0 ) {
 		_dir = DIR_RIGHT;
 	}
-}
-
-void Character::getChipIndex( int* cx, int* cy ) const {
-	cx = 0;
-	cy = 0;
 }
 
 int Character::getActCount( ) const {

@@ -7,14 +7,15 @@ PTR( Shot );
 
 class Shot {
 public:
-	Shot( const Vector& pos, Player::DIR dir );
+	Shot( const Vector& pos, DIR dir );
 	virtual ~Shot( );
 public:
 	Vector getPos( ) const;
 	void update( );
-	int getDir( ) const;
+	DIR getDir( ) const;
 private:
 	Vector _pos;
-	int _dir;
+	DIR _dir;
+	Vector _vec;
 };
 
