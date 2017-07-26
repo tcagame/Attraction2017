@@ -171,6 +171,7 @@
     <ClCompile Include="Armoury.cpp" />
     <ClCompile Include="Viewer.cpp" />
     <ClCompile Include="ViewerArmoury.cpp" />
+    <ClCompile Include="ViewerStatus.cpp" />
     <ClCompile Include="ViewerStreet.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -186,6 +187,7 @@
     <ClInclude Include="Armoury.h" />
     <ClInclude Include="Viewer.h" />
     <ClInclude Include="ViewerArmoury.h" />
+    <ClInclude Include="ViewerStatus.h" />
     <ClInclude Include="ViewerStreet.h" />
   </ItemGroup>
   <ItemGroup>

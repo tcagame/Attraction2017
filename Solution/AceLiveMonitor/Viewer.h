@@ -8,6 +8,7 @@ PTR( ViewerFamily );
 PTR( ViewerStreet );
 PTR( ViewerArmoury );
 PTR( ViewerEvent );
+PTR( ViewerStatus );
 
 class Viewer : public Task {
 public:
@@ -24,5 +25,6 @@ private:
 	ViewerStreetConstPtr _viewer_street;
 	ViewerArmouryConstPtr _viewer_armoury;
 	ViewerEventConstPtr _viewer_event;
+	ViewerStatusConstPtr _viewer_status;
 };
 

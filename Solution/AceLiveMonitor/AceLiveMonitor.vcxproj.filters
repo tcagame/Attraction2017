@@ -15,6 +15,7 @@
     <ClCompile Include="ViewerArmoury.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="ViewerEvent.cpp" />
+    <ClCompile Include="ViewerStatus.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Family.h" />
@@ -30,5 +31,6 @@
     <ClInclude Include="ViewerArmoury.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="ViewerEvent.h" />
+    <ClInclude Include="ViewerStatus.h" />
   </ItemGroup>
 </Project>
