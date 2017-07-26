@@ -9,7 +9,9 @@ const std::string DIRECTORY = "../Resource/Ace/MapData/";
 
 ObjectEditor::ObjectEditor( DataPtr data, ObjectCursorConstPtr object_cursor ) :
 _data( data ),
-_object_cursor( object_cursor ) {
+_object_cursor( object_cursor ),
+_click_active( false ),
+_object( OBJECT_NONE ) {
 }
 
 ObjectEditor::~ObjectEditor( ) {
@@ -17,11 +19,25 @@ ObjectEditor::~ObjectEditor( ) {
 
 void ObjectEditor::update( ) {
 	MousePtr mouse( Mouse::getTask( ) );
-	if ( mouse->isHoldLeftButton( ) && _object_cursor->isOnChip( ) ) {
+	if ( mouse->isHoldLeftButton( ) &&
+		_object_cursor->isOnChip( ) &&
+		_click_active ) {
 		int ox = _object_cursor->getGX( ) + _object_cursor->getScrollX( );
 		int oy = _object_cursor->getGY( );
-		_data->setObject( ox, oy, OBJECT_BLOCK );
+		_data->setObject( ox, oy, _object );
 	}
+	if ( !mouse->isHoldLeftButton( ) ) {
+		_click_active = true;
+	}
+}
+
+void ObjectEditor::setObject( unsigned char object ) {
+	_object = object;
+	_click_active = false;
+}
+
+unsigned char ObjectEditor::getObject( ) const {
+	return _object;
 }
 /*
 void ObjectEditor::save( ) const {

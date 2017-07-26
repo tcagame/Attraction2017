@@ -5,6 +5,7 @@
 #include "ObjectCursor.h"
 #include "Data.h"
 #include "ChipEditor.h"
+#include "ObjectEditor.h"
 #include "Editor.h"
 
 const int VIEW_CHIP_POS_X = 0;
@@ -18,11 +19,12 @@ const int VIEW_MODE_POS_Y = 20;
 const int VIEW_CHIP_MODE_POS_X = SCREEN_WIDTH - 200;
 const int VIEW_CHIP_MODE_POS_Y = 40;
 
-Information::Information( DataConstPtr data, ChipCursorConstPtr chip_cursor, ObjectCursorConstPtr object_cursor, ChipEditorConstPtr chip_editor ) :
+Information::Information( DataConstPtr data, ChipCursorConstPtr chip_cursor, ObjectCursorConstPtr object_cursor, ChipEditorConstPtr chip_editor, ObjectEditorConstPtr object_editor ) :
 _chip_cursor( chip_cursor ),
 _object_cursor( object_cursor ),
 _data( data ),
-_chip_editor( chip_editor ) {
+_chip_editor( chip_editor ),
+_object_editor( object_editor ) {
 }
 
 Information::~Information( ) {
@@ -76,5 +78,17 @@ void Information::drawObjectMode( ) const {
 	DrawerPtr drawer( Drawer::getTask( ) );
 	if ( _object_cursor->isOnChip( ) ) {
 		drawer->drawString( VIEW_GUIDE_POS_X, VIEW_GUIDE_POS_Y, "ガイド座標:%d,%d", _object_cursor->getGX( ), _object_cursor->getGY( ) );
+	}
+	unsigned char set_obj = _object_editor->getObject( );
+	switch ( set_obj ) {
+		case OBJECT_NONE:
+			drawer->drawString( VIEW_CHIP_MODE_POS_X, VIEW_CHIP_MODE_POS_Y, "オブジェクト削除" );
+			break;
+		case OBJECT_BLOCK:
+			drawer->drawString( VIEW_CHIP_MODE_POS_X, VIEW_CHIP_MODE_POS_Y, "不可侵ブロック配置" );
+			break;
+		case OBJECT_ONE_WAY:
+			drawer->drawString( VIEW_CHIP_MODE_POS_X, VIEW_CHIP_MODE_POS_Y, "上方侵入ブロック配置" );
+			break;
 	}
 }
