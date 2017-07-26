@@ -2,6 +2,7 @@
 #include "Device.h"
 #include "Armoury.h"
 #include "ace_define.h"
+#include "Family.h"
 
 //ƒTƒCƒY
 const int PLAYER_FOOT = 7;
@@ -40,6 +41,7 @@ void Player::act( ) {
 	case ACTION_ATTACK:
 		actOnAttack( );
 	}
+	actOnCamera( );
 }
 
 void Player::actOnWaiting( ) {
@@ -162,6 +164,27 @@ void Player::actOnAttack( ) {
 	ShotPtr shot( new Shot( getPos( ), getDir( ) ) );
 	Armoury::getTask( )->add( shot );
 	_action = ACTION_WAIT;
+}
+
+void Player::actOnCamera( ) {
+	FamilyConstPtr family( Family::getTask( ) );
+	double camera_pos = family->getCameraPos( );
+	if ( getPos( ).x + getVec( ).x - NOMAL_CHAR_GRAPH_SIZE / 2 < camera_pos - SCREEN_WIDTH / 2 ) {
+		Vector pos( getPos( ) );
+		pos.x = ( camera_pos - SCREEN_WIDTH / 2 ) + getChipSize( ) / 2;
+		setPos( pos );
+		Vector vec( getVec( ) );
+		vec.x = 0;
+		setVec( vec );
+	}
+	if ( getPos( ).x + getVec( ).x + getChipSize( ) / 2 > camera_pos + SCREEN_WIDTH / 2 ) {
+		Vector pos( getPos( ) );
+		pos.x = ( camera_pos + SCREEN_WIDTH / 2 ) - getChipSize( ) / 2;
+		setPos( pos );
+		Vector vec( getVec( ) );
+		vec.x = 0;
+		setVec( vec );
+	}
 }
 
 Player::ACTION Player::getAction( ) const {

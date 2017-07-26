@@ -19,6 +19,7 @@ protected:
 	bool isStanding( ) const;
 	virtual void act( ) = 0;
 	int getActCount( ) const;
+	int getChipSize( ) const;
 private:
 	void updateDir( );
 private:

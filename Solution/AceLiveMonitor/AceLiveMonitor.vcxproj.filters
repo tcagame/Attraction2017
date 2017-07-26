@@ -14,8 +14,13 @@
     <ClCompile Include="Military.cpp" />
     <ClCompile Include="ViewerArmoury.cpp" />
     <ClCompile Include="Map.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="ViewerMilitary.cpp" />
     <ClCompile Include="EnemyPurpleZombie.cpp" />
+=======
+    <ClCompile Include="ViewerEvent.cpp" />
+    <ClCompile Include="ViewerStatus.cpp" />
+>>>>>>> 3fba7a44173b7bfdb8064f9250665a38e59c7589
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Family.h" />
@@ -30,7 +35,12 @@
     <ClInclude Include="Military.h" />
     <ClInclude Include="ViewerArmoury.h" />
     <ClInclude Include="Map.h" />
+<<<<<<< HEAD
     <ClInclude Include="ViewerMilitary.h" />
     <ClInclude Include="EnemyPurpleZombie.h" />
+=======
+    <ClInclude Include="ViewerEvent.h" />
+    <ClInclude Include="ViewerStatus.h" />
+>>>>>>> 3fba7a44173b7bfdb8064f9250665a38e59c7589
   </ItemGroup>
 </Project>
