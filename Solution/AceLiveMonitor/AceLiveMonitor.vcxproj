@@ -160,6 +160,7 @@
   <ItemGroup>
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyFaceAndHand.cpp" />
     <ClCompile Include="EnemyPurpleZombie.cpp" />
     <ClCompile Include="Family.cpp" />
     <ClCompile Include="Map.cpp" />
@@ -179,6 +180,7 @@
   <ItemGroup>
     <ClInclude Include="Character.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyFaceAndHand.h" />
     <ClInclude Include="EnemyPurpleZombie.h" />
     <ClInclude Include="Family.h" />
     <ClInclude Include="Map.h" />

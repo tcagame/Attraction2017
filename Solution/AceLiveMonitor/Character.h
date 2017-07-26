@@ -4,7 +4,7 @@
 
 class Character {
 public:
-	Character( const Vector& pos, int chip_size );
+	Character( const Vector& pos, int chip_size, bool mass = true );
 	virtual ~Character( );
 public:
 	Vector getVec( ) const;
@@ -29,5 +29,6 @@ private:
 	bool _standing;
 	int _chip_size;
 	int _act_count;
+	bool _mass;
 };
 

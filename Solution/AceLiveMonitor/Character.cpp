@@ -6,12 +6,13 @@
 const int MAX_SPEED_Y = 10;
 const int MAX_ACT_COUNT = 2100000000;
 
-Character::Character( const Vector& pos, int chip_size ) :
+Character::Character( const Vector& pos, int chip_size, bool mass ) :
 _pos( pos ),
 _vec( Vector( ) ),
 _standing( false ),
 _chip_size( chip_size ),
-_act_count( 0 ) {
+_act_count( 0 ),
+_mass( mass ) {
 }
 
 
@@ -24,7 +25,9 @@ void Character::update( ) {
 	_act_count++;
 	_act_count %= MAX_ACT_COUNT;
 	_standing = false;
-	_vec.y += GRAVITY;
+	if ( _mass ) {
+		_vec.y += GRAVITY;
+	}
 	if ( _vec.y > MAX_SPEED_Y ) {
 		_vec.y = MAX_SPEED_Y;
 	}

@@ -2,8 +2,8 @@
 
 
 
-Enemy::Enemy( const Vector& pos, const int width ) :
-Character( pos, width ) {
+Enemy::Enemy( const Vector& pos, const int width, bool mass ) :
+Character( pos, width, mass ) {
 	setDir( DIR_LEFT );
 }
 
