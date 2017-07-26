@@ -34,10 +34,10 @@ void Character::update( ) {
 	if ( _vec.y < -MAX_SPEED_Y ) {
 		_vec.y = -MAX_SPEED_Y;
 	}
-	if ( _pos.y + _vec.y > SCREEN_HEIGHT ) {
+	if ( _pos.y + _vec.y > VIEW_STREET_Y + VIEW_STREET_HEIGHT ) {
 		_standing = true;
 		_vec.y = 0;
-		_pos.y = SCREEN_HEIGHT - GRAVITY / 2;
+		_pos.y = VIEW_STREET_Y + VIEW_STREET_HEIGHT - GRAVITY / 2;
 	}
 	if ( _pos.x + _vec.x - _chip_size / 2 < 0 ) {
 		_pos.x = _chip_size / 2;
