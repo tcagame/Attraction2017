@@ -7,7 +7,7 @@ PTR( Image );
 
 class ObjectGuide {
 public:
-	ObjectGuide( DataConstPtr data, ObjectCursorConstPtr object_cursor );
+	ObjectGuide( ImagePtr block_image, DataConstPtr data, ObjectCursorConstPtr object_cursor );
 	virtual ~ObjectGuide( );
 public:
 	void update( );

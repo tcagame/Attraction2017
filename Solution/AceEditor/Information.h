@@ -5,10 +5,11 @@ PTR( ChipCursor );
 PTR( ObjectCursor );
 PTR( Data );
 PTR( ChipEditor );
+PTR( ObjectEditor );
 
 class Information {
 public:
-	Information( DataConstPtr data, ChipCursorConstPtr chip_cursor, ObjectCursorConstPtr object_cursor, ChipEditorConstPtr chip_editor );
+	Information( DataConstPtr data, ChipCursorConstPtr chip_cursor, ObjectCursorConstPtr object_cursor, ChipEditorConstPtr chip_editor, ObjectEditorConstPtr object_editor );
 	virtual ~Information( );
 public:
 	void draw( ) const;
@@ -20,5 +21,6 @@ private:
 	ObjectCursorConstPtr _object_cursor;
 	DataConstPtr _data;
 	ChipEditorConstPtr _chip_editor;
+	ObjectEditorConstPtr _object_editor;
 };
 

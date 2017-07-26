@@ -58,7 +58,7 @@ ChipMenu::~ChipMenu( ) {
 void ChipMenu::update( ) {
 	MousePtr mouse( Mouse::getTask( ) );
 	if ( mouse->isPushLeftButton( ) ) {
-		Vector mouse_pos = mouse->getPos( ); 
+		Vector mouse_pos = mouse->getPos( );
 		_active = false;
 		{//tag‘I‘ð
 			int sx1 = ( int )_pos.x + TAG_X;

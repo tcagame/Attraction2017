@@ -19,7 +19,7 @@ Data::Data( ) {
 	const int MAX_OBJ = _page_num * PAGE_OBJECT_WIDTH_NUM * OBJECT_CHIP_HEIGHT_NUM;
 	_objects.resize( MAX_OBJ );
 	for ( int i = 0; i < MAX_OBJ; i++ ) {
-		_objects[ i ] = OBJECT_NONE;
+		_objects[ i ] = (unsigned char)( i % 5 );
 	}
 }
 

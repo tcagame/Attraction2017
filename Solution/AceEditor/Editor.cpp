@@ -42,6 +42,7 @@ Editor::~Editor( ) {
 void Editor::initialize( ) {
 	// drawer‰Šú‰»Œã
 	ImagePtr menu_image = Drawer::getTask( )->createImage( "Menu/menu.png" );
+	ImagePtr block_image = Drawer::getTask( )->createImage( "guide/object_guide_cursor.png" );
 	GroundPtr ground = GroundPtr( new Ground );
 	StructurePtr structure = StructurePtr( new Structure );
 
@@ -58,10 +59,10 @@ void Editor::initialize( ) {
 
 	_object_cursor  = ObjectCursorPtr ( new ObjectCursor ( _data ) );
 	_object_editor  = ObjectEditorPtr ( new ObjectEditor ( _data, _object_cursor ) );
-	_object_guide   = ObjectGuidePtr  ( new ObjectGuide  ( _data, _object_cursor ) );
+	_object_guide   = ObjectGuidePtr  ( new ObjectGuide  ( block_image, _data, _object_cursor ) );
 	_object_preview = ObjectPreviewPtr( new ObjectPreview( _data, _object_cursor ) );
-	_object_menu    = ObjectMenuPtr   ( new ObjectMenu   ( menu_image ) );
-	_information    = InformationPtr  ( new Information  ( _data, _chip_cursor, _object_cursor, _chip_editor ) );
+	_object_menu    = ObjectMenuPtr   ( new ObjectMenu   ( menu_image, block_image, _object_editor ) );
+	_information    = InformationPtr  ( new Information  ( _data, _chip_cursor, _object_cursor, _chip_editor, _object_editor ) );
 }
 
 

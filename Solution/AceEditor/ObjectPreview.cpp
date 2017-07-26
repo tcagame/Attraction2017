@@ -21,6 +21,12 @@ void ObjectPreview::draw( ) const {
 			int ox = ( i + _object_cursor->getScrollX( ) ) % ( _data->getPageNum( ) * PAGE_OBJECT_WIDTH_NUM );
 			int oy = j;
 			if ( _data->getObject( ox, oy ) == OBJECT_BLOCK ) {
+				_block->setRect( 0, 16, OBJECT_GUIDE_SIZE, OBJECT_GUIDE_SIZE );
+				_block->setPos( PREVIEW_X + i * OBJECT_GUIDE_SIZE, PREVIEW_Y + j * OBJECT_GUIDE_SIZE );
+				_block->draw( );
+			}
+			if ( _data->getObject( ox, oy ) == OBJECT_ONE_WAY ) {
+				_block->setRect( 16, 0, OBJECT_GUIDE_SIZE, OBJECT_GUIDE_SIZE );
 				_block->setPos( PREVIEW_X + i * OBJECT_GUIDE_SIZE, PREVIEW_Y + j * OBJECT_GUIDE_SIZE );
 				_block->draw( );
 			}
