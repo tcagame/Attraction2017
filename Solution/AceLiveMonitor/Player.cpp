@@ -16,9 +16,10 @@ const int PLAYER_ANIM_WAIT_COUNT = 12;
 const int PLAYER_ANIM_WIDTH_NUM = 8;
 
 Player::Player( int player_id, Vector pos ) :
-Character( pos, NOMAL_CHAR_GRAPH_SIZE ),
+Character( pos, NORMAL_CHAR_GRAPH_SIZE ),
 _id( player_id ),
 _action( ACTION_WAIT ) {
+	setDir( DIR_RIGHT );
 }
 
 Player::~Player( ) {
@@ -169,7 +170,7 @@ void Player::actOnAttack( ) {
 void Player::actOnCamera( ) {
 	FamilyConstPtr family( Family::getTask( ) );
 	double camera_pos = family->getCameraPos( );
-	if ( getPos( ).x + getVec( ).x - NOMAL_CHAR_GRAPH_SIZE / 2 < camera_pos - SCREEN_WIDTH / 2 ) {
+	if ( getPos( ).x + getVec( ).x - NORMAL_CHAR_GRAPH_SIZE / 2 < camera_pos - SCREEN_WIDTH / 2 ) {
 		Vector pos( getPos( ) );
 		pos.x = ( camera_pos - SCREEN_WIDTH / 2 ) + getChipSize( ) / 2;
 		setPos( pos );
@@ -193,7 +194,7 @@ Player::ACTION Player::getAction( ) const {
 
 Chip Player::getChip( ) const {
 	Chip chip = Chip( );
-	chip.size = NOMAL_CHAR_GRAPH_SIZE;
+	chip.size = NORMAL_CHAR_GRAPH_SIZE;
 	int cx = 0;
 	int cy = 0;
 	switch ( _action ) {
@@ -240,19 +241,19 @@ Chip Player::getChip( ) const {
 	}
 
 	
-	chip.tx = cx * NOMAL_CHAR_GRAPH_SIZE;
-	chip.ty = cy * NOMAL_CHAR_GRAPH_SIZE;
+	chip.tx = cx * NORMAL_CHAR_GRAPH_SIZE;
+	chip.ty = cy * NORMAL_CHAR_GRAPH_SIZE;
 	Vector pos = getPos( );
 	if ( getDir( ) == DIR_LEFT ) {
-		chip.sx1 = (int)pos.x - NOMAL_CHAR_GRAPH_SIZE / 2;
-		chip.sy1 = (int)pos.y - NOMAL_CHAR_GRAPH_SIZE + PLAYER_FOOT;
-		chip.sx2 = chip.sx1 + NOMAL_CHAR_GRAPH_SIZE;
-		chip.sy2 = chip.sy1 + NOMAL_CHAR_GRAPH_SIZE;
+		chip.sx1 = (int)pos.x - NORMAL_CHAR_GRAPH_SIZE / 2;
+		chip.sy1 = (int)pos.y - NORMAL_CHAR_GRAPH_SIZE + PLAYER_FOOT;
+		chip.sx2 = chip.sx1 + NORMAL_CHAR_GRAPH_SIZE;
+		chip.sy2 = chip.sy1 + NORMAL_CHAR_GRAPH_SIZE;
 	} else {
-		chip.sx1 = (int)pos.x - NOMAL_CHAR_GRAPH_SIZE / 2 + NOMAL_CHAR_GRAPH_SIZE;
-		chip.sy1 = (int)pos.y - NOMAL_CHAR_GRAPH_SIZE + PLAYER_FOOT;
-		chip.sx2 = chip.sx1 - NOMAL_CHAR_GRAPH_SIZE;
-		chip.sy2 = chip.sy1 + NOMAL_CHAR_GRAPH_SIZE;
+		chip.sx1 = (int)pos.x - NORMAL_CHAR_GRAPH_SIZE / 2 + NORMAL_CHAR_GRAPH_SIZE;
+		chip.sy1 = (int)pos.y - NORMAL_CHAR_GRAPH_SIZE + PLAYER_FOOT;
+		chip.sx2 = chip.sx1 - NORMAL_CHAR_GRAPH_SIZE;
+		chip.sy2 = chip.sy1 + NORMAL_CHAR_GRAPH_SIZE;
 	}
 	return chip;
 }

@@ -9,7 +9,7 @@ const int ACE_MAP_SIZE = 8;
 
 const int GRAVITY = 1;
 
-const int NOMAL_CHAR_GRAPH_SIZE = 64;
+const int NORMAL_CHAR_GRAPH_SIZE = 64;
 
 enum DIR {
 	DIR_LEFT,

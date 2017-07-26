@@ -9,7 +9,6 @@ const int MAX_ACT_COUNT = 2100000000;
 Character::Character( const Vector& pos, int chip_size ) :
 _pos( pos ),
 _vec( Vector( ) ),
-_dir( DIR_RIGHT ),
 _standing( false ),
 _chip_size( chip_size ),
 _act_count( 0 ) {

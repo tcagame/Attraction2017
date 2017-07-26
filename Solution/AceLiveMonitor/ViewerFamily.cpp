@@ -23,8 +23,8 @@ void ViewerFamily::draw( ) const {
 		PlayerConstPtr player = family->getPlayer( i );
 		Vector pos = player->getPos( );
 		Chip chip = player->getChip( );
-		chip.sx1 += - family->getCameraPos( ) + SCREEN_WIDTH / 2;
-		chip.sx2 += - family->getCameraPos( ) + SCREEN_WIDTH / 2;
+		chip.sx1 += - family->getCameraPos( );
+		chip.sx2 += - family->getCameraPos( );
 		_image[ i ]->setRect( chip.tx, chip.ty, chip.size, chip.size );
 		_image[ i ]->setPos( chip.sx1, chip.sy1, chip.sx2, chip.sy2 );
 		_image[ i ]->draw( );

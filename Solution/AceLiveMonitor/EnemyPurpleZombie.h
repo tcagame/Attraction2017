@@ -5,7 +5,7 @@ public:
 	EnemyPurpleZombie( const Vector& pos );
 	virtual ~EnemyPurpleZombie( );
 public:
-	void getChipIndex( int& cx, int& cy ) const;
+	Chip getChip( ) const;
 protected:
 	void act( );
 };
