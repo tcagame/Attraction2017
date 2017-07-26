@@ -170,17 +170,17 @@ void Player::actOnAttack( ) {
 void Player::actOnCamera( ) {
 	FamilyConstPtr family( Family::getTask( ) );
 	double camera_pos = family->getCameraPos( );
-	if ( getPos( ).x + getVec( ).x - NORMAL_CHAR_GRAPH_SIZE / 2 < camera_pos - SCREEN_WIDTH / 2 ) {
+	if ( getPos( ).x + getVec( ).x - NORMAL_CHAR_GRAPH_SIZE / 2 < camera_pos ) {
 		Vector pos( getPos( ) );
-		pos.x = ( camera_pos - SCREEN_WIDTH / 2 ) + getChipSize( ) / 2;
+		pos.x = camera_pos + getChipSize( ) / 2;
 		setPos( pos );
 		Vector vec( getVec( ) );
 		vec.x = 0;
 		setVec( vec );
 	}
-	if ( getPos( ).x + getVec( ).x + getChipSize( ) / 2 > camera_pos + SCREEN_WIDTH / 2 ) {
+	if ( getPos( ).x + getVec( ).x + getChipSize( ) / 2 > camera_pos + SCREEN_WIDTH ) {
 		Vector pos( getPos( ) );
-		pos.x = ( camera_pos + SCREEN_WIDTH / 2 ) - getChipSize( ) / 2;
+		pos.x = ( camera_pos + SCREEN_WIDTH ) - getChipSize( ) / 2;
 		setPos( pos );
 		Vector vec( getVec( ) );
 		vec.x = 0;
