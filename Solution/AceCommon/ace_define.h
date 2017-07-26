@@ -9,7 +9,37 @@ const int ACE_MAP_SIZE = 8;
 
 const int GRAVITY = 1;
 
-const int NOMAL_CHAR_GRAPH_SIZE = 64;
+const int NORMAL_CHAR_GRAPH_SIZE = 64;
+
+const int VIEW_TITLE_Y = 0;
+const int VIEW_TITLE_HEIGHT = 256;
+const int VIEW_STREET_Y = VIEW_TITLE_Y + VIEW_TITLE_HEIGHT;
+const int VIEW_STREET_HEIGHT = 256;
+const int VIEW_STATUS_Y = VIEW_STREET_Y + VIEW_STREET_HEIGHT;
+
+enum DIR {
+	DIR_LEFT,
+	DIR_RIGHT,
+};
+
+struct Chip {
+	int sx1;
+	int sy1;
+	int sx2;
+	int sy2;
+	int tx;
+	int ty;
+	int size;
+	Chip( ) {
+		sx1 = 0;
+		sy1 = 0;
+		sx2 = 0;
+		sy2 = 0;
+		tx = 0;
+		ty = 0;
+		size = 0;
+	}
+};
 
 // Editor—p
 const int GRAPH_SIZE = 256;

@@ -33,7 +33,7 @@ void Family::initialize( ) {
 	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
 		camera_pos += _player[ i ]->getPos( ).x;
 	}
-	_camera_pos = camera_pos * 0.25;
+	_camera_pos = camera_pos * 0.25 - SCREEN_WIDTH / 2;
 }
 
 void Family::update( ) {
@@ -62,11 +62,11 @@ PlayerPtr Family::getPlayer( int player_id ) {
 }
 
 void Family::updateCameraPos( ) {
-	double camera_pos = 0.0;
+	double camera_pos = 0;
 	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
 		camera_pos += _player[ i ]->getPos( ).x;
 	}
-	camera_pos *= 0.25; //•½‹Ï‚ð‚Æ‚é
+	camera_pos = camera_pos * 0.25 - SCREEN_WIDTH / 2; //•½‹Ï‚ð‚Æ‚é
 	if ( _camera_pos - camera_pos > 0 ) {
 		return;
 	}

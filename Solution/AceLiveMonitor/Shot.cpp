@@ -2,13 +2,12 @@
 
 const int SHOT_SPEED = 10; 
 
-Shot::Shot( const Vector& pos, Player::DIR dir ) {
-	_pos = pos;
-	if ( dir == Player::DIR_LEFT ) {
-		_dir = -1;
-	}
-	if ( dir == Player::DIR_RIGHT ) {
-		_dir = 1;
+Shot::Shot( const Vector& pos, DIR dir ) :
+_dir( dir ),
+_pos( pos ) {
+	_vec = Vector( SHOT_SPEED, 0 );
+	if ( dir == DIR_LEFT ) {
+		_vec.x *= -1;
 	}
 }
 
@@ -20,9 +19,9 @@ Vector Shot::getPos( ) const {
 }
 
 void Shot::update( ) {
-	_pos.x += SHOT_SPEED * _dir;
+	_pos += _vec;
 }
 
-int Shot::getDir( ) const {
+DIR Shot::getDir( ) const {
 	return _dir;
 }

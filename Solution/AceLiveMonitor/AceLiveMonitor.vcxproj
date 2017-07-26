@@ -160,6 +160,8 @@
   <ItemGroup>
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EnemyFaceAndHand.cpp" />
+    <ClCompile Include="EnemyPurpleZombie.cpp" />
     <ClCompile Include="Family.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="ViewerEvent.cpp" />
@@ -171,12 +173,15 @@
     <ClCompile Include="Armoury.cpp" />
     <ClCompile Include="Viewer.cpp" />
     <ClCompile Include="ViewerArmoury.cpp" />
+    <ClCompile Include="ViewerMilitary.cpp" />
     <ClCompile Include="ViewerStatus.cpp" />
     <ClCompile Include="ViewerStreet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
     <ClInclude Include="Enemy.h" />
+    <ClInclude Include="EnemyFaceAndHand.h" />
+    <ClInclude Include="EnemyPurpleZombie.h" />
     <ClInclude Include="Family.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="ViewerEvent.h" />
@@ -187,6 +192,7 @@
     <ClInclude Include="Armoury.h" />
     <ClInclude Include="Viewer.h" />
     <ClInclude Include="ViewerArmoury.h" />
+    <ClInclude Include="ViewerMilitary.h" />
     <ClInclude Include="ViewerStatus.h" />
     <ClInclude Include="ViewerStreet.h" />
   </ItemGroup>

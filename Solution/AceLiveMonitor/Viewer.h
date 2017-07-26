@@ -7,6 +7,7 @@ PTR( Viewer );
 PTR( ViewerFamily );
 PTR( ViewerStreet );
 PTR( ViewerArmoury );
+PTR( ViewerMilitary );
 PTR( ViewerEvent );
 PTR( ViewerStatus );
 
@@ -24,6 +25,7 @@ private:
 	ViewerFamilyConstPtr _viewer_family;
 	ViewerStreetConstPtr _viewer_street;
 	ViewerArmouryConstPtr _viewer_armoury;
+	ViewerMilitaryConstPtr _viewer_military;
 	ViewerEventConstPtr _viewer_event;
 	ViewerStatusConstPtr _viewer_status;
 };

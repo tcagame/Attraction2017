@@ -1,11 +1,11 @@
 #include "Viewer.h"
 #include "Application.h"
 #include "Drawer.h"
-#include "Family.h"
 
 #include "ViewerFamily.h"
 #include "ViewerStreet.h"
 #include "ViewerArmoury.h"
+#include "ViewerMilitary.h"
 #include "ViewerEvent.h"
 #include "ViewerStatus.h"
 
@@ -23,6 +23,7 @@ void Viewer::initialize( ) {
 	_viewer_family  = ViewerFamilyPtr ( new ViewerFamily ); 
 	_viewer_street  = ViewerStreetPtr ( new ViewerStreet );
 	_viewer_armoury = ViewerArmouryPtr( new ViewerArmoury );
+	_viewer_military = ViewerMilitaryPtr( new ViewerMilitary );
 	_viewer_event   = ViewerEventPtr  ( new ViewerEvent );
 	_viewer_status  = ViewerStatusPtr ( new ViewerStatus );
 }
@@ -32,6 +33,7 @@ void Viewer::update( ) {
 	_viewer_event->draw( );
 	_viewer_status->draw( );
 	_viewer_street->draw( ViewerStreet::LAYER_BACK );
+	_viewer_military->draw( );
 	_viewer_family->draw( );
 	_viewer_armoury->draw( );
 	_viewer_street->draw( ViewerStreet::LAYER_FRONT );

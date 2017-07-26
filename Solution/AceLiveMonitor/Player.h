@@ -16,7 +16,7 @@ public:
 	virtual ~Player( );
 public:
 	void act( );
-	void getChipIndex( int& cx, int& cy ) const;
+	Chip getChip( ) const;
 	ACTION getAction( ) const;
 private:
 	void actOnWaiting( );
