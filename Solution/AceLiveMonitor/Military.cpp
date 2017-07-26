@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "EnemyPurpleZombie.h"
 #include "EnemyFaceAndHand.h"
+#include "ace_define.h"
 
 MilitaryPtr Military::getTask( ) {
 	return std::dynamic_pointer_cast< Military >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -9,8 +10,8 @@ MilitaryPtr Military::getTask( ) {
 
 
 Military::Military( ) {
-	_enemies.push_back( EnemyPtr( new EnemyPurpleZombie( Vector( 300, 100 ) ) ) );
-	_enemies.push_back( EnemyPtr( new EnemyFaceAndHand( Vector( 400, 100 ) ) ) );
+	_enemies.push_back( EnemyPtr( new EnemyPurpleZombie( Vector( 300, VIEW_STREET_Y + 60 ) ) ) );
+	_enemies.push_back( EnemyPtr( new EnemyFaceAndHand( Vector( 400, VIEW_STREET_Y + 80 ) ) ) );
 }
 
 

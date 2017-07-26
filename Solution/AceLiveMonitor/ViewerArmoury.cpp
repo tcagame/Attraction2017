@@ -28,7 +28,7 @@ void ViewerArmoury::draw( ) const {
 		int tx2 = 64;
 		int ty2 = 64;
 		int sy1 = ( int )shot->getPos( ).y - NORMAL_CHAR_GRAPH_SIZE;
-		int sx1 = ( int )( shot->getPos( ).x - camera_pos ) - ( NORMAL_CHAR_GRAPH_SIZE / 2 ) + ( SCREEN_WIDTH / 2 );
+		int sx1 = ( int )( shot->getPos( ).x - camera_pos ) - ( NORMAL_CHAR_GRAPH_SIZE / 2 );
 		int sx2 = sx1 + NORMAL_CHAR_GRAPH_SIZE;
 		int dir = shot->getDir( );
 		if ( dir == 1 ) {

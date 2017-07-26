@@ -35,9 +35,9 @@ Chip EnemyFaceAndHand::getChip( ) const {
 	chip.size = getChipSize( );
 	chip.tx = cx * chip.size;
 	chip.ty = cy * chip.size;
-	chip.sy1 = 0;
-	chip.sy2 = chip.sy1 + chip.size; 
 	Vector pos = getPos( );
+	chip.sy1 = ( int )pos.y - chip.size;
+	chip.sy2 = chip.sy1 + chip.size; 
 	if ( getDir( ) == DIR_LEFT ) {
 		chip.sx1 = ( int )pos.x - chip.size / 2;
 		chip.sx2 = chip.sx1 + chip.size;	

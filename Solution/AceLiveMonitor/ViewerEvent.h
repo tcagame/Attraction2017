@@ -9,5 +9,6 @@ public:
 	void draw( ) const;
 private:
 	ImagePtr _title;
+	ImagePtr _frame;
 };
 
