@@ -63,3 +63,11 @@ bool StatusSender::setPower( int idx, int power ) {
 	_data.player[ idx ].power = power;
 	return true;
 }
+
+bool StatusSender::setMoney( int idx, int money ) {
+	if ( idx < 0 || idx >= ROCK_PLAYER_NUM ) {
+		return false;
+	}
+	_data.player[ idx ].money = money;
+	return true;
+}
