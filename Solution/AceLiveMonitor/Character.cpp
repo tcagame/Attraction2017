@@ -114,6 +114,10 @@ bool Character::isOverlapped( CharacterConstPtr target ) const {
 	return ( length < radius );
 }
 
+void Character::setRadius( int radius ) {
+	_radius = radius;
+}
+
 double Character::getRadius( ) const{
 	return _radius;
 }

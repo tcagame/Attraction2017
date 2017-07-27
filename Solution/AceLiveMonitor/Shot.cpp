@@ -9,6 +9,7 @@ Character( pos, NORMAL_CHAR_GRAPH_SIZE, false ) {
 		vec.x *= -1;
 	}
 	setVec( vec );
+	setRadius( 20 );
 }
 
 Shot::~Shot( ) {

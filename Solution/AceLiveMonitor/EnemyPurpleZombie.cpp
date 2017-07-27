@@ -5,6 +5,7 @@ static const int WAIT_ANIM_TIME = 5;
 
 EnemyPurpleZombie::EnemyPurpleZombie( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ) {
+	setRadius( 36 );
 }
 
 

@@ -9,6 +9,7 @@ public:
 public:
 	void update( );
 	Chip getChip( ) const;
+	bool isFinished( ) const;
 private:
 	Vector _pos;
 	int _anim_count;

@@ -26,6 +26,10 @@ void Military::update( ) {
 			ite++;
 			continue;
 		}
+		if ( enemy->isFinished( ) ) {
+			ite = _enemies.erase( ite );
+			continue;
+		}
 		enemy->update( );
 		ite++;
 	}

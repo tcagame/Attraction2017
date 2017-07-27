@@ -19,21 +19,36 @@ Armoury::~Armoury( ) {
 
 void Armoury::update( ) {
 	MilitaryPtr militari( Military::getTask( ) );
-	std::array< ShotPtr, MAX_SHOT_NUM >::iterator ite = _shot_list.begin( );
-	while ( ite != _shot_list.end( ) ) {
-		ShotPtr shot = (*ite);
-		if ( !shot ) {
-			ite++;
+	for ( int i = 0; i < MAX_SHOT_NUM; i ++ ) {
+		if ( !_shot_list[ i ] ) {
 			continue;
 		}
-		shot->update( );
-		EnemyPtr hit_enemy = militari->getOverLappedEnemy( shot );
+		_shot_list[ i ]->update( );
+		EnemyPtr hit_enemy = militari->getOverLappedEnemy( _shot_list[ i ] );
 		if ( hit_enemy ) {
 			hit_enemy->damage( 1 );
 			if ( hit_enemy->isFinished( ) ) {
-				_impacts.push_back( ImpactPtr( new Impact( shot->getPos( ) ) ) );
+				_impacts.push_back( ImpactPtr( new Impact( _shot_list[ i ]->getPos( ) ) ) );
+				_shot_list[ i ] = ShotPtr( );
 			}
 		}
+	}
+	updateImpact( );
+}
+
+void Armoury::updateImpact( ) {
+	std::list< ImpactPtr >::iterator ite = _impacts.begin( );
+	while ( ite != _impacts.end( ) ) {
+		ImpactPtr impact = (*ite);
+		if ( !impact ) {
+			ite++;
+			continue;
+		}
+		if ( impact->isFinished( ) ) {
+			ite = _impacts.erase( ite );
+			continue;
+		}
+		impact->update( );
 		ite++;
 	}
 }
@@ -52,4 +67,8 @@ void Armoury::add( ShotPtr shot ) {
 	_shot_list[ _shot_id ] = shot;
 	_shot_id++;
 	_shot_id %= MAX_SHOT_NUM;
+}
+
+std::list< ImpactPtr > Armoury::getImpactList( ) const {
+	return _impacts;
 }

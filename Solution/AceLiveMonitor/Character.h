@@ -27,6 +27,7 @@ protected:
 	virtual void act( ) = 0;
 	int getActCount( ) const;
 	int getChipSize( ) const;
+	void setRadius( int radius );
 private:
 	void updateDir( );
 private:

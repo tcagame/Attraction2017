@@ -22,6 +22,9 @@ public:
 	void update( );
 	ShotConstPtr getShot( int idx ) const;
 	int getMaxShotNum( ) const;
+	std::list< ImpactPtr > getImpactList( ) const;
+private:
+	void updateImpact( );
 private:
 	static const int MAX_SHOT_NUM = 100;
 	int _shot_id;

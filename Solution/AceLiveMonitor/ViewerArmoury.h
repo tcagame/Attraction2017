@@ -10,6 +10,10 @@ public:
 public:
 	void draw( ) const;
 private:
-	ImagePtr _image;
+	void drawShot( ) const;
+	void drawImpact( ) const;
+private:
+	ImagePtr _image_shot;
+	ImagePtr _image_impact;
 };
 
