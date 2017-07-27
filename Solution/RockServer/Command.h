@@ -10,8 +10,9 @@ class Command {
 public:
 	enum COMMAND {
 		COMMAND_IP,
-		COMMAND_CONTINUE,
 		COMMAND_DEVICE,
+		COMMAND_CONTINUE,
+		COMMAND_TOKU,
 		MAX_COMMAND
 	};
 public:
