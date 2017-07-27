@@ -21,7 +21,11 @@ void Armoury::update( ) {
 			ite++;
 			continue;
 		}
-		( *ite )->update( );
+		if ( ( *ite )->isFinish( ) ) {
+			( *ite ) = ShotPtr( );
+		} else {
+			( *ite )->update( );
+		}
 		ite++;
 	}
 }

@@ -36,5 +36,5 @@ void Viewer::update( ) {
 	_viewer_military->draw( );
 	_viewer_family->draw( );
 	_viewer_armoury->draw( );
-	_viewer_street->draw( ViewerStreet::LAYER_FRONT );
+	//_viewer_street->draw( ViewerStreet::LAYER_FRONT );
 }

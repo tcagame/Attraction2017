@@ -22,11 +22,9 @@ void ViewerArmoury::draw( ) const {
 		if ( !shot ) {
 			continue;
 		}
-
-		int tx = 64;
+		int power = shot->getPower( ) - 1;
+		int tx = 0 + power * 128 + 64 * ( shot->getCount( ) % 2 );
 		int ty = 128;
-		int tx2 = 64;
-		int ty2 = 64;
 		int sy1 = ( int )shot->getPos( ).y - NORMAL_CHAR_GRAPH_SIZE;
 		int sx1 = ( int )( shot->getPos( ).x - camera_pos ) - ( NORMAL_CHAR_GRAPH_SIZE / 2 );
 		int sx2 = sx1 + NORMAL_CHAR_GRAPH_SIZE;
@@ -37,13 +35,7 @@ void ViewerArmoury::draw( ) const {
 			sx2 = tmp;
 		}
 		{
-			_image->setRect( tx, ty, tx2, tx2 );
-			_image->setPos( sx1, sy1, sx2, sy1 + NORMAL_CHAR_GRAPH_SIZE );
-			_image->draw( );
-		}
-		{
-			tx += 64;
-			_image->setRect( tx, ty, tx2, tx2 );
+			_image->setRect( tx, ty, NORMAL_CHAR_GRAPH_SIZE, NORMAL_CHAR_GRAPH_SIZE );
 			_image->setPos( sx1, sy1, sx2, sy1 + NORMAL_CHAR_GRAPH_SIZE );
 			_image->draw( );
 		}
