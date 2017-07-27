@@ -131,7 +131,7 @@ void Command::excute( ) {
 					if ( command[ 2 ].size( ) == 8 ) {
 						int item = 0;
 						for ( int i = 0; i < 8; i++ ) {
-							item += command[ 2 ][ 7 - i ] == '0' ? 0 : ( int )pow( 2, i );
+							item |= command[ 2 ][ 7 - i ] == '0' ? 0 : 1 << i;
 						}
 						if ( _status_sender->setItem( player_num, item ) ) {
 							message = "[SUCCESS] " + _command;
@@ -188,7 +188,9 @@ unsigned int Command::getState( std::string str ) {
 	unsigned int result = -1;
 	for ( int i = 0; i < STATE_NUM; i++ ) {
 		if ( str == STATE[ i ] ) {
-			result = ( unsigned int )pow( 2, i - 1 );
+			result = 0;
+			result |= 1 << i - 1;
+			break;
 		}
 	}
 	return result;

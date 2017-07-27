@@ -77,6 +77,7 @@ bool StatusSender::setItem( int idx, int item ) {
 		return false;
 	}
 	_data.player[ idx ].item = item;
+	return true;
 }
 
 bool StatusSender::setState( int idx, unsigned int state ) {
@@ -84,4 +85,5 @@ bool StatusSender::setState( int idx, unsigned int state ) {
 		return false;
 	}
 	_data.player[ idx ].state = state;
+	return true;
 }
