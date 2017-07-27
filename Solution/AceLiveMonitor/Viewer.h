@@ -11,6 +11,8 @@ PTR( ViewerMilitary );
 PTR( ViewerEvent );
 PTR( ViewerStatus );
 
+PTR( ViewerDebug );
+
 class Viewer : public Task {
 public:
 	static std::string getTag( ) { return "VIEWER"; };
@@ -22,11 +24,14 @@ public:
 	void initialize( );
 	void update( );
 private:
+	bool _debug;
 	ViewerFamilyConstPtr _viewer_family;
 	ViewerStreetConstPtr _viewer_street;
 	ViewerArmouryConstPtr _viewer_armoury;
 	ViewerMilitaryConstPtr _viewer_military;
 	ViewerEventConstPtr _viewer_event;
 	ViewerStatusConstPtr _viewer_status;
+
+	ViewerDebugConstPtr _viewer_debug;
 };
 

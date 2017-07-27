@@ -165,6 +165,7 @@
     <ClCompile Include="Family.cpp" />
     <ClCompile Include="Impact.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="ViewerDebug.cpp" />
     <ClCompile Include="ViewerEvent.cpp" />
     <ClCompile Include="ViewerFamily.cpp" />
     <ClCompile Include="main.cpp" />
@@ -186,6 +187,7 @@
     <ClInclude Include="Family.h" />
     <ClInclude Include="Impact.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="ViewerDebug.h" />
     <ClInclude Include="ViewerEvent.h" />
     <ClInclude Include="ViewerFamily.h" />
     <ClInclude Include="Military.h" />

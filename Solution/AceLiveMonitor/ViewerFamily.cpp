@@ -32,9 +32,6 @@ void ViewerFamily::draw( ) const {
 		_image[ i ]->setRect( chip.tx, chip.ty, chip.size, chip.size );
 		_image[ i ]->setPos( chip.sx1, chip.sy1, chip.sx2, chip.sy2 );
 		_image[ i ]->draw( );
-		//デバック用
-		DrawerPtr drawer( Drawer::getTask( ) );
-		drawer->drawCircle( Vector( player->getPos( ) + Vector( -camera_pos, -chip.size / 2) ), player->getRadius( ) );
 
 		// 妖怪念力のチャージエフェクト
 		int charge_count = player->getChargeCount( );

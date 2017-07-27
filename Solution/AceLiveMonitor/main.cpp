@@ -1,6 +1,7 @@
 #include "Application.h"
 #include "Drawer.h"
 #include "Device.h"
+#include "Keyboard.h"
 #include "ace_define.h"
 #include "Family.h"
 #include "Armoury.h"
@@ -14,6 +15,7 @@ void main( ) {
 
 	app->addTask( Drawer::getTag( ), DrawerPtr( new Drawer( "Resource/Ace" ) ) );
 	app->addTask( Device::getTag( ), DevicePtr( new Device( ) ) );
+	app->addTask( Keyboard::getTag( ), KeyboardPtr( new Keyboard( ) ) );
 
 	app->addTask( Map     ::getTag( ), MapPtr     ( new Map    ( ) ) );
 	app->addTask( Family  ::getTag( ), FamilyPtr  ( new Family ( ) ) );

@@ -32,9 +32,6 @@ void ViewerMilitary::draw( ) const {
 		_image->setRect( chip.tx, chip.ty, chip.size, chip.size );
 		_image->setPos( chip.sx1, chip.sy1, chip.sx2, chip.sy2 );
 		_image->draw( );
-		//デバッグ用
-		//DrawerPtr drawer( Drawer::getTask( ) );
-		//drawer->drawCircle( Vector( enemy->getPos( ) + Vector( - camera_pos, - chip.size / 2 ) ), enemy->getRadius( ) );
 		ite++;
 	}
 }

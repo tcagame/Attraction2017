@@ -20,6 +20,7 @@
     <ClCompile Include="ViewerStreet.cpp" />
     <ClCompile Include="EnemyFaceAndHand.cpp" />
     <ClCompile Include="Impact.cpp" />
+    <ClCompile Include="ViewerDebug.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -40,5 +41,6 @@
     <ClInclude Include="ViewerStreet.h" />
     <ClInclude Include="EnemyFaceAndHand.h" />
     <ClInclude Include="Impact.h" />
+    <ClInclude Include="ViewerDebug.h" />
   </ItemGroup>
 </Project>
