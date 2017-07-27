@@ -6,7 +6,7 @@
 #include "Application.h"
 #include "Keyboard.h"
 
-const std::string DIRECTORY = "../Resource/Ace/MapData/";
+const std::string DIRECTORY = "Resource/Ace/MapData/";
 
 ObjectEditor::ObjectEditor( DataPtr data, ObjectCursorConstPtr object_cursor ) :
 _data( data ),

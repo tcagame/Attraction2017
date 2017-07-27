@@ -10,7 +10,7 @@
 void main( ) {
 	TaskPtr keyboard = TaskPtr( new Keyboard( ) );
 	TaskPtr mouse = TaskPtr( new Mouse( ) );
-	TaskPtr drawer = TaskPtr( new Drawer( "../Resource/Ace/Editor" ) );
+	TaskPtr drawer = TaskPtr( new Drawer( "Resource/Ace/Editor" ) );
 	TaskPtr editor = TaskPtr( new Editor( ) );
 
 	ApplicationPtr app = Application::getInstance( );

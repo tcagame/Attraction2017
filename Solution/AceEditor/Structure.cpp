@@ -5,7 +5,7 @@
 
 Structure::Structure( ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
-	LoadCSV csv( "../Resource/Ace/Editor/structure/structure_list", STRUCTURE_LIST_NUM );
+	LoadCSV csv( "Resource/Ace/Editor/structure/structure_list", STRUCTURE_LIST_NUM );
 	for ( int i = 0; i < csv.getSize( ); i++ ) {
 		std::string path = csv.getData( i );
 		if ( path == "" ) {

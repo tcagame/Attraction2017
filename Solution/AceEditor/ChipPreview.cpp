@@ -14,7 +14,7 @@
 
 const int BASE_X = - CHIP_WIDTH / 2;
 const int BASE_Y = - CHIP_HEIGHT / 2;
-const std::string EDITOR_PATH = "../Resource/Ace/Editor/";
+const std::string EDITOR_PATH = "Resource/Ace/Editor/";
 
 ChipPreview::ChipPreview( DataConstPtr data, ChipCursorConstPtr chip_cursor, ChipEditorConstPtr chip_editor, ChipDrawerConstPtr chip_drawer ) :
 _data( data ),
