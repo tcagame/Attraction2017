@@ -11,5 +11,6 @@ public:
 	void draw( ) const;
 private:
 	std::array< ImagePtr, ACE_PLAYER_NUM > _image;
+	ImagePtr _shot;
 };
 

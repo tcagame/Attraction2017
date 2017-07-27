@@ -3,6 +3,7 @@
 #include "Armoury.h"
 #include "Family.h"
 #include "Impact.h"
+#include "Shot.h"
 
 ViewerArmoury::ViewerArmoury( ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
@@ -28,7 +29,8 @@ void ViewerArmoury::drawShot( ) const {
 		ShotConstPtr shot = armoury->getShot( i );
 		if ( !shot ) {
 			continue;
-		}		
+		}
+
 		Chip chip = shot->getChip( );
 		chip.sx1 -= camera_pos;
 		chip.sx2 -= camera_pos;

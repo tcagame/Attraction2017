@@ -121,3 +121,7 @@ void Character::setRadius( int radius ) {
 double Character::getRadius( ) const{
 	return _radius;
 }
+
+void Character::setFinished( ) {
+	_finished = true;
+}

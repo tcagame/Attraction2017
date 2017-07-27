@@ -28,6 +28,7 @@ protected:
 	int getActCount( ) const;
 	int getChipSize( ) const;
 	void setRadius( int radius );
+	void setFinished( );
 private:
 	void updateDir( );
 private:

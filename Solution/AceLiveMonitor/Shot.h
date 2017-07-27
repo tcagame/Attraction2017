@@ -4,11 +4,17 @@
 
 class Shot : public Character {
 public:
-	Shot( const Vector& pos, DIR dir );
+	Shot( const Vector& pos, DIR dir, int power );
 	virtual ~Shot( );
 public:
+	DIR getDir( ) const;
+	int getPower( ) const;
 	Chip getChip( ) const;
 protected:
 	void act( );
+private:
+	int _power;
+	Vector _pos;
+	DIR _dir;
 };
 

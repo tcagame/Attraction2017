@@ -23,6 +23,10 @@ void Armoury::update( ) {
 		if ( !_shot_list[ i ] ) {
 			continue;
 		}
+		if ( _shot_list[ i ]->isFinished( ) ) {
+			_shot_list[ i ] = ShotPtr( );
+			continue;
+		}
 		_shot_list[ i ]->update( );
 		EnemyPtr hit_enemy = militari->getOverLappedEnemy( _shot_list[ i ] );
 		if ( hit_enemy ) {
