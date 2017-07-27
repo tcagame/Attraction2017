@@ -2,6 +2,7 @@
 #include "ace_define.h"
 #include "Family.h"
 #include "Player.h"
+#include "Map.h"
 
 const int MAX_SPEED_Y = 10;
 const int MAX_ACT_COUNT = 0xfffffff;
@@ -36,10 +37,15 @@ void Character::update( ) {
 	if ( _vec.y < -MAX_SPEED_Y ) {
 		_vec.y = -MAX_SPEED_Y;
 	}
-	if ( _pos.y + _vec.y > VIEW_STREET_Y + VIEW_STREET_HEIGHT ) {
-		_standing = true;
-		_vec.y = 0;
-		_pos.y = VIEW_STREET_Y + VIEW_STREET_HEIGHT - GRAVITY / 2;
+	MapConstPtr map( Map::getTask( ) );
+	{//ã‰º”»’è
+		if ( map->isExistance( _pos + Vector( 0, _vec.y ) ) ) {
+			if ( _vec.y > 0 ) {
+				_standing = true;
+				_vec.y = 0;
+				_pos.y = ( int )_pos.y + ( ( int )_pos.y % OBJECT_CHIP_SIZE ) - GRAVITY / 2;
+			}
+		}
 	}
 	if ( _pos.x + _vec.x - _chip_size / 2 < 0 ) {
 		_pos.x = _chip_size / 2;
@@ -47,9 +53,6 @@ void Character::update( ) {
 	}
 	updateDir( );
 	_pos += _vec;
-	//—Ž‰ºˆ—
-
-	//•Ç‚É“–‚½‚éˆ—
 
 }
 

@@ -37,9 +37,9 @@ void ObjectCursor::update( ) {
 	if ( pos.x >= PREVIEW_X &&
 		 pos.x < PREVIEW_X + DISP_WIDTH &&
 		 pos.y > GUIDE_Y &&
-		 pos.y < GUIDE_Y + GUIDE_HEIGHT_NUM * OBJECT_GUIDE_SIZE ) {
-		_gx = ( int )( mouse->getPos( ).x - PREVIEW_X ) / OBJECT_GUIDE_SIZE;
-		_gy = ( int )( mouse->getPos( ).y - GUIDE_Y	  ) / OBJECT_GUIDE_SIZE;
+		 pos.y < GUIDE_Y + GUIDE_HEIGHT_NUM * OBJECT_CHIP_SIZE ) {
+		_gx = ( int )( mouse->getPos( ).x - PREVIEW_X ) / OBJECT_CHIP_SIZE;
+		_gy = ( int )( mouse->getPos( ).y - GUIDE_Y	  ) / OBJECT_CHIP_SIZE;
 	}
 
 	//preview
@@ -47,8 +47,8 @@ void ObjectCursor::update( ) {
 		 pos.x < PREVIEW_X + DISP_WIDTH &&
 		 pos.y > PREVIEW_Y &&
 		 pos.y < SCREEN_HEIGHT ) {
-		_gx = ( int )( mouse->getPos( ).x - PREVIEW_X ) / OBJECT_GUIDE_SIZE;
-		_gy = ( int )( mouse->getPos( ).y - PREVIEW_Y ) / OBJECT_GUIDE_SIZE;
+		_gx = ( int )( mouse->getPos( ).x - PREVIEW_X ) / OBJECT_CHIP_SIZE;
+		_gy = ( int )( mouse->getPos( ).y - PREVIEW_Y ) / OBJECT_CHIP_SIZE;
 	}
 }
 
