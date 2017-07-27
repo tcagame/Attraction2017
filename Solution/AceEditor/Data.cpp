@@ -19,7 +19,7 @@ Data::Data( ) {
 	const int MAX_OBJ = _page_num * PAGE_OBJECT_WIDTH_NUM * OBJECT_CHIP_HEIGHT_NUM;
 	_objects.resize( MAX_OBJ );
 	for ( int i = 0; i < MAX_OBJ; i++ ) {
-		_objects[ i ] = (unsigned char)( i % 5 );
+		_objects[ i ] = ( unsigned char )( i % 5 );
 	}
 }
 
@@ -90,10 +90,10 @@ void Data::insert( int page ) {
 		//chip初期化
 		for ( int i = 0; i < max_new; i++ ) {
 			chips[ i ] = Chip( );
-			chips[ i ].ground = 1;
+			chips[ i ].ground = 0;
 		}
 		//代入
-		for ( int i = 0; i < chip_width_num_old; i++ ) {
+		for ( int i = 0; i < chip_width_num_new; i++ ) {
 			int mx = i;
 			if ( mx >= insert_pos && mx < insert_pos + PAGE_CHIP_WIDTH_NUM ) {
 				//挿入地点はスルーする
@@ -129,7 +129,7 @@ void Data::insert( int page ) {
 			objects[ i ] = OBJECT_NONE;
 		}
 		//代入
-		for ( int i = 0; i < width_num_old; i++ ) {
+		for ( int i = 0; i < width_num_new; i++ ) {
 			int ox = i;
 			if ( ox >= insert_pos && ox < insert_pos + PAGE_OBJECT_WIDTH_NUM ) {
 				//挿入地点はスルーする

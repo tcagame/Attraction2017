@@ -4,6 +4,7 @@
 #include "Data.h"
 #include "ace_define.h"
 #include "Application.h"
+#include "Keyboard.h"
 
 const std::string DIRECTORY = "../Resource/Ace/MapData/";
 
@@ -29,6 +30,7 @@ void ObjectEditor::update( ) {
 	if ( !mouse->isHoldLeftButton( ) ) {
 		_click_active = true;
 	}
+	editWidth( );
 }
 
 void ObjectEditor::setObject( unsigned char object ) {
@@ -38,6 +40,17 @@ void ObjectEditor::setObject( unsigned char object ) {
 
 unsigned char ObjectEditor::getObject( ) const {
 	return _object;
+}
+
+void ObjectEditor::editWidth( ) {
+	KeyboardPtr keyboard( Keyboard::getTask( ) );
+	int mx = _object_cursor->getScrollX( ) + _object_cursor->getGX( );
+	if ( keyboard->isPushKey( "+" ) ) {
+		_data->insert( ( mx / PAGE_OBJECT_WIDTH_NUM ) % _data->getPageNum( ) );
+	}
+	if ( keyboard->isPushKey( "-" ) ) {
+		_data->erase( (  mx / PAGE_OBJECT_WIDTH_NUM ) % _data->getPageNum( ) );
+	}
 }
 /*
 void ObjectEditor::save( ) const {

@@ -14,6 +14,7 @@ public:
 	unsigned char getObject( ) const;
 	void save( ) const;
 	void load( );
+	void editWidth( );
 private:
 	unsigned char _object;
 	bool _click_active;
