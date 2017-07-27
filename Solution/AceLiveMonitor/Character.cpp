@@ -4,7 +4,7 @@
 #include "Player.h"
 
 const int MAX_SPEED_Y = 10;
-const int MAX_ACT_COUNT = 2100000000;
+const int MAX_ACT_COUNT = 0xfffffff;
 
 Character::Character( const Vector& pos, int chip_size, bool mass ) :
 _pos( pos ),
@@ -12,7 +12,9 @@ _vec( Vector( ) ),
 _standing( false ),
 _chip_size( chip_size ),
 _act_count( 0 ),
-_mass( mass ) {
+_mass( mass ),
+_radius( chip_size ),
+_finished( false ) {
 }
 
 
@@ -51,6 +53,11 @@ void Character::update( ) {
 
 }
 
+void Character::damage( int force ) {
+	_finished = true;
+}
+
+
 DIR Character::getDir( ) const {
 	 return _dir;
 }
@@ -80,6 +87,10 @@ bool Character::isStanding( ) const {
 	return _standing;
 }
 
+bool Character::isFinished( ) const {
+	return _finished;
+}
+
 void Character::updateDir( ) {
 	if ( _vec.x < 0 ) {
 		_dir = DIR_LEFT;
@@ -95,4 +106,14 @@ int Character::getActCount( ) const {
 
 int Character::getChipSize( ) const {
 	return _chip_size;
+}
+
+bool Character::isOverlapped( CharacterConstPtr target ) const {
+	double length = ( _pos - target->getPos( ) ).getLength( );
+	double radius = _radius + target->getRadius( );
+	return ( length < radius );
+}
+
+double Character::getRadius( ) const{
+	return _radius;
 }

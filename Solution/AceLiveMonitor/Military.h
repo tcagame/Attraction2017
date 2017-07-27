@@ -5,6 +5,7 @@
 
 PTR( Military );
 PTR( Enemy );
+PTR( Character );
 
 class Military : public Task {
 public:
@@ -15,6 +16,7 @@ public:
 	virtual ~Military( );
 public:
 	void update( );
+	EnemyPtr getOverLappedEnemy( CharacterConstPtr character ) const;
 	const std::list< EnemyPtr > getList( ) const;
 private:
 	std::list< EnemyPtr > _enemies;

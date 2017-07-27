@@ -12,7 +12,7 @@ void main( ) {
 	ApplicationPtr app( Application::getInstance( ) );
 	app->setWindowSize( SCREEN_WIDTH, SCREEN_HEIGHT );
 
-	app->addTask( Drawer::getTag( ), DrawerPtr( new Drawer( "../Resource/Ace" ) ) );
+	app->addTask( Drawer::getTag( ), DrawerPtr( new Drawer( "Resource/Ace" ) ) );
 	app->addTask( Device::getTag( ), DevicePtr( new Device( ) ) );
 
 	app->addTask( Map     ::getTag( ), MapPtr     ( new Map    ( ) ) );

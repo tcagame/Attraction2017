@@ -3,10 +3,12 @@
 #include <string>
 #include "Shot.h"
 #include "smart_ptr.h"
+#include <list>
 #include <array>
 
 PTR( Shot );
 PTR( Armoury );
+PTR( Impact );
 
 class Armoury : public Task {
 public:
@@ -24,5 +26,6 @@ private:
 	static const int MAX_SHOT_NUM = 100;
 	int _shot_id;
 	std::array< ShotPtr, MAX_SHOT_NUM > _shot_list;
+	std::list< ImpactPtr > _impacts;
 };
 

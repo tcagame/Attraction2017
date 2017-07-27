@@ -10,8 +10,8 @@ MilitaryPtr Military::getTask( ) {
 
 
 Military::Military( ) {
-	_enemies.push_back( EnemyPtr( new EnemyPurpleZombie( Vector( 300, VIEW_STREET_Y + 60 ) ) ) );
-	_enemies.push_back( EnemyPtr( new EnemyFaceAndHand( Vector( 400, VIEW_STREET_Y + 80 ) ) ) );
+	_enemies.push_back( EnemyPtr( new EnemyPurpleZombie( Vector( 700, VIEW_STREET_Y + 60 ) ) ) );
+	_enemies.push_back( EnemyPtr( new EnemyFaceAndHand( Vector( 600, VIEW_STREET_Y + 80 ) ) ) );
 }
 
 
@@ -33,4 +33,22 @@ void Military::update( ) {
 
 const std::list< EnemyPtr > Military::getList( ) const {
 	return _enemies;
+}
+
+EnemyPtr Military::getOverLappedEnemy( CharacterConstPtr character ) const {
+	EnemyPtr result = EnemyPtr( );
+	std::list< EnemyPtr >::const_iterator ite = _enemies.begin( );
+	while ( ite != _enemies.end( ) ) {
+		EnemyPtr enemy = (*ite);
+		if ( !enemy ) {
+			ite++;
+			continue;
+		}
+		if ( enemy->isOverlapped( character ) ) {
+			result = enemy;
+			break;
+		}
+		ite++;
+	}
+	return result;
 }

@@ -3,7 +3,7 @@
 #include "Binary.h"
 #include "ace_define.h"
 
-const char * FILENAME = "../Resource/Ace/Map/mapdata";
+const char * FILENAME = "Resource/Ace/Map/mapdata";
 
 MapPtr Map::getTask( ) {
 	return std::dynamic_pointer_cast< Map >( Application::getInstance( )->getTask( getTag( ) ) );

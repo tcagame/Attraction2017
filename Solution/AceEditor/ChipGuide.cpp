@@ -13,13 +13,13 @@ _chip_editor( chip_editor ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
 	_image_chip_guide = drawer->createImage( "guide/guide_chip.png" );
 
-	LoadCSV structure( "../Resource/Ace/Editor/structure/structure_list", STRUCTURE_LIST_NUM );
+	LoadCSV structure( "Resource/Ace/Editor/structure/structure_list", STRUCTURE_LIST_NUM );
 	for ( int i = 0; i < structure.getSize( ); i++ ) {
 		std::string path = structure.getData( i );
 		_struct_graph_data[ i ] = ( path != "" );
 	}
 
-	LoadCSV ground( "../Resource/Ace/Editor/ground/ground_list", GROUND_LIST_NUM );
+	LoadCSV ground( "Resource/Ace/Editor/ground/ground_list", GROUND_LIST_NUM );
 	for ( int i = 0; i < ground.getSize( ); i++ ) {
 		std::string path = ground.getData( i );
 		_ground_graph_data[ i ] = ( path != "" );

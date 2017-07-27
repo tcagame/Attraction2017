@@ -64,6 +64,6 @@ const int MAP_COVER_HEIGHT = 30;//‚½‚ë‚·‚¯ƒ‰ƒCƒ“
 const int STRUCTURE_LIST_NUM = 100;
 const int GROUND_LIST_NUM = 100;
 
-const unsigned char OBJECT_NONE  = 0x00000000;
-const unsigned char OBJECT_BLOCK = 0x00000001;
-const unsigned char OBJECT_ONE_WAY = 0x00000010;
+const unsigned char OBJECT_NONE   = 0x00000000;
+const unsigned char OBJECT_BLOCK  = 0x00000001;
+const unsigned char OBJECT_ONEWAY = 0x00000010;

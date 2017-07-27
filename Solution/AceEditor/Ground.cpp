@@ -6,7 +6,7 @@
 
 Ground::Ground( ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
-	LoadCSV csv( "../Resource/Ace/Editor/ground/ground_list", GROUND_LIST_NUM );
+	LoadCSV csv( "Resource/Ace/Editor/ground/ground_list", GROUND_LIST_NUM );
 	for ( int i = 0; i < csv.getSize( ); i++ ) {
 		std::string path = csv.getData( i );
 		if ( path == "" ) {

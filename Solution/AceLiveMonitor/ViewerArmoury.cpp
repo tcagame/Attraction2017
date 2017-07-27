@@ -2,6 +2,7 @@
 #include "Drawer.h"
 #include "Armoury.h"
 #include "Family.h"
+#include "Shot.h"
 
 ViewerArmoury::ViewerArmoury( ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
@@ -14,7 +15,7 @@ ViewerArmoury::~ViewerArmoury( ) {
 
 void ViewerArmoury::draw( ) const {
 	FamilyConstPtr family( Family::getTask( ) );
-	double camera_pos = family->getCameraPos( );
+	int camera_pos = ( int )family->getCameraPos( );
 
 	ArmouryPtr armoury( Armoury::getTask( ) );
 	for ( int i = 0; i < armoury->getMaxShotNum( ); i++ ) {
@@ -22,22 +23,12 @@ void ViewerArmoury::draw( ) const {
 		if ( !shot ) {
 			continue;
 		}
-		int power = shot->getPower( ) - 1;
-		int tx = 0 + power * 128 + 64 * ( shot->getCount( ) % 2 );
-		int ty = 128;
-		int sy1 = ( int )shot->getPos( ).y - NORMAL_CHAR_GRAPH_SIZE;
-		int sx1 = ( int )( shot->getPos( ).x - camera_pos ) - ( NORMAL_CHAR_GRAPH_SIZE / 2 );
-		int sx2 = sx1 + NORMAL_CHAR_GRAPH_SIZE;
-		int dir = shot->getDir( );
-		if ( dir == 1 ) {
-			int tmp = sx1;
-			sx1 = sx2;
-			sx2 = tmp;
-		}
-		{
-			_image->setRect( tx, ty, NORMAL_CHAR_GRAPH_SIZE, NORMAL_CHAR_GRAPH_SIZE );
-			_image->setPos( sx1, sy1, sx2, sy1 + NORMAL_CHAR_GRAPH_SIZE );
-			_image->draw( );
-		}
+
+		Chip chip = shot->getChip( );
+		chip.sx1 -= camera_pos;
+		chip.sx2 -= camera_pos;
+		_image->setRect( chip.tx, chip.ty, chip.size, chip.size );
+		_image->setPos( chip.sx1, chip.sy1, chip.sx2, chip.sy2 );
+		_image->draw( );
 	}
 }
