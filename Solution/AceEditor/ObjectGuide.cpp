@@ -48,7 +48,7 @@ void ObjectGuide::draw( ) const {
 				tx = 16;
 			}
 			// ã•ûN“üƒuƒƒbƒN
-			if ( _data->getObject( ox, oy ) == OBJECT_ONE_WAY ) {
+			if ( _data->getObject( ox, oy ) == OBJECT_ONEWAY ) {
 				tx = 16 * 2;
 			}
 

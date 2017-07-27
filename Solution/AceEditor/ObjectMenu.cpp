@@ -80,7 +80,7 @@ unsigned char ObjectMenu::getObj( int idx ) {
 		result = OBJECT_BLOCK;
 		break;
 	case 2:
-		result = OBJECT_ONE_WAY;
+		result = OBJECT_ONEWAY;
 		break;
 	default:
 		result = OBJECT_NONE;
