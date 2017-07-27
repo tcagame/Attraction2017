@@ -20,6 +20,7 @@ const std::string COMMAND_FIRST_WORD[ Command::MAX_COMMAND ] = {
 	"device",//DEVICE
 	"continue",//CONTINUE
 	"toku",//TOKU
+	"power",//POWER
 };
 
 Command::Command( StatusSenderPtr status_sender ) :
@@ -88,6 +89,15 @@ void Command::excute( ) {
 					int player_num = std::atoi( command[ 1 ].c_str( ) );
 					int toku_num = std::atoi( command[ 2 ].c_str( ) );
 					if ( _status_sender->setTokuNum( player_num, toku_num ) ) {
+						message = "[SUCCESS] " + _command;
+					}
+				}
+				break;
+			case COMMAND_POWER:
+				if ( command.size( ) == 3 ) {
+					int player_num = std::atoi( command[ 1 ].c_str( ) );
+					int power = std::atoi( command[ 2 ].c_str( ) );
+					if ( _status_sender->setPower( player_num, power ) ) {
 						message = "[SUCCESS] " + _command;
 					}
 				}

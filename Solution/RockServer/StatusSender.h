@@ -12,6 +12,7 @@ public:
 	ROCK_DATA getData( ) const;
 	bool setContinueNum( int idx, int num );
 	bool setTokuNum( int idx, int num );
+	bool setPower( int idx, int power );
 private:
 	ROCK_DATA _data;
 	std::array< int, ROCK_PLAYER_NUM > _reset_count;//ボタンのカウント

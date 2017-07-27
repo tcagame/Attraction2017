@@ -55,3 +55,11 @@ bool StatusSender::setTokuNum( int idx, int num ) {
 	_data.player[ idx ].toku = num;
 	return true;
 }
+
+bool StatusSender::setPower( int idx, int power ) {
+	if ( idx < 0 || idx >= ROCK_PLAYER_NUM ) {
+		return false;
+	}
+	_data.player[ idx ].power = power;
+	return true;
+}
