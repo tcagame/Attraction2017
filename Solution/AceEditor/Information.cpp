@@ -87,7 +87,7 @@ void Information::drawObjectMode( ) const {
 		case OBJECT_BLOCK:
 			drawer->drawString( VIEW_CHIP_MODE_POS_X, VIEW_CHIP_MODE_POS_Y, "不可侵ブロック配置" );
 			break;
-		case OBJECT_ONE_WAY:
+		case OBJECT_ONEWAY:
 			drawer->drawString( VIEW_CHIP_MODE_POS_X, VIEW_CHIP_MODE_POS_Y, "上方侵入ブロック配置" );
 			break;
 	}

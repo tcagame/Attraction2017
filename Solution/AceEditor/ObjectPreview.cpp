@@ -25,7 +25,7 @@ void ObjectPreview::draw( ) const {
 				_block->setPos( PREVIEW_X + i * OBJECT_GUIDE_SIZE, PREVIEW_Y + j * OBJECT_GUIDE_SIZE );
 				_block->draw( );
 			}
-			if ( _data->getObject( ox, oy ) == OBJECT_ONE_WAY ) {
+			if ( _data->getObject( ox, oy ) == OBJECT_ONEWAY ) {
 				_block->setRect( 16, 0, OBJECT_GUIDE_SIZE, OBJECT_GUIDE_SIZE );
 				_block->setPos( PREVIEW_X + i * OBJECT_GUIDE_SIZE, PREVIEW_Y + j * OBJECT_GUIDE_SIZE );
 				_block->draw( );

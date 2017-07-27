@@ -4,7 +4,7 @@
 #include "Player.h"
 
 const int MAX_SPEED_Y = 10;
-const int MAX_ACT_COUNT = 2100000000;
+const int MAX_ACT_COUNT = 0xfffffff;
 
 Character::Character( const Vector& pos, int chip_size, bool mass ) :
 _pos( pos ),
