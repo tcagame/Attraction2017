@@ -48,3 +48,10 @@ bool StatusSender::setContinueNum( int idx, int num ) {
 	return true;
 }
 
+bool StatusSender::setTokuNum( int idx, int num ) {
+	if ( idx < 0 || idx >= ROCK_PLAYER_NUM ) {
+		return false;
+	}
+	_data.player[ idx ].toku = num;
+	return true;
+}

@@ -17,8 +17,9 @@ const int COMMAND_X = SCREEN_WIDTH - COMMAND_WIDTH - 10;
 const int COMMAND_Y = SCREEN_HEIGHT - COMMAND_HEIGHT - 10;
 const std::string COMMAND_FIRST_WORD[ Command::MAX_COMMAND ] = {
 	"ip",//IP
-	"continue",//CONTINUE
 	"device",//DEVICE
+	"continue",//CONTINUE
+	"toku",//TOKU
 };
 
 Command::Command( StatusSenderPtr status_sender ) :
@@ -69,6 +70,10 @@ void Command::excute( ) {
 				Server::getTask( )->saveIP( );
 				message = "[SUCCESS] IP.ini‚ð¶¬‚µ‚Ü‚µ‚½";
 				break;
+			case COMMAND_DEVICE:
+				Device::getTask( )->resetup( );
+				message = "[SUCCESS] device‚ðÄÚ‘±‚µ‚Ü‚µ‚½!";
+				break;
 			case COMMAND_CONTINUE:
 				if ( command.size( ) == 3 ) {
 					int player_num = std::atoi( command[ 1 ].c_str( ) );
@@ -78,9 +83,14 @@ void Command::excute( ) {
 					}
 				}
 				break;
-			case COMMAND_DEVICE:
-				Device::getTask( )->resetup( );
-				message = "[SUCCESS] device‚ðÄÚ‘±‚µ‚Ü‚µ‚½!";
+			case COMMAND_TOKU:
+				if ( command.size( ) == 3 ) {
+					int player_num = std::atoi( command[ 1 ].c_str( ) );
+					int toku_num = std::atoi( command[ 2 ].c_str( ) );
+					if ( _status_sender->setTokuNum( player_num, toku_num ) ) {
+						message = "[SUCCESS] " + _command;
+					}
+				}
 				break;
 			}
 			break;//for•¶‚ð”²‚¯‚é
