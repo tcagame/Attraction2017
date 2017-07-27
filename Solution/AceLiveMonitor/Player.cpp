@@ -14,6 +14,7 @@ const int JUMP_POWER = -15;
 //UŒ‚ŠÖŒW
 const int CHARGE_PHASE_COUNT = 25;
 const int MAX_CHARGE_COUNT = CHARGE_PHASE_COUNT * 4 - 1;
+const int BURST_TIME = 60;
 //ƒAƒjƒ[ƒVƒ‡ƒ“
 const int PLAYER_ANIM_WAIT_COUNT = 12;
 const int PLAYER_ANIM_WIDTH_NUM = 8;
@@ -21,6 +22,7 @@ const int PLAYER_ANIM_WIDTH_NUM = 8;
 Player::Player( int player_id, Vector pos ) :
 Character( pos, NORMAL_CHAR_GRAPH_SIZE ),
 _charge_count( 0 ),
+_over_charge_time( -1 ),
 _id( player_id ),
 _action( ACTION_WAIT ) {
 	setDir( DIR_RIGHT );
@@ -49,6 +51,9 @@ void Player::act( ) {
 	case ACTION_CHARGE:
 		actOnCharge( );
 		break;
+	case ACTION_OVER_CHARGE:
+		actOnOverCharge( );
+		break;
 	}
 	actOnCamera( );
 }
@@ -62,6 +67,7 @@ void Player::actOnWaiting( ) {
 	Vector vec = getVec( );
 	if ( fabs( vec.x ) > 0 ) {
 		_action = ACTION_BRAKE;
+		return;
 	}
 	DevicePtr device( Device::getTask( ) );
 	if ( abs( device->getDirX( _id ) ) > 50 ) {
@@ -210,7 +216,21 @@ void Player::actOnCharge( ) {
 	}
 	_charge_count++;
 	if ( _charge_count > MAX_CHARGE_COUNT ) {
-		_charge_count = MAX_CHARGE_COUNT;
+		_charge_count = 0;
+		_over_charge_time = getActCount( );
+		_action = ACTION_OVER_CHARGE;
+	}
+}
+
+void Player::actOnOverCharge( ) {
+	if ( _over_charge_time < 0 ) {
+		_action = ACTION_WAIT;
+		return;
+	}
+
+	if ( getActCount( ) - _over_charge_time > BURST_TIME ) {
+		_action = ACTION_WAIT;
+		_over_charge_time = -1;
 	}
 }
 
@@ -293,6 +313,16 @@ Chip Player::getChip( ) const {
 			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 			cx = ANIM[ ( _charge_count / ( CHARGE_PHASE_COUNT / 2 ) ) % anim_num ] % PLAYER_ANIM_WIDTH_NUM;
 			cy = ANIM[ ( _charge_count / ( CHARGE_PHASE_COUNT / 2 ) ) % anim_num ] / PLAYER_ANIM_WIDTH_NUM;
+		}
+		break;
+	case ACTION_OVER_CHARGE:
+		{
+			const int ANIM[ ] = {
+				40, 41
+			};
+			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
+			cx = ANIM[ ( getActCount( ) / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] % PLAYER_ANIM_WIDTH_NUM;
+			cy = ANIM[ ( getActCount( ) / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] / PLAYER_ANIM_WIDTH_NUM;
 		}
 		break;
 	}

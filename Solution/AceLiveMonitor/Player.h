@@ -11,6 +11,7 @@ public:
 		ACTION_FLOAT,
 		ACTION_ATTACK,
 		ACTION_CHARGE,
+		ACTION_OVER_CHARGE,
 	};
 public:
 	Player( int player_id, Vector pos );
@@ -28,10 +29,12 @@ private:
 	void actOnFloating( );
 	void actOnAttack( );
 	void actOnCharge( );
+	void actOnOverCharge( );
 	void actOnCamera( );
 private:
 	ACTION _action;
 	int _id;
 	int _charge_count;
+	int _over_charge_time;
 };
 
