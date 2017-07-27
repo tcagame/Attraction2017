@@ -23,10 +23,10 @@ void ObjectGuide::draw( ) const {
 	const int TEX_SIZE = 16;
 	const int COVER_SIZE = DISP_CHIP_HEIGHT - MAP_COVER_HEIGHT;
 	const int CHIP_HEIGHT_NUM = (int)( ( ( DISP_CHIP_HEIGHT - COVER_SIZE ) / 2.0 ) + 0.5 );
-	for ( int i = 0; i <= DISP_WIDTH / OBJECT_GUIDE_SIZE; i++ ) {
+	for ( int i = 0; i <= DISP_WIDTH / OBJECT_CHIP_SIZE; i++ ) {
 		for ( int j = 0; j <= CHIP_HEIGHT_NUM; j++ ) {
-			int sx = ( i * OBJECT_GUIDE_SIZE ) + PREVIEW_X;
-			int sy = ( j * OBJECT_GUIDE_SIZE ) + GUIDE_Y;
+			int sx = ( i * OBJECT_CHIP_SIZE ) + PREVIEW_X;
+			int sy = ( j * OBJECT_CHIP_SIZE ) + GUIDE_Y;
 			int tx = 0;
 			int ty = 0;
 
@@ -58,8 +58,8 @@ void ObjectGuide::draw( ) const {
 		}
 	}
 	// ƒJ[ƒ\ƒ‹
-	int sx = PREVIEW_X + _object_cursor->getGX( ) * OBJECT_GUIDE_SIZE;
-	int sy = GUIDE_Y + _object_cursor->getGY( ) * OBJECT_GUIDE_SIZE;
+	int sx = PREVIEW_X + _object_cursor->getGX( ) * OBJECT_CHIP_SIZE;
+	int sy = GUIDE_Y + _object_cursor->getGY( ) * OBJECT_CHIP_SIZE;
 	if ( _object_cursor->isOnChip( ) ) {
 		_image->setPos( sx, sy );
 		_image->setRect( 0, 32, TEX_SIZE, TEX_SIZE );

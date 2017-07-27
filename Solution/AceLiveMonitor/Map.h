@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Task.h"
+#include "mathmatics.h"
 #include <string>
 #include <vector>
 
@@ -16,6 +17,7 @@ public:
 public:
 	void update( );
 	int getPageNum( ) const;
+	bool isExistance( const Vector& pos ) const;
 private:
 	void load( );
 private:

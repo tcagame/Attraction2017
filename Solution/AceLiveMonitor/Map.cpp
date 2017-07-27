@@ -43,5 +43,20 @@ void Map::load( ) {
 		binary->read( (void*)&object, sizeof( unsigned char ) );
 		_objects[ i ] = object;
 	}
+}
 
+bool Map::isExistance( const Vector& pos ) const {
+	int object_width_num = _page_num * PAGE_OBJECT_WIDTH_NUM;
+	int x = ( ( int )pos.x / OBJECT_CHIP_SIZE ) % object_width_num;
+	int y = ( ( int )pos.y - VIEW_STREET_Y ) / OBJECT_CHIP_SIZE;
+	if ( x < 0 || x >= object_width_num ||
+		 y < 0 || y >= OBJECT_CHIP_HEIGHT_NUM ) {
+		return false;
+	}
+	int idx = x + y * object_width_num;
+	bool result = false;
+	if ( _objects[ idx ] & OBJECT_BLOCK ) {
+		result = true;
+	}
+	return result;
 }

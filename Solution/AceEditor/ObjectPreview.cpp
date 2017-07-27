@@ -21,18 +21,18 @@ void ObjectPreview::draw( ) const {
 			int ox = ( i + _object_cursor->getScrollX( ) ) % ( _data->getPageNum( ) * PAGE_OBJECT_WIDTH_NUM );
 			int oy = j;
 			if ( _data->getObject( ox, oy ) == OBJECT_BLOCK ) {
-				_block->setRect( 0, 16, OBJECT_GUIDE_SIZE, OBJECT_GUIDE_SIZE );
-				_block->setPos( PREVIEW_X + i * OBJECT_GUIDE_SIZE, PREVIEW_Y + j * OBJECT_GUIDE_SIZE );
+				_block->setRect( 0, 16, OBJECT_CHIP_SIZE, OBJECT_CHIP_SIZE );
+				_block->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE, PREVIEW_Y + j * OBJECT_CHIP_SIZE );
 				_block->draw( );
 			}
 			if ( _data->getObject( ox, oy ) == OBJECT_ONEWAY ) {
-				_block->setRect( 16, 0, OBJECT_GUIDE_SIZE, OBJECT_GUIDE_SIZE );
-				_block->setPos( PREVIEW_X + i * OBJECT_GUIDE_SIZE, PREVIEW_Y + j * OBJECT_GUIDE_SIZE );
+				_block->setRect( 16, 0, OBJECT_CHIP_SIZE, OBJECT_CHIP_SIZE );
+				_block->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE, PREVIEW_Y + j * OBJECT_CHIP_SIZE );
 				_block->draw( );
 			}
 			if ( _object_cursor->getGX( )  == ox
 				 && _object_cursor->getGY( ) == oy ) {
-				_choise->setPos( PREVIEW_X + ox * OBJECT_GUIDE_SIZE, PREVIEW_Y + oy * OBJECT_GUIDE_SIZE );
+				_choise->setPos( PREVIEW_X + ox * OBJECT_CHIP_SIZE, PREVIEW_Y + oy * OBJECT_CHIP_SIZE );
 				_choise->setRect( 0, 32, 16, 16 );
 				_choise->draw( );
 			}
