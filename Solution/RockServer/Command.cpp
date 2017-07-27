@@ -23,6 +23,17 @@ const std::string COMMAND_FIRST_WORD[ Command::MAX_COMMAND ] = {
 	"power",//POWER
 	"money",//MONEY
 	"item",//ITEM
+	"state",//STATE
+};
+const int STATE_NUM = 7;
+const std::string STATE[ STATE_NUM ] = {
+	"none",	
+	"entry",
+	"street_1",
+	"street_2",
+	"street_3",
+	"boss",
+	"result"
 };
 
 Command::Command( StatusSenderPtr status_sender ) :
@@ -120,9 +131,20 @@ void Command::excute( ) {
 					if ( command[ 2 ].size( ) == 8 ) {
 						int item = 0;
 						for ( int i = 0; i < 8; i++ ) {
-							item += command[ 2 ][ 7 - i ] == '0' ? 0 : (int)pow( 2, i );
+							item += command[ 2 ][ 7 - i ] == '0' ? 0 : ( int )pow( 2, i );
 						}
 						if ( _status_sender->setItem( player_num, item ) ) {
+							message = "[SUCCESS] " + _command;
+						}
+					}
+				}
+				break;
+			case COMMAND_STATE:
+				if ( command.size( ) == 3 ) {
+					int player_num = std::atoi( command[ 1 ].c_str( ) );
+					unsigned int state = getState( command[ 2 ] );
+					if ( !( state < 0 ) ) {
+						if ( _status_sender->setState( player_num, state ) ) {
 							message = "[SUCCESS] " + _command;
 						}
 					}
@@ -158,6 +180,16 @@ std::vector< std::string > Command::getSpritCommand( ) const {
 	std::string buffer;
 	while ( std::getline( ss, buffer, ' ' ) ) {
 		result.push_back( buffer );
+	}
+	return result;
+}
+
+unsigned int Command::getState( std::string str ) {
+	unsigned int result = -1;
+	for ( int i = 0; i < STATE_NUM; i++ ) {
+		if ( str == STATE[ i ] ) {
+			result = ( unsigned int )pow( 2, i - 1 );
+		}
 	}
 	return result;
 }

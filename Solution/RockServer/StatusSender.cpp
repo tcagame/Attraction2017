@@ -78,3 +78,10 @@ bool StatusSender::setItem( int idx, int item ) {
 	}
 	_data.player[ idx ].item = item;
 }
+
+bool StatusSender::setState( int idx, unsigned int state ) {
+	if ( idx < 0 || idx >= ROCK_PLAYER_NUM ) {
+		return false;
+	}
+	_data.player[ idx ].state = state;
+}

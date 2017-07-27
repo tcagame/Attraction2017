@@ -16,6 +16,7 @@ public:
 		COMMAND_POWER,
 		COMMAND_MONEY,
 		COMMAND_ITEM,
+		COMMAND_STATE,
 		MAX_COMMAND
 	};
 public:
@@ -29,6 +30,7 @@ public:
 private:
 	void excute( );
 	std::vector< std::string > getSpritCommand( ) const;
+	unsigned int getState( std::string str );
 private:
 	std::string _command;
 	LogPtr _log;
