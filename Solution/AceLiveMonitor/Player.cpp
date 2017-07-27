@@ -114,7 +114,7 @@ void Player::actOnWalking( ) {
 		_action = ACTION_FLOAT;
 		vec.y = JUMP_POWER;
 	}
-	if ( device->getDirX( _id ) < 50 ) {
+	if ( device->getDirX( _id ) < -50 ) {
 		vec.x = -MOVE_SPEED;
 	}
 	if ( device->getDirX( _id ) > 50 ) {
@@ -161,26 +161,17 @@ void Player::actOnFloating( ) {
 	}	
 	DevicePtr device( Device::getTask( ) );
 	Vector vec = getVec( );
-	if ( device->getDirX( _id ) * vec.x < 0 ) {
-		if ( vec.x < 0 ) {
-			if ( vec.x < -BRAKE_ACCEL ) {
-				vec.x += BRAKE_ACCEL;
-			} else {
-				vec.x = 0;
-			}
-		}
-		if ( vec.x > 0 ) {
-			if ( vec.x > BRAKE_ACCEL ) {
-				vec.x -= BRAKE_ACCEL;
-			} else {
-				vec.x = 0;
-			}
-		}
+	// ‹ó’†‚ÌˆÚ“®
+	if ( device->getDirX( _id ) < -50 ) {
+		vec.x = -MOVE_SPEED;
 	}
+	if ( device->getDirX( _id ) > 50 ) {
+		vec.x = MOVE_SPEED;
+	}
+	setVec( vec );
 	if ( device->getPush( _id ) & BUTTON_A ) {
 		_action = ACTION_ATTACK;
 	}
-
 }
 
 void Player::actOnAttack( ) {
