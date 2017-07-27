@@ -71,3 +71,10 @@ bool StatusSender::setMoney( int idx, int money ) {
 	_data.player[ idx ].money = money;
 	return true;
 }
+
+bool StatusSender::setItem( int idx, int item ) {
+	if ( idx < 0 || idx >= ROCK_PLAYER_NUM ) {
+		return false;
+	}
+	_data.player[ idx ].item = item;
+}

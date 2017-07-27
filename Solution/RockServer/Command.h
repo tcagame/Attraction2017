@@ -15,6 +15,7 @@ public:
 		COMMAND_TOKU,
 		COMMAND_POWER,
 		COMMAND_MONEY,
+		COMMAND_ITEM,
 		MAX_COMMAND
 	};
 public:

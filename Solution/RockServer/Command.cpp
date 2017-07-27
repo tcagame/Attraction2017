@@ -22,6 +22,7 @@ const std::string COMMAND_FIRST_WORD[ Command::MAX_COMMAND ] = {
 	"toku",//TOKU
 	"power",//POWER
 	"money",//MONEY
+	"item",//ITEM
 };
 
 Command::Command( StatusSenderPtr status_sender ) :
@@ -57,6 +58,7 @@ void Command::draw( ) const {
 	drawString( );
 	_log->draw( );
 }
+
 void Command::excute( ) {
 	//登録されているコマンドと一致しているか確かめて実行
 	std::vector< std::string > command = getSpritCommand( );
@@ -109,6 +111,20 @@ void Command::excute( ) {
 					int money = std::atoi( command[ 2 ].c_str( ) );
 					if ( _status_sender->setMoney( player_num, money ) ) {
 						message = "[SUCCESS] " + _command;
+					}
+				}
+				break;
+			case COMMAND_ITEM:
+				if ( command.size( ) == 3 ) {
+					int player_num = std::atoi( command[ 1 ].c_str( ) );
+					if ( command[ 2 ].size( ) == 8 ) {
+						int item = 0;
+						for ( int i = 0; i < 8; i++ ) {
+							item += command[ 2 ][ 7 - i ] == '0' ? 0 : (int)pow( 2, i );
+						}
+						if ( _status_sender->setItem( player_num, item ) ) {
+							message = "[SUCCESS] " + _command;
+						}
 					}
 				}
 				break;
