@@ -25,6 +25,7 @@ _charge_count( 0 ),
 _over_charge_time( -1 ),
 _id( player_id ),
 _action( ACTION_WAIT ) {
+	setRadius( 25 );
 	setDir( DIR_RIGHT );
 }
 

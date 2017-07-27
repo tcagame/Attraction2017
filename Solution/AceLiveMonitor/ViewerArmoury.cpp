@@ -44,6 +44,9 @@ void ViewerArmoury::drawShot( ) const {
 			_image_shot->setPos( chip.sx1, chip.sy1, chip.sx2, chip.sy2 );
 		}
 		_image_shot->draw( );
+		//デバック用
+		//DrawerPtr drawer( Drawer::getTask( ) );
+		//drawer->drawCircle( Vector( shot->getPos( ) + Vector( -camera_pos, -chip.size / 2 ) ), shot->getRadius( ) );
 	}
 }
 
