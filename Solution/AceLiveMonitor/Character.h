@@ -1,6 +1,9 @@
 #pragma once
 #include "mathmatics.h"
 #include "ace_define.h"
+#include "smart_ptr.h"
+
+PTR( Character );
 
 class Character {
 public:
@@ -10,7 +13,11 @@ public:
 	Vector getVec( ) const;
 	Vector getPos( ) const;
 	void update( );
+	void damage( int force );
 	virtual Chip getChip( ) const = 0;
+	bool isOverlapped( CharacterConstPtr target ) const;
+	double getRadius( ) const;
+	bool isFinished( ) const;
 protected:
 	void setDir( DIR dir );
 	DIR getDir( ) const;
@@ -29,6 +36,8 @@ private:
 	bool _standing;
 	int _chip_size;
 	int _act_count;
+	double _radius;
 	bool _mass;
+	bool _finished;
 };
 

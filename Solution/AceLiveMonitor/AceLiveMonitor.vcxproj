@@ -163,6 +163,7 @@
     <ClCompile Include="EnemyFaceAndHand.cpp" />
     <ClCompile Include="EnemyPurpleZombie.cpp" />
     <ClCompile Include="Family.cpp" />
+    <ClCompile Include="Impact.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="ViewerEvent.cpp" />
     <ClCompile Include="ViewerFamily.cpp" />
@@ -183,6 +184,7 @@
     <ClInclude Include="EnemyFaceAndHand.h" />
     <ClInclude Include="EnemyPurpleZombie.h" />
     <ClInclude Include="Family.h" />
+    <ClInclude Include="Impact.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="ViewerEvent.h" />
     <ClInclude Include="ViewerFamily.h" />
