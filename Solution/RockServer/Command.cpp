@@ -8,13 +8,11 @@
 #include <sstream>
 #include "Server.h"
 #include <iostream>
+#include "Application.h"
 
 const unsigned char BACKSPACE = 0x08;
 const unsigned char ENTER = 0x0d;
-const int COMMAND_WIDTH = 400;
-const int COMMAND_HEIGHT = 30;
-const int COMMAND_X = SCREEN_WIDTH - COMMAND_WIDTH - 10;
-const int COMMAND_Y = SCREEN_HEIGHT - COMMAND_HEIGHT - 10;
+
 const std::string COMMAND_FIRST_WORD[ Command::MAX_COMMAND ] = {
 	"ip",//IP
 	"device",//DEVICE
@@ -36,9 +34,13 @@ const std::string STATE[ STATE_NUM ] = {
 	"result"
 };
 
-Command::Command( StatusSenderPtr status_sender ) :
-_status_sender( status_sender ) {
-	_log = LogPtr( new Log );
+
+CommandPtr Command::getTask( ) {
+	return std::dynamic_pointer_cast< Command >( Application::getInstance( )->getTask( getTag( ) ) );
+}
+
+
+Command::Command( ) {
 }
 
 
@@ -64,15 +66,10 @@ void Command::update( ) {
 	}
 }
 
-void Command::draw( ) const {
-	drawFrame( );
-	drawString( );
-	_log->draw( );
-}
-
 void Command::excute( ) {
 	//ìoò^Ç≥ÇÍÇƒÇ¢ÇÈÉRÉ}ÉìÉhÇ∆àÍívÇµÇƒÇ¢ÇÈÇ©ämÇ©ÇﬂÇƒé¿çs
 	std::vector< std::string > command = getSpritCommand( );
+	StatusSenderPtr status_sender( StatusSender::getTask( ) );
 	if ( command.size( ) == 0 ) {
 		return;
 	}
@@ -93,7 +90,7 @@ void Command::excute( ) {
 				if ( command.size( ) == 3 ) {
 					int player_num = std::atoi( command[ 1 ].c_str( ) );
 					int continue_num = std::atoi( command[ 2 ].c_str( ) );
-					if ( _status_sender->setContinueNum( player_num, continue_num ) ) {
+					if ( status_sender->setContinueNum( player_num, continue_num ) ) {
 						message = "[SUCCESS] " + _command;
 					}
 				}
@@ -102,7 +99,7 @@ void Command::excute( ) {
 				if ( command.size( ) == 3 ) {
 					int player_num = std::atoi( command[ 1 ].c_str( ) );
 					int toku_num = std::atoi( command[ 2 ].c_str( ) );
-					if ( _status_sender->setTokuNum( player_num, toku_num ) ) {
+					if ( status_sender->setTokuNum( player_num, toku_num ) ) {
 						message = "[SUCCESS] " + _command;
 					}
 				}
@@ -111,7 +108,7 @@ void Command::excute( ) {
 				if ( command.size( ) == 3 ) {
 					int player_num = std::atoi( command[ 1 ].c_str( ) );
 					int power = std::atoi( command[ 2 ].c_str( ) );
-					if ( _status_sender->setPower( player_num, power ) ) {
+					if ( status_sender->setPower( player_num, power ) ) {
 						message = "[SUCCESS] " + _command;
 					}
 				}
@@ -120,7 +117,7 @@ void Command::excute( ) {
 				if ( command.size( ) == 3 ) {
 					int player_num = std::atoi( command[ 1 ].c_str( ) );
 					int money = std::atoi( command[ 2 ].c_str( ) );
-					if ( _status_sender->setMoney( player_num, money ) ) {
+					if ( status_sender->setMoney( player_num, money ) ) {
 						message = "[SUCCESS] " + _command;
 					}
 				}
@@ -133,7 +130,7 @@ void Command::excute( ) {
 						for ( int i = 0; i < 8; i++ ) {
 							item |= command[ 2 ][ 7 - i ] == '0' ? 0 : 1 << i;
 						}
-						if ( _status_sender->setItem( player_num, item ) ) {
+						if ( status_sender->setItem( player_num, item ) ) {
 							message = "[SUCCESS] " + _command;
 						}
 					}
@@ -144,7 +141,7 @@ void Command::excute( ) {
 					int player_num = std::atoi( command[ 1 ].c_str( ) );
 					unsigned int state = getState( command[ 2 ] );
 					if ( !( state < 0 ) ) {
-						if ( _status_sender->setState( player_num, state ) ) {
+						if ( status_sender->setState( player_num, state ) ) {
 							message = "[SUCCESS] " + _command;
 						}
 					}
@@ -154,22 +151,9 @@ void Command::excute( ) {
 			break;//forï∂Çî≤ÇØÇÈ
 		}
 	}
-	_log->addMessage( message );
+
+	Log::getTask( )->addMessage( message );
 	_command.clear( );
-}
-
-void Command::drawFrame( ) const{
-	DrawerPtr drawer( Drawer::getTask( ) );
-	drawer->drawLine( COMMAND_X, COMMAND_Y, COMMAND_X + COMMAND_WIDTH, COMMAND_Y );
-	drawer->drawLine( COMMAND_X, COMMAND_Y + COMMAND_HEIGHT , COMMAND_X + COMMAND_WIDTH, COMMAND_Y + COMMAND_HEIGHT );
-	drawer->drawLine( COMMAND_X, COMMAND_Y, COMMAND_X, COMMAND_Y + COMMAND_HEIGHT );
-	drawer->drawLine( COMMAND_X + COMMAND_WIDTH, COMMAND_Y, COMMAND_X + COMMAND_WIDTH, COMMAND_Y + COMMAND_HEIGHT );
-}
-
-void Command::drawString( ) const {
-	DrawerPtr drawer( Drawer::getTask( ) );
-	std::string str = "command : " + _command;
-	drawer->drawString( COMMAND_X + 10, COMMAND_Y + 6, str.c_str( ) );
 }
 
 std::vector< std::string > Command::getSpritCommand( ) const {
@@ -194,4 +178,8 @@ unsigned int Command::getState( std::string str ) {
 		}
 	}
 	return result;
+}
+
+std::string Command::getCommand( ) const {
+	return _command;
 }

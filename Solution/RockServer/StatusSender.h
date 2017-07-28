@@ -2,8 +2,14 @@
 #include "status.h"
 #include "define.h"
 #include <array>
+#include "Task.h"
 
-class StatusSender {
+PTR( StatusSender );
+
+class StatusSender : public Task {
+public:
+	static std::string getTag( ) { return "STATUSSENDER"; };
+	static StatusSenderPtr getTask( );
 public:
 	StatusSender( );
 	virtual ~StatusSender( );

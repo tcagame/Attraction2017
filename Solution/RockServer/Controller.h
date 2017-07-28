@@ -5,7 +5,7 @@
 
 PTR( Controller );
 PTR( Command );
-PTR( StatusDrawer );
+PTR( TableDrawer );
 PTR( StatusSender );
 
 class Controller : public Task {
@@ -25,7 +25,7 @@ private:
 	void drawFlame( ) const;
 private:
 	CommandPtr _command;
-	StatusDrawerPtr _status_drawer;
+	TableDrawerPtr _status_drawer;
 	StatusSenderPtr _status_sender;
 };
 

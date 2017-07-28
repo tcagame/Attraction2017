@@ -1,7 +1,13 @@
 #include "StatusSender.h"
 #include "Device.h"
+#include "Application.h"
 
 const int RESET_TIME = 15;//‚»‚Ì‚¤‚¿íœ‚·‚é
+
+
+StatusSenderPtr StatusSender::getTask( ) {
+	return std::dynamic_pointer_cast< StatusSender >( Application::getInstance( )->getTask( getTag( ) ) );
+}
 
 StatusSender::StatusSender( ) {
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {

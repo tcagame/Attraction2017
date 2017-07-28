@@ -2,11 +2,14 @@
 #include <string>
 #include <vector>
 #include "smart_ptr.h"
+#include "Task.h"
 
-PTR( Log );
-PTR( StatusSender );
+PTR( Command );
 
-class Command {
+class Command : public Task {
+public:
+	static std::string getTag( ) { return "COMMAND"; };
+	static CommandPtr getTask( );
 public:
 	enum COMMAND {
 		COMMAND_IP,
@@ -20,20 +23,16 @@ public:
 		MAX_COMMAND
 	};
 public:
-	Command( StatusSenderPtr status_sender );
+	Command( );
 	virtual ~Command( );
 public:
 	void update( );
-	void draw( ) const;
-	void drawFrame( ) const;
-	void drawString( ) const;
+	std::string getCommand( ) const;
 private:
 	void excute( );
 	std::vector< std::string > getSpritCommand( ) const;
 	unsigned int getState( std::string str );
 private:
 	std::string _command;
-	LogPtr _log;
-	StatusSenderPtr _status_sender;
 };
 

@@ -2,10 +2,14 @@
 #include <array>
 #include "Server.h"
 #include <string>
+#include "Task.h"
 
-PTR( StatusSender );
+PTR( TableDrawer );
 
-class StatusDrawer {
+class TableDrawer : public Task {
+public:
+	static std::string getTag( ) { return "TABLEDRAWER"; };
+	static TableDrawerPtr getTask( );
 public:
 	enum TAG {
 		TAG_PLAYER,
@@ -20,10 +24,10 @@ public:
 		MAX_TAG,
 	};
 public:
-	StatusDrawer( StatusSenderConstPtr status_sender );
-	virtual ~StatusDrawer( );
+	TableDrawer( );
+	virtual ~TableDrawer( );
 public:
-	void draw( ) const;
+	void update( );
 private:
 	void drawFlame( ) const;
 	void drawDeviceNum( ) const;
@@ -36,8 +40,9 @@ private:
 	void drawItem( ) const;
 	void drawMoney( ) const;
 	void drawPower( ) const;
+	void drawCommand( ) const;
+	void drawLog( ) const;
+	void drawConnect( ) const;
 	std::string BToS( unsigned char b ) const;
-private:
-	StatusSenderConstPtr _status_sender; 
 };
 

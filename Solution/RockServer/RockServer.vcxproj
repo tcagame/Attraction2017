@@ -163,10 +163,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Command.cpp" />
-    <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="StatusDrawer.cpp" />
+    <ClCompile Include="TableDrawer.cpp" />
     <ClCompile Include="StatusSender.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -176,9 +175,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command.h" />
-    <ClInclude Include="Controller.h" />
     <ClInclude Include="Log.h" />
-    <ClInclude Include="StatusDrawer.h" />
+    <ClInclude Include="TableDrawer.h" />
     <ClInclude Include="StatusSender.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

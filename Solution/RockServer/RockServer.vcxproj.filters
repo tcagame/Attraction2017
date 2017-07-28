@@ -3,16 +3,14 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Command.cpp" />
-    <ClCompile Include="Controller.cpp" />
     <ClCompile Include="Log.cpp" />
-    <ClCompile Include="StatusDrawer.cpp" />
     <ClCompile Include="StatusSender.cpp" />
+    <ClCompile Include="TableDrawer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command.h" />
-    <ClInclude Include="Controller.h" />
     <ClInclude Include="Log.h" />
-    <ClInclude Include="StatusDrawer.h" />
     <ClInclude Include="StatusSender.h" />
+    <ClInclude Include="TableDrawer.h" />
   </ItemGroup>
 </Project>
