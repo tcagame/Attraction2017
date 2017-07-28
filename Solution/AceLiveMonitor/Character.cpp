@@ -54,6 +54,7 @@ void Character::update( ) {
 				if ( map->isExistance( _pos + Vector( _vec.x - _radius, 0 ) ) ) {
 					_pos.x = ( ( int )( _pos.x + _vec.x - _radius ) / OBJECT_CHIP_SIZE + 1 ) * OBJECT_CHIP_SIZE + _radius;
 					_vec.x = 0;
+					_dir = DIR_LEFT;
 				}
 			}
 			//‰E‘¤
@@ -61,6 +62,7 @@ void Character::update( ) {
 				if ( map->isExistance( _pos + Vector( _vec.x + _radius, 0 ) ) ) {
 					_pos.x = ( ( int )( _pos.x + _vec.x + _radius ) / OBJECT_CHIP_SIZE ) * OBJECT_CHIP_SIZE - _radius;
 					_vec.x = 0;
+					_dir = DIR_RIGHT;
 				}
 			}
 		}

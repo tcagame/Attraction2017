@@ -169,7 +169,7 @@ void Player::actOnFloating( ) {
 	int dir_x = device->getDirX( _id );
 	//右に移動してるとき
 	if ( vec.x >= 0 ) {
-		//入力が左
+		//入力方向が逆
 		if ( dir_x < 0 ) {
 			if ( vec.x > BRAKE_ACCEL ) {
 				vec.x -= BRAKE_ACCEL;
@@ -177,7 +177,7 @@ void Player::actOnFloating( ) {
 				vec.x = 0;
 			}
 		}
-		//入力が右
+		//入力が同じ
 		if ( dir_x > 0 ) {
 			vec.x = MOVE_SPEED;
 		}
@@ -185,7 +185,7 @@ void Player::actOnFloating( ) {
 
 	//左に移動してるとき
 	if ( vec.x <= 0 ) {
-		//入力が右
+		//入力方向が逆
 		if ( dir_x > 0 ) {
 			if ( vec.x < -BRAKE_ACCEL ) {
 				vec.x += BRAKE_ACCEL;
@@ -193,7 +193,7 @@ void Player::actOnFloating( ) {
 				vec.x = 0;
 			}
 		}
-		//入力が右
+		//入力方向が一緒
 		if ( dir_x < 0 ) {
 			vec.x = -MOVE_SPEED;
 		}
