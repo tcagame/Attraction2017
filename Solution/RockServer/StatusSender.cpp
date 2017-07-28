@@ -1,6 +1,7 @@
 #include "StatusSender.h"
 #include "Device.h"
 #include "Application.h"
+#include "Server.h"
 
 const int RESET_TIME = 15;//‚»‚Ì‚¤‚¿íœ‚·‚é
 
@@ -40,6 +41,7 @@ void StatusSender::update( ) {
 			_data.player[ i ].state = STATE_ENTRY;
 		}
 	}
+	Server::getTask( )->sendClientData( ( void* )&_data, sizeof( ROCK_DATA ) );
 }
 
 ROCK_DATA StatusSender::getData( ) const {
