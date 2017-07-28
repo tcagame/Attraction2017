@@ -302,25 +302,52 @@ void Data::savePage( std::string directory, std::string filename, int page ) con
 		filename += EXTENSION_PAGE;
 	}
 	std::vector< Chip > page_chip;
-	int max = PAGE_CHIP_WIDTH_NUM * MAP_HEIGHT;
-	page_chip.resize( max );
-	int base_mx = page * PAGE_CHIP_WIDTH_NUM;
-	int base_my = 0;
+	int max_chip = PAGE_CHIP_WIDTH_NUM * MAP_HEIGHT;
+	page_chip.resize( max_chip );
+
+	std::vector< unsigned char > page_object;
+	int max_object = PAGE_OBJECT_WIDTH_NUM * OBJECT_CHIP_HEIGHT_NUM;
+	page_object.resize( max_object );
+
+	int base_chip_mx = page * PAGE_CHIP_WIDTH_NUM;
+	int base_chip_my = 0;
 	for ( int i = 0; i < MAP_HEIGHT; i++ ) {
-		int my = base_my + i;
+		int my = base_chip_my + i;
 		int y = i;
 		for ( int j = 0; j < PAGE_CHIP_WIDTH_NUM; j++ ) {
-			int mx = base_mx + j;
+			int mx = base_chip_mx + j;
 			int x = j;
 			int page_chip_idx = x + y * PAGE_CHIP_WIDTH_NUM;
 			int chips_idx = mx + my * _page_num * PAGE_CHIP_WIDTH_NUM;
 			page_chip[ page_chip_idx ] = _chips[ chips_idx ];
 		}
 	}
+
+	int base_obj_mx = page * PAGE_OBJECT_WIDTH_NUM;
+	int base_obj_my = 0;
+	for ( int i = 0; i < OBJECT_CHIP_HEIGHT_NUM; i++ ) {
+		int my = base_obj_my + i;
+		int y = i;
+		for ( int j = 0; j < PAGE_OBJECT_WIDTH_NUM; j++ ) {
+			int mx = base_obj_mx + j;
+			int x = j;
+			int page_obj_idx = x + y * PAGE_OBJECT_WIDTH_NUM;
+			int objects_idx = mx + my * _page_num * PAGE_OBJECT_WIDTH_NUM;
+			page_object[ page_obj_idx ] = _objects[ objects_idx ];
+		}
+	}
+
 	BinaryPtr binary( new Binary );
-	int size = (int)( sizeof( Chip ) * max );
-	binary->ensure( size );
-	binary->write( (void*)page_chip.data( ), size );
+	int chip_size = (int)( sizeof( Chip ) * max_chip );
+	int obj_size = (int)( sizeof( unsigned char ) * max_object );
+
+	binary->ensure( chip_size + obj_size + sizeof( int ) * 2 );
+		
+	binary->write( (void*)&chip_size         , sizeof( int ) );
+	binary->write( (void*)&obj_size          , sizeof( int ) );
+	binary->write( (void*)page_chip.data( )  , chip_size     );
+	binary->write( (void*)page_object.data( ), obj_size      );
+
 	ApplicationPtr app( Application::getInstance( ) );
 	app->saveBinary( filename, binary );
 }
@@ -336,23 +363,50 @@ void Data::loadPage( std::string directory, std::string filename, int page ) {
 	}
 
 	std::vector< Chip > page_chip;
-	int max = PAGE_CHIP_WIDTH_NUM * MAP_HEIGHT;
-	page_chip.resize( max );
-	binary->read( (void*)page_chip.data( ), binary->getSize( ) );
+	int max_chip = PAGE_CHIP_WIDTH_NUM * MAP_HEIGHT;
+	page_chip.resize( max_chip );
 
-	int base_mx = page * PAGE_CHIP_WIDTH_NUM;
-	int base_my = 0;
+	std::vector< unsigned char > page_object;
+	int max_object = PAGE_OBJECT_WIDTH_NUM * OBJECT_CHIP_HEIGHT_NUM;
+	page_object.resize( max_object );
+		
+	int page_size_chip;
+	binary->read( (void*)&page_size_chip, sizeof( int ) );
+
+	int page_size_object;
+	binary->read( (void*)&page_size_object, sizeof( int ) );
+
+	binary->read( (void*)page_chip.data( ), page_size_chip );
+	binary->read( (void*)page_object.data( ), page_size_object );
+
+	int base_chip_mx = page * PAGE_CHIP_WIDTH_NUM;
+	int base_chip_my = 0;
 	for ( int i = 0; i < MAP_HEIGHT; i++ ) {
-		int my = base_my + i;
+		int my = base_chip_my + i;
 		int y = i;
 		for ( int j = 0; j < PAGE_CHIP_WIDTH_NUM; j++ ) {
-			int mx = base_mx + j;
+			int mx = base_chip_mx + j;
 			int x = j;
 			int page_chip_idx = x + y * PAGE_CHIP_WIDTH_NUM;
 			int chips_idx = mx + my * _page_num * PAGE_CHIP_WIDTH_NUM;
 			_chips[ chips_idx ] = page_chip[ page_chip_idx ];
 		}
 	}
+
+	int base_obj_mx = page * PAGE_OBJECT_WIDTH_NUM;
+	int base_obj_my = 0;
+	for ( int i = 0; i < OBJECT_CHIP_HEIGHT_NUM; i++ ) {
+		int my = base_obj_my + i;
+		int y = i;
+		for ( int j = 0; j < PAGE_OBJECT_WIDTH_NUM; j++ ) {
+			int mx = base_obj_mx + j;
+			int x = j;
+			int page_obj_idx = x + y * PAGE_OBJECT_WIDTH_NUM;
+			int objects_idx = mx + my * _page_num * PAGE_OBJECT_WIDTH_NUM;
+			_objects[ objects_idx ] = page_object[ page_obj_idx ];
+		}
+	}
+
 }
 
 void Data::copy( std::vector< int >& mx, std::vector< int >& my ) {
