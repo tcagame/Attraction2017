@@ -53,10 +53,10 @@ void ViewerDebug::draw( ) const {
 	for ( int i = 0; i < map->getPageNum( ) * PAGE_OBJECT_WIDTH_NUM; i++ ) {
 		for ( int j = 0; j < OBJECT_CHIP_HEIGHT_NUM; j++ ) {
 			Vector pos( i * OBJECT_CHIP_SIZE, VIEW_STREET_Y + j * OBJECT_CHIP_SIZE );
-			if ( map->isExistance( pos + Vector( 1, 1 ) * ( OBJECT_CHIP_SIZE / 2 ) ) ) {
+			if ( map->isExistance( pos + Vector( OBJECT_CHIP_SIZE / 2, OBJECT_CHIP_SIZE / 2 ) ) ) {
 				_block->setRect( 0, 16, OBJECT_CHIP_SIZE, OBJECT_CHIP_SIZE );
 				if ( ( int )pos.x - camera_pos < -OBJECT_CHIP_SIZE ) {
-					pos.x += MAP_WIDTH + MAP_WIDTH * ( camera_pos / MAP_WIDTH );
+					pos.x +=  MAP_WIDTH * ( camera_pos / SCREEN_WIDTH );
 				}
 				_block->setPos( ( int )pos.x - camera_pos, ( int )pos.y );
 				_block->draw( );

@@ -189,7 +189,7 @@ unsigned int Command::getState( std::string str ) {
 	for ( int i = 0; i < STATE_NUM; i++ ) {
 		if ( str == STATE[ i ] ) {
 			result = 0;
-			result |= 1 << i - 1;
+			result |= 1 << ( i - 1 );
 			break;
 		}
 	}
