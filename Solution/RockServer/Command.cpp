@@ -27,9 +27,9 @@ const int STATE_NUM = 7;
 const std::string STATE[ STATE_NUM ] = {
 	"none",	
 	"entry",
-	"street_1",
-	"street_2",
-	"street_3",
+	"street1",
+	"street2",
+	"street3",
 	"boss",
 	"result"
 };

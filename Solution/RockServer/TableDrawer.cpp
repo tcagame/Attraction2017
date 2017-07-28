@@ -183,13 +183,13 @@ void TableDrawer::drawState( ) const {
 			state = "ENTRY";
 			break;
 		case STATE_STREET_1:
-			state = "“¹’†1";
+			state = "street1";
 			break;
 		case STATE_STREET_2:
-			state = "“¹’†2";
+			state = "street2";
 			break;
 		case STATE_STREET_3:
-			state = "“¹’†3";
+			state = "street3";
 			break;
 		case STATE_BOSS:
 			state = "BOSS";
