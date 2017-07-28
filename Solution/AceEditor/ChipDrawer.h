@@ -3,15 +3,17 @@
 
 PTR( Ground );
 PTR( Structure );
+PTR( Background );
 PTR( Image );
 PTR( Data );
 
 class ChipDrawer {
 public:
-	ChipDrawer( DataConstPtr data, GroundConstPtr ground, StructureConstPtr structure );
+	ChipDrawer( DataConstPtr data, GroundConstPtr ground, StructureConstPtr structure, BackgroundPtr background );
 	virtual ~ChipDrawer( );
 public:
-	void draw( int mx, int my, int gx, int gy, bool select = false ) const;
+	void drawChip( int mx, int my, int gx, int gy, bool select = false ) const;
+	void drawBg( int page ) const;
 private:
 	ImagePtr _image_choice_front;
 	ImagePtr _image_choice_back;
@@ -19,4 +21,5 @@ private:
 	DataConstPtr _data;
 	GroundConstPtr _ground;
 	StructureConstPtr _structure;
+	BackgroundPtr _background;
 };

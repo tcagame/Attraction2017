@@ -24,6 +24,7 @@ Data::Data( ) {
 			_objects[ i ] = OBJECT_BLOCK;
 		}
 	}
+	_bg.resize( _page_num );
 }
 
 Data::~Data( ) {
@@ -73,6 +74,11 @@ Data::Chip& Data::getChip( int mx, int my ) {
 unsigned char Data::getObject( int ox, int oy ) const {
 	return _objects[ ox + oy * _page_num * PAGE_OBJECT_WIDTH_NUM ];
 }
+
+std::string Data::getBg( int page ) const {
+	return _bg[ page ];
+}
+
 
 int Data::getPageNum( ) const {
 	return _page_num;
@@ -149,6 +155,22 @@ void Data::insert( int page ) {
 			}
 		}
 		_objects = objects;
+	}
+	{//bg
+		std::vector< std::string > bg;
+		bg.resize( _page_num + 1 );
+		for ( int i = 0; i < _page_num + 1; i++ ) {
+			int page_old = i;
+			int page_new = i;
+			if ( i == page ) {
+				continue;
+			}
+			if ( i > page ) {
+				page_old--;
+			}
+			bg[ page_new ] = _bg[ page_old ];
+		}
+		_bg = bg;
 	}
 	//ページをひとつ増やす(get系関数に影響するので最後に行う)
 	_page_num++;
@@ -235,6 +257,22 @@ void Data::erase( int page ) {
 		}
 		_objects = objects;
 	}
+	{//bg
+		std::vector< std::string > bg;
+		bg.resize( _page_num - 1 );
+		for ( int i = 0; i < _page_num; i++ ) {
+			int page_old = i;
+			int page_new = i;
+			if ( i == page ) {
+				continue;
+			}
+			if ( i > page ) {
+				page_new--;
+			}
+			bg[ page_new ] = _bg[ page_old ];
+		}
+		_bg = bg;
+	}
 	//ページをひとつ減らす(get系関数に影響するので最後に行う)
 	_page_num--;
 }
@@ -293,6 +331,7 @@ void Data::load( std::string directory, std::string filename ) {
 
 	int width = ( int )( _chips.size( ) / MAP_HEIGHT );
 	_page_num = width / PAGE_CHIP_WIDTH_NUM;
+	_bg.resize( _page_num );
 }
 
 
@@ -408,6 +447,14 @@ void Data::loadPage( std::string directory, std::string filename, int page ) {
 	}
 
 }
+
+void Data::loadBg( std::string directory, std::string filename, int page ) {
+	if ( page >= ( int )_bg.size( ) ) {
+		return;
+	}
+	_bg[ page ] = filename;
+}
+
 
 void Data::copy( std::vector< int >& mx, std::vector< int >& my ) {
 	_copy = { };

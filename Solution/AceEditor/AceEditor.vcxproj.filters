@@ -41,6 +41,7 @@
     <ClCompile Include="ObjectPreview.cpp">
       <Filter>ObjectMode</Filter>
     </ClCompile>
+    <ClCompile Include="Background.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Data.h" />
@@ -82,6 +83,7 @@
     <ClInclude Include="ObjectPreview.h">
       <Filter>ObjectMode</Filter>
     </ClInclude>
+    <ClInclude Include="Background.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ChipMode">

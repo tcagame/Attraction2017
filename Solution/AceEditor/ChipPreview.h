@@ -24,7 +24,7 @@ private:
 	DataConstPtr _data;
 	ChipCursorConstPtr _chip_cursor;
 	ChipEditorConstPtr _chip_editor;
-	ImageTargetPtr _image_background;
 	ChipDrawerConstPtr _chip_drawer;
+	ImageTargetPtr _image;
 };
 

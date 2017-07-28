@@ -1,6 +1,5 @@
 #pragma once
 #include <vector>
-
 #include "ace_define.h"
 
 class Data {
@@ -13,6 +12,7 @@ public:
 	int getStructure( int mx, int my ) const;
 	int getHeight( int mx, int my ) const;
 	unsigned char getObject( int ox, int oy ) const;
+	std::string getBg( int page ) const;
 	void setGroundData( int mx, int my, int num );
 	void setStructure( int mx, int my, int num );
 	void setHeight( int mx, int my, int height );
@@ -23,6 +23,7 @@ public:
 	void load( std::string directory, std::string filename );
 	void savePage( std::string directory, std::string filename, int page ) const;
 	void loadPage( std::string directory, std::string filename, int page );
+	void loadBg( std::string directory, std::string filename, int page );
 	void copy( std::vector< int >& mx, std::vector< int >& my );
 	void paste( std::vector< int >& mx, std::vector< int >& my );
 private:
@@ -38,6 +39,7 @@ private:
 	std::vector< Chip > _copy;
 	std::vector< Chip > _chips;
 	std::vector< unsigned char > _objects;
+	std::vector< std::string > _bg;
 	int _page_num;
 };
 

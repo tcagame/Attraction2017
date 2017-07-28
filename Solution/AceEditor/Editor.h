@@ -19,6 +19,7 @@ PTR( ObjectMenu );
 PTR( Exporter );
 PTR( Ground );
 PTR( Structure );
+PTR( Background );
 PTR( ChipDrawer );
 PTR( Data );
 
@@ -34,6 +35,7 @@ public:
 		MODE_LOADALL,
 		MODE_SAVEPAGE,
 		MODE_LOADPAGE,
+		MODE_LOADBG,
 		MODE_EXPORT,
 	};
 public:
@@ -44,7 +46,7 @@ public:
 	MODE getMode( ) const;
 private:
 	enum PHASE {
-		PHASE_EDIT_BG,
+		PHASE_EDIT,
 		PHASE_MENU
 	};
 private:
@@ -60,6 +62,7 @@ private:
 	void loadAll( );
 	void savePage( ) const;
 	void loadPage( );
+	void loadBg( );
 private:
 	DataPtr _data;
 	InformationPtr _information;
@@ -73,6 +76,7 @@ private:
 	ObjectCursorPtr _object_cursor;
 	ObjectEditorPtr _object_editor;
 	ObjectMenuPtr _object_menu;
+	BackgroundPtr _background;
 	ExporterPtr _exporter;
 	PHASE _phase;
 	MODE _mode;

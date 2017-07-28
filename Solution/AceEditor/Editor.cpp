@@ -23,8 +23,10 @@
 #include "Exporter.h"
 #include "Ground.h"
 #include "Structure.h"
+#include "Background.h"
 
 const std::string DIRECTORY_DATA = "MapData/";
+const std::string DIRECTORY_BG = "Bg/";
 
 EditorPtr Editor::getTask( ) {
 	ApplicationPtr app = Application::getInstance( );
@@ -32,7 +34,7 @@ EditorPtr Editor::getTask( ) {
 }
 
 Editor::Editor( ) :
-_phase( PHASE_EDIT_BG ),
+_phase( PHASE_EDIT ),
 _mode( MODE_CHIP ) {
 }
 
@@ -47,8 +49,9 @@ void Editor::initialize( ) {
 	StructurePtr structure = StructurePtr( new Structure );
 
 	_data = DataPtr( new Data );
+	_background = BackgroundPtr( new Background );
 
-	ChipDrawerPtr chip_drawer = ChipDrawerPtr( new ChipDrawer( _data, ground, structure ) );
+	ChipDrawerPtr chip_drawer = ChipDrawerPtr( new ChipDrawer( _data, ground, structure, _background ) );
 	_exporter       = ExporterPtr     ( new Exporter     ( _data, chip_drawer ) );
 
 	_chip_cursor    = ChipCursorPtr	  ( new ChipCursor   ( _data ) );
@@ -95,6 +98,9 @@ void Editor::updateMode( ) {
 		loadPage( );
 		_mode = _return_mode;
 		break;
+	case MODE_LOADBG:
+		loadBg( );
+		_mode = _return_mode;
 	case MODE_EXPORT:
 		if ( !_exporter->update( ) ) {
 			_mode = _return_mode;
@@ -119,13 +125,16 @@ void Editor::updateMode( ) {
 		}
 		if ( keyboard->isPushKey( "F5" ) ) {
 			_mode = MODE_CHIP;
-			_phase = PHASE_EDIT_BG;
+			_phase = PHASE_EDIT;
 			_chip_cursor->setScrollX( _object_cursor->getScrollX( ) );
 		}
 		if ( keyboard->isPushKey( "F6" ) ) {	
 			_mode = MODE_OBJECT;
-			_phase = PHASE_EDIT_BG;
+			_phase = PHASE_EDIT;
 			_object_cursor->setScrollX( _chip_cursor->getScrollX( ) );
+		}
+		if ( keyboard->isPushKey( "F8" ) ) {
+			_mode = MODE_LOADBG;
 		}
 		if ( keyboard->isPushKey( "F9" ) ) {
 			_mode = MODE_EXPORT;
@@ -171,7 +180,7 @@ void Editor::drawMode( ) {
 
 void Editor::updateChipMode( ) {
 	switch( _phase ) {
-	case PHASE_EDIT_BG:
+	case PHASE_EDIT:
 		_chip_preview->update( );
 		_chip_cursor->update( );
 		_object_cursor->setScrollX( _chip_cursor->getScrollX( ) );
@@ -187,7 +196,7 @@ void Editor::updateChipMode( ) {
 
 void Editor::updateObjectMode( ) {
 	switch( _phase ) {
-	case PHASE_EDIT_BG:
+	case PHASE_EDIT:
 		_object_cursor->update( );
 		_chip_cursor->setScrollX( _object_cursor->getScrollX( ) );
 		_object_editor->update( );
@@ -204,7 +213,7 @@ void Editor::checkPhase( ) {
 	MousePtr mouse( Mouse::getTask( ) );
 	if ( mouse->isPushRightButton( ) ) {
 		PHASE phase = _phase;
-		if ( _phase == PHASE_EDIT_BG ) {
+		if ( _phase == PHASE_EDIT ) {
 			phase = PHASE_MENU;
 			switch( _mode ) {
 			case MODE_CHIP:
@@ -216,7 +225,7 @@ void Editor::checkPhase( ) {
 			}
 		}
 		if ( _phase == PHASE_MENU ) {
-			phase = PHASE_EDIT_BG;
+			phase = PHASE_EDIT;
 		}
 		_phase = phase;
 	}
@@ -228,7 +237,7 @@ void Editor::checkPhase( ) {
 		active = true;
 	}
 	if ( _phase == PHASE_MENU && mouse->isPushLeftButton( ) && active ) {
-		_phase = PHASE_EDIT_BG;
+		_phase = PHASE_EDIT;
 	}
 }
 
@@ -286,4 +295,20 @@ void Editor::loadPage( ) {
 	int page = ( _chip_cursor->getScrollX( ) + _chip_cursor->getGX( ) ) / PAGE_CHIP_WIDTH_NUM;
 	page %= _data->getPageNum( );
 	_data->loadPage( DIRECTORY_DATA, filename, page );
+}
+
+void Editor::loadBg( ) {
+	std::string filename = Application::getInstance( )->inputString( 0, 20 );
+	if ( filename.size( ) == 0 ) {
+		return;
+	}
+	//”wŒi‰æ‘œ‚Ìƒ[ƒh
+	if ( _background->getImage( filename ) == ImagePtr( ) ) {
+		if ( !_background->loadImage( DIRECTORY_BG, filename ) ) {
+			return;
+		}
+	}
+	int page = ( _chip_cursor->getScrollX( ) + _chip_cursor->getGX( ) ) / PAGE_CHIP_WIDTH_NUM;
+	page %= _data->getPageNum( );
+	_data->loadBg( DIRECTORY_BG, filename, page );
 }

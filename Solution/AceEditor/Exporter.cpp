@@ -50,7 +50,7 @@ bool Exporter::update( ) {
 					mx -= _max * PAGE_CHIP_WIDTH_NUM;
 				}
 				int my = gy;
-				_chip_drawer->draw( mx, my, gx, gy );
+				_chip_drawer->drawChip( mx, my, gx, gy );
 			}
 		}
 		char buf[ 256 ];
@@ -70,7 +70,7 @@ bool Exporter::update( ) {
 					mx -= _max * PAGE_CHIP_WIDTH_NUM;
 				}
 				int my = gy;
-				_chip_drawer->draw( mx, my, gx, gy );
+				_chip_drawer->drawChip( mx, my, gx, gy );
 			}
 		}
 		char buf[ 256 ];
