@@ -137,7 +137,7 @@ void Character::setRadius( int radius ) {
 	_radius = radius;
 }
 
-double Character::getRadius( ) const{
+double Character::getRadius( ) const {
 	return _radius;
 }
 
