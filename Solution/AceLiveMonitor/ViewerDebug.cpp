@@ -55,7 +55,7 @@ void ViewerDebug::draw( ) const {
 			Vector pos( i * OBJECT_CHIP_SIZE, VIEW_STREET_Y + j * OBJECT_CHIP_SIZE );
 			if ( map->isExistance( pos + Vector( 1, 1 ) * ( OBJECT_CHIP_SIZE / 2 ) ) ) {
 				_block->setRect( 0, 16, OBJECT_CHIP_SIZE, OBJECT_CHIP_SIZE );
-				if ( ( int )pos.x - camera_pos < 0 ) {
+				if ( ( int )pos.x - camera_pos < -OBJECT_CHIP_SIZE ) {
 					pos.x += MAP_WIDTH + MAP_WIDTH * ( camera_pos / MAP_WIDTH );
 				}
 				_block->setPos( ( int )pos.x - camera_pos, ( int )pos.y );
