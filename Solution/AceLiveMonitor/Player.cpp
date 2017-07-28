@@ -163,12 +163,39 @@ void Player::actOnFloating( ) {
 	DevicePtr device( Device::getTask( ) );
 	Vector vec = getVec( );
 	// 空中の移動
-	if ( device->getDirX( _id ) < -50 ) {
-		vec.x = -MOVE_SPEED;
+	int dir_x = device->getDirX( _id );
+	//右に移動してるとき
+	if ( vec.x >= 0 ) {
+		//入力が左
+		if ( dir_x < 0 ) {
+			if ( vec.x > BRAKE_ACCEL ) {
+				vec.x -= BRAKE_ACCEL;
+			} else {
+				vec.x = 0;
+			}
+		}
+		//入力が右
+		if ( dir_x > 0 ) {
+			vec.x = MOVE_SPEED;
+		}
 	}
-	if ( device->getDirX( _id ) > 50 ) {
-		vec.x = MOVE_SPEED;
+
+	//左に移動してるとき
+	if ( vec.x <= 0 ) {
+		//入力が右
+		if ( dir_x > 0 ) {
+			if ( vec.x < -BRAKE_ACCEL ) {
+				vec.x += BRAKE_ACCEL;
+			} else {
+				vec.x = 0;
+			}
+		}
+		//入力が右
+		if ( dir_x < 0 ) {
+			vec.x = -MOVE_SPEED;
+		}
 	}
+
 	setVec( vec );
 	if ( device->getPush( _id ) & BUTTON_A ) {
 		_action = ACTION_ATTACK;
