@@ -76,7 +76,7 @@ void ChipDrawer::drawBg( int scroll_x ) const {
 			continue;
 		}
 		int sx = i * GRAPH_SIZE - diff;
-		image->setPos( sx, PREVIEW_Y );
+		image->setPos( sx, 0 );
 		image->draw( );
 	}
 }

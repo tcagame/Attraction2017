@@ -49,6 +49,7 @@ void ChipPreview::draw( ) const {
 	int check_num = range * range;
 	int scroll_x = _chip_cursor->getScrollX( );
 
+	_chip_drawer->drawBg( scroll_x );
 
 	for ( int i = 0; i < DISP_CHIP_HEIGHT; i++ ) {
 		for ( int j = 0; j < DISP_CHIP_WIDTH; j++ ) {
@@ -74,7 +75,6 @@ void ChipPreview::draw( ) const {
 
 	{//ì¬‚µ‚½‰æ‘œ‚ð•`‰æ
 		drawer->setImageTarget( );
-		_chip_drawer->drawBg( scroll_x );
 		_image->setPos( PREVIEW_X, PREVIEW_Y );
 		_image->draw( );
 	}
