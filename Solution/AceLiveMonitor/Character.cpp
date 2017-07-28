@@ -14,7 +14,7 @@ _standing( false ),
 _chip_size( chip_size ),
 _act_count( 0 ),
 _mass( mass ),
-_radius( chip_size ),
+_radius( chip_size / 2 ),
 _finished( false ) {
 }
 
@@ -38,28 +38,30 @@ void Character::update( ) {
 		_vec.y = -MAX_SPEED_Y;
 	}
 	MapConstPtr map( Map::getTask( ) );
-	{//上下判定
-		if ( _vec.y > 0 ) {
-			if ( map->isExistance( _pos + Vector( 0, _vec.y ) ) ) {
-				_standing = true;
-				_pos.y = ( ( int )( _pos.y + _vec.y ) / OBJECT_CHIP_SIZE ) * OBJECT_CHIP_SIZE - GRAVITY / 2;
-				_vec.y = 0;
+	if ( _mass ) {
+		{//上下判定
+			if ( _vec.y > 0 ) {
+				if ( map->isExistance( _pos + Vector( 0, _vec.y ) ) ) {
+					_standing = true;
+					_pos.y = ( ( int )( _pos.y + _vec.y ) / OBJECT_CHIP_SIZE ) * OBJECT_CHIP_SIZE - GRAVITY / 2;
+					_vec.y = 0;
+				}
 			}
 		}
-	}
-	{//左右判定
-		//左側
-		if ( _vec.x < 0 ) {
-			if ( map->isExistance( _pos + Vector( _vec.x - _radius, 0 ) ) ) {
-				_pos.x = ( ( int )( _pos.x + _vec.x - _radius ) / OBJECT_CHIP_SIZE + 1 ) * OBJECT_CHIP_SIZE + _radius;
-				_vec.x = 0;
+		{//左右判定
+			//左側
+			if ( _vec.x < 0 ) {
+				if ( map->isExistance( _pos + Vector( _vec.x - _radius, 0 ) ) ) {
+					_pos.x = ( ( int )( _pos.x + _vec.x - _radius ) / OBJECT_CHIP_SIZE + 1 ) * OBJECT_CHIP_SIZE + _radius;
+					_vec.x = 0;
+				}
 			}
-		}
-		//右側
-		if ( _vec.x > 0 ) {
-			if ( map->isExistance( _pos + Vector( _vec.x + _radius, 0 ) ) ) {
-				_pos.x = ( ( int )( _pos.x + _vec.x + _radius ) / OBJECT_CHIP_SIZE ) * OBJECT_CHIP_SIZE - _radius;
-				_vec.x = 0;
+			//右側
+			if ( _vec.x > 0 ) {
+				if ( map->isExistance( _pos + Vector( _vec.x + _radius, 0 ) ) ) {
+					_pos.x = ( ( int )( _pos.x + _vec.x + _radius ) / OBJECT_CHIP_SIZE ) * OBJECT_CHIP_SIZE - _radius;
+					_vec.x = 0;
+				}
 			}
 		}
 	}
