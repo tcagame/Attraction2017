@@ -134,6 +134,9 @@ void Player::actOnBreaking( ) {
 		_action = ACTION_WAIT;
 	}
 	DevicePtr device( Device::getTask( ) );
+	if ( device->getDirX( ) * vec.x > 0 ) {
+		_action = ACTION_WALK;
+	}
 	if ( isStanding( ) && device->getPush( _id ) & BUTTON_C ) {
 		vec.y = JUMP_POWER;
 		_action = ACTION_FLOAT;
