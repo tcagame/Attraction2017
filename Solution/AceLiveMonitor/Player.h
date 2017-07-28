@@ -12,12 +12,14 @@ public:
 		ACTION_ATTACK,
 		ACTION_CHARGE,
 		ACTION_OVER_CHARGE,
+		ACTION_DAMEGE,
 	};
 public:
 	Player( int player_id, Vector pos );
 	virtual ~Player( );
 public:
 	void act( );
+	void damage( int force );
 	Chip getChip( ) const;
 	ACTION getAction( ) const;
 	int getChargeCount( ) const;
@@ -31,10 +33,12 @@ private:
 	void actOnCharge( );
 	void actOnOverCharge( );
 	void actOnCamera( );
+	void actOnDamege( );
 private:
 	ACTION _action;
 	int _id;
 	int _charge_count;
+	int _damege_count;
 	int _over_charge_time;
 };
 

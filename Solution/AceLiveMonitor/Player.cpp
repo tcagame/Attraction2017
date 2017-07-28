@@ -17,11 +17,13 @@ const int MAX_CHARGE_COUNT = CHARGE_PHASE_COUNT * 4 - 1;
 const int BURST_TIME = 60;
 //アニメーション
 const int PLAYER_ANIM_WAIT_COUNT = 12;
-const int PLAYER_ANIM_WIDTH_NUM = 8;
+const int PLAYER_ANIM_WIDTH_NUM = 10;
+const int DAMEGE_COUNT = 20;
 
 Player::Player( int player_id, Vector pos ) :
 Character( pos, NORMAL_CHAR_GRAPH_SIZE ),
 _charge_count( 0 ),
+_damege_count( 0 ),
 _over_charge_time( -1 ),
 _id( player_id ),
 _action( ACTION_WAIT ) {
@@ -54,6 +56,9 @@ void Player::act( ) {
 		break;
 	case ACTION_OVER_CHARGE:
 		actOnOverCharge( );
+		break;
+	case ACTION_DAMEGE:
+		actOnDamege( );
 		break;
 	}
 	actOnCamera( );
@@ -162,7 +167,7 @@ void Player::actOnFloating( ) {
 	if ( isStanding( ) ) {
 		_action = ACTION_WAIT;
 		return;
-	}	
+	}
 	DevicePtr device( Device::getTask( ) );
 	Vector vec = getVec( );
 	// 空中の移動
@@ -277,6 +282,41 @@ void Player::actOnCamera( ) {
 	}
 }
 
+void Player::actOnDamege( ) {
+	if ( _damege_count == 0 ) {
+		_action = ACTION_WAIT;
+		return;
+	}
+	_damege_count--;
+	if ( _damege_count < DAMEGE_COUNT / 2 ) {
+		Vector vec = getVec( );
+		//ひるみ中でも移動できるようにする
+		DevicePtr device( Device::getTask( ) );
+		if ( device->getDirX( _id ) < -50 ) {
+			vec.x = -MOVE_SPEED;
+		}
+		if ( device->getDirX( _id ) > 50 ) {
+			vec.x = MOVE_SPEED;
+		}
+		setVec( vec );
+	}
+	if ( _damege_count < 0 ) {
+		_action = ACTION_WAIT;
+		_damege_count = 0;
+	}
+}
+
+
+void Player::damage( int force ) {
+	if ( _damege_count > 0 ) {
+		return;
+	}
+
+	_action = ACTION_DAMEGE;
+	_damege_count = DAMEGE_COUNT;
+	setVec( Vector( ) );
+}
+
 Player::ACTION Player::getAction( ) const {
 	return _action;
 }
@@ -330,7 +370,7 @@ Chip Player::getChip( ) const {
 	case ACTION_CHARGE:
 		{
 			const int ANIM[ ] = {
-				32, 33, 34, 35, 36, 37, 38
+				30, 31, 32, 33, 34, 35, 36
 			};
 			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 			cx = ANIM[ ( _charge_count / ( CHARGE_PHASE_COUNT / 2 ) ) % anim_num ] % PLAYER_ANIM_WIDTH_NUM;
@@ -340,11 +380,21 @@ Chip Player::getChip( ) const {
 	case ACTION_OVER_CHARGE:
 		{
 			const int ANIM[ ] = {
-				40, 41
+				38, 39
 			};
 			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 			cx = ANIM[ ( getActCount( ) / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] % PLAYER_ANIM_WIDTH_NUM;
 			cy = ANIM[ ( getActCount( ) / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] / PLAYER_ANIM_WIDTH_NUM;
+		}
+		break;
+	case ACTION_DAMEGE:
+		{
+			const int ANIM[ ] = {
+				63
+			};
+			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
+			cx = ANIM[ ( _damege_count / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] % PLAYER_ANIM_WIDTH_NUM;
+			cy = ANIM[ ( _damege_count / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] / PLAYER_ANIM_WIDTH_NUM;
 		}
 		break;
 	}
@@ -395,8 +445,8 @@ Chip Player::getChargeChip( ) const {
 	int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	int phase = ( _charge_count / CHARGE_PHASE_COUNT ) * 2;
 	int time = ( getActCount( ) / 2 ) % 2;
-	chip.tx = ( ANIM[ phase + time ] % PLAYER_ANIM_WIDTH_NUM ) * NORMAL_CHAR_GRAPH_SIZE;
-	chip.ty = ( ANIM[ phase + time ] / PLAYER_ANIM_WIDTH_NUM ) * NORMAL_CHAR_GRAPH_SIZE;
+	chip.tx = ( ANIM[ phase + time ] % 8 ) * NORMAL_CHAR_GRAPH_SIZE;
+	chip.ty = ( ANIM[ phase + time ] / 8 ) * NORMAL_CHAR_GRAPH_SIZE;
 	chip.size = NORMAL_CHAR_GRAPH_SIZE;
 
 	return chip;

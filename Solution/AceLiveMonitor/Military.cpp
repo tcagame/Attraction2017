@@ -4,6 +4,11 @@
 #include "EnemyFaceAndHand.h"
 #include "ace_define.h"
 
+#include "Family.h"
+#include "Player.h"
+
+PTR( Player );
+
 MilitaryPtr Military::getTask( ) {
 	return std::dynamic_pointer_cast< Military >( Application::getInstance( )->getTask( getTag( ) ) );
 }
@@ -29,6 +34,13 @@ void Military::update( ) {
 		if ( enemy->isFinished( ) ) {
 			ite = _enemies.erase( ite );
 			continue;
+		}
+		FamilyPtr family( Family::getTask( ) );
+		for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
+			PlayerPtr player( family->getPlayer( i ) );
+			if ( player->isOverlapped( enemy ) ) {
+				player->damage( 1 );
+			}
 		}
 		enemy->update( );
 		ite++;

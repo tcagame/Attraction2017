@@ -13,7 +13,7 @@ public:
 	Vector getVec( ) const;
 	Vector getPos( ) const;
 	void update( );
-	void damage( int force );
+	virtual void damage( int force );
 	virtual Chip getChip( ) const = 0;
 	bool isOverlapped( CharacterConstPtr target ) const;
 	double getRadius( ) const;
