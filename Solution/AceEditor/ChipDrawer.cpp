@@ -58,25 +58,26 @@ void ChipDrawer::drawChip( int mx, int my, int gx, int gy, bool select ) const {
 	}
 }
 
-void ChipDrawer::drawBg( int scroll_x ) const {
+void ChipDrawer::drawBg( int screen_page, int scroll_mx ) const {
 	int page_num = _data->getPageNum( );
 	if ( page_num == 0 ) {
 		return;
 	}
-	int diff = ( scroll_x % PAGE_CHIP_WIDTH_NUM ) * CHIP_WIDTH;
-	int start_page = scroll_x / PAGE_CHIP_WIDTH_NUM;
-	for ( int i = 0; i < VIEW_PAGE_NUM; i++ ) {
-		int page = ( i + start_page ) % page_num;
-		std::string tag = _data->getBg( page );
-		if ( tag.size( ) == 0 ) {
-			continue;
-		}
-		ImagePtr image = _background->getImage( tag );
-		if ( image == ImagePtr( ) ) {
-			continue;
-		}
-		int sx = i * GRAPH_SIZE - diff;
-		image->setPos( sx, 0 );
-		image->draw( );
+
+	int diff = ( scroll_mx % PAGE_CHIP_WIDTH_NUM ) * CHIP_WIDTH;
+	int start_page = scroll_mx / PAGE_CHIP_WIDTH_NUM;
+
+	int page = ( screen_page + start_page ) % page_num;
+	std::string tag = _data->getBg( page );
+	if ( tag.size( ) == 0 ) {
+		return;
 	}
+	ImagePtr image = _background->getImage( tag );
+	if ( image == ImagePtr( ) ) {
+		return;
+	}
+	int sx = screen_page * GRAPH_SIZE - diff;
+	image->setPos( sx, 0 );
+	image->draw( );
+	
 }

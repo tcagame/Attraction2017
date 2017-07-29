@@ -13,7 +13,7 @@ public:
 	virtual ~ChipDrawer( );
 public:
 	void drawChip( int mx, int my, int gx, int gy, bool select = false ) const;
-	void drawBg( int page ) const;
+	void drawBg( int screen_page, int scroll_mx ) const;
 private:
 	ImagePtr _image_choice_front;
 	ImagePtr _image_choice_back;

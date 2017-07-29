@@ -19,6 +19,8 @@ public:
 public:
 	void update( );
 	void draw( ) const;
+	void drawBg( ) const;
+	void drawChip( ) const;
 private:
 	bool _covor;
 	DataConstPtr _data;

@@ -14,6 +14,7 @@
 
 const int BASE_X = - CHIP_WIDTH / 2;
 const int BASE_Y = - CHIP_HEIGHT / 2;
+const int VIEW_PAGE_NUM = SCREEN_WIDTH / GRAPH_SIZE;
 const std::string EDITOR_PATH = "Resource/Ace/Editor/";
 
 ChipPreview::ChipPreview( DataConstPtr data, ChipCursorConstPtr chip_cursor, ChipEditorConstPtr chip_editor, ChipDrawerConstPtr chip_drawer ) :
@@ -42,14 +43,31 @@ void ChipPreview::draw( ) const {
 	DrawerPtr drawer = Drawer::getTask( );
 	_image->clear( );
 	drawer->setImageTarget( _image );
+
+	drawBg( );
+	drawChip( );
+
+	{//ì¬‚µ‚½‰æ‘œ‚ð•`‰æ
+		drawer->setImageTarget( );
+		_image->setPos( PREVIEW_X, PREVIEW_Y );
+		_image->draw( );
+	}
+}
+
+void ChipPreview::drawBg( ) const {
+	int scroll_x = _chip_cursor->getScrollX( );
+	for ( int i = 0; i < VIEW_PAGE_NUM; i++ ) {
+		_chip_drawer->drawBg( i, scroll_x );
+	}
+}
+
+void ChipPreview::drawChip( ) const {
 	std::vector< int > select_gx;
 	std::vector< int > select_gy;
 	_chip_editor->getReplacePos( select_gx, select_gy );
 	int range = _chip_editor->getRange( );
 	int check_num = range * range;
 	int scroll_x = _chip_cursor->getScrollX( );
-
-	_chip_drawer->drawBg( scroll_x );
 
 	for ( int i = 0; i < DISP_CHIP_HEIGHT; i++ ) {
 		for ( int j = 0; j < DISP_CHIP_WIDTH; j++ ) {
@@ -71,11 +89,5 @@ void ChipPreview::draw( ) const {
 			}
 			_chip_drawer->drawChip( mx, my, gx, gy, select );
 		}
-	}
-
-	{//ì¬‚µ‚½‰æ‘œ‚ð•`‰æ
-		drawer->setImageTarget( );
-		_image->setPos( PREVIEW_X, PREVIEW_Y );
-		_image->draw( );
 	}
 }
