@@ -26,7 +26,8 @@ _charge_count( 0 ),
 _damege_count( 0 ),
 _over_charge_time( -1 ),
 _id( player_id ),
-_action( ACTION_WAIT ) {
+_action( ACTION_WAIT ),
+_state( STATE_MAIN ) {
 	setRadius( 25 );
 	setDir( DIR_RIGHT );
 }
@@ -62,6 +63,13 @@ void Player::act( ) {
 		break;
 	}
 	actOnCamera( );
+	if ( Device::getTask( )->getPush( _id ) & BUTTON_E ) {
+		if ( _state != STATE_EVENT ) {
+			_state = STATE_EVENT;
+		} else {
+			_state = STATE_MAIN;
+		}
+	}
 }
 
 void Player::actOnWaiting( ) {
@@ -450,4 +458,8 @@ Chip Player::getChargeChip( ) const {
 	chip.size = NORMAL_CHAR_GRAPH_SIZE;
 
 	return chip;
+}
+
+Player::STATE Player::getState( ) const {
+	return _state;
 }
