@@ -11,6 +11,7 @@ const double GRAVITY = 1.0;
 
 const int NORMAL_CHAR_GRAPH_SIZE = 64;
 
+const int VIEW_EVEMT_Y = 0;
 const int VIEW_TITLE_Y = 0;
 const int VIEW_TITLE_HEIGHT = 256;
 const int VIEW_STREET_Y = VIEW_TITLE_Y + VIEW_TITLE_HEIGHT;

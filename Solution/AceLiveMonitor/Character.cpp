@@ -15,7 +15,8 @@ _chip_size( chip_size ),
 _act_count( 0 ),
 _mass( mass ),
 _radius( chip_size / 2 ),
-_finished( false ) {
+_finished( false ),
+_state( STATE_MAIN ) {
 }
 
 
@@ -110,6 +111,10 @@ bool Character::isFinished( ) const {
 	return _finished;
 }
 
+Character::STATE Character::getState( ) const {
+	return _state;
+}
+
 void Character::updateDir( ) {
 	if ( _vec.x < 0 ) {
 		_dir = DIR_LEFT;
@@ -128,6 +133,9 @@ int Character::getChipSize( ) const {
 }
 
 bool Character::isOverlapped( CharacterConstPtr target ) const {
+	if ( _state != target->getState( ) ) {
+		return false;
+	}
 	double length = ( _pos - target->getPos( ) ).getLength( );
 	double radius = _radius + target->getRadius( );
 	return ( length < radius );
@@ -143,4 +151,8 @@ double Character::getRadius( ) const {
 
 void Character::setFinished( ) {
 	_finished = true;
+}
+
+void Character::setState( STATE state ) {
+	_state = state;
 }

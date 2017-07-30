@@ -24,7 +24,8 @@ void ViewerDebug::draw( ) const {
 	//プレイヤー
 	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
 		PlayerConstPtr player = family->getPlayer( i );
-		drawer->drawCircle( Vector( player->getPos( ) - Vector( camera_pos, player->getChip( ).size / 2 ) ), player->getRadius( ) );
+		Vector pos( player->getPos( ) - Vector( camera_pos, player->getChip( ).size / 2 ) );
+		drawer->drawCircle( pos + Vector( 0, VIEW_STREET_Y ), player->getRadius( ) );
 	}
 	//エネミー
 	std::list< EnemyPtr > enemies = Military::getTask( )->getList( );
@@ -35,7 +36,8 @@ void ViewerDebug::draw( ) const {
 			ite++;
 			continue;
 		}
-		drawer->drawCircle( Vector( enemy->getPos( ) - Vector( camera_pos, enemy->getChip( ).size / 2 ) ), enemy->getRadius( ) );
+		Vector pos( enemy->getPos( ) - Vector( camera_pos, enemy->getChip( ).size / 2 ) );
+		drawer->drawCircle( pos + Vector( 0, VIEW_STREET_Y ), enemy->getRadius( ) );
 		ite++;
 	}
 	//妖怪念力
@@ -45,7 +47,8 @@ void ViewerDebug::draw( ) const {
 		if ( !shot ) {
 			continue;
 		}
-		drawer->drawCircle( Vector( shot->getPos( ) - Vector( camera_pos, shot->getChip( ).size / 2 ) ), shot->getRadius( ) );
+		Vector pos( shot->getPos( ) - Vector( camera_pos, shot->getChip( ).size / 2 ) );
+		drawer->drawCircle( pos + Vector( 0, VIEW_STREET_Y ), shot->getRadius( ) );
 	}
 	//チップ
 	MapPtr map( Map::getTask( ) );

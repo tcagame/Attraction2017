@@ -34,15 +34,10 @@ void ViewerArmoury::drawShot( ) const {
 		Chip chip = shot->getChip( );
 		chip.sx1 -= camera_pos;
 		chip.sx2 -= camera_pos;
-		{
-			_image_shot->setRect( chip.tx, chip.ty, chip.size, chip.size );
-			_image_shot->setPos( chip.sx1, chip.sy1, chip.sx2, chip.sy2 );
-		}
-		{
-			chip.tx += 64;
-			_image_shot->setRect( chip.tx, chip.ty, chip.size, chip.size );
-			_image_shot->setPos( chip.sx1, chip.sy1, chip.sx2, chip.sy2 );
-		}
+		chip.sy1 += VIEW_STREET_Y;
+		chip.sy2 += VIEW_STREET_Y;
+		_image_shot->setRect( chip.tx, chip.ty, chip.size, chip.size );
+		_image_shot->setPos( chip.sx1, chip.sy1, chip.sx2, chip.sy2 );
 		_image_shot->draw( );
 	}
 }
@@ -62,6 +57,8 @@ void ViewerArmoury::drawImpact( ) const {
 		Chip chip = impact->getChip( );
 		chip.sx1 -= camera_pos;
 		chip.sx2 -= camera_pos;
+		chip.sy1 += VIEW_STREET_Y;
+		chip.sy2 += VIEW_STREET_Y;
 		_image_impact->setRect( chip.tx, chip.ty, chip.size, chip.size );
 		_image_impact->setPos( chip.sx1, chip.sy1, chip.sx2, chip.sy2 );
 		_image_impact->draw( );
