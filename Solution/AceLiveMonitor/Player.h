@@ -14,6 +14,10 @@ public:
 		ACTION_OVER_CHARGE,
 		ACTION_DAMEGE,
 	};
+	enum STATE {
+		STATE_MAIN,
+		STATE_EVENT,
+	};
 public:
 	Player( int player_id, Vector pos );
 	virtual ~Player( );
@@ -24,6 +28,7 @@ public:
 	ACTION getAction( ) const;
 	int getChargeCount( ) const;
 	Chip getChargeChip( ) const;
+	STATE getState( ) const;
 private:
 	void actOnWaiting( );
 	void actOnWalking( );
@@ -36,6 +41,7 @@ private:
 	void actOnDamege( );
 private:
 	ACTION _action;
+	STATE _state;
 	int _id;
 	int _charge_count;
 	int _damege_count;
