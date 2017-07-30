@@ -133,6 +133,9 @@ int Character::getChipSize( ) const {
 }
 
 bool Character::isOverlapped( CharacterConstPtr target ) const {
+	if ( _state != target->getState( ) ) {
+		return false;
+	}
 	double length = ( _pos - target->getPos( ) ).getLength( );
 	double radius = _radius + target->getRadius( );
 	return ( length < radius );

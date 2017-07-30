@@ -66,7 +66,9 @@ void Player::act( ) {
 	//イベント-メイン切り替え用(デバッグ)
 	if ( Device::getTask( )->getPush( _id ) & BUTTON_E ) {
 		if ( getState( ) != STATE_EVENT ) {
-			setState( STATE_EVENT );
+			if ( !Family::getTask( )->isExistancePlayerEvent( ) ) {
+				setState( STATE_EVENT );
+			}
 		} else {
 			setState( STATE_MAIN );
 		}

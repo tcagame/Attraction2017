@@ -64,9 +64,16 @@ PlayerPtr Family::getPlayer( int player_id ) {
 void Family::updateCameraPos( ) {
 	double camera_pos = 0;
 	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
+		if ( _player[ i ]->getState( ) == Character::STATE_EVENT ) {
+			continue;
+		}
 		camera_pos += _player[ i ]->getPos( ).x;
 	}
-	camera_pos = camera_pos * 0.25 - SCREEN_WIDTH / 2; //•½‹Ï‚ð‚Æ‚é
+	double pos_ratio = 0.25;
+	if ( isExistancePlayerEvent( ) ) {
+		pos_ratio = 1.0 / ( ACE_PLAYER_NUM - 1 );
+	}
+	camera_pos = camera_pos * pos_ratio - SCREEN_WIDTH / 2; //•½‹Ï‚ð‚Æ‚é
 	if ( _camera_pos - camera_pos > 0 ) {
 		return;
 	}
@@ -83,4 +90,15 @@ void Family::updateCameraPos( ) {
 
 double Family::getCameraPos( ) const {
 	return _camera_pos;
+}
+
+bool Family::isExistancePlayerEvent( ) const {
+	bool result = false;
+	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
+		if ( _player[ i ]->getState( ) == Character::STATE_EVENT ) {
+			result = true;
+			break;
+		}
+	}
+	return result;
 }
