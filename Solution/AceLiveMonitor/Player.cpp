@@ -63,7 +63,7 @@ void Player::act( ) {
 		break;
 	}
 	actOnCamera( );
-	if ( Device::getTask( )->getButton( ) & BUTTON_E ) {
+	if ( Device::getTask( )->getPush( _id ) & BUTTON_E ) {
 		if ( _state != STATE_EVENT ) {
 			_state = STATE_EVENT;
 		} else {
