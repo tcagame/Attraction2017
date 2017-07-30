@@ -15,8 +15,8 @@ MilitaryPtr Military::getTask( ) {
 
 
 Military::Military( ) {
-	_enemies.push_back( EnemyPtr( new EnemyPurpleZombie( Vector( 700, VIEW_STREET_Y + 60 ) ) ) );
-	_enemies.push_back( EnemyPtr( new EnemyFaceAndHand( Vector( 600, VIEW_STREET_Y + 80 ) ) ) );
+	_enemies.push_back( EnemyPtr( new EnemyPurpleZombie( Vector( 700, 60 ) ) ) );
+	_enemies.push_back( EnemyPtr( new EnemyFaceAndHand( Vector( 600, 80 ) ) ) );
 }
 
 

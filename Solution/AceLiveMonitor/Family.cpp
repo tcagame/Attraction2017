@@ -7,10 +7,10 @@ const int CAMERA_SCROLL_SPEED = 5;
 const int SCROLL_BUFFER = SCREEN_WIDTH / 10;
 
 const Vector INIT_PLAYER_POS[ ACE_PLAYER_NUM ] = {
-	Vector( SCREEN_WIDTH / 2 + 150, 10 ),
-	Vector( SCREEN_WIDTH / 2 + 250, 10 ),
-	Vector( SCREEN_WIDTH / 2 + 350, 10 ),
-	Vector( SCREEN_WIDTH / 2 + 450, 10 )
+	Vector( SCREEN_WIDTH / 2 + 150, NORMAL_CHAR_GRAPH_SIZE ),
+	Vector( SCREEN_WIDTH / 2 + 250, NORMAL_CHAR_GRAPH_SIZE ),
+	Vector( SCREEN_WIDTH / 2 + 350, NORMAL_CHAR_GRAPH_SIZE ),
+	Vector( SCREEN_WIDTH / 2 + 450, NORMAL_CHAR_GRAPH_SIZE )
 };
 
 FamilyPtr Family::getTask( ) {

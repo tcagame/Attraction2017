@@ -29,6 +29,8 @@ void ViewerFamily::draw( ) const {
 		Chip chip = player->getChip( );
 		chip.sx1 -= ( int )family->getCameraPos( );
 		chip.sx2 -= ( int )family->getCameraPos( );
+		chip.sy1 += VIEW_STREET_Y;
+		chip.sy2 += VIEW_STREET_Y;
 		_image[ i ]->setRect( chip.tx, chip.ty, chip.size, chip.size );
 		_image[ i ]->setPos( chip.sx1, chip.sy1, chip.sx2, chip.sy2 );
 		_image[ i ]->draw( );
@@ -39,6 +41,8 @@ void ViewerFamily::draw( ) const {
 			Chip charge_chip = player->getChargeChip( );			
 			charge_chip.sx1 -= ( int )family->getCameraPos( );
 			charge_chip.sx2 -= ( int )family->getCameraPos( );
+			charge_chip.sy1 += VIEW_STREET_Y;
+			charge_chip.sy2 += VIEW_STREET_Y;
 			{
 				_shot->setRect( charge_chip.tx, charge_chip.ty, charge_chip.size, charge_chip.size );
 				_shot->setPos( charge_chip.sx1, charge_chip.sy1, charge_chip.sx2, charge_chip.sy2 );
