@@ -25,20 +25,33 @@ void ViewerFamily::draw( ) const {
 		int camera_pos = (int)family->getCameraPos();
 
 		PlayerConstPtr player = family->getPlayer( i );
+		Player::STATE state = player->getState( );
+		int add_sy = 0;
+		switch ( state ) {
+		case Player::STATE_MAIN:
+			add_sy = VIEW_STREET_Y;
+			break;
+		case Player::STATE_EVENT:
+			add_sy = VIEW_EVEMT_Y;
+			break;
+		}
 		Vector pos = player->getPos( );
 		Chip chip = player->getChip( );
 		chip.sx1 -= ( int )family->getCameraPos( );
 		chip.sx2 -= ( int )family->getCameraPos( );
+		chip.sy1 += add_sy;
+		chip.sy2 += add_sy;
 		_image[ i ]->setRect( chip.tx, chip.ty, chip.size, chip.size );
 		_image[ i ]->setPos( chip.sx1, chip.sy1, chip.sx2, chip.sy2 );
 		_image[ i ]->draw( );
-
 		// 妖怪念力のチャージエフェクト
 		int charge_count = player->getChargeCount( );
 		if ( charge_count > 0 ) {
 			Chip charge_chip = player->getChargeChip( );			
 			charge_chip.sx1 -= ( int )family->getCameraPos( );
 			charge_chip.sx2 -= ( int )family->getCameraPos( );
+			charge_chip.sy1 += add_sy;
+			charge_chip.sy2 += add_sy;
 			{
 				_shot->setRect( charge_chip.tx, charge_chip.ty, charge_chip.size, charge_chip.size );
 				_shot->setPos( charge_chip.sx1, charge_chip.sy1, charge_chip.sx2, charge_chip.sy2 );
