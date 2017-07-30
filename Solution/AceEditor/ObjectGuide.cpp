@@ -23,8 +23,8 @@ void ObjectGuide::draw( ) const {
 	const int TEX_SIZE = 16;
 	const int COVER_SIZE = DISP_CHIP_HEIGHT - MAP_COVER_HEIGHT;
 	const int CHIP_HEIGHT_NUM = (int)( ( ( DISP_CHIP_HEIGHT - COVER_SIZE ) / 2.0 ) + 0.5 );
-	for ( int i = 0; i <= DISP_WIDTH / OBJECT_CHIP_SIZE; i++ ) {
-		for ( int j = 0; j <= CHIP_HEIGHT_NUM; j++ ) {
+	for ( int i = 0; i < DISP_WIDTH / OBJECT_CHIP_SIZE; i++ ) {
+		for ( int j = 0; j < PREVIEW_HEIGHT / OBJECT_CHIP_SIZE; j++ ) {
 			int sx = ( i * OBJECT_CHIP_SIZE ) + PREVIEW_X;
 			int sy = ( j * OBJECT_CHIP_SIZE ) + GUIDE_Y;
 			int tx = 0;
@@ -39,7 +39,7 @@ void ObjectGuide::draw( ) const {
 				now_page++;
 				now_page %= _data->getPageNum( );
 			}
-			if ( now_page == ( ox + adjust ) / PAGE_OBJECT_WIDTH_NUM ) {
+			if ( now_page == ( ( ox ) / PAGE_OBJECT_WIDTH_NUM ) % _data->getPageNum( ) ) {
 				tx = 0;
 				ty = 16;
 			}

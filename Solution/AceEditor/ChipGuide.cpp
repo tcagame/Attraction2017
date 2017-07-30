@@ -54,11 +54,12 @@ void ChipGuide::draw( ) const {
 			int height = 0;
 			// 選択ページ
 			int adjust = _chip_cursor->getScrollX( ) % PAGE_CHIP_WIDTH_NUM;
-			int now_page = _chip_cursor->getGX( ) / PAGE_CHIP_WIDTH_NUM;
+			int now_page = ( _chip_cursor->getGX( ) / PAGE_CHIP_WIDTH_NUM ) % _data->getPageNum( );
 			if ( _chip_cursor->getGX( ) % PAGE_CHIP_WIDTH_NUM >= PAGE_CHIP_WIDTH_NUM - adjust ) {
 				now_page++;
+				now_page %= _data->getPageNum( );
 			}
-			if ( now_page == ( gx + adjust ) / PAGE_CHIP_WIDTH_NUM ) {
+			if ( now_page == ( ( gx + adjust ) / PAGE_CHIP_WIDTH_NUM ) % _data->getPageNum( ) ) {
 				ty = 48;
 			}
 			// たろすけが歩ける

@@ -69,5 +69,5 @@ int ObjectCursor::getScrollX( ) const {
 }
 
 void ObjectCursor::setScrollX( int scroll_x ) {
-	_scroll_x = scroll_x * 2;
+	_scroll_x = scroll_x;
 }

@@ -116,5 +116,5 @@ bool ChipCursor::isOnChip( ) const {
 }
 
 void ChipCursor::setScrollX( int scroll_x ) {
-	_scroll_x = scroll_x / 4;
+	_scroll_x = scroll_x;
 }

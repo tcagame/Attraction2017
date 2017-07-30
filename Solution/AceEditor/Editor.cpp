@@ -126,12 +126,12 @@ void Editor::updateMode( ) {
 		if ( keyboard->isPushKey( "F5" ) ) {
 			_mode = MODE_CHIP;
 			_phase = PHASE_EDIT;
-			_chip_cursor->setScrollX( _object_cursor->getScrollX( ) );
+			_chip_cursor->setScrollX( _object_cursor->getScrollX( ) / 4 + abs( _object_cursor->getScrollX( ) % 4 ) );
 		}
 		if ( keyboard->isPushKey( "F6" ) ) {	
 			_mode = MODE_OBJECT;
 			_phase = PHASE_EDIT;
-			_object_cursor->setScrollX( _chip_cursor->getScrollX( ) );
+			_object_cursor->setScrollX( _chip_cursor->getScrollX( ) * 4 );
 		}
 		if ( keyboard->isPushKey( "F8" ) ) {
 			_mode = MODE_LOADBG;
@@ -183,7 +183,7 @@ void Editor::updateChipMode( ) {
 	case PHASE_EDIT:
 		_chip_preview->update( );
 		_chip_cursor->update( );
-		_object_cursor->setScrollX( _chip_cursor->getScrollX( ) );
+		_object_cursor->setScrollX( _chip_cursor->getScrollX( ) * 4 );
 		_chip_editor->update( );
 		break;
 	case PHASE_MENU:
@@ -198,7 +198,7 @@ void Editor::updateObjectMode( ) {
 	switch( _phase ) {
 	case PHASE_EDIT:
 		_object_cursor->update( );
-		_chip_cursor->setScrollX( _object_cursor->getScrollX( ) );
+		_chip_cursor->setScrollX( _object_cursor->getScrollX( ) / 4 + abs( _object_cursor->getScrollX( ) % 4 ) );
 		_object_editor->update( );
 		break;
 	case PHASE_MENU:
