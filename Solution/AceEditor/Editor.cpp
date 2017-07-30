@@ -282,7 +282,13 @@ void Editor::savePage( ) const {
 	if ( filename.size( ) == 0 ) {
 		return;
 	}
-	int page = ( _chip_cursor->getScrollX( ) + _chip_cursor->getGX( ) ) / PAGE_CHIP_WIDTH_NUM;
+	int page = 0;
+	if ( _return_mode == MODE_CHIP ) {
+		page = ( _chip_cursor->getScrollX( ) + _chip_cursor->getGX( ) ) / PAGE_CHIP_WIDTH_NUM;
+	}
+	if ( _return_mode == MODE_OBJECT ) {
+		page = ( _object_cursor->getScrollX( ) + _object_cursor->getGX( ) ) / PAGE_OBJECT_WIDTH_NUM;
+	}
 	page %= _data->getPageNum( );
 	_data->savePage( DIRECTORY_DATA, filename, page );
 }
@@ -292,7 +298,13 @@ void Editor::loadPage( ) {
 	if ( filename.size( ) == 0 ) {
 		return;
 	}
-	int page = ( _chip_cursor->getScrollX( ) + _chip_cursor->getGX( ) ) / PAGE_CHIP_WIDTH_NUM;
+	int page = 0;
+	if ( _return_mode == MODE_CHIP ) {
+		page = ( _chip_cursor->getScrollX( ) + _chip_cursor->getGX( ) ) / PAGE_CHIP_WIDTH_NUM;
+	}
+	if ( _return_mode == MODE_OBJECT ) {
+		page = ( _object_cursor->getScrollX( ) + _object_cursor->getGX( ) ) / PAGE_OBJECT_WIDTH_NUM;
+	}
 	page %= _data->getPageNum( );
 	_data->loadPage( DIRECTORY_DATA, filename, page );
 }
