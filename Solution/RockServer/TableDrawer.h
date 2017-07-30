@@ -5,6 +5,7 @@
 #include "Task.h"
 
 PTR( TableDrawer );
+PTR( Status );
 
 class TableDrawer : public Task {
 public:
@@ -24,7 +25,7 @@ public:
 		MAX_TAG,
 	};
 public:
-	TableDrawer( );
+	TableDrawer( StatusPtr status );
 	virtual ~TableDrawer( );
 public:
 	void update( );
@@ -44,5 +45,7 @@ private:
 	void drawLog( ) const;
 	void drawConnect( ) const;
 	std::string BToS( unsigned char b ) const;
+private:
+	StatusPtr _status;
 };
 

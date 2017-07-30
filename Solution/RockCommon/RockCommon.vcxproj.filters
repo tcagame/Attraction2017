@@ -3,5 +3,6 @@
   <ItemGroup>
     <ClInclude Include="define.h" />
     <ClInclude Include="Status.h" />
+    <ClInclude Include="Message.h" />
   </ItemGroup>
 </Project>

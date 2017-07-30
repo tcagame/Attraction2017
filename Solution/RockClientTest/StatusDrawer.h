@@ -1,15 +1,17 @@
 #pragma once
+
 #include "Task.h"
 #include <string>
 
 PTR( StatusDrawer );
+PTR( Status );
 
 class StatusDrawer : public Task {
 public:
 	static std::string getTag( ) { return "STATUSDRAWER"; };
 	static StatusDrawerPtr getTask( );
 public:
-	StatusDrawer( );
+	StatusDrawer( StatusPtr status );
 	virtual ~StatusDrawer( );
 public:
 	void update( );
@@ -23,5 +25,7 @@ private:
 	void drawItem( ) const;
 	void drawMoney( ) const;
 	void drawPower( ) const;
+private:
+	StatusPtr _status;
 };
 

@@ -1,16 +1,16 @@
 #include "TableDrawer.h"
 #include "Drawer.h"
 #include "define.h"
-#include "StatusSender.h"
 #include "Device.h"
 #include "Command.h"
 #include "Application.h"
 #include "Log.h"
+#include "Status.h"
 
 const int STATUS_FLAME_X = 5;
 const int STATUS_FLAME_Y = 5;
 const int BOX_HEIGHT = 30;
-const int STATUS_FLAME_HEIGHT = BOX_HEIGHT * ( ROCK_PLAYER_NUM + 1 );
+const int STATUS_FLAME_HEIGHT = BOX_HEIGHT * ( Status::PLAYER_NUM + 1 );
 
 const int COMMAND_WIDTH = 400;
 const int COMMAND_X = SCREEN_WIDTH - COMMAND_WIDTH - 10;
@@ -45,7 +45,7 @@ const int BOX_WIDTH[ TableDrawer::MAX_TAG ] {
 	100, //Money
 	100, //Power
 };
-const char* NAME[ ROCK_PLAYER_NUM ] = {
+const char* NAME[ Status::PLAYER_NUM ] = {
 	"TAROSUKE",
 	"TAROJIRO",
 	"GARISUKE",
@@ -57,7 +57,8 @@ TableDrawerPtr TableDrawer::getTask( ) {
 }
 
 
-TableDrawer::TableDrawer( ) {
+TableDrawer::TableDrawer( StatusPtr status ) :
+_status( status ) {
 }
 
 
@@ -87,7 +88,7 @@ void TableDrawer::drawFlame( ) const {
 	DrawerPtr drawer( Drawer::getTask( ) );
 	int vertical_sx = STATUS_FLAME_X;
 	for ( int i = 0; i < MAX_TAG; i++ ) {
-		for ( int j = 0; j < ROCK_PLAYER_NUM; j++ ) {
+		for ( int j = 0; j < Status::PLAYER_NUM; j++ ) {
 			drawer->drawLine( vertical_sx, STATUS_FLAME_Y, vertical_sx, STATUS_FLAME_Y + STATUS_FLAME_HEIGHT ); // ècÉâÉCÉì
 		}
 		vertical_sx += BOX_WIDTH[ i ];
@@ -95,7 +96,7 @@ void TableDrawer::drawFlame( ) const {
 	drawer->drawLine( vertical_sx, STATUS_FLAME_Y, vertical_sx, STATUS_FLAME_Y + STATUS_FLAME_HEIGHT ); // ç≈å„ÇÃècÉâÉCÉì
 	int frame_right = vertical_sx;
 	int horizontal_sy = STATUS_FLAME_Y;
-	for ( int i = 0; i < ROCK_PLAYER_NUM + 1; i++ ) {
+	for ( int i = 0; i < Status::PLAYER_NUM + 1; i++ ) {
 		drawer->drawLine( STATUS_FLAME_X, horizontal_sy, frame_right, horizontal_sy ); // â°ÉâÉCÉì
 		horizontal_sy += BOX_HEIGHT;
 	}
@@ -125,7 +126,7 @@ void TableDrawer::drawPlayer( ) const {
 	}
 	int sy = STATUS_FLAME_Y + 10;
 	drawer->drawString( sx, sy, "PLAYER" );
-	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+	for ( int i = 0; i < Status::PLAYER_NUM; i++ ) {
 		sy += BOX_HEIGHT;
 		drawer->drawString( sx, sy, "%d:%s", i, NAME[ i ] );
 	}
@@ -133,49 +134,48 @@ void TableDrawer::drawPlayer( ) const {
 
 void TableDrawer::drawDeviceDir( ) const {
 	DrawerPtr drawer( Drawer::getTask( ) );
-	StatusSenderPtr status_sender( StatusSender::getTask( ) );
+
 	int sx = STATUS_FLAME_X + 5;
 	for ( int i = 0; i < TAG_DEVICE_DIR; i++ ) {
 		sx += BOX_WIDTH[ i ];
 	}
 	int sy = STATUS_FLAME_Y + 10;
 	drawer->drawString( sx, sy, "DEVICE DIR" );
-	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+	for ( int i = 0; i < Status::PLAYER_NUM; i++ ) {
 		sy += BOX_HEIGHT;
-		int dir_x = status_sender->getData( ).player[ i ].device_x;
-		int dir_y = status_sender->getData( ).player[ i ].device_y;
+		int dir_x = _status->getPlayer( i ).device_x;
+		int dir_y = _status->getPlayer( i ).device_y;
 		drawer->drawString( sx, sy, "X:%d Y:%d", dir_x, dir_y );
 	}
 }
 
 void TableDrawer::drawDeviceButton( ) const {
 	DrawerPtr drawer( Drawer::getTask( ) );
-	StatusSenderPtr status_sender( StatusSender::getTask( ) );
+
 	int sx = STATUS_FLAME_X + 5;
 	for ( int i = 0; i < TAG_DEVICE_BUTTON; i++ ) {
 		sx += BOX_WIDTH[ i ];
 	}
 	int sy = STATUS_FLAME_Y + 10;
 	drawer->drawString( sx, sy, "DEVICE BUTTON" );
-	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+	for ( int i = 0; i < Status::PLAYER_NUM; i++ ) {
 		sy += BOX_HEIGHT;
-		drawer->drawString( sx, sy, "%s", BToS( status_sender->getData( ).player[ i ].device_button ).c_str( ) );
+		drawer->drawString( sx, sy, "%s", BToS( _status->getPlayer( i ).device_button ).c_str( ) );
 	}
 }
 
 void TableDrawer::drawState( ) const {
 	DrawerPtr drawer( Drawer::getTask( ) );
-	StatusSenderPtr status_sender( StatusSender::getTask( ) );
 	int sx = STATUS_FLAME_X + 5;
 	for ( int i = 0; i < TAG_STATE; i++ ) {
 		sx += BOX_WIDTH[ i ];
 	}
 	int sy = STATUS_FLAME_Y + 10;
 	drawer->drawString( sx, sy, "STATE" );
-	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+	for ( int i = 0; i < Status::PLAYER_NUM; i++ ) {
 		sy += BOX_HEIGHT;
 		std::string state = "\0";
-		switch ( status_sender->getData( ).player[ i ].state ) {
+		switch ( _status->getPlayer( i ).state ) {
 		case STATE_NONE:
 			state = "NONE";
 			break;
@@ -204,76 +204,76 @@ void TableDrawer::drawState( ) const {
 
 void TableDrawer::drawContinue( ) const {
 	DrawerPtr drawer( Drawer::getTask( ) );
-	StatusSenderPtr status_sender( StatusSender::getTask( ) );
+
 	int sx = STATUS_FLAME_X + 5;
 	for ( int i = 0; i < TAG_CONTINUE; i++ ) {
 		sx += BOX_WIDTH[ i ];
 	}
 	int sy = STATUS_FLAME_Y + 10;
 	drawer->drawString( sx, sy, "CONTINUE" );
-	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+	for ( int i = 0; i < Status::PLAYER_NUM; i++ ) {
 		sy += BOX_HEIGHT;
-		drawer->drawString( sx, sy, "%d", status_sender->getData( ).player[ i ].continue_num );
+		drawer->drawString( sx, sy, "%d", _status->getPlayer( i ).continue_num );
 	}
 }
 
 void TableDrawer::drawToku( ) const {
 	DrawerPtr drawer( Drawer::getTask( ) );
-	StatusSenderPtr status_sender( StatusSender::getTask( ) );
+
 	int sx = STATUS_FLAME_X + 5;
 	for ( int i = 0; i < TAG_TOKU; i++ ) {
 		sx += BOX_WIDTH[ i ];
 	}
 	int sy = STATUS_FLAME_Y + 10;
 	drawer->drawString( sx, sy, "TOKU" );
-	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+	for ( int i = 0; i < Status::PLAYER_NUM; i++ ) {
 		sy += BOX_HEIGHT;
-		drawer->drawString( sx, sy, "%d", status_sender->getData( ).player[ i ].toku );
+		drawer->drawString( sx, sy, "%d", _status->getPlayer( i ).toku );
 	}
 }
 
 void TableDrawer::drawItem( ) const {
 	DrawerPtr drawer( Drawer::getTask( ) );
-	StatusSenderPtr status_sender( StatusSender::getTask( ) );
+
 	int sx = STATUS_FLAME_X + 5;
 	for ( int i = 0; i < TAG_ITEM; i++ ) {
 		sx += BOX_WIDTH[ i ];
 	}
 	int sy = STATUS_FLAME_Y + 10;
 	drawer->drawString( sx, sy, "ITEM" );
-	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+	for ( int i = 0; i < Status::PLAYER_NUM; i++ ) {
 		sy += BOX_HEIGHT;
-		drawer->drawString( sx, sy, "%s", BToS( status_sender->getData( ).player[ i ].item ).c_str( ) );
+		drawer->drawString( sx, sy, "%s", BToS( _status->getPlayer( i ).item ).c_str( ) );
 	}
 }
 
 void TableDrawer::drawMoney( ) const {
 	DrawerPtr drawer( Drawer::getTask( ) );
-	StatusSenderPtr status_sender( StatusSender::getTask( ) );
+
 	int sx = STATUS_FLAME_X + 5;
 	for ( int i = 0; i < TAG_MONEY; i++ ) {
 		sx += BOX_WIDTH[ i ];
 	}
 	int sy = STATUS_FLAME_Y + 10;
 	drawer->drawString( sx, sy, "MONEY" );
-	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+	for ( int i = 0; i < Status::PLAYER_NUM; i++ ) {
 		sy += BOX_HEIGHT;
-		drawer->drawString( sx, sy, "%d", status_sender->getData( ).player[ i ].money );
+		drawer->drawString( sx, sy, "%d", _status->getPlayer( i ).money );
 	}
 }
 
 void TableDrawer::drawPower( ) const {
 	DrawerPtr drawer( Drawer::getTask( ) );
-	StatusSenderPtr status_sender( StatusSender::getTask( ) );
+
 	int sx = STATUS_FLAME_X + 5;
 	for ( int i = 0; i < TAG_POWER; i++ ) {
 		sx += BOX_WIDTH[ i ];
 	}
 	int sy = STATUS_FLAME_Y + 10;
 	drawer->drawString( sx, sy, "POWER" );
-	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+	for ( int i = 0; i < Status::PLAYER_NUM; i++ ) {
 		sy += BOX_HEIGHT;
-		drawer->drawString( sx, sy, "%d", status_sender->getData( ).player[ i ].power );
+		drawer->drawString( sx, sy, "%d", _status->getPlayer( i ).power );
 	}
 }
 
@@ -325,13 +325,13 @@ void TableDrawer::drawLog( ) const{
 void TableDrawer::drawConnect( ) const {
 	DrawerPtr drawer( Drawer::getTask( ) );
 	ServerPtr server( Server::getTask( ) );
-	drawer->drawLine( CONNECT_X, CONNECT_Y, CONNECT_X, CONNECT_Y + BOX_HEIGHT * ( MAX_MACHINE + 1 )  );
-	drawer->drawLine( CONNECT_X + CONNECT_WIDTH, CONNECT_Y, CONNECT_X + CONNECT_WIDTH, CONNECT_Y + BOX_HEIGHT * ( MAX_MACHINE + 1 )  );
-	drawer->drawLine( CONNECT_X, CONNECT_Y + BOX_HEIGHT * ( MAX_MACHINE + 1 ), CONNECT_X + CONNECT_WIDTH, CONNECT_Y + BOX_HEIGHT * ( MAX_MACHINE + 1 ) );
+	drawer->drawLine( CONNECT_X, CONNECT_Y, CONNECT_X, CONNECT_Y + BOX_HEIGHT * ( Server::MAX_MACHINES + 1 )  );
+	drawer->drawLine( CONNECT_X + CONNECT_WIDTH, CONNECT_Y, CONNECT_X + CONNECT_WIDTH, CONNECT_Y + BOX_HEIGHT * ( Server::MAX_MACHINES + 1 )  );
+	drawer->drawLine( CONNECT_X, CONNECT_Y + BOX_HEIGHT * ( Server::MAX_MACHINES + 1 ), CONNECT_X + CONNECT_WIDTH, CONNECT_Y + BOX_HEIGHT * ( Server::MAX_MACHINES + 1 ) );
 	int sy = CONNECT_Y;
 	drawer->drawLine( CONNECT_X, sy, CONNECT_X + CONNECT_WIDTH, sy );
 	drawer->drawString( CONNECT_X + 100, sy + 6, "Connect" );
-	for ( int i = 0; i < MAX_MACHINE; i++ ) {
+	for ( int i = 0; i < Server::MAX_MACHINES; i++ ) {
 		sy += BOX_HEIGHT;
 		drawer->drawString( CONNECT_X, sy + 6, server->getMachineIPStr( i ).c_str( ) );
 		drawer->drawLine( CONNECT_X, sy, CONNECT_X + CONNECT_WIDTH, sy );

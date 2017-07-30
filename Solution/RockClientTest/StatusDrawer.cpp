@@ -21,7 +21,8 @@ StatusDrawerPtr StatusDrawer::getTask( ) {
 }
 
 
-StatusDrawer::StatusDrawer( ) {
+StatusDrawer::StatusDrawer( StatusPtr status ) :
+_status( status ) {
 }
 
 
@@ -29,14 +30,13 @@ StatusDrawer::~StatusDrawer( ) {
 }
 
 void StatusDrawer::update( ) {
-	ROCK_DATA data = StatusReceiver::getTask( )->getData( );
 	DrawerPtr drawer( Drawer::getTask( ) );
 	drawer->flip( );
 	{//player
 		int sx = VIEW_PLAYER_X;
 		int sy = 0;
 		drawer->drawString( sx, sy, "Player" );
-		for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+		for ( int i = 0; i < Status::PLAYER_NUM; i++ ) {
 			sy += HEIGHT;
 			drawer->drawString( sx, sy, "Player%d", i );
 		}
@@ -45,72 +45,72 @@ void StatusDrawer::update( ) {
 		int sx = VIEW_DEVICE_X;
 		int sy = 0;
 		drawer->drawString( sx, sy, "DeviceDir" );
-		for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+		for ( int i = 0; i < Status::PLAYER_NUM; i++ ) {
 			sy += HEIGHT;
-			drawer->drawString( sx, sy, "%d : %d", data.player[ i ].device_x, data.player[ i ].device_y );
+			drawer->drawString( sx, sy, "%d : %d", _status->getPlayer( i ).device_x, _status->getPlayer( i ).device_y );
 		}
 	}
 	{//drawDeviceButton
 		int sx = VIEW_BUTTON_X;
 		int sy = 0;
 		drawer->drawString( sx, sy, "DeviceButton" );
-		for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+		for ( int i = 0; i < Status::PLAYER_NUM; i++ ) {
 			sy += HEIGHT;
-			drawer->drawString( sx, sy, BToS( data.player[ i ].device_button ).c_str( ) );
+			drawer->drawString( sx, sy, BToS( _status->getPlayer( i ).device_button ).c_str( ) );
 		}
 	}
 	{//drawState
 		int sx = VIEW_STATE_X;
 		int sy = 0;
 		drawer->drawString( sx, sy, "State" );
-		for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+		for ( int i = 0; i < Status::PLAYER_NUM; i++ ) {
 			sy += HEIGHT;
-			drawer->drawString( sx, sy, BToS( data.player[ i ].state ).c_str( ) );
+			drawer->drawString( sx, sy, BToS( _status->getPlayer( i ).state ).c_str( ) );
 		}
 	}
 	{//drawContinue
 		int sx = VIEW_CONTINUE_X;
 		int sy = 0;
 		drawer->drawString( sx, sy,  "Continue" );
-		for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+		for ( int i = 0; i < Status::PLAYER_NUM; i++ ) {
 			sy += HEIGHT;
-			drawer->drawString( sx, sy, "%d", data.player[ i ].continue_num );
+			drawer->drawString( sx, sy, "%d", _status->getPlayer( i ).continue_num );
 		}
 	}
 	{//drawToku
 		int sx = VIEW_TOKU_X;
 		int sy = 0;
 		drawer->drawString( sx, sy,  "Toku" );
-		for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+		for ( int i = 0; i < Status::PLAYER_NUM; i++ ) {
 			sy += HEIGHT;
-			drawer->drawString( sx, sy, "%d", data.player[ i ].toku );
+			drawer->drawString( sx, sy, "%d", _status->getPlayer( i ).toku );
 		}
 	}
 	{//drawItem
 		int sx = VIEW_ITEM_X;
 		int sy = 0;
 		drawer->drawString( sx, sy, "Item" );
-		for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+		for ( int i = 0; i < Status::PLAYER_NUM; i++ ) {
 			sy += HEIGHT;
-			drawer->drawString( sx, sy, BToS( data.player[ i ].item ).c_str( ) );
+			drawer->drawString( sx, sy, BToS( _status->getPlayer( i ).item ).c_str( ) );
 		}
 	}
 	{//drawMoney
 		int sx = VIEW_MONEY_X;
 		int sy = 0;
 		drawer->drawString( sx, sy,  "Money" );
-		for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+		for ( int i = 0; i < Status::PLAYER_NUM; i++ ) {
 			sy += HEIGHT;
-			drawer->drawString( sx, sy, "%d", data.player[ i ].money );
+			drawer->drawString( sx, sy, "%d", _status->getPlayer( i ).money );
 		}
 	}
 	{//drawPower
 		int sx = VIEW_POWER_X;
 		int sy = 0;
 		drawer->drawString( sx, sy,  "Power" );
-		for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+		for ( int i = 0; i < Status::PLAYER_NUM; i++ ) {
 			sy += HEIGHT;
-			drawer->drawString( sx, sy, "%d", data.player[ i ].power );
+			drawer->drawString( sx, sy, "%d", _status->getPlayer( i ).power );
 		}
 	}
 }

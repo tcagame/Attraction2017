@@ -13,9 +13,4 @@ StatusReceiver::~StatusReceiver( ) {
 }
 
 void StatusReceiver::update( ) {
-	Client::getTask( )->recieveClientData( ( void* )&_data, sizeof( ROCK_DATA ) );
-}
-
-ROCK_DATA StatusReceiver::getData( ) const {
-	return _data;
 }

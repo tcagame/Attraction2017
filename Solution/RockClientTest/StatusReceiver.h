@@ -4,6 +4,7 @@
 #include "status.h"
 
 PTR( StatusReceiver );
+PTR( Status );
 
 class StatusReceiver : public Task {
 public:
@@ -14,8 +15,7 @@ public:
 	virtual ~StatusReceiver( );
 public:
 	void update( );
-	ROCK_DATA getData( ) const;
 private:
-	ROCK_DATA _data;
+	StatusPtr _status;
 };
 

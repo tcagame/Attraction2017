@@ -1,11 +1,15 @@
 #pragma once
 #include <array>
 #include "define.h"
+#include "Data.h"
+#include <assert.h>
 
-const int ROCK_PLAYER_NUM = 4;
+class Status : public Data {
+public:
 
-struct ROCK_DATA {
-	struct STATUS {
+	static const int PLAYER_NUM = 4;
+
+	struct Player {
 		char device_x;
 		char device_y;
 		unsigned char device_button;
@@ -15,18 +19,44 @@ struct ROCK_DATA {
 		unsigned char item;
 		unsigned char money;
 		unsigned char power;
-		STATUS( ) :
-			device_x( 0 ),
-			device_y( 0 ),
-			device_button( 0b00000000 ),
-			state( STATE_NONE ),
-			continue_num( 0 ),
-			toku( 0 ),
-			item( 0b00000000 ),
-			money( 0 ),
-			power( 0 ) {
+	};
+
+	Status( ) {
+		for ( int i = 0; i < PLAYER_NUM; i++ ) {
+			_player[ i ].device_x = 0;
+			_player[ i ].device_y = 0;
+			_player[ i ].device_button = 0b00000000;
+			_player[ i ].state = STATE_NONE;
+			_player[ i ].continue_num = 0;
+			_player[ i ].toku = 0;
+			_player[ i ].item = 0b00000000;
+			_player[ i ].money = 0;
+			_player[ i ].power = 0;
 		}
 	};
-	std::array< STATUS, ROCK_PLAYER_NUM > player;
+
+	virtual ~Status( ) {
+
+	}
+
+	Player& getPlayer( int idx ) {
+		assert( idx >= 0 );
+		assert( idx < PLAYER_NUM );
+
+		return _player[ idx ];
+	}
+
+	void * getPtr( ) {
+		return ( void * )_player;
+	}
+
+	int getSize( ) {
+		return sizeof( _player );
+	}
+
+private:
+#	pragma pack( 1 )
+		Player _player[ PLAYER_NUM ];
+#	pragma pack( )
 };
 

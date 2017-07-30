@@ -1,21 +1,22 @@
 #pragma once
-#include "status.h"
+
 #include "define.h"
 #include <array>
 #include "Task.h"
+#include "Status.h"
 
 PTR( StatusSender );
+PTR( Status );
 
 class StatusSender : public Task {
 public:
 	static std::string getTag( ) { return "STATUSSENDER"; };
 	static StatusSenderPtr getTask( );
 public:
-	StatusSender( );
+	StatusSender( StatusPtr status );
 	virtual ~StatusSender( );
 public:
 	void update( );
-	ROCK_DATA getData( ) const;
 	bool setContinueNum( int idx, int num );
 	bool setTokuNum( int idx, int num );
 	bool setPower( int idx, int power );
@@ -23,6 +24,6 @@ public:
 	bool setItem( int idx, int item );
 	bool setState( int idx, unsigned int state );
 private:
-	ROCK_DATA _data;
-	std::array< int, ROCK_PLAYER_NUM > _reset_count;//ボタンのカウント
+	StatusPtr _status;
+	std::array< int, Status::PLAYER_NUM > _reset_count;//ボタンのカウント
 };
