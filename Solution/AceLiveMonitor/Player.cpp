@@ -26,8 +26,7 @@ _charge_count( 0 ),
 _damege_count( 0 ),
 _over_charge_time( -1 ),
 _id( player_id ),
-_action( ACTION_WAIT ),
-_state( STATE_MAIN ) {
+_action( ACTION_WAIT ) {
 	setRadius( 25 );
 	setDir( DIR_RIGHT );
 }
@@ -63,11 +62,13 @@ void Player::act( ) {
 		break;
 	}
 	actOnCamera( );
+
+	//イベント-メイン切り替え用(デバッグ)
 	if ( Device::getTask( )->getPush( _id ) & BUTTON_E ) {
-		if ( _state != STATE_EVENT ) {
-			_state = STATE_EVENT;
+		if ( getState( ) != STATE_EVENT ) {
+			setState( STATE_EVENT );
 		} else {
-			_state = STATE_MAIN;
+			setState( STATE_MAIN );
 		}
 	}
 }
@@ -458,8 +459,4 @@ Chip Player::getChargeChip( ) const {
 	chip.size = NORMAL_CHAR_GRAPH_SIZE;
 
 	return chip;
-}
-
-Player::STATE Player::getState( ) const {
-	return _state;
 }
