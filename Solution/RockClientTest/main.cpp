@@ -10,6 +10,9 @@
 #include "Message.h"
 #include "RockViewer.h"
 #include "RockMap.h"
+#include "RockMilitary.h"
+#include "RockCamera.h"
+#include "RockDollHouse.h"
 
 void main( ) {
 
@@ -21,6 +24,9 @@ void main( ) {
 	app->addTask( Client::getTag( ), TaskPtr( new Client( status, message ) ) );
 	app->addTask( StatusReceiver::getTag( ), TaskPtr( new StatusReceiver ) );
 	app->addTask( RockMap::getTag( ), TaskPtr( new RockMap ) );
+	app->addTask( RockMilitary::getTag( ), TaskPtr( new RockMilitary ) );
+	app->addTask( RockDollHouse::getTag( ), TaskPtr( new RockDollHouse ) );
+	app->addTask( RockCamera::getTag( ), TaskPtr( new RockCamera ) );
 	//debug•`‰æ(status)
 	//app->addTask( StatusDrawer::getTag( ), TaskPtr( new StatusDrawer( status ) ) );
 	//’Êí•`‰æ

@@ -12,3 +12,9 @@ const unsigned int STATE_STREET_2	= 0b00000100;
 const unsigned int STATE_STREET_3	= 0b00001000;
 const unsigned int STATE_BOSS		= 0b00010000;
 const unsigned int STATE_RESULT		= 0b00100000;
+
+enum DOLL {
+	DOLL_GHOST,
+	DOLL_REDBARD,
+	MAX_DOLL
+};
