@@ -4,9 +4,13 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="StatusDrawer.cpp" />
     <ClCompile Include="StatusReceiver.cpp" />
+    <ClCompile Include="RockMap.cpp" />
+    <ClCompile Include="RockViewer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StatusDrawer.h" />
     <ClInclude Include="StatusReceiver.h" />
+    <ClInclude Include="RockMap.h" />
+    <ClInclude Include="RockViewer.h" />
   </ItemGroup>
 </Project>
