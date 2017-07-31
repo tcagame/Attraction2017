@@ -21,7 +21,8 @@ private:
 		MAX_TAG
 	};
 private:
-	unsigned char getObj( int idx );
+	unsigned char getObj( int idx ) const;
+	unsigned char getEnemy( int idx );
 private:
 	bool _active;
 	TAG _select_tag;

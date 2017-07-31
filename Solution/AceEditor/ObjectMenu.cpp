@@ -59,24 +59,40 @@ void ObjectMenu::update( ) {
 		}
 
 		switch ( _select_tag ) {
-		case TAG_BLOCK: // block‘I‘ð
-			int sx1 = ( int )_pos.x + BLOCK_X;
-			int sy1 = ( int )_pos.y + BLOCK_Y;
-			int sx2 = sx1 + BLOCK_DRAW_SIZE * BLOCK_WIDTH_NUM;
-			int sy2 = sy1 + BLOCK_DRAW_SIZE;
-			if ( sx1 < mouse_pos.x && sx2 > mouse_pos.x && sy1 < mouse_pos.y && sy2 > mouse_pos.y ) {
-				int x = ( int )( mouse_pos.x - sx1 ) / BLOCK_DRAW_SIZE;
-				int y = ( int )( mouse_pos.y - sy1 ) / BLOCK_DRAW_SIZE;
-				int idx = x + y * BLOCK_WIDTH_NUM;
-				unsigned char obj = getObj( idx );
-				_object_editor->setObject( obj );
+			case TAG_BLOCK: // block‘I‘ð
+			{
+				int sx1 = ( int )_pos.x + BLOCK_X;
+				int sy1 = ( int )_pos.y + BLOCK_Y;
+				int sx2 = sx1 + BLOCK_DRAW_SIZE * BLOCK_WIDTH_NUM;
+				int sy2 = sy1 + BLOCK_DRAW_SIZE;
+				if ( sx1 < mouse_pos.x && sx2 > mouse_pos.x && sy1 < mouse_pos.y && sy2 > mouse_pos.y ) {
+					int x = ( int )( mouse_pos.x - sx1 ) / BLOCK_DRAW_SIZE;
+					int y = ( int )( mouse_pos.y - sy1 ) / BLOCK_DRAW_SIZE;
+					int idx = x + y * BLOCK_WIDTH_NUM;
+					unsigned char obj = getObj( idx );
+					_object_editor->setObject( obj );
+				}
 			}
-			break;
+				break;
+			case TAG_ENEMY: //enemy‘I‘ð
+			{
+				int sx1 = ( int )_pos.x + BLOCK_X;
+				int sy1 = ( int )_pos.y + BLOCK_Y;
+				int sx2 = sx1 + NORMAL_CHAR_GRAPH_SIZE;
+				int sy2 = sy1 + NORMAL_CHAR_GRAPH_SIZE;
+				if ( sx1 < mouse_pos.x && sx2 > mouse_pos.x && sy1 < mouse_pos.y && sy2 > mouse_pos.y ) {
+					int x = ( int )( mouse_pos.x - sx1 ) / NORMAL_CHAR_GRAPH_SIZE;
+					int y = ( int )( mouse_pos.y - sy1 ) / NORMAL_CHAR_GRAPH_SIZE;
+					int enemy_idx = x + y;
+					unsigned char enemy = getEnemy( enemy_idx );
+					_object_editor->setObject( enemy );
+				}
+			}
 		}
 	}
 }
 
-unsigned char ObjectMenu::getObj( int idx ) {
+unsigned char ObjectMenu::getObj( int idx ) const {
 	unsigned char result = OBJECT_NONE;
 	switch ( idx ) {
 	case 1:
@@ -84,6 +100,19 @@ unsigned char ObjectMenu::getObj( int idx ) {
 		break;
 	case 2:
 		result = OBJECT_ONEWAY;
+		break;
+	default:
+		result = OBJECT_NONE;
+		break;
+	}
+	return result;
+}
+
+unsigned char ObjectMenu::getEnemy( int idx ) {
+	unsigned char result = OBJECT_NONE;
+	switch( idx ) {
+	case 0:
+		result = OBJECT_ENEMY;
 		break;
 	default:
 		result = OBJECT_NONE;
