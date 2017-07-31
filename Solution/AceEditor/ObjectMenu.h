@@ -7,7 +7,7 @@ PTR( ObjectEditor );
 
 class ObjectMenu {
 public:
-	ObjectMenu( ImagePtr image_menu, ImagePtr image_block, ObjectEditorPtr object_editor );
+	ObjectMenu( ImagePtr image_menu, ImagePtr image_block, ImagePtr image_enemy, ObjectEditorPtr object_editor );
 	virtual ~ObjectMenu( );
 public:
 	void update( );
@@ -21,13 +21,15 @@ private:
 		MAX_TAG
 	};
 private:
-	unsigned char getObj( int idx );
+	unsigned char getObj( int idx ) const;
+	unsigned char getEnemy( int idx );
 private:
 	bool _active;
 	TAG _select_tag;
 	Vector _pos;
 	ImagePtr _menu;
 	ImagePtr _block;
+	ImagePtr _enemy;
 	ObjectEditorPtr _object_editor;
 };
 

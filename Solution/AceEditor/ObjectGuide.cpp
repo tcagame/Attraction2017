@@ -51,6 +51,11 @@ void ObjectGuide::draw( ) const {
 			if ( _data->getObject( ox, oy ) == OBJECT_ONEWAY ) {
 				tx = 16 * 2;
 			}
+			//エネミー配置ブロック
+			if ( _data->getObject( ox, oy ) == OBJECT_ENEMY ) {
+				tx = 16;
+				ty = 32;
+			}
 
 			_image->setRect( tx, ty, TEX_SIZE, TEX_SIZE );
 			_image->setPos( sx, sy );
