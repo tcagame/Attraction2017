@@ -28,12 +28,15 @@ const int BLOCK_Y = 42;
 const int BLOCK_DRAW_SIZE = 64;
 const int BLOCK_WIDTH_NUM = 3;
 
-ObjectMenu::ObjectMenu( ImagePtr image_menu, ImagePtr image_block, ObjectEditorPtr object_editor ) :
+const int ENEMY_WIDTH_NUM = 2;
+
+ObjectMenu::ObjectMenu( ImagePtr image_menu, ImagePtr image_block, ImagePtr image_enemy, ObjectEditorPtr object_editor ) :
 _active( false ),
 _select_tag( TAG_BLOCK ),
 _object_editor( object_editor ),
 _menu( image_menu ),
-_block( image_block ) {
+_block( image_block ),
+_enemy( image_enemy ) {
 }
 
 ObjectMenu::~ObjectMenu( ) {
@@ -160,6 +163,15 @@ void ObjectMenu::draw( ) const {
 				_block->setPos( sx, sy, sx + BLOCK_DRAW_SIZE, sy + BLOCK_DRAW_SIZE );
 				_block->draw( );
 			}
+		}
+		break;
+	case TAG_ENEMY:
+		{//enemy
+			int sx = ( int )_pos.x + BLOCK_X;
+			int sy = ( int )_pos.y + BLOCK_Y;
+			_enemy->setRect( 0, NORMAL_CHAR_GRAPH_SIZE, NORMAL_CHAR_GRAPH_SIZE, NORMAL_CHAR_GRAPH_SIZE );
+			_enemy->setPos( sx, sy, sx + NORMAL_CHAR_GRAPH_SIZE, sy + NORMAL_CHAR_GRAPH_SIZE );
+			_enemy->draw( );	
 		}
 		break;
 	}
