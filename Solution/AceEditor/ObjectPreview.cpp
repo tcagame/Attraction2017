@@ -9,6 +9,7 @@ _data( data ),
 _object_cursor( object_cursor ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
 	_block = drawer->createImage( "block/block.png" );
+	_enemy = drawer->createImage( "../Enemy/enemy_medium.png" );
 	_choise = drawer->createImage( "guide/object_guide_cursor.png" );
 }
 
@@ -29,6 +30,11 @@ void ObjectPreview::draw( ) const {
 				_block->setRect( 16, 0, OBJECT_CHIP_SIZE, OBJECT_CHIP_SIZE );
 				_block->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE, PREVIEW_Y + j * OBJECT_CHIP_SIZE );
 				_block->draw( );
+			}
+			if ( _data->getObject( ox, oy ) == OBJECT_ENEMY ) {
+				_enemy->setRect( 0, 64 ,NORMAL_CHAR_GRAPH_SIZE, NORMAL_CHAR_GRAPH_SIZE );
+				_enemy->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE - ( NORMAL_CHAR_GRAPH_SIZE / 2 ), PREVIEW_Y + j * OBJECT_CHIP_SIZE - ( NORMAL_CHAR_GRAPH_SIZE - OBJECT_CHIP_SIZE ) );
+				_enemy->draw( );
 			}
 			if ( _object_cursor->getGX( )  == ox
 				 && _object_cursor->getGY( ) == oy ) {

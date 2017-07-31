@@ -13,6 +13,7 @@ public:
 	void draw( ) const;
 private:
 	ImagePtr _block;
+	ImagePtr _enemy;
 	ImagePtr _choise;
 	DataConstPtr _data;
 	ObjectCursorConstPtr _object_cursor;
