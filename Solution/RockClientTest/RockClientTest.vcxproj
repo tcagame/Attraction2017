@@ -159,7 +159,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="RockEnemyRedBard.cpp" />
+    <ClCompile Include="RockCamera.cpp" />
+    <ClCompile Include="RockCharacter.cpp" />
+    <ClCompile Include="RockDollHouse.cpp" />
+    <ClCompile Include="RockEnemy.cpp" />
+    <ClCompile Include="RockEnemyGhost.cpp" />
     <ClCompile Include="RockMap.cpp" />
+    <ClCompile Include="RockMilitary.cpp" />
     <ClCompile Include="RockViewer.cpp" />
     <ClCompile Include="StatusDrawer.cpp" />
     <ClCompile Include="StatusReceiver.cpp" />
@@ -170,7 +177,14 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="RockEnemyRedBard.h" />
+    <ClInclude Include="RockCamera.h" />
+    <ClInclude Include="RockCharacter.h" />
+    <ClInclude Include="RockDollHouse.h" />
+    <ClInclude Include="RockEnemy.h" />
+    <ClInclude Include="RockEnemyGhost.h" />
     <ClInclude Include="RockMap.h" />
+    <ClInclude Include="RockMilitary.h" />
     <ClInclude Include="RockViewer.h" />
     <ClInclude Include="StatusDrawer.h" />
     <ClInclude Include="StatusReceiver.h" />
