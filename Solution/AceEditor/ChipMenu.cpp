@@ -10,15 +10,19 @@
 const int NUMBER_CHIP_SIZE = 32;
 const int BG_WIDTH = 340;
 const int BG_HEIGHT = 280;
+
 const int TAG_GRAPH_WIDTH = 96;
 const int TAG_GRAPH_HEIGHT = 32;
+
 const int FRAME_SIZE = 5;
 const int FRAME_WINDOW_WIDTH = BG_WIDTH + FRAME_SIZE * 2;
 const int FRAME_WINDOW_HEIGHT = BG_HEIGHT + TAG_GRAPH_HEIGHT + FRAME_SIZE;
 const int FRAME_X = 0;
 const int FRAME_Y = 0;
+
 const int TAG_Y = 0;
 const int TAG_X = 10;
+
 const int BG_X = FRAME_SIZE;
 const int BG_Y = TAG_GRAPH_HEIGHT;
 const int HEIGHT_X = BG_X + 10;

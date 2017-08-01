@@ -24,6 +24,7 @@ private:
 	unsigned char getObj( int idx ) const;
 	unsigned char getEnemy( int idx );
 private:
+	int _page;
 	bool _active;
 	TAG _select_tag;
 	Vector _pos;

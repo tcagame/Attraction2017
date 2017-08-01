@@ -52,7 +52,8 @@ void ObjectGuide::draw( ) const {
 				tx = 16 * 2;
 			}
 			//エネミー配置ブロック
-			if ( _data->getObject( ox, oy ) == OBJECT_ENEMY ) {
+			if ( _data->getObject( ox, oy ) != OBJECT_NONE &&
+				 _data->getObject( ox, oy ) < OBJECT_BLOCK ) {
 				tx = 16;
 				ty = 32;
 			}

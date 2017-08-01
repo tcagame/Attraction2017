@@ -1,6 +1,7 @@
 #include "ObjectMenu.h"
 #include "Drawer.h"
 #include "ace_define.h"
+#include "ace_enemy_rect.h"
 #include "Mouse.h"
 #include "Image.h"
 #include "ObjectEditor.h"
@@ -28,7 +29,18 @@ const int BLOCK_Y = 42;
 const int BLOCK_DRAW_SIZE = 64;
 const int BLOCK_WIDTH_NUM = 3;
 
-const int ENEMY_WIDTH_NUM = 2;
+const int ENEMY_WIDTH_NUM = 3;
+const int ENEMY_HEIGHT_NUM = 1;
+
+const int PAGE_ARROW_SIZE = 32;
+const int PAGE_ARROW_Y = FRAME_WINDOW_HEIGHT - FRAME_SIZE - PAGE_ARROW_SIZE - 5;
+const int PAGE_ARROW_DISTANCE_CENTER = 30;
+
+const Rect enemies_rect[ ] = {
+	RECT_PUPLE_ZOMBIE,
+	RECT_FACE_AND_HAND
+};
+const int MAX_ENEMY = sizeof( enemies_rect ) / sizeof( enemies_rect[ 0 ] );
 
 ObjectMenu::ObjectMenu( ImagePtr image_menu, ImagePtr image_block, ImagePtr image_enemy, ObjectEditorPtr object_editor ) :
 _active( false ),
@@ -36,7 +48,8 @@ _select_tag( TAG_BLOCK ),
 _object_editor( object_editor ),
 _menu( image_menu ),
 _block( image_block ),
-_enemy( image_enemy ) {
+_enemy( image_enemy ),
+_page( 0 ) {
 }
 
 ObjectMenu::~ObjectMenu( ) {
@@ -74,16 +87,38 @@ void ObjectMenu::update( ) {
 				}
 			}
 				break;
-			case TAG_ENEMY: //enemy‘I‘ð
-			{
+			case TAG_ENEMY:
+			{//page‘I‘ð
+				int sx1 = ( int )_pos.x + FRAME_WINDOW_WIDTH / 2 - PAGE_ARROW_DISTANCE_CENTER - PAGE_ARROW_SIZE;
+				int sy1 = ( int )_pos.y + PAGE_ARROW_Y;
+				int sx2 = sx1 + PAGE_ARROW_SIZE;
+				int sy2 = sy1 + PAGE_ARROW_SIZE;
+				if ( sx1 < mouse_pos.x && sx2 > mouse_pos.x && sy1 < mouse_pos.y && sy2 > mouse_pos.y ) {
+					_active = true;
+					_page--;
+					if ( _page < 0 ) {
+						_page = 0;
+					}
+				}
+				sx1 = ( int )_pos.x + FRAME_WINDOW_WIDTH / 2 + PAGE_ARROW_DISTANCE_CENTER;
+				sx2 = sx1 + PAGE_ARROW_SIZE;
+				if ( sx1 < mouse_pos.x && sx2 > mouse_pos.x && sy1 < mouse_pos.y && sy2 > mouse_pos.y ) {
+					_active = true;
+					_page++;
+					if ( _page > MAX_ENEMY / ( ENEMY_WIDTH_NUM * ENEMY_HEIGHT_NUM ) ) {
+						_page = MAX_ENEMY / ( ENEMY_WIDTH_NUM * ENEMY_HEIGHT_NUM );
+					}
+				}
+			}			
+			{ //enemy‘I‘ð
 				int sx1 = ( int )_pos.x + BLOCK_X;
 				int sy1 = ( int )_pos.y + BLOCK_Y;
-				int sx2 = sx1 + NORMAL_CHAR_GRAPH_SIZE;
-				int sy2 = sy1 + NORMAL_CHAR_GRAPH_SIZE;
+				int sx2 = sx1 + NORMAL_CHAR_GRAPH_SIZE * ENEMY_WIDTH_NUM;
+				int sy2 = sy1 + NORMAL_CHAR_GRAPH_SIZE * ENEMY_HEIGHT_NUM;
 				if ( sx1 < mouse_pos.x && sx2 > mouse_pos.x && sy1 < mouse_pos.y && sy2 > mouse_pos.y ) {
 					int x = ( int )( mouse_pos.x - sx1 ) / NORMAL_CHAR_GRAPH_SIZE;
 					int y = ( int )( mouse_pos.y - sy1 ) / NORMAL_CHAR_GRAPH_SIZE;
-					int enemy_idx = x + y;
+					int enemy_idx = x + y * ENEMY_WIDTH_NUM + _page * ENEMY_WIDTH_NUM * ENEMY_HEIGHT_NUM;
 					unsigned char enemy = getEnemy( enemy_idx );
 					_object_editor->setObject( enemy );
 				}
@@ -112,7 +147,10 @@ unsigned char ObjectMenu::getEnemy( int idx ) {
 	unsigned char result = OBJECT_NONE;
 	switch( idx ) {
 	case 0:
-		result = OBJECT_ENEMY;
+		result = OBJECT_PURPLE_ZOMBIE;
+		break;
+	case 1:
+		result = OBJECT_FACE_AND_HAND;
 		break;
 	default:
 		result = OBJECT_NONE;
@@ -194,13 +232,31 @@ void ObjectMenu::draw( ) const {
 			}
 		}
 		break;
-	case TAG_ENEMY:
+	case TAG_ENEMY:		
+		{//Arrow
+			int sx1 = ( int )_pos.x + FRAME_WINDOW_WIDTH / 2 - PAGE_ARROW_DISTANCE_CENTER - PAGE_ARROW_SIZE;
+			int sy1 = ( int )_pos.y + PAGE_ARROW_Y;
+			int tx = 32 * 4;
+			int ty = 32 * 1;
+			int sx2 = sx1 + PAGE_ARROW_SIZE;
+			int sy2 = sy1 + PAGE_ARROW_SIZE;
+			_menu->setPos( sx1, sy1, sx2, sy2 );
+			_menu->setRect( tx, ty, PAGE_ARROW_SIZE, PAGE_ARROW_SIZE );
+			_menu->draw( );
+			sx1 = ( int )_pos.x + FRAME_WINDOW_WIDTH / 2 + PAGE_ARROW_DISTANCE_CENTER + PAGE_ARROW_SIZE;
+			sx2 = sx1 - PAGE_ARROW_SIZE;
+			_menu->setPos( sx1, sy1, sx2, sy2 );
+			_menu->setRect( tx, ty, PAGE_ARROW_SIZE, PAGE_ARROW_SIZE );
+			_menu->draw( );
+		}
 		{//enemy
-			int sx = ( int )_pos.x + BLOCK_X;
-			int sy = ( int )_pos.y + BLOCK_Y;
-			_enemy->setRect( 0, NORMAL_CHAR_GRAPH_SIZE, NORMAL_CHAR_GRAPH_SIZE, NORMAL_CHAR_GRAPH_SIZE );
-			_enemy->setPos( sx, sy, sx + NORMAL_CHAR_GRAPH_SIZE, sy + NORMAL_CHAR_GRAPH_SIZE );
-			_enemy->draw( );	
+			for ( int i = 0; i < MAX_ENEMY; i++ ) {
+				int sx = ( int )_pos.x + BLOCK_X + ( i % ENEMY_WIDTH_NUM ) * NORMAL_CHAR_GRAPH_SIZE;
+				int sy = ( int )_pos.y + BLOCK_Y + ( i / ENEMY_WIDTH_NUM ) * NORMAL_CHAR_GRAPH_SIZE;
+				_enemy->setRect( enemies_rect[ i ].tx, enemies_rect[ i ].ty, NORMAL_CHAR_GRAPH_SIZE, NORMAL_CHAR_GRAPH_SIZE );
+				_enemy->setPos( sx, sy, sx + NORMAL_CHAR_GRAPH_SIZE, sy + NORMAL_CHAR_GRAPH_SIZE );
+				_enemy->draw( );
+			}
 		}
 		break;
 	}

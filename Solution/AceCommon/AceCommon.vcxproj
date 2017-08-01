@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ace_define.h" />
+    <ClInclude Include="ace_enemy_rect.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{05398435-0DB2-4938-8464-8CC567ABBB40}</ProjectGuid>

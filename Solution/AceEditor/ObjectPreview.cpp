@@ -1,6 +1,7 @@
 #include "ObjectPreview.h"
 #include "Drawer.h"
 #include "ace_define.h"
+#include "ace_enemy_rect.h"
 #include "Data.h"
 #include "ObjectCursor.h"
 
@@ -21,6 +22,19 @@ void ObjectPreview::draw( ) const {
 		for ( int j = 0; j < OBJECT_CHIP_HEIGHT_NUM; j++ ) {
 			int ox = ( i + _object_cursor->getScrollX( ) ) % ( _data->getPageNum( ) * PAGE_OBJECT_WIDTH_NUM );
 			int oy = j;
+			// エネミー
+			if ( _data->getObject( ox, oy ) == OBJECT_PURPLE_ZOMBIE ) {
+				_enemy->setRect( RECT_PUPLE_ZOMBIE.tx, RECT_PUPLE_ZOMBIE.ty, NORMAL_CHAR_GRAPH_SIZE, NORMAL_CHAR_GRAPH_SIZE );
+				_enemy->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE - ( NORMAL_CHAR_GRAPH_SIZE / 2 ), PREVIEW_Y + j * OBJECT_CHIP_SIZE - ( NORMAL_CHAR_GRAPH_SIZE - OBJECT_CHIP_SIZE ) );
+				_enemy->draw( );
+			}
+			if ( _data->getObject( ox, oy ) == OBJECT_FACE_AND_HAND ) {
+				_enemy->setRect( RECT_FACE_AND_HAND.tx, RECT_FACE_AND_HAND.ty, NORMAL_CHAR_GRAPH_SIZE, NORMAL_CHAR_GRAPH_SIZE );
+				_enemy->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE - ( NORMAL_CHAR_GRAPH_SIZE / 2 ), PREVIEW_Y + j * OBJECT_CHIP_SIZE - ( NORMAL_CHAR_GRAPH_SIZE - OBJECT_CHIP_SIZE ) );
+				_enemy->draw( );
+			}
+
+			// オブジェクトブロック
 			if ( _data->getObject( ox, oy ) == OBJECT_BLOCK ) {
 				_block->setRect( 0, 16, OBJECT_CHIP_SIZE, OBJECT_CHIP_SIZE );
 				_block->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE, PREVIEW_Y + j * OBJECT_CHIP_SIZE );
@@ -31,11 +45,8 @@ void ObjectPreview::draw( ) const {
 				_block->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE, PREVIEW_Y + j * OBJECT_CHIP_SIZE );
 				_block->draw( );
 			}
-			if ( _data->getObject( ox, oy ) == OBJECT_ENEMY ) {
-				_enemy->setRect( 0, 64 ,NORMAL_CHAR_GRAPH_SIZE, NORMAL_CHAR_GRAPH_SIZE );
-				_enemy->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE - ( NORMAL_CHAR_GRAPH_SIZE / 2 ), PREVIEW_Y + j * OBJECT_CHIP_SIZE - ( NORMAL_CHAR_GRAPH_SIZE - OBJECT_CHIP_SIZE ) );
-				_enemy->draw( );
-			}
+
+			// 選択カーソル
 			if ( _object_cursor->getGX( )  == ox
 				 && _object_cursor->getGY( ) == oy ) {
 				_choise->setPos( PREVIEW_X + ox * OBJECT_CHIP_SIZE, PREVIEW_Y + oy * OBJECT_CHIP_SIZE );
