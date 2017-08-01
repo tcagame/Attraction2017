@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "Binary.h"
 #include "ace_define.h"
+#include <assert.h>
 
 const char * FILENAME = "Resource/Ace/Map/mapdata";
 
@@ -59,4 +60,10 @@ bool Map::isExistance( const Vector& pos ) const {
 		result = true;
 	}
 	return result;
+}
+
+unsigned char Map::getObject( int mx, int my ) const {
+	assert( mx < _page_num * PAGE_OBJECT_WIDTH_NUM && my < OBJECT_CHIP_HEIGHT_NUM );
+	int idx = mx + my * ( _page_num * PAGE_OBJECT_WIDTH_NUM );
+	return _objects[ idx ];
 }

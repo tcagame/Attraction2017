@@ -8,6 +8,7 @@
 #include "Viewer.h"
 #include "Map.h"
 #include "Military.h"
+#include "Popper.h"
 
 void main( ) {
 	ApplicationPtr app( Application::getInstance( ) );
@@ -17,9 +18,10 @@ void main( ) {
 	app->addTask( Device::getTag( ), DevicePtr( new Device( ) ) );
 	app->addTask( Keyboard::getTag( ), KeyboardPtr( new Keyboard( ) ) );
 
-	app->addTask( Map     ::getTag( ), MapPtr     ( new Map    ( ) ) );
-	app->addTask( Family  ::getTag( ), FamilyPtr  ( new Family ( ) ) );
-	app->addTask( Armoury ::getTag( ), ArmouryPtr ( new Armoury( ) ) );
+	app->addTask( Map     ::getTag( ), MapPtr     ( new Map     ( ) ) );
+	app->addTask( Family  ::getTag( ), FamilyPtr  ( new Family  ( ) ) );
+	app->addTask( Armoury ::getTag( ), ArmouryPtr ( new Armoury ( ) ) );
+	app->addTask( Popper  ::getTag( ), PopperPtr  ( new Popper  ( ) ) );
 	app->addTask( Military::getTag( ), MilitaryPtr( new Military( ) ) );
-	app->addTask( Viewer  ::getTag( ), ViewerPtr  ( new Viewer ( ) ) );
+	app->addTask( Viewer  ::getTag( ), ViewerPtr  ( new Viewer  ( ) ) );
 }

@@ -15,8 +15,6 @@ MilitaryPtr Military::getTask( ) {
 
 
 Military::Military( ) {
-	_enemies.push_back( EnemyPtr( new EnemyPurpleZombie( Vector( 700, 60 ) ) ) );
-	_enemies.push_back( EnemyPtr( new EnemyFaceAndHand( Vector( 600, 80 ) ) ) );
 }
 
 
@@ -49,6 +47,10 @@ void Military::update( ) {
 
 const std::list< EnemyPtr > Military::getList( ) const {
 	return _enemies;
+}
+
+void Military::popUp( EnemyPtr enemy ) {
+	_enemies.push_back( enemy );
 }
 
 EnemyPtr Military::getOverLappedEnemy( CharacterConstPtr character ) const {

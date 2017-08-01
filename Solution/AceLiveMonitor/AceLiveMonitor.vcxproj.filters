@@ -21,6 +21,10 @@
     <ClCompile Include="EnemyFaceAndHand.cpp" />
     <ClCompile Include="Impact.cpp" />
     <ClCompile Include="ViewerDebug.cpp" />
+    <ClCompile Include="Popper.cpp" />
+    <ClCompile Include="PopPurpleZombie.cpp" />
+    <ClCompile Include="Pop.cpp" />
+    <ClCompile Include="PopFaceAndHand.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -42,5 +46,9 @@
     <ClInclude Include="EnemyFaceAndHand.h" />
     <ClInclude Include="Impact.h" />
     <ClInclude Include="ViewerDebug.h" />
+    <ClInclude Include="Popper.h" />
+    <ClInclude Include="PopPurpleZombie.h" />
+    <ClInclude Include="Pop.h" />
+    <ClInclude Include="PopFaceAndHand.h" />
   </ItemGroup>
 </Project>

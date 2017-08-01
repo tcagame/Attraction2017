@@ -18,6 +18,7 @@ public:
 	void update( );
 	EnemyPtr getOverLappedEnemy( CharacterConstPtr character ) const;
 	const std::list< EnemyPtr > getList( ) const;
+	void popUp( EnemyPtr enemy );
 private:
 	std::list< EnemyPtr > _enemies;
 };
