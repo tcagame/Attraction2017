@@ -2,8 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="Character.cpp" />
-    <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="EnemyPurpleZombie.cpp" />
     <ClCompile Include="Family.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="ViewerEvent.cpp" />
@@ -18,18 +16,32 @@
     <ClCompile Include="ViewerMilitary.cpp" />
     <ClCompile Include="ViewerStatus.cpp" />
     <ClCompile Include="ViewerStreet.cpp" />
-    <ClCompile Include="EnemyFaceAndHand.cpp" />
     <ClCompile Include="Impact.cpp" />
     <ClCompile Include="ViewerDebug.cpp" />
-    <ClCompile Include="Popper.cpp" />
-    <ClCompile Include="PopPurpleZombie.cpp" />
-    <ClCompile Include="Pop.cpp" />
-    <ClCompile Include="PopFaceAndHand.cpp" />
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyFaceAndHand.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyPurpleZombie.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="Pop.cpp">
+      <Filter>Pop</Filter>
+    </ClCompile>
+    <ClCompile Include="PopFaceAndHand.cpp">
+      <Filter>Pop</Filter>
+    </ClCompile>
+    <ClCompile Include="Popper.cpp">
+      <Filter>Pop</Filter>
+    </ClCompile>
+    <ClCompile Include="PopPurpleZombie.cpp">
+      <Filter>Pop</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
-    <ClInclude Include="Enemy.h" />
-    <ClInclude Include="EnemyPurpleZombie.h" />
     <ClInclude Include="Family.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="ViewerEvent.h" />
@@ -43,12 +55,36 @@
     <ClInclude Include="ViewerMilitary.h" />
     <ClInclude Include="ViewerStatus.h" />
     <ClInclude Include="ViewerStreet.h" />
-    <ClInclude Include="EnemyFaceAndHand.h" />
     <ClInclude Include="Impact.h" />
     <ClInclude Include="ViewerDebug.h" />
-    <ClInclude Include="Popper.h" />
-    <ClInclude Include="PopPurpleZombie.h" />
-    <ClInclude Include="Pop.h" />
-    <ClInclude Include="PopFaceAndHand.h" />
+    <ClInclude Include="Enemy.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyFaceAndHand.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyPurpleZombie.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="Pop.h">
+      <Filter>Pop</Filter>
+    </ClInclude>
+    <ClInclude Include="PopFaceAndHand.h">
+      <Filter>Pop</Filter>
+    </ClInclude>
+    <ClInclude Include="Popper.h">
+      <Filter>Pop</Filter>
+    </ClInclude>
+    <ClInclude Include="PopPurpleZombie.h">
+      <Filter>Pop</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Enemy">
+      <UniqueIdentifier>{a27163da-86d5-4ace-a4f8-ded400c8a1bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pop">
+      <UniqueIdentifier>{850afb85-911e-43b2-a175-64364fee8f68}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

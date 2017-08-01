@@ -39,7 +39,8 @@ void Viewer::update( ) {
 		_debug = !_debug;
 	}
 
-	Drawer::getTask( )->flip( );
+	DrawerPtr drawer( Drawer::getTask( ) );
+	drawer->flip( );
 	_viewer_event->draw( );
 	_viewer_status->draw( );
 	_viewer_street->draw( ViewerStreet::LAYER_BACK );
