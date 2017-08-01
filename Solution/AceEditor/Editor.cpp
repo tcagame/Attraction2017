@@ -145,6 +145,9 @@ void Editor::updateMode( ) {
 }
 
 void Editor::drawMode( ) {
+	DrawerPtr drawer( Drawer::getTask( ) );
+	drawer->flip( );
+
 	// í‚É•`‰æ
 	_information->draw( );
 	_chip_preview->draw( );
@@ -160,8 +163,6 @@ void Editor::drawMode( ) {
 		break;
 	}
 	
-	DrawerPtr drawer( Drawer::getTask( ) );
-	drawer->flip( );
 
 	switch ( _mode ) {
 	case MODE_SAVEALL:
