@@ -180,6 +180,7 @@
     <ClCompile Include="EnemyStoneFace.cpp" />
     <ClCompile Include="EnemySwampZombieA.cpp" />
     <ClCompile Include="EnemySwampZombieB.cpp" />
+    <ClCompile Include="EnemySwampZombieC.cpp" />
     <ClCompile Include="EnemyWhiteMist.cpp" />
     <ClCompile Include="Pop.cpp" />
     <ClCompile Include="PopArcher.cpp" />
@@ -204,6 +205,7 @@
     <ClCompile Include="PopShishimai.cpp" />
     <ClCompile Include="PopShishimaiDemon.cpp" />
     <ClCompile Include="PopStoneFace.cpp" />
+    <ClCompile Include="PopSwampZombieC.cpp" />
     <ClCompile Include="PopSwampZombieA.cpp" />
     <ClCompile Include="PopSwampZombieB.cpp" />
     <ClCompile Include="PopWhiteMist.cpp" />
@@ -244,6 +246,7 @@
     <ClInclude Include="EnemyStoneFace.h" />
     <ClInclude Include="EnemySwampZombieA.h" />
     <ClInclude Include="EnemySwampZombieB.h" />
+    <ClInclude Include="EnemySwampZombieC.h" />
     <ClInclude Include="EnemyWhiteMist.h" />
     <ClInclude Include="Pop.h" />
     <ClInclude Include="PopArcher.h" />
@@ -268,6 +271,7 @@
     <ClInclude Include="PopShishimai.h" />
     <ClInclude Include="PopShishimaiDemon.h" />
     <ClInclude Include="PopStoneFace.h" />
+    <ClInclude Include="PopSwampZombieC.h" />
     <ClInclude Include="PopSwampZombieA.h" />
     <ClInclude Include="PopSwampZombieB.h" />
     <ClInclude Include="PopWhiteMist.h" />

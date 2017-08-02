@@ -147,8 +147,18 @@
     <ClCompile Include="PopSwampZombieA.cpp">
       <Filter>Pop</Filter>
     </ClCompile>
-    <ClCompile Include="EnemySwampZombieB.cpp" />
-    <ClCompile Include="PopSwampZombieB.cpp" />
+    <ClCompile Include="EnemySwampZombieB.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemySwampZombieC.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopSwampZombieC.cpp">
+      <Filter>Pop</Filter>
+    </ClCompile>
+    <ClCompile Include="PopSwampZombieB.cpp">
+      <Filter>Pop</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -296,8 +306,18 @@
     <ClInclude Include="PopHugDemon.h">
       <Filter>Pop</Filter>
     </ClInclude>
-    <ClInclude Include="EnemySwampZombieB.h" />
-    <ClInclude Include="PopSwampZombieB.h" />
+    <ClInclude Include="EnemySwampZombieB.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemySwampZombieC.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopSwampZombieC.h">
+      <Filter>Pop</Filter>
+    </ClInclude>
+    <ClInclude Include="PopSwampZombieB.h">
+      <Filter>Pop</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">

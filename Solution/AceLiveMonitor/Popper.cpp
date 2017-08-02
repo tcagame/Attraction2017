@@ -25,6 +25,7 @@
 #include "PopHugDemon.h"
 #include "PopSwampZombieA.h"
 #include "PopSwampZombieB.h"
+#include "PopSwampZombieC.h"
 
 PopperPtr Popper::getTask( ) {
 	return std::dynamic_pointer_cast< Popper >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -107,6 +108,9 @@ void Popper::initialize( ) {
 				break;
 			case  OBJECT_SWAMP_ZOMBIE_B:
 				_pops.push_back( PopPtr( new PopSwampZombieB( Vector( x, y ) ) ) );
+				break;
+			case  OBJECT_SWAMP_ZOMBIE_C:
+				_pops.push_back( PopPtr( new PopSwampZombieC( Vector( x, y ) ) ) );
 				break;
 			}
 		}
