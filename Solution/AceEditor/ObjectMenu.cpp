@@ -96,7 +96,7 @@ void ObjectMenu::update( ) {
 					_object_editor->setObject( obj );
 				}
 			}
-				break;
+			break;
 			case TAG_ENEMY:
 			{//page‘I‘ð
 				int sx1 = ( int )_pos.x + FRAME_WINDOW_WIDTH / 2 - PAGE_ARROW_DISTANCE_CENTER - PAGE_ARROW_SIZE;
@@ -133,6 +133,7 @@ void ObjectMenu::update( ) {
 					_object_editor->setObject( enemy );
 				}
 			}
+			break;
 			case TAG_EVENT:
 			{//event‘I‘ð
 				int sx1 = ( int )_pos.x + BLOCK_X;
@@ -147,6 +148,7 @@ void ObjectMenu::update( ) {
 					_object_editor->setObject( event );
 				}
 			}
+			break;
 		}
 	}
 }

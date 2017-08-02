@@ -75,8 +75,10 @@ const unsigned char OBJECT_LANCER		  = 0x04;
 const unsigned char OBJECT_CROCO_SNAKE	  = 0x05;
 const unsigned char OBJECT_GHOUL		  = 0x06;
 
+
+const unsigned char OBJECT_ENEMY_END = 0x7F;
 //block
 const unsigned char OBJECT_BLOCK  = 0x80;
 const unsigned char OBJECT_ONEWAY = 0x81;
 //event
-const unsigned char OBJECT_EVENT_REDDEAMON = 0xFF;
+const unsigned char OBJECT_EVENT_REDDEAMON = 0xC0;
