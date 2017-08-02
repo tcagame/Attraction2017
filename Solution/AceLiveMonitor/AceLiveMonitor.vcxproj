@@ -166,6 +166,7 @@
     <ClCompile Include="EnemyGhoul.cpp" />
     <ClCompile Include="EnemyLancer.cpp" />
     <ClCompile Include="EnemyNoFace.cpp" />
+    <ClCompile Include="EnemyNoNeckGhost.cpp" />
     <ClCompile Include="EnemyOneEyeSnake.cpp" />
     <ClCompile Include="EnemyPurpleZombie.cpp" />
     <ClCompile Include="EnemyStoneFace.cpp" />
@@ -177,6 +178,7 @@
     <ClCompile Include="PopGhoul.cpp" />
     <ClCompile Include="PopLancer.cpp" />
     <ClCompile Include="PopNoFace.cpp" />
+    <ClCompile Include="PopNoNeckGhost.cpp" />
     <ClCompile Include="PopOneEyeSnake.cpp" />
     <ClCompile Include="PopPurpleZombie.cpp" />
     <ClCompile Include="Family.cpp" />
@@ -208,6 +210,7 @@
     <ClInclude Include="EnemyGhoul.h" />
     <ClInclude Include="EnemyLancer.h" />
     <ClInclude Include="EnemyNoFace.h" />
+    <ClInclude Include="EnemyNoNeckGhost.h" />
     <ClInclude Include="EnemyOneEyeSnake.h" />
     <ClInclude Include="EnemyPurpleZombie.h" />
     <ClInclude Include="EnemyStoneFace.h" />
@@ -219,6 +222,7 @@
     <ClInclude Include="PopGhoul.h" />
     <ClInclude Include="PopLancer.h" />
     <ClInclude Include="PopNoFace.h" />
+    <ClInclude Include="PopNoNeckGhost.h" />
     <ClInclude Include="PopOneEyeSnake.h" />
     <ClInclude Include="PopPurpleZombie.h" />
     <ClInclude Include="Family.h" />

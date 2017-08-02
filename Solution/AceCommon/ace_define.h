@@ -68,16 +68,29 @@ const int GROUND_LIST_NUM = 100;
 //object
 const unsigned char OBJECT_NONE   = 0x00;
 //enemy
-const unsigned char OBJECT_PURPLE_ZOMBIE  = 0x01;
-const unsigned char OBJECT_FACE_AND_HAND  = 0x02;
-const unsigned char OBJECT_NO_FACE		  = 0x03;
-const unsigned char OBJECT_LANCER		  = 0x04;
-const unsigned char OBJECT_CROCO_SNAKE	  = 0x05;
-const unsigned char OBJECT_GHOUL		  = 0x06;
-const unsigned char OBJECT_GHOST		  = 0x07;
-const unsigned char OBJECT_ONE_EYE_SNAKE  = 0x08;
-const unsigned char OBJECT_WHITE_MIST	  = 0x09;
-const unsigned char OBJECT_STONE_FACE	  = 0x0A;
+const unsigned char OBJECT_PURPLE_ZOMBIE	= 0x01;
+const unsigned char OBJECT_FACE_AND_HAND	= 0x02;
+const unsigned char OBJECT_NO_FACE			= 0x03;
+const unsigned char OBJECT_LANCER			= 0x04;
+const unsigned char OBJECT_CROCO_SNAKE		= 0x05;
+const unsigned char OBJECT_GHOUL			= 0x06;
+const unsigned char OBJECT_GHOST			= 0x07;
+const unsigned char OBJECT_ONE_EYE_SNAKE	= 0x08;
+const unsigned char OBJECT_WHITE_MIST		= 0x09;
+const unsigned char OBJECT_STONE_FACE		= 0x0A;
+const unsigned char OBJECT_NO_NECK_GHOST	= 0x0B;
+const unsigned char OBJECT_SHISHIMAI_DEMON	= 0x0C;
+const unsigned char OBJECT_SHISHIMAI		= 0x0D;
+const unsigned char OBJECT_ARCHER			= 0x0E;
+const unsigned char OBJECT_HAND				= 0x0F;
+const unsigned char OBJECT_RED_BIRD			= 0x10;
+const unsigned char OBJECT_BLUE_MONK		= 0x11;
+//const unsigned char OBJECT_RED_DEMON_JR	= 0x12;
+const unsigned char OBJECT_GREEN_ZOMBIE		= 0x13;
+const unsigned char OBJECT_HUG_DEMON		= 0x14;
+const unsigned char OBJECT_SWAMP_ZOMBIE_A	= 0x15;
+const unsigned char OBJECT_SWAMP_ZOMBIE_B	= 0x16;
+const unsigned char OBJECT_SWAMP_ZOMBIE_C	= 0x17;
 
 
 const unsigned char OBJECT_ENEMY_END = 0x7F;

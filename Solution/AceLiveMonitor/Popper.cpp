@@ -14,6 +14,7 @@
 #include "PopOneEyeSnake.h"
 #include "PopWhiteMist.h"
 #include "PopStoneFace.h"
+#include "PopNoNeckGhost.h"
 
 PopperPtr Popper::getTask( ) {
 	return std::dynamic_pointer_cast< Popper >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -63,6 +64,9 @@ void Popper::initialize( ) {
 				break;
 			case  OBJECT_STONE_FACE:
 				_pops.push_back( PopPtr( new PopStoneFace( Vector( x, y ) ) ) );
+				break;
+			case  OBJECT_NO_NECK_GHOST:
+				_pops.push_back( PopPtr( new PopNoNeckGhost( Vector( x, y ) ) ) );
 				break;
 			}
 		}
