@@ -75,6 +75,7 @@ const unsigned char OBJECT_LANCER		  = 0x04;
 const unsigned char OBJECT_CROCO_SNAKE	  = 0x05;
 const unsigned char OBJECT_GHOUL		  = 0x06;
 const unsigned char OBJECT_GHOST		  = 0x07;
+const unsigned char OBJECT_ONE_EYE_SNAKE  = 0x08;
 
 //block
 const unsigned char OBJECT_BLOCK  = 0x80;

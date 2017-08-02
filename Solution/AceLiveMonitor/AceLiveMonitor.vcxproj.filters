@@ -65,6 +65,8 @@
     </ClCompile>
     <ClCompile Include="EnemyGhost.cpp" />
     <ClCompile Include="PopGhost.cpp" />
+    <ClCompile Include="EnemyOneEyeSnake.cpp" />
+    <ClCompile Include="PopOneEyeSnake.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -130,6 +132,8 @@
     </ClInclude>
     <ClInclude Include="EnemyGhost.h" />
     <ClInclude Include="PopGhost.h" />
+    <ClInclude Include="EnemyOneEyeSnake.h" />
+    <ClInclude Include="PopOneEyeSnake.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Enemy">

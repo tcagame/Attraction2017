@@ -49,6 +49,7 @@ const Rect enemies_rect[ ] = {
 	RECT_CROCO_SNAKE,
 	RECT_GHOUL,
 	RECT_GHOST,
+	RECT_ONE_EYE_SNAKE,
 };
 const int MAX_ENEMY = sizeof( enemies_rect ) / sizeof( enemies_rect[ 0 ] );
 
@@ -191,6 +192,9 @@ unsigned char ObjectMenu::getEnemy( int idx ) const {
 		break;
 	case 6:
 		result = OBJECT_GHOST;
+		break;
+	case 7:
+		result = OBJECT_ONE_EYE_SNAKE;
 		break;
 	default:
 		result = OBJECT_NONE;
