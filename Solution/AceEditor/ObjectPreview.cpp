@@ -5,13 +5,14 @@
 #include "Data.h"
 #include "ObjectCursor.h"
 
-ObjectPreview::ObjectPreview( DataConstPtr data, ObjectCursorConstPtr object_cursor ) :
+ObjectPreview::ObjectPreview( DataConstPtr data, ObjectCursorConstPtr object_cursor, ImagePtr image_enemy, ImagePtr image_event ) :
 _data( data ),
-_object_cursor( object_cursor ) {
+_object_cursor( object_cursor ),
+_enemy( image_enemy ),
+_event( image_event ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
-	_block = drawer->createImage( "block/block.png" );
-	_enemy = drawer->createImage( "../Enemy/enemy_medium.png" );
 	_choise = drawer->createImage( "guide/object_guide_cursor.png" );
+	_block = drawer->createImage( "block/block.png" );
 }
 
 ObjectPreview::~ObjectPreview( ) {
@@ -79,6 +80,13 @@ void ObjectPreview::draw( ) const {
 				_block->setRect( 16, 0, OBJECT_CHIP_SIZE, OBJECT_CHIP_SIZE );
 				_block->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE, PREVIEW_Y + j * OBJECT_CHIP_SIZE );
 				_block->draw( );
+			}
+
+			//event
+			if ( _data->getObject( ox, oy ) == OBJECT_EVENT_REDDEAMON ) {
+				_event->setRect( 16, 0, 128, 128 );
+				_event->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE, PREVIEW_Y + j * OBJECT_CHIP_SIZE );
+				_event->draw( );
 			}
 
 			// 選択カーソル
