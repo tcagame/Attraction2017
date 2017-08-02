@@ -19,3 +19,4 @@ struct Rect {
 const Rect RECT_PUPLE_ZOMBIE( 0 * CHIP_SIZE, 1 * CHIP_SIZE );
 const Rect RECT_FACE_AND_HAND( 3 * CHIP_SIZE, 7 * CHIP_SIZE );
 const Rect RECT_NO_FACE( 12 * CHIP_SIZE, 5 * CHIP_SIZE );
+const Rect RECT_LANCER( 5 * CHIP_SIZE, 11 * CHIP_SIZE );

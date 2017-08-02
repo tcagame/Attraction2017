@@ -70,6 +70,7 @@ const unsigned char OBJECT_NONE   = 0x00;
 const unsigned char OBJECT_PURPLE_ZOMBIE  = 0x01;
 const unsigned char OBJECT_FACE_AND_HAND  = 0x02;
 const unsigned char OBJECT_NO_FACE		  = 0x03;
+const unsigned char OBJECT_LANCER		  = 0x04;
 
 const unsigned char OBJECT_BLOCK  = 0x80;
 const unsigned char OBJECT_ONEWAY = 0x81;
