@@ -45,6 +45,12 @@
     <ClCompile Include="PopNoFace.cpp">
       <Filter>Pop</Filter>
     </ClCompile>
+    <ClCompile Include="PopLancer.cpp">
+      <Filter>Pop</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyLancer.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -89,6 +95,12 @@
     </ClInclude>
     <ClInclude Include="PopNoFace.h">
       <Filter>Pop</Filter>
+    </ClInclude>
+    <ClInclude Include="PopLancer.h">
+      <Filter>Pop</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyLancer.h">
+      <Filter>Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

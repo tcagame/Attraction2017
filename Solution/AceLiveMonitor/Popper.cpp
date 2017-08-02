@@ -7,6 +7,7 @@
 #include "PopPurpleZombie.h"
 #include "PopFaceAndHand.h"
 #include "PopNoFace.h"
+#include "PopLancer.h"
 
 PopperPtr Popper::getTask( ) {
 	return std::dynamic_pointer_cast< Popper >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -35,6 +36,9 @@ void Popper::initialize( ) {
 				break;
 			case  OBJECT_NO_FACE:	
 				_pops.push_back( PopPtr( new PopNoFace( Vector( x, y ) ) ) );
+				break;
+			case  OBJECT_LANCER:	
+				_pops.push_back( PopPtr( new PopLancer( Vector( x, y ) ) ) );
 				break;
 			}
 		}

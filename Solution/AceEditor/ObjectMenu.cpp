@@ -29,8 +29,8 @@ const int BLOCK_Y = 42;
 const int BLOCK_DRAW_SIZE = 64;
 const int BLOCK_WIDTH_NUM = 3;
 
-const int ENEMY_WIDTH_NUM = 3;
-const int ENEMY_HEIGHT_NUM = 1;
+const int ENEMY_WIDTH_NUM = 5;
+const int ENEMY_HEIGHT_NUM = 3;
 
 const int PAGE_ARROW_SIZE = 32;
 const int PAGE_ARROW_Y = FRAME_WINDOW_HEIGHT - FRAME_SIZE - PAGE_ARROW_SIZE - 5;
@@ -39,7 +39,8 @@ const int PAGE_ARROW_DISTANCE_CENTER = 30;
 const Rect enemies_rect[ ] = {
 	RECT_PUPLE_ZOMBIE,
 	RECT_FACE_AND_HAND,
-	RECT_NO_FACE
+	RECT_NO_FACE,
+	RECT_LANCER
 };
 const int MAX_ENEMY = sizeof( enemies_rect ) / sizeof( enemies_rect[ 0 ] );
 
@@ -155,6 +156,9 @@ unsigned char ObjectMenu::getEnemy( int idx ) {
 		break;
 	case 2:
 		result = OBJECT_NO_FACE;
+		break;
+	case 3:
+		result = OBJECT_LANCER;
 		break;
 	default:
 		result = OBJECT_NONE;
