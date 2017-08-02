@@ -3,6 +3,7 @@
 #include "Armoury.h"
 #include "ace_define.h"
 #include "Family.h"
+#include "Map.h"
 
 //画像サイズ
 const int PLAYER_FOOT = 7;
@@ -63,14 +64,14 @@ void Player::act( ) {
 	}
 	actOnCamera( );
 
-	//イベント-メイン切り替え用(デバッグ)
-	if ( Device::getTask( )->getPush( _id ) & BUTTON_E ) {
+	//イベント
+	MapPtr map( Map::getTask( ) );
+	unsigned char obj = map->getObject( getPos( ) + getVec( ) );
+	if ( obj >= OBJECT_EVENT_REDDEAMON ) {
 		if ( getState( ) != STATE_EVENT ) {
 			if ( !Family::getTask( )->isExistancePlayerEvent( ) ) {
 				setState( STATE_EVENT );
 			}
-		} else {
-			setState( STATE_MAIN );
 		}
 	}
 }

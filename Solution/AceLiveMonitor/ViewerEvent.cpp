@@ -1,6 +1,7 @@
 #include "ViewerEvent.h"
 #include "Drawer.h"
 #include "ace_define.h"
+#include "Family.h"
 
 
 ViewerEvent::ViewerEvent(  ) {
@@ -22,7 +23,7 @@ ViewerEvent::~ViewerEvent( ) {
 }
 
 void ViewerEvent::draw( ) const {
-	if( _type == TYPE_TITLE ) {
+	if( !Family::getTask( )->isExistancePlayerEvent( ) ) {
 		_images[ 0 ]->setPos( 0, VIEW_TITLE_Y );
 		_images[ 0 ]->draw( );
 	} else {

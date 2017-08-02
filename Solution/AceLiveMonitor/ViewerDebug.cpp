@@ -84,7 +84,7 @@ void ViewerDebug::drawChip( ) const {
 	for ( int i = 0; i < width; i++ ) {
 		for ( int j = 0; j < OBJECT_CHIP_HEIGHT_NUM; j++ ) {
 			Vector pos( i * OBJECT_CHIP_SIZE + camera_pos, j * OBJECT_CHIP_SIZE );
-			if ( map->isExistance( pos + Vector( OBJECT_CHIP_SIZE / 2, OBJECT_CHIP_SIZE / 2 ) ) ) {
+			if ( map->getObject( pos + Vector( OBJECT_CHIP_SIZE / 2, OBJECT_CHIP_SIZE / 2 ) ) == OBJECT_BLOCK ) {
 				_block->setRect( 0, 16, OBJECT_CHIP_SIZE, OBJECT_CHIP_SIZE );
 				_block->setPos( i * OBJECT_CHIP_SIZE - ( camera_pos % OBJECT_CHIP_SIZE ), j * OBJECT_CHIP_HEIGHT_NUM + VIEW_STREET_Y );
 				_block->draw( );

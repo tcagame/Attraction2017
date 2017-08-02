@@ -95,6 +95,7 @@ bool Exporter::update( ) {
 			page * PAGE_OBJECT_WIDTH_NUM * PAGE_OBJECT_WIDTH_NUM );
 		binary->ensure( size_object + sizeof( int ) );
 	
+
 		binary->write( (void*)&page, sizeof( int ) );
 		for ( int i = 0; i < PAGE_OBJECT_WIDTH_NUM; i++ ) {
 			for ( int j = 0; j < page * PAGE_OBJECT_WIDTH_NUM; j++ ) {
