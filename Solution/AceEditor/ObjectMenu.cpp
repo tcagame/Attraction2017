@@ -32,6 +32,11 @@ const int BLOCK_WIDTH_NUM = 3;
 const int ENEMY_WIDTH_NUM = 5;
 const int ENEMY_HEIGHT_NUM = 3;
 
+const int EVENT_SPRITE_SIZE = 128;
+const int EVENT_DRAW_SIZE = 64;
+const int EVENT_WIDTH_NUM = 3;
+const int EVENT_HEIGHT_NUM = 3;
+
 const int PAGE_ARROW_SIZE = 32;
 const int PAGE_ARROW_Y = FRAME_WINDOW_HEIGHT - FRAME_SIZE - PAGE_ARROW_SIZE - 5;
 const int PAGE_ARROW_DISTANCE_CENTER = 30;
@@ -44,13 +49,14 @@ const Rect enemies_rect[ ] = {
 };
 const int MAX_ENEMY = sizeof( enemies_rect ) / sizeof( enemies_rect[ 0 ] );
 
-ObjectMenu::ObjectMenu( ImagePtr image_menu, ImagePtr image_block, ImagePtr image_enemy, ObjectEditorPtr object_editor ) :
+ObjectMenu::ObjectMenu( ImagePtr image_menu, ImagePtr image_block, ImagePtr image_enemy, ImagePtr image_event, ObjectEditorPtr object_editor ) :
 _active( false ),
 _select_tag( TAG_BLOCK ),
 _object_editor( object_editor ),
 _menu( image_menu ),
 _block( image_block ),
 _enemy( image_enemy ),
+_event( image_event ),
 _page( 0 ) {
 }
 
@@ -125,6 +131,20 @@ void ObjectMenu::update( ) {
 					_object_editor->setObject( enemy );
 				}
 			}
+			case TAG_EVENT:
+			{//event‘I‘ð
+				int sx1 = ( int )_pos.x + BLOCK_X;
+				int sy1 = ( int )_pos.y + BLOCK_Y;
+				int sx2 = sx1 + EVENT_DRAW_SIZE * EVENT_WIDTH_NUM;
+				int sy2 = sy1 + EVENT_DRAW_SIZE;
+				if ( sx1 < mouse_pos.x && sx2 > mouse_pos.x && sy1 < mouse_pos.y && sy2 > mouse_pos.y ) {
+					int x = ( int )( mouse_pos.x - sx1 ) / EVENT_DRAW_SIZE;
+					int y = ( int )( mouse_pos.y - sy1 ) / EVENT_DRAW_SIZE;
+					int idx = x + y * EVENT_WIDTH_NUM;
+					unsigned char event = getEvent( idx );
+					_object_editor->setObject( event );
+				}
+			}
 		}
 	}
 }
@@ -145,7 +165,7 @@ unsigned char ObjectMenu::getObj( int idx ) const {
 	return result;
 }
 
-unsigned char ObjectMenu::getEnemy( int idx ) {
+unsigned char ObjectMenu::getEnemy( int idx ) const {
 	unsigned char result = OBJECT_NONE;
 	switch( idx ) {
 	case 0:
@@ -166,6 +186,20 @@ unsigned char ObjectMenu::getEnemy( int idx ) {
 	}
 	return result;
 }
+
+unsigned char ObjectMenu::getEvent( int idx ) const {
+	unsigned char result = OBJECT_NONE;
+	switch( idx ) {
+	case 0:
+		result = OBJECT_EVENT_REDDEAMON;
+		break;
+	default:
+		result = OBJECT_NONE;
+		break;
+	}
+	return result;
+}
+
 
 void ObjectMenu::draw( ) const {
 	DrawerPtr drawer( Drawer::getTask( ) );
@@ -264,6 +298,19 @@ void ObjectMenu::draw( ) const {
 				_enemy->setRect( enemies_rect[ i ].tx, enemies_rect[ i ].ty, NORMAL_CHAR_GRAPH_SIZE, NORMAL_CHAR_GRAPH_SIZE );
 				_enemy->setPos( sx, sy, sx + NORMAL_CHAR_GRAPH_SIZE, sy + NORMAL_CHAR_GRAPH_SIZE );
 				_enemy->draw( );
+			}
+		}
+		break;
+		case TAG_EVENT:		
+		{//event
+			int sx = ( int )_pos.x + BLOCK_X;
+			int sy = ( int )_pos.y + BLOCK_Y;
+			for ( int i = 0; i < EVENT_WIDTH_NUM; i++, sx += EVENT_DRAW_SIZE ) {
+				int tx = ( i % 3 ) * EVENT_SPRITE_SIZE;
+				int ty = 0;
+				_event->setRect( tx, ty, EVENT_SPRITE_SIZE, EVENT_SPRITE_SIZE );
+				_event->setPos( sx, sy, sx + EVENT_DRAW_SIZE, sy + EVENT_DRAW_SIZE );
+				_event->draw( );
 			}
 		}
 		break;

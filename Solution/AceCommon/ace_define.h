@@ -65,12 +65,15 @@ const int MAP_COVER_HEIGHT = 30;//‚½‚ë‚·‚¯ƒ‰ƒCƒ“
 const int STRUCTURE_LIST_NUM = 100;
 const int GROUND_LIST_NUM = 100;
 
+//object
 const unsigned char OBJECT_NONE   = 0x00;
-
+//enemy
 const unsigned char OBJECT_PURPLE_ZOMBIE  = 0x01;
 const unsigned char OBJECT_FACE_AND_HAND  = 0x02;
 const unsigned char OBJECT_NO_FACE		  = 0x03;
 const unsigned char OBJECT_LANCER		  = 0x04;
-
+//block
 const unsigned char OBJECT_BLOCK  = 0x80;
 const unsigned char OBJECT_ONEWAY = 0x81;
+//event
+const unsigned char OBJECT_EVENT_REDDEAMON = 0xFF;
