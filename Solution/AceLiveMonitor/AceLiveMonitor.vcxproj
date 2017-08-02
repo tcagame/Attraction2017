@@ -171,6 +171,7 @@
     <ClCompile Include="EnemyNoNeckGhost.cpp" />
     <ClCompile Include="EnemyOneEyeSnake.cpp" />
     <ClCompile Include="EnemyPurpleZombie.cpp" />
+    <ClCompile Include="EnemyRedBird.cpp" />
     <ClCompile Include="EnemyShishimai.cpp" />
     <ClCompile Include="EnemyShishimaiDemon.cpp" />
     <ClCompile Include="EnemyStoneFace.cpp" />
@@ -191,6 +192,7 @@
     <ClCompile Include="Impact.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Popper.cpp" />
+    <ClCompile Include="PopRedBird.cpp" />
     <ClCompile Include="PopShishimai.cpp" />
     <ClCompile Include="PopShishimaiDemon.cpp" />
     <ClCompile Include="PopStoneFace.cpp" />
@@ -223,6 +225,7 @@
     <ClInclude Include="EnemyNoNeckGhost.h" />
     <ClInclude Include="EnemyOneEyeSnake.h" />
     <ClInclude Include="EnemyPurpleZombie.h" />
+    <ClInclude Include="EnemyRedBird.h" />
     <ClInclude Include="EnemyShishimai.h" />
     <ClInclude Include="EnemyShishimaiDemon.h" />
     <ClInclude Include="EnemyStoneFace.h" />
@@ -243,6 +246,7 @@
     <ClInclude Include="Impact.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Popper.h" />
+    <ClInclude Include="PopRedBird.h" />
     <ClInclude Include="PopShishimai.h" />
     <ClInclude Include="PopShishimaiDemon.h" />
     <ClInclude Include="PopStoneFace.h" />

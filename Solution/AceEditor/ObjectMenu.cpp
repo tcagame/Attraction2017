@@ -57,6 +57,7 @@ const Rect enemies_rect[ ] = {
 	RECT_SHISHIMAI,
 	RECT_ARCHER,
 	RECT_HAND,
+	RECT_RED_BIRD,
 };
 const int MAX_ENEMY = sizeof( enemies_rect ) / sizeof( enemies_rect[ 0 ] );
 
@@ -226,6 +227,9 @@ unsigned char ObjectMenu::getEnemy( int idx ) const {
 	case 14:
 		result = OBJECT_HAND;
 		break;
+	case 15:
+		result = OBJECT_RED_BIRD;
+		break;
 	default:
 		result = OBJECT_NONE;
 		break;
@@ -338,12 +342,21 @@ void ObjectMenu::draw( ) const {
 			_menu->draw( );
 		}
 		{//enemy
-			for ( int i = 0; i < MAX_ENEMY; i++ ) {
-				int sx = ( int )_pos.x + BLOCK_X + ( i % ENEMY_WIDTH_NUM ) * NORMAL_CHAR_GRAPH_SIZE;
-				int sy = ( int )_pos.y + BLOCK_Y + ( i / ENEMY_WIDTH_NUM ) * NORMAL_CHAR_GRAPH_SIZE;
-				_enemy->setRect( enemies_rect[ i ].tx, enemies_rect[ i ].ty, NORMAL_CHAR_GRAPH_SIZE, NORMAL_CHAR_GRAPH_SIZE );
-				_enemy->setPos( sx, sy, sx + NORMAL_CHAR_GRAPH_SIZE, sy + NORMAL_CHAR_GRAPH_SIZE );
-				_enemy->draw( );
+			int add = _page * ENEMY_HEIGHT_NUM * ENEMY_WIDTH_NUM;
+			for ( int i = 0; i < ENEMY_HEIGHT_NUM; i++ ) {
+				for ( int j = 0; j < ENEMY_WIDTH_NUM; j++ ) {
+					int idx = j + i * ENEMY_WIDTH_NUM + add;
+					if ( idx >= MAX_ENEMY ) {
+						break;
+					}
+					if ( idx != -1 ) {
+						int sx = ( int )_pos.x + BLOCK_X + j * NORMAL_CHAR_GRAPH_SIZE;
+						int sy = ( int )_pos.y + BLOCK_Y + i * NORMAL_CHAR_GRAPH_SIZE;
+						_enemy->setRect( enemies_rect[ idx ].tx, enemies_rect[ idx ].ty, NORMAL_CHAR_GRAPH_SIZE, NORMAL_CHAR_GRAPH_SIZE );
+						_enemy->setPos( sx, sy, sx + NORMAL_CHAR_GRAPH_SIZE, sy + NORMAL_CHAR_GRAPH_SIZE );
+						_enemy->draw( );
+					}
+				}
 			}
 		}
 		break;
