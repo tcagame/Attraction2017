@@ -43,9 +43,11 @@ Editor::~Editor( ) {
 
 void Editor::initialize( ) {
 	// drawer‰Šú‰»Œã
-	ImagePtr menu_image = Drawer::getTask( )->createImage( "Menu/menu.png" );
-	ImagePtr block_image = Drawer::getTask( )->createImage( "guide/object_guide_cursor.png" );
-	ImagePtr enemy_image = Drawer::getTask( )->createImage( "../Enemy/enemy_medium.png" );
+	DrawerPtr drawer( Drawer::getTask( ) );
+	ImagePtr menu_image  = drawer->createImage( "Menu/menu.png" );
+	ImagePtr block_image = drawer->createImage( "guide/object_guide_cursor.png" );
+	ImagePtr enemy_image = drawer->createImage( "../Enemy/enemy_medium.png" );
+	ImagePtr event_image = drawer->createImage( "Event/event.png" );
 	GroundPtr ground = GroundPtr( new Ground );
 	StructurePtr structure = StructurePtr( new Structure );
 
@@ -65,7 +67,7 @@ void Editor::initialize( ) {
 	_object_editor  = ObjectEditorPtr ( new ObjectEditor ( _data, _object_cursor ) );
 	_object_guide   = ObjectGuidePtr  ( new ObjectGuide  ( block_image, _data, _object_cursor ) );
 	_object_preview = ObjectPreviewPtr( new ObjectPreview( _data, _object_cursor ) );
-	_object_menu    = ObjectMenuPtr   ( new ObjectMenu   ( menu_image, block_image, enemy_image, _object_editor ) );
+	_object_menu    = ObjectMenuPtr   ( new ObjectMenu   ( menu_image, block_image, enemy_image, event_image, _object_editor ) );
 	_information    = InformationPtr  ( new Information  ( _data, _chip_cursor, _object_cursor, _chip_editor, _object_editor ) );
 }
 
@@ -102,6 +104,7 @@ void Editor::updateMode( ) {
 	case MODE_LOADBG:
 		loadBg( );
 		_mode = _return_mode;
+		break;
 	case MODE_EXPORT:
 		if ( !_exporter->update( ) ) {
 			_mode = _return_mode;
