@@ -133,6 +133,8 @@
     <ClCompile Include="PopGreenZombie.cpp" />
     <ClCompile Include="EnemyHugDemon.cpp" />
     <ClCompile Include="PopHugDemon.cpp" />
+    <ClCompile Include="EnemySwampZombieA.cpp" />
+    <ClCompile Include="PopSwampZombieA.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -266,6 +268,8 @@
     <ClInclude Include="PopGreenZombie.h" />
     <ClInclude Include="EnemyHugDemon.h" />
     <ClInclude Include="PopHugDemon.h" />
+    <ClInclude Include="EnemySwampZombieA.h" />
+    <ClInclude Include="PopSwampZombieA.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">
