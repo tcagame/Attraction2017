@@ -51,6 +51,8 @@
     <ClCompile Include="EnemyLancer.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyCrocoSnake.cpp" />
+    <ClCompile Include="PopCrocoSnake.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -102,6 +104,8 @@
     <ClInclude Include="EnemyLancer.h">
       <Filter>Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="EnemyCrocoSnake.h" />
+    <ClInclude Include="PopCrocoSnake.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Enemy">

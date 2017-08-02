@@ -8,6 +8,7 @@
 #include "PopFaceAndHand.h"
 #include "PopNoFace.h"
 #include "PopLancer.h"
+#include "PopCrocoSnake.h"
 
 PopperPtr Popper::getTask( ) {
 	return std::dynamic_pointer_cast< Popper >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -39,6 +40,9 @@ void Popper::initialize( ) {
 				break;
 			case  OBJECT_LANCER:	
 				_pops.push_back( PopPtr( new PopLancer( Vector( x, y ) ) ) );
+				break;
+			case  OBJECT_CROCO_SNAKE:	
+				_pops.push_back( PopPtr( new PopCrocoSnake( Vector( x, y ) ) ) );
 				break;
 			}
 		}
