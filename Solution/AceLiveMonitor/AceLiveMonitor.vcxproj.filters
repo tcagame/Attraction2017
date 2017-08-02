@@ -73,6 +73,10 @@
     <ClCompile Include="PopStoneFace.cpp" />
     <ClCompile Include="EnemyNoNeckGhost.cpp" />
     <ClCompile Include="PopNoNeckGhost.cpp" />
+    <ClCompile Include="EnemyShishimaiDemon.cpp" />
+    <ClCompile Include="PopShishimaiDemon.cpp" />
+    <ClCompile Include="EnemyShishimai.cpp" />
+    <ClCompile Include="PopShishimai.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -146,6 +150,10 @@
     <ClInclude Include="PopStoneFace.h" />
     <ClInclude Include="EnemyNoNeckGhost.h" />
     <ClInclude Include="PopNoNeckGhost.h" />
+    <ClInclude Include="EnemyShishimaiDemon.h" />
+    <ClInclude Include="PopShishimaiDemon.h" />
+    <ClInclude Include="EnemyShishimai.h" />
+    <ClInclude Include="PopShishimai.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Enemy">

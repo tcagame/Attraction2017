@@ -15,6 +15,9 @@
 #include "PopWhiteMist.h"
 #include "PopStoneFace.h"
 #include "PopNoNeckGhost.h"
+#include "PopShishimaiDemon.h"
+#include "PopShishimai.h"
+
 
 PopperPtr Popper::getTask( ) {
 	return std::dynamic_pointer_cast< Popper >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -67,6 +70,12 @@ void Popper::initialize( ) {
 				break;
 			case  OBJECT_NO_NECK_GHOST:
 				_pops.push_back( PopPtr( new PopNoNeckGhost( Vector( x, y ) ) ) );
+				break;
+			case  OBJECT_SHISHIMAI_DEMON:
+				_pops.push_back( PopPtr( new PopShishimaiDemon( Vector( x, y ) ) ) );
+				break;
+			case  OBJECT_SHISHIMAI:
+				_pops.push_back( PopPtr( new PopShishimai( Vector( x, y ) ) ) );
 				break;
 			}
 		}
