@@ -43,21 +43,29 @@ void ObjectGuide::draw( ) const {
 				tx = 0;
 				ty = 16;
 			}
+			unsigned char obj = _data->getObject( ox, oy );
+
 			// 不可侵ブロック
-			if ( _data->getObject( ox, oy ) == OBJECT_BLOCK ) {
+			if ( obj == OBJECT_BLOCK ) {
 				tx = 16;
+				ty = 0;
 			}
 			// 上方侵入ブロック
-			if ( _data->getObject( ox, oy ) == OBJECT_ONEWAY ) {
+			if ( obj == OBJECT_ONEWAY ) {
 				tx = 16 * 2;
+				ty = 0;
 			}
 			//エネミー配置ブロック
-			if ( _data->getObject( ox, oy ) != OBJECT_NONE &&
-				 _data->getObject( ox, oy ) < OBJECT_BLOCK ) {
+			if ( obj >= OBJECT_PURPLE_ZOMBIE &&
+				 obj < OBJECT_ENEMY_END ) {
 				tx = 16;
 				ty = 32;
 			}
-
+			//イベント配置ブロック
+			if ( obj >= OBJECT_EVENT_REDDEAMON ) {
+				tx = 32;
+				ty = 32;
+			}
 			_image->setRect( tx, ty, TEX_SIZE, TEX_SIZE );
 			_image->setPos( sx, sy );
 			_image->draw( );

@@ -79,8 +79,10 @@ const unsigned char OBJECT_ONE_EYE_SNAKE  = 0x08;
 const unsigned char OBJECT_WHITE_MIST	  = 0x09;
 const unsigned char OBJECT_STONE_FACE	  = 0x0A;
 
+
+const unsigned char OBJECT_ENEMY_END = 0x7F;
 //block
 const unsigned char OBJECT_BLOCK  = 0x80;
 const unsigned char OBJECT_ONEWAY = 0x81;
 //event
-const unsigned char OBJECT_EVENT_REDDEAMON = 0xFF;
+const unsigned char OBJECT_EVENT_REDDEAMON = 0xC0;
