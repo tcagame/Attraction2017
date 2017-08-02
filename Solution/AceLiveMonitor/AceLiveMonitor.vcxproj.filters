@@ -63,6 +63,12 @@
     <ClCompile Include="EnemyGhoul.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyGhost.cpp" />
+    <ClCompile Include="PopGhost.cpp" />
+    <ClCompile Include="EnemyOneEyeSnake.cpp" />
+    <ClCompile Include="PopOneEyeSnake.cpp" />
+    <ClCompile Include="EnemyWhiteMist.cpp" />
+    <ClCompile Include="PopWhiteMist.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -126,6 +132,12 @@
     <ClInclude Include="EnemyGhoul.h">
       <Filter>Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="EnemyGhost.h" />
+    <ClInclude Include="PopGhost.h" />
+    <ClInclude Include="EnemyOneEyeSnake.h" />
+    <ClInclude Include="PopOneEyeSnake.h" />
+    <ClInclude Include="EnemyWhiteMist.h" />
+    <ClInclude Include="PopWhiteMist.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Enemy">

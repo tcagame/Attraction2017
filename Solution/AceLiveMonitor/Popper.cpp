@@ -10,6 +10,9 @@
 #include "PopLancer.h"
 #include "PopCrocoSnake.h"
 #include "PopGhoul.h"
+#include "PopGhost.h"
+#include "PopOneEyeSnake.h"
+#include "PopWhiteMist.h"
 
 PopperPtr Popper::getTask( ) {
 	return std::dynamic_pointer_cast< Popper >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -47,6 +50,15 @@ void Popper::initialize( ) {
 				break;
 			case  OBJECT_GHOUL:	
 				_pops.push_back( PopPtr( new PopGhoul( Vector( x, y ) ) ) );
+				break;
+			case  OBJECT_GHOST:	
+				_pops.push_back( PopPtr( new PopGhost( Vector( x, y ) ) ) );
+				break;
+			case  OBJECT_ONE_EYE_SNAKE:	
+				_pops.push_back( PopPtr( new PopOneEyeSnake( Vector( x, y ) ) ) );
+				break;
+			case  OBJECT_WHITE_MIST:	
+				_pops.push_back( PopPtr( new PopWhiteMist( Vector( x, y ) ) ) );
 				break;
 			}
 		}
