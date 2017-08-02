@@ -129,12 +129,26 @@
     <ClCompile Include="PopBlueMonk.cpp">
       <Filter>Pop</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyGreenZombie.cpp" />
-    <ClCompile Include="PopGreenZombie.cpp" />
-    <ClCompile Include="EnemyHugDemon.cpp" />
-    <ClCompile Include="PopHugDemon.cpp" />
-    <ClCompile Include="EnemySwampZombieA.cpp" />
-    <ClCompile Include="PopSwampZombieA.cpp" />
+    <ClCompile Include="EnemyGreenZombie.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemySwampZombieA.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyHugDemon.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopGreenZombie.cpp">
+      <Filter>Pop</Filter>
+    </ClCompile>
+    <ClCompile Include="PopHugDemon.cpp">
+      <Filter>Pop</Filter>
+    </ClCompile>
+    <ClCompile Include="PopSwampZombieA.cpp">
+      <Filter>Pop</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemySwampZombieB.cpp" />
+    <ClCompile Include="PopSwampZombieB.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -264,12 +278,26 @@
     <ClInclude Include="PopBlueMonk.h">
       <Filter>Pop</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyGreenZombie.h" />
-    <ClInclude Include="PopGreenZombie.h" />
-    <ClInclude Include="EnemyHugDemon.h" />
-    <ClInclude Include="PopHugDemon.h" />
-    <ClInclude Include="EnemySwampZombieA.h" />
-    <ClInclude Include="PopSwampZombieA.h" />
+    <ClInclude Include="EnemySwampZombieA.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyGreenZombie.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyHugDemon.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopGreenZombie.h">
+      <Filter>Pop</Filter>
+    </ClInclude>
+    <ClInclude Include="PopSwampZombieA.h">
+      <Filter>Pop</Filter>
+    </ClInclude>
+    <ClInclude Include="PopHugDemon.h">
+      <Filter>Pop</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemySwampZombieB.h" />
+    <ClInclude Include="PopSwampZombieB.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">
