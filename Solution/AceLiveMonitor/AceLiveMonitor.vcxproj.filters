@@ -123,8 +123,14 @@
     <ClCompile Include="PopWhiteMist.cpp">
       <Filter>Pop</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyBlueMonk.cpp" />
-    <ClCompile Include="PopBlueMonk.cpp" />
+    <ClCompile Include="EnemyBlueMonk.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopBlueMonk.cpp">
+      <Filter>Pop</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyGreenZombie.cpp" />
+    <ClCompile Include="PopGreenZombie.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -248,15 +254,21 @@
     <ClInclude Include="PopWhiteMist.h">
       <Filter>Pop</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyBlueMonk.h" />
-    <ClInclude Include="PopBlueMonk.h" />
+    <ClInclude Include="EnemyBlueMonk.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopBlueMonk.h">
+      <Filter>Pop</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyGreenZombie.h" />
+    <ClInclude Include="PopGreenZombie.h" />
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Enemy">
-      <UniqueIdentifier>{a27163da-86d5-4ace-a4f8-ded400c8a1bd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Pop">
       <UniqueIdentifier>{850afb85-911e-43b2-a175-64364fee8f68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enemy">
+      <UniqueIdentifier>{a27163da-86d5-4ace-a4f8-ded400c8a1bd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

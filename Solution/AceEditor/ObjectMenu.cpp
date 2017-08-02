@@ -59,6 +59,7 @@ const Rect enemies_rect[ ] = {
 	RECT_HAND,
 	RECT_RED_BIRD,
 	RECT_BLUE_MONK,
+	RECT_GREEN_ZOMBIE,
 };
 const int MAX_ENEMY = sizeof( enemies_rect ) / sizeof( enemies_rect[ 0 ] );
 
@@ -233,6 +234,9 @@ unsigned char ObjectMenu::getEnemy( int idx ) const {
 		break;
 	case 16:
 		result = OBJECT_BLUE_MONK;
+		break;
+	case 17:
+		result = OBJECT_GREEN_ZOMBIE;
 		break;
 	default:
 		result = OBJECT_NONE;

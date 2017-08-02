@@ -21,7 +21,7 @@
 #include "PopHand.h"
 #include "PopRedBird.h"
 #include "PopBlueMonk.h"
-
+#include "PopGreenZombie.h"
 
 PopperPtr Popper::getTask( ) {
 	return std::dynamic_pointer_cast< Popper >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -92,6 +92,9 @@ void Popper::initialize( ) {
 				break;
 			case  OBJECT_BLUE_MONK:
 				_pops.push_back( PopPtr( new PopBlueMonk( Vector( x, y ) ) ) );
+				break;
+			case  OBJECT_GREEN_ZOMBIE:
+				_pops.push_back( PopPtr( new PopGreenZombie( Vector( x, y ) ) ) );
 				break;
 			}
 		}

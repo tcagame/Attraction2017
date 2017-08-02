@@ -166,6 +166,7 @@
     <ClCompile Include="EnemyFaceAndHand.cpp" />
     <ClCompile Include="EnemyGhost.cpp" />
     <ClCompile Include="EnemyGhoul.cpp" />
+    <ClCompile Include="EnemyGreenZombie.cpp" />
     <ClCompile Include="EnemyHand.cpp" />
     <ClCompile Include="EnemyLancer.cpp" />
     <ClCompile Include="EnemyNoFace.cpp" />
@@ -184,6 +185,7 @@
     <ClCompile Include="PopFaceAndHand.cpp" />
     <ClCompile Include="PopGhost.cpp" />
     <ClCompile Include="PopGhoul.cpp" />
+    <ClCompile Include="PopGreenZombie.cpp" />
     <ClCompile Include="PopHand.cpp" />
     <ClCompile Include="PopLancer.cpp" />
     <ClCompile Include="PopNoFace.cpp" />
@@ -222,6 +224,7 @@
     <ClInclude Include="EnemyFaceAndHand.h" />
     <ClInclude Include="EnemyGhost.h" />
     <ClInclude Include="EnemyGhoul.h" />
+    <ClInclude Include="EnemyGreenZombie.h" />
     <ClInclude Include="EnemyHand.h" />
     <ClInclude Include="EnemyLancer.h" />
     <ClInclude Include="EnemyNoFace.h" />
@@ -240,6 +243,7 @@
     <ClInclude Include="PopFaceAndHand.h" />
     <ClInclude Include="PopGhost.h" />
     <ClInclude Include="PopGhoul.h" />
+    <ClInclude Include="PopGreenZombie.h" />
     <ClInclude Include="PopHand.h" />
     <ClInclude Include="PopLancer.h" />
     <ClInclude Include="PopNoFace.h" />
