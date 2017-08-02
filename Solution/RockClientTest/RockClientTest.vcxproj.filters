@@ -13,6 +13,7 @@
     <ClCompile Include="RockMap.cpp" />
     <ClCompile Include="RockDollHouse.cpp" />
     <ClCompile Include="RockEnemyRedBard.cpp" />
+    <ClCompile Include="RockEnemyWaterGhost.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StatusDrawer.h" />
@@ -26,5 +27,6 @@
     <ClInclude Include="RockMap.h" />
     <ClInclude Include="RockDollHouse.h" />
     <ClInclude Include="RockEnemyRedBard.h" />
+    <ClInclude Include="RockEnemyWaterGhost.h" />
   </ItemGroup>
 </Project>

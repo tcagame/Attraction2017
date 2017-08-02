@@ -4,7 +4,7 @@
 
 class RockCharacter {
 public:
-	RockCharacter( const Vector& pos, DOLL id );
+	RockCharacter( const Vector& pos, DOLL id, bool mass = true );
 	virtual ~RockCharacter( );
 public:
 	DOLL getId( ) const;
@@ -18,5 +18,6 @@ private:
 	Vector _pos;
 	Vector _vec;
 	DOLL _id;
+	bool _mass;
 };
 

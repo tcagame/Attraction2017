@@ -4,7 +4,7 @@
 
 class RockEnemy:  public RockCharacter {
 public:
-	RockEnemy( const Vector& pos, DOLL id );
+	RockEnemy( const Vector& pos, DOLL id, bool mass = true );
 	virtual ~RockEnemy( );
 };
 

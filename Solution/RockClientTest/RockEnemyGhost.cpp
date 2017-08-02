@@ -3,7 +3,7 @@
 
 
 RockEnemyGhost::RockEnemyGhost( const Vector& pos ) :
-RockEnemy( pos, DOLL_GHOST ) {
+RockEnemy( pos, DOLL_GHOST, false ) {
 }
 
 
@@ -11,5 +11,5 @@ RockEnemyGhost::~RockEnemyGhost( ) {
 }
 
 void RockEnemyGhost::act( ) {
-	setVec( Vector( 0.6, -0.3, 1 ) );
+	setVec( Vector( 0.6, 0, 1 ) );
 }
