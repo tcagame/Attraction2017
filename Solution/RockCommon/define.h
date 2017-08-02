@@ -13,8 +13,11 @@ const unsigned int STATE_STREET_3	= 0b00001000;
 const unsigned int STATE_BOSS		= 0b00010000;
 const unsigned int STATE_RESULT		= 0b00100000;
 
+const double GRAVITY = -0.1;
+
 enum DOLL {
 	DOLL_GHOST,
 	DOLL_REDBARD,
+	DOLL_WATERGHOST,
 	MAX_DOLL
 };

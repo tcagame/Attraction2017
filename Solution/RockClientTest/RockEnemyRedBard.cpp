@@ -1,7 +1,7 @@
 #include "RockEnemyRedBard.h"
 
 RockEnemyRedBard::RockEnemyRedBard( const Vector& pos ) :
-RockEnemy( pos, DOLL_REDBARD ) {
+RockEnemy( pos, DOLL_REDBARD, false ) {
 }
 
 
