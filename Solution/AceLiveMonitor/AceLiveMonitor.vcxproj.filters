@@ -63,6 +63,8 @@
     <ClCompile Include="EnemyGhoul.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyGhost.cpp" />
+    <ClCompile Include="PopGhost.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -126,6 +128,8 @@
     <ClInclude Include="EnemyGhoul.h">
       <Filter>Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="EnemyGhost.h" />
+    <ClInclude Include="PopGhost.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Enemy">
