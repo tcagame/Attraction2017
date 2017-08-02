@@ -69,6 +69,11 @@ void ObjectPreview::draw( ) const {
 				_enemy->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE - ( NORMAL_CHAR_GRAPH_SIZE / 2 ), PREVIEW_Y + j * OBJECT_CHIP_SIZE - ( NORMAL_CHAR_GRAPH_SIZE - OBJECT_CHIP_SIZE ) );
 				_enemy->draw( );
 			}
+			if ( _data->getObject( ox, oy ) == OBJECT_STONE_FACE ) {
+				_enemy->setRect( RECT_STONE_FACE.tx, RECT_STONE_FACE.ty, NORMAL_CHAR_GRAPH_SIZE, NORMAL_CHAR_GRAPH_SIZE );
+				_enemy->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE - ( NORMAL_CHAR_GRAPH_SIZE / 2 ), PREVIEW_Y + j * OBJECT_CHIP_SIZE - ( NORMAL_CHAR_GRAPH_SIZE - OBJECT_CHIP_SIZE ) );
+				_enemy->draw( );
+			}
 
 			// オブジェクトブロック
 			if ( _data->getObject( ox, oy ) == OBJECT_BLOCK ) {

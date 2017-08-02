@@ -77,6 +77,7 @@ const unsigned char OBJECT_GHOUL		  = 0x06;
 const unsigned char OBJECT_GHOST		  = 0x07;
 const unsigned char OBJECT_ONE_EYE_SNAKE  = 0x08;
 const unsigned char OBJECT_WHITE_MIST	  = 0x09;
+const unsigned char OBJECT_STONE_FACE	  = 0x0A;
 
 
 const unsigned char OBJECT_ENEMY_END = 0x7F;
