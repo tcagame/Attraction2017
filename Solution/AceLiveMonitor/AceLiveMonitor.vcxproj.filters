@@ -51,10 +51,18 @@
     <ClCompile Include="EnemyLancer.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyCrocoSnake.cpp" />
-    <ClCompile Include="PopCrocoSnake.cpp" />
-    <ClCompile Include="EnemyGhoul.cpp" />
-    <ClCompile Include="PopGhoul.cpp" />
+    <ClCompile Include="PopCrocoSnake.cpp">
+      <Filter>Pop</Filter>
+    </ClCompile>
+    <ClCompile Include="PopGhoul.cpp">
+      <Filter>Pop</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyCrocoSnake.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyGhoul.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -106,10 +114,18 @@
     <ClInclude Include="EnemyLancer.h">
       <Filter>Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyCrocoSnake.h" />
-    <ClInclude Include="PopCrocoSnake.h" />
-    <ClInclude Include="EnemyGhoul.h" />
-    <ClInclude Include="PopGhoul.h" />
+    <ClInclude Include="PopCrocoSnake.h">
+      <Filter>Pop</Filter>
+    </ClInclude>
+    <ClInclude Include="PopGhoul.h">
+      <Filter>Pop</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyCrocoSnake.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyGhoul.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Enemy">
