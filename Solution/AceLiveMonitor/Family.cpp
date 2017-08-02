@@ -63,20 +63,27 @@ PlayerPtr Family::getPlayer( int player_id ) {
 
 void Family::updateCameraPos( ) {
 	double camera_pos = 0;
+	//プレイヤーの位置の合計を出す
 	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
 		if ( _player[ i ]->getState( ) == Character::STATE_EVENT ) {
 			continue;
 		}
 		camera_pos += _player[ i ]->getPos( ).x;
 	}
+	//プレイヤーの平均を出すための値
 	double pos_ratio = 0.25;
 	if ( isExistancePlayerEvent( ) ) {
 		pos_ratio = 1.0 / ( ACE_PLAYER_NUM - 1 );
 	}
-	camera_pos = camera_pos * pos_ratio - SCREEN_WIDTH / 2; //平均をとる
+
+	//平均を計算
+	camera_pos = camera_pos * pos_ratio - SCREEN_WIDTH / 2;
+
+	//左に行く場合抜ける
 	if ( _camera_pos - camera_pos > 0 ) {
 		return;
 	}
+
 	if ( _camera_pos - camera_pos > CAMERA_SCROLL_SPEED ) {
 		_camera_pos -= CAMERA_SCROLL_SPEED;
 	}

@@ -3,7 +3,6 @@
 #include "EnemyPurpleZombie.h"
 #include "EnemyFaceAndHand.h"
 #include "ace_define.h"
-
 #include "Family.h"
 #include "Player.h"
 
@@ -29,7 +28,8 @@ void Military::update( ) {
 			ite++;
 			continue;
 		}
-		if ( enemy->isFinished( ) ) {
+		if ( enemy->isFinished( ) ||
+			 !enemy->isInScreen( ) ) {
 			ite = _enemies.erase( ite );
 			continue;
 		}
