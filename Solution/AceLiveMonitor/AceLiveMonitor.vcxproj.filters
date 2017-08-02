@@ -131,6 +131,8 @@
     </ClCompile>
     <ClCompile Include="EnemyGreenZombie.cpp" />
     <ClCompile Include="PopGreenZombie.cpp" />
+    <ClCompile Include="EnemyHugDemon.cpp" />
+    <ClCompile Include="PopHugDemon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -262,6 +264,8 @@
     </ClInclude>
     <ClInclude Include="EnemyGreenZombie.h" />
     <ClInclude Include="PopGreenZombie.h" />
+    <ClInclude Include="EnemyHugDemon.h" />
+    <ClInclude Include="PopHugDemon.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">

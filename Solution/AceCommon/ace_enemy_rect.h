@@ -34,8 +34,8 @@ const Rect RECT_HAND			( 8 * CHIP_SIZE, 0 * CHIP_SIZE );
 const Rect RECT_RED_BIRD		( 0 * CHIP_SIZE, 4 * CHIP_SIZE );
 const Rect RECT_BLUE_MONK		( 11 * CHIP_SIZE, 8 * CHIP_SIZE );
 //const Rect RECT_RED_DEMON_JR	( 1 * CHIP_SIZE, 9 * CHIP_SIZE );EditorÇ≈èûä“Ç∑ÇÈÇ©ïsñæ
-
 const Rect RECT_GREEN_ZOMBIE	( 3 * CHIP_SIZE, 1 * CHIP_SIZE );
+
 const Rect RECT_HUG_DEMON		( 4 * CHIP_SIZE, 6 * CHIP_SIZE );
 const Rect RECT_SWAMP_ZOMBIE_A	( 0 * CHIP_SIZE, 10 * CHIP_SIZE );
 const Rect RECT_SWAMP_ZOMBIE_B	( 5 * CHIP_SIZE, 10 * CHIP_SIZE );
