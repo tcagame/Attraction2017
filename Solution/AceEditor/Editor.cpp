@@ -25,7 +25,7 @@
 #include "Structure.h"
 #include "Background.h"
 
-const std::string DIRECTORY_DATA = "MapData/";
+const std::string DIRECTORY_DATA = "Resource/Ace/MapData/";
 const std::string DIRECTORY_BG = "Bg/";
 
 EditorPtr Editor::getTask( ) {
@@ -169,16 +169,16 @@ void Editor::drawMode( ) {
 
 	switch ( _mode ) {
 	case MODE_SAVEALL:
-		drawer->drawString( 0, 0, "オールセーブ" );
+		drawer->drawString( 0, 20, "オールセーブ" );
 		break;
 	case MODE_LOADALL:
-		drawer->drawString( 0, 0, "オールロード" );
+		drawer->drawString( 0, 20, "オールロード" );
 		break;
 	case MODE_SAVEPAGE:
-		drawer->drawString( 0, 0, "ページセーブ" );
+		drawer->drawString( 0, 20, "ページセーブ" );
 		break;
 	case MODE_LOADPAGE:
-		drawer->drawString( 0, 0, "ページロード" );
+		drawer->drawString( 0, 20, "ページロード" );
 		break;
 	}
 }
@@ -266,7 +266,7 @@ Editor::MODE Editor::getMode( ) const {
 }
 
 void Editor::saveAll( ) const {
-	std::string filename = Application::getInstance( )->inputString( 0, 20 );
+	std::string filename = Application::getInstance( )->inputString( 0, 40 );
 	if ( filename.size( ) == 0 ) {
 		return;
 	}
@@ -275,7 +275,7 @@ void Editor::saveAll( ) const {
 }
 
 void Editor::loadAll( ) {
-	std::string filename = Application::getInstance( )->inputString( 0, 20 );
+	std::string filename = Application::getInstance( )->inputString( 0, 40 );
 	if ( filename.size( ) == 0 ) {
 		return;
 	}
@@ -283,7 +283,7 @@ void Editor::loadAll( ) {
 }
 
 void Editor::savePage( ) const {
-	std::string filename = Application::getInstance( )->inputString( 0, 20 );
+	std::string filename = Application::getInstance( )->inputString( 0, 40 );
 	if ( filename.size( ) == 0 ) {
 		return;
 	}
@@ -299,7 +299,7 @@ void Editor::savePage( ) const {
 }
 
 void Editor::loadPage( ) {
-	std::string filename = Application::getInstance( )->inputString( 0, 20 );
+	std::string filename = Application::getInstance( )->inputString( 0, 40 );
 	if ( filename.size( ) == 0 ) {
 		return;
 	}

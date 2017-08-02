@@ -32,7 +32,7 @@ const int BLOCK_WIDTH_NUM = 3;
 const int ENEMY_WIDTH_NUM = 5;
 const int ENEMY_HEIGHT_NUM = 3;
 
-const int EVENT_SPRITE_SIZE = 128;
+const int EVENT_SPRITE_SIZE = 32;
 const int EVENT_DRAW_SIZE = 64;
 const int EVENT_WIDTH_NUM = 3;
 const int EVENT_HEIGHT_NUM = 3;

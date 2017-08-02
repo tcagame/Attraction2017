@@ -89,7 +89,7 @@ void ObjectPreview::draw( ) const {
 
 			//event
 			if ( _data->getObject( ox, oy ) == OBJECT_EVENT_REDDEAMON ) {
-				_event->setRect( 0, 0, 128, 128 );
+				_event->setRect( 0, 0, 32, 32 );
 				_event->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE, PREVIEW_Y + j * OBJECT_CHIP_SIZE );
 				_event->draw( );
 			}
