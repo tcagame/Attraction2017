@@ -55,6 +55,7 @@ const Rect enemies_rect[ ] = {
 	RECT_NO_NECK_GHOST,
 	RECT_SHISHIMAI_DEMON,
 	RECT_SHISHIMAI,
+	RECT_ARCHER,
 };
 const int MAX_ENEMY = sizeof( enemies_rect ) / sizeof( enemies_rect[ 0 ] );
 
@@ -217,6 +218,9 @@ unsigned char ObjectMenu::getEnemy( int idx ) const {
 		break;
 	case 12:
 		result = OBJECT_SHISHIMAI;
+		break;
+	case 13:
+		result = OBJECT_ARCHER;
 		break;
 	default:
 		result = OBJECT_NONE;

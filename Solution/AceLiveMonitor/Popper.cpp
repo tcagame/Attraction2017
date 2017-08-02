@@ -17,6 +17,7 @@
 #include "PopNoNeckGhost.h"
 #include "PopShishimaiDemon.h"
 #include "PopShishimai.h"
+#include "PopArcher.h"
 
 
 PopperPtr Popper::getTask( ) {
@@ -76,6 +77,9 @@ void Popper::initialize( ) {
 				break;
 			case  OBJECT_SHISHIMAI:
 				_pops.push_back( PopPtr( new PopShishimai( Vector( x, y ) ) ) );
+				break;
+			case  OBJECT_ARCHER:
+				_pops.push_back( PopPtr( new PopArcher( Vector( x, y ) ) ) );
 				break;
 			}
 		}
