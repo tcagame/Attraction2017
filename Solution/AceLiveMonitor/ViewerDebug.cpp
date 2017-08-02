@@ -21,15 +21,30 @@ void ViewerDebug::draw( ) const {
 	FamilyPtr family( Family::getTask( ) );
 	int camera_pos = ( int )family->getCameraPos( );
 	DrawerPtr drawer( Drawer::getTask( ) );
-	//プレイヤー
+	drawPlayer( );
+	drawEnemy( );
+	drawShot( );
+	drawChip( );
+}
+
+void ViewerDebug::drawPlayer( ) const {
+	FamilyPtr family( Family::getTask( ) );
+	int camera_pos = ( int )family->getCameraPos( );
+	DrawerPtr drawer( Drawer::getTask( ) );
 	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
 		PlayerConstPtr player = family->getPlayer( i );
 		Vector pos( player->getPos( ) - Vector( camera_pos, player->getChip( ).size / 2 ) );
 		drawer->drawCircle( pos + Vector( 0, VIEW_STREET_Y ), player->getRadius( ) );
 	}
-	//エネミー
+}
+
+void ViewerDebug::drawEnemy( ) const {
+	DrawerPtr drawer( Drawer::getTask( ) );
+	FamilyPtr family( Family::getTask( ) );
+	int camera_pos = ( int )family->getCameraPos( );
 	std::list< EnemyPtr > enemies = Military::getTask( )->getList( );
-	std::list< EnemyPtr >::const_iterator ite = enemies.begin( );	
+	std::list< EnemyPtr >::const_iterator ite = enemies.begin( );
+	int enemy_num = 0;
 	while ( ite != enemies.end( ) ) {
 		EnemyPtr enemy = ( *ite );
 		if ( !enemy ) {
@@ -38,9 +53,16 @@ void ViewerDebug::draw( ) const {
 		}
 		Vector pos( enemy->getPos( ) - Vector( camera_pos, enemy->getChip( ).size / 2 ) );
 		drawer->drawCircle( pos + Vector( 0, VIEW_STREET_Y ), enemy->getRadius( ) );
+		enemy_num++;
 		ite++;
 	}
-	//妖怪念力
+	drawer->drawString( 0, 0, "Enemy:%d", enemy_num );
+}
+
+void ViewerDebug::drawShot( ) const {
+	FamilyPtr family( Family::getTask( ) );
+	int camera_pos = ( int )family->getCameraPos( );
+	DrawerPtr drawer( Drawer::getTask( ) );
 	ArmouryPtr armoury( Armoury::getTask( ) );
 	for ( int i = 0; i < armoury->getMaxShotNum( ); i++ ) {
 		ShotConstPtr shot = armoury->getShot( i );
@@ -50,7 +72,12 @@ void ViewerDebug::draw( ) const {
 		Vector pos( shot->getPos( ) - Vector( camera_pos, shot->getChip( ).size / 2 ) );
 		drawer->drawCircle( pos + Vector( 0, VIEW_STREET_Y ), shot->getRadius( ) );
 	}
-	//チップ
+}
+
+void ViewerDebug::drawChip( ) const {
+	FamilyPtr family( Family::getTask( ) );
+	int camera_pos = ( int )family->getCameraPos( );
+	DrawerPtr drawer( Drawer::getTask( ) );
 	MapPtr map( Map::getTask( ) );
 	const int MAP_WIDTH = map->getPageNum( ) * PAGE_OBJECT_WIDTH_NUM * OBJECT_CHIP_SIZE;
 	for ( int i = 0; i < map->getPageNum( ) * PAGE_OBJECT_WIDTH_NUM; i++ ) {
@@ -67,3 +94,4 @@ void ViewerDebug::draw( ) const {
 		}
 	}
 }
+
