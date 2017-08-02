@@ -71,6 +71,8 @@
     <ClCompile Include="PopWhiteMist.cpp" />
     <ClCompile Include="EnemyStoneFace.cpp" />
     <ClCompile Include="PopStoneFace.cpp" />
+    <ClCompile Include="EnemyNoNeckGhost.cpp" />
+    <ClCompile Include="PopNoNeckGhost.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -142,6 +144,8 @@
     <ClInclude Include="PopWhiteMist.h" />
     <ClInclude Include="EnemyStoneFace.h" />
     <ClInclude Include="PopStoneFace.h" />
+    <ClInclude Include="EnemyNoNeckGhost.h" />
+    <ClInclude Include="PopNoNeckGhost.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Enemy">

@@ -52,6 +52,7 @@ const Rect enemies_rect[ ] = {
 	RECT_ONE_EYE_SNAKE,
 	RECT_WHITE_MIST,
 	RECT_STONE_FACE,
+	RECT_NO_NECK_GHOST,
 };
 const int MAX_ENEMY = sizeof( enemies_rect ) / sizeof( enemies_rect[ 0 ] );
 
@@ -205,6 +206,9 @@ unsigned char ObjectMenu::getEnemy( int idx ) const {
 		break;
 	case 9:
 		result = OBJECT_STONE_FACE;
+		break;
+	case 10:
+		result = OBJECT_NO_NECK_GHOST;
 		break;
 	default:
 		result = OBJECT_NONE;
