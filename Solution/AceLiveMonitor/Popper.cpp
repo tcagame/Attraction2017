@@ -20,6 +20,7 @@
 #include "PopArcher.h"
 #include "PopHand.h"
 #include "PopRedBird.h"
+#include "PopBlueMonk.h"
 
 
 PopperPtr Popper::getTask( ) {
@@ -88,6 +89,9 @@ void Popper::initialize( ) {
 				break;
 			case  OBJECT_RED_BIRD:
 				_pops.push_back( PopPtr( new PopRedBird( Vector( x, y ) ) ) );
+				break;
+			case  OBJECT_BLUE_MONK:
+				_pops.push_back( PopPtr( new PopBlueMonk( Vector( x, y ) ) ) );
 				break;
 			}
 		}

@@ -26,13 +26,13 @@ const Rect RECT_GHOST			( 2 * CHIP_SIZE, 3 * CHIP_SIZE );
 const Rect RECT_ONE_EYE_SNAKE	( 0 * CHIP_SIZE, 12 * CHIP_SIZE );
 const Rect RECT_WHITE_MIST		( 1 * CHIP_SIZE, 5 * CHIP_SIZE );
 const Rect RECT_STONE_FACE		( 1 * CHIP_SIZE, 9 * CHIP_SIZE );
-
 const Rect RECT_NO_NECK_GHOST	( 6 * CHIP_SIZE, 1 * CHIP_SIZE );
 const Rect RECT_SHISHIMAI_DEMON	( 8 * CHIP_SIZE, 5 * CHIP_SIZE );
 const Rect RECT_SHISHIMAI		( 4 * CHIP_SIZE, 5 * CHIP_SIZE );
 const Rect RECT_ARCHER			( 7 * CHIP_SIZE, 4 * CHIP_SIZE );
 const Rect RECT_HAND			( 8 * CHIP_SIZE, 0 * CHIP_SIZE );
 const Rect RECT_RED_BIRD		( 0 * CHIP_SIZE, 4 * CHIP_SIZE );
+
 const Rect RECT_BLUE_MONK		( 11 * CHIP_SIZE, 8 * CHIP_SIZE );
 //const Rect RECT_RED_DEMON_JR	( 1 * CHIP_SIZE, 9 * CHIP_SIZE );EditorÇ≈èûä“Ç∑ÇÈÇ©ïsñæ
 const Rect RECT_GREEN_ZOMBIE	( 3 * CHIP_SIZE, 1 * CHIP_SIZE );
