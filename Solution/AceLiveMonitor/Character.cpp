@@ -42,7 +42,7 @@ void Character::update( ) {
 	if ( _mass ) {
 		{//è„â∫îªíË
 			if ( _vec.y > 0 ) {
-				if ( map->isExistance( _pos + Vector( 0, _vec.y ) ) ) {
+				if ( map->getObject( _pos + Vector( 0, _vec.y ) ) == OBJECT_BLOCK ) {
 					_standing = true;
 					_pos.y = ( ( int )( _pos.y + _vec.y ) / OBJECT_CHIP_SIZE ) * OBJECT_CHIP_SIZE - GRAVITY / 2;
 					_vec.y = 0;
@@ -52,7 +52,7 @@ void Character::update( ) {
 		{//ç∂âEîªíË
 			//ç∂ë§
 			if ( _vec.x < 0 ) {
-				if ( map->isExistance( _pos + Vector( _vec.x - _radius, 0 ) ) ) {
+				if ( map->getObject( _pos + Vector( _vec.x - _radius, 0 ) ) == OBJECT_BLOCK ) {
 					_pos.x = ( ( int )( _pos.x + _vec.x - _radius ) / OBJECT_CHIP_SIZE + 1 ) * OBJECT_CHIP_SIZE + _radius;
 					_vec.x = 0;
 					_dir = DIR_LEFT;
@@ -60,7 +60,7 @@ void Character::update( ) {
 			}
 			//âEë§
 			if ( _vec.x > 0 ) {
-				if ( map->isExistance( _pos + Vector( _vec.x + _radius, 0 ) ) ) {
+				if ( map->getObject( _pos + Vector( _vec.x + _radius, 0 ) ) == OBJECT_BLOCK ) {
 					_pos.x = ( ( int )( _pos.x + _vec.x + _radius ) / OBJECT_CHIP_SIZE ) * OBJECT_CHIP_SIZE - _radius;
 					_vec.x = 0;
 					_dir = DIR_RIGHT;

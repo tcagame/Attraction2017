@@ -17,7 +17,7 @@ public:
 public:
 	void update( );
 	int getPageNum( ) const;
-	bool isExistance( const Vector& pos ) const;
+	unsigned char getObject( const Vector& pos ) const;
 	unsigned char getObject( int mx, int my ) const;
 private:
 	void load( );
