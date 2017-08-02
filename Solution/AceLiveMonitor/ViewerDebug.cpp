@@ -80,15 +80,13 @@ void ViewerDebug::drawChip( ) const {
 	DrawerPtr drawer( Drawer::getTask( ) );
 	MapPtr map( Map::getTask( ) );
 	const int MAP_WIDTH = map->getPageNum( ) * PAGE_OBJECT_WIDTH_NUM * OBJECT_CHIP_SIZE;
-	for ( int i = 0; i < map->getPageNum( ) * PAGE_OBJECT_WIDTH_NUM; i++ ) {
+	int width = ( SCREEN_WIDTH / GRAPH_SIZE + 1 ) * PAGE_OBJECT_WIDTH_NUM;
+	for ( int i = 0; i < width; i++ ) {
 		for ( int j = 0; j < OBJECT_CHIP_HEIGHT_NUM; j++ ) {
-			Vector pos( i * OBJECT_CHIP_SIZE, j * OBJECT_CHIP_SIZE );
+			Vector pos( i * OBJECT_CHIP_SIZE + camera_pos, j * OBJECT_CHIP_SIZE );
 			if ( map->isExistance( pos + Vector( OBJECT_CHIP_SIZE / 2, OBJECT_CHIP_SIZE / 2 ) ) ) {
 				_block->setRect( 0, 16, OBJECT_CHIP_SIZE, OBJECT_CHIP_SIZE );
-				while ( ( int )pos.x - camera_pos < -OBJECT_CHIP_SIZE ) {
-					pos.x += MAP_WIDTH;
-				}
-				_block->setPos( ( int )pos.x - camera_pos, VIEW_STREET_Y + ( int )pos.y );
+				_block->setPos( i * OBJECT_CHIP_SIZE - ( camera_pos % OBJECT_CHIP_SIZE ), j * OBJECT_CHIP_HEIGHT_NUM + VIEW_STREET_Y );
 				_block->draw( );
 			}
 		}
