@@ -39,6 +39,12 @@
     <ClCompile Include="PopPurpleZombie.cpp">
       <Filter>Pop</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyNoFace.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopNoFace.cpp">
+      <Filter>Pop</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -76,6 +82,12 @@
       <Filter>Pop</Filter>
     </ClInclude>
     <ClInclude Include="PopPurpleZombie.h">
+      <Filter>Pop</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyNoFace.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopNoFace.h">
       <Filter>Pop</Filter>
     </ClInclude>
   </ItemGroup>
