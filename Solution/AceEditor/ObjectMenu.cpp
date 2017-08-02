@@ -38,7 +38,8 @@ const int PAGE_ARROW_DISTANCE_CENTER = 30;
 
 const Rect enemies_rect[ ] = {
 	RECT_PUPLE_ZOMBIE,
-	RECT_FACE_AND_HAND
+	RECT_FACE_AND_HAND,
+	RECT_NO_FACE
 };
 const int MAX_ENEMY = sizeof( enemies_rect ) / sizeof( enemies_rect[ 0 ] );
 
@@ -151,6 +152,9 @@ unsigned char ObjectMenu::getEnemy( int idx ) {
 		break;
 	case 1:
 		result = OBJECT_FACE_AND_HAND;
+		break;
+	case 2:
+		result = OBJECT_NO_FACE;
 		break;
 	default:
 		result = OBJECT_NONE;

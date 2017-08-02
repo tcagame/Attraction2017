@@ -161,9 +161,11 @@
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="EnemyFaceAndHand.cpp" />
+    <ClCompile Include="EnemyNoFace.cpp" />
     <ClCompile Include="EnemyPurpleZombie.cpp" />
     <ClCompile Include="Pop.cpp" />
     <ClCompile Include="PopFaceAndHand.cpp" />
+    <ClCompile Include="PopNoFace.cpp" />
     <ClCompile Include="PopPurpleZombie.cpp" />
     <ClCompile Include="Family.cpp" />
     <ClCompile Include="Impact.cpp" />
@@ -187,9 +189,11 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnemyFaceAndHand.h" />
+    <ClInclude Include="EnemyNoFace.h" />
     <ClInclude Include="EnemyPurpleZombie.h" />
     <ClInclude Include="Pop.h" />
     <ClInclude Include="PopFaceAndHand.h" />
+    <ClInclude Include="PopNoFace.h" />
     <ClInclude Include="PopPurpleZombie.h" />
     <ClInclude Include="Family.h" />
     <ClInclude Include="Impact.h" />
