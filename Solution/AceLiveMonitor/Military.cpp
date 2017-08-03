@@ -48,6 +48,9 @@ void Military::update( ) {
 	{//event
 		if ( _boss ) {
 			_boss->update( );
+			if ( _boss->isFinished( ) ) {
+				_boss = EnemyPtr( );
+			}
 		}
 		std::list< EnemyPtr >::const_iterator ite = _event_enemies.begin( );
 		while ( ite != _event_enemies.end( ) ) {

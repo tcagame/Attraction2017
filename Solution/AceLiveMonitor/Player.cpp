@@ -7,6 +7,7 @@
 #include "Viewer.h"
 #include "ViewerEvent.h"
 #include "MapEvent.h"
+#include "Military.h"
 
 //画像サイズ
 const int PLAYER_FOOT = 7;
@@ -65,12 +66,12 @@ void Player::act( ) {
 		actOnDamege( );
 		break;
 	}
+	actOnCamera( );
 
 	//イベント
 	MapPtr map( Map::getTask( ) );
 	FamilyPtr family( Family::getTask( ) );
 	if ( getState( ) != STATE_EVENT ) {
-		actOnCamera( );
 		unsigned char obj = map->getObject( getPos( ) + getVec( ) );
 		if ( !Family::getTask( )->isExistancePlayerEvent( ) ) {
 			switch ( obj ) {
@@ -78,16 +79,19 @@ void Player::act( ) {
 				setState( STATE_EVENT );
 				MapEvent::getTask( )->setType( ViewerEvent::TYPE_RED_DEMON );
 				setPos( Vector( GRAPH_SIZE * 3 / 2, 0 ) );
+				setVec( Vector( ) );
 				break;
 			}	
 		}
 	}
 	if ( getState( ) == STATE_EVENT ) {
-		//一ページ目にいたら退場
-		if ( getPos( ).x < GRAPH_SIZE ) {
+		//一ページ目にいたらorボスが倒れている場合 [退場]
+		if ( getPos( ).x < GRAPH_SIZE ||
+			 !Military::getTask( )->getBoss( ) ) {
 			setState( STATE_MAIN );
+			MapEvent::getTask( )->setType( ViewerEvent::TYPE_TITLE );
 			setPos( Vector( family->getCameraPos( ) + SCREEN_WIDTH / 2, 0 ) );
-				MapEvent::getTask( )->setType( ViewerEvent::TYPE_TITLE );
+			setVec( Vector( ) );
 		}
 	}
 }
@@ -292,18 +296,21 @@ void Player::actOnOverCharge( ) {
 
 void Player::actOnCamera( ) {
 	FamilyConstPtr family( Family::getTask( ) );
-	double camera_pos = family->getCameraPos( );
-	if ( getPos( ).x + getVec( ).x - NORMAL_CHAR_GRAPH_SIZE / 2 < camera_pos ) {
+	int x = 0;
+	if ( getState( ) != STATE_EVENT ) {
+		x += ( int )family->getCameraPos( );
+	}
+	if ( getPos( ).x + getVec( ).x - getRadius( ) / 2 < x ) {
 		Vector pos( getPos( ) );
-		pos.x = camera_pos + getChipSize( ) / 2;
+		pos.x = x + getRadius( );
 		setPos( pos );
 		Vector vec( getVec( ) );
 		vec.x = 0;
 		setVec( vec );
 	}
-	if ( getPos( ).x + getVec( ).x + getChipSize( ) / 2 > camera_pos + SCREEN_WIDTH ) {
+	if ( getPos( ).x + getVec( ).x + getRadius( ) > x + SCREEN_WIDTH ) {
 		Vector pos( getPos( ) );
-		pos.x = ( camera_pos + SCREEN_WIDTH ) - getChipSize( ) / 2;
+		pos.x = ( x + SCREEN_WIDTH ) - getRadius( );
 		setPos( pos );
 		Vector vec( getVec( ) );
 		vec.x = 0;

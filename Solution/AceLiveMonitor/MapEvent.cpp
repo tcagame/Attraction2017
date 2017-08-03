@@ -65,7 +65,7 @@ ViewerEvent::TYPE  MapEvent::getType( ) const {
 
 unsigned char MapEvent::getObject( const Vector& pos ) const {
 	int object_width_num = EVENT_PAGE_NUM * PAGE_OBJECT_WIDTH_NUM;
-	int x = ( ( int )pos.x / OBJECT_CHIP_SIZE ) % object_width_num;
+	int x = ( ( int )pos.x / OBJECT_CHIP_SIZE + object_width_num ) % object_width_num;
 	int y = ( int )pos.y / OBJECT_CHIP_SIZE;
 	unsigned char obj = getObject( x, y );
 	return obj;

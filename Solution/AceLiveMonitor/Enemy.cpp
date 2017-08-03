@@ -19,9 +19,12 @@ bool Enemy::isInScreen( ) const {
 	//エネミーの位置
 	int enemy_page = ( int )getPos( ).x / GRAPH_SIZE;
 	//スクリーンの端
-	int screen_page_min = ( int )Family::getTask( )->getCameraPos( ) / GRAPH_SIZE;
-	int screen_page_max = screen_page_min + SCREEN_WIDTH / GRAPH_SIZE;
-	
+	int add = 0;
+	if ( getState( ) != STATE_EVENT ) {
+		add = ( int )Family::getTask( )->getCameraPos( ) / GRAPH_SIZE;
+	}
+	int screen_page_min = 0 + add;
+	int screen_page_max = SCREEN_WIDTH / GRAPH_SIZE + 1 + add;
 	if ( enemy_page < screen_page_min ||
 		 enemy_page > screen_page_max ) {
 		result = false;
