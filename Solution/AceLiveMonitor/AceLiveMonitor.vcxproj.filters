@@ -160,6 +160,12 @@
       <Filter>Pop</Filter>
     </ClCompile>
     <ClCompile Include="MapEvent.cpp" />
+    <ClCompile Include="EnemyBossRedDemon.cpp">
+      <Filter>Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBoss.cpp">
+      <Filter>Boss</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -320,6 +326,12 @@
       <Filter>Pop</Filter>
     </ClInclude>
     <ClInclude Include="MapEvent.h" />
+    <ClInclude Include="EnemyBossRedDemon.h">
+      <Filter>Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBoss.h">
+      <Filter>Boss</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">
@@ -327,6 +339,9 @@
     </Filter>
     <Filter Include="Enemy">
       <UniqueIdentifier>{a27163da-86d5-4ace-a4f8-ded400c8a1bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Boss">
+      <UniqueIdentifier>{ac0a6380-7baf-4cac-a471-08c053d3e854}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

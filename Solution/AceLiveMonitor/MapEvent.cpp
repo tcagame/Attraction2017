@@ -2,6 +2,7 @@
 #include "Application.h"
 #include <assert.h>
 #include "Binary.h"
+#include "Military.h"
 
 const std::string FILENAME[ MAX_EVENT ] {
 	"Resource/Ace/Event/akaoni/mapdata",//red deamon
@@ -55,6 +56,7 @@ void MapEvent::update( ) {
 
 void MapEvent::setType( ViewerEvent::TYPE type ) {
 	_type = type;
+	Military::getTask( )->createBoss( );
 }
 
 ViewerEvent::TYPE  MapEvent::getType( ) const {

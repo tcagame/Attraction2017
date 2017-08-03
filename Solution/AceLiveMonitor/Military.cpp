@@ -1,10 +1,10 @@
 #include "Military.h"
 #include "Application.h"
-#include "EnemyPurpleZombie.h"
-#include "EnemyFaceAndHand.h"
 #include "ace_define.h"
 #include "Family.h"
 #include "Player.h"
+#include "EnemyBossRedDemon.h"
+#include "MapEvent.h"
 
 PTR( Player );
 
@@ -43,6 +43,9 @@ void Military::update( ) {
 		enemy->update( );
 		ite++;
 	}
+	if ( _boss ) {
+		_boss->update( );
+	}
 }
 
 const std::list< EnemyPtr > Military::getList( ) const {
@@ -68,5 +71,24 @@ EnemyPtr Military::getOverLappedEnemy( CharacterConstPtr character ) const {
 		}
 		ite++;
 	}
+	if ( _boss ) {
+		_boss->isOverlapped( character );
+	}
 	return result;
+}
+
+void Military::createBoss( ) {
+	ViewerEvent::TYPE type = MapEvent::getTask( )->getType( );
+	switch ( type ) {
+	case ViewerEvent::TYPE_TITLE:
+		_boss = EnemyPtr( );
+		break;
+	case ViewerEvent::TYPE_RED_DEMON:
+		_boss = EnemyPtr( new EnemyBossRedDemon( Vector( 800, 200 ) ) );
+		break;
+	}
+}
+
+EnemyPtr Military::getBoss( ) const {
+	return _boss;
 }
