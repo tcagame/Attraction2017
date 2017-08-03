@@ -64,18 +64,22 @@ const Rect enemies_rect[ ] = {
 	RECT_SWAMP_ZOMBIE_A,
 	RECT_SWAMP_ZOMBIE_B,
 	RECT_SWAMP_ZOMBIE_C,
+	RECT_SKELETON,
+	RECT_LADY,
 };
 const int MAX_ENEMY = sizeof( enemies_rect ) / sizeof( enemies_rect[ 0 ] );
 
-ObjectMenu::ObjectMenu( ImagePtr image_menu, ImagePtr image_block, ImagePtr image_enemy, ImagePtr image_event, ObjectEditorPtr object_editor ) :
+ObjectMenu::ObjectMenu( ImagePtr image_menu, ImagePtr image_block, ImagePtr enemy_midium_image, ImagePtr enemy_big_image, ImagePtr enemy_wide_image, ImagePtr image_event, ObjectEditorPtr object_editor ) :
 _active( false ),
 _select_tag( TAG_BLOCK ),
 _object_editor( object_editor ),
 _menu( image_menu ),
 _block( image_block ),
-_enemy( image_enemy ),
 _event( image_event ),
 _page( 0 ) {
+	_enemy[ GRAPH_ENEMY_MIDIUM ] = enemy_midium_image;
+	_enemy[ GRAPH_ENEMY_BIG ] = enemy_big_image;
+	_enemy[ GRAPH_ENEMY_WIDE ] = enemy_wide_image;
 }
 
 ObjectMenu::~ObjectMenu( ) {
@@ -254,6 +258,12 @@ unsigned char ObjectMenu::getEnemy( int idx ) const {
 	case 21:
 		result = OBJECT_SWAMP_ZOMBIE_C;
 		break;
+	case 22:
+		result = OBJECT_SKELETON;
+		break;
+	case 23:
+		result = OBJECT_LADY;
+		break;
 	default:
 		result = OBJECT_NONE;
 		break;
@@ -376,9 +386,16 @@ void ObjectMenu::draw( ) const {
 					if ( idx != -1 ) {
 						int sx = ( int )_pos.x + BLOCK_X + j * NORMAL_CHAR_GRAPH_SIZE;
 						int sy = ( int )_pos.y + BLOCK_Y + i * NORMAL_CHAR_GRAPH_SIZE;
-						_enemy->setRect( enemies_rect[ idx ].tx, enemies_rect[ idx ].ty, NORMAL_CHAR_GRAPH_SIZE, NORMAL_CHAR_GRAPH_SIZE );
-						_enemy->setPos( sx, sy, sx + NORMAL_CHAR_GRAPH_SIZE, sy + NORMAL_CHAR_GRAPH_SIZE );
-						_enemy->draw( );
+						if ( idx < 22 ) {
+							_enemy[ GRAPH_ENEMY_MIDIUM ]->setRect( enemies_rect[ idx ].tx, enemies_rect[ idx ].ty, NORMAL_CHAR_GRAPH_SIZE, NORMAL_CHAR_GRAPH_SIZE );
+							_enemy[ GRAPH_ENEMY_MIDIUM ]->setPos( sx, sy, sx + NORMAL_CHAR_GRAPH_SIZE, sy + NORMAL_CHAR_GRAPH_SIZE );
+							_enemy[ GRAPH_ENEMY_MIDIUM ]->draw( );
+						}
+						if ( idx < 24 && idx > 21 ) {
+							_enemy[ GRAPH_ENEMY_WIDE ]->setRect( enemies_rect[ idx ].tx, enemies_rect[ idx ].ty, NORMAL_CHAR_GRAPH_SIZE, NORMAL_CHAR_GRAPH_SIZE );
+							_enemy[ GRAPH_ENEMY_WIDE ]->setPos( sx, sy, sx + NORMAL_CHAR_GRAPH_SIZE, sy + NORMAL_CHAR_GRAPH_SIZE );
+							_enemy[ GRAPH_ENEMY_WIDE ]->draw( );
+						}
 					}
 				}
 			}

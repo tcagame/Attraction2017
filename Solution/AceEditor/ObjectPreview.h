@@ -7,13 +7,20 @@ PTR( ObjectCursor );
 
 class ObjectPreview {
 public:
-	ObjectPreview( DataConstPtr data, ObjectCursorConstPtr object_cursor, ImagePtr image_enemy, ImagePtr image_event );
+	ObjectPreview( DataConstPtr data, ObjectCursorConstPtr object_cursor, ImagePtr enemy_midium_image, ImagePtr enemy_big_image, ImagePtr enemy_wide_image, ImagePtr image_event );
 	virtual ~ObjectPreview( );
 public:
 	void draw( ) const;
 private:
+	enum GRAPH_ENEMY {
+		GRAPH_ENEMY_MIDIUM,
+		GRAPH_ENEMY_BIG,
+		GRAPH_ENEMY_WIDE,
+		MAX_GRAPH_ENEMY,
+	};
+private:
 	ImagePtr _block;
-	ImagePtr _enemy;
+	ImagePtr _enemy[ MAX_GRAPH_ENEMY ];
 	ImagePtr _event;
 	ImagePtr _choise;
 	DataConstPtr _data;
