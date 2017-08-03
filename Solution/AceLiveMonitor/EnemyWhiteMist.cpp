@@ -17,12 +17,12 @@ void EnemyWhiteMist::act( ) {
 
 Chip EnemyWhiteMist::getChip( ) const {
 	const int ANIM[ ] = {
-		0, 1, 2, 3
+		5, 6, 7, 8, 9, 10, 9, 8, 7, 6
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	Chip chip = Chip( );
 	chip.tx = ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ] * 64;
-	chip.ty = 5 * 64;
+	chip.ty = 7 * 64;
 	chip.size = getChipSize( );
 	
 	Vector pos = getPos( );

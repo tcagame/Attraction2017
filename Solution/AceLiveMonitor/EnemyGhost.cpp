@@ -29,20 +29,20 @@ Chip EnemyGhost::getChip( ) const {
 	switch ( _act ) {
 	case ACTION_FADE_IN:
 	{
-		const int ANIM[ ] = { 0, 1 };
+		const int ANIM[ ] = { 8, 9, 10, 11, 12, 13 };
 		int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 		chip.tx = ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ] * 64;
 	}
 		break;
 	case ACTION_MOVE:
 	{
-		const int ANIM[ ] = { 2, 3 };
+		const int ANIM[ ] = { 14, 15, 16, 17, 18 };
 		int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 		chip.tx = ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ] * 64;
 	}
 		break;
 	}
-	chip.ty = 3 * 64;
+	chip.ty = 11 * 64;
 	chip.size = getChipSize( );
 	
 	Vector pos = getPos( );

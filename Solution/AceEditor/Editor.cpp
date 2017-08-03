@@ -46,7 +46,7 @@ void Editor::initialize( ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
 	ImagePtr menu_image  = drawer->createImage( "Menu/menu.png" );
 	ImagePtr block_image = drawer->createImage( "guide/object_guide_cursor.png" );
-	ImagePtr enemy_image = drawer->createImage( "../Enemy/enemy_medium.png" );
+	ImagePtr enemy_image = drawer->createImage( "Enemy/enemy_medium.png" );
 	ImagePtr event_image = drawer->createImage( "../Event/event.png" );
 	GroundPtr ground = GroundPtr( new Ground );
 	StructurePtr structure = StructurePtr( new Structure );

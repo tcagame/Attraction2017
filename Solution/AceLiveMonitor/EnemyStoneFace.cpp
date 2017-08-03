@@ -15,12 +15,12 @@ void EnemyStoneFace::act( ) {
 
 Chip EnemyStoneFace::getChip( ) const {
 	const int ANIM[ ] = {
-		0, 1, 2, 3
+		12, 13, 14, 15, 16
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	Chip chip = Chip( );
 	chip.tx = ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ] * 64;
-	chip.ty = 9 * 64;
+	chip.ty = 1 * 64;
 	chip.size = getChipSize( );
 	
 	Vector pos = getPos( );

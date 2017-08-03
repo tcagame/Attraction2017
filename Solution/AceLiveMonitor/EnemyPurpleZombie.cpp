@@ -14,16 +14,16 @@ EnemyPurpleZombie::~EnemyPurpleZombie( ) {
 
 Chip EnemyPurpleZombie::getChip( ) const {
 	const int ANIM[ ] = {
-		0, 1, 2, 1
+		0, 1, 2, 3, 4, 5
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-	int cx = ANIM[ ( int )getPos( ).x / WAIT_ANIM_TIME % anim_size ];
-	int cy = 64;
+	int cx = ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ];
+	int cy = 3;
 
 	Chip chip = Chip( );
 	chip.size = getChipSize( );
-	chip.tx = cx;
-	chip.ty = cy;
+	chip.tx = cx * 64;
+	chip.ty = cy * 64;
 
 	Vector pos = getPos( );
 	DIR dir = getDir( );
