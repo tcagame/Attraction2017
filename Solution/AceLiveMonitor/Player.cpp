@@ -29,7 +29,7 @@ Character( pos, NORMAL_CHAR_GRAPH_SIZE ),
 _charge_count( 0 ),
 _damege_count( 0 ),
 _over_charge_time( -1 ),
-_id( player_id ),
+_id( 0 ),
 _action( ACTION_WAIT ) {
 	setRadius( 25 );
 	setDir( DIR_RIGHT );

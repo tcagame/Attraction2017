@@ -16,12 +16,12 @@ void EnemyNoFace::act( ) {
 
 Chip EnemyNoFace::getChip( ) const {
 	const int ANIM[ ] = {
-		12, 13, 14, 15, 14, 13
+		0, 1, 2, 3, 4, 5, 6, 7, 6, 7, 6, 5, 4, 3, 2, 1
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	Chip chip = Chip( );
 	chip.tx = ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ] * 64;
-	chip.ty = 5 * 64;
+	chip.ty = 11 * 64;
 	chip.size = getChipSize( );
 	
 	Vector pos = getPos( );

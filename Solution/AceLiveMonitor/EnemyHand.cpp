@@ -17,12 +17,12 @@ void EnemyHand::act( ) {
 
 Chip EnemyHand::getChip( ) const {
 	const int ANIM[ ] = {
-		0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+		0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 2, 1, 0
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	Chip chip = Chip( );
 	chip.tx = ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ] * 64;
-	chip.ty = 0 * 64;
+	chip.ty = 2 * 64;
 	chip.size = getChipSize( );
 	
 	Vector pos = getPos( );

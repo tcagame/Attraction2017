@@ -17,12 +17,12 @@ void EnemyHugDemon::act( ) {
 
 Chip EnemyHugDemon::getChip( ) const {
 	const int ANIM[ ] = {
-		4, 5, 6
+		13, 14, 15, 14
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	Chip chip = Chip( );
 	chip.tx = ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ] * 64;
-	chip.ty = 6 * 64;
+	chip.ty = 9 * 64;
 	chip.size = getChipSize( );
 	
 	Vector pos = getPos( );

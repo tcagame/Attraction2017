@@ -15,7 +15,7 @@ EnemyFaceAndHand::~EnemyFaceAndHand( ) {
 Chip EnemyFaceAndHand::getChip( ) const {
 	Chip chip = Chip( );
 	int cx = 0;
-	int cy = 7;
+	int cy = 9;
 	switch ( _act ) {
 	case ACTION_FADE_IN:
 	{
@@ -26,7 +26,7 @@ Chip EnemyFaceAndHand::getChip( ) const {
 		break;
 	case ACTION_MOVE:
 	{
-		const int ANIM[ ] = { 2, 3 };
+		const int ANIM[ ] = { 2, 3, 4, 5, 4, 3 };
 		int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 		cx = ANIM[ getActCount( ) / ANIM_WAIT_TIME % anim_size ];
 	}

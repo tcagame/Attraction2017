@@ -17,12 +17,12 @@ void EnemyShishimai::act( ) {
 
 Chip EnemyShishimai::getChip( ) const {
 	const int ANIM[ ] = {
-		4, 5, 6, 7
+		0, 1, 2, 3, 4, 5, 6, 7
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	Chip chip = Chip( );
 	chip.tx = ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ] * 64;
-	chip.ty = 5 * 64;
+	chip.ty = 12 * 64;
 	chip.size = getChipSize( );
 	
 	Vector pos = getPos( );

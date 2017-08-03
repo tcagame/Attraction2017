@@ -17,12 +17,12 @@ void EnemySwampZombieB::act( ) {
 
 Chip EnemySwampZombieB::getChip( ) const {
 	const int ANIM[ ] = {
-		5, 6, 7, 8, 9, 8, 7, 6
+		0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	Chip chip = Chip( );
 	chip.tx = ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ] * 64;
-	chip.ty = 10 * 64;
+	chip.ty = 4 * 64;
 	chip.size = getChipSize( );
 	
 	Vector pos = getPos( );

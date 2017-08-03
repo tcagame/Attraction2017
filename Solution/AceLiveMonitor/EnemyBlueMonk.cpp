@@ -17,12 +17,12 @@ void EnemyBlueMonk::act( ) {
 
 Chip EnemyBlueMonk::getChip( ) const {
 	const int ANIM[ ] = {
-		11, 12, 13, 14
+		7, 8, 9, 10, 11, 12, 13
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	Chip chip = Chip( );
 	chip.tx = ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ] * 64;
-	chip.ty = 8 * 64;
+	chip.ty = 9 * 64;
 	chip.size = getChipSize( );
 	
 	Vector pos = getPos( );
