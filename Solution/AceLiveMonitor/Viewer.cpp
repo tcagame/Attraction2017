@@ -8,6 +8,7 @@
 #include "ViewerArmoury.h"
 #include "ViewerMilitary.h"
 #include "ViewerStatus.h"
+#include "ViewerEvent.h"
 
 #include "ViewerDebug.h"
 
@@ -27,7 +28,7 @@ void Viewer::initialize( ) {
 	_viewer_street  = ViewerStreetPtr ( new ViewerStreet );
 	_viewer_armoury = ViewerArmouryPtr( new ViewerArmoury );
 	_viewer_military = ViewerMilitaryPtr( new ViewerMilitary );
-	_viewer_event   = ViewerEventPtr  ( new ViewerEvent( ) );
+	_viewer_event   = ViewerEventPtr  ( new ViewerEvent );
 	_viewer_status  = ViewerStatusPtr ( new ViewerStatus );
 
 	_viewer_debug = ViewerDebugPtr( new ViewerDebug );
@@ -50,9 +51,4 @@ void Viewer::update( ) {
 	if ( _debug ) {
 		_viewer_debug->draw( );
 	}
-}
-
-
-void Viewer::setEventType( ViewerEvent::TYPE type ) {
-	_viewer_event->setType( type );
 }

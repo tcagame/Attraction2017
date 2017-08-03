@@ -39,8 +39,11 @@ bool Exporter::update( ) {
 
 	DrawerPtr drawer( Drawer::getTask( ) );
 	{//back
-		_image_export_front->clear( );
-		drawer->setImageTarget( _image_export_front );
+		_image_export_back->clear( );
+		drawer->setImageTarget( _image_export_back );
+		//”wŒi
+		_chip_drawer->drawBg( 0, _now * PAGE_CHIP_WIDTH_NUM );
+		
 		for( int i = 0; i < MAP_COVER_HEIGHT; i++ ) {
 			for ( int j = 0; j <= PAGE_CHIP_WIDTH_NUM; j++ ) {
 				int gx = j;
@@ -56,11 +59,11 @@ bool Exporter::update( ) {
 		char buf[ 256 ];
 		sprintf_s( buf, "back_%003d", _now );
 		std::string filename = buf;
-		_image_export_front->save( DIRECTORY + filename );
+		_image_export_back->save( DIRECTORY + filename );
 	}
 	{//front
-		_image_export_back->clear( );
-		drawer->setImageTarget( _image_export_back );
+		_image_export_front->clear( );
+		drawer->setImageTarget( _image_export_front );
 		for ( int i = 0; i < FRONT_HEIGHT_NUM; i++ ) {
 			for ( int j = 0; j <= PAGE_CHIP_WIDTH_NUM; j++ ) {
 				int gx = j;
@@ -76,7 +79,7 @@ bool Exporter::update( ) {
 		char buf[ 256 ];
 		sprintf_s( buf, "front_%003d", _now );
 		std::string filename = buf;
-		_image_export_back->save( DIRECTORY + filename );
+		_image_export_front->save( DIRECTORY + filename );
 	}
 	drawer->setImageTarget( );
 	_now++;

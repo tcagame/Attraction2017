@@ -6,6 +6,7 @@
 #include "Map.h"
 #include "Viewer.h"
 #include "ViewerEvent.h"
+#include "MapEvent.h"
 
 //‰æ‘œƒTƒCƒY
 const int PLAYER_FOOT = 7;
@@ -75,7 +76,7 @@ void Player::act( ) {
 			switch ( obj ) {
 			case OBJECT_EVENT_REDDEAMON:
 				setState( STATE_EVENT );
-				Viewer::getTask( )->setEventType( ViewerEvent::TYPE_RED_DEMON );
+				MapEvent::getTask( )->setType( ViewerEvent::TYPE_RED_DEMON );
 				setPos( Vector( GRAPH_SIZE * 3 / 2, 0 ) );
 				break;
 			}	
@@ -86,7 +87,7 @@ void Player::act( ) {
 		if ( getPos( ).x < GRAPH_SIZE ) {
 			setState( STATE_MAIN );
 			setPos( Vector( family->getCameraPos( ) + SCREEN_WIDTH / 2, 0 ) );
-				Viewer::getTask( )->setEventType( ViewerEvent::TYPE_TITLE );
+				MapEvent::getTask( )->setType( ViewerEvent::TYPE_TITLE );
 		}
 	}
 }

@@ -159,6 +159,7 @@
     <ClCompile Include="PopSwampZombieB.cpp">
       <Filter>Pop</Filter>
     </ClCompile>
+    <ClCompile Include="MapEvent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -318,6 +319,7 @@
     <ClInclude Include="PopSwampZombieB.h">
       <Filter>Pop</Filter>
     </ClInclude>
+    <ClInclude Include="MapEvent.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">

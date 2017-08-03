@@ -1,9 +1,7 @@
 #pragma once
 #include "Image.h"
 #include <vector>
-
-
-const int EVENT_PAGE_NUM = 4;
+#include "ace_define.h"
 
 class ViewerEvent {
 public:
@@ -16,11 +14,9 @@ public:
 	ViewerEvent( );
 	virtual ~ViewerEvent( );
 public:
-	void setType( TYPE type );
 	void draw( ) const;
 private:
-	std::vector<ImagePtr> _images;
+	std::vector< ImagePtr > _images;
 	ImagePtr _frame;
-	TYPE _type;
 };
 
