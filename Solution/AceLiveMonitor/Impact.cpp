@@ -4,9 +4,10 @@ const int IMPACT_CHIP_SIZE = 128;
 const int MAX_ANIM_COUNT = 30;
 const int ANIM_WIDTH_NUM = 2;
 
-Impact::Impact( const Vector& pos ) :
+Impact::Impact( const Vector& pos, Character::STATE state ) :
 _pos( pos ),
-_anim_count( 0 ) {
+_anim_count( 0 ),
+_state( state ) {
 }
 
 
@@ -37,4 +38,8 @@ Chip Impact::getChip( ) const {
 
 bool Impact::isFinished( ) const {
 	return ( _anim_count > MAX_ANIM_COUNT );
+}
+
+Character::STATE Impact::getState( ) const {
+	return _state;
 }

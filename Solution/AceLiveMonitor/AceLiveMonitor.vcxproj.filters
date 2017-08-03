@@ -166,6 +166,7 @@
     <ClCompile Include="EnemyBoss.cpp">
       <Filter>Boss</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyLittleRedDemon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -332,6 +333,7 @@
     <ClInclude Include="EnemyBoss.h">
       <Filter>Boss</Filter>
     </ClInclude>
+    <ClInclude Include="EnemyLittleRedDemon.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">

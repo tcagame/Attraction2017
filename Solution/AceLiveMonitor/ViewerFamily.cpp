@@ -33,7 +33,7 @@ void ViewerFamily::draw( ) const {
 			add_sx = -camera_pos;
 			break;
 		case Player::STATE_EVENT:
-			add_sy = VIEW_EVEMT_Y;
+			add_sy = VIEW_EVENT_Y;
 			add_sx = 0;
 			break;
 		}

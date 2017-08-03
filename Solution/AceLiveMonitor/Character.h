@@ -26,6 +26,7 @@ public:
 	bool isFinished( ) const;
 	STATE getState( ) const;
 	void setState( STATE state );
+	int getChipSize( ) const;
 protected:
 	void setDir( DIR dir );
 	DIR getDir( ) const;
@@ -34,7 +35,6 @@ protected:
 	bool isStanding( ) const;
 	virtual void act( ) = 0;
 	int getActCount( ) const;
-	int getChipSize( ) const;
 	void setRadius( int radius );
 	void setFinished( );
 private:

@@ -21,64 +21,119 @@ Military::~Military( ) {
 }
 
 void Military::update( ) {
-	std::list< EnemyPtr >::const_iterator ite = _enemies.begin( );
-	while ( ite != _enemies.end( ) ) {
-		EnemyPtr enemy = (*ite);
-		if ( !enemy ) {
-			ite++;
-			continue;
-		}
-		if ( enemy->isFinished( ) ||
-			 !enemy->isInScreen( ) ) {
-			ite = _enemies.erase( ite );
-			continue;
-		}
-		FamilyPtr family( Family::getTask( ) );
-		for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
-			PlayerPtr player( family->getPlayer( i ) );
-			if ( player->isOverlapped( enemy ) ) {
-				player->damage( 1 );
+	{//main
+		std::list< EnemyPtr >::const_iterator ite = _enemies.begin( );
+		while ( ite != _enemies.end( ) ) {
+			EnemyPtr enemy = (*ite);
+			if ( !enemy ) {
+				ite++;
+				continue;
 			}
+			if ( enemy->isFinished( ) ||
+				 !enemy->isInScreen( ) ) {
+				ite = _enemies.erase( ite );
+				continue;
+			}
+			FamilyPtr family( Family::getTask( ) );
+			for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
+				PlayerPtr player( family->getPlayer( i ) );
+				if ( player->isOverlapped( enemy ) ) {
+					player->damage( 1 );
+				}
+			}
+			enemy->update( );
+			ite++;
 		}
-		enemy->update( );
-		ite++;
 	}
-	if ( _boss ) {
-		_boss->update( );
+	{//event
+		if ( _boss ) {
+			_boss->update( );
+		}
+		std::list< EnemyPtr >::const_iterator ite = _event_enemies.begin( );
+		while ( ite != _event_enemies.end( ) ) {
+			EnemyPtr enemy = (*ite);
+			if ( !enemy ) {
+				ite++;
+				continue;
+			}
+			if ( enemy->isFinished( ) ||
+				 !enemy->isInScreen( ) ) {
+				ite = _event_enemies.erase( ite );
+				continue;
+			}
+			FamilyPtr family( Family::getTask( ) );
+			for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
+				PlayerPtr player( family->getPlayer( i ) );
+				if ( player->isOverlapped( enemy ) ) {
+					player->damage( 1 );
+				}
+			}
+			enemy->update( );
+			ite++;
+		}
 	}
+
 }
 
-const std::list< EnemyPtr > Military::getList( ) const {
+const std::list< EnemyPtr > Military::getEnemyList( ) const {
 	return _enemies;
 }
+
+const std::list< EnemyPtr > Military::getEventEnemyList( ) const {
+	return _event_enemies;
+}
+
 
 void Military::popUp( EnemyPtr enemy ) {
 	_enemies.push_back( enemy );
 }
 
+void Military::popUpEventEnemy( EnemyPtr enemy ) {
+	_event_enemies.push_back( enemy );
+}
+
 EnemyPtr Military::getOverLappedEnemy( CharacterConstPtr character ) const {
 	EnemyPtr result = EnemyPtr( );
-	std::list< EnemyPtr >::const_iterator ite = _enemies.begin( );
-	while ( ite != _enemies.end( ) ) {
-		EnemyPtr enemy = (*ite);
-		if ( !enemy ) {
+	if ( character->getState( ) == Character::STATE_MAIN ) {
+		std::list< EnemyPtr >::const_iterator ite = _enemies.begin( );
+		while ( ite != _enemies.end( ) ) {
+			EnemyPtr enemy = (*ite);
+			if ( !enemy ) {
+				ite++;
+				continue;
+			}
+			if ( enemy->isOverlapped( character ) ) {
+				result = enemy;
+				break;
+			}
 			ite++;
-			continue;
 		}
-		if ( enemy->isOverlapped( character ) ) {
-			result = enemy;
-			break;
+	} else {
+		if ( _boss ) {
+			if ( _boss->isOverlapped( character ) ) {
+				result = _boss;
+			}
 		}
-		ite++;
-	}
-	if ( _boss ) {
-		_boss->isOverlapped( character );
+		std::list< EnemyPtr >::const_iterator ite = _event_enemies.begin( );
+		while ( ite != _event_enemies.end( ) ) {
+			EnemyPtr enemy = (*ite);
+			if ( !enemy ) {
+				ite++;
+				continue;
+			}
+			if ( enemy->isOverlapped( character ) ) {
+				result = enemy;
+				break;
+			}
+			ite++;
+		}
 	}
 	return result;
 }
 
 void Military::createBoss( ) {
 	ViewerEvent::TYPE type = MapEvent::getTask( )->getType( );
+	_event_enemies = { };
 	switch ( type ) {
 	case ViewerEvent::TYPE_TITLE:
 		_boss = EnemyPtr( );

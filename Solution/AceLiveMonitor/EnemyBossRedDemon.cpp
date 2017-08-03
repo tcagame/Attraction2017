@@ -1,6 +1,9 @@
 #include "EnemyBossRedDemon.h"
+#include "EnemyLittleRedDemon.h"
+#include "Military.h"
 
 const int WAIT_ANIM_TIME = 10;
+const int WAIT_POP_TIME = 30;
 
 EnemyBossRedDemon::EnemyBossRedDemon( const Vector& pos ) :
 EnemyBoss( pos, BIG_CHAR_GRAPH_SIZE ) {
@@ -11,6 +14,11 @@ EnemyBossRedDemon::~EnemyBossRedDemon( ) {
 }
 
 void EnemyBossRedDemon::act( ) {
+	if ( getActCount( ) % WAIT_POP_TIME == 0 ) {
+		EnemyPtr enemy = EnemyPtr( new EnemyLittleRedDemon( getPos( ) + Vector( 100, 0 ) ) );
+		enemy->setState( Character::STATE_EVENT );
+		Military::getTask( )->popUpEventEnemy( enemy );
+	}
 }
 
 Chip EnemyBossRedDemon::getChip( ) const {
