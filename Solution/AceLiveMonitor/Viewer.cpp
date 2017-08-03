@@ -7,7 +7,6 @@
 #include "ViewerStreet.h"
 #include "ViewerArmoury.h"
 #include "ViewerMilitary.h"
-#include "ViewerEvent.h"
 #include "ViewerStatus.h"
 
 #include "ViewerDebug.h"
@@ -51,4 +50,9 @@ void Viewer::update( ) {
 	if ( _debug ) {
 		_viewer_debug->draw( );
 	}
+}
+
+
+void Viewer::setEventType( ViewerEvent::TYPE type ) {
+	_viewer_event->setType( type );
 }

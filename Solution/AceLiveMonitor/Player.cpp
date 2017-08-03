@@ -4,6 +4,8 @@
 #include "ace_define.h"
 #include "Family.h"
 #include "Map.h"
+#include "Viewer.h"
+#include "ViewerEvent.h"
 
 //画像サイズ
 const int PLAYER_FOOT = 7;
@@ -62,16 +64,29 @@ void Player::act( ) {
 		actOnDamege( );
 		break;
 	}
-	actOnCamera( );
 
 	//イベント
 	MapPtr map( Map::getTask( ) );
-	unsigned char obj = map->getObject( getPos( ) + getVec( ) );
-	if ( obj >= OBJECT_EVENT_REDDEAMON ) {
-		if ( getState( ) != STATE_EVENT ) {
-			if ( !Family::getTask( )->isExistancePlayerEvent( ) ) {
+	FamilyPtr family( Family::getTask( ) );
+	if ( getState( ) != STATE_EVENT ) {
+		actOnCamera( );
+		unsigned char obj = map->getObject( getPos( ) + getVec( ) );
+		if ( !Family::getTask( )->isExistancePlayerEvent( ) ) {
+			switch ( obj ) {
+			case OBJECT_EVENT_REDDEAMON:
 				setState( STATE_EVENT );
-			}
+				Viewer::getTask( )->setEventType( ViewerEvent::TYPE_RED_DEMON );
+				setPos( Vector( GRAPH_SIZE * 3 / 2, 0 ) );
+				break;
+			}	
+		}
+	}
+	if ( getState( ) == STATE_EVENT ) {
+		//一ページ目にいたら退場
+		if ( getPos( ).x < GRAPH_SIZE ) {
+			setState( STATE_MAIN );
+			setPos( Vector( family->getCameraPos( ) + SCREEN_WIDTH / 2, 0 ) );
+				Viewer::getTask( )->setEventType( ViewerEvent::TYPE_TITLE );
 		}
 	}
 }

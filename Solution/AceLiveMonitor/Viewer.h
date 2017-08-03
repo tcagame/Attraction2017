@@ -2,6 +2,7 @@
 #include "Task.h"
 #include <string>
 #include "smart_ptr.h"
+#include "ViewerEvent.h"
 
 PTR( Viewer );
 PTR( ViewerFamily );
@@ -23,14 +24,15 @@ public:
 public:
 	void initialize( );
 	void update( );
+	void setEventType( ViewerEvent::TYPE type );
 private:
 	bool _debug;
 	ViewerFamilyConstPtr _viewer_family;
 	ViewerStreetConstPtr _viewer_street;
 	ViewerArmouryConstPtr _viewer_armoury;
 	ViewerMilitaryConstPtr _viewer_military;
-	ViewerEventConstPtr _viewer_event;
 	ViewerStatusConstPtr _viewer_status;
+	ViewerEventPtr _viewer_event;
 
 	ViewerDebugConstPtr _viewer_debug;
 };

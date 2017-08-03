@@ -16,6 +16,7 @@ public:
 	ViewerEvent( );
 	virtual ~ViewerEvent( );
 public:
+	void setType( TYPE type );
 	void draw( ) const;
 private:
 	std::vector<ImagePtr> _images;

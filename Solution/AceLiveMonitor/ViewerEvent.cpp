@@ -16,14 +16,14 @@ ViewerEvent::ViewerEvent(  ) {
 		sprintf_s( buf, "Event/event_akaoni_%d.png", i + 1 );
 		_images.push_back( drawer->createImage( buf ) );
 	}
-	_type = TYPE_RED_DEMON;
+	_type = TYPE_TITLE;
 }
 
 ViewerEvent::~ViewerEvent( ) {
 }
 
 void ViewerEvent::draw( ) const {
-	if( !Family::getTask( )->isExistancePlayerEvent( ) ) {
+	if( _type == TYPE_TITLE ) {
 		_images[ 0 ]->setPos( 0, VIEW_TITLE_Y );
 		_images[ 0 ]->draw( );
 	} else {
@@ -36,4 +36,8 @@ void ViewerEvent::draw( ) const {
 	}
 	_frame->setPos( 0, VIEW_TITLE_Y );
 	_frame->draw( );
+}
+
+void ViewerEvent::setType( TYPE type ) {
+	_type = type;
 }

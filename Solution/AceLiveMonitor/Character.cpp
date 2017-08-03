@@ -39,33 +39,55 @@ void Character::update( ) {
 		_vec.y = -MAX_SPEED_Y;
 	}
 	MapConstPtr map( Map::getTask( ) );
-	if ( _mass ) {
-		{//上下判定
-			if ( _vec.y > 0 ) {
-				if ( map->getObject( _pos + Vector( 0, _vec.y ) ) == OBJECT_BLOCK ) {
-					_standing = true;
-					_pos.y = ( ( int )( _pos.y + _vec.y ) / OBJECT_CHIP_SIZE ) * OBJECT_CHIP_SIZE - GRAVITY / 2;
-					_vec.y = 0;
+	if ( _state == STATE_MAIN ) {
+		if ( _mass ) {
+			{//上下判定
+				if ( _vec.y > 0 ) {
+					if ( map->getObject( _pos + Vector( 0, _vec.y ) ) == OBJECT_BLOCK ) {
+						_standing = true;
+						_pos.y = ( ( int )( _pos.y + _vec.y ) / OBJECT_CHIP_SIZE ) * OBJECT_CHIP_SIZE - GRAVITY / 2;
+						_vec.y = 0;
+					}
+				}
+			}
+			{//左右判定
+				//左側
+				if ( _vec.x < 0 ) {
+					if ( map->getObject( _pos + Vector( _vec.x - _radius, 0 ) ) == OBJECT_BLOCK ) {
+						_pos.x = ( ( int )( _pos.x + _vec.x - _radius ) / OBJECT_CHIP_SIZE + 1 ) * OBJECT_CHIP_SIZE + _radius;
+						_vec.x = 0;
+						_dir = DIR_LEFT;
+					}
+				}
+				//右側
+				if ( _vec.x > 0 ) {
+					if ( map->getObject( _pos + Vector( _vec.x + _radius, 0 ) ) == OBJECT_BLOCK ) {
+						_pos.x = ( ( int )( _pos.x + _vec.x + _radius ) / OBJECT_CHIP_SIZE ) * OBJECT_CHIP_SIZE - _radius;
+						_vec.x = 0;
+						_dir = DIR_RIGHT;
+					}
 				}
 			}
 		}
-		{//左右判定
-			//左側
-			if ( _vec.x < 0 ) {
-				if ( map->getObject( _pos + Vector( _vec.x - _radius, 0 ) ) == OBJECT_BLOCK ) {
-					_pos.x = ( ( int )( _pos.x + _vec.x - _radius ) / OBJECT_CHIP_SIZE + 1 ) * OBJECT_CHIP_SIZE + _radius;
-					_vec.x = 0;
-					_dir = DIR_LEFT;
-				}
-			}
-			//右側
-			if ( _vec.x > 0 ) {
-				if ( map->getObject( _pos + Vector( _vec.x + _radius, 0 ) ) == OBJECT_BLOCK ) {
-					_pos.x = ( ( int )( _pos.x + _vec.x + _radius ) / OBJECT_CHIP_SIZE ) * OBJECT_CHIP_SIZE - _radius;
-					_vec.x = 0;
-					_dir = DIR_RIGHT;
-				}
-			}
+	}
+	if ( _state == STATE_EVENT ) {
+		//左端
+		if ( _pos.x + _vec.x - _radius < 0 ) {
+			_pos.x = _radius;
+			_vec.x = 0;
+			_dir = DIR_LEFT;
+		}
+		//右端
+		if ( _pos.x + _vec.x + _radius > SCREEN_WIDTH ) {
+			_pos.x = SCREEN_WIDTH - _radius;
+			_vec.x = 0;
+			_dir = DIR_RIGHT;
+		}
+		//下
+		if ( _pos.y + _vec.y > GRAPH_SIZE - OBJECT_CHIP_SIZE * 2 ) {
+			_standing = true;
+			_pos.y = GRAPH_SIZE - OBJECT_CHIP_SIZE * 2 - GRAVITY / 2;
+			_vec.y = 0;
 		}
 	}
 	updateDir( );

@@ -20,25 +20,27 @@ ViewerFamily::~ViewerFamily( ) {
 
 void ViewerFamily::draw( ) const {
 	FamilyPtr family( Family::getTask( ) );
+	int camera_pos = (int)family->getCameraPos( );
 
 	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
-		int camera_pos = (int)family->getCameraPos();
-
 		PlayerConstPtr player = family->getPlayer( i );
 		Player::STATE state = player->getState( );
 		int add_sy = 0;
+		int add_sx = 0;
 		switch ( state ) {
 		case Player::STATE_MAIN:
 			add_sy = VIEW_STREET_Y;
+			add_sx = -camera_pos;
 			break;
 		case Player::STATE_EVENT:
 			add_sy = VIEW_EVEMT_Y;
+			add_sx = 0;
 			break;
 		}
 		Vector pos = player->getPos( );
 		Chip chip = player->getChip( );
-		chip.sx1 -= ( int )family->getCameraPos( );
-		chip.sx2 -= ( int )family->getCameraPos( );
+		chip.sx1 += add_sx;
+		chip.sx2 += add_sx;
 		chip.sy1 += add_sy;
 		chip.sy2 += add_sy;
 		_image[ i ]->setRect( chip.tx, chip.ty, chip.size, chip.size );
@@ -48,8 +50,8 @@ void ViewerFamily::draw( ) const {
 		int charge_count = player->getChargeCount( );
 		if ( charge_count > 0 ) {
 			Chip charge_chip = player->getChargeChip( );			
-			charge_chip.sx1 -= ( int )family->getCameraPos( );
-			charge_chip.sx2 -= ( int )family->getCameraPos( );
+			charge_chip.sx1 += add_sx;
+			charge_chip.sx2 += add_sx;
 			charge_chip.sy1 += add_sy;
 			charge_chip.sy2 += add_sy;
 			{
