@@ -241,6 +241,7 @@ void Player::actOnFloating( ) {
 void Player::actOnAttack( ) {
 	int power = ( _charge_count / CHARGE_PHASE_COUNT ) + 1;
 	ShotPtr shot( new Shot( getPos( ), getDir( ), power ) );
+	shot->setState( getState( ) );
 	Armoury::getTask( )->add( shot );
 	_action = ACTION_WAIT;
 	_charge_count = 0;

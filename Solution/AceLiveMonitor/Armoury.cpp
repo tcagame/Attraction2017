@@ -34,7 +34,7 @@ void Armoury::update( ) {
 			if ( hit_enemy->isFinished( ) ) {
 				Vector impact_pos = hit_enemy->getPos( );
 				impact_pos.y += NORMAL_CHAR_GRAPH_SIZE / 2;
-				_impacts.push_back( ImpactPtr( new Impact( impact_pos ) ) );
+				_impacts.push_back( ImpactPtr( new Impact( impact_pos, _shot_list[ i ]->getState( ) ) ) );
 				_shot_list[ i ] = ShotPtr( );
 			}
 		}

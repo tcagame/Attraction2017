@@ -20,10 +20,13 @@ public:
 	void update( );
 	virtual void damage( int force );
 	virtual Chip getChip( ) const = 0;
+	virtual Chip getChip2( ) const { return Chip( ); };
 	bool isOverlapped( CharacterConstPtr target ) const;
 	double getRadius( ) const;
 	bool isFinished( ) const;
 	STATE getState( ) const;
+	void setState( STATE state );
+	int getChipSize( ) const;
 protected:
 	void setDir( DIR dir );
 	DIR getDir( ) const;
@@ -32,10 +35,8 @@ protected:
 	bool isStanding( ) const;
 	virtual void act( ) = 0;
 	int getActCount( ) const;
-	int getChipSize( ) const;
 	void setRadius( int radius );
 	void setFinished( );
-	void setState( STATE state );
 private:
 	void updateDir( );
 private:

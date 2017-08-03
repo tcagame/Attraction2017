@@ -12,8 +12,9 @@ const double GRAVITY = 1.0;
 const int EVENT_PAGE_NUM = 4;
 const int MAX_EVENT = 10;
 const int NORMAL_CHAR_GRAPH_SIZE = 64;
+const int BIG_CHAR_GRAPH_SIZE = 128;
 
-const int VIEW_EVEMT_Y = 0;
+const int VIEW_EVENT_Y = 0;
 const int VIEW_TITLE_Y = 0;
 const int VIEW_TITLE_HEIGHT = 256;
 const int VIEW_STREET_Y = VIEW_TITLE_Y + VIEW_TITLE_HEIGHT;

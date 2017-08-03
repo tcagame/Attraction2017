@@ -3,8 +3,8 @@
 #include <assert.h>
 
 
-Enemy::Enemy( const Vector& pos, const int width, bool mass ) :
-Character( pos, width, mass ) {
+Enemy::Enemy( const Vector& pos, const int chip_size, bool mass ) :
+Character( pos, chip_size, mass ) {
 	setDir( DIR_LEFT );
 }
 

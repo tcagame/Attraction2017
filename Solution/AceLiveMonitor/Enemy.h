@@ -2,7 +2,7 @@
 #include "Character.h"
 class Enemy : public Character {
 public:
-	Enemy( const Vector& pos, const int width, bool mass = true );
+	Enemy( const Vector& pos, const int chip_size, bool mass = true );
 	virtual ~Enemy( );
 public:
 	bool isInScreen( ) const;

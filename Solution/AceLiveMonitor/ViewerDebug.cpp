@@ -33,30 +33,63 @@ void ViewerDebug::drawPlayer( ) const {
 	DrawerPtr drawer( Drawer::getTask( ) );
 	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
 		PlayerConstPtr player = family->getPlayer( i );
-		Vector pos( player->getPos( ) - Vector( camera_pos, player->getChip( ).size / 2 ) );
-		drawer->drawCircle( pos + Vector( 0, VIEW_STREET_Y ), player->getRadius( ) );
+		int add_sx = - camera_pos;
+		int add_sy = VIEW_STREET_Y;
+		if ( player->getState( ) == Character::STATE_EVENT ) {
+			add_sx = 0;
+			add_sy = VIEW_EVENT_Y;
+		}
+		Vector pos( player->getPos( ) - Vector( 0, player->getChip( ).size / 2 ) );
+		drawer->drawCircle( pos + Vector( add_sx, add_sy ), player->getRadius( ) );
 	}
 }
 
 void ViewerDebug::drawEnemy( ) const {
 	DrawerPtr drawer( Drawer::getTask( ) );
 	FamilyPtr family( Family::getTask( ) );
-	int camera_pos = ( int )family->getCameraPos( );
-	std::list< EnemyPtr > enemies = Military::getTask( )->getList( );
-	std::list< EnemyPtr >::const_iterator ite = enemies.begin( );
-	int enemy_num = 0;
-	while ( ite != enemies.end( ) ) {
-		EnemyPtr enemy = ( *ite );
-		if ( !enemy ) {
+	MilitaryPtr military( Military::getTask( ) );
+	{//main
+		int camera_pos = ( int )family->getCameraPos( );
+		std::list< EnemyPtr > enemies = military->getEnemyList( );
+		std::list< EnemyPtr >::const_iterator ite = enemies.begin( );
+		int enemy_num = 0;
+		while ( ite != enemies.end( ) ) {
+			EnemyPtr enemy = ( *ite );
+			if ( !enemy ) {
+				ite++;
+				continue;
+			}
+			Vector pos( enemy->getPos( ) - Vector( camera_pos, enemy->getChipSize( ) / 2 ) );
+			drawer->drawCircle( pos + Vector( 0, VIEW_STREET_Y ), enemy->getRadius( ) );
+			enemy_num++;
 			ite++;
-			continue;
 		}
-		Vector pos( enemy->getPos( ) - Vector( camera_pos, enemy->getChip( ).size / 2 ) );
-		drawer->drawCircle( pos + Vector( 0, VIEW_STREET_Y ), enemy->getRadius( ) );
-		enemy_num++;
-		ite++;
+		drawer->drawString( 0, 20, "Enemy-Street:%d", enemy_num );
 	}
-	drawer->drawString( 0, 0, "Enemy:%d", enemy_num );
+	{//event
+		std::list< EnemyPtr > enemies = military->getEventEnemyList( );
+		std::list< EnemyPtr >::const_iterator ite = enemies.begin( );
+		int enemy_num = 0;
+		while ( ite != enemies.end( ) ) {
+			EnemyPtr enemy = ( *ite );
+			if ( !enemy ) {
+				ite++;
+				continue;
+			}
+			Vector pos( enemy->getPos( ) - Vector( 0, enemy->getChipSize( ) / 2 ) );
+			drawer->drawCircle( pos + Vector( 0, VIEW_EVENT_Y ), enemy->getRadius( ) );
+			enemy_num++;
+			ite++;
+		}
+		drawer->drawString( 0, 0, "Enemy-Event:%d", enemy_num );
+	}
+	{//boss
+		EnemyPtr boss = military->getBoss( );
+		if ( boss ) {
+			Vector pos( boss->getPos( ) - Vector( 0, boss->getChipSize( ) / 2 ) );
+			drawer->drawCircle( pos + Vector( 0, VIEW_EVENT_Y ), boss->getRadius( ) );
+		}
+	}
 }
 
 void ViewerDebug::drawShot( ) const {
@@ -69,8 +102,14 @@ void ViewerDebug::drawShot( ) const {
 		if ( !shot ) {
 			continue;
 		}
-		Vector pos( shot->getPos( ) - Vector( camera_pos, shot->getChip( ).size / 2 ) );
-		drawer->drawCircle( pos + Vector( 0, VIEW_STREET_Y ), shot->getRadius( ) );
+		int add_sx = -camera_pos;
+		int add_sy = VIEW_STREET_Y;
+		if ( shot->getState( ) == Character::STATE_EVENT ) {
+			add_sx = 0;
+			add_sy = VIEW_EVENT_Y;
+		}
+		Vector pos( shot->getPos( ) - Vector( 0, shot->getChip( ).size / 2 ) );
+		drawer->drawCircle( pos + Vector( add_sx, add_sy ), shot->getRadius( ) );
 	}
 }
 
