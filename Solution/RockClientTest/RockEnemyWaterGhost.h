@@ -5,6 +5,8 @@ class RockEnemyWaterGhost :
 public:
 	RockEnemyWaterGhost( const Vector& pos );
 	virtual ~RockEnemyWaterGhost( );
+public:
+	double getAnimTime( ) const;
 protected:
 	void act( );
 };

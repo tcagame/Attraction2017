@@ -166,8 +166,10 @@
     <ClCompile Include="RockEnemy.cpp" />
     <ClCompile Include="RockEnemyGhost.cpp" />
     <ClCompile Include="RockEnemyWaterGhost.cpp" />
+    <ClCompile Include="RockFamily.cpp" />
     <ClCompile Include="RockMap.cpp" />
     <ClCompile Include="RockMilitary.cpp" />
+    <ClCompile Include="RockPlayer.cpp" />
     <ClCompile Include="RockViewer.cpp" />
     <ClCompile Include="StatusDrawer.cpp" />
     <ClCompile Include="StatusReceiver.cpp" />
@@ -185,8 +187,10 @@
     <ClInclude Include="RockEnemy.h" />
     <ClInclude Include="RockEnemyGhost.h" />
     <ClInclude Include="RockEnemyWaterGhost.h" />
+    <ClInclude Include="RockFamily.h" />
     <ClInclude Include="RockMap.h" />
     <ClInclude Include="RockMilitary.h" />
+    <ClInclude Include="RockPlayer.h" />
     <ClInclude Include="RockViewer.h" />
     <ClInclude Include="StatusDrawer.h" />
     <ClInclude Include="StatusReceiver.h" />

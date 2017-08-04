@@ -13,6 +13,7 @@
 #include "RockMilitary.h"
 #include "RockCamera.h"
 #include "RockDollHouse.h"
+#include "RockFamily.h"
 
 void main( ) {
 
@@ -26,6 +27,7 @@ void main( ) {
 	app->addTask( RockMap::getTag( ), TaskPtr( new RockMap ) );
 	app->addTask( RockMilitary::getTag( ), TaskPtr( new RockMilitary ) );
 	app->addTask( RockDollHouse::getTag( ), TaskPtr( new RockDollHouse ) );
+	app->addTask( RockFamily::getTag( ), TaskPtr( new RockFamily( status ) ) );
 	app->addTask( RockCamera::getTag( ), TaskPtr( new RockCamera ) );
 	//debug•`‰æ(status)
 	//app->addTask( StatusDrawer::getTag( ), TaskPtr( new StatusDrawer( status ) ) );

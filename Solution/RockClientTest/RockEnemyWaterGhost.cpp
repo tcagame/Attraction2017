@@ -11,3 +11,7 @@ RockEnemyWaterGhost::~RockEnemyWaterGhost( ) {
 void RockEnemyWaterGhost::act( ) {
 
 }
+
+double RockEnemyWaterGhost::getAnimTime( ) const {
+	return 0;
+}
