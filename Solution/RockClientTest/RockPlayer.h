@@ -15,12 +15,16 @@ protected:
 private:
 	enum ACTION {
 		ACTION_WAIT,
-		ACTION_JUMP
+		ACTION_JUMP,
+		ACTION_WALK,
+		ACTION_BRAKE,
 	};
 private:
 	void setAction( ACTION action );
 	void actOnWaiting( );
 	void actOnJumping( );
+	void actOnWalking( );
+	void actOnBraking( );
 private:
 	StatusPtr _status;
 	ACTION _action;
