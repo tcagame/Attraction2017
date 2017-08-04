@@ -69,6 +69,7 @@ const Rect enemies_rect[ ] = {
 	RECT_WIND,
 	RECT_ONYUDO,
 	RECT_JIZO,
+	RECT_TREE,
 };
 const int MAX_ENEMY = sizeof( enemies_rect ) / sizeof( enemies_rect[ 0 ] );
 
@@ -276,6 +277,9 @@ unsigned char ObjectMenu::getEnemy( int idx ) const {
 	case 26:
 		result = OBJECT_JIZO;
 		break;
+	case 27:
+		result = OBJECT_TREE;
+		break;
 	default:
 		result = OBJECT_NONE;
 		break;
@@ -408,7 +412,7 @@ void ObjectMenu::draw( ) const {
 							_enemy[ GRAPH_ENEMY_WIDE ]->setPos( sx, sy, sx + NORMAL_CHAR_GRAPH_SIZE, sy + NORMAL_CHAR_GRAPH_SIZE );
 							_enemy[ GRAPH_ENEMY_WIDE ]->draw( );
 						}
-						if ( 23 < idx && idx < 27 ) {
+						if ( 23 < idx && idx < 28 ) {
 							_enemy[ GRAPH_ENEMY_BIG ]->setRect( enemies_rect[ idx ].tx, enemies_rect[ idx ].ty, BIG_CHAR_GRAPH_SIZE, BIG_CHAR_GRAPH_SIZE );
 							_enemy[ GRAPH_ENEMY_BIG ]->setPos( sx, sy, sx + NORMAL_CHAR_GRAPH_SIZE, sy + NORMAL_CHAR_GRAPH_SIZE );
 							_enemy[ GRAPH_ENEMY_BIG ]->draw( );

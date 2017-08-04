@@ -100,6 +100,7 @@ const unsigned char OBJECT_LADY				= 0x19;
 const unsigned char OBJECT_WIND				= 0x1A;
 const unsigned char OBJECT_ONYUDO			= 0x1B;
 const unsigned char OBJECT_JIZO				= 0x1C;
+const unsigned char OBJECT_TREE				= 0x1D;
 
 
 const unsigned char OBJECT_ENEMY_END = 0x7F;

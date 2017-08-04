@@ -45,3 +45,4 @@ const Rect RECT_LADY			( 0 * CHIP_SIZE, 1 * CHIP_SIZE );
 const Rect RECT_WIND			( 4 * BIG_CHIP_SIZE, 3 * BIG_CHIP_SIZE );
 const Rect RECT_ONYUDO			( 0 * BIG_CHIP_SIZE, 1 * BIG_CHIP_SIZE );
 const Rect RECT_JIZO			( 7 * BIG_CHIP_SIZE, 0 * BIG_CHIP_SIZE );
+const Rect RECT_TREE			( 0 * BIG_CHIP_SIZE, 4 * BIG_CHIP_SIZE );

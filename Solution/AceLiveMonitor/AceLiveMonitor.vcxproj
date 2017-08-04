@@ -188,6 +188,7 @@
     <ClCompile Include="EnemySwampZombieA.cpp" />
     <ClCompile Include="EnemySwampZombieB.cpp" />
     <ClCompile Include="EnemySwampZombieC.cpp" />
+    <ClCompile Include="EnemyTree.cpp" />
     <ClCompile Include="EnemyWhiteMist.cpp" />
     <ClCompile Include="EnemyWind.cpp" />
     <ClCompile Include="MapEvent.cpp" />
@@ -221,6 +222,7 @@
     <ClCompile Include="PopSwampZombieC.cpp" />
     <ClCompile Include="PopSwampZombieA.cpp" />
     <ClCompile Include="PopSwampZombieB.cpp" />
+    <ClCompile Include="PopTree.cpp" />
     <ClCompile Include="PopWhiteMist.cpp" />
     <ClCompile Include="PopWind.cpp" />
     <ClCompile Include="ViewerDebug.cpp" />
@@ -268,6 +270,7 @@
     <ClInclude Include="EnemySwampZombieA.h" />
     <ClInclude Include="EnemySwampZombieB.h" />
     <ClInclude Include="EnemySwampZombieC.h" />
+    <ClInclude Include="EnemyTree.h" />
     <ClInclude Include="EnemyWhiteMist.h" />
     <ClInclude Include="EnemyWind.h" />
     <ClInclude Include="MapEvent.h" />
@@ -301,6 +304,7 @@
     <ClInclude Include="PopSwampZombieC.h" />
     <ClInclude Include="PopSwampZombieA.h" />
     <ClInclude Include="PopSwampZombieB.h" />
+    <ClInclude Include="PopTree.h" />
     <ClInclude Include="PopWhiteMist.h" />
     <ClInclude Include="PopWind.h" />
     <ClInclude Include="ViewerDebug.h" />

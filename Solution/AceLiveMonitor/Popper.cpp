@@ -31,6 +31,7 @@
 #include "PopWind.h"
 #include "PopOnyudo.h"
 #include "PopJizo.h"
+#include "PopTree.h"
 
 PopperPtr Popper::getTask( ) {
 	return std::dynamic_pointer_cast< Popper >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -131,6 +132,9 @@ void Popper::initialize( ) {
 				break;
 			case OBJECT_JIZO:
 				_pops.push_back( PopPtr( new PopJizo( Vector( x, y ) ) ) );
+				break;
+			case OBJECT_TREE:
+				_pops.push_back( PopPtr( new PopTree( Vector( x, y ) ) ) );
 				break;
 			}
 		}

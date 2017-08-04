@@ -161,6 +161,11 @@ void ObjectPreview::draw( ) const {
 				_enemy[ GRAPH_ENEMY_BIG ]->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE - ( BIG_CHAR_GRAPH_SIZE / 2 ), PREVIEW_Y + j * OBJECT_CHIP_SIZE - ( BIG_CHAR_GRAPH_SIZE - OBJECT_CHIP_SIZE ) );
 				_enemy[ GRAPH_ENEMY_BIG ]->draw( );
 			}
+			if ( _data->getObject( ox, oy ) == OBJECT_TREE ) {
+				_enemy[ GRAPH_ENEMY_BIG ]->setRect( RECT_TREE.tx, RECT_TREE.ty, BIG_CHAR_GRAPH_SIZE, BIG_CHAR_GRAPH_SIZE );
+				_enemy[ GRAPH_ENEMY_BIG ]->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE - ( BIG_CHAR_GRAPH_SIZE / 2 ), PREVIEW_Y + j * OBJECT_CHIP_SIZE - ( BIG_CHAR_GRAPH_SIZE - OBJECT_CHIP_SIZE ) );
+				_enemy[ GRAPH_ENEMY_BIG ]->draw( );
+			}
 
 			// オブジェクトブロック
 			if ( _data->getObject( ox, oy ) == OBJECT_BLOCK ) {
