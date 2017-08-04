@@ -55,7 +55,16 @@ unsigned char Map::getObject( const Vector& pos ) const {
 }
 
 unsigned char Map::getObject( int mx, int my ) const {
-	assert( mx >= 0 && mx < _page_num * PAGE_OBJECT_WIDTH_NUM && my < OBJECT_CHIP_HEIGHT_NUM );
-	int idx = mx + my * ( _page_num * PAGE_OBJECT_WIDTH_NUM );
-	return _objects[ idx ];
+	assert( mx >= 0 && mx < _page_num * PAGE_OBJECT_WIDTH_NUM );
+	unsigned char obj = OBJECT_NONE;
+	if ( my < 0 ) {
+		return obj;
+	}
+	if ( my >= OBJECT_CHIP_HEIGHT_NUM ) {
+		obj = OBJECT_BLOCK;
+	} else {
+		int idx = mx + my * ( _page_num * PAGE_OBJECT_WIDTH_NUM );
+		obj = _objects[ idx ];
+	}
+	return obj;
 }
