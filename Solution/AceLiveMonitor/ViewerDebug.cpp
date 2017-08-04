@@ -117,18 +117,37 @@ void ViewerDebug::drawChip( ) const {
 	FamilyPtr family( Family::getTask( ) );
 	int camera_pos = ( int )family->getCameraPos( );
 	DrawerPtr drawer( Drawer::getTask( ) );
-	MapPtr map( Map::getTask( ) );
-	const int MAP_WIDTH = map->getPageNum( ) * PAGE_OBJECT_WIDTH_NUM * OBJECT_CHIP_SIZE;
-	int width = ( SCREEN_WIDTH / GRAPH_SIZE + 1 ) * PAGE_OBJECT_WIDTH_NUM;
-	for ( int i = 0; i < width; i++ ) {
-		for ( int j = 0; j < OBJECT_CHIP_HEIGHT_NUM; j++ ) {
-			Vector pos( i * OBJECT_CHIP_SIZE + camera_pos, j * OBJECT_CHIP_SIZE );
-			if ( map->getObject( pos + Vector( OBJECT_CHIP_SIZE / 2, OBJECT_CHIP_SIZE / 2 ) ) == OBJECT_BLOCK ) {
-				_block->setRect( 0, 16, OBJECT_CHIP_SIZE, OBJECT_CHIP_SIZE );
-				_block->setPos( i * OBJECT_CHIP_SIZE - ( camera_pos % OBJECT_CHIP_SIZE ), j * OBJECT_CHIP_HEIGHT_NUM + VIEW_STREET_Y );
-				_block->draw( );
+	{//main
+		MapPtr map( Map::getTask( ) );
+		//const int MAP_WIDTH = map->getPageNum( ) * PAGE_OBJECT_WIDTH_NUM * OBJECT_CHIP_SIZE;
+		//ï\é¶Ç∑ÇÈâ°ÇÃêî
+		int width = ( SCREEN_WIDTH / GRAPH_SIZE + 1 ) * PAGE_OBJECT_WIDTH_NUM;
+		for ( int i = 0; i < width; i++ ) {
+			for ( int j = 0; j < OBJECT_CHIP_HEIGHT_NUM; j++ ) {
+				int x = i * OBJECT_CHIP_SIZE - camera_pos % OBJECT_CHIP_SIZE;
+				int y = j * OBJECT_CHIP_SIZE;
+				Vector pos = Vector( x + camera_pos + OBJECT_CHIP_SIZE / 2, y + OBJECT_CHIP_SIZE / 2 );
+
+				unsigned char obj = map->getObject( pos );
+				if ( obj == OBJECT_BLOCK ) {
+					_block->setRect( 0, 16, OBJECT_CHIP_SIZE, OBJECT_CHIP_SIZE );
+					_block->setPos( x, y + VIEW_STREET_Y );
+					_block->draw( );
+				}
+				if ( obj == OBJECT_ONEWAY ) {
+					_block->setRect( 16, 0, OBJECT_CHIP_SIZE, OBJECT_CHIP_SIZE );
+					_block->setPos( x, y + VIEW_STREET_Y );
+					_block->draw( );
+				}
+				if ( obj >= OBJECT_EVENT_REDDEAMON ) {
+					_block->setRect( 32, 0, OBJECT_CHIP_SIZE, OBJECT_CHIP_SIZE );
+					_block->setPos( x, y + VIEW_STREET_Y );
+					_block->draw( );
+				}
 			}
 		}
+	}
+	{//event
 	}
 }
 

@@ -43,8 +43,19 @@ void Character::update( ) {
 		if ( _mass ) {
 			MapConstPtr map( Map::getTask( ) );
 			{//è„â∫îªíË
+				//è„
+				if ( _vec.y < 0 ) {
+					unsigned char obj = map->getObject( _pos + Vector( 0, _vec.y - _radius * 2 ) );
+					if ( obj == OBJECT_BLOCK ) {
+						_pos.y = ( ( int )( _pos.y + _vec.y - _radius * 2 ) / OBJECT_CHIP_SIZE + 1 ) * OBJECT_CHIP_SIZE - GRAVITY / 2 + _radius * 2;
+						_vec.y = 0;
+					}
+				}
+				//â∫
 				if ( _vec.y > 0 ) {
-					if ( map->getObject( _pos + Vector( 0, _vec.y ) ) == OBJECT_BLOCK ) {
+					unsigned char obj = map->getObject( _pos + Vector( 0, _vec.y ) );
+					if ( obj == OBJECT_BLOCK ||
+						 obj == OBJECT_ONEWAY ) {
 						_standing = true;
 						_pos.y = ( ( int )( _pos.y + _vec.y ) / OBJECT_CHIP_SIZE ) * OBJECT_CHIP_SIZE - GRAVITY / 2;
 						_vec.y = 0;
