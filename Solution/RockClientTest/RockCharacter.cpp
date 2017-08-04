@@ -30,9 +30,20 @@ void RockCharacter::update( ) {
 		//—Ž‰º
 		_vec.y += GRAVITY;
 	}
-	if ( map_model->isHitLine( _pos, _pos + _vec ) ) {
-		_vec = Vector( );
-		_standing = true;
+	{//ã‰º”»’è
+		Vector fpos = _pos + Vector( 0, _vec.y, 0 );
+		if ( map_model->isHitLine( _pos, fpos ) ) {
+			_vec.y = 0;
+			_standing = true;
+		}
+	}
+	{//‰¡”»’è
+		Vector fpos = _pos + Vector( _vec.x, 0, _vec.z );
+		if ( map_model->isHitLine( _pos, fpos ) ) {
+			_vec.x = 0;
+			_vec.z = 0;
+			_standing = true;
+		}
 	}
 	collision( );
 	_pos += _vec;
