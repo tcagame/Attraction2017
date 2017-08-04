@@ -173,6 +173,8 @@
     <ClCompile Include="PopSkeleton.cpp" />
     <ClCompile Include="EnemyLady.cpp" />
     <ClCompile Include="PopLady.cpp" />
+    <ClCompile Include="EnemyWind.cpp" />
+    <ClCompile Include="PopWind.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -346,6 +348,8 @@
     <ClInclude Include="PopSkeleton.h" />
     <ClInclude Include="EnemyLady.h" />
     <ClInclude Include="PopLady.h" />
+    <ClInclude Include="EnemyWind.h" />
+    <ClInclude Include="PopWind.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">

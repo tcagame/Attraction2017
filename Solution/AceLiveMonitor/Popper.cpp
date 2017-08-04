@@ -28,6 +28,7 @@
 #include "PopSwampZombieC.h"
 #include "PopSkeleton.h"
 #include "PopLady.h"
+#include "PopWind.h"
 
 PopperPtr Popper::getTask( ) {
 	return std::dynamic_pointer_cast< Popper >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -119,6 +120,9 @@ void Popper::initialize( ) {
 				break;
 			case  OBJECT_LADY:
 				_pops.push_back( PopPtr( new PopLady( Vector( x, y ) ) ) );
+				break;
+			case  OBJECT_WIND:
+				_pops.push_back( PopPtr( new PopWind( Vector( x, y ) ) ) );
 				break;
 			}
 		}

@@ -3,7 +3,7 @@
 #include "Application.h"
 #include <assert.h>
 
-const int CAMERA_SCROLL_SPEED = 5;
+const int CAMERA_SCROLL_SPEED = 8;
 const int SCROLL_BUFFER = SCREEN_WIDTH / 10;
 
 const Vector INIT_PLAYER_POS[ ACE_PLAYER_NUM ] = {
