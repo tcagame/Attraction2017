@@ -5,6 +5,8 @@
 #include "RockEnemy.h"
 #include "RockMap.h"
 #include "RockDollHouse.h"
+#include "RockFamily.h"
+#include "RockPlayer.h"
 
 RockViewerPtr RockViewer::getTask( ) {
 	return std::dynamic_pointer_cast< RockViewer >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -23,6 +25,7 @@ void RockViewer::update( ) {
 	drawer->flip( );
 	drawMap( );
 	drawEnemy( );
+	drawPlayer( );
 }
 
 void RockViewer::drawMap( ) const {
@@ -40,11 +43,27 @@ void RockViewer::drawEnemy( ) const {
 			ite++;
 			continue;
 		}
-		DOLL id = enemy->getId( );
+		DOLL doll = enemy->getDoll( );
 		Vector pos = enemy->getPos( );
-		ModelMV1Ptr model = doll_house->getModel( id );
+		ModelMV1Ptr model = doll_house->getModel( doll );
 		model->setTrans( Matrix::makeTransformTranslation( pos ) );
 		model->draw( );
 		ite++;
 	}
 }
+
+void RockViewer::drawPlayer( ) const {
+	RockDollHousePtr doll_house( RockDollHouse::getTask( ) );
+	RockFamilyPtr family( RockFamily::getTask( ) );
+	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+		RockPlayerPtr player( family->getPlayer( i ) );
+		DOLL doll = player->getDoll( );
+		Vector pos = player->getPos( );
+		ModelMV1Ptr model = doll_house->getModel( doll );
+		double anim_time = fmod( player->getAnimTime( ), model->getEndAnimTime( ) );
+		model->setAnimTime( anim_time );
+		model->setTrans( Matrix::makeTransformTranslation( pos ) );
+		model->draw( );
+	}
+}
+

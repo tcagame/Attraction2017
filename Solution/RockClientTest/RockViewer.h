@@ -16,5 +16,6 @@ public:
 private:
 	void drawMap( ) const;
 	void drawEnemy( ) const;
+	void drawPlayer( ) const;
 };
 

@@ -11,3 +11,7 @@ RockEnemyRedBard::~RockEnemyRedBard( ) {
 void RockEnemyRedBard::act( ) {
 	setVec( Vector( 3, 0, 5 ) );
 }
+
+double RockEnemyRedBard::getAnimTime( ) const {
+	return 0;
+}
