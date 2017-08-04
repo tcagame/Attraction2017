@@ -175,6 +175,10 @@
     <ClCompile Include="PopLady.cpp" />
     <ClCompile Include="EnemyWind.cpp" />
     <ClCompile Include="PopWind.cpp" />
+    <ClCompile Include="EnemyOnyudo.cpp" />
+    <ClCompile Include="PopOnyudo.cpp" />
+    <ClCompile Include="EnemyJizo.cpp" />
+    <ClCompile Include="PopJizo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -350,6 +354,10 @@
     <ClInclude Include="PopLady.h" />
     <ClInclude Include="EnemyWind.h" />
     <ClInclude Include="PopWind.h" />
+    <ClInclude Include="EnemyOnyudo.h" />
+    <ClInclude Include="PopOnyudo.h" />
+    <ClInclude Include="EnemyJizo.h" />
+    <ClInclude Include="PopJizo.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">

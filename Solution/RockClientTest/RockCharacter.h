@@ -21,6 +21,8 @@ protected:
 	int getActCount( ) const;
 	void setRadius( int radius );
 private:
+	void collision( );
+private:
 	Vector _pos;
 	Vector _vec;
 	DOLL _doll;

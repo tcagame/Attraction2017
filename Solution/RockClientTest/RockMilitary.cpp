@@ -11,9 +11,9 @@ RockMilitaryPtr RockMilitary::getTask( ) {
 
 
 RockMilitary::RockMilitary( ) {
-	_enemies.push_back( RockEnemyPtr( new RockEnemyGhost( Vector( 0, 30, 0 ) ) ) );
-	_enemies.push_back( RockEnemyPtr( new RockEnemyRedBard( Vector( 0, 30, 0 ) ) ) );
-	_enemies.push_back( RockEnemyPtr( new RockEnemyWaterGhost( Vector( 0, 30, 0 ) ) ) );
+	_enemies.push_back( RockEnemyPtr( new RockEnemyGhost( Vector( 0, 40, 0 ) ) ) );
+	_enemies.push_back( RockEnemyPtr( new RockEnemyRedBard( Vector( 10, 30, 10 ) ) ) );
+	_enemies.push_back( RockEnemyPtr( new RockEnemyWaterGhost( Vector( -10, 30, 30 ) ) ) );
 }
 
 
