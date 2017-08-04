@@ -19,12 +19,14 @@ protected:
 	bool isStanding( ) const;
 	void setActCount( int count );
 	int getActCount( ) const;
+	void setRadius( int radius );
 private:
 	Vector _pos;
 	Vector _vec;
 	DOLL _doll;
 	bool _mass;
 	bool _standing;
+	int _radius;
 	int _act_count;
 };
 

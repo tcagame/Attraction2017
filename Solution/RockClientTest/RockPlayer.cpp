@@ -106,6 +106,10 @@ void RockPlayer::actOnWalking( ) {
 		setAction( ACTION_BRAKE );
 		return;
 	}
+	if ( !isStanding( ) ) {
+		setAction( ACTION_WAIT );
+		return;
+	}
 
 	Vector vec = getVec( );
 	vec = Vector( player.device_x, vec.y, player.device_y ).normalize( ) * MOVE_SPEED;
