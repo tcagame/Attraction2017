@@ -94,26 +94,38 @@ int RockCharacter::getActCount( ) const {
 	return _act_count;
 }
 
-
 void RockCharacter::setRadius( int radius ) {
 	_radius = radius;
+}
+
+int RockCharacter::getRadius( ) const {
+	return _radius;
 }
 
 void RockCharacter::collision( ) {
 	// player ‚ ‚½‚è”»’è
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
-		RockPlayerPtr player = RockFamily::getTask( )->getPlayer( i );
-		if ( _doll == player->getDoll( ) ) {
-			continue;
+		RockPlayerPtr target = RockFamily::getTask( )->getPlayer( i );
+		if ( ( target->getPos( ) - _pos ).getLength2( ) < 1 ) {
+			continue; // Ž©•ª‚¾‚Á‚½‚ç”»’è‚µ‚È‚¢
 		}
-		if ( ( player->getPos( ) - _pos ).getLength2( ) > COLLISION_RANGE * COLLISION_RANGE ) {
-			continue;
+		if ( ( target->getPos( ) - _pos ).getLength2( ) > COLLISION_RANGE * COLLISION_RANGE ) {
+			continue; // —£‚ê‚Ä‚¢‚½‚ç”»’è‚µ‚È‚¢
 		}
 
-		ModelMV1Ptr target = RockDollHouse::getTask( )->getModel( player->getDoll( ) );
-		if ( target->isHitLine( _pos, _pos + _vec ) ) {
-			_vec = Vector( );
-			return;
+		double range = target->getRadius( ) + _radius;
+		{//ã‰º”»’è
+			Vector diff = target->getPos( ) - ( _pos + Vector( 0, _vec.y, 0 ) );
+			if ( diff.getLength2( ) < range * range ) {
+				_vec.y = 0;
+			}
+		}
+		{//‰¡”»’è
+			Vector diff = target->getPos( ) - ( _pos + Vector( _vec.x, 0, _vec.z ) );
+			if ( diff.getLength2( ) < range * range ) {
+				_vec.x = 0;
+				_vec.z = 0;
+			}
 		}
 	}
 
@@ -126,21 +138,30 @@ void RockCharacter::collision( ) {
 			ite++;
 			continue;
 		}
-		RockEnemyPtr enemy = ( *ite );
-
-		if ( _doll == enemy->getDoll( ) ) {
+		RockEnemyPtr target = ( *ite );
+		
+		if ( ( target->getPos( ) - _pos ).getLength2( ) < 1 ) {
 			ite++;
-			continue;
+			continue; // Ž©•ª‚¾‚Á‚½‚ç”»’è‚µ‚È‚¢
 		}
-		if ( ( enemy->getPos( ) - _pos ).getLength2( ) > COLLISION_RANGE * COLLISION_RANGE ) {
+		if ( ( target->getPos( ) - _pos ).getLength2( ) > COLLISION_RANGE * COLLISION_RANGE ) {
 			ite++;
-			continue;
+			continue; // —£‚ê‚Ä‚¢‚½‚ç”»’è‚µ‚È‚¢
 		}
-
-		ModelMV1Ptr target = RockDollHouse::getTask( )->getModel( enemy->getDoll( ) );
-		if ( target->isHitLine( _pos, _pos + _vec ) ) {
-			_vec = Vector( );
-			return;
+		
+		double range = target->getRadius( ) + _radius;
+		{//ã‰º”»’è
+			Vector diff = target->getPos( ) - ( _pos + Vector( 0, _vec.y, 0 ) );
+			if ( diff.getLength2( ) < range * range ) {
+				_vec.y = fabs( _vec.y ) * -1;
+			}
+		}
+		{//‰¡”»’è
+			Vector diff = target->getPos( ) - ( _pos + Vector( _vec.x, 0, _vec.z ) );
+			if ( diff.getLength2( ) < range * range ) {
+				_vec.x = 0;
+				_vec.z = 0;
+			}
 		}
 		ite++;
 	}

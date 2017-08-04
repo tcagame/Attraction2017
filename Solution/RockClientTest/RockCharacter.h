@@ -20,6 +20,7 @@ protected:
 	void setActCount( int count );
 	int getActCount( ) const;
 	void setRadius( int radius );
+	int getRadius( ) const;
 private:
 	void collision( );
 private:
