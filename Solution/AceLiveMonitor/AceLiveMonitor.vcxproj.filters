@@ -166,7 +166,13 @@
     <ClCompile Include="EnemyBoss.cpp">
       <Filter>Boss</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyLittleRedDemon.cpp" />
+    <ClCompile Include="EnemyLittleRedDemon.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemySkeleton.cpp" />
+    <ClCompile Include="PopSkeleton.cpp" />
+    <ClCompile Include="EnemyLady.cpp" />
+    <ClCompile Include="PopLady.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -333,7 +339,13 @@
     <ClInclude Include="EnemyBoss.h">
       <Filter>Boss</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyLittleRedDemon.h" />
+    <ClInclude Include="EnemyLittleRedDemon.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemySkeleton.h" />
+    <ClInclude Include="PopSkeleton.h" />
+    <ClInclude Include="EnemyLady.h" />
+    <ClInclude Include="PopLady.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">

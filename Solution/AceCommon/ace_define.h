@@ -94,9 +94,12 @@ const unsigned char OBJECT_HUG_DEMON		= 0x14;
 const unsigned char OBJECT_SWAMP_ZOMBIE_A	= 0x15;
 const unsigned char OBJECT_SWAMP_ZOMBIE_B	= 0x16;
 const unsigned char OBJECT_SWAMP_ZOMBIE_C	= 0x17;
-// wide
+// big
 const unsigned char OBJECT_SKELETON			= 0x18;
 const unsigned char OBJECT_LADY				= 0x19;
+const unsigned char OBJECT_WIND				= 0x1A;
+const unsigned char OBJECT_ONYUDO			= 0x1B;
+const unsigned char OBJECT_JIZO				= 0x1C;
 
 
 const unsigned char OBJECT_ENEMY_END = 0x7F;
