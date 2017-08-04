@@ -171,6 +171,7 @@
     <ClCompile Include="EnemyGreenZombie.cpp" />
     <ClCompile Include="EnemyHand.cpp" />
     <ClCompile Include="EnemyHugDemon.cpp" />
+    <ClCompile Include="EnemyLady.cpp" />
     <ClCompile Include="EnemyLancer.cpp" />
     <ClCompile Include="EnemyLittleRedDemon.cpp" />
     <ClCompile Include="EnemyNoFace.cpp" />
@@ -180,6 +181,7 @@
     <ClCompile Include="EnemyRedBird.cpp" />
     <ClCompile Include="EnemyShishimai.cpp" />
     <ClCompile Include="EnemyShishimaiDemon.cpp" />
+    <ClCompile Include="EnemySkeleton.cpp" />
     <ClCompile Include="EnemyStoneFace.cpp" />
     <ClCompile Include="EnemySwampZombieA.cpp" />
     <ClCompile Include="EnemySwampZombieB.cpp" />
@@ -196,6 +198,7 @@
     <ClCompile Include="PopGreenZombie.cpp" />
     <ClCompile Include="PopHand.cpp" />
     <ClCompile Include="PopHugDemon.cpp" />
+    <ClCompile Include="PopLady.cpp" />
     <ClCompile Include="PopLancer.cpp" />
     <ClCompile Include="PopNoFace.cpp" />
     <ClCompile Include="PopNoNeckGhost.cpp" />
@@ -208,6 +211,7 @@
     <ClCompile Include="PopRedBird.cpp" />
     <ClCompile Include="PopShishimai.cpp" />
     <ClCompile Include="PopShishimaiDemon.cpp" />
+    <ClCompile Include="PopSkeleton.cpp" />
     <ClCompile Include="PopStoneFace.cpp" />
     <ClCompile Include="PopSwampZombieC.cpp" />
     <ClCompile Include="PopSwampZombieA.cpp" />
@@ -241,6 +245,7 @@
     <ClInclude Include="EnemyGreenZombie.h" />
     <ClInclude Include="EnemyHand.h" />
     <ClInclude Include="EnemyHugDemon.h" />
+    <ClInclude Include="EnemyLady.h" />
     <ClInclude Include="EnemyLancer.h" />
     <ClInclude Include="EnemyLittleRedDemon.h" />
     <ClInclude Include="EnemyNoFace.h" />
@@ -250,6 +255,7 @@
     <ClInclude Include="EnemyRedBird.h" />
     <ClInclude Include="EnemyShishimai.h" />
     <ClInclude Include="EnemyShishimaiDemon.h" />
+    <ClInclude Include="EnemySkeleton.h" />
     <ClInclude Include="EnemyStoneFace.h" />
     <ClInclude Include="EnemySwampZombieA.h" />
     <ClInclude Include="EnemySwampZombieB.h" />
@@ -266,6 +272,7 @@
     <ClInclude Include="PopGreenZombie.h" />
     <ClInclude Include="PopHand.h" />
     <ClInclude Include="PopHugDemon.h" />
+    <ClInclude Include="PopLady.h" />
     <ClInclude Include="PopLancer.h" />
     <ClInclude Include="PopNoFace.h" />
     <ClInclude Include="PopNoNeckGhost.h" />
@@ -278,6 +285,7 @@
     <ClInclude Include="PopRedBird.h" />
     <ClInclude Include="PopShishimai.h" />
     <ClInclude Include="PopShishimaiDemon.h" />
+    <ClInclude Include="PopSkeleton.h" />
     <ClInclude Include="PopStoneFace.h" />
     <ClInclude Include="PopSwampZombieC.h" />
     <ClInclude Include="PopSwampZombieA.h" />
