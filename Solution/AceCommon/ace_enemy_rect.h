@@ -1,6 +1,7 @@
 #pragma once
 
-const int CHIP_SIZE = 64; // NORMAL_CHAR_GRAPH_SIZE‚ÌƒTƒCƒY‚Æ“¯‚¶‚É‚·‚é
+const int CHIP_SIZE = 64; // NORMAL_CHAR_GRAPH_SIZE‚Æ“¯‚¶‚É‚·‚é
+const int BIG_CHIP_SIZE = 128; // BIG_CHAR_GRAPH_SIZE‚Æ“¯‚¶‚É‚·‚é
 
 struct Rect {
 	int tx;
@@ -41,3 +42,6 @@ const Rect RECT_SWAMP_ZOMBIE_B	( 0 * CHIP_SIZE, 4 * CHIP_SIZE );
 const Rect RECT_SWAMP_ZOMBIE_C	( 6 * CHIP_SIZE, 5 * CHIP_SIZE );
 const Rect RECT_SKELETON		( 0 * CHIP_SIZE, 2 * CHIP_SIZE );
 const Rect RECT_LADY			( 0 * CHIP_SIZE, 1 * CHIP_SIZE );
+const Rect RECT_WIND			( 4 * BIG_CHIP_SIZE, 3 * BIG_CHIP_SIZE );
+const Rect RECT_ONYUDO			( 0 * BIG_CHIP_SIZE, 1 * BIG_CHIP_SIZE );
+const Rect RECT_JIZO			( 7 * BIG_CHIP_SIZE, 0 * BIG_CHIP_SIZE );

@@ -137,14 +137,29 @@ void ObjectPreview::draw( ) const {
 				_enemy[ GRAPH_ENEMY_MIDIUM ]->draw( );
 			}
 			if ( _data->getObject( ox, oy ) == OBJECT_SKELETON ) {
-				_enemy[ GRAPH_ENEMY_WIDE ]->setRect( RECT_SKELETON.tx, RECT_SKELETON.ty, NORMAL_CHAR_GRAPH_SIZE * 2, NORMAL_CHAR_GRAPH_SIZE );
-				_enemy[ GRAPH_ENEMY_WIDE ]->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE - ( NORMAL_CHAR_GRAPH_SIZE / 2 ), PREVIEW_Y + j * OBJECT_CHIP_SIZE - ( NORMAL_CHAR_GRAPH_SIZE - OBJECT_CHIP_SIZE ) );
+				_enemy[ GRAPH_ENEMY_WIDE ]->setRect( RECT_SKELETON.tx, RECT_SKELETON.ty, BIG_CHAR_GRAPH_SIZE, NORMAL_CHAR_GRAPH_SIZE );
+				_enemy[ GRAPH_ENEMY_WIDE ]->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE - ( BIG_CHAR_GRAPH_SIZE / 2 ), PREVIEW_Y + j * OBJECT_CHIP_SIZE - ( NORMAL_CHAR_GRAPH_SIZE - OBJECT_CHIP_SIZE ) );
 				_enemy[ GRAPH_ENEMY_WIDE ]->draw( );
 			}
 			if ( _data->getObject( ox, oy ) == OBJECT_LADY ) {
-				_enemy[ GRAPH_ENEMY_WIDE ]->setRect( RECT_LADY.tx, RECT_LADY.ty, NORMAL_CHAR_GRAPH_SIZE * 2, NORMAL_CHAR_GRAPH_SIZE );
-				_enemy[ GRAPH_ENEMY_WIDE ]->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE - ( NORMAL_CHAR_GRAPH_SIZE / 2 ), PREVIEW_Y + j * OBJECT_CHIP_SIZE - ( NORMAL_CHAR_GRAPH_SIZE - OBJECT_CHIP_SIZE ) );
+				_enemy[ GRAPH_ENEMY_WIDE ]->setRect( RECT_LADY.tx, RECT_LADY.ty, BIG_CHAR_GRAPH_SIZE, NORMAL_CHAR_GRAPH_SIZE );
+				_enemy[ GRAPH_ENEMY_WIDE ]->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE - ( BIG_CHAR_GRAPH_SIZE / 2 ), PREVIEW_Y + j * OBJECT_CHIP_SIZE - ( NORMAL_CHAR_GRAPH_SIZE - OBJECT_CHIP_SIZE ) );
 				_enemy[ GRAPH_ENEMY_WIDE ]->draw( );
+			}
+			if ( _data->getObject( ox, oy ) == OBJECT_WIND ) {
+				_enemy[ GRAPH_ENEMY_BIG ]->setRect( RECT_WIND.tx, RECT_WIND.ty, BIG_CHAR_GRAPH_SIZE, BIG_CHAR_GRAPH_SIZE );
+				_enemy[ GRAPH_ENEMY_BIG ]->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE - ( BIG_CHAR_GRAPH_SIZE / 2 ), PREVIEW_Y + j * OBJECT_CHIP_SIZE - ( BIG_CHAR_GRAPH_SIZE - OBJECT_CHIP_SIZE ) );
+				_enemy[ GRAPH_ENEMY_BIG ]->draw( );
+			}
+			if ( _data->getObject( ox, oy ) == OBJECT_ONYUDO ) {
+				_enemy[ GRAPH_ENEMY_BIG ]->setRect( RECT_ONYUDO.tx, RECT_ONYUDO.ty, BIG_CHAR_GRAPH_SIZE, BIG_CHAR_GRAPH_SIZE );
+				_enemy[ GRAPH_ENEMY_BIG ]->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE - ( BIG_CHAR_GRAPH_SIZE / 2 ), PREVIEW_Y + j * OBJECT_CHIP_SIZE - ( BIG_CHAR_GRAPH_SIZE - OBJECT_CHIP_SIZE ) );
+				_enemy[ GRAPH_ENEMY_BIG ]->draw( );
+			}
+			if ( _data->getObject( ox, oy ) == OBJECT_JIZO ) {
+				_enemy[ GRAPH_ENEMY_BIG ]->setRect( RECT_JIZO.tx, RECT_JIZO.ty, BIG_CHAR_GRAPH_SIZE, BIG_CHAR_GRAPH_SIZE );
+				_enemy[ GRAPH_ENEMY_BIG ]->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE - ( BIG_CHAR_GRAPH_SIZE / 2 ), PREVIEW_Y + j * OBJECT_CHIP_SIZE - ( BIG_CHAR_GRAPH_SIZE - OBJECT_CHIP_SIZE ) );
+				_enemy[ GRAPH_ENEMY_BIG ]->draw( );
 			}
 
 			// オブジェクトブロック

@@ -66,6 +66,9 @@ const Rect enemies_rect[ ] = {
 	RECT_SWAMP_ZOMBIE_C,
 	RECT_SKELETON,
 	RECT_LADY,
+	RECT_WIND,
+	RECT_ONYUDO,
+	RECT_JIZO,
 };
 const int MAX_ENEMY = sizeof( enemies_rect ) / sizeof( enemies_rect[ 0 ] );
 
@@ -264,6 +267,15 @@ unsigned char ObjectMenu::getEnemy( int idx ) const {
 	case 23:
 		result = OBJECT_LADY;
 		break;
+	case 24:
+		result = OBJECT_WIND;
+		break;
+	case 25:
+		result = OBJECT_ONYUDO;
+		break;
+	case 26:
+		result = OBJECT_JIZO;
+		break;
 	default:
 		result = OBJECT_NONE;
 		break;
@@ -395,6 +407,11 @@ void ObjectMenu::draw( ) const {
 							_enemy[ GRAPH_ENEMY_WIDE ]->setRect( enemies_rect[ idx ].tx, enemies_rect[ idx ].ty, NORMAL_CHAR_GRAPH_SIZE, NORMAL_CHAR_GRAPH_SIZE );
 							_enemy[ GRAPH_ENEMY_WIDE ]->setPos( sx, sy, sx + NORMAL_CHAR_GRAPH_SIZE, sy + NORMAL_CHAR_GRAPH_SIZE );
 							_enemy[ GRAPH_ENEMY_WIDE ]->draw( );
+						}
+						if ( 23 < idx && idx < 27 ) {
+							_enemy[ GRAPH_ENEMY_BIG ]->setRect( enemies_rect[ idx ].tx, enemies_rect[ idx ].ty, BIG_CHAR_GRAPH_SIZE, BIG_CHAR_GRAPH_SIZE );
+							_enemy[ GRAPH_ENEMY_BIG ]->setPos( sx, sy, sx + NORMAL_CHAR_GRAPH_SIZE, sy + NORMAL_CHAR_GRAPH_SIZE );
+							_enemy[ GRAPH_ENEMY_BIG ]->draw( );
 						}
 					}
 				}
