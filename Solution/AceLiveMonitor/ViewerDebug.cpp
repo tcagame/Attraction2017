@@ -18,9 +18,6 @@ ViewerDebug::~ViewerDebug( ) {
 }
 
 void ViewerDebug::draw( ) const {
-	FamilyPtr family( Family::getTask( ) );
-	int camera_pos = ( int )family->getCameraPos( );
-	DrawerPtr drawer( Drawer::getTask( ) );
 	drawPlayer( );
 	drawEnemy( );
 	drawShot( );
@@ -144,6 +141,11 @@ void ViewerDebug::drawChip( ) const {
 					_block->setPos( x, y + VIEW_STREET_Y );
 					_block->draw( );
 				}
+			}
+			if ( map->getObject( pos + Vector( OBJECT_CHIP_SIZE / 2, OBJECT_CHIP_SIZE / 2 ) ) == OBJECT_ONEWAY ) {
+				_block->setRect( 16, 0, OBJECT_CHIP_SIZE, OBJECT_CHIP_SIZE );
+				_block->setPos( i * OBJECT_CHIP_SIZE - ( camera_pos % OBJECT_CHIP_SIZE ), j * OBJECT_CHIP_HEIGHT_NUM + VIEW_STREET_Y );
+				_block->draw( );
 			}
 		}
 	}
