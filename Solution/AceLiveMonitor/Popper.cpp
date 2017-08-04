@@ -29,6 +29,8 @@
 #include "PopSkeleton.h"
 #include "PopLady.h"
 #include "PopWind.h"
+#include "PopOnyudo.h"
+#include "PopJizo.h"
 
 PopperPtr Popper::getTask( ) {
 	return std::dynamic_pointer_cast< Popper >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -49,80 +51,86 @@ void Popper::initialize( ) {
 			int x = mx * OBJECT_CHIP_SIZE;
 			int y = my * OBJECT_CHIP_SIZE;
 			switch ( object ) {
-			case  OBJECT_PURPLE_ZOMBIE: 
+			case OBJECT_PURPLE_ZOMBIE: 
 				_pops.push_back( PopPtr( new PopPurpleZombie( Vector( x, y ) ) ) );
 				break;
-			case  OBJECT_FACE_AND_HAND:	
+			case OBJECT_FACE_AND_HAND:	
 				_pops.push_back( PopPtr( new PopFaceAndHand( Vector( x, y ) ) ) );
 				break;
-			case  OBJECT_NO_FACE:
+			case OBJECT_NO_FACE:
 				_pops.push_back( PopPtr( new PopNoFace( Vector( x, y ) ) ) );
 				break;
-			case  OBJECT_LANCER:	
+			case OBJECT_LANCER:	
 				_pops.push_back( PopPtr( new PopLancer( Vector( x, y ) ) ) );
 				break;
-			case  OBJECT_CROCO_SNAKE:	
+			case OBJECT_CROCO_SNAKE:	
 				_pops.push_back( PopPtr( new PopCrocoSnake( Vector( x, y ) ) ) );
 				break;
-			case  OBJECT_GHOUL:	
+			case OBJECT_GHOUL:	
 				_pops.push_back( PopPtr( new PopGhoul( Vector( x, y ) ) ) );
 				break;
-			case  OBJECT_GHOST:	
+			case OBJECT_GHOST:	
 				_pops.push_back( PopPtr( new PopGhost( Vector( x, y ) ) ) );
 				break;
-			case  OBJECT_ONE_EYE_SNAKE:	
+			case OBJECT_ONE_EYE_SNAKE:	
 				_pops.push_back( PopPtr( new PopOneEyeSnake( Vector( x, y ) ) ) );
 				break;
-			case  OBJECT_WHITE_MIST:	
+			case OBJECT_WHITE_MIST:	
 				_pops.push_back( PopPtr( new PopWhiteMist( Vector( x, y ) ) ) );
 				break;
-			case  OBJECT_STONE_FACE:
+			case OBJECT_STONE_FACE:
 				_pops.push_back( PopPtr( new PopStoneFace( Vector( x, y ) ) ) );
 				break;
-			case  OBJECT_NO_NECK_GHOST:
+			case OBJECT_NO_NECK_GHOST:
 				_pops.push_back( PopPtr( new PopNoNeckGhost( Vector( x, y ) ) ) );
 				break;
-			case  OBJECT_SHISHIMAI_DEMON:
+			case OBJECT_SHISHIMAI_DEMON:
 				_pops.push_back( PopPtr( new PopShishimaiDemon( Vector( x, y ) ) ) );
 				break;
-			case  OBJECT_SHISHIMAI:
+			case OBJECT_SHISHIMAI:
 				_pops.push_back( PopPtr( new PopShishimai( Vector( x, y ) ) ) );
 				break;
-			case  OBJECT_ARCHER:
+			case OBJECT_ARCHER:
 				_pops.push_back( PopPtr( new PopArcher( Vector( x, y ) ) ) );
 				break;
-			case  OBJECT_HAND:
+			case OBJECT_HAND:
 				_pops.push_back( PopPtr( new PopHand( Vector( x, y ) ) ) );
 				break;
-			case  OBJECT_RED_BIRD:
+			case OBJECT_RED_BIRD:
 				_pops.push_back( PopPtr( new PopRedBird( Vector( x, y ) ) ) );
 				break;
-			case  OBJECT_BLUE_MONK:
+			case OBJECT_BLUE_MONK:
 				_pops.push_back( PopPtr( new PopBlueMonk( Vector( x, y ) ) ) );
 				break;
-			case  OBJECT_GREEN_ZOMBIE:
+			case OBJECT_GREEN_ZOMBIE:
 				_pops.push_back( PopPtr( new PopGreenZombie( Vector( x, y ) ) ) );
 				break;
-			case  OBJECT_HUG_DEMON:
+			case OBJECT_HUG_DEMON:
 				_pops.push_back( PopPtr( new PopHugDemon( Vector( x, y ) ) ) );
 				break;
-			case  OBJECT_SWAMP_ZOMBIE_A:
+			case OBJECT_SWAMP_ZOMBIE_A:
 				_pops.push_back( PopPtr( new PopSwampZombieA( Vector( x, y ) ) ) );
 				break;
-			case  OBJECT_SWAMP_ZOMBIE_B:
+			case OBJECT_SWAMP_ZOMBIE_B:
 				_pops.push_back( PopPtr( new PopSwampZombieB( Vector( x, y ) ) ) );
 				break;
-			case  OBJECT_SWAMP_ZOMBIE_C:
+			case OBJECT_SWAMP_ZOMBIE_C:
 				_pops.push_back( PopPtr( new PopSwampZombieC( Vector( x, y ) ) ) );
 				break;
-			case  OBJECT_SKELETON:
+			case OBJECT_SKELETON:
 				_pops.push_back( PopPtr( new PopSkeleton( Vector( x, y ) ) ) );
 				break;
-			case  OBJECT_LADY:
+			case OBJECT_LADY:
 				_pops.push_back( PopPtr( new PopLady( Vector( x, y ) ) ) );
 				break;
-			case  OBJECT_WIND:
+			case OBJECT_WIND:
 				_pops.push_back( PopPtr( new PopWind( Vector( x, y ) ) ) );
+				break;
+			case OBJECT_ONYUDO:
+				_pops.push_back( PopPtr( new PopOnyudo( Vector( x, y ) ) ) );
+				break;
+			case OBJECT_JIZO:
+				_pops.push_back( PopPtr( new PopJizo( Vector( x, y ) ) ) );
 				break;
 			}
 		}

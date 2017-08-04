@@ -20,6 +20,8 @@ protected:
 	void setActCount( int count );
 	int getActCount( ) const;
 private:
+	void collision( );
+private:
 	Vector _pos;
 	Vector _vec;
 	DOLL _doll;

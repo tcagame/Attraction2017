@@ -9,7 +9,8 @@ RockEnemyRedBard::~RockEnemyRedBard( ) {
 }
 
 void RockEnemyRedBard::act( ) {
-	setVec( Vector( 3, 0, 5 ) );
+	Vector vec = ( Vector( 0, 40, 0 ) - getPos( ) ).normalize( );
+	setVec( vec );
 }
 
 double RockEnemyRedBard::getAnimTime( ) const {

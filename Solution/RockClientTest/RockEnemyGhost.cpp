@@ -11,7 +11,7 @@ RockEnemyGhost::~RockEnemyGhost( ) {
 }
 
 void RockEnemyGhost::act( ) {
-	setVec( Vector( 0.6, 0, 1 ) );
+	setVec( ( Vector( 0, 40, 0 ) - getPos( ) ).normalize( ) );
 }
 
 double RockEnemyGhost::getAnimTime( ) const {

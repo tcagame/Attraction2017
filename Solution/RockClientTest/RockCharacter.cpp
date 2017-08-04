@@ -3,6 +3,13 @@
 #include "RockMap.h"
 #include "RockDollHouse.h"
 
+#include "RockFamily.h"
+#include "RockPlayer.h"
+#include "RockMilitary.h"
+#include "RockEnemy.h"
+
+const int COLLISION_RANGE = 20;
+
 RockCharacter::RockCharacter( const Vector& pos, DOLL doll, bool mass ) :
 _pos( pos ),
 _doll( doll ),
@@ -27,6 +34,7 @@ void RockCharacter::update( ) {
 		_vec = Vector( );
 		_standing = true;
 	}
+	collision( );
 	_pos += _vec;
 }
 
@@ -59,4 +67,51 @@ void RockCharacter::setActCount( int count ) {
 
 int RockCharacter::getActCount( ) const {
 	return _act_count;
+}
+
+void RockCharacter::collision( ) {
+	// player ‚ ‚½‚è”»’è
+	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+		RockPlayerPtr player = RockFamily::getTask( )->getPlayer( i );
+		if ( _doll == player->getDoll( ) ) {
+			continue;
+		}
+		if ( ( player->getPos( ) - _pos ).getLength2( ) > COLLISION_RANGE * COLLISION_RANGE ) {
+			continue;
+		}
+
+		ModelMV1Ptr target = RockDollHouse::getTask( )->getModel( player->getDoll( ) );
+		if ( target->isHitLine( _pos, _pos + _vec ) ) {
+			_vec = Vector( );
+			return;
+		}
+	}
+
+	// enemy ‚ ‚½‚è”»’è
+	std::list< RockEnemyPtr > enemys = RockMilitary::getTask( )->getEnemyList( );
+	std::list< RockEnemyPtr >::iterator ite = enemys.begin( );
+
+	while ( ite != enemys.end( ) ) {
+		if ( !( *ite ) ) {
+			ite++;
+			continue;
+		}
+		RockEnemyPtr enemy = ( *ite );
+
+		if ( _doll == enemy->getDoll( ) ) {
+			ite++;
+			continue;
+		}
+		if ( ( enemy->getPos( ) - _pos ).getLength2( ) > COLLISION_RANGE * COLLISION_RANGE ) {
+			ite++;
+			continue;
+		}
+
+		ModelMV1Ptr target = RockDollHouse::getTask( )->getModel( enemy->getDoll( ) );
+		if ( target->isHitLine( _pos, _pos + _vec ) ) {
+			_vec = Vector( );
+			return;
+		}
+		ite++;
+	}
 }
