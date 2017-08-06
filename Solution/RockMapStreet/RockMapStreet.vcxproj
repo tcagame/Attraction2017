@@ -153,6 +153,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="RockMapStreetCamera.cpp" />
     <ClCompile Include="RockStreet.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -161,6 +162,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="RockMapStreetCamera.h" />
     <ClInclude Include="RockStreet.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -1,5 +1,6 @@
 #include "Application.h"
 #include "RockStreet.h"
+#include "RockMapStreetCamera.h"
 #include "define.h"
 #include "Drawer.h"
 
@@ -9,5 +10,5 @@ void main( ) {
 	app->setWindowSize( SCREEN_WIDTH, SCREEN_HEIGHT );
 	app->addTask( Drawer::getTag( ), TaskPtr( new Drawer( "Resource/Rock" ) ) );
 	app->addTask( RockStreet::getTag( ), TaskPtr( new RockStreet ) );
-
+	app->addTask( RockMapStreetCamera::getTag( ), TaskPtr( new RockMapStreetCamera ) );
 }
