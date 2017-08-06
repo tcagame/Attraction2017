@@ -109,3 +109,4 @@ const unsigned char OBJECT_BLOCK  = 0x80;
 const unsigned char OBJECT_ONEWAY = 0x81;
 //event
 const unsigned char OBJECT_EVENT_REDDEAMON = 0xC0;
+const unsigned char OBJECT_EVENT_FIRE = 0xC1;

@@ -8,6 +8,7 @@
 #include "Family.h"
 #include "Player.h"
 #include "Map.h"
+#include "MapEvent.h"
 
 ViewerDebug::ViewerDebug( ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
@@ -118,7 +119,7 @@ void ViewerDebug::drawChip( ) const {
 		MapPtr map( Map::getTask( ) );
 		//const int MAP_WIDTH = map->getPageNum( ) * PAGE_OBJECT_WIDTH_NUM * OBJECT_CHIP_SIZE;
 		//ï\é¶Ç∑ÇÈâ°ÇÃêî
-		int width = ( SCREEN_WIDTH / GRAPH_SIZE + 1 ) * PAGE_OBJECT_WIDTH_NUM;
+		int width = 8 * PAGE_OBJECT_WIDTH_NUM;
 		for ( int i = 0; i < width; i++ ) {
 			for ( int j = 0; j < OBJECT_CHIP_HEIGHT_NUM; j++ ) {
 				int x = i * OBJECT_CHIP_SIZE - camera_pos % OBJECT_CHIP_SIZE;
@@ -145,6 +146,34 @@ void ViewerDebug::drawChip( ) const {
 		}
 	}
 	{//event
+		int width = 8 * PAGE_OBJECT_WIDTH_NUM;
+		MapEventPtr map( MapEvent::getTask( ) );
+		if ( map->getType( ) != ViewerEvent::TYPE_TITLE ) {
+			for ( int i = 0; i < width; i++ ) {
+				for ( int j = 0; j < OBJECT_CHIP_HEIGHT_NUM; j++ ) {
+					int x = i * OBJECT_CHIP_SIZE;
+					int y = j * OBJECT_CHIP_SIZE;
+					Vector pos = Vector( x + OBJECT_CHIP_SIZE / 2, y + OBJECT_CHIP_SIZE / 2 );
+
+					unsigned char obj = map->getObject( pos );
+					if ( obj == OBJECT_BLOCK ) {
+						_block->setRect( 0, 16, OBJECT_CHIP_SIZE, OBJECT_CHIP_SIZE );
+						_block->setPos( x, y + VIEW_EVENT_Y );
+						_block->draw( );
+					}
+					if ( obj == OBJECT_ONEWAY ) {
+						_block->setRect( 16, 0, OBJECT_CHIP_SIZE, OBJECT_CHIP_SIZE );
+						_block->setPos( x, y + VIEW_EVENT_Y );
+						_block->draw( );
+					}
+					if ( obj >= OBJECT_EVENT_REDDEAMON ) {
+						_block->setRect( 32, 0, OBJECT_CHIP_SIZE, OBJECT_CHIP_SIZE );
+						_block->setPos( x, y + VIEW_EVENT_Y );
+						_block->draw( );
+					}
+				}
+			}
+		}
 	}
 }
 

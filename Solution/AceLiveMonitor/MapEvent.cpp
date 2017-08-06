@@ -6,7 +6,7 @@
 
 const std::string FILENAME[ MAX_EVENT ] {
 	"Resource/Ace/Event/akaoni/mapdata",//red deamon
-	"",
+	"Resource/Ace/Event/fire/mapdata",  //fire
 	"",
 	"",
 	"",
@@ -64,23 +64,31 @@ ViewerEvent::TYPE  MapEvent::getType( ) const {
 }
 
 unsigned char MapEvent::getObject( const Vector& pos ) const {
-	int object_width_num = EVENT_PAGE_NUM * PAGE_OBJECT_WIDTH_NUM;
-	int x = ( ( int )pos.x / OBJECT_CHIP_SIZE + object_width_num ) % object_width_num;
-	int y = ( int )pos.y / OBJECT_CHIP_SIZE;
-	unsigned char obj = getObject( x, y );
+	int mx = ( int )pos.x / OBJECT_CHIP_SIZE;
+	int my = ( int )pos.y / OBJECT_CHIP_SIZE;
+	unsigned char obj = getObject( mx, my );
 	return obj;
 }
 
 unsigned char MapEvent::getObject( int mx, int my ) const {
-	assert( mx >= 0 && mx < EVENT_PAGE_NUM * PAGE_OBJECT_WIDTH_NUM && my < OBJECT_CHIP_HEIGHT_NUM );
-	int idx = mx + my * ( EVENT_PAGE_NUM * PAGE_OBJECT_WIDTH_NUM );
 	unsigned char obj = OBJECT_NONE;
+	int type = -1;
 	switch ( _type ) {
 	case ViewerEvent::TYPE_TITLE:
 		break;
 	case ViewerEvent::TYPE_RED_DEMON:
-		obj = _objects[ 0 ][ idx ];
+		mx = ( mx + EVENT_PAGE_NUM * PAGE_OBJECT_WIDTH_NUM ) % ( EVENT_PAGE_NUM * PAGE_OBJECT_WIDTH_NUM );
+		type = 0;
+		break;
+	case ViewerEvent::TYPE_FIRE:
+		while ( mx >= EVENT_PAGE_NUM * PAGE_OBJECT_WIDTH_NUM ) {
+			mx -= PAGE_OBJECT_WIDTH_NUM;
+		}
+		type = 1;
 		break;
 	}
+	assert( mx >= 0 && mx < EVENT_PAGE_NUM * PAGE_OBJECT_WIDTH_NUM && my < OBJECT_CHIP_HEIGHT_NUM );
+	int idx = mx + my * ( EVENT_PAGE_NUM * PAGE_OBJECT_WIDTH_NUM );
+	obj = _objects[ type ][ idx ];
 	return obj;
 }

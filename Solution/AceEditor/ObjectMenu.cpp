@@ -293,6 +293,9 @@ unsigned char ObjectMenu::getEvent( int idx ) const {
 	case 0:
 		result = OBJECT_EVENT_REDDEAMON;
 		break;
+	case 1:
+		result = OBJECT_EVENT_FIRE;
+		break;
 	default:
 		result = OBJECT_NONE;
 		break;
@@ -427,8 +430,8 @@ void ObjectMenu::draw( ) const {
 			int sx = ( int )_pos.x + BLOCK_X;
 			int sy = ( int )_pos.y + BLOCK_Y;
 			for ( int i = 0; i < EVENT_WIDTH_NUM; i++, sx += EVENT_DRAW_SIZE ) {
-				int tx = ( i % 3 ) * EVENT_SPRITE_SIZE;
-				int ty = 0;
+				int tx = ( i % 2 ) * EVENT_SPRITE_SIZE;
+				int ty = ( i / 2 ) * EVENT_SPRITE_SIZE;
 				_event->setRect( tx, ty, EVENT_SPRITE_SIZE, EVENT_SPRITE_SIZE );
 				_event->setPos( sx, sy, sx + EVENT_DRAW_SIZE, sy + EVENT_DRAW_SIZE );
 				_event->draw( );

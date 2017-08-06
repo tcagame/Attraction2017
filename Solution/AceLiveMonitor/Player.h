@@ -34,6 +34,7 @@ private:
 	void actOnOverCharge( );
 	void actOnCamera( );
 	void actOnDamege( );
+	void updateState( );
 private:
 	ACTION _action;
 	int _id;

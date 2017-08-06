@@ -3,7 +3,7 @@
 #include "Military.h"
 
 const int WAIT_ANIM_TIME = 10;
-const int WAIT_POP_TIME = 30;
+const int WAIT_POP_TIME = 30000;
 
 EnemyBossRedDemon::EnemyBossRedDemon( const Vector& pos ) :
 EnemyBoss( pos, BIG_CHAR_GRAPH_SIZE ) {
