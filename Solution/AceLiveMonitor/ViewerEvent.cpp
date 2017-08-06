@@ -17,6 +17,11 @@ ViewerEvent::ViewerEvent(  ) {
 		sprintf_s( buf, "Event/akaoni/back_%003d.png", i );
 		_images.push_back( drawer->createImage( buf ) );
 	}
+	//FIRE
+	for ( int i = 0; i < EVENT_PAGE_NUM; i++ ) {
+		sprintf_s( buf, "Event/fire/back_%003d.png", i );
+		_images.push_back( drawer->createImage( buf ) );
+	}
 }
 
 ViewerEvent::~ViewerEvent( ) {
@@ -29,9 +34,21 @@ void ViewerEvent::draw( ) const {
 		_images[ 0 ]->setPos( 0, VIEW_TITLE_Y );
 		_images[ 0 ]->draw( );
 	} else {
+		int idx = 0;
 		int sx = 256;
 		for ( int i = 0; i < 8; i++ ) {
-			int idx = type + ( i % EVENT_PAGE_NUM );
+			switch ( type ) {
+			case TYPE_RED_DEMON:
+				idx = type + ( i % EVENT_PAGE_NUM );
+				break;
+			case TYPE_FIRE:
+				if ( i / EVENT_PAGE_NUM > 0 ) {
+					idx = type + 3; 
+				} else {
+					idx = type + i;
+				}
+				break;
+			}
 			_images[ idx ]->setPos( i * sx, VIEW_TITLE_Y );
 			_images[ idx ]->draw( );
 		}
