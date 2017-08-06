@@ -17,6 +17,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AceLiveMonitor", "AceLiveMo
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RockClientTest", "RockClientTest\RockClientTest.vcxproj", "{91502850-339B-4C9C-974D-1E35DF1709A1}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RockMapStreet", "RockMapStreet\RockMapStreet.vcxproj", "{79CC6E31-2E6C-4EAD-A3E5-8AB8AF0F8510}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -81,6 +83,14 @@ Global
 		{91502850-339B-4C9C-974D-1E35DF1709A1}.Release|x64.Build.0 = Release|x64
 		{91502850-339B-4C9C-974D-1E35DF1709A1}.Release|x86.ActiveCfg = Release|Win32
 		{91502850-339B-4C9C-974D-1E35DF1709A1}.Release|x86.Build.0 = Release|Win32
+		{79CC6E31-2E6C-4EAD-A3E5-8AB8AF0F8510}.Debug|x64.ActiveCfg = Debug|x64
+		{79CC6E31-2E6C-4EAD-A3E5-8AB8AF0F8510}.Debug|x64.Build.0 = Debug|x64
+		{79CC6E31-2E6C-4EAD-A3E5-8AB8AF0F8510}.Debug|x86.ActiveCfg = Debug|Win32
+		{79CC6E31-2E6C-4EAD-A3E5-8AB8AF0F8510}.Debug|x86.Build.0 = Debug|Win32
+		{79CC6E31-2E6C-4EAD-A3E5-8AB8AF0F8510}.Release|x64.ActiveCfg = Release|x64
+		{79CC6E31-2E6C-4EAD-A3E5-8AB8AF0F8510}.Release|x64.Build.0 = Release|x64
+		{79CC6E31-2E6C-4EAD-A3E5-8AB8AF0F8510}.Release|x86.ActiveCfg = Release|Win32
+		{79CC6E31-2E6C-4EAD-A3E5-8AB8AF0F8510}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
