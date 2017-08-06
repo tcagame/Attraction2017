@@ -70,21 +70,21 @@ void Player::act( ) {
 
 	//イベント
 	MapPtr map( Map::getTask( ) );
+	MapEventPtr map_event( MapEvent::getTask( ) );
 	FamilyPtr family( Family::getTask( ) );
-	if ( getState( ) != STATE_EVENT ) {
+	ViewerEvent::TYPE event_type = map_event->getType( );
+	if ( event_type == ViewerEvent::TYPE_TITLE ) {
 		unsigned char obj = map->getObject( getPos( ) + getVec( ) );
-		if ( !Family::getTask( )->isExistancePlayerEvent( ) ) {
-			switch ( obj ) {
-			case OBJECT_EVENT_REDDEAMON:
-				setState( STATE_EVENT );
-				MapEvent::getTask( )->setType( ViewerEvent::TYPE_RED_DEMON );
-				setPos( Vector( GRAPH_SIZE * 3 / 2, 0 ) );
-				setVec( Vector( ) );
-				break;
-			}	
+		switch ( obj ) {
+		case OBJECT_EVENT_REDDEAMON:
+			setState( STATE_EVENT );
+			MapEvent::getTask( )->setType( ViewerEvent::TYPE_RED_DEMON );
+			setPos( Vector( GRAPH_SIZE * 3 / 2, 0 ) );
+			setVec( Vector( ) );
+			break;
 		}
 	}
-	if ( getState( ) == STATE_EVENT ) {
+	if ( event_type == STATE_EVENT ) {
 		//一ページ目にいたらorボスが倒れている場合 [退場]
 		if ( getPos( ).x < GRAPH_SIZE ||
 			 !Military::getTask( )->getBoss( ) ) {
