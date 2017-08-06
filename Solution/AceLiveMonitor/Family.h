@@ -21,7 +21,6 @@ public:
 	PlayerConstPtr getPlayer( int player_id ) const;
 	PlayerPtr getPlayer( int player_id );
 	double getCameraPos( ) const;
-	bool isExistancePlayerEvent( ) const;
 private:
 	void updateCameraPos( );
 private:

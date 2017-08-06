@@ -5,6 +5,8 @@
 
 const int CAMERA_SCROLL_SPEED = 8;
 const int SCROLL_BUFFER = SCREEN_WIDTH / 10;
+const double CAMERA_MAIN_RATIO = 1.0 / ACE_PLAYER_NUM;
+const double CAMERA_EVENT_RATIO = 1.0 / ( ACE_PLAYER_NUM - 1 );
 
 const Vector INIT_PLAYER_POS[ ACE_PLAYER_NUM ] = {
 	Vector( SCREEN_WIDTH / 2 + 150, NORMAL_CHAR_GRAPH_SIZE ),
@@ -40,8 +42,11 @@ void Family::update( ) {
 	bool update_camera = true;
 	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
 		_player[ i ]->update( );
-		if ( ( _camera_pos - SCREEN_WIDTH / 2 ) + SCROLL_BUFFER > _player[ i ]->getPos( ).x ) {
-			update_camera = false;
+		if ( _player[ i ]->getState( ) != Character::STATE_EVENT ) {
+			//キャラクターが右端にいる場合、カメラのポジションを変えない
+			if ( ( _camera_pos - SCREEN_WIDTH / 2 ) + SCROLL_BUFFER > _player[ i ]->getPos( ).x ) {
+				update_camera = false;
+			}
 		}
 	}
 	if ( update_camera ) {
@@ -63,17 +68,15 @@ PlayerPtr Family::getPlayer( int player_id ) {
 
 void Family::updateCameraPos( ) {
 	double camera_pos = 0;
+	//プレイヤーの平均を出すための値
+	double pos_ratio = CAMERA_MAIN_RATIO;
 	//プレイヤーの位置の合計を出す
 	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
 		if ( _player[ i ]->getState( ) == Character::STATE_EVENT ) {
+			pos_ratio = CAMERA_EVENT_RATIO;
 			continue;
 		}
 		camera_pos += _player[ i ]->getPos( ).x;
-	}
-	//プレイヤーの平均を出すための値
-	double pos_ratio = 0.25;
-	if ( isExistancePlayerEvent( ) ) {
-		pos_ratio = 1.0 / ( ACE_PLAYER_NUM - 1 );
 	}
 
 	//平均を計算
@@ -97,15 +100,4 @@ void Family::updateCameraPos( ) {
 
 double Family::getCameraPos( ) const {
 	return _camera_pos;
-}
-
-bool Family::isExistancePlayerEvent( ) const {
-	bool result = false;
-	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
-		if ( _player[ i ]->getState( ) == Character::STATE_EVENT ) {
-			result = true;
-			break;
-		}
-	}
-	return result;
 }
