@@ -149,7 +149,10 @@ void Military::createBoss( ) {
 	case ViewerEvent::TYPE_FIRE:
 		_boss = EnemyPtr( new EnemyBossBloodDemon( Vector( 800, 200 ) ) );
 		break;
-		case ViewerEvent::TYPE_TREE:
+	case ViewerEvent::TYPE_TREE:
+		_boss = EnemyPtr( new EnemyBossMonsteTreer( Vector( 800, 225 ) ) );
+		break;
+	case ViewerEvent::TYPE_ROCK:
 		_boss = EnemyPtr( new EnemyBossMonsteTreer( Vector( 800, 225 ) ) );
 		break;
 	}
