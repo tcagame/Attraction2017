@@ -111,3 +111,7 @@ const unsigned char OBJECT_ONEWAY = 0x81;
 const unsigned char OBJECT_EVENT_REDDEAMON = 0xC0;
 const unsigned char OBJECT_EVENT_FIRE = 0xC1;
 const unsigned char OBJECT_EVENT_TREE = 0xC2;
+const unsigned char OBJECT_EVENT_ROCK = 0xC3;
+const unsigned char OBJECT_EVENT_RYUGU = 0xC4;
+const unsigned char OBJECT_EVENT_SHOP = 0xC5;
+

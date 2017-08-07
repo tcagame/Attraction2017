@@ -34,7 +34,7 @@ const int ENEMY_HEIGHT_NUM = 3;
 
 const int EVENT_SPRITE_SIZE = 32;
 const int EVENT_DRAW_SIZE = 64;
-const int EVENT_WIDTH_NUM = 3;
+const int EVENT_WIDTH_NUM = 5;
 const int EVENT_HEIGHT_NUM = 3;
 
 const int PAGE_ARROW_SIZE = 32;
@@ -299,6 +299,15 @@ unsigned char ObjectMenu::getEvent( int idx ) const {
 	case 2:
 		result = OBJECT_EVENT_TREE;
 		break;
+	case 3:
+		result = OBJECT_EVENT_ROCK;
+		break;
+	case 4:
+		result = OBJECT_EVENT_RYUGU;
+		break;
+	case 5:
+		result = OBJECT_EVENT_SHOP;
+		break;
 	default:
 		result = OBJECT_NONE;
 		break;
@@ -433,8 +442,8 @@ void ObjectMenu::draw( ) const {
 			int sx = ( int )_pos.x + BLOCK_X;
 			int sy = ( int )_pos.y + BLOCK_Y;
 			for ( int i = 0; i < EVENT_WIDTH_NUM; i++, sx += EVENT_DRAW_SIZE ) {
-				int tx = ( i % 3 ) * EVENT_SPRITE_SIZE;
-				int ty = ( i / 3 ) * EVENT_SPRITE_SIZE;
+				int tx = ( i % 4 ) * EVENT_SPRITE_SIZE;
+				int ty = ( i / 4 ) * EVENT_SPRITE_SIZE;
 				_event->setRect( tx, ty, EVENT_SPRITE_SIZE, EVENT_SPRITE_SIZE );
 				_event->setPos( sx, sy, sx + EVENT_DRAW_SIZE, sy + EVENT_DRAW_SIZE );
 				_event->draw( );
