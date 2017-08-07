@@ -4,6 +4,7 @@
 #include "Family.h"
 #include "Player.h"
 #include "EnemyBossRedDemon.h"
+#include "EnemyBossBloodDemon.h"
 #include "MapEvent.h"
 
 PTR( Player );
@@ -145,7 +146,7 @@ void Military::createBoss( ) {
 		_boss = EnemyPtr( new EnemyBossRedDemon( Vector( 800, 200 ) ) );
 		break;
 	case ViewerEvent::TYPE_FIRE:
-		_boss = EnemyPtr( new EnemyBossRedDemon( Vector( 800, 200 ) ) );
+		_boss = EnemyPtr( new EnemyBossBloodDemon( Vector( 800, 200 ) ) );
 		break;
 	}
 }

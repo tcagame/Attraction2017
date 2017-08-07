@@ -221,6 +221,9 @@
     <ClCompile Include="PopTree.cpp">
       <Filter>Pop</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyBossBloodDemon.cpp">
+      <Filter>Boss</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -441,6 +444,9 @@
     </ClInclude>
     <ClInclude Include="PopTree.h">
       <Filter>Pop</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBossBloodDemon.h">
+      <Filter>Boss</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
