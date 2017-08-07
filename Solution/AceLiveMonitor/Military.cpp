@@ -6,6 +6,7 @@
 #include "EnemyBossRedDemon.h"
 #include "EnemyBossBloodDemon.h"
 #include "EnemyBossMonsteTreer.h"
+#include "EnemyBossRock.h"
 #include "MapEvent.h"
 
 PTR( Player );
@@ -153,7 +154,7 @@ void Military::createBoss( ) {
 		_boss = EnemyPtr( new EnemyBossMonsteTreer( Vector( 800, 225 ) ) );
 		break;
 	case ViewerEvent::TYPE_ROCK:
-		_boss = EnemyPtr( new EnemyBossMonsteTreer( Vector( 800, 225 ) ) );
+		_boss = EnemyPtr( new EnemyBossRock( Vector( 800, 225 ) ) );
 		break;
 	}
 }

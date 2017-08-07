@@ -227,6 +227,9 @@
     <ClCompile Include="EnemyBossMonsteTreer.cpp">
       <Filter>Boss</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyBossRock.cpp">
+      <Filter>Boss</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -452,6 +455,9 @@
       <Filter>Boss</Filter>
     </ClInclude>
     <ClInclude Include="EnemyBossMonsteTreer.h">
+      <Filter>Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBossRock.h">
       <Filter>Boss</Filter>
     </ClInclude>
   </ItemGroup>
