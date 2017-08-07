@@ -478,6 +478,9 @@ void Player::updateState( ) {
 		case OBJECT_EVENT_FIRE:
 			map_event->setType( ViewerEvent::TYPE_FIRE );
 			break;
+		case OBJECT_EVENT_TREE:
+			map_event->setType( ViewerEvent::TYPE_TREE );
+			break;
 		default:
 			event_obj = false;
 			break;
