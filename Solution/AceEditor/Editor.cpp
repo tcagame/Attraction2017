@@ -49,7 +49,7 @@ void Editor::initialize( ) {
 	ImagePtr enemy_midium_image = drawer->createImage( "Enemy/enemy_medium.png" );
 	ImagePtr enemy_big_image = drawer->createImage( "Enemy/enemy_big.png" );
 	ImagePtr enemy_wide_image = drawer->createImage( "Enemy/enemy_wide.png" );
-	ImagePtr event_image = drawer->createImage( "Event/event.png" );
+	ImagePtr event_image = drawer->createImage( "Menu/event.png" );
 	GroundPtr ground = GroundPtr( new Ground );
 	StructurePtr structure = StructurePtr( new Structure );
 
