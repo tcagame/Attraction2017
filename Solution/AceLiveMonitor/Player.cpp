@@ -481,6 +481,9 @@ void Player::updateState( ) {
 		case OBJECT_EVENT_TREE:
 			map_event->setType( ViewerEvent::TYPE_TREE );
 			break;
+		case OBJECT_EVENT_ROCK:
+			map_event->setType( ViewerEvent::TYPE_ROCK );
+			break;
 		default:
 			event_obj = false;
 			break;

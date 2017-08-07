@@ -27,6 +27,11 @@ ViewerEvent::ViewerEvent(  ) {
 		sprintf_s( buf, "Event/tree/back_%003d.png", i );
 		_images.push_back( drawer->createImage( buf ) );
 	}
+	//TREE
+	for ( int i = 0; i < EVENT_PAGE_NUM; i++ ) {
+		sprintf_s( buf, "Event/rock/back_%003d.png", i );
+		_images.push_back( drawer->createImage( buf ) );
+	}
 }
 
 ViewerEvent::~ViewerEvent( ) {
@@ -53,6 +58,13 @@ void ViewerEvent::draw( ) const {
 					idx = type + i;
 				}
 				case TYPE_TREE:
+				if ( i / EVENT_PAGE_NUM > 0 ) {
+					idx = type + 3; 
+				} else {
+					idx = type + i;
+				}
+				break;
+				case TYPE_ROCK:
 				if ( i / EVENT_PAGE_NUM > 0 ) {
 					idx = type + 3; 
 				} else {
