@@ -9,6 +9,7 @@ public:
 public:
 	void draw( ) const;
 private:
+	ImagePtr _enemy_small;
 	ImagePtr _enemy_midium;
 	ImagePtr _enemy_wide;
 	ImagePtr _enemy_boss;

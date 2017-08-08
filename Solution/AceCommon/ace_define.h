@@ -11,6 +11,7 @@ const double GRAVITY = 1.0;
 
 const int EVENT_PAGE_NUM = 4;
 const int MAX_EVENT = 10;
+const int SMALL_CHAR_GRAPH_SIZE = 32;
 const int NORMAL_CHAR_GRAPH_SIZE = 64;
 const int BIG_CHAR_GRAPH_SIZE = 128;
 

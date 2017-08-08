@@ -7,6 +7,7 @@
 
 ViewerMilitary::ViewerMilitary( ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
+	_enemy_small = drawer->createImage( "Enemy/enemy_small.png" );
 	_enemy_midium = drawer->createImage( "Enemy/enemy_medium.png" );
 	_enemy_wide = drawer->createImage( "Enemy/enemy_big.png" );
 	_enemy_boss = drawer->createImage( "Enemy/enemy_boss.png" );
@@ -35,6 +36,11 @@ void ViewerMilitary::draw( ) const {
 			chip.sx2 -= camera_pos;
 			chip.sy1 += VIEW_STREET_Y;
 			chip.sy2 += VIEW_STREET_Y;
+			if ( chip.size == SMALL_CHAR_GRAPH_SIZE ) {
+				_enemy_small->setRect( chip.tx, chip.ty, chip.size, chip.size );
+				_enemy_small->setPos( chip.sx1, chip.sy1, chip.sx2, chip.sy2 );
+				_enemy_small->draw( );
+			}
 			if ( chip.size == NORMAL_CHAR_GRAPH_SIZE ) {
 				_enemy_midium->setRect( chip.tx, chip.ty, chip.size, chip.size );
 				_enemy_midium->setPos( chip.sx1, chip.sy1, chip.sx2, chip.sy2 );
