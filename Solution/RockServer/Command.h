@@ -31,8 +31,15 @@ public:
 	std::string getCommand( ) const;
 private:
 	void excute( );
+	bool excuteIp( ) const;
+	bool excuteDevice( ) const;
+	bool excuteContinue( std::vector< std::string > command );
+	bool excuteToku( std::vector< std::string > command );
+	bool excutePower( std::vector< std::string > command );
+	bool excuteMoney( std::vector< std::string > command );
+	bool excuteItem( std::vector< std::string > command );
+	bool excuteState( std::vector< std::string > command );
 	std::vector< std::string > getSpritCommand( ) const;
-	unsigned int getState( std::string str );
 private:
 	std::string _command;
 	StatusPtr _status;
