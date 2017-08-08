@@ -1,9 +1,9 @@
-#include "RockStreet.h"
+#include "RockMapStreet.h"
 
 const int STREET_MODEL_NUM = 3;
 
 
-RockStreet::RockStreet( ) {
+RockMapStreet::RockMapStreet( ) {
 	_filenames = { };
 	for ( int i = 0; i < STREET_MODEL_NUM; i++ ) {
 		char filename[ 256 ];
@@ -12,10 +12,10 @@ RockStreet::RockStreet( ) {
 	}
 }
 
-RockStreet::~RockStreet( ) {
+RockMapStreet::~RockMapStreet( ) {
 }
 
-std::vector< std::string > RockStreet::getFilenames( ) const {
+std::vector< std::string > RockMapStreet::getFilenames( ) const {
 	return _filenames;
 }
 

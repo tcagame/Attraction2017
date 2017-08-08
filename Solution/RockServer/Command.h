@@ -5,6 +5,7 @@
 #include "Task.h"
 
 PTR( Command );
+PTR( Status );
 
 class Command : public Task {
 public:
@@ -23,7 +24,7 @@ public:
 		MAX_COMMAND
 	};
 public:
-	Command( );
+	Command( StatusPtr status );
 	virtual ~Command( );
 public:
 	void update( );
@@ -34,5 +35,6 @@ private:
 	unsigned int getState( std::string str );
 private:
 	std::string _command;
+	StatusPtr _status;
 };
 

@@ -7,7 +7,7 @@
 #include "Status.h"
 #include "Message.h"
 #include "RockViewer.h"
-#include "RockStreet.h"
+#include "RockMapStreet.h"
 #include "RockMilitaryStreet.h"
 #include "RockMapStreetCamera.h"
 #include "RockDollHouse.h"
@@ -22,7 +22,7 @@ void main( ) {
 	app->setWindowSize( SCREEN_WIDTH, SCREEN_HEIGHT );
 	app->addTask( Drawer::getTag( ), TaskPtr( new Drawer( "Resource/Rock" ) ) );
 	app->addTask( Client::getTag( ), TaskPtr( new Client( status, message ) ) );
-	app->addTask( RockMap::getTag( ), TaskPtr( new RockStreet ) );
+	app->addTask( RockMap::getTag( ), TaskPtr( new RockMapStreet ) );
 	app->addTask( RockMilitary::getTag( ), TaskPtr( new RockMilitaryStreet ) );
 	app->addTask( RockDollHouse::getTag( ), TaskPtr( new RockDollHouse ) );
 	app->addTask( RockFamily::getTag( ), TaskPtr( new RockFamily( status ) ) );

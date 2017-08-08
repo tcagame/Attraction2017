@@ -6,11 +6,13 @@
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="StatusSender.cpp" />
     <ClCompile Include="TableDrawer.cpp" />
+    <ClCompile Include="MessageReceiver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="StatusSender.h" />
     <ClInclude Include="TableDrawer.h" />
+    <ClInclude Include="MessageReceiver.h" />
   </ItemGroup>
 </Project>

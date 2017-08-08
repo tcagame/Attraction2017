@@ -165,6 +165,7 @@
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MessageReceiver.cpp" />
     <ClCompile Include="TableDrawer.cpp" />
     <ClCompile Include="StatusSender.cpp" />
   </ItemGroup>
@@ -176,6 +177,7 @@
   <ItemGroup>
     <ClInclude Include="Command.h" />
     <ClInclude Include="Log.h" />
+    <ClInclude Include="MessageReceiver.h" />
     <ClInclude Include="TableDrawer.h" />
     <ClInclude Include="StatusSender.h" />
   </ItemGroup>

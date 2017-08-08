@@ -41,7 +41,8 @@ CommandPtr Command::getTask( ) {
 }
 
 
-Command::Command( ) {
+Command::Command( StatusPtr status ) :
+_status( status ) {
 }
 
 

@@ -2,13 +2,13 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="RockStreet.cpp" />
     <ClCompile Include="RockMapStreetCamera.cpp" />
     <ClCompile Include="RockMilitaryStreet.cpp" />
+    <ClCompile Include="RockMapStreet.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="RockStreet.h" />
     <ClInclude Include="RockMapStreetCamera.h" />
     <ClInclude Include="RockMilitaryStreet.h" />
+    <ClInclude Include="RockMapStreet.h" />
   </ItemGroup>
 </Project>

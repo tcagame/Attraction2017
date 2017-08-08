@@ -2,10 +2,10 @@
 #include "RockMap.h"
 
 
-class RockStreet : public RockMap {
+class RockMapStreet : public RockMap {
 public:
-	RockStreet( );
-	virtual ~RockStreet( );
+	RockMapStreet( );
+	virtual ~RockMapStreet( );
 protected:
 	std::vector< std::string > getFilenames( ) const;
 private:

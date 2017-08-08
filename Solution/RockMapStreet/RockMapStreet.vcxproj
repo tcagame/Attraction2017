@@ -161,7 +161,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RockMapStreetCamera.cpp" />
     <ClCompile Include="RockMilitaryStreet.cpp" />
-    <ClCompile Include="RockStreet.cpp" />
+    <ClCompile Include="RockMapStreet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Framework2017ver2\Framework2017Ver2.vcxproj">
@@ -174,7 +174,7 @@
   <ItemGroup>
     <ClInclude Include="RockMapStreetCamera.h" />
     <ClInclude Include="RockMilitaryStreet.h" />
-    <ClInclude Include="RockStreet.h" />
+    <ClInclude Include="RockMapStreet.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

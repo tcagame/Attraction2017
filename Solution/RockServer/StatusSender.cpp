@@ -19,6 +19,7 @@ StatusSender::~StatusSender( ) {
 }
 
 void StatusSender::update( ) {
+	ServerPtr server( Server::getTask( ) );
 	DevicePtr device( Device::getTask( ) );
 	for ( int i = 0; i < Status::PLAYER_NUM; i++ ) {
 		_status->getPlayer( i ).device_x = device->getDirX( i );
@@ -40,6 +41,7 @@ void StatusSender::update( ) {
 		}
 	}
 	Server::getTask( )->sendUdp( _status );
+	server->sendUdp( _status );
 }
 
 bool StatusSender::setContinueNum( int idx, int num ) {

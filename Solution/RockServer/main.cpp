@@ -21,7 +21,7 @@ void main( ) {
 	app->addTask( Drawer::getTag( )		 , TaskPtr( new Drawer( "Resource" ) ) );
 	app->addTask( Keyboard::getTag( )	 , TaskPtr( new Keyboard ) );
 	app->addTask( Device::getTag( )		 , TaskPtr( new Device ) );
-	app->addTask( Command::getTag( )	 , TaskPtr( new Command ) );
+	app->addTask( Command::getTag( )	 , TaskPtr( new Command( status ) ) );
 	app->addTask( Log::getTag( )		 , TaskPtr( new Log ) );
 	app->addTask( StatusSender::getTag( ), TaskPtr( new StatusSender( status ) ) );
 	app->addTask( TableDrawer::getTag( ) , TaskPtr( new TableDrawer( status ) ) );
