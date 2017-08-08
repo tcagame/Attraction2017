@@ -184,6 +184,7 @@
     <ClCompile Include="EnemyOnyudo.cpp" />
     <ClCompile Include="EnemyPurpleZombie.cpp" />
     <ClCompile Include="EnemyRedBird.cpp" />
+    <ClCompile Include="EnemyRedBirdAttack.cpp" />
     <ClCompile Include="EnemyShishimai.cpp" />
     <ClCompile Include="EnemyShishimaiDemon.cpp" />
     <ClCompile Include="EnemySkeleton.cpp" />
@@ -269,6 +270,7 @@
     <ClInclude Include="EnemyOnyudo.h" />
     <ClInclude Include="EnemyPurpleZombie.h" />
     <ClInclude Include="EnemyRedBird.h" />
+    <ClInclude Include="EnemyRedBirdAttack.h" />
     <ClInclude Include="EnemyShishimai.h" />
     <ClInclude Include="EnemyShishimaiDemon.h" />
     <ClInclude Include="EnemySkeleton.h" />

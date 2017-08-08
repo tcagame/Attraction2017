@@ -1,34 +1,28 @@
-#include "EnemyRedBird.h"
 #include "EnemyRedBirdAttack.h"
-#include "Military.h"
 
 const int WAIT_ANIM_TIME = 5;
-const int ATTACK_TIME = 30;
 
-EnemyRedBird::EnemyRedBird( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, false ) {
-	setRadius( 36 );
+EnemyRedBirdAttack::EnemyRedBirdAttack( const Vector& pos ) :
+Enemy( pos, SMALL_CHAR_GRAPH_SIZE ) {
+	setRadius( 18 );
 }
 
 
-EnemyRedBird::~EnemyRedBird( ) {
+EnemyRedBirdAttack::~EnemyRedBirdAttack( ) {
 }
 
-void EnemyRedBird::act( ) {
-	if ( !( getActCount( ) % ATTACK_TIME ) ) {
-		MilitaryPtr military( Military::getTask( ) );
-		military->popUp( EnemyPtr( new EnemyRedBirdAttack( getPos( ) ) ) );
-	}
+void EnemyRedBirdAttack::act( ) {
+	if ( isStanding( ) ) damage( -1 );
 }
 
-Chip EnemyRedBird::getChip( ) const {
+Chip EnemyRedBirdAttack::getChip( ) const {
 	const int ANIM[ ] = {
-		0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+		0, 1, 2, 1
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	Chip chip = Chip( );
-	chip.tx = ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ] * 64;
-	chip.ty = 14 * 64;
+	chip.tx = ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ] * 32;
+	chip.ty = 0 * 32;
 	chip.size = getChipSize( );
 	
 	Vector pos = getPos( );

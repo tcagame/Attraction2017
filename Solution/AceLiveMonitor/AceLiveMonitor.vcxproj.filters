@@ -230,6 +230,9 @@
     <ClCompile Include="EnemyBossRock.cpp">
       <Filter>Boss</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyRedBirdAttack.cpp">
+      <Filter>EnemyAttack</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -460,6 +463,9 @@
     <ClInclude Include="EnemyBossRock.h">
       <Filter>Boss</Filter>
     </ClInclude>
+    <ClInclude Include="EnemyRedBirdAttack.h">
+      <Filter>EnemyAttack</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">
@@ -473,6 +479,9 @@
     </Filter>
     <Filter Include="Viewer">
       <UniqueIdentifier>{947e2af3-b4cc-4bea-b71e-fe5bab2e28d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EnemyAttack">
+      <UniqueIdentifier>{a4bea1fa-d4cd-4c18-a4cc-4e1ee9e929f3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
