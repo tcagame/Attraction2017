@@ -1,13 +1,12 @@
 #pragma once
 #include "RockMap.h"
-
-
-class RockStreet : public RockMap {
+class RockMapTest :	public RockMap {
 public:
-	RockStreet( );
-	virtual ~RockStreet( );
+	RockMapTest( );
+	virtual ~RockMapTest( );
 protected:
 	std::vector< std::string > getFilenames( ) const;
 private:
 	std::vector< std::string > _filenames;
 };
+

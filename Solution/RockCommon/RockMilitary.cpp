@@ -1,9 +1,6 @@
 #include "RockMilitary.h"
 #include "Application.h"
 #include "RockEnemy.h"
-#include "RockEnemyGhost.h"
-#include "RockEnemyRedBard.h"
-#include "RockEnemyWaterGhost.h"
 
 RockMilitaryPtr RockMilitary::getTask( ) {
 	return std::dynamic_pointer_cast< RockMilitary >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -11,9 +8,6 @@ RockMilitaryPtr RockMilitary::getTask( ) {
 
 
 RockMilitary::RockMilitary( ) {
-	_enemies.push_back( RockEnemyPtr( new RockEnemyGhost( Vector( 0, 40, 0 ) ) ) );
-	_enemies.push_back( RockEnemyPtr( new RockEnemyRedBard( Vector( 10, 30, 10 ) ) ) );
-	_enemies.push_back( RockEnemyPtr( new RockEnemyWaterGhost( Vector( -10, 30, 30 ) ) ) );
 }
 
 
@@ -35,4 +29,8 @@ void RockMilitary::update( ) {
 		enemy->update( );
 		ite++;
 	}
+}
+
+void RockMilitary::add( RockEnemyPtr enemy ) {
+	_enemies.push_back( enemy );
 }

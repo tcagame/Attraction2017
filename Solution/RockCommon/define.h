@@ -12,6 +12,7 @@ const unsigned int STATE_STREET_2	= 0b00000100;
 const unsigned int STATE_STREET_3	= 0b00001000;
 const unsigned int STATE_BOSS		= 0b00010000;
 const unsigned int STATE_RESULT		= 0b00100000;
+const unsigned int STATE_TEST		= 0b01000000;
 
 const int ROCK_PLAYER_NUM = 4;
 const int ROCK_PLAYER_MOTION_NUM = 10;

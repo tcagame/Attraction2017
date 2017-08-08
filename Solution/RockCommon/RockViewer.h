@@ -3,13 +3,14 @@
 #include <string>
 
 PTR( RockViewer );
+PTR( Status );
 
 class RockViewer : public Task {
 public:
 	static std::string getTag( ) { return "ROCKVIEWER"; };
 	static RockViewerPtr getTask( );
 public:
-	RockViewer( );
+	RockViewer( StatusPtr status );
 	virtual ~RockViewer( );
 public:
 	void update( );
@@ -17,5 +18,7 @@ private:
 	void drawMap( ) const;
 	void drawEnemy( ) const;
 	void drawPlayer( ) const;
+private:
+	StatusPtr _status;
 };
 

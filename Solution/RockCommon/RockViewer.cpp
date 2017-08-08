@@ -7,13 +7,16 @@
 #include "RockDollHouse.h"
 #include "RockFamily.h"
 #include "RockPlayer.h"
+#include "RockClientInfo.h"
+#include "Status.h"
 
 RockViewerPtr RockViewer::getTask( ) {
 	return std::dynamic_pointer_cast< RockViewer >( Application::getInstance( )->getTask( getTag( ) ) );
 }
 
 
-RockViewer::RockViewer( ) {
+RockViewer::RockViewer( StatusPtr status ) :
+_status( status ) {
 }
 
 
@@ -29,8 +32,11 @@ void RockViewer::update( ) {
 }
 
 void RockViewer::drawMap( ) const {
-	ModelMV1Ptr model = RockMap::getTask( )->getModel( );
-	model->draw( );
+	std::vector< ModelMV1Ptr > models = RockMap::getTask( )->getModels( );
+	int size = ( int )models.size( );
+	for ( int i = 0; i < size; i++ ) {
+		models[ i ]->draw( );
+	}
 }
 
 void RockViewer::drawEnemy( ) const {
@@ -55,7 +61,11 @@ void RockViewer::drawEnemy( ) const {
 void RockViewer::drawPlayer( ) const {
 	RockDollHousePtr doll_house( RockDollHouse::getTask( ) );
 	RockFamilyPtr family( RockFamily::getTask( ) );
+	unsigned int client_id = RockClientInfo::getTask( )->getClientId( );
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+		if ( client_id != _status->getPlayer( i ).state ) {
+			continue;
+		}
 		RockPlayerPtr player( family->getPlayer( i ) );
 		DOLL doll = player->getDoll( );
 		Vector pos = player->getPos( );

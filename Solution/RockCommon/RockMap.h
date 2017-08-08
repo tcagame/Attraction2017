@@ -1,6 +1,7 @@
 #pragma once
 #include "Task.h"
 #include <string>
+#include <vector>
 #include "ModelMV1.h"
 
 PTR( RockMap );
@@ -15,10 +16,12 @@ public:
 public:
 	void initialize( );
 	void update( );
-	ModelMV1Ptr getModel( ) const;
+	std::vector< ModelMV1Ptr > getModels( ) const;
 	ModelMV1Ptr getColModel( ) const;
+protected:
+	virtual std::vector< std::string > getFilenames( ) const = 0;
 private:
-	ModelMV1Ptr _model;
+	std::vector< ModelMV1Ptr > _models;
 	ModelMV1Ptr _col_model;
 };
 

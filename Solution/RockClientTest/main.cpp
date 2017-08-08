@@ -5,15 +5,15 @@
 #include "Client.h"
 #include "Status.h"
 #include "StatusDrawer.h"
-#include "StatusReceiver.h"
 #include "Status.h"
 #include "Message.h"
 #include "RockViewer.h"
-#include "RockMap.h"
-#include "RockMilitary.h"
+#include "RockMapTest.h"
+#include "RockMilitaryTest.h"
 #include "RockCamera.h"
 #include "RockDollHouse.h"
 #include "RockFamily.h"
+#include "RockClientInfo.h"
 
 void main( ) {
 
@@ -23,14 +23,14 @@ void main( ) {
 	app->setWindowSize( SCREEN_WIDTH, SCREEN_HEIGHT );
 	app->addTask( Drawer::getTag( ), TaskPtr( new Drawer( "Resource/Rock" ) ) );
 	app->addTask( Client::getTag( ), TaskPtr( new Client( status, message ) ) );
-	app->addTask( StatusReceiver::getTag( ), TaskPtr( new StatusReceiver ) );
-	app->addTask( RockMap::getTag( ), TaskPtr( new RockMap ) );
-	app->addTask( RockMilitary::getTag( ), TaskPtr( new RockMilitary ) );
+	app->addTask( RockMap::getTag( ), TaskPtr( new RockMapTest ) );
+	app->addTask( RockMilitary::getTag( ), TaskPtr( new RockMilitaryTest ) );
 	app->addTask( RockDollHouse::getTag( ), TaskPtr( new RockDollHouse ) );
 	app->addTask( RockFamily::getTag( ), TaskPtr( new RockFamily( status ) ) );
 	app->addTask( RockCamera::getTag( ), TaskPtr( new RockCamera ) );
+	app->addTask( RockClientInfo::getTag( ), TaskPtr( new RockClientInfo( STATE_TEST ) ) );
 	//debug•`‰æ(status)
 	//app->addTask( StatusDrawer::getTag( ), TaskPtr( new StatusDrawer( status ) ) );
 	//’Êí•`‰æ
-	app->addTask( StatusDrawer::getTag( ), TaskPtr( new RockViewer( ) ) );
+	app->addTask( RockViewer::getTag( ), TaskPtr( new RockViewer( status ) ) );
 }

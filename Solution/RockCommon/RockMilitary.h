@@ -19,6 +19,8 @@ public:
 public:
 	void update( );
 	std::list< RockEnemyPtr > getEnemyList( ) const;
+protected:
+	void add( RockEnemyPtr enemy );
 private:
 	std::list< RockEnemyPtr > _enemies;
 	std::array< ModelMV1Ptr, MAX_DOLL > _enemy_model;

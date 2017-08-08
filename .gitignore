@@ -31,3 +31,5 @@ Solution/RockClientTest/Log.txt
 Solution/RockMapStreet/x64/Debug/vc140.idb
 Solution/RockMapStreet/x64/Debug/RockMapStreet.tlog/CL.command.1.tlog
 Solution/RockMapStreet/x64/Debug/
+Solution/RockMapStreet/Log.txt
+*.ini

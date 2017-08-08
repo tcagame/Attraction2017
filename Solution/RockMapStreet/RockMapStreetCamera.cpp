@@ -2,8 +2,10 @@
 #include "Application.h"
 #include "Drawer.h"
 
-const Vector INIT_POS = Vector( 10000, 15000, -5000 );
-const Vector INIT_TARGET = Vector( 10000, 0, 0 );
+const Vector INIT_POS = Vector( 0, 300, -450 );
+const Vector INIT_TARGET = Vector( 0, 60, 0 );
+//const Vector INIT_POS = Vector( 10000, 15000, -5000 );
+//const Vector INIT_TARGET = Vector( 10000, 0, 0 );
 
 RockMapStreetCameraPtr RockMapStreetCamera::getTask( ) {
 	return std::dynamic_pointer_cast<RockMapStreetCamera>( Application::getInstance( )->getTask( getTag( ) ) );

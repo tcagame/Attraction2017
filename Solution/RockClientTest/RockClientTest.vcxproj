@@ -159,41 +159,24 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="RockEnemyRedBard.cpp" />
     <ClCompile Include="RockCamera.cpp" />
-    <ClCompile Include="RockCharacter.cpp" />
-    <ClCompile Include="RockDollHouse.cpp" />
-    <ClCompile Include="RockEnemy.cpp" />
-    <ClCompile Include="RockEnemyGhost.cpp" />
-    <ClCompile Include="RockEnemyWaterGhost.cpp" />
-    <ClCompile Include="RockFamily.cpp" />
-    <ClCompile Include="RockMap.cpp" />
-    <ClCompile Include="RockMilitary.cpp" />
-    <ClCompile Include="RockPlayer.cpp" />
-    <ClCompile Include="RockViewer.cpp" />
+    <ClCompile Include="RockMapTest.cpp" />
+    <ClCompile Include="RockMilitaryTest.cpp" />
     <ClCompile Include="StatusDrawer.cpp" />
-    <ClCompile Include="StatusReceiver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Framework2017ver2\Framework2017Ver2.vcxproj">
       <Project>{0bd19263-3452-4219-af86-db8b26e4ee02}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\RockCommon\RockCommon.vcxproj">
+      <Project>{8952960e-64a2-407e-9ed9-004d9a7d129b}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="RockEnemyRedBard.h" />
     <ClInclude Include="RockCamera.h" />
-    <ClInclude Include="RockCharacter.h" />
-    <ClInclude Include="RockDollHouse.h" />
-    <ClInclude Include="RockEnemy.h" />
-    <ClInclude Include="RockEnemyGhost.h" />
-    <ClInclude Include="RockEnemyWaterGhost.h" />
-    <ClInclude Include="RockFamily.h" />
-    <ClInclude Include="RockMap.h" />
-    <ClInclude Include="RockMilitary.h" />
-    <ClInclude Include="RockPlayer.h" />
-    <ClInclude Include="RockViewer.h" />
+    <ClInclude Include="RockMapTest.h" />
+    <ClInclude Include="RockMilitaryTest.h" />
     <ClInclude Include="StatusDrawer.h" />
-    <ClInclude Include="StatusReceiver.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

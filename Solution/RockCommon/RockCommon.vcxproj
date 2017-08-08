@@ -176,7 +176,33 @@
   <ItemGroup>
     <ClInclude Include="define.h" />
     <ClInclude Include="Message.h" />
+    <ClInclude Include="RockCharacter.h" />
+    <ClInclude Include="RockClientInfo.h" />
+    <ClInclude Include="RockDollHouse.h" />
+    <ClInclude Include="RockEnemy.h" />
+    <ClInclude Include="RockEnemyGhost.h" />
+    <ClInclude Include="RockEnemyRedBard.h" />
+    <ClInclude Include="RockEnemyWaterGhost.h" />
+    <ClInclude Include="RockFamily.h" />
+    <ClInclude Include="RockMap.h" />
+    <ClInclude Include="RockMilitary.h" />
+    <ClInclude Include="RockPlayer.h" />
+    <ClInclude Include="RockViewer.h" />
     <ClInclude Include="Status.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="RockCharacter.cpp" />
+    <ClCompile Include="RockClientInfo.cpp" />
+    <ClCompile Include="RockDollHouse.cpp" />
+    <ClCompile Include="RockEnemy.cpp" />
+    <ClCompile Include="RockEnemyGhost.cpp" />
+    <ClCompile Include="RockEnemyRedBard.cpp" />
+    <ClCompile Include="RockEnemyWaterGhost.cpp" />
+    <ClCompile Include="RockFamily.cpp" />
+    <ClCompile Include="RockMap.cpp" />
+    <ClCompile Include="RockMilitary.cpp" />
+    <ClCompile Include="RockPlayer.cpp" />
+    <ClCompile Include="RockViewer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -197,6 +197,9 @@ void TableDrawer::drawState( ) const {
 		case STATE_RESULT:
 			state = "RESULT";
 			break;
+		case STATE_TEST:
+			state = "TEST";
+			break;
 		}
 		drawer->drawString( sx, sy, "%s", state.c_str( ) );
 	}

@@ -3,7 +3,6 @@
 #include "Drawer.h"
 #include "Client.h"
 #include "Status.h"
-#include "StatusReceiver.h"
 
 const int VIEW_PLAYER_X = 50;
 const int VIEW_DEVICE_X = VIEW_PLAYER_X + 100;

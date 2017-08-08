@@ -23,7 +23,7 @@ const std::string COMMAND_FIRST_WORD[ Command::MAX_COMMAND ] = {
 	"item",//ITEM
 	"state",//STATE
 };
-const int STATE_NUM = 7;
+const int STATE_NUM = 8;
 const std::string STATE[ STATE_NUM ] = {
 	"none",	
 	"entry",
@@ -31,7 +31,8 @@ const std::string STATE[ STATE_NUM ] = {
 	"street2",
 	"street3",
 	"boss",
-	"result"
+	"result",
+	"test"
 };
 
 
