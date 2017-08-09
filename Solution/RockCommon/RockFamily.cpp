@@ -3,6 +3,7 @@
 #include "RockPlayer.h"
 #include "Status.h"
 #include "RockClientInfo.h"
+#include <assert.h>
 
 RockFamilyPtr RockFamily::getTask( ) {
 	return std::dynamic_pointer_cast< RockFamily >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -36,5 +37,19 @@ void RockFamily::update( ) {
 }
 
 RockPlayerPtr RockFamily::getPlayer( int id ) const {
+	assert( 0 <= id && id < ROCK_PLAYER_NUM );
 	return _player[ id ];
+}
+
+Vector RockFamily::getCameraPos( unsigned int state ) const {
+	Vector result = Vector( );
+	int i = 0;
+	for ( i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+		if ( _status->getPlayer( i ).state == state ) {
+			result += _player[ i ]->getPos( );
+		}
+	}
+	result *= ( 1.0 / ( double )i );
+
+	return result;
 }

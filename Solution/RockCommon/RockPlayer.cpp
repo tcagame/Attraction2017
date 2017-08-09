@@ -1,6 +1,8 @@
 #include "RockPlayer.h"
 #include "Status.h"
 #include "Device.h"
+#include "Drawer.h"
+#include "RockFamily.h"
 
 const double JUMP_POWER = 3.0;
 const double ANIM_SPEED = 0.5;
@@ -31,6 +33,15 @@ void RockPlayer::act( ) {
 		break;
 	case ACTION_BRAKE:
 		actOnBraking( );
+	}
+	// ƒJƒƒ‰‚É“ü‚è‘±‚¯‚é
+	DrawerPtr drawer( Drawer::getTask( ) );
+	if ( !drawer->isInCamera( getPos( ) + getVec( ) ) ) {
+		setVec( Vector( ) );
+	}
+	Vector dir = ( RockFamily::getTask( )->getCameraPos( _status->getPlayer( _id ).state ) - getPos( ) ).normalize( );
+	while( !drawer->isInCamera( getPos( ) + getVec( ) ) ) {
+		setVec( getVec( ) + dir );
 	}
 }
 
