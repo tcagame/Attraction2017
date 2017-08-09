@@ -3,6 +3,8 @@
 #include <string>
 #include <array>
 #include "define.h"
+#include "Status.h"
+#include "mathmatics.h"
 
 PTR( RockFamily );
 PTR( RockPlayer );
@@ -19,6 +21,7 @@ public:
 	void initialize( );
 	void update( );
 	RockPlayerPtr getPlayer( int id ) const;
+	Vector getCameraPos( ) const;
 private:
 	std::array< RockPlayerPtr, ROCK_PLAYER_NUM > _player;
 };
