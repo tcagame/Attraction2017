@@ -2,6 +2,8 @@
 #include "mathmatics.h"
 #include "Character.h"
 
+PTR( Enemy );
+
 class Player : public Character {
 public:
 	enum ACTION {
@@ -24,6 +26,8 @@ public:
 	ACTION getAction( ) const;
 	int getChargeCount( ) const;
 	Chip getChargeChip( ) const;
+	bool isOnHead( EnemyPtr target ) const;
+	void bound( );
 private:
 	void actOnWaiting( );
 	void actOnWalking( );

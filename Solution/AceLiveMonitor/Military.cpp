@@ -44,7 +44,11 @@ void Military::update( ) {
 			for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
 				PlayerPtr player( family->getPlayer( i ) );
 				if ( player->isOverlapped( enemy ) ) {
-					player->damage( 1 );
+					if ( player->isOnHead( enemy ) ) {
+						player->bound( );
+					} else {
+						player->damage( 1 );
+					}
 				}
 			}
 			enemy->update( );
@@ -76,7 +80,11 @@ void Military::update( ) {
 			for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
 				PlayerPtr player( family->getPlayer( i ) );
 				if ( player->isOverlapped( enemy ) ) {
-					player->damage( 1 );
+					if ( player->isOnHead( enemy ) ) {
+						player->bound( );
+					} else {
+						player->damage( 1 );
+					}
 				}
 			}
 			enemy->update( );

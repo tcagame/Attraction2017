@@ -8,6 +8,7 @@
 #include "ViewerEvent.h"
 #include "MapEvent.h"
 #include "Military.h"
+#include "Enemy.h"
 
 //‰æ‘œƒTƒCƒY
 const int PLAYER_FOOT = 7;
@@ -504,4 +505,27 @@ void Player::updateState( ) {
 			setVec( Vector( ) );
 		}
 	}
+}
+
+bool Player::isOnHead( EnemyPtr target ) const {
+	if ( _action != ACTION_FLOAT ) {
+		return false;
+	}
+	Vector player = getPos( ) + Vector( 0, -getChipSize( ) / 2 );
+	Vector enemy  = target->getPos( ) + Vector( 0, -target->getChipSize( ) / 2 );
+	Vector vec = enemy - player;
+	if ( vec.y < 0 ) {
+		return false;
+	}
+	if ( vec.getLength( ) < target->getRadius( ) ) {
+		return false;
+	}
+	return true;
+}
+
+void Player::bound( ) {
+	_action = ACTION_FLOAT;
+	Vector vec = getVec( );
+	vec.y = JUMP_POWER;
+	setVec( vec );
 }
