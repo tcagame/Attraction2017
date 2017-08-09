@@ -6,6 +6,7 @@
 PTR( Military );
 PTR( Enemy );
 PTR( Character );
+PTR( Impact );
 
 class Military : public Task {
 public:
@@ -23,9 +24,13 @@ public:
 	void popUpEventEnemy( EnemyPtr enemy );
 	void createBoss( );
 	EnemyPtr getBoss( ) const;
+	std::list< ImpactPtr > getImpactList( ) const;
+private:
+	void updateImpact( );
 private:
 	std::list< EnemyPtr > _enemies;
 	std::list< EnemyPtr > _event_enemies;
+	std::list< ImpactPtr > _impacts;
 	EnemyPtr _boss;
 };
 

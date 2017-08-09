@@ -5,10 +5,10 @@
 #include "Impact.h"
 #include "Shot.h"
 
-ViewerArmoury::ViewerArmoury( ) {
+ViewerArmoury::ViewerArmoury( ImagePtr impact ) :
+_image_impact( impact ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
 	_image_shot = drawer->createImage( "Effect/psychic.png" );
-	_image_impact = drawer->createImage( "Effect/impact.png" );
 }
 
 

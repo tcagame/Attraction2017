@@ -5,7 +5,7 @@
 
 class ViewerArmoury {
 public:
-	ViewerArmoury( );
+	ViewerArmoury( ImagePtr impact );
 	virtual ~ViewerArmoury( );
 public:
 	void draw( ) const;

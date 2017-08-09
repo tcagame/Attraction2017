@@ -8,6 +8,7 @@
 #include "EnemyBossMonsteTreer.h"
 #include "EnemyBossRock.h"
 #include "MapEvent.h"
+#include "Impact.h"
 
 PTR( Player );
 
@@ -34,6 +35,8 @@ void Military::update( ) {
 			}
 			if ( enemy->isFinished( ) ||
 				 !enemy->isInScreen( ) ) {
+				int chip_size = enemy->getChipSize( ) * 2;
+				_impacts.push_back( ImpactPtr( new Impact( enemy->getPos( ), Character::STATE_MAIN, chip_size ) ) );
 				ite = _enemies.erase( ite );
 				continue;
 			}
@@ -64,6 +67,8 @@ void Military::update( ) {
 			}
 			if ( enemy->isFinished( ) ||
 				 !enemy->isInScreen( ) ) {
+				int chip_size = enemy->getChipSize( ) * 2;
+				_impacts.push_back( ImpactPtr( new Impact( enemy->getPos( ), Character::STATE_EVENT, chip_size ) ) );
 				ite = _event_enemies.erase( ite );
 				continue;
 			}
@@ -79,6 +84,7 @@ void Military::update( ) {
 		}
 	}
 
+	updateImpact( );
 }
 
 const std::list< EnemyPtr > Military::getEnemyList( ) const {
@@ -161,4 +167,26 @@ void Military::createBoss( ) {
 
 EnemyPtr Military::getBoss( ) const {
 	return _boss;
+}
+
+void Military::updateImpact( ) {
+	std::list< ImpactPtr >::iterator ite = _impacts.begin( );
+	while( ite != _impacts.end( ) ) {
+		if ( !( *ite ) ) {
+			ite++;
+			continue;
+		}
+
+		ImpactPtr impact = *ite;
+		if ( impact->isFinished( ) ) {
+			ite = _impacts.erase( ite );
+			continue;
+		}
+		impact->update( );
+		ite++;
+	}
+}
+
+std::list< ImpactPtr > Military::getImpactList( ) const {
+	return _impacts;
 }
