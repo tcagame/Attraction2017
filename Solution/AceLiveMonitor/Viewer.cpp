@@ -24,12 +24,15 @@ Viewer::~Viewer( ) {
 }
 
 void Viewer::initialize( ) {
-	_viewer_family  = ViewerFamilyPtr ( new ViewerFamily ); 
-	_viewer_street  = ViewerStreetPtr ( new ViewerStreet );
-	_viewer_armoury = ViewerArmouryPtr( new ViewerArmoury );
-	_viewer_military = ViewerMilitaryPtr( new ViewerMilitary );
-	_viewer_event   = ViewerEventPtr  ( new ViewerEvent );
-	_viewer_status  = ViewerStatusPtr ( new ViewerStatus );
+	DrawerPtr drawer( Drawer::getTask( ) );
+	ImagePtr impact = drawer->createImage( "Effect/impact.png" );
+
+	_viewer_family		= ViewerFamilyPtr	( new ViewerFamily ); 
+	_viewer_street		= ViewerStreetPtr	( new ViewerStreet );
+	_viewer_armoury		= ViewerArmouryPtr	( new ViewerArmoury( impact ) );
+	_viewer_military	= ViewerMilitaryPtr	( new ViewerMilitary( impact ) );
+	_viewer_event		= ViewerEventPtr	( new ViewerEvent );
+	_viewer_status		= ViewerStatusPtr	( new ViewerStatus );
 
 	_viewer_debug = ViewerDebugPtr( new ViewerDebug );
 }
