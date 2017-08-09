@@ -193,6 +193,7 @@
     <ClCompile Include="EnemySwampZombieB.cpp" />
     <ClCompile Include="EnemySwampZombieC.cpp" />
     <ClCompile Include="EnemyTree.cpp" />
+    <ClCompile Include="EnemyTreeNuts.cpp" />
     <ClCompile Include="EnemyWhiteMist.cpp" />
     <ClCompile Include="EnemyWind.cpp" />
     <ClCompile Include="MapEvent.cpp" />
@@ -279,6 +280,7 @@
     <ClInclude Include="EnemySwampZombieB.h" />
     <ClInclude Include="EnemySwampZombieC.h" />
     <ClInclude Include="EnemyTree.h" />
+    <ClInclude Include="EnemyTreeNuts.h" />
     <ClInclude Include="EnemyWhiteMist.h" />
     <ClInclude Include="EnemyWind.h" />
     <ClInclude Include="MapEvent.h" />

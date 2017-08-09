@@ -53,7 +53,7 @@ void ViewerMilitary::drawEnemyies( ) const {
 				_enemy_midium->setPos( chip.sx1, chip.sy1, chip.sx2, chip.sy2 );
 				_enemy_midium->draw( );
 			}
-			if ( chip.size == BIG_CHAR_GRAPH_SIZE ) {
+			if ( chip.size >= BIG_CHAR_GRAPH_SIZE ) {
 				_enemy_wide->setRect( chip.tx, chip.ty, chip.size, chip.size );
 				_enemy_wide->setPos( chip.sx1, chip.sy1, chip.sx2, chip.sy2 );
 				_enemy_wide->draw( );
