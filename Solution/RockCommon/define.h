@@ -5,14 +5,14 @@ const int SCREEN_HEIGHT = ( SCREEN_WIDTH * 9 ) / 16;
 
 const int MESSAGE_COUNT = 10;
 
-const unsigned int STATE_NONE		= 0b00000000;
-const unsigned int STATE_ENTRY		= 0b00000001;
-const unsigned int STATE_STREET_1	= 0b00000010;
-const unsigned int STATE_STREET_2	= 0b00000100;
-const unsigned int STATE_STREET_3	= 0b00001000;
-const unsigned int STATE_BOSS		= 0b00010000;
-const unsigned int STATE_RESULT		= 0b00100000;
-const unsigned int STATE_TEST		= 0b01000000;
+const unsigned int STATE_NONE		= 0b0000000000000000;
+const unsigned int STATE_ENTRY		= 0b0000000000000001;
+const unsigned int STATE_STREET_1	= 0b0000000000000010;
+const unsigned int STATE_STREET_2	= 0b0000000000000100;
+const unsigned int STATE_STREET_3	= 0b0000000000001000;
+const unsigned int STATE_BOSS		= 0b0000000000010000;
+const unsigned int STATE_RESULT		= 0b0000000000100000;
+const unsigned int STATE_TEST		= 0b0000000001000000;
 
 const int ROCK_PLAYER_NUM = 4;
 const int ROCK_PLAYER_MOTION_NUM = 10;

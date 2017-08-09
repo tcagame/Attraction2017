@@ -14,6 +14,7 @@
 #include "RockDollHouse.h"
 #include "RockFamily.h"
 #include "RockClientInfo.h"
+#include "MessageSender.h"
 
 void main( ) {
 
@@ -29,6 +30,7 @@ void main( ) {
 	app->addTask( RockFamily::getTag( ), TaskPtr( new RockFamily( status ) ) );
 	app->addTask( RockCamera::getTag( ), TaskPtr( new RockCamera ) );
 	app->addTask( RockClientInfo::getTag( ), TaskPtr( new RockClientInfo( STATE_TEST ) ) );
+	app->addTask( MessageSender::getTag( ), TaskPtr( new MessageSender( message ) ) );
 	//debug•`‰æ(status)
 	//app->addTask( StatusDrawer::getTag( ), TaskPtr( new StatusDrawer( status ) ) );
 	//’Êí•`‰æ

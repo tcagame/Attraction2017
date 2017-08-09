@@ -118,7 +118,7 @@ void MessageReceiver::excuteItem( std::vector< std::string > command ) {
 	if ( command.size( ) == 3 ) {
 		int player_num = std::atoi( command[ 1 ].c_str( ) );
 		if ( command[ 2 ].size( ) == 8 ) {
-			int item = 0;
+			unsigned char item = 0b00000000;
 			for ( int i = 0; i < 8; i++ ) {
 				item |= command[ 2 ][ 7 - i ] == '0' ? 0 : 1 << i;
 			}
