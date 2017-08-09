@@ -21,6 +21,5 @@ public:
 	RockPlayerPtr getPlayer( int id ) const;
 private:
 	std::array< RockPlayerPtr, ROCK_PLAYER_NUM > _player;
-	StatusPtr _status;
 };
 

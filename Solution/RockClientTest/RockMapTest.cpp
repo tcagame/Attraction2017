@@ -1,6 +1,10 @@
 #include "RockMapTest.h"
+#include "RockFamily.h"
+#include "RockPlayer.h"
+#include "MessageSender.h"
 
-
+const Vector ENTRY_POS = Vector( 200, 0, 270 );
+const double ENTRY_RADIUS = 40;
 
 RockMapTest::RockMapTest( ) {
 	_filenames = { };
@@ -16,3 +20,26 @@ std::vector< std::string > RockMapTest::getFilenames( ) const {
 }
 
 
+void RockMapTest::update( ) {
+	RockFamilyPtr family = RockFamily::getTask( );
+	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+		RockPlayerPtr player = family->getPlayer( i );
+		if ( !player->isActive( ) ) {
+			continue;
+		}
+		Vector pos = player->getPos( );
+		if ( isNext( pos ) ) {
+			unsigned int state = STATE_STREET_1;
+			MessageSender::getTask( )->sendMessage( i, Message::COMMAND_STATE, &state );
+		}
+	}
+}
+
+bool RockMapTest::isNext( Vector pos ) const {
+	bool result = false;
+	double length = ( pos - ENTRY_POS ).getLength( );
+	if ( ENTRY_RADIUS > length ) {
+		result = true;
+	}
+	return result;
+}

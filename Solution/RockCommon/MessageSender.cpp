@@ -33,7 +33,7 @@ void MessageSender::sendMessage( int player_id, Message::COMMAND command, void* 
 		message = "power " + std::to_string( player_id ) + " " + std::to_string( *( int* )value ); 
 		break;
 	case Message::COMMAND_ITEM:
-		message = "power " + std::to_string( player_id ) + " "; 
+		message = "item " + std::to_string( player_id ) + " "; 
 		for ( int i = 0; i < 8; i++ ) {
 			int check = 1 >> ( 7 - i );
 			if ( check & *( unsigned char* )value ) {
@@ -44,9 +44,9 @@ void MessageSender::sendMessage( int player_id, Message::COMMAND command, void* 
 		}
 		break;
 	case Message::COMMAND_STATE:
-		message = "power " + std::to_string( player_id ) + " "; 
-		for ( int i = 0; i < 8; i++ ) {
-			int check = 1 >> ( 7 - i );
+		message = "state " + std::to_string( player_id ) + " "; 
+		for ( int i = 0; i < 16; i++ ) {
+			unsigned int check = 1 << ( 15 - i );
 			if ( check & *( unsigned int* )value ) {
 				message += "1";
 			} else {
@@ -55,6 +55,8 @@ void MessageSender::sendMessage( int player_id, Message::COMMAND command, void* 
 		}
 		break;
 	}
-	memcpy_s( _message->getPtr( ), _message->getSize( ), message.c_str( ), message.size( ) );
+
+	char* str = ( char* )_message->getPtr( );
+	memcpy_s( _message->getPtr( ), _message->getSize( ), message.c_str( ), message.size( ) + 1 );
 	Client::getTask( )->sendTcp( _message );
 }

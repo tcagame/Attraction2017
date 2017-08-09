@@ -10,6 +10,7 @@ public:
 	virtual ~RockPlayer( );
 public:
 	double getAnimTime( ) const;
+	bool isActive( ) const;
 protected:
 	void act( );
 private:

@@ -6,6 +6,8 @@ class RockMapStreet : public RockMap {
 public:
 	RockMapStreet( );
 	virtual ~RockMapStreet( );
+public:
+	void update( );
 protected:
 	std::vector< std::string > getFilenames( ) const;
 private:
