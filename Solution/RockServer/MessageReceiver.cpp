@@ -118,7 +118,7 @@ void MessageReceiver::excuteItem( std::vector< std::string > command ) {
 	if ( command.size( ) == 3 ) {
 		int player_num = std::atoi( command[ 1 ].c_str( ) );
 		if ( command[ 2 ].size( ) == 8 ) {
-			int item = 0;
+			unsigned char item = 0b00000000;
 			for ( int i = 0; i < 8; i++ ) {
 				item |= command[ 2 ][ 7 - i ] == '0' ? 0 : 1 << i;
 			}
@@ -132,12 +132,13 @@ void MessageReceiver::excuteItem( std::vector< std::string > command ) {
 void MessageReceiver::excuteState( std::vector< std::string > command ) {
 	if ( command.size( ) == 3 ) {
 		int player_num = std::atoi( command[ 1 ].c_str( ) );
-		unsigned int state = 0;
-		for ( int i = 0; i < STATE_NUM; i++ ) {
-			if ( command[ 2 ] == STATE[ i ] ) {
-				state |= 1 << ( i - 1 );
-				break;
+		unsigned int state = 0b0000000000000000;
+		int check = std::atoi( command[ 2 ].c_str( ) );
+		for ( int i = 0; i < 16; i++ ) {
+			if ( check % 2 == 1 ) {
+				state |= ( 1 << i );
 			}
+			check /= 10;
 		}
 		if ( player_num >= 0 && player_num <= ROCK_PLAYER_NUM ) {
 			_status->getPlayer( player_num ).state = state;

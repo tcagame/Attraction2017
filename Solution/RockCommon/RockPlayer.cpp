@@ -1,4 +1,5 @@
 #include "RockPlayer.h"
+#include "RockClientInfo.h"
 #include "Status.h"
 #include "Device.h"
 #include "Drawer.h"
@@ -39,7 +40,7 @@ void RockPlayer::act( ) {
 	if ( !drawer->isInCamera( getPos( ) + getVec( ) ) ) {
 		setVec( Vector( ) );
 	}
-	Vector dir = ( RockFamily::getTask( )->getCameraPos( _status->getPlayer( _id ).state ) - getPos( ) ).normalize( );
+	Vector dir = ( RockFamily::getTask( )->getCameraPos( ) - getPos( ) ).normalize( );
 	while( !drawer->isInCamera( getPos( ) + getVec( ) ) ) {
 		setVec( getVec( ) + dir );
 	}
@@ -62,6 +63,10 @@ void RockPlayer::setAction( ACTION action ) {
 		setDoll( ( DOLL )( DOLL_TAROSUKE_WAIT + _id * ROCK_PLAYER_MOTION_NUM ) );
 		break;
 	}
+}
+
+bool RockPlayer::isActive( ) const {
+	return (  RockClientInfo::getTask( )->getClientId( ) == _status->getPlayer( _id ).state );
 }
 
 void RockPlayer::actOnWaiting( ) {

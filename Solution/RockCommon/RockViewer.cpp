@@ -29,6 +29,7 @@ void RockViewer::update( ) {
 	drawMap( );
 	drawEnemy( );
 	drawPlayer( );
+
 }
 
 void RockViewer::drawMap( ) const {

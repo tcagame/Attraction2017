@@ -19,3 +19,5 @@ std::vector< std::string > RockMapStreet::getFilenames( ) const {
 	return _filenames;
 }
 
+void RockMapStreet::update( ) {
+}

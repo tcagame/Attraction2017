@@ -21,9 +21,8 @@ public:
 	void initialize( );
 	void update( );
 	RockPlayerPtr getPlayer( int id ) const;
-	Vector getCameraPos( unsigned int state ) const;
+	Vector getCameraPos( ) const;
 private:
 	std::array< RockPlayerPtr, ROCK_PLAYER_NUM > _player;
-	StatusPtr _status;
 };
 

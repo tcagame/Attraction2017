@@ -15,7 +15,6 @@ public:
 	virtual ~RockMap( );
 public:
 	void initialize( );
-	void update( );
 	std::vector< ModelMV1Ptr > getModels( ) const;
 	ModelMV1Ptr getColModel( ) const;
 protected:

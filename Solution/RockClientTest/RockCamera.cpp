@@ -20,7 +20,7 @@ RockCamera::~RockCamera( ) {
 void RockCamera::initialize( ) {
 	_pos = INIT_POS;
 	RockFamilyPtr family( RockFamily::getTask( ) );
-	_target = family->getCameraPos( STATE_TEST );
+	_target = family->getCameraPos( );
 	DrawerPtr drawer( Drawer::getTask( ) );
 	drawer->setCameraUp( Vector( 0, 1, 0 ) );
 	drawer->setCamera( _pos, _target );
@@ -28,7 +28,7 @@ void RockCamera::initialize( ) {
 
 void RockCamera::update( ) {
 	RockFamilyPtr family( RockFamily::getTask( ) );
-	_target = family->getCameraPos( STATE_TEST );
+	_target = family->getCameraPos( );
 	DrawerPtr drawer( Drawer::getTask( ) );
 	drawer->setCamera( _pos, _target );
 }
