@@ -10,6 +10,7 @@ RockMapStreet::RockMapStreet( ) {
 		sprintf_s( filename, "Resource/Rock/map/map02_0%d.mv1", i + 1 );
 		_filenames.push_back( filename );
 	}
+	_filename_col = "Resource/Rock/map/map02_CL";
 }
 
 RockMapStreet::~RockMapStreet( ) {
@@ -18,6 +19,11 @@ RockMapStreet::~RockMapStreet( ) {
 std::vector< std::string > RockMapStreet::getFilenames( ) const {
 	return _filenames;
 }
+
+std::string RockMapStreet::getFilenameCol( ) const {
+	return _filename_col;
+}
+
 
 void RockMapStreet::update( ) {
 }

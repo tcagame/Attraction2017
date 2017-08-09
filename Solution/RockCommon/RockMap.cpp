@@ -24,7 +24,7 @@ void RockMap::initialize( ) {
 		_models.push_back( model );
 	}
 	_col_model = ModelMV1Ptr( new ModelMV1 );
-	_col_model->load( "Resource/Rock/map/map01_col.mv1" );
+	_col_model->load( getFilenameCol( ).c_str( ) );
 }
 
 std::vector< ModelMV1Ptr > RockMap::getModels( ) const {

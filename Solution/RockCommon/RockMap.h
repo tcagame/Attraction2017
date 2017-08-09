@@ -19,6 +19,7 @@ public:
 	ModelMV1Ptr getColModel( ) const;
 protected:
 	virtual std::vector< std::string > getFilenames( ) const = 0;
+	virtual std::string getFilenameCol( ) const = 0;
 private:
 	std::vector< ModelMV1Ptr > _models;
 	ModelMV1Ptr _col_model;

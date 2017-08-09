@@ -9,6 +9,7 @@ const double ENTRY_RADIUS = 40;
 RockMapTest::RockMapTest( ) {
 	_filenames = { };
 	_filenames.push_back( "Resource/Rock/map/map01.mv1" );
+	_filename_col = "Resource/Rock/map/map01_col.mv1";
 }
 
 
@@ -19,6 +20,9 @@ std::vector< std::string > RockMapTest::getFilenames( ) const {
 	return _filenames;
 }
 
+std::string RockMapTest::getFilenameCol( ) const {
+	return _filename_col;
+}
 
 void RockMapTest::update( ) {
 	RockFamilyPtr family = RockFamily::getTask( );
