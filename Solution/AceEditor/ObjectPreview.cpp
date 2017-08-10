@@ -200,16 +200,12 @@ void ObjectPreview::draw( ) const {
 				_event->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE - OBJECT_CHIP_SIZE / 2, PREVIEW_Y + j * OBJECT_CHIP_SIZE - OBJECT_CHIP_SIZE );
 				_event->draw( );
 			}
-			if ( _data->getObject( ox, oy ) == OBJECT_EVENT_RYUGU ) {
+			if ( _data->getObject( ox, oy ) == OBJECT_EVENT_SHOP ) {
 				_event->setRect( 0, 32, 32, 32 );
 				_event->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE - OBJECT_CHIP_SIZE / 2, PREVIEW_Y + j * OBJECT_CHIP_SIZE - OBJECT_CHIP_SIZE );
 				_event->draw( );
 			}
-			if ( _data->getObject( ox, oy ) == OBJECT_EVENT_SHOP ) {
-				_event->setRect( 32, 32, 32, 32 );
-				_event->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE - OBJECT_CHIP_SIZE / 2, PREVIEW_Y + j * OBJECT_CHIP_SIZE - OBJECT_CHIP_SIZE );
-				_event->draw( );
-			}
+			
 
 			// 選択カーソル
 			if ( _object_cursor->getGX( )  == ox

@@ -485,6 +485,9 @@ void Player::updateState( ) {
 		case OBJECT_EVENT_ROCK:
 			map_event->setType( ViewerEvent::TYPE_ROCK );
 			break;
+		case OBJECT_EVENT_SHOP:
+			map_event->setType( ViewerEvent::TYPE_SHOP );
+			break;
 		default:
 			event_obj = false;
 			break;

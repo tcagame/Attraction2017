@@ -170,6 +170,9 @@ void Military::createBoss( ) {
 	case ViewerEvent::TYPE_ROCK:
 		_boss = EnemyPtr( new EnemyBossRock( Vector( 800, 225 ) ) );
 		break;
+	case ViewerEvent::TYPE_SHOP:
+		_boss = EnemyPtr( new EnemyBossRock( Vector( 800, 225 ) ) );
+		break;
 	}
 }
 
