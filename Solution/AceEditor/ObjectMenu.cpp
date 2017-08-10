@@ -303,9 +303,6 @@ unsigned char ObjectMenu::getEvent( int idx ) const {
 		result = OBJECT_EVENT_ROCK;
 		break;
 	case 4:
-		result = OBJECT_EVENT_RYUGU;
-		break;
-	case 5:
 		result = OBJECT_EVENT_SHOP;
 		break;
 	default:

@@ -9,7 +9,7 @@ const std::string FILENAME[ MAX_EVENT ] {
 	"Resource/Ace/Event/fire/mapdata",  //fire
 	"Resource/Ace/Event/tree/mapdata",	//tree
 	"Resource/Ace/Event/rock/mapdata",	//rock
-	"",
+	"Resource/Ace/Event/shop/mapdata",  //shop
 	""
 };
 
@@ -97,6 +97,12 @@ unsigned char MapEvent::getObject( int mx, int my ) const {
 			mx -= PAGE_OBJECT_WIDTH_NUM;
 		}
 		type = 3;
+		break;
+	case ViewerEvent::TYPE_SHOP:
+		while (mx >= EVENT_PAGE_NUM * PAGE_OBJECT_WIDTH_NUM) {
+			mx -= PAGE_OBJECT_WIDTH_NUM;
+		}
+		type = 4;
 		break;
 	}
 	assert( mx >= 0 && mx < EVENT_PAGE_NUM * PAGE_OBJECT_WIDTH_NUM && my < OBJECT_CHIP_HEIGHT_NUM );

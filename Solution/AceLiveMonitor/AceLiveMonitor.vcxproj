@@ -164,9 +164,10 @@
     <ClCompile Include="EnemyBlueMonk.cpp" />
     <ClCompile Include="EnemyBoss.cpp" />
     <ClCompile Include="EnemyBossBloodDemon.cpp" />
-    <ClCompile Include="EnemyBossMonsteTreer.cpp" />
+    <ClCompile Include="EnemyBossMonsteTree.cpp" />
     <ClCompile Include="EnemyBossRedDemon.cpp" />
     <ClCompile Include="EnemyBossRock.cpp" />
+    <ClCompile Include="EnemyBranch.cpp" />
     <ClCompile Include="EnemyCrocoSnake.cpp" />
     <ClCompile Include="EnemyFaceAndHand.cpp" />
     <ClCompile Include="EnemyGhost.cpp" />
@@ -252,9 +253,10 @@
     <ClInclude Include="EnemyBlueMonk.h" />
     <ClInclude Include="EnemyBoss.h" />
     <ClInclude Include="EnemyBossBloodDemon.h" />
-    <ClInclude Include="EnemyBossMonsteTreer.h" />
+    <ClInclude Include="EnemyBossMonsteTree.h" />
     <ClInclude Include="EnemyBossRedDemon.h" />
     <ClInclude Include="EnemyBossRock.h" />
+    <ClInclude Include="EnemyBranch.h" />
     <ClInclude Include="EnemyCrocoSnake.h" />
     <ClInclude Include="EnemyFaceAndHand.h" />
     <ClInclude Include="EnemyGhost.h" />
