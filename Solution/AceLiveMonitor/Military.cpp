@@ -152,22 +152,22 @@ EnemyPtr Military::getOverLappedEnemy( CharacterConstPtr character ) const {
 }
 
 void Military::createBoss( ) {
-	ViewerEvent::TYPE type = MapEvent::getTask( )->getType( );
-	_event_enemies = { };
+	MapEvent::TYPE type = MapEvent::getTask( )->getType( );
+	_event_enemies.clear( );
 	switch ( type ) {
-	case ViewerEvent::TYPE_TITLE:
+	case MapEvent::TYPE_TITLE:
 		_boss = EnemyPtr( );
 		break;
-	case ViewerEvent::TYPE_RED_DEMON:
+	case MapEvent::TYPE_RED_DEMON:
 		_boss = EnemyPtr( new EnemyBossRedDemon( Vector( 800, 200 ) ) );
 		break;
-	case ViewerEvent::TYPE_FIRE:
+	case MapEvent::TYPE_FIRE:
 		_boss = EnemyPtr( new EnemyBossBloodDemon( Vector( 800, 200 ) ) );
 		break;
-	case ViewerEvent::TYPE_TREE:
+	case MapEvent::TYPE_TREE:
 		_boss = EnemyPtr( new EnemyBossMonsteTree( Vector( 800, 225 ) ) );
 		break;
-	case ViewerEvent::TYPE_ROCK:
+	case MapEvent::TYPE_ROCK:
 		_boss = EnemyPtr( new EnemyBossRock( Vector( 800, 225 ) ) );
 		break;
 	}

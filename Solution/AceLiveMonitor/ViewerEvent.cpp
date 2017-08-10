@@ -3,9 +3,9 @@
 #include "ace_define.h"
 #include "Family.h"
 #include "MapEvent.h"
+#include "NPC.h"
 
-
-ViewerEvent::ViewerEvent(  ) {
+ViewerEvent::ViewerEvent( ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
 	_frame = drawer->createImage( "Event/event_frame.png");
 
@@ -37,6 +37,8 @@ ViewerEvent::ViewerEvent(  ) {
 		sprintf_s( buf, "Event/shop/back_%003d.png", i );
 		_images.push_back( drawer->createImage( buf ) );
 	}
+	_characters = drawer->createImage( "Event/character/character.png" );
+
 }
 
 ViewerEvent::~ViewerEvent( ) {
@@ -44,8 +46,8 @@ ViewerEvent::~ViewerEvent( ) {
 
 void ViewerEvent::draw( ) const {
 	MapEventPtr map( MapEvent::getTask( ) );
-	TYPE type = map->getType( );
-	if( type == TYPE_TITLE ) {
+	MapEvent::TYPE type = map->getType( );
+	if( type == MapEvent::TYPE_TITLE ) {
 		_images[ 0 ]->setPos( 0, VIEW_TITLE_Y );
 		_images[ 0 ]->draw( );
 	} else {
@@ -53,30 +55,30 @@ void ViewerEvent::draw( ) const {
 		int sx = 256;
 		for ( int i = 0; i < 8; i++ ) {
 			switch ( type ) {
-			case TYPE_RED_DEMON:
+			case MapEvent::TYPE_RED_DEMON:
 				idx = type + ( i % EVENT_PAGE_NUM );
 				break;
-			case TYPE_FIRE:
+			case MapEvent::TYPE_FIRE:
 				if ( i / EVENT_PAGE_NUM > 0 ) {
 					idx = type + 3; 
 				} else {
 					idx = type + i;
 				}
-			case TYPE_TREE:
-				if ( i / EVENT_PAGE_NUM > 0 ) {
-					idx = type + 3; 
-				} else {
-					idx = type + i;
-				}
-				break;
-			case TYPE_ROCK:
+			case MapEvent::TYPE_TREE:
 				if ( i / EVENT_PAGE_NUM > 0 ) {
 					idx = type + 3; 
 				} else {
 					idx = type + i;
 				}
 				break;
-			case TYPE_SHOP:
+			case MapEvent::TYPE_ROCK:
+				if ( i / EVENT_PAGE_NUM > 0 ) {
+					idx = type + 3; 
+				} else {
+					idx = type + i;
+				}
+				break;
+			case MapEvent::TYPE_SHOP:
 				if ( i / EVENT_PAGE_NUM > 0 ) {
 					idx = type + 3; 
 				} else {
@@ -86,6 +88,27 @@ void ViewerEvent::draw( ) const {
 			}
 			_images[ idx ]->setPos( i * sx, VIEW_TITLE_Y );
 			_images[ idx ]->draw( );
+		}
+		{// npc chara
+			FamilyConstPtr family( Family::getTask( ) );
+			int camera_pos = ( int )family->getCameraPos( );
+			NPCPtr npc( NPC::getTask( ) );
+			std::list< CharacterPtr > chara_list = npc->getNPCChara( );
+			std::list< CharacterPtr >::const_iterator ite = chara_list.begin( );
+			while( ite != chara_list.end( ) ) {
+				if ( !( *ite ) ) {
+					ite++;
+					continue;
+				}
+				CharacterPtr chara = ( *ite );
+				Chip chip = chara->getChip( );
+				chip.sy1 += VIEW_EVENT_Y;
+				chip.sy2 += VIEW_EVENT_Y;
+				_characters->setRect( chip.tx, chip.ty, chip.size, chip.size );
+				_characters->setPos( chip.sx1, chip.sy1, chip.sx2, chip.sy2 );
+				_characters->draw( );
+				ite++;
+			}
 		}
 	}
 	_frame->setPos( 0, VIEW_TITLE_Y );

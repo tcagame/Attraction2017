@@ -9,6 +9,7 @@
 #include "Map.h"
 #include "MapEvent.h"
 #include "Military.h"
+#include "NPC.h"
 #include "Popper.h"
 
 void main( ) {
@@ -25,5 +26,6 @@ void main( ) {
 	app->addTask( Armoury ::getTag( ), ArmouryPtr ( new Armoury ( ) ) );
 	app->addTask( Popper  ::getTag( ), PopperPtr  ( new Popper  ( ) ) );
 	app->addTask( Military::getTag( ), MilitaryPtr( new Military( ) ) );
+	app->addTask( NPC	  ::getTag( ), NPCPtr	  ( new NPC		( ) ) );
 	app->addTask( Viewer  ::getTag( ), ViewerPtr  ( new Viewer  ( ) ) );
 }

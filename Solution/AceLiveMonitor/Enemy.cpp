@@ -29,5 +29,11 @@ bool Enemy::isInScreen( ) const {
 		 enemy_page > screen_page_max ) {
 		result = false;
 	}
+	if ( getState( ) == STATE_EVENT ) {
+		Vector vec = getVec( );
+		if ( pos.x + vec.x - getRadius( ) < 0 ) {
+			result = false;
+		}
+	}
 	return result;
 }

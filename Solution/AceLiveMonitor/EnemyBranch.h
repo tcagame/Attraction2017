@@ -1,6 +1,7 @@
 #pragma once
 #include "Enemy.h"
 #include "smart_ptr.h"
+#include <list>
 
 PTR( Enemy );
 
@@ -12,5 +13,7 @@ public:
 	Chip getChip( ) const;
 protected:
 	void act( );
+private:
+	std::list< EnemyPtr > _seeds;
 };
 

@@ -7,6 +7,7 @@ const int ATTACK_TIME = 50;
 EnemyBossMonsteTree::EnemyBossMonsteTree( const Vector& pos ) :
 EnemyBoss( pos, BIG_CHAR_GRAPH_SIZE ) {
 	_branch = EnemyPtr( new EnemyBranch( getPos( ) + Vector( -70, -20 ) ) );
+	_branch->setState( Character::STATE_EVENT );
 	Military::getTask( )->popUpEventEnemy( _branch );
 }
 

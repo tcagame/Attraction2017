@@ -12,17 +12,26 @@ public:
 	static std::string getTag( ) { return "MAPEVENT"; };
 	static MapEventPtr getTask( );
 public:
+	enum TYPE {
+		TYPE_TITLE,
+		TYPE_RED_DEMON,
+		TYPE_FIRE = TYPE_RED_DEMON + EVENT_PAGE_NUM,
+		TYPE_TREE = TYPE_FIRE + EVENT_PAGE_NUM,
+		TYPE_ROCK = TYPE_TREE + EVENT_PAGE_NUM,
+		TYPE_SHOP = TYPE_ROCK + EVENT_PAGE_NUM,
+	};
+public:
 	MapEvent( );
 	virtual ~MapEvent( );
 public:
 	void load( );
 	void update( );
-	void setType( ViewerEvent::TYPE type );
-	ViewerEvent::TYPE getType( ) const;
+	void setType( TYPE type );
+	TYPE getType( ) const;
 	unsigned char getObject( const Vector& pos ) const;
 	unsigned char getObject( int mx, int my ) const;
 private:
 	std::array< std::array< unsigned char, PAGE_NUM * PAGE_OBJECT_WIDTH_NUM * PAGE_OBJECT_WIDTH_NUM >, MAX_EVENT > _objects;
-	ViewerEvent::TYPE _type;
+	TYPE _type;
 };
 
