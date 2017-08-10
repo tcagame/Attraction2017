@@ -37,6 +37,16 @@ ViewerEvent::ViewerEvent( ) {
 		sprintf_s( buf, "Event/shop/back_%003d.png", i );
 		_images.push_back( drawer->createImage( buf ) );
 	}
+	//RYUGU
+	for ( int i = 0; i < EVENT_PAGE_NUM; i++ ) {
+		sprintf_s( buf, "Event/ryugu/back_%003d.png", i );
+		_images.push_back( drawer->createImage( buf ) );
+	}
+	//LAKE
+	for ( int i = 0; i < EVENT_PAGE_NUM; i++ ) {
+		sprintf_s( buf, "Event/lake/back_%003d.png", i );
+		_images.push_back( drawer->createImage( buf ) );
+	}
 	_characters = drawer->createImage( "Event/character/character.png" );
 
 }
@@ -79,6 +89,20 @@ void ViewerEvent::draw( ) const {
 				}
 				break;
 			case MapEvent::TYPE_SHOP:
+				if ( i / EVENT_PAGE_NUM > 0 ) {
+					idx = type + 3; 
+				} else {
+					idx = type + i;
+				}
+				break;
+			case MapEvent::TYPE_RYUGU:
+				if ( i / EVENT_PAGE_NUM > 0 ) {
+					idx = type + 3; 
+				} else {
+					idx = type + i;
+				}
+				break;
+			case MapEvent::TYPE_LAKE:
 				if ( i / EVENT_PAGE_NUM > 0 ) {
 					idx = type + 3; 
 				} else {

@@ -488,6 +488,12 @@ void Player::updateState( ) {
 		case OBJECT_EVENT_SHOP:
 			map_event->setType( MapEvent::TYPE_SHOP );
 			break;
+		case OBJECT_EVENT_RYUGU:
+			map_event->setType( MapEvent::TYPE_RYUGU );
+			break;
+		case OBJECT_EVENT_LAKE:
+			map_event->setType( MapEvent::TYPE_LAKE );
+			break;
 		default:
 			event_obj = false;
 			break;
@@ -510,7 +516,7 @@ void Player::updateState( ) {
 		//ƒ{ƒX‚ª“|‚ê‚Ä‚¢‚éê‡ [‘Þê]
 		MapEventPtr map_event( MapEvent::getTask( ) );
 		if ( !Military::getTask( )->getBoss( ) &&
-			 map_event->getType( ) != MapEvent::TYPE_SHOP ) {
+			 map_event->getType( ) < MapEvent::TYPE_SHOP ) {
 			setState( STATE_MAIN );
 			map_event->setType( MapEvent::TYPE_TITLE );
 			setPos( Vector( family->getCameraPos( ) + SCREEN_WIDTH / 2, 0 ) );
