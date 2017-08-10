@@ -1,6 +1,9 @@
 #include "EnemyBranch.h"
+#include "EnemySeed.h"
+#include "Military.h"
 
 const int WAIT_ANIM_TIME = 5;
+const int ATTACK_TIME = WAIT_ANIM_TIME * 11;
 
 EnemyBranch::EnemyBranch( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, false ) {
@@ -8,9 +11,16 @@ Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, false ) {
 }
 
 EnemyBranch::~EnemyBranch( ) {
+	_seeds.clear( );
 }
 
 void EnemyBranch::act( ) {
+	if ( !( ( getActCount( ) + WAIT_ANIM_TIME * 5 ) % ATTACK_TIME ) ) {
+		EnemyPtr seed( new EnemySeed( getPos( ) ) );
+		seed->setState( STATE_EVENT );
+		_seeds.push_back( seed );
+		Military::getTask( )->popUpEventEnemy( seed );
+	}
 }
 
 Chip EnemyBranch::getChip( ) const {

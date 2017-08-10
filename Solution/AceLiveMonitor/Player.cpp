@@ -31,7 +31,7 @@ Character( pos, NORMAL_CHAR_GRAPH_SIZE ),
 _charge_count( 0 ),
 _damege_count( 0 ),
 _over_charge_time( -1 ),
-_id( player_id ),
+_id( 0 ),
 _action( ACTION_WAIT ) {
 	setRadius( 25 );
 	setDir( DIR_RIGHT );
@@ -468,25 +468,25 @@ void Player::updateState( ) {
 	MapPtr map( Map::getTask( ) );
 	MapEventPtr map_event( MapEvent::getTask( ) );
 	FamilyPtr family( Family::getTask( ) );
-	ViewerEvent::TYPE event_type = map_event->getType( );
-	if ( event_type == ViewerEvent::TYPE_TITLE ) {
+	MapEvent::TYPE event_type = map_event->getType( );
+	if ( event_type == MapEvent::TYPE_TITLE ) {
 		bool event_obj = true;
 		unsigned char obj = map->getObject( getPos( ) + getVec( ) );
 		switch ( obj ) {
 		case OBJECT_EVENT_REDDEAMON:
-			map_event->setType( ViewerEvent::TYPE_RED_DEMON );
+			map_event->setType( MapEvent::TYPE_RED_DEMON );
 			break;
 		case OBJECT_EVENT_FIRE:
-			map_event->setType( ViewerEvent::TYPE_FIRE );
+			map_event->setType( MapEvent::TYPE_FIRE );
 			break;
 		case OBJECT_EVENT_TREE:
-			map_event->setType( ViewerEvent::TYPE_TREE );
+			map_event->setType( MapEvent::TYPE_TREE );
 			break;
 		case OBJECT_EVENT_ROCK:
-			map_event->setType( ViewerEvent::TYPE_ROCK );
+			map_event->setType( MapEvent::TYPE_ROCK );
 			break;
 		case OBJECT_EVENT_SHOP:
-			map_event->setType( ViewerEvent::TYPE_SHOP );
+			map_event->setType( MapEvent::TYPE_SHOP );
 			break;
 		default:
 			event_obj = false;
@@ -503,16 +503,16 @@ void Player::updateState( ) {
 		//一ページ目にいたらメインに戻る
 		if ( getPos( ).x < GRAPH_SIZE ) {
 			setState( STATE_MAIN );
-			map_event->setType( ViewerEvent::TYPE_TITLE );
+			map_event->setType( MapEvent::TYPE_TITLE );
 			setPos( Vector( family->getCameraPos( ) + SCREEN_WIDTH / 2, 0 ) );
 			setVec( Vector( ) );
 		}
 		//ボスが倒れている場合 [退場]
 		MapEventPtr map_event( MapEvent::getTask( ) );
 		if ( !Military::getTask( )->getBoss( ) &&
-			 map_event->getType( ) != ViewerEvent::TYPE_SHOP ) {
+			 map_event->getType( ) != MapEvent::TYPE_SHOP ) {
 			setState( STATE_MAIN );
-			map_event->setType( ViewerEvent::TYPE_TITLE );
+			map_event->setType( MapEvent::TYPE_TITLE );
 			setPos( Vector( family->getCameraPos( ) + SCREEN_WIDTH / 2, 0 ) );
 			setVec( Vector( ) );
 		}

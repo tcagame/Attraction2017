@@ -3,6 +3,7 @@
 #include <assert.h>
 #include "Binary.h"
 #include "Military.h"
+#include "NPC.h"
 
 const std::string FILENAME[ MAX_EVENT ] {
 	"Resource/Ace/Event/akaoni/mapdata",//red deamon
@@ -19,7 +20,7 @@ MapEventPtr MapEvent::getTask( ) {
 
 
 MapEvent::MapEvent( ) {
-	_type = ViewerEvent::TYPE_TITLE;
+	_type = TYPE_TITLE;
 	_objects = { };
 	load( );
 }
@@ -54,12 +55,16 @@ void MapEvent::load( ) {
 void MapEvent::update( ) {
 }
 
-void MapEvent::setType( ViewerEvent::TYPE type ) {
+void MapEvent::setType( TYPE type ) {
 	_type = type;
-	Military::getTask( )->createBoss( );
+	if ( type == TYPE_SHOP ) {
+		NPC::getTask( )->popUpNPC( );
+	} else {
+		Military::getTask( )->createBoss( );
+	}
 }
 
-ViewerEvent::TYPE  MapEvent::getType( ) const {
+MapEvent::TYPE MapEvent::getType( ) const {
 	return _type;
 }
 
@@ -74,31 +79,31 @@ unsigned char MapEvent::getObject( int mx, int my ) const {
 	unsigned char obj = OBJECT_NONE;
 	int type = -1;
 	switch ( _type ) {
-	case ViewerEvent::TYPE_TITLE:
+	case TYPE_TITLE:
 		break;
-	case ViewerEvent::TYPE_RED_DEMON:
+	case TYPE_RED_DEMON:
 		mx = ( mx + EVENT_PAGE_NUM * PAGE_OBJECT_WIDTH_NUM ) % ( EVENT_PAGE_NUM * PAGE_OBJECT_WIDTH_NUM );
 		type = 0;
 		break;
-	case ViewerEvent::TYPE_FIRE:
+	case TYPE_FIRE:
 		while ( mx >= EVENT_PAGE_NUM * PAGE_OBJECT_WIDTH_NUM ) {
 			mx -= PAGE_OBJECT_WIDTH_NUM;
 		}
 		type = 1;
 		break;
-	case ViewerEvent::TYPE_TREE:
+	case TYPE_TREE:
 		while ( mx >= EVENT_PAGE_NUM * PAGE_OBJECT_WIDTH_NUM ) {
 			mx -= PAGE_OBJECT_WIDTH_NUM;
 		}
 		type = 2;
 		break;
-	case ViewerEvent::TYPE_ROCK:
+	case TYPE_ROCK:
 		while (mx >= EVENT_PAGE_NUM * PAGE_OBJECT_WIDTH_NUM) {
 			mx -= PAGE_OBJECT_WIDTH_NUM;
 		}
 		type = 3;
 		break;
-	case ViewerEvent::TYPE_SHOP:
+	case TYPE_SHOP:
 		while (mx >= EVENT_PAGE_NUM * PAGE_OBJECT_WIDTH_NUM) {
 			mx -= PAGE_OBJECT_WIDTH_NUM;
 		}

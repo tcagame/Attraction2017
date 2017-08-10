@@ -230,11 +230,24 @@
     <ClCompile Include="EnemyRedBirdAttack.cpp">
       <Filter>EnemyAttack</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyTreeNuts.cpp" />
     <ClCompile Include="EnemyBossMonsteTree.cpp">
       <Filter>Boss</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyBranch.cpp" />
+    <ClCompile Include="NPC.cpp">
+      <Filter>NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="NPCObaba.cpp">
+      <Filter>NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBranch.cpp">
+      <Filter>EnemyAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemySeed.cpp">
+      <Filter>EnemyAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyTreeNuts.cpp">
+      <Filter>EnemyAttack</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -465,11 +478,24 @@
     <ClInclude Include="EnemyRedBirdAttack.h">
       <Filter>EnemyAttack</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyTreeNuts.h" />
     <ClInclude Include="EnemyBossMonsteTree.h">
       <Filter>Boss</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyBranch.h" />
+    <ClInclude Include="NPC.h">
+      <Filter>NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="NPCObaba.h">
+      <Filter>NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBranch.h">
+      <Filter>EnemyAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemySeed.h">
+      <Filter>EnemyAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyTreeNuts.h">
+      <Filter>EnemyAttack</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">
@@ -486,6 +512,9 @@
     </Filter>
     <Filter Include="EnemyAttack">
       <UniqueIdentifier>{a4bea1fa-d4cd-4c18-a4cc-4e1ee9e929f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="NPC">
+      <UniqueIdentifier>{23277578-7733-48ca-bde2-9b3e53490df2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
