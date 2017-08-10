@@ -224,9 +224,6 @@
     <ClCompile Include="EnemyBossBloodDemon.cpp">
       <Filter>Boss</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyBossMonsteTreer.cpp">
-      <Filter>Boss</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyBossRock.cpp">
       <Filter>Boss</Filter>
     </ClCompile>
@@ -234,6 +231,10 @@
       <Filter>EnemyAttack</Filter>
     </ClCompile>
     <ClCompile Include="EnemyTreeNuts.cpp" />
+    <ClCompile Include="EnemyBossMonsteTree.cpp">
+      <Filter>Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBranch.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -458,9 +459,6 @@
     <ClInclude Include="EnemyBossBloodDemon.h">
       <Filter>Boss</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyBossMonsteTreer.h">
-      <Filter>Boss</Filter>
-    </ClInclude>
     <ClInclude Include="EnemyBossRock.h">
       <Filter>Boss</Filter>
     </ClInclude>
@@ -468,6 +466,10 @@
       <Filter>EnemyAttack</Filter>
     </ClInclude>
     <ClInclude Include="EnemyTreeNuts.h" />
+    <ClInclude Include="EnemyBossMonsteTree.h">
+      <Filter>Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBranch.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">

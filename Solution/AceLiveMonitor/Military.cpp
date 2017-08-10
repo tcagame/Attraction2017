@@ -5,7 +5,7 @@
 #include "Player.h"
 #include "EnemyBossRedDemon.h"
 #include "EnemyBossBloodDemon.h"
-#include "EnemyBossMonsteTreer.h"
+#include "EnemyBossMonsteTree.h"
 #include "EnemyBossRock.h"
 #include "MapEvent.h"
 #include "Impact.h"
@@ -165,14 +165,11 @@ void Military::createBoss( ) {
 		_boss = EnemyPtr( new EnemyBossBloodDemon( Vector( 800, 200 ) ) );
 		break;
 	case ViewerEvent::TYPE_TREE:
-		_boss = EnemyPtr( new EnemyBossMonsteTreer( Vector( 800, 225 ) ) );
+		_boss = EnemyPtr( new EnemyBossMonsteTree( Vector( 800, 225 ) ) );
 		break;
 	case ViewerEvent::TYPE_ROCK:
 		_boss = EnemyPtr( new EnemyBossRock( Vector( 800, 225 ) ) );
 		break;
-	//case ViewerEvent::TYPE_SHOP:
-	//	_boss = EnemyPtr( new EnemyBossRock( Vector( 800, 225 ) ) );
-	//	break;
 	}
 }
 
