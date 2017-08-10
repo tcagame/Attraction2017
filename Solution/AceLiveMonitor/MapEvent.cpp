@@ -58,7 +58,7 @@ void MapEvent::update( ) {
 
 void MapEvent::setType( TYPE type ) {
 	_type = type;
-	if ( type == TYPE_SHOP ) {
+	if ( type == TYPE_SHOP || type == TYPE_LAKE ) {
 		NPC::getTask( )->popUpNPC( );
 	} else {
 		Military::getTask( )->createBoss( );
@@ -99,27 +99,27 @@ unsigned char MapEvent::getObject( int mx, int my ) const {
 		type = 2;
 		break;
 	case TYPE_ROCK:
-		while (mx >= EVENT_PAGE_NUM * PAGE_OBJECT_WIDTH_NUM) {
+		while ( mx >= EVENT_PAGE_NUM * PAGE_OBJECT_WIDTH_NUM ) {
 			mx -= PAGE_OBJECT_WIDTH_NUM;
 		}
 		type = 3;
 		break;
 	case TYPE_SHOP:
-		while (mx >= EVENT_PAGE_NUM * PAGE_OBJECT_WIDTH_NUM) {
+		while ( mx >= EVENT_PAGE_NUM * PAGE_OBJECT_WIDTH_NUM ) {
 			mx -= PAGE_OBJECT_WIDTH_NUM;
 		}
 		type = 4;
 	case TYPE_RYUGU:
-		while (mx >= EVENT_PAGE_NUM * PAGE_OBJECT_WIDTH_NUM) {
+		while ( mx >= EVENT_PAGE_NUM * PAGE_OBJECT_WIDTH_NUM ) {
 			mx -= PAGE_OBJECT_WIDTH_NUM;
 		}
 		type = 5;
 		break;
 	case TYPE_LAKE:
-		while (mx >= EVENT_PAGE_NUM * PAGE_OBJECT_WIDTH_NUM) {
+		while ( mx >= EVENT_PAGE_NUM * PAGE_OBJECT_WIDTH_NUM ) {
 			mx -= PAGE_OBJECT_WIDTH_NUM;
 		}
-		type = 5;
+		type = 6;
 		break;
 	}
 	assert( mx >= 0 && mx < EVENT_PAGE_NUM * PAGE_OBJECT_WIDTH_NUM && my < OBJECT_CHIP_HEIGHT_NUM );

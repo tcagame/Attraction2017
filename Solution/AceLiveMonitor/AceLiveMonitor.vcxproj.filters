@@ -254,6 +254,9 @@
     <ClCompile Include="EnemyTreeNuts.cpp">
       <Filter>EnemyAttack</Filter>
     </ClCompile>
+    <ClCompile Include="NPCMiko.cpp">
+      <Filter>NPC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -507,6 +510,9 @@
     </ClInclude>
     <ClInclude Include="EnemyTreeNuts.h">
       <Filter>EnemyAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="NPCMiko.h">
+      <Filter>NPC</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
