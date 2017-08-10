@@ -234,6 +234,7 @@
       <Filter>EnemyAttack</Filter>
     </ClCompile>
     <ClCompile Include="EnemyTreeNuts.cpp" />
+    <ClCompile Include="EnemyHandAttack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -468,6 +469,7 @@
       <Filter>EnemyAttack</Filter>
     </ClInclude>
     <ClInclude Include="EnemyTreeNuts.h" />
+    <ClInclude Include="EnemyHandAttack.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">
