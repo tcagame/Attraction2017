@@ -248,6 +248,12 @@
     <ClCompile Include="EnemyTreeNuts.cpp">
       <Filter>EnemyAttack</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyHandAttack.cpp">
+      <Filter>EnemyAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyTreeNuts.cpp">
+      <Filter>EnemyAttack</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -491,6 +497,12 @@
       <Filter>EnemyAttack</Filter>
     </ClInclude>
     <ClInclude Include="EnemySeed.h">
+      <Filter>EnemyAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyTreeNuts.h">
+      <Filter>EnemyAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyHandAttack.h">
       <Filter>EnemyAttack</Filter>
     </ClInclude>
     <ClInclude Include="EnemyTreeNuts.h">

@@ -1,6 +1,9 @@
 #include "EnemyHand.h"
+#include "Military.h"
+#include "EnemyHandAttack.h"
 
 const int WAIT_ANIM_TIME = 3;
+const int ATTACK_TIME = WAIT_ANIM_TIME * 21;
 
 EnemyHand::EnemyHand( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ) {
@@ -12,7 +15,12 @@ EnemyHand::~EnemyHand( ) {
 }
 
 void EnemyHand::act( ) {
-
+	const Vector genelate_pos( 35, 40 );
+	if ( !( ( getActCount( ) + WAIT_ANIM_TIME * 12 ) % ATTACK_TIME ) ) {
+		MilitaryPtr military( Military::getTask( ) );
+		Vector origin = getPos( ) - Vector( NORMAL_CHAR_GRAPH_SIZE / 2, NORMAL_CHAR_GRAPH_SIZE );
+		military->popUp( EnemyPtr( new EnemyHandAttack( origin  + genelate_pos ) ) );
+	}
 }
 
 Chip EnemyHand::getChip( ) const {
@@ -26,17 +34,10 @@ Chip EnemyHand::getChip( ) const {
 	chip.size = getChipSize( );
 	
 	Vector pos = getPos( );
-	DIR dir = getDir( );
-	if ( dir == DIR_RIGHT ){
-		chip.sx1 = ( int )pos.x - chip.size / 2 + chip.size;
-		chip.sy1 = ( int )pos.y - chip.size;
-		chip.sx2 = chip.sx1 - chip.size;
-		chip.sy2 = chip.sy1 + chip.size;
-	} else {
-		chip.sx1 = ( int )pos.x - chip.size / 2;
-		chip.sy1 = ( int )pos.y - chip.size;
-		chip.sx2 = chip.sx1 + chip.size;
-		chip.sy2 = chip.sy1 + chip.size;
-	}
+	chip.sx1 = ( int )pos.x - chip.size / 2 + chip.size;
+	chip.sy1 = ( int )pos.y - chip.size;
+	chip.sx2 = chip.sx1 - chip.size;
+	chip.sy2 = chip.sy1 + chip.size;
+	
 	return chip;
 }
