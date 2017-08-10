@@ -114,4 +114,6 @@ const unsigned char OBJECT_EVENT_FIRE = 0xC1;
 const unsigned char OBJECT_EVENT_TREE = 0xC2;
 const unsigned char OBJECT_EVENT_ROCK = 0xC3;
 const unsigned char OBJECT_EVENT_SHOP = 0xC4;
+const unsigned char OBJECT_EVENT_LAKE = 0xC5;
+const unsigned char OBJECT_EVENT_RYUGU = 0xC6;
 

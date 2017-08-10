@@ -29,13 +29,13 @@ const int BLOCK_Y = 42;
 const int BLOCK_DRAW_SIZE = 64;
 const int BLOCK_WIDTH_NUM = 3;
 
-const int ENEMY_WIDTH_NUM = 5;
-const int ENEMY_HEIGHT_NUM = 3;
+const int ENEMY_WIDTH_NUM = 3;
+const int ENEMY_HEIGHT_NUM = 2;
 
 const int EVENT_SPRITE_SIZE = 32;
 const int EVENT_DRAW_SIZE = 64;
-const int EVENT_WIDTH_NUM = 5;
-const int EVENT_HEIGHT_NUM = 3;
+const int EVENT_WIDTH_NUM = 4;
+const int EVENT_HEIGHT_NUM = 2;
 
 const int PAGE_ARROW_SIZE = 32;
 const int PAGE_ARROW_Y = FRAME_WINDOW_HEIGHT - FRAME_SIZE - PAGE_ARROW_SIZE - 5;
@@ -163,7 +163,7 @@ void ObjectMenu::update( ) {
 				int sx1 = ( int )_pos.x + BLOCK_X;
 				int sy1 = ( int )_pos.y + BLOCK_Y;
 				int sx2 = sx1 + EVENT_DRAW_SIZE * EVENT_WIDTH_NUM;
-				int sy2 = sy1 + EVENT_DRAW_SIZE;
+				int sy2 = sy1 + EVENT_DRAW_SIZE * EVENT_HEIGHT_NUM;
 				if ( sx1 < mouse_pos.x && sx2 > mouse_pos.x && sy1 < mouse_pos.y && sy2 > mouse_pos.y ) {
 					int x = ( int )( mouse_pos.x - sx1 ) / EVENT_DRAW_SIZE;
 					int y = ( int )( mouse_pos.y - sy1 ) / EVENT_DRAW_SIZE;
@@ -305,6 +305,12 @@ unsigned char ObjectMenu::getEvent( int idx ) const {
 	case 4:
 		result = OBJECT_EVENT_SHOP;
 		break;
+	case 5:
+		result = OBJECT_EVENT_LAKE;
+		break;
+	case 6:
+		result = OBJECT_EVENT_RYUGU;
+		break;
 	default:
 		result = OBJECT_NONE;
 		break;
@@ -434,18 +440,18 @@ void ObjectMenu::draw( ) const {
 			}
 		}
 		break;
-		case TAG_EVENT:		
-		{//event
-			int sx = ( int )_pos.x + BLOCK_X;
-			int sy = ( int )_pos.y + BLOCK_Y;
-			for ( int i = 0; i < EVENT_WIDTH_NUM; i++, sx += EVENT_DRAW_SIZE ) {
-				int tx = ( i % 4 ) * EVENT_SPRITE_SIZE;
-				int ty = ( i / 4 ) * EVENT_SPRITE_SIZE;
-				_event->setRect( tx, ty, EVENT_SPRITE_SIZE, EVENT_SPRITE_SIZE );
-				_event->setPos( sx, sy, sx + EVENT_DRAW_SIZE, sy + EVENT_DRAW_SIZE );
-				_event->draw( );
+		case TAG_EVENT:	
+			for ( int i = 0; i < EVENT_HEIGHT_NUM; i++ ) {
+				for ( int j = 0; j < EVENT_WIDTH_NUM; j++ ) {
+					int sx = ( int )_pos.x + BLOCK_X + j * EVENT_DRAW_SIZE;
+					int sy = ( int )_pos.y + BLOCK_Y + i * EVENT_DRAW_SIZE;
+					int tx = j * EVENT_SPRITE_SIZE;
+					int ty = i * EVENT_SPRITE_SIZE;
+					_event->setRect( tx, ty, EVENT_SPRITE_SIZE, EVENT_SPRITE_SIZE );
+					_event->setPos( sx, sy, sx + EVENT_DRAW_SIZE, sy + EVENT_DRAW_SIZE );
+					_event->draw( );
+				}
 			}
-		}
 		break;
 	}
 }
