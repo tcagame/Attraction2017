@@ -31,7 +31,7 @@ Character( pos, NORMAL_CHAR_GRAPH_SIZE ),
 _charge_count( 0 ),
 _damege_count( 0 ),
 _over_charge_time( -1 ),
-_id( 0 ),
+_id( player_id ),
 _action( ACTION_WAIT ) {
 	setRadius( 25 );
 	setDir( DIR_RIGHT );
@@ -498,10 +498,19 @@ void Player::updateState( ) {
 			setVec( Vector( ) );
 		}
 	}
+
 	if ( getState( ) == STATE_EVENT ) {
-		//一ページ目にいたらorボスが倒れている場合 [退場]
-		if ( getPos( ).x < GRAPH_SIZE ||
-			 !Military::getTask( )->getBoss( ) ) {
+		//一ページ目にいたらメインに戻る
+		if ( getPos( ).x < GRAPH_SIZE ) {
+			setState( STATE_MAIN );
+			map_event->setType( ViewerEvent::TYPE_TITLE );
+			setPos( Vector( family->getCameraPos( ) + SCREEN_WIDTH / 2, 0 ) );
+			setVec( Vector( ) );
+		}
+		//ボスが倒れている場合 [退場]
+		MapEventPtr map_event( MapEvent::getTask( ) );
+		if ( !Military::getTask( )->getBoss( ) &&
+			 map_event->getType( ) != ViewerEvent::TYPE_SHOP ) {
 			setState( STATE_MAIN );
 			map_event->setType( ViewerEvent::TYPE_TITLE );
 			setPos( Vector( family->getCameraPos( ) + SCREEN_WIDTH / 2, 0 ) );
