@@ -167,3 +167,43 @@ void RockCharacter::collision( ) {
 	}
 }
 
+bool RockCharacter::isOverRapped( ) const {
+	bool result = false;
+	std::list< RockEnemyPtr > enemys = RockMilitary::getTask( )->getEnemyList( );
+	std::list< RockEnemyPtr >::iterator ite = enemys.begin( );
+
+	while ( ite != enemys.end( ) ) {
+		if ( !( *ite ) ) {
+			ite++;
+			continue;
+		}
+		RockEnemyPtr target = ( *ite );
+		
+		if ( ( target->getPos( ) - _pos ).getLength2( ) < 1 ) {
+			ite++;
+			continue; // 自分だったら判定しない
+		}
+		if ( ( target->getPos( ) - _pos ).getLength2( ) > COLLISION_RANGE * COLLISION_RANGE ) {
+			ite++;
+			continue; // 離れていたら判定しない
+		}
+		
+		double range = target->getRadius( ) + _radius;
+		{//上下判定
+			Vector diff = target->getPos( ) - ( _pos + Vector( 0, _vec.y, 0 ) );
+			if ( diff.getLength2( ) < range * range ) {
+				// バウンド　or　ダメージ
+			}
+		}
+		{//横判定
+			Vector diff = target->getPos( ) - ( _pos + Vector( _vec.x, 0, _vec.z ) );
+			if ( diff.getLength2( ) < range * range ) {
+				result = true;
+				break;
+			}
+		}
+		ite++;
+	}
+
+	return result;
+}

@@ -11,6 +11,7 @@ public:
 	void update( );
 	Vector getPos( );
 	virtual double getAnimTime( ) const = 0;
+	bool isOverRapped( ) const;
 protected:
 	virtual void act( ) = 0;
 	void setVec( const Vector& vec );
