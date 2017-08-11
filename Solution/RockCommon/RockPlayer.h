@@ -11,6 +11,9 @@ public:
 public:
 	double getAnimTime( ) const;
 	bool isActive( ) const;
+	void bound( );
+	void damage( int force );
+	void back( );
 protected:
 	void act( );
 private:
@@ -19,6 +22,7 @@ private:
 		ACTION_JUMP,
 		ACTION_WALK,
 		ACTION_BRAKE,
+		ACTION_DEAD,
 	};
 private:
 	void setAction( ACTION action );
@@ -26,6 +30,7 @@ private:
 	void actOnJumping( );
 	void actOnWalking( );
 	void actOnBraking( );
+	void actOnDead( );
 private:
 	StatusPtr _status;
 	ACTION _action;

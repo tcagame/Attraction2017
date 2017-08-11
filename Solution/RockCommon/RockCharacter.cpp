@@ -8,14 +8,15 @@
 #include "RockMilitary.h"
 #include "RockEnemy.h"
 
-const int COLLISION_RANGE = 20;
+const double BOUND_POWER = 1.0;
 
-RockCharacter::RockCharacter( const Vector& pos, DOLL doll, bool mass ) :
+RockCharacter::RockCharacter( const Vector& pos, DOLL doll, int radius, bool mass, bool head ) :
 _pos( pos ),
 _doll( doll ),
 _mass( mass ),
 _act_count( 0 ),
-_radius( 10 ) {
+_radius( radius ),
+_head( head ) {
 }
 
 
@@ -35,18 +36,23 @@ void RockCharacter::update( ) {
 		//頭
 		Vector head = _pos + _vec + Vector( 0, _radius * 2, 0 );
 		//足元
-		Vector leg = _pos + _vec;
+		Vector leg = _pos + _vec + Vector( 0, -GRAVITY * 2, 0 );
 
-		//頭の位置であたる||足元がない
-		if ( map_model->isHitLine( head, head - Vector( 0, _radius, 0 ) ) ||
-			 !map_model->isHitLine( leg, leg + Vector( 0, _radius, 0 ) ) ) {
+		//頭の位置であたる
+		if ( map_model->isHitLine( head, head - Vector( 0, _radius, 0 ) ) ) {
+			_vec.x = 0;
+			_vec.z = 0;
+		}
+		//足元がない
+		if ( !map_model->isHitLine( leg, leg + Vector( 0, -100, 0 ) ) ) {
 			_vec.x = 0;
 			_vec.z = 0;
 		}
 	}
 	{//上下判定
+		Vector pos = _pos + Vector( 0, -GRAVITY * 2, 0 );
 		Vector fpos = _pos + Vector( 0, _vec.y, 0 );
-		if ( map_model->isHitLine( _pos, fpos ) ) {
+		if ( map_model->isHitLine( pos, fpos ) ) {
 			_vec.y = 0;
 			_standing = true;
 		}
@@ -59,18 +65,22 @@ void RockCharacter::update( ) {
 			_standing = true;
 		}
 	}
-	collision( );
 	_pos += _vec;
 }
 
 void RockCharacter::setVec( const Vector& vec ) {
 	_vec = vec;
 }
+
+void RockCharacter::setPos( const Vector& pos ) {
+	_pos = pos;
+}
+
 Vector RockCharacter::getVec( ) const {
 	return _vec;
 }
 
-Vector RockCharacter::getPos( ) {
+Vector RockCharacter::getPos( ) const {
 	return _pos;
 }
 
@@ -84,6 +94,10 @@ void RockCharacter::setDoll( DOLL doll ) {
 
 bool RockCharacter::isStanding( ) const {
 	return _standing;
+}
+
+bool RockCharacter::isHead( ) const {
+	return _head;
 }
 
 void RockCharacter::setActCount( int count ) {
@@ -102,108 +116,72 @@ int RockCharacter::getRadius( ) const {
 	return _radius;
 }
 
-void RockCharacter::collision( ) {
-	// player あたり判定
-	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
-		RockPlayerPtr target = RockFamily::getTask( )->getPlayer( i );
-		if ( ( target->getPos( ) - _pos ).getLength2( ) < 1 ) {
-			continue; // 自分だったら判定しない
-		}
-		if ( ( target->getPos( ) - _pos ).getLength2( ) > COLLISION_RANGE * COLLISION_RANGE ) {
-			continue; // 離れていたら判定しない
-		}
-
-		double range = target->getRadius( ) + _radius;
-		{//上下判定
-			Vector diff = target->getPos( ) - ( _pos + Vector( 0, _vec.y, 0 ) );
-			if ( diff.getLength2( ) < range * range ) {
-				_vec.y = 0;
-			}
-		}
-		{//横判定
-			Vector diff = target->getPos( ) - ( _pos + Vector( _vec.x, 0, _vec.z ) );
-			if ( diff.getLength2( ) < range * range ) {
-				_vec.x = 0;
-				_vec.z = 0;
-			}
-		}
-	}
-
-	// enemy あたり判定
-	std::list< RockEnemyPtr > enemys = RockMilitary::getTask( )->getEnemyList( );
-	std::list< RockEnemyPtr >::iterator ite = enemys.begin( );
-
-	while ( ite != enemys.end( ) ) {
-		if ( !( *ite ) ) {
-			ite++;
-			continue;
-		}
-		RockEnemyPtr target = ( *ite );
-		
-		if ( ( target->getPos( ) - _pos ).getLength2( ) < 1 ) {
-			ite++;
-			continue; // 自分だったら判定しない
-		}
-		if ( ( target->getPos( ) - _pos ).getLength2( ) > COLLISION_RANGE * COLLISION_RANGE ) {
-			ite++;
-			continue; // 離れていたら判定しない
-		}
-		
-		double range = target->getRadius( ) + _radius;
-		{//上下判定
-			Vector diff = target->getPos( ) - ( _pos + Vector( 0, _vec.y, 0 ) );
-			if ( diff.getLength2( ) < range * range ) {
-				_vec.y = fabs( _vec.y ) * -1;
-			}
-		}
-		{//横判定
-			Vector diff = target->getPos( ) - ( _pos + Vector( _vec.x, 0, _vec.z ) );
-			if ( diff.getLength2( ) < range * range ) {
-				_vec.x = 0;
-				_vec.z = 0;
-			}
-		}
-		ite++;
-	}
+void RockCharacter::damage( int force ) {
 }
 
-bool RockCharacter::isOverRapped( ) const {
-	bool result = false;
-	std::list< RockEnemyPtr > enemys = RockMilitary::getTask( )->getEnemyList( );
-	std::list< RockEnemyPtr >::iterator ite = enemys.begin( );
+void RockCharacter::bound( ) {
+	_vec.y = BOUND_POWER;
+}
 
-	while ( ite != enemys.end( ) ) {
-		if ( !( *ite ) ) {
-			ite++;
-			continue;
-		}
-		RockEnemyPtr target = ( *ite );
-		
-		if ( ( target->getPos( ) - _pos ).getLength2( ) < 1 ) {
-			ite++;
-			continue; // 自分だったら判定しない
-		}
-		if ( ( target->getPos( ) - _pos ).getLength2( ) > COLLISION_RANGE * COLLISION_RANGE ) {
-			ite++;
-			continue; // 離れていたら判定しない
-		}
-		
-		double range = target->getRadius( ) + _radius;
-		{//上下判定
-			Vector diff = target->getPos( ) - ( _pos + Vector( 0, _vec.y, 0 ) );
-			if ( diff.getLength2( ) < range * range ) {
-				// バウンド　or　ダメージ
-			}
-		}
-		{//横判定
-			Vector diff = target->getPos( ) - ( _pos + Vector( _vec.x, 0, _vec.z ) );
-			if ( diff.getLength2( ) < range * range ) {
-				result = true;
-				break;
-			}
-		}
-		ite++;
+bool RockCharacter::isOnHead( RockCharacterConstPtr target ) const {
+	if ( _vec.y >= 0 ) {
+		return false;
 	}
+	if ( !target->isHead( ) ) {
+		return false;
+	}
+	Vector target_pos = target->getPos( );
+	double length = ( target_pos - _pos ).getLength2( );
+	if ( length < 0.1 ) {
+		// 自分だったら判定しない
+		return false;
+	}
+	if ( length > COLLISION_RANGE * COLLISION_RANGE ) {
+		// 離れていたら判定しない
+		return false;
+	}
+		
+	double range = target->getRadius( ) + getRadius( );
+	{//上下判定
+		Vector diff = target_pos - _pos;
+		if ( diff.getLength2( ) > range * range ) {
+			return false;
+		}
+	}
+	return true;
+}
 
+
+bool RockCharacter::isOverRapped( RockCharacterConstPtr target ) const {
+	bool result = false;
+	Vector target_pos = target->getPos( );
+		
+	double length = ( target_pos - _pos ).getLength2( );
+	if ( length < 0.1 ) {
+		// 自分だったら判定しない
+		return false;
+	}
+	if ( length > COLLISION_RANGE * COLLISION_RANGE ) {
+		// 離れていたら判定しない
+		return false;
+	}
+	
+	double range = target->getRadius( ) + getRadius( );
+	{//上下判定
+		Vector diff = target_pos - _pos;
+		if ( diff.getLength2( ) < range * range ) {
+			result = true;
+		}
+	}
+	{//横判定
+		Vector diff = target_pos - _pos;
+		if ( diff.getLength2( ) < range * range ) {
+			result = true;
+		}
+	}
 	return result;
+}
+
+void RockCharacter::back( ) {
+	_pos -= _vec;
 }

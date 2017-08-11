@@ -3,7 +3,6 @@
 #include "RockEnemy.h"
 #include "RockFamily.h"
 #include "RockPlayer.h"
-#include "MessageSender.h"
 
 RockMilitaryPtr RockMilitary::getTask( ) {
 	return std::dynamic_pointer_cast< RockMilitary >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -30,14 +29,19 @@ void RockMilitary::update( ) {
 			ite++;
 			continue;
 		}
+		enemy->update( );
+		//player‚Æ‚Ì“–‚½‚è”»’è
 		for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 			RockPlayerPtr player = family->getPlayer( i );
-			if ( player->isOverRapped( ) && player->isActive( ) ) {
-				int force = -enemy->getForce( );
-				MessageSender::getTask( )->sendMessage( i, Message::COMMAND_POWER, &force );
+			if ( player->isActive( ) && player->isOverRapped( enemy ) ) {
+				if ( player->isOnHead( enemy ) ) {
+					player->bound( );
+				} else {
+					int force = -enemy->getForce( );
+					player->damage( force );
+				}
 			}
 		}
-		enemy->update( );
 		ite++;
 	}
 }

@@ -1,9 +1,9 @@
 #include "RockEnemy.h"
+#include "RockPlayer.h"
 
 
-
-RockEnemy::RockEnemy( const Vector& pos, DOLL id, int force, bool mass ) :
-RockCharacter( pos, id, mass ),
+RockEnemy::RockEnemy( const Vector& pos, DOLL id, int force, int radius, bool mass, bool head ) :
+RockCharacter( pos, id, radius, mass, head ),
 _force( 1 ) {
 }
 
