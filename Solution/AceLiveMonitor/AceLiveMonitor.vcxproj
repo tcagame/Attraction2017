@@ -158,6 +158,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="NPCAngel.cpp" />
+    <ClCompile Include="NPCMermaid.cpp" />
     <ClCompile Include="NPCMiko.cpp" />
     <ClCompile Include="NPCObaba.cpp" />
     <ClCompile Include="Character.cpp" />
@@ -203,6 +205,7 @@
     <ClCompile Include="EnemyWind.cpp" />
     <ClCompile Include="MapEvent.cpp" />
     <ClCompile Include="NPC.cpp" />
+    <ClCompile Include="NPCOtohime.cpp" />
     <ClCompile Include="Pop.cpp" />
     <ClCompile Include="PopArcher.cpp" />
     <ClCompile Include="PopBlueMonk.cpp" />
@@ -251,6 +254,8 @@
     <ClCompile Include="ViewerStreet.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="NPCAngel.h" />
+    <ClInclude Include="NPCMermaid.h" />
     <ClInclude Include="NPCMiko.h" />
     <ClInclude Include="NPCObaba.h" />
     <ClInclude Include="Character.h" />
@@ -296,6 +301,7 @@
     <ClInclude Include="EnemyWind.h" />
     <ClInclude Include="MapEvent.h" />
     <ClInclude Include="NPC.h" />
+    <ClInclude Include="NPCOtohime.h" />
     <ClInclude Include="Pop.h" />
     <ClInclude Include="PopArcher.h" />
     <ClInclude Include="PopBlueMonk.h" />

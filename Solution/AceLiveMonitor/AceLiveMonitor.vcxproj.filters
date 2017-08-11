@@ -257,6 +257,15 @@
     <ClCompile Include="NPCMiko.cpp">
       <Filter>NPC</Filter>
     </ClCompile>
+    <ClCompile Include="NPCOtohime.cpp">
+      <Filter>NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="NPCAngel.cpp">
+      <Filter>NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="NPCMermaid.cpp">
+      <Filter>NPC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -512,6 +521,15 @@
       <Filter>EnemyAttack</Filter>
     </ClInclude>
     <ClInclude Include="NPCMiko.h">
+      <Filter>NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="NPCOtohime.h">
+      <Filter>NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="NPCAngel.h">
+      <Filter>NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="NPCMermaid.h">
       <Filter>NPC</Filter>
     </ClInclude>
   </ItemGroup>

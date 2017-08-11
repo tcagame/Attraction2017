@@ -3,6 +3,9 @@
 #include "MapEvent.h"
 #include "NPCObaba.h"
 #include "NPCMiko.h"
+#include "NPCOtohime.h"
+#include "NPCAngel.h"
+#include "NPCMermaid.h"
 
 NPCPtr NPC::getTask( ) {
 	return std::dynamic_pointer_cast< NPC >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -42,6 +45,13 @@ void NPC::popUpNPC( ) {
 		break;
 	case MapEvent::TYPE_LAKE:
 		_npc_chara.push_back( CharacterPtr( new NPCMiko( Vector( 200, 225 ) ) ) );
+		break;
+	case MapEvent::TYPE_RYUGU:
+		_npc_chara.push_back( CharacterPtr( new NPCAngel( Vector( 325, 225 ) ) ) );
+		_npc_chara.push_back( CharacterPtr( new NPCAngel( Vector( 700, 225 ) ) ) );
+		_npc_chara.push_back( CharacterPtr( new NPCOtohime( Vector( 510, 150 ) ) ) );
+		_npc_chara.push_back( CharacterPtr( new NPCMermaid( Vector( 225, 250 ) ) ) );
+		_npc_chara.push_back( CharacterPtr( new NPCMermaid( Vector( 864, 250 ) ) ) );
 		break;
 	}
 }
