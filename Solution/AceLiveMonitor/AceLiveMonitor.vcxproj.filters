@@ -269,6 +269,45 @@
     <ClCompile Include="PopGrayMist.cpp">
       <Filter>Pop</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyBat.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyEyeDemon.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyFlog.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyMoth.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyStone.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopBat.cpp">
+      <Filter>Pop</Filter>
+    </ClCompile>
+    <ClCompile Include="PopEyeDemon.cpp">
+      <Filter>Pop</Filter>
+    </ClCompile>
+    <ClCompile Include="PopFlog.cpp">
+      <Filter>Pop</Filter>
+    </ClCompile>
+    <ClCompile Include="PopMoth.cpp">
+      <Filter>Pop</Filter>
+    </ClCompile>
+    <ClCompile Include="PopStone.cpp">
+      <Filter>Pop</Filter>
+    </ClCompile>
+    <ClCompile Include="NPCAngel.cpp">
+      <Filter>NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="NPCMermaid.cpp">
+      <Filter>NPC</Filter>
+    </ClCompile>
+    <ClCompile Include="NPCOtohime.cpp">
+      <Filter>NPC</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -537,6 +576,45 @@
     </ClInclude>
     <ClInclude Include="PopGrayMist.h">
       <Filter>Pop</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBat.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyEyeDemon.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyFlog.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyMoth.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyStone.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopBat.h">
+      <Filter>Pop</Filter>
+    </ClInclude>
+    <ClInclude Include="PopEyeDemon.h">
+      <Filter>Pop</Filter>
+    </ClInclude>
+    <ClInclude Include="PopFlog.h">
+      <Filter>Pop</Filter>
+    </ClInclude>
+    <ClInclude Include="PopMoth.h">
+      <Filter>Pop</Filter>
+    </ClInclude>
+    <ClInclude Include="PopStone.h">
+      <Filter>Pop</Filter>
+    </ClInclude>
+    <ClInclude Include="NPCAngel.h">
+      <Filter>NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="NPCMermaid.h">
+      <Filter>NPC</Filter>
+    </ClInclude>
+    <ClInclude Include="NPCOtohime.h">
+      <Filter>NPC</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

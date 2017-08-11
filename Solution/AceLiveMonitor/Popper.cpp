@@ -34,6 +34,11 @@
 #include "PopJizo.h"
 #include "PopTree.h"
 #include "PopGama.h"
+#include "PopFlog.h"
+#include "PopBat.h"
+#include "PopStone.h"
+#include "PopMoth.h"
+#include "PopEyeDemon.h"
 
 PopperPtr Popper::getTask( ) {
 	return std::dynamic_pointer_cast< Popper >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -143,6 +148,21 @@ void Popper::initialize( ) {
 				break;
 			case OBJECT_GAMA:
 				_pops.push_back( PopPtr( new PopGama( Vector( x, y ) ) ) );
+				break;
+			case OBJECT_FLOG:
+				_pops.push_back( PopPtr( new PopFlog( Vector( x, y ) ) ) );
+				break;
+			case OBJECT_BAT:
+				_pops.push_back( PopPtr( new PopBat( Vector( x, y ) ) ) );
+				break;
+			case OBJECT_STONE:
+				_pops.push_back( PopPtr( new PopStone( Vector( x, y ) ) ) );
+				break;
+			case OBJECT_MOTH:
+				_pops.push_back( PopPtr( new PopMoth( Vector( x, y ) ) ) );
+				break;
+			case OBJECT_EYE_DEMON:
+				_pops.push_back( PopPtr( new PopEyeDemon( Vector( x, y ) ) ) );
 				break;
 			}
 		}

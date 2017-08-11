@@ -158,8 +158,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="EnemyBat.cpp" />
+    <ClCompile Include="EnemyEyeDemon.cpp" />
+    <ClCompile Include="EnemyFlog.cpp" />
     <ClCompile Include="EnemyGama.cpp" />
     <ClCompile Include="EnemyGrayMist.cpp" />
+    <ClCompile Include="EnemyMoth.cpp" />
+    <ClCompile Include="EnemyStone.cpp" />
     <ClCompile Include="NPCAngel.cpp" />
     <ClCompile Include="NPCMermaid.cpp" />
     <ClCompile Include="NPCMiko.cpp" />
@@ -210,9 +215,12 @@
     <ClCompile Include="NPCOtohime.cpp" />
     <ClCompile Include="Pop.cpp" />
     <ClCompile Include="PopArcher.cpp" />
+    <ClCompile Include="PopBat.cpp" />
     <ClCompile Include="PopBlueMonk.cpp" />
     <ClCompile Include="PopCrocoSnake.cpp" />
+    <ClCompile Include="PopEyeDemon.cpp" />
     <ClCompile Include="PopFaceAndHand.cpp" />
+    <ClCompile Include="PopFlog.cpp" />
     <ClCompile Include="PopGama.cpp" />
     <ClCompile Include="PopGhost.cpp" />
     <ClCompile Include="PopGhoul.cpp" />
@@ -223,6 +231,7 @@
     <ClCompile Include="PopJizo.cpp" />
     <ClCompile Include="PopLady.cpp" />
     <ClCompile Include="PopLancer.cpp" />
+    <ClCompile Include="PopMoth.cpp" />
     <ClCompile Include="PopNoFace.cpp" />
     <ClCompile Include="PopNoNeckGhost.cpp" />
     <ClCompile Include="PopOneEyeSnake.cpp" />
@@ -236,6 +245,7 @@
     <ClCompile Include="PopShishimai.cpp" />
     <ClCompile Include="PopShishimaiDemon.cpp" />
     <ClCompile Include="PopSkeleton.cpp" />
+    <ClCompile Include="PopStone.cpp" />
     <ClCompile Include="PopStoneFace.cpp" />
     <ClCompile Include="PopSwampZombieC.cpp" />
     <ClCompile Include="PopSwampZombieA.cpp" />
@@ -258,8 +268,13 @@
     <ClCompile Include="ViewerStreet.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EnemyBat.h" />
+    <ClInclude Include="EnemyEyeDemon.h" />
+    <ClInclude Include="EnemyFlog.h" />
     <ClInclude Include="EnemyGama.h" />
     <ClInclude Include="EnemyGrayMist.h" />
+    <ClInclude Include="EnemyMoth.h" />
+    <ClInclude Include="EnemyStone.h" />
     <ClInclude Include="NPCAngel.h" />
     <ClInclude Include="NPCMermaid.h" />
     <ClInclude Include="NPCMiko.h" />
@@ -310,9 +325,12 @@
     <ClInclude Include="NPCOtohime.h" />
     <ClInclude Include="Pop.h" />
     <ClInclude Include="PopArcher.h" />
+    <ClInclude Include="PopBat.h" />
     <ClInclude Include="PopBlueMonk.h" />
     <ClInclude Include="PopCrocoSnake.h" />
+    <ClInclude Include="PopEyeDemon.h" />
     <ClInclude Include="PopFaceAndHand.h" />
+    <ClInclude Include="PopFlog.h" />
     <ClInclude Include="PopGama.h" />
     <ClInclude Include="PopGhost.h" />
     <ClInclude Include="PopGhoul.h" />
@@ -323,6 +341,7 @@
     <ClInclude Include="PopJizo.h" />
     <ClInclude Include="PopLady.h" />
     <ClInclude Include="PopLancer.h" />
+    <ClInclude Include="PopMoth.h" />
     <ClInclude Include="PopNoFace.h" />
     <ClInclude Include="PopNoNeckGhost.h" />
     <ClInclude Include="PopOneEyeSnake.h" />
@@ -336,6 +355,7 @@
     <ClInclude Include="PopShishimai.h" />
     <ClInclude Include="PopShishimaiDemon.h" />
     <ClInclude Include="PopSkeleton.h" />
+    <ClInclude Include="PopStone.h" />
     <ClInclude Include="PopStoneFace.h" />
     <ClInclude Include="PopSwampZombieC.h" />
     <ClInclude Include="PopSwampZombieA.h" />
