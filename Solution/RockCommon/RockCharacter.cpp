@@ -8,14 +8,16 @@
 #include "RockMilitary.h"
 #include "RockEnemy.h"
 
+const double BOUND_POWER = 1.0;
 
-
-RockCharacter::RockCharacter( const Vector& pos, DOLL doll, bool mass ) :
+RockCharacter::RockCharacter( const Vector& pos, DOLL doll, int radius, int height, bool mass, bool head ) :
 _pos( pos ),
 _doll( doll ),
 _mass( mass ),
 _act_count( 0 ),
-_radius( 10 ) {
+_radius( radius ),
+_height( height ),
+_head( head ) {
 }
 
 
@@ -64,7 +66,6 @@ void RockCharacter::update( ) {
 			_standing = true;
 		}
 	}
-	collision( );
 	_pos += _vec;
 }
 
@@ -96,6 +97,10 @@ bool RockCharacter::isStanding( ) const {
 	return _standing;
 }
 
+bool RockCharacter::isHead( ) const {
+	return _head;
+}
+
 void RockCharacter::setActCount( int count ) {
 	_act_count = count;
 }
@@ -112,33 +117,51 @@ int RockCharacter::getRadius( ) const {
 	return _radius;
 }
 
-void RockCharacter::collision( ) {
-	// player ‚ ‚½‚è”»’è
-	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
-		RockPlayerPtr target = RockFamily::getTask( )->getPlayer( i );
-		if ( ( target->getPos( ) - _pos ).getLength2( ) < 1 ) {
-			continue; // Ž©•ª‚¾‚Á‚½‚ç”»’è‚µ‚È‚¢
-		}
-		if ( ( target->getPos( ) - _pos ).getLength2( ) > COLLISION_RANGE * COLLISION_RANGE ) {
-			continue; // —£‚ê‚Ä‚¢‚½‚ç”»’è‚µ‚È‚¢
-		}
-
-		double range = target->getRadius( ) + _radius;
-		{//ã‰º”»’è
-			Vector diff = target->getPos( ) - ( _pos + Vector( 0, _vec.y, 0 ) );
-			if ( diff.getLength2( ) < range * range ) {
-				_vec.y = 0;
-			}
-		}
-		{//‰¡”»’è
-			Vector diff = target->getPos( ) - ( _pos + Vector( _vec.x, 0, _vec.z ) );
-			if ( diff.getLength2( ) < range * range ) {
-				_vec.x = 0;
-				_vec.z = 0;
-			}
-		}
-	}
+int RockCharacter::getHeight( ) const {
+	return _height;
 }
 
 void RockCharacter::damage( int force ) {
+}
+
+void RockCharacter::bound( ) {
+	_vec.y = BOUND_POWER;
+}
+
+bool RockCharacter::isOnHead( RockCharacterConstPtr target ) const {
+	if ( _vec.y >= 0 ) {
+		//ã•ûŒü‚É“®‚¢‚Ä‚é
+		return false;
+	}
+	if ( !target->isHead( ) ) {
+		//‘ŠŽè‚Ì“ª‚Éæ‚é‚±‚Æ‚ªo—ˆ‚È‚¢
+		return false;
+	}
+	if ( target->getPos( ).y + target->getHeight( ) / 2 > getPos( ).y ) {
+		return false;
+	}
+	return true;
+}
+
+
+bool RockCharacter::isOverRapped( RockCharacterConstPtr target ) const {
+	bool result = false;
+
+	Vector distance = target->getPos( ) - _pos;
+	double distance_y = fabs( distance.y );
+	distance.y = 0;
+
+	double length = distance.getLength2( );
+	double range_hol = target->getRadius( ) + getRadius( );
+	double range_vir = target->getHeight( ) + getHeight( );
+	if ( length < range_hol * range_hol ) {
+		if ( distance_y < range_vir ) {
+			result = true;
+		}
+	}
+	return result;
+}
+
+void RockCharacter::back( ) {
+	_pos -= _vec;
 }

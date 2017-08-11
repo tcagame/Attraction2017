@@ -257,10 +257,18 @@
     <ClCompile Include="NPCMiko.cpp">
       <Filter>NPC</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyGama.cpp" />
-    <ClCompile Include="PopGama.cpp" />
-    <ClCompile Include="EnemyGrayMist.cpp" />
-    <ClCompile Include="PopGrayMist.cpp" />
+    <ClCompile Include="EnemyGrayMist.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyGama.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopGama.cpp">
+      <Filter>Pop</Filter>
+    </ClCompile>
+    <ClCompile Include="PopGrayMist.cpp">
+      <Filter>Pop</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -518,10 +526,18 @@
     <ClInclude Include="NPCMiko.h">
       <Filter>NPC</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyGama.h" />
-    <ClInclude Include="PopGama.h" />
-    <ClInclude Include="EnemyGrayMist.h" />
-    <ClInclude Include="PopGrayMist.h" />
+    <ClInclude Include="EnemyGrayMist.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyGama.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopGama.h">
+      <Filter>Pop</Filter>
+    </ClInclude>
+    <ClInclude Include="PopGrayMist.h">
+      <Filter>Pop</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">

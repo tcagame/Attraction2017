@@ -1,16 +1,19 @@
-#include "EnemyLittleRedDemon.h"
+#include "NPCMermaid.h"
 
-const int WAIT_ANIM_TIME = 6;
+const int WAIT_ANIM_TIME = 10;
 
-EnemyLittleRedDemon::EnemyLittleRedDemon( const Vector& pos ):
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ) {
+NPCMermaid::NPCMermaid( const Vector& pos ) :
+Character( pos, BIG_CHAR_GRAPH_SIZE, false ) {
 }
 
 
-EnemyLittleRedDemon::~EnemyLittleRedDemon( ) {
+NPCMermaid::~NPCMermaid( ) {
 }
 
-Chip EnemyLittleRedDemon::getChip( ) const {
+void NPCMermaid::act( ) {
+}
+
+Chip NPCMermaid::getChip( ) const {
 	Chip chip = Chip( );
 	Vector pos = getPos( );
 	chip.size = getChipSize( );
@@ -20,16 +23,15 @@ Chip EnemyLittleRedDemon::getChip( ) const {
 	chip.sy2 = chip.sy1 + chip.size;
 	
 	const int ANIM[ ] = {
-		9, 10, 11, 12, 13, 14
+		0, 1, 2, 3
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	int cx = ANIM[ ( getActCount( ) / WAIT_ANIM_TIME ) % anim_size ];
+	//int cy = 2;
 	chip.tx = cx * chip.size;
-	chip.ty = 320;
+	chip.ty = 640;
 	return chip;
 }
 
-void EnemyLittleRedDemon::act( ) {
-	setVec( Vector( -3, 0 ) );
+void NPCMermaid::damage( int force ) {
 }
-

@@ -1,7 +1,7 @@
 #include "RockEnemyWaterGhost.h"
 
 RockEnemyWaterGhost::RockEnemyWaterGhost( const Vector& pos ) :
-RockEnemy( pos, DOLL_WATERGHOST ) {
+RockEnemy( pos, DOLL_WATERGHOST, 1, 10, 10, true, true ) {
 }
 
 

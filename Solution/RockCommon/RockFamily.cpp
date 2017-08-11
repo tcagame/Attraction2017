@@ -12,7 +12,7 @@ RockFamilyPtr RockFamily::getTask( ) {
 
 RockFamily::RockFamily( StatusPtr status ) {
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
-		_player[ i ] = RockPlayerPtr( new RockPlayer( status, Vector( i * 25, 30 ), i ) );
+		_player[ i ] = RockPlayerPtr( new RockPlayer( status, Vector( i * 35, 30 ), i ) );
 	}
 }
 
@@ -28,6 +28,18 @@ void RockFamily::update( ) {
 		if ( !_player[ i ]->isActive( ) ) {
 		}
 		_player[ i ]->update( );
+		for ( int j = 0; j < ROCK_PLAYER_NUM; j++ ) {
+			if ( i == j ) {
+				continue;
+			}
+			if ( _player[ i ]->isOverRapped( _player[ j ] ) ) {
+				if ( _player[ i ]->isOnHead( _player[ j ] ) ) {
+					_player[ i ]->bound( );
+				} else {
+					_player[ i ]->back( );
+				}
+			}
+		}
 	}
 }
 
