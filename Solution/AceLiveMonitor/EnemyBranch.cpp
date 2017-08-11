@@ -37,3 +37,6 @@ Chip EnemyBranch::getChip( ) const {
 	chip.sy2 = chip.sy1 + chip.size;
 	return chip;
 }
+
+void EnemyBranch::damage( int force ) {
+}

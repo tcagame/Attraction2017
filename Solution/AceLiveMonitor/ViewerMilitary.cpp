@@ -62,24 +62,6 @@ void ViewerMilitary::drawEnemyies( ) const {
 		}
 	}
 
-	{//event_enemy
-		std::list< EnemyPtr > enemies = military->getEventEnemyList( );
-		std::list< EnemyPtr >::const_iterator ite = enemies.begin( );
-		while ( ite != enemies.end( ) ) {
-			EnemyPtr enemy = (*ite);
-			if ( !enemy ) {
-				ite++;
-				continue;
-			}
-			Chip chip = enemy->getChip( );
-			chip.sy1 += VIEW_EVENT_Y;
-			chip.sy2 += VIEW_EVENT_Y;
-			_enemy_boss->setRect( chip.tx, chip.ty, chip.size, chip.size );
-			_enemy_boss->setPos( chip.sx1, chip.sy1, chip.sx2, chip.sy2 );
-			_enemy_boss->draw( );
-			ite++;
-		}
-	}
 	//enemy_boss
 	EnemyPtr boss = military->getBoss( );
 	if ( boss ) {
@@ -98,6 +80,24 @@ void ViewerMilitary::drawEnemyies( ) const {
 			_enemy_boss->setRect( chip.tx, chip.ty, chip.size, chip.size );
 			_enemy_boss->setPos( chip.sx1, chip.sy1, chip.sx2, chip.sy2 );
 			_enemy_boss->draw( );
+		}
+	}
+	{//event_enemy
+		std::list< EnemyPtr > enemies = military->getEventEnemyList( );
+		std::list< EnemyPtr >::const_iterator ite = enemies.begin( );
+		while ( ite != enemies.end( ) ) {
+			EnemyPtr enemy = (*ite);
+			if ( !enemy ) {
+				ite++;
+				continue;
+			}
+			Chip chip = enemy->getChip( );
+			chip.sy1 += VIEW_EVENT_Y;
+			chip.sy2 += VIEW_EVENT_Y;
+			_enemy_boss->setRect( chip.tx, chip.ty, chip.size, chip.size );
+			_enemy_boss->setPos( chip.sx1, chip.sy1, chip.sx2, chip.sy2 );
+			_enemy_boss->draw( );
+			ite++;
 		}
 	}
 }

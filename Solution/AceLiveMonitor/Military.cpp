@@ -36,7 +36,7 @@ void Military::update( ) {
 			if ( enemy->isFinished( ) ||
 				 !enemy->isInScreen( ) ) {
 				int chip_size = enemy->getChipSize( ) * 2;
-				_impacts.push_back( ImpactPtr( new Impact( enemy->getPos( ), Character::STATE_MAIN, chip_size ) ) );
+				_impacts.push_back( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), Character::STATE_MAIN, chip_size ) ) );
 				ite = _enemies.erase( ite );
 				continue;
 			}
@@ -72,7 +72,7 @@ void Military::update( ) {
 			if ( enemy->isFinished( ) ||
 				 !enemy->isInScreen( ) ) {
 				int chip_size = enemy->getChipSize( ) * 2;
-				_impacts.push_back( ImpactPtr( new Impact( enemy->getPos( ), Character::STATE_EVENT, chip_size ) ) );
+				_impacts.push_back( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), Character::STATE_EVENT, chip_size ) ) );
 				ite = _event_enemies.erase( ite );
 				continue;
 			}
