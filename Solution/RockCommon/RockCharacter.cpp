@@ -8,7 +8,7 @@
 #include "RockMilitary.h"
 #include "RockEnemy.h"
 
-const int COLLISION_RANGE = 20;
+
 
 RockCharacter::RockCharacter( const Vector& pos, DOLL doll, bool mass ) :
 _pos( pos ),
@@ -35,18 +35,23 @@ void RockCharacter::update( ) {
 		//頭
 		Vector head = _pos + _vec + Vector( 0, _radius * 2, 0 );
 		//足元
-		Vector leg = _pos + _vec;
+		Vector leg = _pos + _vec + Vector( 0, -GRAVITY * 2, 0 );
 
-		//頭の位置であたる||足元がない
-		if ( map_model->isHitLine( head, head - Vector( 0, _radius, 0 ) ) ||
-			 !map_model->isHitLine( leg, leg + Vector( 0, _radius, 0 ) ) ) {
+		//頭の位置であたる
+		if ( map_model->isHitLine( head, head - Vector( 0, _radius, 0 ) ) ) {
+			_vec.x = 0;
+			_vec.z = 0;
+		}
+		//足元がない
+		if ( !map_model->isHitLine( leg, leg + Vector( 0, -100, 0 ) ) ) {
 			_vec.x = 0;
 			_vec.z = 0;
 		}
 	}
 	{//上下判定
+		Vector pos = _pos + Vector( 0, -GRAVITY * 2, 0 );
 		Vector fpos = _pos + Vector( 0, _vec.y, 0 );
-		if ( map_model->isHitLine( _pos, fpos ) ) {
+		if ( map_model->isHitLine( pos, fpos ) ) {
 			_vec.y = 0;
 			_standing = true;
 		}
@@ -66,11 +71,16 @@ void RockCharacter::update( ) {
 void RockCharacter::setVec( const Vector& vec ) {
 	_vec = vec;
 }
+
+void RockCharacter::setPos( const Vector& pos ) {
+	_pos = pos;
+}
+
 Vector RockCharacter::getVec( ) const {
 	return _vec;
 }
 
-Vector RockCharacter::getPos( ) {
+Vector RockCharacter::getPos( ) const {
 	return _pos;
 }
 
@@ -128,82 +138,7 @@ void RockCharacter::collision( ) {
 			}
 		}
 	}
-
-	// enemy あたり判定
-	std::list< RockEnemyPtr > enemys = RockMilitary::getTask( )->getEnemyList( );
-	std::list< RockEnemyPtr >::iterator ite = enemys.begin( );
-
-	while ( ite != enemys.end( ) ) {
-		if ( !( *ite ) ) {
-			ite++;
-			continue;
-		}
-		RockEnemyPtr target = ( *ite );
-		
-		if ( ( target->getPos( ) - _pos ).getLength2( ) < 1 ) {
-			ite++;
-			continue; // 自分だったら判定しない
-		}
-		if ( ( target->getPos( ) - _pos ).getLength2( ) > COLLISION_RANGE * COLLISION_RANGE ) {
-			ite++;
-			continue; // 離れていたら判定しない
-		}
-		
-		double range = target->getRadius( ) + _radius;
-		{//上下判定
-			Vector diff = target->getPos( ) - ( _pos + Vector( 0, _vec.y, 0 ) );
-			if ( diff.getLength2( ) < range * range ) {
-				_vec.y = fabs( _vec.y ) * -1;
-			}
-		}
-		{//横判定
-			Vector diff = target->getPos( ) - ( _pos + Vector( _vec.x, 0, _vec.z ) );
-			if ( diff.getLength2( ) < range * range ) {
-				_vec.x = 0;
-				_vec.z = 0;
-			}
-		}
-		ite++;
-	}
 }
 
-bool RockCharacter::isOverRapped( ) const {
-	bool result = false;
-	std::list< RockEnemyPtr > enemys = RockMilitary::getTask( )->getEnemyList( );
-	std::list< RockEnemyPtr >::iterator ite = enemys.begin( );
-
-	while ( ite != enemys.end( ) ) {
-		if ( !( *ite ) ) {
-			ite++;
-			continue;
-		}
-		RockEnemyPtr target = ( *ite );
-		
-		if ( ( target->getPos( ) - _pos ).getLength2( ) < 1 ) {
-			ite++;
-			continue; // 自分だったら判定しない
-		}
-		if ( ( target->getPos( ) - _pos ).getLength2( ) > COLLISION_RANGE * COLLISION_RANGE ) {
-			ite++;
-			continue; // 離れていたら判定しない
-		}
-		
-		double range = target->getRadius( ) + _radius;
-		{//上下判定
-			Vector diff = target->getPos( ) - ( _pos + Vector( 0, _vec.y, 0 ) );
-			if ( diff.getLength2( ) < range * range ) {
-				// バウンド　or　ダメージ
-			}
-		}
-		{//横判定
-			Vector diff = target->getPos( ) - ( _pos + Vector( _vec.x, 0, _vec.z ) );
-			if ( diff.getLength2( ) < range * range ) {
-				result = true;
-				break;
-			}
-		}
-		ite++;
-	}
-
-	return result;
+void RockCharacter::damage( int force ) {
 }

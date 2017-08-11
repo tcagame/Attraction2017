@@ -17,7 +17,7 @@ const unsigned int STATE_TEST		= 0b0000000001000000;
 const int ROCK_PLAYER_NUM = 4;
 const int ROCK_PLAYER_MOTION_NUM = 10;
 const double GRAVITY = -0.1;
-
+const int COLLISION_RANGE = 20;
 
 enum DOLL {
 	DOLL_TAROSUKE_WAIT,

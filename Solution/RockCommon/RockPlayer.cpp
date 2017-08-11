@@ -4,8 +4,13 @@
 #include "Device.h"
 #include "Drawer.h"
 #include "RockFamily.h"
+#include "RockEnemy.h"
+#include "RockCharacter.h"
+#include "RockMilitary.h"
+#include "MessageSender.h"
 
 const double JUMP_POWER = 3.0;
+const double BOUND_POWER = 1.0;
 const double ANIM_SPEED = 0.5;
 const double MOVE_SPEED = 1.0;
 const double BRAKE_SPEED = 0.3;
@@ -102,6 +107,11 @@ void RockPlayer::actOnJumping( ) {
 		setAction( ACTION_WAIT );
 		return;
 	}
+	//ˆÚ“®
+	Status::Player player = _status->getPlayer( _id );
+	Vector vec = Vector( player.device_x, 0, player.device_y ).normalize( ) * MOVE_SPEED;
+	vec.y = getVec( ).y;
+	setVec( vec );
 }
 
 void RockPlayer::actOnWalking( ) {
@@ -116,19 +126,21 @@ void RockPlayer::actOnWalking( ) {
 			return;
 		}
 	}
+	//•‚‚¢‚Ä‚¢‚é
+	if ( !isStanding( ) ) {
+		setAction( ACTION_WAIT );
+		return;
+	}
 	//ƒuƒŒ[ƒL
 	if ( player.device_x == 0 &&
 		 player.device_y == 0 ) {
 		setAction( ACTION_BRAKE );
 		return;
 	}
-	if ( !isStanding( ) ) {
-		setAction( ACTION_WAIT );
-		return;
-	}
 
-	Vector vec = getVec( );
-	vec = Vector( player.device_x, vec.y, player.device_y ).normalize( ) * MOVE_SPEED;
+	//ˆÚ“®
+	Vector vec = Vector( player.device_x, 0, player.device_y ).normalize( ) * MOVE_SPEED;
+	vec.y = getVec( ).y;
 	setVec( vec );
 }
 
@@ -174,4 +186,46 @@ double RockPlayer::getAnimTime( ) const {
 		break;
 	}
 	return anim_time;
+}
+
+void RockPlayer::bound( ) {
+	Vector vec = getVec( );
+	vec.y = BOUND_POWER;
+	setVec( vec );
+	setAction( ACTION_JUMP );
+}
+
+bool RockPlayer::isOnHead( RockEnemyConstPtr target ) const {
+	Vector vec = getVec( );
+	if ( vec.y >= 0 ) {
+		return false;
+	}
+	if ( !target->isHead( ) ) {
+		return false;
+	}
+	Vector pos = getPos( );
+	Vector target_pos = target->getPos( );
+	double length = ( target_pos - pos ).getLength2( );
+	if ( length < 1 ) {
+		// Ž©•ª‚¾‚Á‚½‚ç”»’è‚µ‚È‚¢
+		return false;
+	}
+	if ( length > COLLISION_RANGE * COLLISION_RANGE ) {
+		// —£‚ê‚Ä‚¢‚½‚ç”»’è‚µ‚È‚¢
+		return false;
+	}
+		
+	double range = target->getRadius( ) + getRadius( );
+	{//ã‰º”»’è
+		Vector diff = target_pos - ( pos + Vector( 0, vec.y, 0 ) );
+		if ( diff.getLength2( ) > range * range ) {
+			return false;
+		}
+	}
+	return true;
+}
+
+void RockPlayer::damage( int force ) {
+	setPos( getPos( ) - getVec( ) );
+	MessageSender::getTask( )->sendMessage( _id, Message::COMMAND_POWER, &force );
 }

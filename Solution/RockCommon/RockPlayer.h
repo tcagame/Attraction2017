@@ -3,6 +3,7 @@
 #include "smart_ptr.h"
 
 PTR( Status );
+PTR( RockEnemy );
 
 class RockPlayer : public RockCharacter {
 public:
@@ -11,6 +12,9 @@ public:
 public:
 	double getAnimTime( ) const;
 	bool isActive( ) const;
+	void bound( );
+	bool isOnHead( RockEnemyConstPtr enemy ) const;
+	void damage( int force );
 protected:
 	void act( );
 private:
