@@ -81,28 +81,35 @@ const unsigned char OBJECT_GHOUL			= 0x06;
 const unsigned char OBJECT_GHOST			= 0x07;
 const unsigned char OBJECT_ONE_EYE_SNAKE	= 0x08;
 const unsigned char OBJECT_WHITE_MIST		= 0x09;
-const unsigned char OBJECT_STONE_FACE		= 0x0A;
-const unsigned char OBJECT_NO_NECK_GHOST	= 0x0B;
-const unsigned char OBJECT_SHISHIMAI_DEMON	= 0x0C;
-const unsigned char OBJECT_SHISHIMAI		= 0x0D;
-const unsigned char OBJECT_ARCHER			= 0x0E;
-const unsigned char OBJECT_HAND				= 0x0F;
-const unsigned char OBJECT_RED_BIRD			= 0x10;
-const unsigned char OBJECT_BLUE_MONK		= 0x11;
-//const unsigned char OBJECT_RED_DEMON_JR	= 0x12;
-const unsigned char OBJECT_GREEN_ZOMBIE		= 0x13;
-const unsigned char OBJECT_HUG_DEMON		= 0x14;
-const unsigned char OBJECT_SWAMP_ZOMBIE_A	= 0x15;
-const unsigned char OBJECT_SWAMP_ZOMBIE_B	= 0x16;
-const unsigned char OBJECT_SWAMP_ZOMBIE_C	= 0x17;
+const unsigned char OBJECT_GRAY_MIST		= 0x0A;
+const unsigned char OBJECT_STONE_FACE		= 0x0B;
+const unsigned char OBJECT_NO_NECK_GHOST	= 0x0C;
+const unsigned char OBJECT_SHISHIMAI_DEMON	= 0x0D;
+const unsigned char OBJECT_SHISHIMAI		= 0x0E;
+const unsigned char OBJECT_ARCHER			= 0x0F;
+const unsigned char OBJECT_HAND				= 0x10;
+const unsigned char OBJECT_RED_BIRD			= 0x11;
+const unsigned char OBJECT_BLUE_MONK		= 0x12;
+//const unsigned char OBJECT_RED_DEMON_JR	= 0x13;
+const unsigned char OBJECT_GREEN_ZOMBIE		= 0x14;
+const unsigned char OBJECT_HUG_DEMON		= 0x15;
+const unsigned char OBJECT_SWAMP_ZOMBIE_A	= 0x16;
+const unsigned char OBJECT_SWAMP_ZOMBIE_B	= 0x17;
+const unsigned char OBJECT_SWAMP_ZOMBIE_C	= 0x18;
 // big
-const unsigned char OBJECT_SKELETON			= 0x18;
-const unsigned char OBJECT_LADY				= 0x19;
-const unsigned char OBJECT_WIND				= 0x1A;
-const unsigned char OBJECT_ONYUDO			= 0x1B;
-const unsigned char OBJECT_JIZO				= 0x1C;
-const unsigned char OBJECT_TREE				= 0x1D;
-
+const unsigned char OBJECT_SKELETON			= 0x19;
+const unsigned char OBJECT_LADY				= 0x1A;
+const unsigned char OBJECT_WIND				= 0x1B;
+const unsigned char OBJECT_ONYUDO			= 0x1C;
+const unsigned char OBJECT_JIZO				= 0x1D;
+const unsigned char OBJECT_TREE				= 0x1E;
+const unsigned char OBJECT_GAMA				= 0x1F;
+// small
+const unsigned char OBJECT_FLOG				= 0x20;
+const unsigned char OBJECT_BAT				= 0x21;
+const unsigned char OBJECT_STONE			= 0x22;
+const unsigned char OBJECT_MOTH 			= 0x23;
+const unsigned char OBJECT_EYE_DEMON		= 0x24;
 
 const unsigned char OBJECT_ENEMY_END = 0x7F;
 //block

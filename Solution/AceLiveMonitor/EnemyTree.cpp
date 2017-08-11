@@ -42,7 +42,7 @@ Chip EnemyTree::getChip( ) const {
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	Chip chip = Chip( );
 	chip.tx = ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ] * CHIP_SIZE;
-	chip.ty = 6 * 128;
+	chip.ty = 7 * 128;
 	chip.size = getChipSize( );
 	
 	Vector pos = getPos( );

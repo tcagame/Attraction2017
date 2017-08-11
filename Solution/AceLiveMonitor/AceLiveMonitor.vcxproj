@@ -158,6 +158,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="EnemyGama.cpp" />
+    <ClCompile Include="EnemyGrayMist.cpp" />
     <ClCompile Include="NPCMiko.cpp" />
     <ClCompile Include="NPCObaba.cpp" />
     <ClCompile Include="Character.cpp" />
@@ -208,8 +210,10 @@
     <ClCompile Include="PopBlueMonk.cpp" />
     <ClCompile Include="PopCrocoSnake.cpp" />
     <ClCompile Include="PopFaceAndHand.cpp" />
+    <ClCompile Include="PopGama.cpp" />
     <ClCompile Include="PopGhost.cpp" />
     <ClCompile Include="PopGhoul.cpp" />
+    <ClCompile Include="PopGrayMist.cpp" />
     <ClCompile Include="PopGreenZombie.cpp" />
     <ClCompile Include="PopHand.cpp" />
     <ClCompile Include="PopHugDemon.cpp" />
@@ -251,6 +255,8 @@
     <ClCompile Include="ViewerStreet.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="EnemyGama.h" />
+    <ClInclude Include="EnemyGrayMist.h" />
     <ClInclude Include="NPCMiko.h" />
     <ClInclude Include="NPCObaba.h" />
     <ClInclude Include="Character.h" />
@@ -301,8 +307,10 @@
     <ClInclude Include="PopBlueMonk.h" />
     <ClInclude Include="PopCrocoSnake.h" />
     <ClInclude Include="PopFaceAndHand.h" />
+    <ClInclude Include="PopGama.h" />
     <ClInclude Include="PopGhost.h" />
     <ClInclude Include="PopGhoul.h" />
+    <ClInclude Include="PopGrayMist.h" />
     <ClInclude Include="PopGreenZombie.h" />
     <ClInclude Include="PopHand.h" />
     <ClInclude Include="PopHugDemon.h" />

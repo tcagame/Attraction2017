@@ -1,5 +1,6 @@
 #pragma once
 
+const int SMALL_CHIP_SIZE = 32; // SMALL_CHAR_GRAPH_SIZE‚Æ“¯‚¶‚É‚·‚é
 const int CHIP_SIZE = 64; // NORMAL_CHAR_GRAPH_SIZE‚Æ“¯‚¶‚É‚·‚é
 const int BIG_CHIP_SIZE = 128; // BIG_CHAR_GRAPH_SIZE‚Æ“¯‚¶‚É‚·‚é
 
@@ -26,6 +27,7 @@ const Rect RECT_GHOUL			( 0 * CHIP_SIZE, 1 * CHIP_SIZE );
 const Rect RECT_GHOST			( 16 * CHIP_SIZE, 11 * CHIP_SIZE );
 const Rect RECT_ONE_EYE_SNAKE	( 0 * CHIP_SIZE, 0 * CHIP_SIZE );
 const Rect RECT_WHITE_MIST		( 5 * CHIP_SIZE, 7 * CHIP_SIZE );
+const Rect RECT_GRAY_MIST		( 11 * CHIP_SIZE, 7 * CHIP_SIZE );
 const Rect RECT_STONE_FACE		( 12 * CHIP_SIZE, 1 * CHIP_SIZE );
 const Rect RECT_NO_NECK_GHOST	( 0 * CHIP_SIZE, 10 * CHIP_SIZE );
 const Rect RECT_SHISHIMAI_DEMON	( 8 * CHIP_SIZE, 12 * CHIP_SIZE );
@@ -46,3 +48,9 @@ const Rect RECT_WIND			( 4 * BIG_CHIP_SIZE, 3 * BIG_CHIP_SIZE );
 const Rect RECT_ONYUDO			( 0 * BIG_CHIP_SIZE, 1 * BIG_CHIP_SIZE );
 const Rect RECT_JIZO			( 7 * BIG_CHIP_SIZE, 0 * BIG_CHIP_SIZE );
 const Rect RECT_TREE			( 0 * BIG_CHIP_SIZE, 4 * BIG_CHIP_SIZE );
+const Rect RECT_GAMA			( 0 * BIG_CHIP_SIZE, 5 * BIG_CHIP_SIZE );
+const Rect RECT_FLOG			( 0 * SMALL_CHIP_SIZE, 1 * SMALL_CHIP_SIZE );
+const Rect RECT_BAT				( 5 * SMALL_CHIP_SIZE, 0 * SMALL_CHIP_SIZE );
+const Rect RECT_STONE			( 0 * SMALL_CHIP_SIZE, 6 * SMALL_CHIP_SIZE );
+const Rect RECT_MOTH			( 0 * SMALL_CHIP_SIZE, 5 * SMALL_CHIP_SIZE );
+const Rect RECT_EYE_DEMON		( 3 * SMALL_CHIP_SIZE, 5 * SMALL_CHIP_SIZE );
