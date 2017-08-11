@@ -7,13 +7,14 @@ PTR( RockCharacter );
 
 class RockCharacter {
 public:
-	RockCharacter( const Vector& pos, DOLL id, int radius, bool mass = true, bool head = true );
+	RockCharacter( const Vector& pos, DOLL id, int radius, int height, bool mass = true, bool head = true );
 	virtual ~RockCharacter( );
 public:
 	DOLL getDoll( ) const;
 	void update( );
 	Vector getPos( ) const;
 	int getRadius( ) const;
+	int getHeight( ) const;
 	virtual double getAnimTime( ) const = 0;
 	virtual void damage( int force );
 	bool isHead( ) const;
@@ -38,6 +39,7 @@ private:
 	bool _mass;
 	bool _standing;
 	int _radius;
+	int _height;
 	int _act_count;
 	bool _head;
 };

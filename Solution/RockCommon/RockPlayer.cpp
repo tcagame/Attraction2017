@@ -13,10 +13,11 @@ const double JUMP_POWER = 3.0;
 const double ANIM_SPEED = 0.5;
 const double MOVE_SPEED = 1.0;
 const double BRAKE_SPEED = 0.3;
-const int RADIUS = 20;
+const int RADIUS = 10;
+const int HEIGHT = 20;
 
 RockPlayer::RockPlayer( StatusPtr status, const Vector& pos, int id ) :
-RockCharacter( pos, ( DOLL )( DOLL_TAROSUKE_WAIT + id * ROCK_PLAYER_MOTION_NUM ), RADIUS ) {
+RockCharacter( pos, ( DOLL )( DOLL_TAROSUKE_WAIT + id * ROCK_PLAYER_MOTION_NUM ), RADIUS, HEIGHT ) {
 	_id = id;
 	_status = status;
 	setAction( ACTION_WAIT );
@@ -232,5 +233,6 @@ void RockPlayer::bound( ) {
 
 
 void RockPlayer::back( ) {
-	setPos( getPos( ) - getVec( ) );
+	Vector vec = getVec( );
+	setPos( getPos( ) - Vector( vec.x, 0, vec.z ) );
 }

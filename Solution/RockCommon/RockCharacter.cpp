@@ -10,12 +10,13 @@
 
 const double BOUND_POWER = 1.0;
 
-RockCharacter::RockCharacter( const Vector& pos, DOLL doll, int radius, bool mass, bool head ) :
+RockCharacter::RockCharacter( const Vector& pos, DOLL doll, int radius, int height, bool mass, bool head ) :
 _pos( pos ),
 _doll( doll ),
 _mass( mass ),
 _act_count( 0 ),
 _radius( radius ),
+_height( height ),
 _head( head ) {
 }
 
@@ -116,6 +117,10 @@ int RockCharacter::getRadius( ) const {
 	return _radius;
 }
 
+int RockCharacter::getHeight( ) const {
+	return _height;
+}
+
 void RockCharacter::damage( int force ) {
 }
 
@@ -125,28 +130,15 @@ void RockCharacter::bound( ) {
 
 bool RockCharacter::isOnHead( RockCharacterConstPtr target ) const {
 	if ( _vec.y >= 0 ) {
+		//è„ï˚å¸Ç…ìÆÇ¢ÇƒÇÈ
 		return false;
 	}
 	if ( !target->isHead( ) ) {
+		//ëäéËÇÃì™Ç…èÊÇÈÇ±Ç∆Ç™èoóàÇ»Ç¢
 		return false;
 	}
-	Vector target_pos = target->getPos( );
-	double length = ( target_pos - _pos ).getLength2( );
-	if ( length < 0.1 ) {
-		// é©ï™ÇæÇ¡ÇΩÇÁîªíËÇµÇ»Ç¢
+	if ( target->getPos( ).y + target->getHeight( ) / 2 > getPos( ).y ) {
 		return false;
-	}
-	if ( length > COLLISION_RANGE * COLLISION_RANGE ) {
-		// ó£ÇÍÇƒÇ¢ÇΩÇÁîªíËÇµÇ»Ç¢
-		return false;
-	}
-		
-	double range = target->getRadius( ) + getRadius( );
-	{//è„â∫îªíË
-		Vector diff = target_pos - _pos;
-		if ( diff.getLength2( ) > range * range ) {
-			return false;
-		}
 	}
 	return true;
 }
@@ -154,28 +146,16 @@ bool RockCharacter::isOnHead( RockCharacterConstPtr target ) const {
 
 bool RockCharacter::isOverRapped( RockCharacterConstPtr target ) const {
 	bool result = false;
-	Vector target_pos = target->getPos( );
-		
-	double length = ( target_pos - _pos ).getLength2( );
-	if ( length < 0.1 ) {
-		// é©ï™ÇæÇ¡ÇΩÇÁîªíËÇµÇ»Ç¢
-		return false;
-	}
-	if ( length > COLLISION_RANGE * COLLISION_RANGE ) {
-		// ó£ÇÍÇƒÇ¢ÇΩÇÁîªíËÇµÇ»Ç¢
-		return false;
-	}
-	
-	double range = target->getRadius( ) + getRadius( );
-	{//è„â∫îªíË
-		Vector diff = target_pos - _pos;
-		if ( diff.getLength2( ) < range * range ) {
-			result = true;
-		}
-	}
-	{//â°îªíË
-		Vector diff = target_pos - _pos;
-		if ( diff.getLength2( ) < range * range ) {
+
+	Vector distance = target->getPos( ) - _pos;
+	double distance_y = fabs( distance.y );
+	distance.y = 0;
+
+	double length = distance.getLength2( );
+	double range_hol = target->getRadius( ) + getRadius( );
+	double range_vir = target->getHeight( ) + getHeight( );
+	if ( length < range_hol * range_hol ) {
+		if ( distance_y < range_vir ) {
 			result = true;
 		}
 	}
