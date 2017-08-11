@@ -240,6 +240,9 @@ void Player::actOnCharge( ) {
 		if ( device->getDirX( _id ) == 0 ) {
 			_action = ACTION_WAIT;
 			return;
+		} else {
+			_action = ACTION_WALK;
+			return;
 		}
 		Vector vec = getVec( );
 		if ( device->getPush( _id ) & BUTTON_C ) {

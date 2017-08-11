@@ -18,7 +18,7 @@ public:
 		unsigned char toku;
 		unsigned char item;
 		unsigned char money;
-		unsigned char power;
+		signed int power;
 	};
 
 	Status( ) {
@@ -31,7 +31,7 @@ public:
 			_player[ i ].toku = 0;
 			_player[ i ].item = 0b00000000;
 			_player[ i ].money = 0;
-			_player[ i ].power = 0;
+			_player[ i ].power = 1;
 		}
 	};
 

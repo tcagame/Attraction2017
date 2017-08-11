@@ -39,6 +39,10 @@ void RockPlayer::act( ) {
 		break;
 	case ACTION_BRAKE:
 		actOnBraking( );
+		break;
+	case ACTION_DEAD:
+		actOnDead( );
+		break;
 	}
 	// ƒJƒƒ‰‚É“ü‚è‘±‚¯‚é
 	DrawerPtr drawer( Drawer::getTask( ) );
@@ -64,6 +68,9 @@ void RockPlayer::setAction( ACTION action ) {
 	case ACTION_WALK:
 		setDoll( ( DOLL )( DOLL_TAROSUKE_WALK + _id * ROCK_PLAYER_MOTION_NUM ) );
 		break;
+	case ACTION_DEAD:
+		setDoll( ( DOLL )( DOLL_TAROSUKE_DEAD + _id * ROCK_PLAYER_MOTION_NUM ) );
+		break;
 	default:
 		setDoll( ( DOLL )( DOLL_TAROSUKE_WAIT + _id * ROCK_PLAYER_MOTION_NUM ) );
 		break;
@@ -76,6 +83,11 @@ bool RockPlayer::isActive( ) const {
 
 void RockPlayer::actOnWaiting( ) {
 	Status::Player player = _status->getPlayer( _id );
+	//Ž€–S
+	if ( player.power <= 0 ) {
+		setAction( ACTION_DEAD );
+		return;
+	}
 	//ƒWƒƒƒ“ƒv
 	if ( isStanding( ) ) {
 		if ( player.device_button & BUTTON_A ) {
@@ -103,12 +115,17 @@ void RockPlayer::actOnWaiting( ) {
 	}
 }
 void RockPlayer::actOnJumping( ) {
+	Status::Player player = _status->getPlayer( _id );
+	//Ž€–S
+	if ( player.power <= 0 ) {
+		setAction( ACTION_DEAD );
+		return;
+	}
 	if ( isStanding( ) ) {
 		setAction( ACTION_WAIT );
 		return;
 	}
 	//ˆÚ“®
-	Status::Player player = _status->getPlayer( _id );
 	Vector vec = Vector( player.device_x, 0, player.device_y ).normalize( ) * MOVE_SPEED;
 	vec.y = getVec( ).y;
 	setVec( vec );
@@ -116,6 +133,11 @@ void RockPlayer::actOnJumping( ) {
 
 void RockPlayer::actOnWalking( ) {
 	Status::Player player = _status->getPlayer( _id );
+	//Ž€–S
+	if ( player.power <= 0 ) {
+		setAction( ACTION_DEAD );
+		return;
+	}
 	//ƒWƒƒƒ“ƒv
 	if ( isStanding( ) ) {
 		if ( player.device_button & BUTTON_A ) {
@@ -145,6 +167,12 @@ void RockPlayer::actOnWalking( ) {
 }
 
 void RockPlayer::actOnBraking( ) {
+	Status::Player player = _status->getPlayer( _id );
+	//Ž€–S
+	if ( player.power <= 0 ) {
+		setAction( ACTION_DEAD );
+		return;
+	}
 	//…•½•ûŒü‚ÌƒxƒNƒgƒ‹
 	Vector vec = getVec( );
 	double tmp_y = vec.y;
@@ -168,6 +196,8 @@ void RockPlayer::actOnBraking( ) {
 	setVec( vec );
 }
 
+void RockPlayer::actOnDead( ) {
+}
 
 double RockPlayer::getAnimTime( ) const {
 	double anim_time = 0;
@@ -179,6 +209,9 @@ double RockPlayer::getAnimTime( ) const {
 		anim_time = ( double )getActCount( ) * ANIM_SPEED;
 		break;
 	case ACTION_WALK:
+		anim_time = ( double )getActCount( ) * ANIM_SPEED;
+		break;
+	case ACTION_DEAD:
 		anim_time = ( double )getActCount( ) * ANIM_SPEED;
 		break;
 	default:
@@ -229,3 +262,4 @@ void RockPlayer::damage( int force ) {
 	setPos( getPos( ) - getVec( ) );
 	MessageSender::getTask( )->sendMessage( _id, Message::COMMAND_POWER, &force );
 }
+
