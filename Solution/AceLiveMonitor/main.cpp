@@ -10,6 +10,7 @@
 #include "MapEvent.h"
 #include "Military.h"
 #include "NPC.h"
+#include "Storage.h"
 #include "Popper.h"
 
 void main( ) {
@@ -24,6 +25,7 @@ void main( ) {
 	app->addTask( MapEvent::getTag( ), MapEventPtr( new MapEvent( ) ) );
 	app->addTask( Family  ::getTag( ), FamilyPtr  ( new Family  ( ) ) );
 	app->addTask( Armoury ::getTag( ), ArmouryPtr ( new Armoury ( ) ) );
+	app->addTask( Storage ::getTag( ), StoragePtr ( new Storage ( ) ) );
 	app->addTask( Popper  ::getTag( ), PopperPtr  ( new Popper  ( ) ) );
 	app->addTask( Military::getTag( ), MilitaryPtr( new Military( ) ) );
 	app->addTask( NPC	  ::getTag( ), NPCPtr	  ( new NPC		( ) ) );

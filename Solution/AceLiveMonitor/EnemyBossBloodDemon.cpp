@@ -1,4 +1,6 @@
 #include "EnemyBossBloodDemon.h"
+#include "ItemFire.h"
+#include "Storage.h"
 
 const int WAIT_ANIM_TIME = 10;
 
@@ -8,6 +10,9 @@ EnemyBoss( pos, BIG_CHAR_GRAPH_SIZE ) {
 
 
 EnemyBossBloodDemon::~EnemyBossBloodDemon( ) {
+	ItemPtr item = ItemPtr( new ItemFire( getPos( ) ) );
+	item->setState( STATE_EVENT );
+	Storage::getTask( )->add( item );
 }
 
 void EnemyBossBloodDemon::act( ) {

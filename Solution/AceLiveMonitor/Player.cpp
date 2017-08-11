@@ -9,6 +9,7 @@
 #include "MapEvent.h"
 #include "Military.h"
 #include "Enemy.h"
+#include "Storage.h"
 
 //画像サイズ
 const int PLAYER_FOOT = 7;
@@ -31,7 +32,7 @@ Character( pos, NORMAL_CHAR_GRAPH_SIZE ),
 _charge_count( 0 ),
 _damege_count( 0 ),
 _over_charge_time( -1 ),
-_id( player_id ),
+_id( 0 ),
 _action( ACTION_WAIT ) {
 	setRadius( 25 );
 	setDir( DIR_RIGHT );
@@ -516,9 +517,11 @@ void Player::updateState( ) {
 			setPos( Vector( family->getCameraPos( ) + SCREEN_WIDTH / 2, 0 ) );
 			setVec( Vector( ) );
 		}
-		//ボスが倒れている場合 [退場]
+		//ボスが倒れている場合 && アイテムが無い[退場]
 		MapEventPtr map_event( MapEvent::getTask( ) );
+		StoragePtr storage( Storage::getTask( ) );
 		if ( !Military::getTask( )->getBoss( ) &&
+			 !storage->isExistanceEventItem( ) &&
 			 map_event->getType( ) < MapEvent::TYPE_SHOP ) {
 			setState( STATE_MAIN );
 			map_event->setType( MapEvent::TYPE_TITLE );

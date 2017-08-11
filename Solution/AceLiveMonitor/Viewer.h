@@ -10,6 +10,7 @@ PTR( ViewerArmoury );
 PTR( ViewerMilitary );
 PTR( ViewerEvent );
 PTR( ViewerStatus );
+PTR( ViewerStorage );
 
 PTR( ViewerDebug );
 
@@ -31,6 +32,7 @@ private:
 	ViewerMilitaryConstPtr _viewer_military;
 	ViewerStatusConstPtr _viewer_status;
 	ViewerEventConstPtr _viewer_event;
+	ViewerStoragePtr _viewer_storage;
 
 	ViewerDebugConstPtr _viewer_debug;
 };

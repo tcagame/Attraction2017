@@ -266,6 +266,16 @@
     <ClCompile Include="NPCMermaid.cpp">
       <Filter>NPC</Filter>
     </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="Storage.cpp" />
+    <ClCompile Include="ViewerStorage.cpp">
+      <Filter>Viewer</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemFire.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -532,6 +542,16 @@
     <ClInclude Include="NPCMermaid.h">
       <Filter>NPC</Filter>
     </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Storage.h" />
+    <ClInclude Include="ViewerStorage.h">
+      <Filter>Viewer</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemFire.h">
+      <Filter>Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">
@@ -551,6 +571,9 @@
     </Filter>
     <Filter Include="NPC">
       <UniqueIdentifier>{23277578-7733-48ca-bde2-9b3e53490df2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Item">
+      <UniqueIdentifier>{ef8c8990-cea0-46b9-b95b-6fed73e02411}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

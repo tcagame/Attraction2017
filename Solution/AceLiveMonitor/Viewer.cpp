@@ -9,6 +9,7 @@
 #include "ViewerMilitary.h"
 #include "ViewerStatus.h"
 #include "ViewerEvent.h"
+#include "ViewerStorage.h"
 
 #include "ViewerDebug.h"
 
@@ -33,6 +34,7 @@ void Viewer::initialize( ) {
 	_viewer_military	= ViewerMilitaryPtr	( new ViewerMilitary( impact ) );
 	_viewer_event		= ViewerEventPtr	( new ViewerEvent );
 	_viewer_status		= ViewerStatusPtr	( new ViewerStatus );
+	_viewer_storage		= ViewerStoragePtr  ( new ViewerStorage );
 
 	_viewer_debug = ViewerDebugPtr( new ViewerDebug );
 }
@@ -48,6 +50,7 @@ void Viewer::update( ) {
 	_viewer_status->draw( );
 	_viewer_street->draw( ViewerStreet::LAYER_BACK );
 	_viewer_military->draw( );
+	_viewer_storage->draw( );
 	_viewer_family->draw( );
 	_viewer_armoury->draw( );
 	_viewer_street->draw( ViewerStreet::LAYER_FRONT );
