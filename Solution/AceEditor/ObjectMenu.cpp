@@ -29,8 +29,8 @@ const int BLOCK_Y = 42;
 const int BLOCK_DRAW_SIZE = 64;
 const int BLOCK_WIDTH_NUM = 3;
 
-const int ENEMY_WIDTH_NUM = 3;
-const int ENEMY_HEIGHT_NUM = 2;
+const int ENEMY_WIDTH_NUM = 5;
+const int ENEMY_HEIGHT_NUM = 3;
 
 const int EVENT_SPRITE_SIZE = 32;
 const int EVENT_DRAW_SIZE = 64;
