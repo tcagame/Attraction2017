@@ -39,6 +39,7 @@ void RockMilitary::update( ) {
 				} else {
 					int force = -enemy->getForce( );
 					player->damage( force );
+					player->back( );
 				}
 			}
 		}

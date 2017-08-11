@@ -3,7 +3,7 @@
 
 
 RockEnemyGhost::RockEnemyGhost( const Vector& pos ) :
-RockEnemy( pos, DOLL_GHOST, false ) {
+RockEnemy( pos, DOLL_GHOST, 1, 10, 10, false, false ) {
 }
 
 

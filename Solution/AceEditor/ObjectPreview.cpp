@@ -5,7 +5,7 @@
 #include "Data.h"
 #include "ObjectCursor.h"
 
-ObjectPreview::ObjectPreview( DataConstPtr data, ObjectCursorConstPtr object_cursor, ImagePtr enemy_midium_image, ImagePtr enemy_big_image, ImagePtr enemy_wide_image, ImagePtr image_event ) :
+ObjectPreview::ObjectPreview( DataConstPtr data, ObjectCursorConstPtr object_cursor, ImagePtr enemy_midium_image, ImagePtr enemy_big_image, ImagePtr enemy_wide_image, ImagePtr enemy_small_image, ImagePtr image_event ) :
 _data( data ),
 _object_cursor( object_cursor ),
 _event( image_event ) {
@@ -15,6 +15,7 @@ _event( image_event ) {
 	_enemy[ GRAPH_ENEMY_MIDIUM ] = enemy_midium_image;
 	_enemy[ GRAPH_ENEMY_BIG ] = enemy_big_image;
 	_enemy[ GRAPH_ENEMY_WIDE ] = enemy_wide_image;
+	_enemy[ GRAPH_ENEMY_SMALL ] = enemy_small_image;
 }
 
 ObjectPreview::~ObjectPreview( ) {
@@ -68,6 +69,11 @@ void ObjectPreview::draw( ) const {
 			}
 			if ( _data->getObject( ox, oy ) == OBJECT_WHITE_MIST ) {
 				_enemy[ GRAPH_ENEMY_MIDIUM ]->setRect( RECT_WHITE_MIST.tx, RECT_WHITE_MIST.ty, NORMAL_CHAR_GRAPH_SIZE, NORMAL_CHAR_GRAPH_SIZE );
+				_enemy[ GRAPH_ENEMY_MIDIUM ]->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE - ( NORMAL_CHAR_GRAPH_SIZE / 2 ), PREVIEW_Y + j * OBJECT_CHIP_SIZE - ( NORMAL_CHAR_GRAPH_SIZE - OBJECT_CHIP_SIZE ) );
+				_enemy[ GRAPH_ENEMY_MIDIUM ]->draw( );
+			}
+			if ( _data->getObject( ox, oy ) == OBJECT_GRAY_MIST ) {
+				_enemy[ GRAPH_ENEMY_MIDIUM ]->setRect( RECT_GRAY_MIST.tx, RECT_GRAY_MIST.ty, NORMAL_CHAR_GRAPH_SIZE, NORMAL_CHAR_GRAPH_SIZE );
 				_enemy[ GRAPH_ENEMY_MIDIUM ]->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE - ( NORMAL_CHAR_GRAPH_SIZE / 2 ), PREVIEW_Y + j * OBJECT_CHIP_SIZE - ( NORMAL_CHAR_GRAPH_SIZE - OBJECT_CHIP_SIZE ) );
 				_enemy[ GRAPH_ENEMY_MIDIUM ]->draw( );
 			}
@@ -165,6 +171,36 @@ void ObjectPreview::draw( ) const {
 				_enemy[ GRAPH_ENEMY_BIG ]->setRect( RECT_TREE.tx, RECT_TREE.ty, BIG_CHAR_GRAPH_SIZE, BIG_CHAR_GRAPH_SIZE );
 				_enemy[ GRAPH_ENEMY_BIG ]->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE - ( BIG_CHAR_GRAPH_SIZE / 2 ), PREVIEW_Y + j * OBJECT_CHIP_SIZE - ( BIG_CHAR_GRAPH_SIZE - OBJECT_CHIP_SIZE ) );
 				_enemy[ GRAPH_ENEMY_BIG ]->draw( );
+			}
+			if ( _data->getObject( ox, oy ) == OBJECT_GAMA ) {
+				_enemy[ GRAPH_ENEMY_BIG ]->setRect( RECT_GAMA.tx, RECT_GAMA.ty, BIG_CHAR_GRAPH_SIZE, BIG_CHAR_GRAPH_SIZE );
+				_enemy[ GRAPH_ENEMY_BIG ]->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE - ( BIG_CHAR_GRAPH_SIZE / 2 ), PREVIEW_Y + j * OBJECT_CHIP_SIZE - ( BIG_CHAR_GRAPH_SIZE - OBJECT_CHIP_SIZE ) );
+				_enemy[ GRAPH_ENEMY_BIG ]->draw( );
+			}
+			if ( _data->getObject( ox, oy ) == OBJECT_FLOG ) {
+				_enemy[ GRAPH_ENEMY_SMALL ]->setRect( RECT_FLOG.tx, RECT_FLOG.ty, SMALL_CHAR_GRAPH_SIZE, SMALL_CHAR_GRAPH_SIZE );
+				_enemy[ GRAPH_ENEMY_SMALL ]->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE - ( SMALL_CHAR_GRAPH_SIZE / 2 ), PREVIEW_Y + j * OBJECT_CHIP_SIZE - ( SMALL_CHAR_GRAPH_SIZE - OBJECT_CHIP_SIZE ) );
+				_enemy[ GRAPH_ENEMY_SMALL ]->draw( );
+			}
+			if ( _data->getObject( ox, oy ) == OBJECT_BAT ) {
+				_enemy[ GRAPH_ENEMY_SMALL ]->setRect( RECT_BAT.tx, RECT_BAT.ty, SMALL_CHAR_GRAPH_SIZE, SMALL_CHAR_GRAPH_SIZE );
+				_enemy[ GRAPH_ENEMY_SMALL ]->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE - ( SMALL_CHAR_GRAPH_SIZE / 2 ), PREVIEW_Y + j * OBJECT_CHIP_SIZE - ( SMALL_CHAR_GRAPH_SIZE - OBJECT_CHIP_SIZE ) );
+				_enemy[ GRAPH_ENEMY_SMALL ]->draw( );
+			}
+			if ( _data->getObject( ox, oy ) == OBJECT_STONE ) {
+				_enemy[ GRAPH_ENEMY_SMALL ]->setRect( RECT_STONE.tx, RECT_STONE.ty, SMALL_CHAR_GRAPH_SIZE, SMALL_CHAR_GRAPH_SIZE );
+				_enemy[ GRAPH_ENEMY_SMALL ]->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE - ( SMALL_CHAR_GRAPH_SIZE / 2 ), PREVIEW_Y + j * OBJECT_CHIP_SIZE - ( SMALL_CHAR_GRAPH_SIZE - OBJECT_CHIP_SIZE ) );
+				_enemy[ GRAPH_ENEMY_SMALL ]->draw( );
+			}
+			if ( _data->getObject( ox, oy ) == OBJECT_MOTH ) {
+				_enemy[ GRAPH_ENEMY_SMALL ]->setRect( RECT_MOTH.tx, RECT_MOTH.ty, SMALL_CHAR_GRAPH_SIZE, SMALL_CHAR_GRAPH_SIZE );
+				_enemy[ GRAPH_ENEMY_SMALL ]->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE - ( SMALL_CHAR_GRAPH_SIZE / 2 ), PREVIEW_Y + j * OBJECT_CHIP_SIZE - ( SMALL_CHAR_GRAPH_SIZE - OBJECT_CHIP_SIZE ) );
+				_enemy[ GRAPH_ENEMY_SMALL ]->draw( );
+			}
+			if ( _data->getObject( ox, oy ) == OBJECT_EYE_DEMON ) {
+				_enemy[ GRAPH_ENEMY_SMALL ]->setRect( RECT_EYE_DEMON.tx, RECT_EYE_DEMON.ty, SMALL_CHAR_GRAPH_SIZE, SMALL_CHAR_GRAPH_SIZE );
+				_enemy[ GRAPH_ENEMY_SMALL ]->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE - ( SMALL_CHAR_GRAPH_SIZE / 2 ), PREVIEW_Y + j * OBJECT_CHIP_SIZE - ( SMALL_CHAR_GRAPH_SIZE - OBJECT_CHIP_SIZE ) );
+				_enemy[ GRAPH_ENEMY_SMALL ]->draw( );
 			}
 
 			// オブジェクトブロック

@@ -7,7 +7,7 @@ PTR( ObjectEditor );
 
 class ObjectMenu {
 public:
-	ObjectMenu( ImagePtr image_menu, ImagePtr image_block, ImagePtr enemy_midium_image, ImagePtr enemy_big_image, ImagePtr enemy_wide_image, ImagePtr image_event, ObjectEditorPtr object_editor );
+	ObjectMenu( ImagePtr image_menu, ImagePtr image_block, ImagePtr enemy_midium_image, ImagePtr enemy_big_image, ImagePtr enemy_wide_image, ImagePtr enemy_small_image, ImagePtr image_event, ObjectEditorPtr object_editor );
 	virtual ~ObjectMenu( );
 public:
 	void update( );
@@ -25,6 +25,7 @@ private:
 		GRAPH_ENEMY_MIDIUM,
 		GRAPH_ENEMY_BIG,
 		GRAPH_ENEMY_WIDE,
+		GRAPH_ENEMY_SMALL,
 		MAX_GRAPH_ENEMY,
 	};
 private:

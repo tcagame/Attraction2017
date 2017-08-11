@@ -49,6 +49,7 @@ void Editor::initialize( ) {
 	ImagePtr enemy_midium_image = drawer->createImage( "Enemy/enemy_medium.png" );
 	ImagePtr enemy_big_image = drawer->createImage( "Enemy/enemy_big.png" );
 	ImagePtr enemy_wide_image = drawer->createImage( "Enemy/enemy_wide.png" );
+	ImagePtr enemy_small_image = drawer->createImage( "Enemy/enemy_small.png" );
 	ImagePtr event_image = drawer->createImage( "Menu/event.png" );
 	GroundPtr ground = GroundPtr( new Ground );
 	StructurePtr structure = StructurePtr( new Structure );
@@ -68,8 +69,8 @@ void Editor::initialize( ) {
 	_object_cursor  = ObjectCursorPtr ( new ObjectCursor ( _data ) );
 	_object_editor  = ObjectEditorPtr ( new ObjectEditor ( _data, _object_cursor ) );
 	_object_guide   = ObjectGuidePtr  ( new ObjectGuide  ( block_image, _data, _object_cursor ) );
-	_object_preview = ObjectPreviewPtr( new ObjectPreview( _data, _object_cursor, enemy_midium_image, enemy_big_image, enemy_wide_image, event_image ) );
-	_object_menu    = ObjectMenuPtr   ( new ObjectMenu   ( menu_image, block_image, enemy_midium_image, enemy_big_image, enemy_wide_image, event_image, _object_editor ) );
+	_object_preview = ObjectPreviewPtr( new ObjectPreview( _data, _object_cursor, enemy_midium_image, enemy_big_image, enemy_wide_image, enemy_small_image, event_image ) );
+	_object_menu    = ObjectMenuPtr   ( new ObjectMenu   ( menu_image, block_image, enemy_midium_image, enemy_big_image, enemy_wide_image, enemy_small_image, event_image, _object_editor ) );
 	_information    = InformationPtr  ( new Information  ( _data, _chip_cursor, _object_cursor, _chip_editor, _object_editor ) );
 }
 

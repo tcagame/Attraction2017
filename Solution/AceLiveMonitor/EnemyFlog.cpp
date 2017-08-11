@@ -1,28 +1,28 @@
-#include "EnemyOnyudo.h"
+#include "EnemyFlog.h"
 
 const int WAIT_ANIM_TIME = 5;
-const int GRAPH_WIDTH_NUM = 10;
 
-EnemyOnyudo::EnemyOnyudo( const Vector& pos ) :
-Enemy( pos, BIG_CHAR_GRAPH_SIZE ) {
-	setRadius( 48 );
+EnemyFlog::EnemyFlog( const Vector& pos ) :
+Enemy( pos, SMALL_CHAR_GRAPH_SIZE ) {
+	setRadius( 16 );
 }
 
 
-EnemyOnyudo::~EnemyOnyudo( ) {
+EnemyFlog::~EnemyFlog( ) {
 }
 
-void EnemyOnyudo::act( ) {
+void EnemyFlog::act( ) {
+
 }
 
-Chip EnemyOnyudo::getChip( ) const {
+Chip EnemyFlog::getChip( ) const {
 	const int ANIM[ ] = {
-		0, 1, 2, 3, 4, 5, 6, 7
+		0, 1, 2, 3, 4
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	Chip chip = Chip( );
-	chip.tx = ( ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ] % GRAPH_WIDTH_NUM ) * 128;
-	chip.ty = 1 * 128;
+	chip.tx = ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ] * 32;
+	chip.ty = 1 * 32;
 	chip.size = getChipSize( );
 	
 	Vector pos = getPos( );

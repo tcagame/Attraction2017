@@ -51,6 +51,7 @@ const Rect enemies_rect[ ] = {
 	RECT_GHOST,
 	RECT_ONE_EYE_SNAKE,
 	RECT_WHITE_MIST,
+	RECT_GRAY_MIST,
 	RECT_STONE_FACE,
 	RECT_NO_NECK_GHOST,
 	RECT_SHISHIMAI_DEMON,
@@ -70,10 +71,16 @@ const Rect enemies_rect[ ] = {
 	RECT_ONYUDO,
 	RECT_JIZO,
 	RECT_TREE,
+	RECT_GAMA,
+	RECT_FLOG,
+	RECT_BAT,
+	RECT_STONE,
+	RECT_MOTH,
+	RECT_EYE_DEMON,
 };
 const int MAX_ENEMY = sizeof( enemies_rect ) / sizeof( enemies_rect[ 0 ] );
 
-ObjectMenu::ObjectMenu( ImagePtr image_menu, ImagePtr image_block, ImagePtr enemy_midium_image, ImagePtr enemy_big_image, ImagePtr enemy_wide_image, ImagePtr image_event, ObjectEditorPtr object_editor ) :
+ObjectMenu::ObjectMenu( ImagePtr image_menu, ImagePtr image_block, ImagePtr enemy_midium_image, ImagePtr enemy_big_image, ImagePtr enemy_wide_image, ImagePtr enemy_small_image, ImagePtr image_event, ObjectEditorPtr object_editor ) :
 _active( false ),
 _select_tag( TAG_BLOCK ),
 _object_editor( object_editor ),
@@ -84,6 +91,7 @@ _page( 0 ) {
 	_enemy[ GRAPH_ENEMY_MIDIUM ] = enemy_midium_image;
 	_enemy[ GRAPH_ENEMY_BIG ] = enemy_big_image;
 	_enemy[ GRAPH_ENEMY_WIDE ] = enemy_wide_image;
+	_enemy[ GRAPH_ENEMY_SMALL ] = enemy_small_image;
 }
 
 ObjectMenu::~ObjectMenu( ) {
@@ -224,61 +232,82 @@ unsigned char ObjectMenu::getEnemy( int idx ) const {
 		result = OBJECT_WHITE_MIST;
 		break;
 	case 9:
-		result = OBJECT_STONE_FACE;
+		result = OBJECT_GRAY_MIST;
 		break;
 	case 10:
-		result = OBJECT_NO_NECK_GHOST;
+		result = OBJECT_STONE_FACE;
 		break;
 	case 11:
-		result = OBJECT_SHISHIMAI_DEMON;
+		result = OBJECT_NO_NECK_GHOST;
 		break;
 	case 12:
-		result = OBJECT_SHISHIMAI;
+		result = OBJECT_SHISHIMAI_DEMON;
 		break;
 	case 13:
-		result = OBJECT_ARCHER;
+		result = OBJECT_SHISHIMAI;
 		break;
 	case 14:
-		result = OBJECT_HAND;
+		result = OBJECT_ARCHER;
 		break;
 	case 15:
-		result = OBJECT_RED_BIRD;
+		result = OBJECT_HAND;
 		break;
 	case 16:
-		result = OBJECT_BLUE_MONK;
+		result = OBJECT_RED_BIRD;
 		break;
 	case 17:
-		result = OBJECT_GREEN_ZOMBIE;
+		result = OBJECT_BLUE_MONK;
 		break;
 	case 18:
-		result = OBJECT_HUG_DEMON;
+		result = OBJECT_GREEN_ZOMBIE;
 		break;
 	case 19:
-		result = OBJECT_SWAMP_ZOMBIE_A;
+		result = OBJECT_HUG_DEMON;
 		break;
 	case 20:
-		result = OBJECT_SWAMP_ZOMBIE_B;
+		result = OBJECT_SWAMP_ZOMBIE_A;
 		break;
 	case 21:
-		result = OBJECT_SWAMP_ZOMBIE_C;
+		result = OBJECT_SWAMP_ZOMBIE_B;
 		break;
 	case 22:
-		result = OBJECT_SKELETON;
+		result = OBJECT_SWAMP_ZOMBIE_C;
 		break;
 	case 23:
-		result = OBJECT_LADY;
+		result = OBJECT_SKELETON;
 		break;
 	case 24:
-		result = OBJECT_WIND;
+		result = OBJECT_LADY;
 		break;
 	case 25:
-		result = OBJECT_ONYUDO;
+		result = OBJECT_WIND;
 		break;
 	case 26:
-		result = OBJECT_JIZO;
+		result = OBJECT_ONYUDO;
 		break;
 	case 27:
+		result = OBJECT_JIZO;
+		break;
+	case 28:
 		result = OBJECT_TREE;
+		break;
+	case 29:
+		result = OBJECT_GAMA;
+		break;
+	case 30:
+		result = OBJECT_FLOG;
+		break;
+	case 31:
+		result = OBJECT_BAT;
+		break;
+	case 32:
+		result = OBJECT_STONE;
+		break;
+	case 33:
+		result = OBJECT_MOTH;
+		break;
+	case 34:
+		result = OBJECT_EYE_DEMON;
 		break;
 	default:
 		result = OBJECT_NONE;
@@ -420,20 +449,25 @@ void ObjectMenu::draw( ) const {
 					if ( idx != -1 ) {
 						int sx = ( int )_pos.x + BLOCK_X + j * NORMAL_CHAR_GRAPH_SIZE;
 						int sy = ( int )_pos.y + BLOCK_Y + i * NORMAL_CHAR_GRAPH_SIZE;
-						if ( idx < 22 ) {
+						if ( idx < 23 ) {
 							_enemy[ GRAPH_ENEMY_MIDIUM ]->setRect( enemies_rect[ idx ].tx, enemies_rect[ idx ].ty, NORMAL_CHAR_GRAPH_SIZE, NORMAL_CHAR_GRAPH_SIZE );
 							_enemy[ GRAPH_ENEMY_MIDIUM ]->setPos( sx, sy, sx + NORMAL_CHAR_GRAPH_SIZE, sy + NORMAL_CHAR_GRAPH_SIZE );
 							_enemy[ GRAPH_ENEMY_MIDIUM ]->draw( );
 						}
-						if ( idx < 24 && idx > 21 ) {
+						if ( idx < 25 && idx > 22 ) {
 							_enemy[ GRAPH_ENEMY_WIDE ]->setRect( enemies_rect[ idx ].tx, enemies_rect[ idx ].ty, NORMAL_CHAR_GRAPH_SIZE, NORMAL_CHAR_GRAPH_SIZE );
 							_enemy[ GRAPH_ENEMY_WIDE ]->setPos( sx, sy, sx + NORMAL_CHAR_GRAPH_SIZE, sy + NORMAL_CHAR_GRAPH_SIZE );
 							_enemy[ GRAPH_ENEMY_WIDE ]->draw( );
 						}
-						if ( 23 < idx && idx < 28 ) {
+						if ( 24 < idx && idx < 30 ) {
 							_enemy[ GRAPH_ENEMY_BIG ]->setRect( enemies_rect[ idx ].tx, enemies_rect[ idx ].ty, BIG_CHAR_GRAPH_SIZE, BIG_CHAR_GRAPH_SIZE );
 							_enemy[ GRAPH_ENEMY_BIG ]->setPos( sx, sy, sx + NORMAL_CHAR_GRAPH_SIZE, sy + NORMAL_CHAR_GRAPH_SIZE );
 							_enemy[ GRAPH_ENEMY_BIG ]->draw( );
+						}
+						if ( 29 < idx && idx < 35 ) {
+							_enemy[ GRAPH_ENEMY_SMALL ]->setRect( enemies_rect[ idx ].tx, enemies_rect[ idx ].ty, SMALL_CHAR_GRAPH_SIZE, SMALL_CHAR_GRAPH_SIZE );
+							_enemy[ GRAPH_ENEMY_SMALL ]->setPos( sx, sy, sx + NORMAL_CHAR_GRAPH_SIZE, sy + NORMAL_CHAR_GRAPH_SIZE );
+							_enemy[ GRAPH_ENEMY_SMALL ]->draw( );
 						}
 					}
 				}

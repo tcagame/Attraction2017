@@ -7,7 +7,7 @@ PTR( ObjectCursor );
 
 class ObjectPreview {
 public:
-	ObjectPreview( DataConstPtr data, ObjectCursorConstPtr object_cursor, ImagePtr enemy_midium_image, ImagePtr enemy_big_image, ImagePtr enemy_wide_image, ImagePtr image_event );
+	ObjectPreview( DataConstPtr data, ObjectCursorConstPtr object_cursor, ImagePtr enemy_midium_image, ImagePtr enemy_big_image, ImagePtr enemy_wide_image, ImagePtr enemy_small_image, ImagePtr image_event );
 	virtual ~ObjectPreview( );
 public:
 	void draw( ) const;
@@ -16,6 +16,7 @@ private:
 		GRAPH_ENEMY_MIDIUM,
 		GRAPH_ENEMY_BIG,
 		GRAPH_ENEMY_WIDE,
+		GRAPH_ENEMY_SMALL,
 		MAX_GRAPH_ENEMY,
 	};
 private:
