@@ -3,7 +3,7 @@
 const int WAIT_ANIM_TIME = 10;
 
 NPCMiko::NPCMiko( const Vector& pos ) :
-Character( pos, BIG_CHAR_GRAPH_SIZE ) {
+Character( pos, BIG_CHAR_GRAPH_SIZE, false ) {
 }
 
 
