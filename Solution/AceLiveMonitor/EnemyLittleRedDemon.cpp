@@ -20,7 +20,7 @@ Chip EnemyLittleRedDemon::getChip( ) const {
 	chip.sy2 = chip.sy1 + chip.size;
 	
 	const int ANIM[ ] = {
-		6, 7, 8, 9, 10, 11
+		9, 10, 11, 12, 13, 14
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	int cx = ANIM[ ( getActCount( ) / WAIT_ANIM_TIME ) % anim_size ];
