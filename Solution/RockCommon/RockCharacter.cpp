@@ -8,14 +8,15 @@
 #include "RockMilitary.h"
 #include "RockEnemy.h"
 
+const double BOUND_POWER = 1.0;
 
-
-RockCharacter::RockCharacter( const Vector& pos, DOLL doll, bool mass ) :
+RockCharacter::RockCharacter( const Vector& pos, DOLL doll, int radius, bool mass, bool head ) :
 _pos( pos ),
 _doll( doll ),
 _mass( mass ),
 _act_count( 0 ),
-_radius( 10 ) {
+_radius( radius ),
+_head( head ) {
 }
 
 
@@ -64,7 +65,6 @@ void RockCharacter::update( ) {
 			_standing = true;
 		}
 	}
-	collision( );
 	_pos += _vec;
 }
 
@@ -96,6 +96,10 @@ bool RockCharacter::isStanding( ) const {
 	return _standing;
 }
 
+bool RockCharacter::isHead( ) const {
+	return _head;
+}
+
 void RockCharacter::setActCount( int count ) {
 	_act_count = count;
 }
@@ -112,33 +116,72 @@ int RockCharacter::getRadius( ) const {
 	return _radius;
 }
 
-void RockCharacter::collision( ) {
-	// player Ç†ÇΩÇËîªíË
-	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
-		RockPlayerPtr target = RockFamily::getTask( )->getPlayer( i );
-		if ( ( target->getPos( ) - _pos ).getLength2( ) < 1 ) {
-			continue; // é©ï™ÇæÇ¡ÇΩÇÁîªíËÇµÇ»Ç¢
-		}
-		if ( ( target->getPos( ) - _pos ).getLength2( ) > COLLISION_RANGE * COLLISION_RANGE ) {
-			continue; // ó£ÇÍÇƒÇ¢ÇΩÇÁîªíËÇµÇ»Ç¢
-		}
-
-		double range = target->getRadius( ) + _radius;
-		{//è„â∫îªíË
-			Vector diff = target->getPos( ) - ( _pos + Vector( 0, _vec.y, 0 ) );
-			if ( diff.getLength2( ) < range * range ) {
-				_vec.y = 0;
-			}
-		}
-		{//â°îªíË
-			Vector diff = target->getPos( ) - ( _pos + Vector( _vec.x, 0, _vec.z ) );
-			if ( diff.getLength2( ) < range * range ) {
-				_vec.x = 0;
-				_vec.z = 0;
-			}
-		}
-	}
+void RockCharacter::damage( int force ) {
 }
 
-void RockCharacter::damage( int force ) {
+void RockCharacter::bound( ) {
+	_vec.y = BOUND_POWER;
+}
+
+bool RockCharacter::isOnHead( RockCharacterConstPtr target ) const {
+	if ( _vec.y >= 0 ) {
+		return false;
+	}
+	if ( !target->isHead( ) ) {
+		return false;
+	}
+	Vector target_pos = target->getPos( );
+	double length = ( target_pos - _pos ).getLength2( );
+	if ( length < 0.1 ) {
+		// é©ï™ÇæÇ¡ÇΩÇÁîªíËÇµÇ»Ç¢
+		return false;
+	}
+	if ( length > COLLISION_RANGE * COLLISION_RANGE ) {
+		// ó£ÇÍÇƒÇ¢ÇΩÇÁîªíËÇµÇ»Ç¢
+		return false;
+	}
+		
+	double range = target->getRadius( ) + getRadius( );
+	{//è„â∫îªíË
+		Vector diff = target_pos - _pos;
+		if ( diff.getLength2( ) > range * range ) {
+			return false;
+		}
+	}
+	return true;
+}
+
+
+bool RockCharacter::isOverRapped( RockCharacterConstPtr target ) const {
+	bool result = false;
+	Vector target_pos = target->getPos( );
+		
+	double length = ( target_pos - _pos ).getLength2( );
+	if ( length < 0.1 ) {
+		// é©ï™ÇæÇ¡ÇΩÇÁîªíËÇµÇ»Ç¢
+		return false;
+	}
+	if ( length > COLLISION_RANGE * COLLISION_RANGE ) {
+		// ó£ÇÍÇƒÇ¢ÇΩÇÁîªíËÇµÇ»Ç¢
+		return false;
+	}
+	
+	double range = target->getRadius( ) + getRadius( );
+	{//è„â∫îªíË
+		Vector diff = target_pos - _pos;
+		if ( diff.getLength2( ) < range * range ) {
+			result = true;
+		}
+	}
+	{//â°îªíË
+		Vector diff = target_pos - _pos;
+		if ( diff.getLength2( ) < range * range ) {
+			result = true;
+		}
+	}
+	return result;
+}
+
+void RockCharacter::back( ) {
+	_pos -= _vec;
 }

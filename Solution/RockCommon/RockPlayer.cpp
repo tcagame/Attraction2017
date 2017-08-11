@@ -10,13 +10,13 @@
 #include "MessageSender.h"
 
 const double JUMP_POWER = 3.0;
-const double BOUND_POWER = 1.0;
 const double ANIM_SPEED = 0.5;
 const double MOVE_SPEED = 1.0;
 const double BRAKE_SPEED = 0.3;
+const int RADIUS = 20;
 
 RockPlayer::RockPlayer( StatusPtr status, const Vector& pos, int id ) :
-RockCharacter( pos, ( DOLL )( DOLL_TAROSUKE_WAIT + id * ROCK_PLAYER_MOTION_NUM ) ) {
+RockCharacter( pos, ( DOLL )( DOLL_TAROSUKE_WAIT + id * ROCK_PLAYER_MOTION_NUM ), RADIUS ) {
 	_id = id;
 	_status = status;
 	setAction( ACTION_WAIT );
@@ -221,45 +221,16 @@ double RockPlayer::getAnimTime( ) const {
 	return anim_time;
 }
 
-void RockPlayer::bound( ) {
-	Vector vec = getVec( );
-	vec.y = BOUND_POWER;
-	setVec( vec );
-	setAction( ACTION_JUMP );
-}
-
-bool RockPlayer::isOnHead( RockEnemyConstPtr target ) const {
-	Vector vec = getVec( );
-	if ( vec.y >= 0 ) {
-		return false;
-	}
-	if ( !target->isHead( ) ) {
-		return false;
-	}
-	Vector pos = getPos( );
-	Vector target_pos = target->getPos( );
-	double length = ( target_pos - pos ).getLength2( );
-	if ( length < 1 ) {
-		// Ž©•ª‚¾‚Á‚½‚ç”»’è‚µ‚È‚¢
-		return false;
-	}
-	if ( length > COLLISION_RANGE * COLLISION_RANGE ) {
-		// —£‚ê‚Ä‚¢‚½‚ç”»’è‚µ‚È‚¢
-		return false;
-	}
-		
-	double range = target->getRadius( ) + getRadius( );
-	{//ã‰º”»’è
-		Vector diff = target_pos - ( pos + Vector( 0, vec.y, 0 ) );
-		if ( diff.getLength2( ) > range * range ) {
-			return false;
-		}
-	}
-	return true;
-}
-
 void RockPlayer::damage( int force ) {
-	setPos( getPos( ) - getVec( ) );
 	MessageSender::getTask( )->sendMessage( _id, Message::COMMAND_POWER, &force );
 }
 
+void RockPlayer::bound( ) {
+	RockCharacter::bound( );
+	setAction( ACTION_JUMP );
+}
+
+
+void RockPlayer::back( ) {
+	setPos( getPos( ) - getVec( ) );
+}

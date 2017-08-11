@@ -1,18 +1,26 @@
 #pragma once
 #include "define.h"
 #include "mathmatics.h"
+#include "smart_ptr.h"
+
+PTR( RockCharacter );
 
 class RockCharacter {
 public:
-	RockCharacter( const Vector& pos, DOLL id, bool mass = true );
+	RockCharacter( const Vector& pos, DOLL id, int radius, bool mass = true, bool head = true );
 	virtual ~RockCharacter( );
 public:
 	DOLL getDoll( ) const;
 	void update( );
 	Vector getPos( ) const;
-	virtual double getAnimTime( ) const = 0;
 	int getRadius( ) const;
+	virtual double getAnimTime( ) const = 0;
 	virtual void damage( int force );
+	bool isHead( ) const;
+	bool isOnHead( RockCharacterConstPtr target ) const;
+	bool isOverRapped( RockCharacterConstPtr target ) const;
+	void back( );
+	virtual void bound( );
 protected:
 	virtual void act( ) = 0;
 	void setVec( const Vector& vec );
@@ -24,8 +32,6 @@ protected:
 	int getActCount( ) const;
 	void setRadius( int radius );
 private:
-	void collision( );
-private:
 	Vector _pos;
 	Vector _vec;
 	DOLL _doll;
@@ -33,5 +39,6 @@ private:
 	bool _standing;
 	int _radius;
 	int _act_count;
+	bool _head;
 };
 
