@@ -318,13 +318,15 @@
     <ClCompile Include="ItemFire.cpp">
       <Filter>Item</Filter>
     </ClCompile>
+    <ClCompile Include="ItemTree.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
     <ClInclude Include="Family.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MapEvent.h" />
-    <ClInclude Include="main.h" />
     <ClInclude Include="Military.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Shot.h" />
@@ -635,6 +637,9 @@
       <Filter>Item</Filter>
     </ClInclude>
     <ClInclude Include="ItemFire.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemTree.h">
       <Filter>Item</Filter>
     </ClInclude>
   </ItemGroup>

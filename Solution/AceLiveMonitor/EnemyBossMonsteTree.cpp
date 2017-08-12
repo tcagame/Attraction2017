@@ -1,6 +1,8 @@
 #include "EnemyBossMonsteTree.h"
 #include "EnemyBranch.h"
 #include "Military.h"
+#include "ItemTree.h"
+#include "Storage.h"
 
 const int ATTACK_TIME = 50;
 
@@ -13,7 +15,10 @@ EnemyBoss( pos, BIG_CHAR_GRAPH_SIZE ) {
 
 
 EnemyBossMonsteTree::~EnemyBossMonsteTree( ) {
-	_branch->damage( -1 );
+	_branch->isFinished( );
+	ItemPtr item = ItemPtr( new ItemTree( getPos( ) ) );
+	item->setState( STATE_EVENT );
+	Storage::getTask( )->add( item );
 }
 
 void EnemyBossMonsteTree::act( ) {

@@ -13,7 +13,6 @@ public:
 	Chip getChip( ) const;
 protected:
 	void act( );
-	void damage( int force );
 private:
 	std::list< EnemyPtr > _seeds;
 };
