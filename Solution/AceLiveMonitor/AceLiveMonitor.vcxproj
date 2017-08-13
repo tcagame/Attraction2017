@@ -89,7 +89,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(Solutiondir)../../Framework2017ver2;$(Solutiondir)AceCommon;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(Solutiondir)../../Framework2017ver2;$(Solutiondir)AceCommon</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -125,7 +125,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(Solutiondir)../../Framework2017ver2;$(Solutiondir)AceCommon;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(Solutiondir)../../Framework2017ver2;$(Solutiondir)AceCommon</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
