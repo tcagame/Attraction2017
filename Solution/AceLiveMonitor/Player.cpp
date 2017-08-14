@@ -279,7 +279,7 @@ void Player::actOnCamera( ) {
 	if ( getState( ) != STATE_EVENT ) {
 		x += ( int )family->getCameraPos( );
 	}
-	if ( getPos( ).x + getVec( ).x - getRadius( ) / 2 < x ) {
+	if ( getPos( ).x + getVec( ).x - getRadius( ) < x ) {
 		Vector pos( getPos( ) );
 		pos.x = x + getRadius( );
 		setPos( pos );

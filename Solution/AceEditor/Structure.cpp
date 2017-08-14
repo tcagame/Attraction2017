@@ -22,7 +22,7 @@ Structure::~Structure( ) {
 }
 
 ImagePtr Structure::getImage( int idx ) const {
-	if ( _image.size( ) <= idx ) {
+	if ( ( int )_image.size( ) <= idx ) {
 		return ImagePtr( );
 	}
 	return _image[ idx ];
