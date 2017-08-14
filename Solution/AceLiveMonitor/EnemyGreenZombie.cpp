@@ -2,6 +2,7 @@
 
 static const int WAIT_ANIM_TIME = 5;
 static const int MOVE_SPEED = 5;
+static const int JUMP_POWER = -50;
 
 EnemyGreenZombie::EnemyGreenZombie( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ),
@@ -20,7 +21,7 @@ void EnemyGreenZombie::act( ) {
 	if ( _before_pos.x == getPos( ).x ) {
 		_vec.x *= -1;
 		if ( isStanding( ) && _jump_count % 30 == 0 ) {
-			_vec.y += -50;
+			_vec.y += JUMP_POWER;
 		}
 		setVec( _vec );
 	}
