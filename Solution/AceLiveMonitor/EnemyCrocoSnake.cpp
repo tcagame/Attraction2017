@@ -1,10 +1,13 @@
 #include "EnemyCrocoSnake.h"
 
 static const int WAIT_ANIM_TIME = 5;
+static const int MOVE_SPEED = 1;
 
 EnemyCrocoSnake::EnemyCrocoSnake( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ) {
-	setRadius( 36 );
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ),
+_before_pos( Vector( ) ),
+_vec( Vector( MOVE_SPEED, 0 ) ) {
+	setRadius( 30 );
 }
 
 
@@ -12,7 +15,11 @@ EnemyCrocoSnake::~EnemyCrocoSnake( ) {
 }
 
 void EnemyCrocoSnake::act( ) {
-
+	if ( _before_pos.x == getPos( ).x ) {
+		_vec.x *= -1;
+		setVec( _vec );
+	}
+	_before_pos = getPos( );
 }
 
 Chip EnemyCrocoSnake::getChip( ) const {
