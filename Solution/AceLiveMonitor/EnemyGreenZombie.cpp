@@ -1,9 +1,13 @@
 #include "EnemyGreenZombie.h"
 
-const int WAIT_ANIM_TIME = 5;
+static const int WAIT_ANIM_TIME = 5;
+static const int MOVE_SPEED = 5;
 
 EnemyGreenZombie::EnemyGreenZombie( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ) {
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ),
+_before_pos( Vector( ) ),
+_vec( Vector( MOVE_SPEED, 0 ) ),
+_jump_count( 1 ) {
 	setRadius( 36 );
 }
 
@@ -12,7 +16,15 @@ EnemyGreenZombie::~EnemyGreenZombie( ) {
 }
 
 void EnemyGreenZombie::act( ) {
-
+	_jump_count++;
+	if ( _before_pos.x == getPos( ).x ) {
+		_vec.x *= -1;
+		if ( isStanding( ) && _jump_count % 30 == 0 ) {
+			_vec.y += -50;
+		}
+		setVec( _vec );
+	}
+	_before_pos = getPos( );
 }
 
 Chip EnemyGreenZombie::getChip( ) const {
