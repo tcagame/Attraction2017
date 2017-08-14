@@ -1,9 +1,12 @@
 #include "EnemyMoth.h"
 
 const int WAIT_ANIM_TIME = 5;
+const int FLOAT_RANGE = 4;
 
 EnemyMoth::EnemyMoth( const Vector& pos ) :
-Enemy( pos, SMALL_CHAR_GRAPH_SIZE, false ) {
+Enemy( pos, SMALL_CHAR_GRAPH_SIZE, false ),
+_vy( 0 ),
+_dir( 1 ) {
 	setRadius( 16 );
 }
 
@@ -12,7 +15,15 @@ EnemyMoth::~EnemyMoth( ) {
 }
 
 void EnemyMoth::act( ) {
+	_vy += _dir;
+	setVec( Vector( 0, _vy ) );
 
+	if ( _vy < -FLOAT_RANGE ) {
+		_dir = 1;
+	}
+	if ( _vy > FLOAT_RANGE ) {
+		_dir = -1;
+	}
 }
 
 Chip EnemyMoth::getChip( ) const {

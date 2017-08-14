@@ -16,9 +16,8 @@ EnemyWhiteMist::~EnemyWhiteMist( ) {
 }
 
 void EnemyWhiteMist::act( ) {
-	Vector move_speed( -MOVE_SPEED, _vy );
 	_vy += _dir;
-	setVec( move_speed );
+	setVec( Vector( -MOVE_SPEED, _vy ) );
 
 	if ( _vy < -FLOAT_RANGE ) {
 		_dir = 1;
