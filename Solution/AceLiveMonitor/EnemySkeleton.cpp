@@ -12,6 +12,8 @@ EnemySkeleton::~EnemySkeleton( ) {
 }
 
 void EnemySkeleton::act( ) {
+	Vector move( -3, 0 );
+	setVec( move );
 }
 
 Chip EnemySkeleton::getChip( ) const {

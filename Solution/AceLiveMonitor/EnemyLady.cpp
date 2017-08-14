@@ -13,7 +13,8 @@ EnemyLady::~EnemyLady( ) {
 }
 
 void EnemyLady::act( ) {
-
+	Vector move( -3, 0 );
+	setVec( move );
 }
 
 Chip EnemyLady::getChip( ) const {
