@@ -1,10 +1,14 @@
 #include "EnemyStone.h"
 
 const int WAIT_ANIM_TIME = 5;
+const int MOVE_SPEED = 5;
 
 EnemyStone::EnemyStone( const Vector& pos ) :
-Enemy( pos, SMALL_CHAR_GRAPH_SIZE ) {
+Enemy( pos, SMALL_CHAR_GRAPH_SIZE ),
+_before_pos( Vector( ) ),
+_vec( Vector( -MOVE_SPEED, 2 ) ) {
 	setRadius( 16 );
+	setVec( _vec );
 }
 
 
@@ -12,7 +16,11 @@ EnemyStone::~EnemyStone( ) {
 }
 
 void EnemyStone::act( ) {
-
+	if ( _before_pos.x == getPos( ).x ) {
+		_vec.x *= -1;
+		setVec( _vec );
+	}
+	_before_pos = getPos( );
 }
 
 Chip EnemyStone::getChip( ) const {
