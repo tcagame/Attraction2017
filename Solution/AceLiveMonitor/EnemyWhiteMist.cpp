@@ -1,9 +1,13 @@
 #include "EnemyWhiteMist.h"
 
 const int WAIT_ANIM_TIME = 5;
+const int MOVE_SPEED = 2;
+const int FLOAT_RANGE = 10;
 
 EnemyWhiteMist::EnemyWhiteMist( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, false ) {
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, false ),
+_vy( 0 ),
+_dir( 1 ) {
 	setRadius( 36 );
 }
 
@@ -12,7 +16,16 @@ EnemyWhiteMist::~EnemyWhiteMist( ) {
 }
 
 void EnemyWhiteMist::act( ) {
+	Vector move_speed( -MOVE_SPEED, _vy );
+	_vy += _dir;
+	setVec( move_speed );
 
+	if ( _vy < -FLOAT_RANGE ) {
+		_dir = 1;
+	}
+	if ( _vy > FLOAT_RANGE ) {
+		_dir = -1;
+	}
 }
 
 Chip EnemyWhiteMist::getChip( ) const {
