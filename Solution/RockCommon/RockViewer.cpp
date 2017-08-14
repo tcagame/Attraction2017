@@ -9,6 +9,9 @@
 #include "RockPlayer.h"
 #include "RockClientInfo.h"
 #include "Status.h"
+#include "Drawer.h"
+#include "RockArmoury.h"
+#include "RockShot.h"
 
 RockViewerPtr RockViewer::getTask( ) {
 	return std::dynamic_pointer_cast< RockViewer >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -29,7 +32,7 @@ void RockViewer::update( ) {
 	drawMap( );
 	drawEnemy( );
 	drawPlayer( );
-
+	drawShot( );
 }
 
 void RockViewer::drawMap( ) const {
@@ -86,3 +89,22 @@ void RockViewer::drawPlayer( ) const {
 	}
 }
 
+
+void RockViewer::drawShot( ) const {
+	DrawerPtr drawer( Drawer::getTask( ) );
+	RockArmouryPtr armoury( RockArmoury::getTask( ) );
+	std::list< RockShotPtr > shots = armoury->getShots( );
+	std::list< RockShotPtr >::const_iterator ite = shots.begin( );
+	while ( ite != shots.end( ) ) {
+		RockShotPtr shot = *ite;
+		if ( !shot ) {
+			ite++;
+			continue;
+		}
+
+		int handle = shot->getEffectHandle( );
+		Vector pos = shot->getPos( );
+		drawer->drawEffect( handle, pos );
+		ite++;
+	}
+}

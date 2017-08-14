@@ -177,6 +177,7 @@
     <ClInclude Include="define.h" />
     <ClInclude Include="Message.h" />
     <ClInclude Include="MessageSender.h" />
+    <ClInclude Include="RockArmoury.h" />
     <ClInclude Include="RockCharacter.h" />
     <ClInclude Include="RockClientInfo.h" />
     <ClInclude Include="RockDollHouse.h" />
@@ -188,11 +189,13 @@
     <ClInclude Include="RockMap.h" />
     <ClInclude Include="RockMilitary.h" />
     <ClInclude Include="RockPlayer.h" />
+    <ClInclude Include="RockShot.h" />
     <ClInclude Include="RockViewer.h" />
     <ClInclude Include="Status.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MessageSender.cpp" />
+    <ClCompile Include="RockArmoury.cpp" />
     <ClCompile Include="RockCharacter.cpp" />
     <ClCompile Include="RockClientInfo.cpp" />
     <ClCompile Include="RockDollHouse.cpp" />
@@ -204,6 +207,7 @@
     <ClCompile Include="RockMap.cpp" />
     <ClCompile Include="RockMilitary.cpp" />
     <ClCompile Include="RockPlayer.cpp" />
+    <ClCompile Include="RockShot.cpp" />
     <ClCompile Include="RockViewer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
