@@ -9,5 +9,8 @@ public:
 	Chip getChip( ) const;
 protected:
 	void act( );
+private:
+	int _vy;
+	int _dir;
 };
 

@@ -1,10 +1,13 @@
 #include "EnemyBlueMonk.h"
 
 const int WAIT_ANIM_TIME = 5;
+const int MOVE_SPEED = 2;
 
 EnemyBlueMonk::EnemyBlueMonk( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ) {
-	setRadius( 36 );
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ),
+_before_pos( Vector( ) ),
+_vec( Vector( MOVE_SPEED, 0 ) ) {
+	setRadius( 30 );
 }
 
 
@@ -12,12 +15,16 @@ EnemyBlueMonk::~EnemyBlueMonk( ) {
 }
 
 void EnemyBlueMonk::act( ) {
-
+	if ( _before_pos.x == getPos( ).x ) {
+		_vec.x *= -1;
+		setVec( _vec );
+	}
+	_before_pos = getPos( );
 }
 
 Chip EnemyBlueMonk::getChip( ) const {
 	const int ANIM[ ] = {
-		7, 8, 9, 10, 11, 12, 13
+		7, 8, 9, 10, 11, 12
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	Chip chip = Chip( );
