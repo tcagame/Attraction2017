@@ -120,7 +120,10 @@ void Character::update( ) {
 }
 
 void Character::damage( int force ) {
-	_finished = true;
+	_hp -= force;
+	if ( _hp <= 0 ) {
+		_finished = true;
+	}
 }
 
 

@@ -35,6 +35,7 @@ void Military::update( ) {
 			}
 			if ( enemy->isFinished( ) ||
 				 !enemy->isInScreen( ) ) {
+				//エネミーが倒れた場合、倒れた位置で爆発する
 				int chip_size = enemy->getChipSize( ) * 2;
 				_impacts.push_back( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), Character::STATE_MAIN, chip_size ) ) );
 				ite = _enemies.erase( ite );
@@ -59,6 +60,8 @@ void Military::update( ) {
 		if ( _boss ) {
 			_boss->update( );
 			if ( _boss->isFinished( ) ) {
+				int chip_size = _boss->getChipSize( ) * 2;
+				_impacts.push_back( ImpactPtr( new Impact( _boss->getPos( ) + Vector( 0, _boss->getChipSize( ) / 2 ), Character::STATE_EVENT, chip_size ) ) );
 				_boss = EnemyPtr( );
 			}
 		}
@@ -71,6 +74,7 @@ void Military::update( ) {
 			}
 			if ( enemy->isFinished( ) ||
 				 !enemy->isInScreen( ) ) {
+				//エネミーが倒れた場合、倒れた位置で爆発する
 				int chip_size = enemy->getChipSize( ) * 2;
 				_impacts.push_back( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), Character::STATE_EVENT, chip_size ) ) );
 				ite = _event_enemies.erase( ite );

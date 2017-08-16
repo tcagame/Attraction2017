@@ -24,6 +24,7 @@ public:
 	int getMaxShotNum( ) const;
 	std::list< ImpactPtr > getImpactList( ) const;
 private:
+	void updateEnemy( );
 	void updateImpact( );
 private:
 	static const int MAX_SHOT_NUM = 100;

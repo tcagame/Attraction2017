@@ -18,6 +18,11 @@ Armoury::~Armoury( ) {
 }
 
 void Armoury::update( ) {
+	updateEnemy( );
+	updateImpact( );
+}
+
+void Armoury::updateEnemy( ) {
 	MilitaryPtr militari( Military::getTask( ) );
 	for ( int i = 0; i < MAX_SHOT_NUM; i ++ ) {
 		if ( !_shot_list[ i ] ) {
@@ -31,15 +36,15 @@ void Armoury::update( ) {
 		EnemyPtr hit_enemy = militari->getOverLappedEnemy( _shot_list[ i ] );
 		if ( hit_enemy ) {
 			hit_enemy->damage( _shot_list[ i ]->getPower( ) );
-			if ( hit_enemy->isFinished( ) ) {
-				Vector impact_pos = hit_enemy->getPos( );
+			if ( !hit_enemy->isFinished( ) ) {
+				//エネミーが倒れなかったらショットが当たった位置で爆発
+				Vector impact_pos = _shot_list[ i ]->getPos( );
 				impact_pos.y += NORMAL_CHAR_GRAPH_SIZE / 2;
-				_impacts.push_back( ImpactPtr( new Impact( impact_pos, _shot_list[ i ]->getState( ) ) ) );
+				_impacts.push_back( ImpactPtr( new Impact( impact_pos, _shot_list[ i ]->getState( ), 64 ) ) );
 				_shot_list[ i ] = ShotPtr( );
 			}
 		}
 	}
-	updateImpact( );
 }
 
 void Armoury::updateImpact( ) {
