@@ -75,11 +75,8 @@ void RockViewer::drawPlayer( ) const {
 		Vector pos = player->getPos( );
 		ModelMV1Ptr model = doll_house->getModel( doll );
 		double anim_time = fmod( player->getAnimTime( ), model->getEndAnimTime( ) );
-		if ( ( doll == DOLL_GARISUKE_DEAD ||
-			   doll == DOLL_TAROSUKE_DEAD ||
-			   doll == DOLL_TAROJIRO_DEAD ||
-			   doll == DOLL_TAROMI_DEAD ) &&
-			   ( player->getAnimTime( ) >= model->getEndAnimTime( ) ) ) {
+		if ( player->isDead( ) &&
+			 player->getAnimTime( ) >= model->getEndAnimTime( ) ) {
 			//死亡アニメーションはループさせない
 			anim_time = model->getEndAnimTime( );
 		}
@@ -102,9 +99,9 @@ void RockViewer::drawShot( ) const {
 			continue;
 		}
 
-		int handle = shot->getEffectHandle( );
+//		int handle = shot->getEffectHandle( );
 		Vector pos = shot->getPos( );
-		drawer->drawEffect( handle, pos );
+		drawer->drawEffect( EFFECT_SHOT, pos );
 		ite++;
 	}
 }

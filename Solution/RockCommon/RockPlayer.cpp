@@ -236,3 +236,7 @@ void RockPlayer::back( ) {
 	Vector vec = getVec( );
 	setPos( getPos( ) - Vector( vec.x, 0, vec.z ) );
 }
+
+bool RockPlayer::isDead( ) const {
+	return _action == ACTION_DEAD;
+}

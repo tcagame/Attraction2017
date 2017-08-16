@@ -14,6 +14,7 @@ public:
 	void bound( );
 	void damage( int force );
 	void back( );
+	bool isDead( ) const;
 protected:
 	void act( );
 private:
