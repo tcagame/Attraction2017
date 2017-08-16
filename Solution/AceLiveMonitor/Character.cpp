@@ -151,6 +151,10 @@ void Character::setDir( DIR dir ) {
 	_dir = dir;
 }
 
+int Character::getHp( ) const {
+	return _hp;
+}
+
 
 bool Character::isStanding( ) const {
 	return _standing;

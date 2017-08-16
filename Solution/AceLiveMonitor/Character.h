@@ -27,6 +27,7 @@ public:
 	STATE getState( ) const;
 	void setState( STATE state );
 	int getChipSize( ) const;
+	int getHp( ) const;
 protected:
 	void setDir( DIR dir );
 	DIR getDir( ) const;

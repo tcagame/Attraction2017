@@ -22,7 +22,7 @@ static const int JUMP_MAX_HP = -15;
 static const int CHARGE_PHASE_COUNT = 25;
 static const int MAX_CHARGE_COUNT = CHARGE_PHASE_COUNT * 4 - 1;
 static const int BURST_TIME = 60;
-static const int MAX_HP = 3;
+static const int MAX_HP = 16;
 //アニメーション
 static const int PLAYER_ANIM_WAIT_COUNT = 12;
 static const int PLAYER_ANIM_WIDTH_NUM = 10;
