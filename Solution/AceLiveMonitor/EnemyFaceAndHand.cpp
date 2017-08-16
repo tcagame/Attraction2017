@@ -1,10 +1,11 @@
 #include "EnemyFaceAndHand.h"
 
-const int ANIM_WAIT_TIME = 6;
-const int FADE_IN_TIME = 15;
+static const int ANIM_WAIT_TIME = 6;
+static const int FADE_IN_TIME = 15;
+static const int MAX_HP = 3;
 
 EnemyFaceAndHand::EnemyFaceAndHand( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, false ),
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP, false ),
 _act( ACTION_FADE_IN ){
 }
 

@@ -1,11 +1,12 @@
 #include "EnemyGrayMist.h"
 
-const int WAIT_ANIM_TIME = 5;
-const int MOVE_SPEED = 1;
-const int FLOAT_RANGE = 6;
+static const int WAIT_ANIM_TIME = 5;
+static const int MOVE_SPEED = 1;
+static const int FLOAT_RANGE = 6;
+static const int MAX_HP = 3;
 
 EnemyGrayMist::EnemyGrayMist( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, false ),
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP, false ),
 _vy( 0 ),
 _dir( 1 ) {
 	setRadius( 36 );

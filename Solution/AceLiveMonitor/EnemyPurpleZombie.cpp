@@ -3,10 +3,10 @@
 
 static const int WAIT_ANIM_TIME = 5;
 static const int MOVE_SPEED = 4;
-static const int POWER = 3;
+static const int MAX_HP = 3;
 
 EnemyPurpleZombie::EnemyPurpleZombie( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, POWER ),
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ),
 _before_pos( Vector( ) ),
 _vec( Vector( -MOVE_SPEED, 0 ) ) {
 	setRadius( 36 );

@@ -1,6 +1,7 @@
 #include "NPCAngel.h"
 
-const int WAIT_ANIM_TIME = 10;
+static const int WAIT_ANIM_TIME = 10;
+static const int MAX_HP = 6;
 
 NPCAngel::NPCAngel( const Vector& pos ) :
 Character( pos, BIG_CHAR_GRAPH_SIZE, false ) {

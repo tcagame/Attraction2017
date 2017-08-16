@@ -3,10 +3,10 @@
 #include "Storage.h"
 
 static const int WAIT_ANIM_TIME = 10;
-static const int POWER = 12;
+static const int MAX_HP = 12;
 
 EnemyBossBloodDemon::EnemyBossBloodDemon( const Vector& pos ) :
-EnemyBoss( pos, BIG_CHAR_GRAPH_SIZE, POWER ) {
+EnemyBoss( pos, BIG_CHAR_GRAPH_SIZE, MAX_HP ) {
 }
 
 

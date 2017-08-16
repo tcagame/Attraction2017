@@ -1,10 +1,11 @@
 #include "Shot.h"
 
-const int SHOT_SPEED = 10; 
-const int VANISH_LENGTH = 500;
+static const int SHOT_SPEED = 10; 
+static const int VANISH_LENGTH = 500;
+static const int MAX_HP = 3;
 
 Shot::Shot( const Vector& pos, DIR dir, int power ) :
-Character( pos, NORMAL_CHAR_GRAPH_SIZE, false ),
+Character( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP, false ),
 _dir( dir ),
 _pos( pos ),
 _power( power ) {

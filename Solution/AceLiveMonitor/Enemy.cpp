@@ -4,7 +4,7 @@
 
 
 Enemy::Enemy( const Vector& pos, const int chip_size, const int hp, bool mass ) :
-Character( pos, chip_size, mass ) {
+Character( pos, chip_size, hp, mass ) {
 	setDir( DIR_LEFT );
 }
 

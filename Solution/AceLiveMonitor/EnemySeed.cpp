@@ -4,11 +4,11 @@
 
 static const int WAIT_ANIM_TIME = 5;
 static const int ATTACK_TIME = WAIT_ANIM_TIME * 11;
-static const int JUMP_POWER = -15;
-static const int POWER = 2;
+static const int JUMP_MAX_HP = -15;
+static const int MAX_HP = 2;
 
 EnemySeed::EnemySeed( const Vector& pos ) :
-Enemy( pos, SMALL_CHAR_GRAPH_SIZE, POWER ) {
+Enemy( pos, SMALL_CHAR_GRAPH_SIZE, MAX_HP ) {
 	setRadius( 16 );
 	setVec( Vector( -10, 0 ) );
 }
@@ -17,7 +17,7 @@ EnemySeed::~EnemySeed( ) {
 }
 
 void EnemySeed::act( ) {
-	if ( isStanding( ) ) setVec( getVec( ) + Vector( 0, JUMP_POWER ) );
+	if ( isStanding( ) ) setVec( getVec( ) + Vector( 0, JUMP_MAX_HP ) );
 }
 
 Chip EnemySeed::getChip( ) const {

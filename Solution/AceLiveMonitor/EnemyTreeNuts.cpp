@@ -1,10 +1,11 @@
 #include "EnemyTreeNuts.h"
 
-const int WAIT_ANIM_TIME = 5;
-const int FADE_IN_TIME = WAIT_ANIM_TIME * 9;
+static const int WAIT_ANIM_TIME = 5;
+static const int FADE_IN_TIME = WAIT_ANIM_TIME * 9;
+static const int MAX_HP = 2;
 
 EnemyTreeNuts::EnemyTreeNuts( const Vector& pos ) :
-Enemy( pos, SMALL_CHAR_GRAPH_SIZE, false ),
+Enemy( pos, SMALL_CHAR_GRAPH_SIZE, MAX_HP, false ),
 _act( ACTION_FADE_IN ) {
 	setRadius( 18 );
 }

@@ -4,10 +4,10 @@
 
 static const int WAIT_ANIM_TIME = 10;
 static const int WAIT_POP_TIME = 30000;
-static const int POWER = 12;
+static const int MAX_HP = 12;
 
 EnemyBossRedDemon::EnemyBossRedDemon( const Vector& pos ) :
-EnemyBoss( pos, BIG_CHAR_GRAPH_SIZE, POWER ) {
+EnemyBoss( pos, BIG_CHAR_GRAPH_SIZE, MAX_HP ) {
 }
 
 

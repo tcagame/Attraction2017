@@ -1,9 +1,10 @@
 #include "NPCOtohime.h"
 
-const int WAIT_ANIM_TIME = 10;
+static const int WAIT_ANIM_TIME = 10;
+static const int MAX_HP = 6;
 
 NPCOtohime::NPCOtohime( const Vector& pos ):
-Character( pos, BIG_CHAR_GRAPH_SIZE, false ) {
+Character( pos, BIG_CHAR_GRAPH_SIZE, MAX_HP, false ) {
 }
 
 

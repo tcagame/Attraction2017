@@ -1,10 +1,11 @@
 #include "EnemyGhost.h"
 
-const int WAIT_ANIM_TIME = 5;
-const int FADE_IN_TIME = WAIT_ANIM_TIME * 2;
+static const int WAIT_ANIM_TIME = 5;
+static const int FADE_IN_TIME = WAIT_ANIM_TIME * 2;
+static const int MAX_HP = 3;
 
 EnemyGhost::EnemyGhost( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, false ),
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP, false ),
 _act( ACTION_FADE_IN ) {
 	setRadius( 36 );
 }

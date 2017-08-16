@@ -1,10 +1,10 @@
 #include "EnemyArcher.h"
 
 static const int WAIT_ANIM_TIME = 5;
-static const int POWER = 0;
+static const int MAX_HP = 0;
 
 EnemyArcher::EnemyArcher( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, POWER ) {
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ) {
 	setRadius( 36 );
 }
 

@@ -1,10 +1,11 @@
 #include "EnemyWind.h"
 
-const int WAIT_ANIM_TIME = 5;
-const int GRAPH_WIDTH_NUM = 10;
+static const int WAIT_ANIM_TIME = 5;
+static const int GRAPH_WIDTH_NUM = 10;
+static const int MAX_HP = 6;
 
 EnemyWind::EnemyWind( const Vector& pos ) :
-Enemy( pos, BIG_CHAR_GRAPH_SIZE, false ) {
+Enemy( pos, BIG_CHAR_GRAPH_SIZE, MAX_HP, false ) {
 	setRadius( 48 );
 }
 

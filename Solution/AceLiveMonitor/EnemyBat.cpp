@@ -1,10 +1,10 @@
 #include "EnemyBat.h"
 
 static const int WAIT_ANIM_TIME = 5;
-static const int POWER = 0;
+static const int MAX_HP = 0;
 
 EnemyBat::EnemyBat( const Vector& pos ) :
-Enemy( pos, SMALL_CHAR_GRAPH_SIZE, POWER, false ) {
+Enemy( pos, SMALL_CHAR_GRAPH_SIZE, MAX_HP, false ) {
 	setRadius( 16 );
 }
 

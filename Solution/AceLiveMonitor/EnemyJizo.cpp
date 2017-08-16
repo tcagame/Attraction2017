@@ -1,11 +1,12 @@
 #include "EnemyJizo.h"
 
-const int WAIT_ANIM_TIME = 8;
-const int GRAPH_WIDTH_NUM = 10;
-const int FADE_IN_TIME = WAIT_ANIM_TIME * 6;
+static const int WAIT_ANIM_TIME = 8;
+static const int GRAPH_WIDTH_NUM = 10;
+static const int FADE_IN_TIME = WAIT_ANIM_TIME * 6;
+static const int MAX_HP = 6;
 
 EnemyJizo::EnemyJizo( const Vector& pos ) :
-Enemy( pos, BIG_CHAR_GRAPH_SIZE, false ),
+Enemy( pos, BIG_CHAR_GRAPH_SIZE, MAX_HP, false ),
 _act( ACTION_FADE_IN ) {
 	setRadius( 48 );
 }

@@ -2,10 +2,10 @@
 
 static const int TIME = 60;
 static const int WAIT_ANIM_TIME = 10;
-static const int POWER = 6;
+static const int MAX_HP = 6;
 
 NPCObaba::NPCObaba( const Vector& pos ) :
-Character( pos, BIG_CHAR_GRAPH_SIZE, POWER ) {
+Character( pos, BIG_CHAR_GRAPH_SIZE, MAX_HP ) {
 	setVec( Vector( 1, 0 ) );
 }
 

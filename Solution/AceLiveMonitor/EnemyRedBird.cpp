@@ -2,11 +2,12 @@
 #include "EnemyRedBirdAttack.h"
 #include "Military.h"
 
-const int WAIT_ANIM_TIME = 5;
-const int ATTACK_TIME = 30;
+static const int WAIT_ANIM_TIME = 5;
+static const int ATTACK_TIME = 30;
+static const int MAX_HP = 3;
 
 EnemyRedBird::EnemyRedBird( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, false ) {
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP, false ) {
 	setRadius( 36 );
 }
 

@@ -1,10 +1,10 @@
 #include "EnemyLancer.h"
 
 static const int WAIT_ANIM_TIME = 2;
-static const int POWER = 3;
+static const int MAX_HP = 3;
 
 EnemyLancer::EnemyLancer( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, POWER ) {
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ) {
 	setRadius( 36 );
 }
 

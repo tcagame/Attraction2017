@@ -1,10 +1,11 @@
 #include "EnemyMoth.h"
 
-const int WAIT_ANIM_TIME = 5;
-const int FLOAT_RANGE = 4;
+static const int WAIT_ANIM_TIME = 5;
+static const int FLOAT_RANGE = 4;
+static const int MAX_HP = 2;
 
 EnemyMoth::EnemyMoth( const Vector& pos ) :
-Enemy( pos, SMALL_CHAR_GRAPH_SIZE, false ),
+Enemy( pos, SMALL_CHAR_GRAPH_SIZE, MAX_HP, false ),
 _vy( 0 ),
 _dir( 1 ) {
 	setRadius( 16 );

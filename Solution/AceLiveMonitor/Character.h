@@ -43,7 +43,7 @@ private:
 	Vector _pos;
 	Vector _vec;
 	int _chip_size;
-	int _power;
+	int _hp;
 	int _act_count;
 	bool _mass;
 	bool _standing;
