@@ -1,10 +1,11 @@
 #include "EnemyBlueMonk.h"
 
-const int WAIT_ANIM_TIME = 5;
-const int MOVE_SPEED = 2;
+static const int WAIT_ANIM_TIME = 5;
+static const int MOVE_SPEED = 2;
+static const int POWER = 0;
 
 EnemyBlueMonk::EnemyBlueMonk( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ),
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, POWER ),
 _before_pos( Vector( ) ),
 _vec( Vector( MOVE_SPEED, 0 ) ) {
 	setRadius( 30 );

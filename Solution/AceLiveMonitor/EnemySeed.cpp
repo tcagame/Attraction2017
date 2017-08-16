@@ -2,12 +2,13 @@
 
 #include "Military.h"
 
-const int WAIT_ANIM_TIME = 5;
-const int ATTACK_TIME = WAIT_ANIM_TIME * 11;
-const int JUMP_POWER = -15;
+static const int WAIT_ANIM_TIME = 5;
+static const int ATTACK_TIME = WAIT_ANIM_TIME * 11;
+static const int JUMP_POWER = -15;
+static const int POWER = 2;
 
 EnemySeed::EnemySeed( const Vector& pos ) :
-Enemy( pos, SMALL_CHAR_GRAPH_SIZE ) {
+Enemy( pos, SMALL_CHAR_GRAPH_SIZE, POWER ) {
 	setRadius( 16 );
 	setVec( Vector( -10, 0 ) );
 }

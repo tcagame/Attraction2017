@@ -41,3 +41,9 @@ Solution/AceConsole/Debug/
 Solution/AceConsole/x64/
 Solution/RockMapStreet/x64/
 *.rej
+Solution/Release/
+*.lastbuildstate
+*.tlog
+*.obj
+*.log
+*.pdb

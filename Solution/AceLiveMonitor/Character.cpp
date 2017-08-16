@@ -8,7 +8,7 @@
 const int MAX_SPEED_Y = 10;
 const int MAX_ACT_COUNT = 0xfffffff;
 
-Character::Character( const Vector& pos, int chip_size, bool mass ) :
+Character::Character( const Vector& pos, const int chip_size, const int hp, bool mass ) :
 _pos( pos ),
 _vec( Vector( ) ),
 _standing( false ),

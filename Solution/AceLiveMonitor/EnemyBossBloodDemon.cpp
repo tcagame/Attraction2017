@@ -2,10 +2,11 @@
 #include "ItemFire.h"
 #include "Storage.h"
 
-const int WAIT_ANIM_TIME = 10;
+static const int WAIT_ANIM_TIME = 10;
+static const int POWER = 12;
 
 EnemyBossBloodDemon::EnemyBossBloodDemon( const Vector& pos ) :
-EnemyBoss( pos, BIG_CHAR_GRAPH_SIZE ) {
+EnemyBoss( pos, BIG_CHAR_GRAPH_SIZE, POWER ) {
 }
 
 

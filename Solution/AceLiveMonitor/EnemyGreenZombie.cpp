@@ -3,9 +3,10 @@
 static const int WAIT_ANIM_TIME = 5;
 static const int MOVE_SPEED = 5;
 static const int JUMP_POWER = -50;
+static const int POWER = 3;
 
 EnemyGreenZombie::EnemyGreenZombie( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ),
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, POWER ),
 _before_pos( Vector( ) ),
 _vec( Vector( MOVE_SPEED, 0 ) ),
 _jump_count( 1 ) {

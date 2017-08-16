@@ -2,11 +2,12 @@
 #include "Military.h"
 #include "EnemyHandAttack.h"
 
-const int WAIT_ANIM_TIME = 3;
-const int ATTACK_TIME = WAIT_ANIM_TIME * 21;
+static const int WAIT_ANIM_TIME = 3;
+static const int ATTACK_TIME = WAIT_ANIM_TIME * 21;
+static const int POWER = 3;
 
 EnemyHand::EnemyHand( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ) {
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, POWER ) {
 	setRadius( 36 );
 }
 

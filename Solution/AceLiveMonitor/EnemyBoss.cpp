@@ -2,8 +2,8 @@
 
 
 
-EnemyBoss::EnemyBoss( const Vector& pos, const int chip_size ) :
-Enemy( pos, chip_size, false ) {
+EnemyBoss::EnemyBoss( const Vector& pos, const int chip_size, const int hp ) :
+Enemy( pos, chip_size, hp, false ) {
 	setState( Character::STATE_EVENT );
 }
 

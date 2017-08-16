@@ -1,9 +1,10 @@
 #include "EnemyEyeDemon.h"
 
-const int WAIT_ANIM_TIME = 5;
+static const int WAIT_ANIM_TIME = 5;
+static const int POWER = 2;
 
 EnemyEyeDemon::EnemyEyeDemon( const Vector& pos ) :
-Enemy( pos, SMALL_CHAR_GRAPH_SIZE ) {
+Enemy( pos, SMALL_CHAR_GRAPH_SIZE, POWER ) {
 	setRadius( 16 );
 }
 

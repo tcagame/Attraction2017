@@ -1,9 +1,10 @@
 #include "EnemyShishimai.h"
 
-const int WAIT_ANIM_TIME = 5;
+static const int WAIT_ANIM_TIME = 5;
+static const int POWER = 3;
 
 EnemyShishimai::EnemyShishimai( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ) {
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, POWER ) {
 	setRadius( 36 );
 }
 

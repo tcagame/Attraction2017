@@ -4,10 +4,11 @@
 #include "ItemTree.h"
 #include "Storage.h"
 
-const int ATTACK_TIME = 50;
+static const int ATTACK_TIME = 50;
+static const int POWER = 12;
 
 EnemyBossMonsteTree::EnemyBossMonsteTree( const Vector& pos ) :
-EnemyBoss( pos, BIG_CHAR_GRAPH_SIZE ) {
+EnemyBoss( pos, BIG_CHAR_GRAPH_SIZE, POWER ) {
 	_branch = EnemyPtr( new EnemyBranch( getPos( ) + Vector( -70, -20 ) ) );
 	_branch->setState( Character::STATE_EVENT );
 	Military::getTask( )->popUpEventEnemy( _branch );

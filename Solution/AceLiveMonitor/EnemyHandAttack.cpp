@@ -1,9 +1,10 @@
 #include "EnemyHandAttack.h"
 
-const int WAIT_ANIM_TIME = 1;
+static const int WAIT_ANIM_TIME = 1;
+static const int POWER = 2;
 
 EnemyHandAttack::EnemyHandAttack( const Vector& pos ) :
-Enemy( pos, SMALL_CHAR_GRAPH_SIZE ) {
+Enemy( pos, SMALL_CHAR_GRAPH_SIZE, POWER ) {
 	setRadius( 18 );
 	Vector vec( -20, -8 );
 	setVec( vec );

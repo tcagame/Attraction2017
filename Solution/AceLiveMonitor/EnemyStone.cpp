@@ -1,10 +1,11 @@
 #include "EnemyStone.h"
 
-const int WAIT_ANIM_TIME = 5;
-const int MOVE_SPEED = 5;
+static const int WAIT_ANIM_TIME = 5;
+static const int MOVE_SPEED = 5;
+static const int POWER = 2;
 
 EnemyStone::EnemyStone( const Vector& pos ) :
-Enemy( pos, SMALL_CHAR_GRAPH_SIZE ),
+Enemy( pos, SMALL_CHAR_GRAPH_SIZE, POWER ),
 _before_pos( Vector( ) ),
 _vec( Vector( -MOVE_SPEED, 2 ) ) {
 	setRadius( 16 );

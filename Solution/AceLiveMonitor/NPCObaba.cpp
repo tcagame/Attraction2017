@@ -1,10 +1,11 @@
 #include "NPCObaba.h"
 
-const int TIME = 60;
-const int WAIT_ANIM_TIME = 10;
+static const int TIME = 60;
+static const int WAIT_ANIM_TIME = 10;
+static const int POWER = 6;
 
 NPCObaba::NPCObaba( const Vector& pos ) :
-Character( pos, BIG_CHAR_GRAPH_SIZE ) {
+Character( pos, BIG_CHAR_GRAPH_SIZE, POWER ) {
 	setVec( Vector( 1, 0 ) );
 }
 

@@ -13,6 +13,7 @@
 #include "RockDollHouse.h"
 #include "RockFamily.h"
 #include "RockClientInfo.h"
+#include "RockArmoury.h"
 
 void main( ) {
 
@@ -27,6 +28,7 @@ void main( ) {
 	app->addTask( RockDollHouse::getTag( ), TaskPtr( new RockDollHouse ) );
 	app->addTask( RockFamily::getTag( ), TaskPtr( new RockFamily( status ) ) );
 	app->addTask( RockMapStreetCamera::getTag( ), TaskPtr( new RockMapStreetCamera ) );
+	app->addTask( RockArmoury::getTag( ), TaskPtr( new RockArmoury( ) ) );
 	app->addTask( RockViewer::getTag( ), TaskPtr( new RockViewer( status ) ) );
 	app->addTask( RockClientInfo::getTag( ), TaskPtr( new RockClientInfo( STATE_STREET_1 ) ) );
 }

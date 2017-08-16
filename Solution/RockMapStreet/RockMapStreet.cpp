@@ -10,7 +10,7 @@ RockMapStreet::RockMapStreet( ) {
 		sprintf_s( filename, "Resource/Rock/map/map02_0%d.mv1", i + 1 );
 		_filenames.push_back( filename );
 	}
-	_filename_col = "Resource/Rock/map/map02_CL";
+	_filename_col = "Resource/Rock/map/map02_CL.mv1";
 }
 
 RockMapStreet::~RockMapStreet( ) {

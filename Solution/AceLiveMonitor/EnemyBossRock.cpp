@@ -1,7 +1,9 @@
 #include "EnemyBossRock.h"
 
+static const int POWER = 12;
+
 EnemyBossRock::EnemyBossRock( const Vector& pos ) :
-EnemyBoss( pos, BIG_CHAR_GRAPH_SIZE ) {
+EnemyBoss( pos, BIG_CHAR_GRAPH_SIZE, POWER ) {
 }
 
 

@@ -12,7 +12,7 @@ public:
 		STATE_EVENT,
 	};
 public:
-	Character( const Vector& pos, int chip_size, bool mass = true );
+	Character( const Vector& pos, const int chip_size, const int hp, bool mass = true );
 	virtual ~Character( );
 public:
 	Vector getVec( ) const;
@@ -42,13 +42,14 @@ private:
 private:
 	Vector _pos;
 	Vector _vec;
-	DIR _dir;
-	bool _standing;
 	int _chip_size;
+	int _power;
 	int _act_count;
-	double _radius;
 	bool _mass;
+	bool _standing;
 	bool _finished;
+	double _radius;
+	DIR _dir;
 	STATE _state;
 };
 

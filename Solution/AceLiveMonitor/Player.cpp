@@ -12,23 +12,24 @@
 #include "Storage.h"
 
 //画像サイズ
-const int PLAYER_FOOT = 7;
+static const int PLAYER_FOOT = 7;
 //速度
-const int MAX_SPEED = 20;
-const int MOVE_SPEED = 7;
-const int BRAKE_ACCEL = 1;
-const int JUMP_POWER = -15;
+static const int MAX_SPEED = 20;
+static const int MOVE_SPEED = 7;
+static const int BRAKE_ACCEL = 1;
+static const int JUMP_POWER = -15;
 //攻撃関係
-const int CHARGE_PHASE_COUNT = 25;
-const int MAX_CHARGE_COUNT = CHARGE_PHASE_COUNT * 4 - 1;
-const int BURST_TIME = 60;
+static const int CHARGE_PHASE_COUNT = 25;
+static const int MAX_CHARGE_COUNT = CHARGE_PHASE_COUNT * 4 - 1;
+static const int BURST_TIME = 60;
+static const int POWER = 0;
 //アニメーション
-const int PLAYER_ANIM_WAIT_COUNT = 12;
-const int PLAYER_ANIM_WIDTH_NUM = 10;
-const int DAMEGE_COUNT = 20;
+static const int PLAYER_ANIM_WAIT_COUNT = 12;
+static const int PLAYER_ANIM_WIDTH_NUM = 10;
+static const int DAMEGE_COUNT = 20;
 
 Player::Player( int player_id, Vector pos ) :
-Character( pos, NORMAL_CHAR_GRAPH_SIZE ),
+Character( pos, NORMAL_CHAR_GRAPH_SIZE, POWER ),
 _charge_count( 0 ),
 _damege_count( 0 ),
 _over_charge_time( -1 ),

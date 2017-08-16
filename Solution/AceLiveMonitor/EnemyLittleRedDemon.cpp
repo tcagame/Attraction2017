@@ -1,9 +1,10 @@
 #include "EnemyLittleRedDemon.h"
 
-const int WAIT_ANIM_TIME = 6;
+static const int WAIT_ANIM_TIME = 6;
+static const int POWER = 3;
 
 EnemyLittleRedDemon::EnemyLittleRedDemon( const Vector& pos ):
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ) {
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, POWER ) {
 }
 
 

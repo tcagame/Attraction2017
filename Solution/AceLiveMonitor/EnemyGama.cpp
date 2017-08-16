@@ -1,10 +1,11 @@
 #include "EnemyGama.h"
 
-const int WAIT_ANIM_TIME = 5;
-const int GRAPH_WIDTH_NUM = 10;
+static const int WAIT_ANIM_TIME = 5;
+static const int GRAPH_WIDTH_NUM = 10;
+static const int POWER = 6;
 
 EnemyGama::EnemyGama( const Vector& pos ) :
-Enemy( pos, BIG_CHAR_GRAPH_SIZE ) {
+Enemy( pos, BIG_CHAR_GRAPH_SIZE, POWER ) {
 	setRadius( 48 );
 }
 
