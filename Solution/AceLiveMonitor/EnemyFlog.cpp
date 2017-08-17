@@ -19,7 +19,11 @@ void EnemyFlog::act( ) {
 		setVec( Vector( ) );
 	}
 	if ( isStanding( ) && !( ( getActCount( ) + WAIT_ANIM_TIME * 3 ) % JUMP_TIME ) ) {
-		setVec( Vector( -2, JUMP_POWER ) );
+		if ( rand( ) % 2 ) {
+			setVec( Vector( 2, JUMP_POWER ) );
+		} else {
+			setVec( Vector( -2, JUMP_POWER ) );
+		}
 	}
 }
 
