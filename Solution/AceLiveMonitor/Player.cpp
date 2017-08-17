@@ -35,6 +35,7 @@ _damege_count( 0 ),
 _over_charge_time( -1 ),
 _id( 0 ),
 _money( rand( ) ),
+_toku( 0 ),
 _action( ACTION_WAIT ) {
 	setRadius( 25 );
 	setDir( DIR_RIGHT );
@@ -561,4 +562,12 @@ int Player::getHandMoney( ) const {
 
 void Player::getMoney( int money ) {
 	_money += money;
+}
+
+int Player::getHandToku( ) const {
+	return _toku;
+}
+
+void Player::getToku( ) {
+	_toku++;
 }

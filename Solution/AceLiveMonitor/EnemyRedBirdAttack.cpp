@@ -1,7 +1,7 @@
 #include "EnemyRedBirdAttack.h"
 
 static const int WAIT_ANIM_TIME = 5;
-static const int MAX_HP = 2;
+static const int MAX_HP = 1;
 
 EnemyRedBirdAttack::EnemyRedBirdAttack( const Vector& pos ) :
 Enemy( pos, SMALL_CHAR_GRAPH_SIZE, MAX_HP ) {

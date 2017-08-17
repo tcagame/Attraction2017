@@ -30,6 +30,8 @@ public:
 	void bound( );
 	int getHandMoney( ) const;
 	void getMoney( int money );
+	int getHandToku( ) const;
+	void getToku( );
 private:
 	void actOnWaiting( );
 	void actOnWalking( );
@@ -45,6 +47,7 @@ private:
 	ACTION _action;
 	int _id;
 	int _money;
+	int _toku;
 	int _charge_count;
 	int _damege_count;
 	int _over_charge_time;
