@@ -168,6 +168,7 @@
     <ClCompile Include="EnemyGrayMist.cpp" />
     <ClCompile Include="EnemyMoth.cpp" />
     <ClCompile Include="EnemyStone.cpp" />
+    <ClCompile Include="ItemMoney.cpp" />
     <ClCompile Include="ItemTree.cpp" />
     <ClCompile Include="NPCAngel.cpp" />
     <ClCompile Include="NPCMermaid.cpp" />
@@ -283,6 +284,7 @@
     <ClInclude Include="EnemyGrayMist.h" />
     <ClInclude Include="EnemyMoth.h" />
     <ClInclude Include="EnemyStone.h" />
+    <ClInclude Include="ItemMoney.h" />
     <ClInclude Include="ItemTree.h" />
     <ClInclude Include="NPCAngel.h" />
     <ClInclude Include="NPCMermaid.h" />

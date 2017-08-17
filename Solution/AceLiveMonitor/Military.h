@@ -27,6 +27,7 @@ public:
 	std::list< ImpactPtr > getImpactList( ) const;
 private:
 	void updateImpact( );
+	void dropMoney( EnemyConstPtr enemy );
 private:
 	std::list< EnemyPtr > _enemies;
 	std::list< EnemyPtr > _event_enemies;
