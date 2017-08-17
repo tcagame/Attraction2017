@@ -16,5 +16,6 @@ private:
 	};
 private:
 	ACTION _act;
+	Vector _before_pos;
 };
 
