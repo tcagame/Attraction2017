@@ -16,24 +16,20 @@ Storage::~Storage( ) {
 }
 
 void Storage::update( ) {
-	FamilyPtr family( Family::getTask( ) );
-	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
-		PlayerPtr player = family->getPlayer( i );
-		std::list< ItemPtr >::iterator ite = _items.begin( );
-		while ( ite != _items.end( ) ) {
-			ItemPtr item = *ite;
-			if ( !item ) {
-				ite++;
-				continue;
-			}
-			item->update( );
-			if ( item->isOverlapped( player ) ) {
-				//プレイヤーがアイテムと接触
-				ite = _items.erase( ite );
-				continue;
-			}
+	std::list< ItemPtr >::iterator ite = _items.begin( );
+	while ( ite != _items.end( ) ) {
+		ItemPtr item = *ite;
+		if ( !item ) {
 			ite++;
+			continue;
 		}
+		item->update( );
+		if ( isOverRappedPlayer( item ) ) {
+			//プレイヤーがアイテムと接触
+			ite = _items.erase( ite );
+			continue;
+		}
+		ite++;
 	}
 }
 
@@ -54,9 +50,24 @@ bool Storage::isExistanceEventItem( ) const {
 			ite++;
 			continue;
 		}
-		result = true;
-		break;
+		if ( item->getState( ) == Character::STATE_EVENT ) {
+			result = true;
+			break;
+		}
 		ite++;
+	}
+	return result;
+}
+
+bool Storage::isOverRappedPlayer( ItemConstPtr item ) const {
+	bool result = false;
+	FamilyPtr family( Family::getTask( ) );
+	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
+		PlayerPtr player = family->getPlayer( i );
+		if ( item->isOverlapped( player ) ) {
+			result = true;
+			break;
+		}
 	}
 	return result;
 }
