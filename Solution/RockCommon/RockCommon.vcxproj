@@ -186,6 +186,7 @@
     <ClInclude Include="RockEnemyRedBard.h" />
     <ClInclude Include="RockEnemyWaterGhost.h" />
     <ClInclude Include="RockFamily.h" />
+    <ClInclude Include="RockImpact.h" />
     <ClInclude Include="RockMap.h" />
     <ClInclude Include="RockMilitary.h" />
     <ClInclude Include="RockPlayer.h" />
@@ -204,6 +205,7 @@
     <ClCompile Include="RockEnemyRedBard.cpp" />
     <ClCompile Include="RockEnemyWaterGhost.cpp" />
     <ClCompile Include="RockFamily.cpp" />
+    <ClCompile Include="RockImpact.cpp" />
     <ClCompile Include="RockMap.cpp" />
     <ClCompile Include="RockMilitary.cpp" />
     <ClCompile Include="RockPlayer.cpp" />

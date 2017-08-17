@@ -8,7 +8,10 @@ public:
 	virtual ~RockEnemy( );
 public:
 	int getForce( ) const;
+	void damage( int force );
+	bool isFinished( ) const;
 private:
 	int _force;
+	bool _finished;
 };
 

@@ -38,5 +38,6 @@ private:
 	StatusPtr _status;
 	ACTION _action;
 	int _id;
+	bool _is_push_button_a;
 };
 

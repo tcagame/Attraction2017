@@ -22,7 +22,8 @@ const int RADIUS = 10;
 const int HEIGHT = 20;
 
 RockPlayer::RockPlayer( StatusPtr status, const Vector& pos, int id ) :
-RockCharacter( pos, ( DOLL )( DOLL_TAROSUKE_WAIT + id * ROCK_PLAYER_MOTION_NUM ), RADIUS, HEIGHT ) {
+RockCharacter( pos, ( DOLL )( DOLL_TAROSUKE_WAIT + id * ROCK_PLAYER_MOTION_NUM ), RADIUS, HEIGHT ),
+_is_push_button_a( false ) {
 	_id = id;
 	_status = status;
 	setAction( ACTION_WAIT );
@@ -52,6 +53,10 @@ void RockPlayer::act( ) {
 	case ACTION_DEAD:
 		actOnDead( );
 		break;
+	}
+	if ( _is_push_button_a &&
+		 !( _status->getPlayer( _id ).device_button & BUTTON_A ) ) {
+		_is_push_button_a = false;
 	}
 	// ƒJƒƒ‰‚É“ü‚è‘±‚¯‚é
 	DrawerPtr drawer( Drawer::getTask( ) );
@@ -108,7 +113,9 @@ void RockPlayer::actOnWaiting( ) {
 		}
 	}
 	//UŒ‚
-	if ( player.device_button & BUTTON_A ) {
+	if ( player.device_button & BUTTON_A &&
+		 !_is_push_button_a ) {
+		_is_push_button_a = true;
 		setAction( ACTION_ATTACK );
 		return;
 	}
@@ -141,7 +148,9 @@ void RockPlayer::actOnJumping( ) {
 		return;
 	}
 	//UŒ‚
-	if ( player.device_button & BUTTON_A ) {
+	if ( player.device_button & BUTTON_A &&
+		 !_is_push_button_a ) {
+		_is_push_button_a = true;
 		setAction( ACTION_ATTACK );
 	}
 	//ˆÚ“®

@@ -12,6 +12,7 @@
 #include "Drawer.h"
 #include "RockArmoury.h"
 #include "RockShot.h"
+#include "RockImpact.h"
 
 RockViewerPtr RockViewer::getTask( ) {
 	return std::dynamic_pointer_cast< RockViewer >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -33,6 +34,7 @@ void RockViewer::update( ) {
 	drawEnemy( );
 	drawPlayer( );
 	drawShot( );
+	drawImpact( );
 }
 
 void RockViewer::drawMap( ) const {
@@ -99,9 +101,26 @@ void RockViewer::drawShot( ) const {
 			continue;
 		}
 
-//		int handle = shot->getEffectHandle( );
 		Vector pos = shot->getPos( );
 		drawer->drawEffect( EFFECT_SHOT, pos );
+		drawer->drawLine(pos, pos + Vector( 0, 10, 0 ) );
+		ite++;
+	}
+}
+
+void RockViewer::drawImpact( ) const {
+	DrawerPtr drawer( Drawer::getTask( ) );
+	std::list< RockImpactPtr > impacts = RockMilitary::getTask( )->getImpactList( );
+	std::list< RockImpactPtr >::iterator ite = impacts.begin( );
+	while ( ite != impacts.end( ) ) {
+		RockImpactPtr impact = (*ite);
+		if ( !impact ) {
+			ite++;
+			continue;
+		}
+		Vector pos = impact->getPos( );
+		double size = impact->getSize( );
+		drawer->drawEffect( EFFECT_IMPACT, pos, size );
 		ite++;
 	}
 }

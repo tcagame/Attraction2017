@@ -19,6 +19,7 @@ private:
 	void drawEnemy( ) const;
 	void drawPlayer( ) const;
 	void drawShot( ) const;
+	void drawImpact( ) const;
 private:
 	StatusPtr _status;
 };

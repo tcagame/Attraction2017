@@ -7,15 +7,18 @@ public:
 	virtual ~RockShot( );
 public:
 	double getAnimTime( ) const;
-	bool isfinished( ) const;
+	bool isBack( ) const;
+	bool isFinished( ) const;
+	void setBack( );
+	void setFinished( );
 protected:
 	void act( );
 private:
-	void actOutRange( );
+	void actOutBack( );
 private:
 	int _id;
 	double _size = 1.0;
-	bool _out_range;
+	bool _back;
 	bool _finished;
 	Vector _rotate = Vector( 0, 0, 0 );
 };

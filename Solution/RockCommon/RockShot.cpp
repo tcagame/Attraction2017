@@ -9,7 +9,7 @@ const Vector FOOT( 0, 30, 0 ); // ƒvƒŒƒCƒ„[‚Ì‘«Œ³‚©‚ç‚Ì‚‚³
 RockShot::RockShot( const int id_, const Vector& pos, const Vector& dir ) :
 RockCharacter( pos + FOOT, DOLL_NONE, 32, 32, false, false ),
 _id( id_ ),
-_out_range( false ),
+_back( false ),
 _finished( false ) {
 	setVec( dir * MOVE_SPEED );
 }
@@ -19,14 +19,14 @@ RockShot::~RockShot( ) {
 
 void RockShot::act( ) {
 	if ( getActCount( ) > ACTIVE_COUNT ) {
-		_out_range = true;
+		_back = true;
 	}
-	if ( _out_range ) {
-		actOutRange( );
+	if ( _back ) {
+		actOutBack( );
 	}
 }
 
-void RockShot::actOutRange( ) {
+void RockShot::actOutBack( ) {
 	RockPlayerPtr player = RockFamily::getTask( )->getPlayer( _id );
 	Vector diff = ( ( player->getPos( ) + FOOT ) - getPos( ) );
 	if ( diff.getLength2( ) > 1 ) {
@@ -40,6 +40,18 @@ double RockShot::getAnimTime( ) const {
 	return 0;
 }
 
-bool RockShot::isfinished( ) const {
+bool RockShot::isFinished( ) const {
 	return _finished;
+}
+
+bool RockShot::isBack( ) const {
+	return _back;
+}
+
+void RockShot::setFinished( ) {
+	_finished = true;
+}
+
+void RockShot::setBack( ) {
+	_back = true;
 }

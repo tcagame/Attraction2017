@@ -3,6 +3,9 @@
 #include "Drawer.h"
 #include "define.h"
 #include "RockShot.h"
+#include "RockMilitary.h"
+#include "RockEnemy.h"
+#include <list>
 
 RockArmouryPtr RockArmoury::getTask( ) {
 	return std::dynamic_pointer_cast< RockArmoury >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -20,24 +23,41 @@ void RockArmoury::initialize( ) {
 }
 
 void RockArmoury::update( ) {
-	std::list< RockShotPtr >::iterator ite = _shots.begin( );
-	while( ite != _shots.end( ) ) {
-		RockShotPtr shot = *ite;
+	std::list< RockShotPtr >::iterator shot_ite = _shots.begin( );
+	while( shot_ite != _shots.end( ) ) {
+		RockShotPtr shot = *shot_ite;
 		if ( !shot ) {
-			ite++;
+			shot_ite++;
 			continue;
 		}
-		if ( shot->isfinished( ) ) {
-			ite = _shots.erase( ite );
+		if ( shot->isFinished( ) ) {
+			shot_ite = _shots.erase( shot_ite );
 			continue;
-		} else {
-			shot->update( );
 		}
-		ite++;
+
+		shot->update( );
+		std::list< RockEnemyPtr > enemies = RockMilitary::getTask( )->getEnemyList( );
+		std::list< RockEnemyPtr >::iterator ene_ite = enemies.begin( );
+		while ( ene_ite != enemies.end( ) ) {
+			RockEnemyPtr enemy = *ene_ite;
+			if ( !enemy ) {
+				ene_ite++;
+				continue;
+			}
+
+			if ( shot->isOverLapped( enemy ) ) {
+				enemy->damage( 1 );
+				shot->setBack( );
+				break;
+			}
+			ene_ite++;
+		}
+		shot_ite++;
 	}
 }
 
 std::list< RockShotPtr > RockArmoury::getShots( ) const {
+	int size = _shots.size( );
 	return _shots;
 }
 

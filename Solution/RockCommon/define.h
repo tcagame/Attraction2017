@@ -47,5 +47,6 @@ enum DOLL {
 
 enum EFFECT {
 	EFFECT_SHOT,
+	EFFECT_IMPACT,
 	MAX_EFFECT
 };
