@@ -49,7 +49,7 @@ void ViewerStatus::drawMoney( ) const {
 		PlayerPtr player = family->getPlayer( i );
 		int sx = i * 320 + 160;
 		int sy = VIEW_STATUS_Y + 105;
-		drawer->drawString( sx, sy, "%15d", player->getHandMoney( ) );
+		drawer->drawString( sx, sy, "%15d", player->getMoneyNum( ) );
 	}
 }
 
@@ -61,6 +61,6 @@ void ViewerStatus::drawToku( ) const {
 		PlayerPtr player = family->getPlayer( i );
 		int sx = i * 320 + 280;
 		int sy = VIEW_STATUS_Y + 180;
-		drawer->drawString( sx, sy, "%2d", player->getHandToku( ) );
+		drawer->drawString( sx, sy, "%2d", player->getTokuNum( ) );
 	}
 }

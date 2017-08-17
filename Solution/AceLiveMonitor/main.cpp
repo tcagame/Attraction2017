@@ -12,6 +12,7 @@
 #include "NPC.h"
 #include "Storage.h"
 #include "Popper.h"
+#include "Debug.h"
 
 void main( ) {
 	ApplicationPtr app( Application::getInstance( ) );
@@ -29,5 +30,6 @@ void main( ) {
 	app->addTask( Popper  ::getTag( ), PopperPtr  ( new Popper  ( ) ) );
 	app->addTask( Military::getTag( ), MilitaryPtr( new Military( ) ) );
 	app->addTask( NPC	  ::getTag( ), NPCPtr	  ( new NPC		( ) ) );
+	app->addTask( Debug	  ::getTag( ), DebugPtr   ( new Debug   ( ) ) );
 	app->addTask( Viewer  ::getTag( ), ViewerPtr  ( new Viewer  ( ) ) );
 }
