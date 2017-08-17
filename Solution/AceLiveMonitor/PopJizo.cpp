@@ -3,16 +3,12 @@
 #include "Military.h"
 
 PopJizo::PopJizo( const Vector& pos ) :
-_pos( pos ),
-_pop( false ) {
+Pop( pos ) {
 }
 
 PopJizo::~PopJizo( ) {
 }
 
-void PopJizo::update( ) {
-	if ( !_pop ) {
-		Military::getTask( )->popUp( EnemyPtr( new EnemyJizo( _pos ) ) );
-		_pop = true;
-	}
+void PopJizo::create( ) {
+	Military::getTask( )->popUp( EnemyPtr( new EnemyJizo( getPos( ) ) ) );
 }

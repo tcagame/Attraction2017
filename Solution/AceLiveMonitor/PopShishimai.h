@@ -6,10 +6,7 @@ class PopShishimai : public Pop {
 public:
 	PopShishimai( const Vector& pos );
 	virtual ~PopShishimai( );
-public:
-	void update( );
-private:
-	bool _pop;
-	Vector _pos;
+protected:
+	void create( );
 };
 

@@ -144,7 +144,7 @@ bool RockCharacter::isOnHead( RockCharacterConstPtr target ) const {
 }
 
 
-bool RockCharacter::isOverRapped( RockCharacterConstPtr target ) const {
+bool RockCharacter::isOverLapped( RockCharacterConstPtr target ) const {
 	bool result = false;
 
 	Vector distance = target->getPos( ) - _pos;

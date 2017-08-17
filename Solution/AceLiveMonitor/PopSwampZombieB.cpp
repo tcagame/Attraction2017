@@ -4,17 +4,13 @@
 
 
 PopSwampZombieB::PopSwampZombieB( const Vector& pos ) :
-_pos( pos ),
-_pop( false ) {
+Pop( pos ) {
 }
 
 
 PopSwampZombieB::~PopSwampZombieB( ) {
 }
 
-void PopSwampZombieB::update( ) {
-	if ( !_pop ) {
-		Military::getTask( )->popUp( EnemyPtr( new EnemySwampZombieB( _pos ) ) );
-		_pop = true;
-	}
+void PopSwampZombieB::create( ) {
+	Military::getTask( )->popUp( EnemyPtr( new EnemySwampZombieB( getPos( ) ) ) );
 }

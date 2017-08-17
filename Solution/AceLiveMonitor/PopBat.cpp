@@ -4,17 +4,13 @@
 
 
 PopBat::PopBat( const Vector& pos ) :
-_pos( pos ),
-_pop( false ) {
+Pop( pos ) {
 }
 
 
 PopBat::~PopBat( ) {
 }
 
-void PopBat::update( ) {
-	if ( !_pop ) {
-		Military::getTask( )->popUp( EnemyPtr( new EnemyBat( _pos ) ) );
-		_pop = true;
-	}
+void PopBat::create( ) {
+	Military::getTask( )->popUp( EnemyPtr( new EnemyBat( getPos( ) ) ) );
 }

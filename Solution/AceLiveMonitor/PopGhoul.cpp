@@ -4,17 +4,13 @@
 
 
 PopGhoul::PopGhoul( const Vector& pos ) :
-_pos( pos ),
-_pop( false ) {
+Pop( pos ) {
 }
 
 
 PopGhoul::~PopGhoul( ) {
 }
 
-void PopGhoul::update( ) {
-	if ( !_pop ) {
-		Military::getTask( )->popUp( EnemyPtr( new EnemyGhoul( _pos ) ) );
-		_pop = true;
-	}
+void PopGhoul::create( ) {
+	Military::getTask( )->popUp( EnemyPtr( new EnemyGhoul( getPos( ) ) ) );
 }

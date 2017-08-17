@@ -4,17 +4,13 @@
 
 
 PopTree::PopTree( const Vector& pos ) :
-_pos( pos ),
-_pop( false ) {
+Pop( pos ) {
 }
 
 
 PopTree::~PopTree( ) {
 }
 
-void PopTree::update( ) {
-	if ( !_pop ) {
-		Military::getTask( )->popUp( EnemyPtr( new EnemyTree( _pos ) ) );
-		_pop = true;
-	}
+void PopTree::create( ) {
+	Military::getTask( )->popUp( EnemyPtr( new EnemyTree( getPos( ) ) ) );
 }

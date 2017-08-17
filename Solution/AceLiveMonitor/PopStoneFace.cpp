@@ -3,16 +3,12 @@
 #include "Military.h"
 
 PopStoneFace::PopStoneFace( const Vector& pos ) :
-_pos( pos ),
-_pop( false ) {
+Pop( pos ) {
 }
 
 PopStoneFace::~PopStoneFace( ) {
 }
 
-void PopStoneFace::update( ) {
-	if ( !_pop ) {
-		Military::getTask( )->popUp( EnemyPtr( new EnemyStoneFace( _pos ) ) );
-		_pop = true;
-	}
+void PopStoneFace::create( ) {
+	Military::getTask( )->popUp( EnemyPtr( new EnemyStoneFace( getPos( ) ) ) );
 }

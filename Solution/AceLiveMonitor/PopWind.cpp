@@ -3,16 +3,12 @@
 #include "Military.h"
 
 PopWind::PopWind( const Vector& pos ) :
-_pos( pos ),
-_pop( false ) {
+Pop( pos ) {
 }
 
 PopWind::~PopWind( ) {
 }
 
-void PopWind::update( ) {
-	if ( !_pop ) {
-		Military::getTask( )->popUp( EnemyPtr( new EnemyWind( _pos ) ) );
-		_pop = true;
-	}
+void PopWind::create( ) {
+	Military::getTask( )->popUp( EnemyPtr( new EnemyWind( getPos( ) ) ) );
 }

@@ -3,17 +3,13 @@
 #include "Military.h"
 
 PopOneEyeSnake::PopOneEyeSnake( const Vector& pos ) :
-_pos( pos ),
-_pop( false ) {
+Pop( pos ) {
 }
 
 
 PopOneEyeSnake::~PopOneEyeSnake( ) {
 }
 
-void PopOneEyeSnake::update( ) {
-	if ( !_pop ) {
-		Military::getTask( )->popUp( EnemyPtr( new EnemyOneEyeSnake( _pos ) ) );
-		_pop = true;
-	}
+void PopOneEyeSnake::create( ) {
+	Military::getTask( )->popUp( EnemyPtr( new EnemyOneEyeSnake( getPos( ) ) ) );
 }

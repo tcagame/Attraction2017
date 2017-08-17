@@ -3,16 +3,12 @@
 #include "Military.h"
 
 PopSkeleton::PopSkeleton( const Vector& pos ) :
-_pos( pos ),
-_pop( false ) {
+Pop( pos ) {
 }
 
 PopSkeleton::~PopSkeleton( ) {
 }
 
-void PopSkeleton::update( ) {
-	if ( !_pop ) {
-		Military::getTask( )->popUp( EnemyPtr( new EnemySkeleton( _pos ) ) );
-		_pop = true;
-	}
+void PopSkeleton::create( ) {
+	Military::getTask( )->popUp( EnemyPtr( new EnemySkeleton( getPos( ) ) ) );
 }

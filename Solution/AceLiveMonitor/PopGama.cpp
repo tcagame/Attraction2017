@@ -3,16 +3,12 @@
 #include "Military.h"
 
 PopGama::PopGama( const Vector& pos ) :
-_pos( pos ),
-_pop( false ) {
+Pop( pos ) {
 }
 
 PopGama::~PopGama( ) {
 }
 
-void PopGama::update( ) {
-	if ( !_pop ) {
-		Military::getTask( )->popUp( EnemyPtr( new EnemyGama( _pos ) ) );
-		_pop = true;
-	}
+void PopGama::create( ) {
+	Military::getTask( )->popUp( EnemyPtr( new EnemyGama( getPos( ) ) ) );
 }

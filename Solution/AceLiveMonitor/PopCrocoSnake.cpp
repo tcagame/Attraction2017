@@ -4,17 +4,13 @@
 
 
 PopCrocoSnake::PopCrocoSnake( const Vector& pos ) :
-_pos( pos ),
-_pop( false ) {
+Pop( pos ) {
 }
 
 
 PopCrocoSnake::~PopCrocoSnake( ) {
 }
 
-void PopCrocoSnake::update( ) {
-	if ( !_pop ) {
-		Military::getTask( )->popUp( EnemyPtr( new EnemyCrocoSnake( _pos ) ) );
-		_pop = true;
-	}
+void PopCrocoSnake::create( ) {
+	Military::getTask( )->popUp( EnemyPtr( new EnemyCrocoSnake( getPos( ) ) ) );
 }

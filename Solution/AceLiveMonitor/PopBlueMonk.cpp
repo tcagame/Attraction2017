@@ -4,17 +4,13 @@
 
 
 PopBlueMonk::PopBlueMonk( const Vector& pos ) :
-_pos( pos ),
-_pop( false ) {
+Pop( pos ) {
 }
 
 
 PopBlueMonk::~PopBlueMonk( ) {
 }
 
-void PopBlueMonk::update( ) {
-	if ( !_pop ) {
-		Military::getTask( )->popUp( EnemyPtr( new EnemyBlueMonk( _pos ) ) );
-		_pop = true;
-	}
+void PopBlueMonk::create( ) {
+	Military::getTask( )->popUp( EnemyPtr( new EnemyBlueMonk( getPos( ) ) ) );
 }

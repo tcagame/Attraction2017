@@ -33,7 +33,7 @@ void Armoury::updateEnemy( ) {
 			continue;
 		}
 		_shot_list[ i ]->update( );
-		EnemyPtr hit_enemy = militari->getOverLappedEnemy( _shot_list[ i ] );
+		EnemyPtr hit_enemy = militari->getOverlappedEnemy( _shot_list[ i ] );
 		if ( hit_enemy ) {
 			hit_enemy->damage( _shot_list[ i ]->getPower( ) );
 			if ( !hit_enemy->isFinished( ) ) {
