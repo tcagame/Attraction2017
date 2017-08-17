@@ -1,4 +1,6 @@
 #include "EnemyBossRock.h"
+#include "ItemRock.h"
+#include "Storage.h"
 
 static const int MAX_HP = 12;
 
@@ -8,6 +10,9 @@ EnemyBoss( pos, BIG_CHAR_GRAPH_SIZE, MAX_HP ) {
 
 
 EnemyBossRock::~EnemyBossRock( ) {
+	ItemPtr item = ItemPtr( new ItemRock( getPos( ) ) );
+	item->setState( STATE_EVENT );
+	Storage::getTask( )->add( item );
 }
 
 void EnemyBossRock::act( ) {
