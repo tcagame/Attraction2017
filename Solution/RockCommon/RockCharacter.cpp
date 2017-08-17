@@ -17,7 +17,8 @@ _mass( mass ),
 _act_count( 0 ),
 _radius( radius ),
 _height( height ),
-_head( head ) {
+_head( head ),
+_dir( ( ( _pos + _vec ) - _pos ).normalize( ) ) {
 }
 
 
@@ -66,6 +67,10 @@ void RockCharacter::update( ) {
 			_standing = true;
 		}
 	}
+	Vector dir = ( ( _pos + _vec ) - _pos ).normalize( );
+	if ( dir.getLength2( ) > 0.5 ) {
+		_dir = dir;
+	}
 	_pos += _vec;
 }
 
@@ -83,6 +88,10 @@ Vector RockCharacter::getVec( ) const {
 
 Vector RockCharacter::getPos( ) const {
 	return _pos;
+}
+
+Vector RockCharacter::getDir( ) const {
+	return _dir;
 }
 
 DOLL RockCharacter::getDoll( ) const {

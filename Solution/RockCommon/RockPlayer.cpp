@@ -8,11 +8,16 @@
 #include "RockCharacter.h"
 #include "RockMilitary.h"
 #include "MessageSender.h"
+#include "RockArmoury.h"
+#include "RockShot.h"
 
+//ˆÚ“®
 const double JUMP_POWER = 3.0;
-const double ANIM_SPEED = 0.5;
 const double MOVE_SPEED = 1.0;
 const double BRAKE_SPEED = 0.3;
+//ƒAƒjƒ[ƒVƒ‡ƒ“
+const double ANIM_SPEED = 0.5;
+
 const int RADIUS = 10;
 const int HEIGHT = 20;
 
@@ -40,6 +45,9 @@ void RockPlayer::act( ) {
 		break;
 	case ACTION_BRAKE:
 		actOnBraking( );
+		break;
+	case ACTION_ATTACK:
+		actOnAttacking( );
 		break;
 	case ACTION_DEAD:
 		actOnDead( );
@@ -91,13 +99,18 @@ void RockPlayer::actOnWaiting( ) {
 	}
 	//ƒWƒƒƒ“ƒv
 	if ( isStanding( ) ) {
-		if ( player.device_button & BUTTON_A ) {
+		if ( player.device_button & BUTTON_B ) {
 			setAction( ACTION_JUMP );
 			Vector vec = getVec( );
 			vec.y = JUMP_POWER;
 			setVec( vec );
 			return;
 		}
+	}
+	//UŒ‚
+	if ( player.device_button & BUTTON_A ) {
+		setAction( ACTION_ATTACK );
+		return;
 	}
 	//ˆÚ“®
 	if ( player.device_x != 0 ||
@@ -115,6 +128,7 @@ void RockPlayer::actOnWaiting( ) {
 		return;
 	}
 }
+
 void RockPlayer::actOnJumping( ) {
 	Status::Player player = _status->getPlayer( _id );
 	//Ž€–S
@@ -125,6 +139,10 @@ void RockPlayer::actOnJumping( ) {
 	if ( isStanding( ) ) {
 		setAction( ACTION_WAIT );
 		return;
+	}
+	//UŒ‚
+	if ( player.device_button & BUTTON_A ) {
+		setAction( ACTION_ATTACK );
 	}
 	//ˆÚ“®
 	Vector vec = Vector( player.device_x, 0, player.device_y ).normalize( ) * MOVE_SPEED;
@@ -141,7 +159,7 @@ void RockPlayer::actOnWalking( ) {
 	}
 	//ƒWƒƒƒ“ƒv
 	if ( isStanding( ) ) {
-		if ( player.device_button & BUTTON_A ) {
+		if ( player.device_button & BUTTON_B ) {
 			setAction( ACTION_JUMP );
 			Vector vec = getVec( );
 			vec.y = JUMP_POWER;
@@ -165,6 +183,18 @@ void RockPlayer::actOnWalking( ) {
 	Vector vec = Vector( player.device_x, 0, player.device_y ).normalize( ) * MOVE_SPEED;
 	vec.y = getVec( ).y;
 	setVec( vec );
+}
+
+void RockPlayer::actOnAttacking( ) {
+	Status::Player player = _status->getPlayer( _id );
+	//Ž€–S
+	if ( player.power <= 0 ) {
+		setAction( ACTION_DEAD );
+		return;
+	}
+	RockShotPtr shot( new RockShot( _id, getPos( ), getDir( ) ) );
+	RockArmoury::getTask( )->addShot( shot );
+	setAction( ACTION_WAIT );
 }
 
 void RockPlayer::actOnBraking( ) {

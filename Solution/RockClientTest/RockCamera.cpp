@@ -3,7 +3,7 @@
 #include "Drawer.h"
 #include "RockFamily.h"
 
-const Vector INIT_POS = Vector( 0, 100, -150 );
+const Vector INIT_POS = Vector( 0, 500, -1000 );
 
 RockCameraPtr RockCamera::getTask( ) {
 	return std::dynamic_pointer_cast<RockCamera>( Application::getInstance( )->getTask( getTag( ) ) );

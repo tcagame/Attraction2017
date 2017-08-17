@@ -22,7 +22,7 @@ void main( ) {
 	StatusPtr status( new Status );
 	MessagePtr message( new Message );
 	ApplicationPtr app( Application::getInstance( ) );
-	app->setWindowSize( SCREEN_WIDTH, SCREEN_HEIGHT );
+	//app->setWindowSize( SCREEN_WIDTH, SCREEN_HEIGHT );
 	app->addTask( Drawer::getTag( ), TaskPtr( new Drawer( "Resource/Rock" ) ) );
 	app->addTask( Client::getTag( ), TaskPtr( new Client( status, message ) ) );
 	app->addTask( RockMap::getTag( ), TaskPtr( new RockMapTest ) );
