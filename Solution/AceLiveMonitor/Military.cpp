@@ -98,12 +98,12 @@ void Military::update( ) {
 				dropMoney( enemy );
 				int impact_chip_size = enemy->getChipSize( );
 				_impacts.push_back( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), Character::STATE_MAIN, impact_chip_size ) ) );
-				ite = _enemies.erase( ite );
+				ite = _event_enemies.erase( ite );
 				continue;
 			}
 			if ( !enemy->isInScreen( ) ) {
 				//エネミーが画面外に行くと消える
-				ite = _enemies.erase( ite );
+				ite = _event_enemies.erase( ite );
 				continue;
 			}
 			for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {

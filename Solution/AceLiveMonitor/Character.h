@@ -38,6 +38,7 @@ protected:
 	int getActCount( ) const;
 	void setRadius( int radius );
 	void setFinished( );
+	void setActCount( int count );
 private:
 	void updateDir( );
 private:

@@ -16,6 +16,7 @@ public:
 		ACTION_OVER_CHARGE,
 		ACTION_DAMEGE,
 		ACTION_BLOW_AWAY,
+		ACTION_DAED,
 	};
 public:
 	Player( int player_id, Vector pos );
@@ -46,13 +47,13 @@ private:
 	void actOnDamege( );
 	void actOnBlowAway( );
 	void updateState( );
+	void setAction( ACTION action );
 private:
 	ACTION _action;
 	int _id;
 	int _money;
 	int _toku;
-	int _charge_count;
-	int _damege_count;
 	int _over_charge_time;
+	int _charge_count;
 };
 
