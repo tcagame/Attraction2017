@@ -10,6 +10,7 @@
 #include "Military.h"
 #include "Enemy.h"
 #include "Storage.h"
+#include "Debug.h"
 
 //画像サイズ
 static const int PLAYER_FOOT = 7;
@@ -27,12 +28,10 @@ static const int MAX_HP = 16;
 //アニメーション
 static const int PLAYER_ANIM_WAIT_COUNT = 12;
 static const int PLAYER_ANIM_WIDTH_NUM = 10;
-static const int DAMEGE_COUNT = 20;
+static const int MAX_DAMEGE_COUNT = 20;
 
 Player::Player( int player_id, Vector pos ) :
 Character( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ),
-_charge_count( 0 ),
-_damege_count( 0 ),
 _over_charge_time( -1 ),
 _id( 0 ),
 _money( 0 ),
@@ -71,6 +70,11 @@ void Player::act( ) {
 	case ACTION_DAMEGE:
 		actOnDamege( );
 		break;
+	case ACTION_BLOW_AWAY:
+		actOnBlowAway( );
+		break;
+	case ACTION_DAED:
+		break;
 	}
 	actOnCamera( );
 	updateState( );
@@ -79,29 +83,29 @@ void Player::act( ) {
 void Player::actOnWaiting( ) {
 	//デバイスのスティック入力があった場合、action_walk
 	if ( !isStanding( ) ) {
-		_action = ACTION_FLOAT;
+		setAction( ACTION_FLOAT );
 		return;
 	}
 	Vector vec = getVec( );
 	if ( fabs( vec.x ) > 0 ) {
-		_action = ACTION_BRAKE;
+		setAction( ACTION_BRAKE );
 		return;
 	}
 	DevicePtr device( Device::getTask( ) );
 	if ( abs( device->getDirX( _id ) ) > 50 ) {
-		_action = ACTION_WALK;
+		setAction( ACTION_WALK );
 		return;
 	}
 	if ( device->getPush( _id ) & BUTTON_A ) {
-		_action = ACTION_ATTACK;
+		setAction( ACTION_ATTACK );
 		return;
 	}
 	if ( device->getDirY( _id ) > 0 ) {
-		_action = ACTION_CHARGE;
+		setAction( ACTION_CHARGE );
 		return;
 	}
 	if ( isStanding( ) && device->getPush( _id ) & BUTTON_C ) {
-		_action = ACTION_FLOAT;
+		setAction( ACTION_FLOAT );
 		vec.y = JUMP_POWER;
 	}
 	setVec( vec );
@@ -116,20 +120,20 @@ void Player::actOnWalking( ) {
 	DevicePtr device( Device::getTask( ) );
 	Vector vec = getVec( );
 	if ( !isStanding( ) ) {
-		_action = ACTION_FLOAT;
+		setAction( ACTION_FLOAT );
 		return;
 	}
 	if ( device->getDirX( _id ) * vec.x < 0 ) {
-		_action = ACTION_BRAKE;
+		setAction( ACTION_BRAKE );
 		return;
 	}
 	if ( device->getDirX( _id ) == 0 ) {
-		_action = ACTION_WAIT;
+		setAction( ACTION_WAIT );
 		return;
 	}
 
 	if ( isStanding( ) && device->getPush( _id ) & BUTTON_C ) {
-		_action = ACTION_FLOAT;
+		setAction( ACTION_FLOAT );
 		vec.y = JUMP_POWER;
 	}
 	if ( device->getDirX( _id ) < -50 ) {
@@ -144,19 +148,19 @@ void Player::actOnWalking( ) {
 void Player::actOnBreaking( ) {
 	Vector vec = getVec( );
 	if ( !isStanding( ) ) {
-		_action = ACTION_FLOAT;
+		setAction( ACTION_FLOAT );
 		return;
 	}
 	if ( ( int )vec.x == 0 ) {
-		_action = ACTION_WAIT;
+		setAction( ACTION_WAIT );
 	}
 	DevicePtr device( Device::getTask( ) );
 	if ( device->getDirX( ) * vec.x > 0 ) {
-		_action = ACTION_WALK;
+		setAction( ACTION_WALK );
 	}
 	if ( isStanding( ) && device->getPush( _id ) & BUTTON_C ) {
 		vec.y = JUMP_POWER;
-		_action = ACTION_FLOAT;
+		setAction( ACTION_FLOAT );
 	}
 	if ( vec.x < 0 ) {
 		if ( vec.x < -BRAKE_ACCEL ) {
@@ -177,7 +181,7 @@ void Player::actOnBreaking( ) {
 
 void Player::actOnFloating( ) {
 	if ( isStanding( ) ) {
-		_action = ACTION_WAIT;
+		setAction( ACTION_WAIT );
 		return;
 	}
 	DevicePtr device( Device::getTask( ) );
@@ -218,7 +222,7 @@ void Player::actOnFloating( ) {
 
 	setVec( vec );
 	if ( device->getPush( _id ) & BUTTON_A ) {
-		_action = ACTION_ATTACK;
+		setAction( ACTION_ATTACK );
 	}
 }
 
@@ -227,33 +231,33 @@ void Player::actOnAttack( ) {
 	ShotPtr shot( new Shot( getPos( ), getDir( ), power ) );
 	shot->setState( getState( ) );
 	Armoury::getTask( )->add( shot );
-	_action = ACTION_WAIT;
+	setAction( ACTION_WAIT );
 	_charge_count = 0;
 }
 
 void Player::actOnCharge( ) {
 	DevicePtr device( Device::getTask( ) );
 	if ( !isStanding( ) ) {
-		_action = ACTION_FLOAT;
+		setAction( ACTION_FLOAT );
 		return;
 	}
 	if ( device->getPush( _id ) & BUTTON_A ) {
-		_action = ACTION_ATTACK;
+		setAction( ACTION_ATTACK );
 		return;
 	}
 	if ( device->getDirY( _id ) <= 0 ) {
 		if ( device->getDirX( _id ) == 0 ) {
-			_action = ACTION_WAIT;
+			setAction( ACTION_WAIT );
 			return;
 		} else {
-			_action = ACTION_WALK;
+			setAction( ACTION_WALK );
 			return;
 		}
 		Vector vec = getVec( );
 		if ( device->getPush( _id ) & BUTTON_C ) {
 			vec.y = JUMP_POWER;
 			setVec( vec );
-			_action = ACTION_FLOAT;
+			setAction( ACTION_FLOAT );
 			return;
 		}
 	}
@@ -261,18 +265,18 @@ void Player::actOnCharge( ) {
 	if ( _charge_count > MAX_CHARGE_COUNT ) {
 		_charge_count = 0;
 		_over_charge_time = getActCount( );
-		_action = ACTION_OVER_CHARGE;
+		setAction( ACTION_OVER_CHARGE );
 	}
 }
 
 void Player::actOnOverCharge( ) {
 	if ( _over_charge_time < 0 ) {
-		_action = ACTION_WAIT;
+		setAction( ACTION_WAIT );
 		return;
 	}
 
 	if ( getActCount( ) - _over_charge_time > BURST_TIME ) {
-		_action = ACTION_WAIT;
+		setAction( ACTION_WAIT );
 		_over_charge_time = -1;
 	}
 }
@@ -301,12 +305,11 @@ void Player::actOnCamera( ) {
 }
 
 void Player::actOnDamege( ) {
-	if ( _damege_count == 0 ) {
-		_action = ACTION_WAIT;
+	if ( getActCount( ) >= MAX_DAMEGE_COUNT ) {
+		setAction( ACTION_WAIT );
 		return;
 	}
-	_damege_count--;
-	if ( _damege_count < DAMEGE_COUNT / 2 ) {
+	if ( getActCount( ) > MAX_DAMEGE_COUNT / 2 ) {
 		Vector vec = getVec( );
 		//ひるみ中でも移動できるようにする
 		DevicePtr device( Device::getTask( ) );
@@ -318,20 +321,35 @@ void Player::actOnDamege( ) {
 		}
 		setVec( vec );
 	}
-	if ( _damege_count < 0 ) {
-		_action = ACTION_WAIT;
-		_damege_count = 0;
-	}
 }
 
 
+void Player::actOnBlowAway( ) {
+	Vector pos = getPos( );
+	if ( pos.y < -GRAPH_SIZE ) {
+		setPos( Vector( Family::getTask( )->getCameraPos( ) + SCREEN_WIDTH / 2, -GRAPH_SIZE ) );
+		setAction( ACTION_WAIT );
+		setVec( Vector( ) );
+		return;
+	}
+	setVec( Vector( getVec( ).x, BLOW_POWER ) );
+}
+
 void Player::damage( int force ) {
-	if ( _damege_count > 0 ) {
+	if ( Debug::getTask( )->isDebug( ) ) {
+		return;
+	}
+	if ( _action == ACTION_DAMEGE ||
+		 _action == ACTION_BLOW_AWAY ||
+		 isFinished( ) ) {
 		return;
 	}
 	Character::damage( force );
-	_action = ACTION_DAMEGE;
-	_damege_count = DAMEGE_COUNT;
+	if ( isFinished( ) ) {
+		setAction( ACTION_DAED );
+	} else {
+		setAction( ACTION_DAMEGE );
+	}
 	setVec( Vector( ) );
 }
 
@@ -411,8 +429,32 @@ Chip Player::getChip( ) const {
 				63
 			};
 			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-			cx = ANIM[ ( _damege_count / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] % PLAYER_ANIM_WIDTH_NUM;
-			cy = ANIM[ ( _damege_count / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] / PLAYER_ANIM_WIDTH_NUM;
+			cx = ANIM[ ( getActCount( ) / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] % PLAYER_ANIM_WIDTH_NUM;
+			cy = ANIM[ ( getActCount( ) / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] / PLAYER_ANIM_WIDTH_NUM;
+		}
+		break;
+	case ACTION_BLOW_AWAY:
+		{
+			const int ANIM[ ] = {
+				5,
+			};
+			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
+			cx = ANIM[ ( ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] % PLAYER_ANIM_WIDTH_NUM;
+			cy = ANIM[ ( ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] / PLAYER_ANIM_WIDTH_NUM;
+		}
+		break;
+	case ACTION_DAED:
+		{
+			const int ANIM[ ] = {
+				60, 61, 62, 63, 64, 65, 66, 67, 68
+			};
+			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
+			int anim = getActCount( ) / PLAYER_ANIM_WAIT_COUNT;
+			if ( anim >= anim_num ) {
+				anim = anim_num - 1;
+			}
+			cx = ANIM[ anim ] % PLAYER_ANIM_WIDTH_NUM;
+			cy = ANIM[ anim ] / PLAYER_ANIM_WIDTH_NUM;
 		}
 		break;
 	}
@@ -475,6 +517,7 @@ void Player::updateState( ) {
 	MapPtr map( Map::getTask( ) );
 	MapEventPtr map_event( MapEvent::getTask( ) );
 	FamilyPtr family( Family::getTask( ) );
+
 	MapEvent::TYPE event_type = map_event->getType( );
 	if ( event_type == MapEvent::TYPE_TITLE ) {
 		bool event_obj = true;
@@ -551,27 +594,35 @@ bool Player::isOnHead( EnemyPtr target ) const {
 }
 
 void Player::bound( ) {
-	_action = ACTION_FLOAT;
+	setAction( ACTION_FLOAT );
 	Vector vec = getVec( );
 	vec.y = JUMP_POWER;
 	setVec( vec );
 }
 
 void Player::blowAway( ) {
+	if ( !Debug::getTask( )->isDebug( ) ) {
+		setAction( ACTION_BLOW_AWAY );
+	}
 }
 
-int Player::getHandMoney( ) const {
+int Player::getMoneyNum( ) const {
 	return _money;
 }
 
-void Player::getMoney( int money ) {
+void Player::pickUpMoney( int money ) {
 	_money += money;
 }
 
-int Player::getHandToku( ) const {
+int Player::getTokuNum( ) const {
 	return _toku;
 }
 
-void Player::getToku( ) {
+void Player::pickUpToku( ) {
 	_toku++;
+}
+
+void Player::setAction( ACTION action ) {
+	_action = action;
+	setActCount( 0 );
 }

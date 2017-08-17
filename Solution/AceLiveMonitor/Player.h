@@ -16,6 +16,7 @@ public:
 		ACTION_OVER_CHARGE,
 		ACTION_DAMEGE,
 		ACTION_BLOW_AWAY,
+		ACTION_DAED,
 	};
 public:
 	Player( int player_id, Vector pos );
@@ -30,10 +31,10 @@ public:
 	bool isOnHead( EnemyPtr target ) const;
 	void bound( );
 	void blowAway( );
-	int getHandMoney( ) const;
-	void getMoney( int money );
-	int getHandToku( ) const;
-	void getToku( );
+	int getMoneyNum( ) const;
+	int getTokuNum( ) const;
+	void pickUpMoney( int money );
+	void pickUpToku( );
 private:
 	void actOnWaiting( );
 	void actOnWalking( );
@@ -44,14 +45,15 @@ private:
 	void actOnOverCharge( );
 	void actOnCamera( );
 	void actOnDamege( );
+	void actOnBlowAway( );
 	void updateState( );
+	void setAction( ACTION action );
 private:
 	ACTION _action;
 	int _id;
 	int _money;
 	int _toku;
-	int _charge_count;
-	int _damege_count;
 	int _over_charge_time;
+	int _charge_count;
 };
 

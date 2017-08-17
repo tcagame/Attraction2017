@@ -1,18 +1,32 @@
 #include "EnemyLancer.h"
+#include "Family.h"
+#include "Player.h"
 
-static const int WAIT_ANIM_TIME = 2;
-static const int MAX_HP = 3;
+const int WAIT_ANIM_TIME = 2;
+const int MAX_HP = 3;
+const int MOVE_SPEED = -3;
+const int RANGE = 150;
 
 EnemyLancer::EnemyLancer( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ) {
 	setRadius( 36 );
+	setVec( Vector( MOVE_SPEED, 0 ) );
 }
 
 EnemyLancer::~EnemyLancer( ) {
 }
 
 void EnemyLancer::act( ) {
-
+	Vector vec = getVec( );
+	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
+		 PlayerPtr player = Family::getTask( )->getPlayer( i );
+		 Vector diff = player->getPos( ) - getPos( );
+		 if ( diff.getLength( ) < RANGE &&
+			  player->getPos( ).x < getPos( ).x ) {
+				vec.x = MOVE_SPEED * 3;
+		 }
+	}
+	setVec( vec );
 }
 
 Chip EnemyLancer::getChip( ) const {

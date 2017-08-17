@@ -1,10 +1,14 @@
 #include "EnemyArcher.h"
 
-static const int WAIT_ANIM_TIME = 5;
-static const int MAX_HP = 0;
+const int WAIT_ANIM_TIME = 5;
+const int MAX_HP = 0;
+const int MOVE_SPEED = -2;
+const int MOVE_TIME = WAIT_ANIM_TIME * 12;
+const int SHOT_TIME = WAIT_ANIM_TIME * 9;
 
 EnemyArcher::EnemyArcher( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ) {
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ),
+_act( ACTION_MOVE ) {
 	setRadius( 36 );
 }
 
@@ -12,15 +16,26 @@ EnemyArcher::~EnemyArcher( ) {
 }
 
 void EnemyArcher::act( ) {
-
+	switch ( _act ) {
+	case ACTION_MOVE:
+		setVec( Vector( MOVE_SPEED, 0 ) );
+		if ( ( getActCount( ) + 1 ) % MOVE_TIME == 0 ) {
+			_act = ACTION_SHOT;
+		}
+		break;
+	case ACTION_SHOT:
+		if ( ( getActCount( ) + 1 ) % SHOT_TIME == 0 ) {
+			_act = ACTION_MOVE;
+			getVec( ).x = 0;
+		}
+		break;
+	}
 }
 
 Chip EnemyArcher::getChip( ) const {
-	const int ANIM[ ] = {
-		0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11
-	};
-	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	Chip chip = Chip( );
+	int ANIM[ ] = { /*move*/ 0, 1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1, /*shot*/ 3, 4, 5, 6, 7, 8, 9, 10, 11 };
+	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	chip.tx = ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ] * 64;
 	chip.ty = 13 * 64;
 	chip.size = getChipSize( );

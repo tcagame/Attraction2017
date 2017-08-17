@@ -1,13 +1,15 @@
 #include "EnemyJizo.h"
 
-static const int WAIT_ANIM_TIME = 8;
-static const int GRAPH_WIDTH_NUM = 10;
-static const int FADE_IN_TIME = WAIT_ANIM_TIME * 6;
-static const int MAX_HP = 6;
+const int WAIT_ANIM_TIME = 8;
+const int GRAPH_WIDTH_NUM = 10;
+const int FADE_IN_TIME = WAIT_ANIM_TIME * 6;
+const int MAX_HP = 6;
+const int MOVE_SPEED = 1;
 
 EnemyJizo::EnemyJizo( const Vector& pos ) :
-Enemy( pos, BIG_CHAR_GRAPH_SIZE, MAX_HP, false ),
-_act( ACTION_FADE_IN ) {
+Enemy( pos, BIG_CHAR_GRAPH_SIZE, MAX_HP ),
+_act( ACTION_FADE_IN ),
+_before_pos( pos ) {
 	setRadius( 48 );
 }
 
@@ -20,11 +22,20 @@ void EnemyJizo::act( ) {
 	case ACTION_FADE_IN:
 		if ( getActCount( ) > FADE_IN_TIME ) {
 			_act = ACTION_MOVE;
+			setVec( Vector( -MOVE_SPEED, 0 ) );
 		}
 		break;
 	case ACTION_MOVE:
+		if ( _before_pos.x == getPos( ).x ) {
+			if ( getDir( ) == DIR_LEFT ) {
+				setVec( Vector( MOVE_SPEED, 0 ) );
+			} else {
+				setVec( Vector( -MOVE_SPEED, 0 ) );
+			}
+		}
+		_before_pos = getPos( );
 		break;
-	}
+		}
 }
 
 Chip EnemyJizo::getChip( ) const {

@@ -100,6 +100,18 @@ void ViewerMilitary::drawEnemyies( ) const {
 			ite++;
 		}
 	}
+	//enemy_hellfire
+	EnemyPtr hellfire = military->getHellFire( );
+	{
+		Chip chip = hellfire->getChip( );
+		chip.sy1 += VIEW_STREET_Y;
+		chip.sy2 += VIEW_STREET_Y;
+		chip.sx1 -= camera_pos;
+		chip.sx2 -= camera_pos;
+		_enemy_midium->setRect( chip.tx, chip.ty, chip.size, chip.size );
+		_enemy_midium->setPos( chip.sx1, chip.sy1, chip.sx2, chip.sy2 );
+		_enemy_midium->draw( );
+	}
 }
 
 void ViewerMilitary::drawImpacts( ) const {

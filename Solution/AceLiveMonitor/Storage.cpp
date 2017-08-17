@@ -73,12 +73,12 @@ bool Storage::isOverLappedPlayer( ItemPtr item ) const {
 		if ( item->isOverlapped( player ) ) {
 			ItemMoneyPtr money = std::dynamic_pointer_cast< ItemMoney >( item );
 			if ( money ) {
-				player->getMoney( money->getValue( ) );
+				player->pickUpMoney( money->getValue( ) );
 			}
 
 			ItemTokuPtr toku = std::dynamic_pointer_cast< ItemToku >( item );
 			if ( toku ) {
-				player->getToku( );
+				player->pickUpToku( );
 			}
 			result = true;
 			break;
@@ -95,5 +95,21 @@ void Storage::createToku( ) {
 		FamilyPtr family( Family::getTask( ) );
 		Vector pos = Vector( family->getCameraPos( ) + ( rand( ) % SCREEN_WIDTH ), 100 );
 		add( ItemPtr( new ItemToku( pos ) ) );
+	}
+}
+
+void Storage::eraseEventItem( ) {
+	std::list< ItemPtr >::iterator ite = _items.begin( );
+	while ( ite != _items.end( ) ) {
+		ItemPtr item = *ite;
+		if ( !item ) {
+			ite++;
+			continue;
+		}
+		if ( item->getState( ) == Character::STATE_EVENT ) {
+			ite = _items.erase( ite );
+			continue;
+		}
+		ite++;
 	}
 }
