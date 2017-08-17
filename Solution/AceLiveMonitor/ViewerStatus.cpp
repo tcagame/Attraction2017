@@ -24,6 +24,7 @@ void ViewerStatus::draw( ) const {
 	}
 	drawHp( );
 	drawMoney( );
+	drawToku( );
 }
 
 void ViewerStatus::drawHp( ) const {
@@ -49,5 +50,17 @@ void ViewerStatus::drawMoney( ) const {
 		int sx = i * 320 + 160;
 		int sy = VIEW_STATUS_Y + 105;
 		drawer->drawString( sx, sy, "%15d", player->getHandMoney( ) );
+	}
+}
+
+void ViewerStatus::drawToku( ) const {
+	//Toku
+	FamilyPtr family( Family::getTask( ) );
+	DrawerPtr drawer( Drawer::getTask( ) );
+	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
+		PlayerPtr player = family->getPlayer( i );
+		int sx = i * 320 + 280;
+		int sy = VIEW_STATUS_Y + 180;
+		drawer->drawString( sx, sy, "%2d", player->getHandToku( ) );
 	}
 }
