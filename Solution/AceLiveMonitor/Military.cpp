@@ -25,6 +25,7 @@ Military::~Military( ) {
 }
 
 void Military::update( ) {
+	FamilyPtr family( Family::getTask( ) );
 	{//main
 		std::list< EnemyPtr >::const_iterator ite = _enemies.begin( );
 		while ( ite != _enemies.end( ) ) {
@@ -41,14 +42,13 @@ void Military::update( ) {
 				ite = _enemies.erase( ite );
 				continue;
 			}
-			FamilyPtr family( Family::getTask( ) );
 			for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
 				PlayerPtr player( family->getPlayer( i ) );
 				if ( player->isOverlapped( enemy ) ) {
 					if ( player->isOnHead( enemy ) ) {
 						player->bound( );
 					} else {
-						player->damage( 1 );
+						player->damage( 3 );
 					}
 				}
 			}
@@ -59,6 +59,16 @@ void Military::update( ) {
 	{//event
 		if ( _boss ) {
 			_boss->update( );
+			for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
+				PlayerPtr player( family->getPlayer( i ) );
+				if ( player->isOverlapped( _boss ) ) {
+					if ( player->isOnHead( _boss ) ) {
+						player->bound( );
+					} else {
+						player->damage( 3 );
+					}
+				}
+			}
 			if ( _boss->isFinished( ) ) {
 				int chip_size = _boss->getChipSize( ) * 2;
 				_impacts.push_back( ImpactPtr( new Impact( _boss->getPos( ) + Vector( 0, _boss->getChipSize( ) / 2 ), Character::STATE_EVENT, chip_size ) ) );
@@ -80,14 +90,13 @@ void Military::update( ) {
 				ite = _event_enemies.erase( ite );
 				continue;
 			}
-			FamilyPtr family( Family::getTask( ) );
 			for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
 				PlayerPtr player( family->getPlayer( i ) );
 				if ( player->isOverlapped( enemy ) ) {
 					if ( player->isOnHead( enemy ) ) {
 						player->bound( );
 					} else {
-						player->damage( 1 );
+						player->damage( 3 );
 					}
 				}
 			}
