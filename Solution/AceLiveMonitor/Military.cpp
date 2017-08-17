@@ -9,6 +9,9 @@
 #include "EnemyBossRock.h"
 #include "MapEvent.h"
 #include "Impact.h"
+#include "Storage.h"
+#include "ItemMoney.h"
+#include "EnemyBat.h"
 
 PTR( Player );
 
@@ -26,6 +29,7 @@ Military::~Military( ) {
 
 void Military::update( ) {
 	FamilyPtr family( Family::getTask( ) );
+	StoragePtr storage( Storage::getTask( ) );
 	{//main
 		std::list< EnemyPtr >::const_iterator ite = _enemies.begin( );
 		while ( ite != _enemies.end( ) ) {
@@ -37,8 +41,9 @@ void Military::update( ) {
 			if ( enemy->isFinished( ) ||
 				 !enemy->isInScreen( ) ) {
 				//エネミーが倒れた場合、倒れた位置で爆発する
-				int chip_size = enemy->getChipSize( ) * 2;
-				_impacts.push_back( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), Character::STATE_MAIN, chip_size ) ) );
+				dropMoney( enemy );
+				int chip_size = enemy->getChipSize( );
+				_impacts.push_back( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), Character::STATE_MAIN, chip_size * 2 ) ) );
 				ite = _enemies.erase( ite );
 				continue;
 			}
@@ -70,8 +75,8 @@ void Military::update( ) {
 				}
 			}
 			if ( _boss->isFinished( ) ) {
-				int chip_size = _boss->getChipSize( ) * 2;
-				_impacts.push_back( ImpactPtr( new Impact( _boss->getPos( ) + Vector( 0, _boss->getChipSize( ) / 2 ), Character::STATE_EVENT, chip_size ) ) );
+				int impact_chip_size = _boss->getChipSize( ) * 2;
+				_impacts.push_back( ImpactPtr( new Impact( _boss->getPos( ) + Vector( 0, _boss->getChipSize( ) / 2 ), Character::STATE_EVENT, impact_chip_size ) ) );
 				_boss = EnemyPtr( );
 			}
 		}
@@ -85,8 +90,9 @@ void Military::update( ) {
 			if ( enemy->isFinished( ) ||
 				 !enemy->isInScreen( ) ) {
 				//エネミーが倒れた場合、倒れた位置で爆発する
-				int chip_size = enemy->getChipSize( ) * 2;
-				_impacts.push_back( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), Character::STATE_EVENT, chip_size ) ) );
+				dropMoney( enemy );
+				int impact_chip_size = enemy->getChipSize( ) * 2;
+				_impacts.push_back( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), Character::STATE_EVENT, impact_chip_size ) ) );
 				ite = _event_enemies.erase( ite );
 				continue;
 			}
@@ -210,4 +216,24 @@ void Military::updateImpact( ) {
 
 std::list< ImpactPtr > Military::getImpactList( ) const {
 	return _impacts;
+}
+
+void Military::dropMoney( EnemyConstPtr enemy ) {
+	int chip_size = enemy->getChipSize( );
+	ItemMoney::TYPE type = ItemMoney::TYPE_500;
+	switch ( chip_size ) {
+	case SMALL_CHAR_GRAPH_SIZE:
+		type = ItemMoney::TYPE_PETTY;
+		break;
+	case NORMAL_CHAR_GRAPH_SIZE:
+		type = ItemMoney::TYPE_BAG;
+		break;
+	case BIG_CHAR_GRAPH_SIZE:
+		type = ItemMoney::TYPE_500;
+		break;
+	}
+	Vector pos = enemy->getPos( ) + Vector( 0, -chip_size );
+	ItemPtr item = ItemPtr( new ItemMoney( pos, type ) );
+	item->setState( enemy->getState( ) );
+	Storage::getTask( )->add( item );
 }

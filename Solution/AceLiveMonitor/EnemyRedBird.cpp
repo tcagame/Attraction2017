@@ -2,9 +2,10 @@
 #include "EnemyRedBirdAttack.h"
 #include "Military.h"
 
-static const int WAIT_ANIM_TIME = 5;
-static const int ATTACK_TIME = 30;
-static const int MAX_HP = 3;
+const int WAIT_ANIM_TIME = 5;
+const int ATTACK_TIME = 30;
+const int MAX_HP = 3;
+const int MOVE_SPEED = -5;
 
 EnemyRedBird::EnemyRedBird( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP, false ) {
@@ -16,6 +17,7 @@ EnemyRedBird::~EnemyRedBird( ) {
 }
 
 void EnemyRedBird::act( ) {
+	setVec( Vector( MOVE_SPEED, 0 ) );
 	if ( !( getActCount( ) % ATTACK_TIME ) ) {
 		MilitaryPtr military( Military::getTask( ) );
 		military->popUp( EnemyPtr( new EnemyRedBirdAttack( getPos( ) ) ) );
