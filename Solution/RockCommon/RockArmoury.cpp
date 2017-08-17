@@ -57,7 +57,6 @@ void RockArmoury::update( ) {
 }
 
 std::list< RockShotPtr > RockArmoury::getShots( ) const {
-	int size = _shots.size( );
 	return _shots;
 }
 

@@ -26,7 +26,6 @@ void EnemyArcher::act( ) {
 	case ACTION_SHOT:
 		if ( ( getActCount( ) + 1 ) % SHOT_TIME == 0 ) {
 			_act = ACTION_MOVE;
-			getVec( ).x = 0;
 		}
 		break;
 	}
