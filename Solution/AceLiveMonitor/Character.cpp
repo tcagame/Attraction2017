@@ -5,7 +5,7 @@
 #include "Map.h"
 #include "MapEvent.h"
 
-const int MAX_SPEED_Y = 10;
+const int MAX_SPEED_Y = 16;
 const int MAX_ACT_COUNT = 0xfffffff;
 
 Character::Character( const Vector& pos, const int chip_size, const int hp, bool mass ) :
