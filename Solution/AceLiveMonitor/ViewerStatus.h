@@ -7,7 +7,9 @@ public:
 	virtual ~ViewerStatus( );
 public:
 	void draw( ) const;
+private:
 	void drawHp( ) const;
+	void drawMoney( ) const;
 private:
 	ImagePtr _status_flame;
 	ImagePtr _status_ui;

@@ -23,6 +23,7 @@ void ViewerStatus::draw( ) const {
 		_status_flame->draw( );
 	}
 	drawHp( );
+	drawMoney( );
 }
 
 void ViewerStatus::drawHp( ) const {
@@ -36,5 +37,17 @@ void ViewerStatus::drawHp( ) const {
 		int sy = VIEW_STATUS_Y + 50;
 		_status_ui->setPos( sx, sy );
 		_status_ui->draw( );
+	}
+}
+
+void ViewerStatus::drawMoney( ) const {
+	//Money
+	FamilyPtr family( Family::getTask( ) );
+	DrawerPtr drawer( Drawer::getTask( ) );
+	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
+		PlayerPtr player = family->getPlayer( i );
+		int sx = i * 320 + 160;
+		int sy = VIEW_STATUS_Y + 105;
+		drawer->drawString( sx, sy, "%15d", player->getHandMoney( ) );
 	}
 }
