@@ -213,6 +213,10 @@ void Character::setFinished( ) {
 	_finished = true;
 }
 
+void Character::setActCount( int count ) {
+	_act_count = count;
+}
+
 void Character::setState( STATE state ) {
 	_state = state;
 }
