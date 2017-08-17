@@ -2,7 +2,7 @@
 
 static const int WAIT_ANIM_TIME = 5;
 static const int MOVE_SPEED = 5;
-static const int JUMP_POWER = -50;
+static const int JUMP_POWER = -10;
 static const int MAX_HP = 3;
 
 EnemyGreenZombie::EnemyGreenZombie( const Vector& pos ) :
