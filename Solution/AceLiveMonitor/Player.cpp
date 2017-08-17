@@ -34,7 +34,7 @@ _charge_count( 0 ),
 _damege_count( 0 ),
 _over_charge_time( -1 ),
 _id( 0 ),
-_money( rand( ) ),
+_money( 0 ),
 _toku( 0 ),
 _action( ACTION_WAIT ) {
 	setRadius( 25 );
