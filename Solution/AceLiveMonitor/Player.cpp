@@ -327,7 +327,7 @@ void Player::damage( int force ) {
 	if ( _damege_count > 0 ) {
 		return;
 	}
-
+	Character::damage( force );
 	_action = ACTION_DAMEGE;
 	_damege_count = DAMEGE_COUNT;
 	setVec( Vector( ) );

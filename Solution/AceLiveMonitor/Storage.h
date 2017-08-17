@@ -19,6 +19,8 @@ public:
 	bool isExistanceEventItem( ) const;
 	std::list< ItemPtr > getItems( ) const;
 private:
+	bool isOverRappedPlayer( ItemConstPtr item ) const;
+private:
 	std::list< ItemPtr > _items;
 };
 

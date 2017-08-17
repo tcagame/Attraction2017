@@ -1,10 +1,14 @@
 #include "EnemyOneEyeSnake.h"
 
 static const int WAIT_ANIM_TIME = 5;
+static const int MOVE_SPEED = 2;
 static const int MAX_HP = 3;
+static const int JUMP_POWER = -400;
 
 EnemyOneEyeSnake::EnemyOneEyeSnake( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ) {
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ),
+_before_pos( Vector( ) ),
+_vec( Vector( MOVE_SPEED, 0 ) ) {
 	setRadius( 36 );
 }
 
@@ -13,7 +17,15 @@ EnemyOneEyeSnake::~EnemyOneEyeSnake( ) {
 }
 
 void EnemyOneEyeSnake::act( ) {
-
+	if ( _before_pos.x == getPos( ).x ) {
+		_vec.x *= -1;
+		setVec( _vec );
+	}
+	if ( isStanding( ) && getActCount( ) % 90 == 0 ) {
+		_vec.y += JUMP_POWER;
+		setVec( _vec );
+	}
+	_before_pos = getPos( );
 }
 
 Chip EnemyOneEyeSnake::getChip( ) const {
