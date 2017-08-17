@@ -38,12 +38,16 @@ void Military::update( ) {
 				ite++;
 				continue;
 			}
-			if ( enemy->isFinished( ) ||
-				 !enemy->isInScreen( ) ) {
+			if ( enemy->isFinished( ) ) {
 				//エネミーが倒れた場合、倒れた位置で爆発する
 				dropMoney( enemy );
-				int chip_size = enemy->getChipSize( );
-				_impacts.push_back( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), Character::STATE_MAIN, chip_size * 2 ) ) );
+				int impact_chip_size = enemy->getChipSize( );
+				_impacts.push_back( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), Character::STATE_MAIN, impact_chip_size ) ) );
+				ite = _enemies.erase( ite );
+				continue;
+			}
+			if ( !enemy->isInScreen( ) ) {
+				//エネミーが画面外に行くと消える
 				ite = _enemies.erase( ite );
 				continue;
 			}
@@ -87,13 +91,17 @@ void Military::update( ) {
 				ite++;
 				continue;
 			}
-			if ( enemy->isFinished( ) ||
-				 !enemy->isInScreen( ) ) {
+			if ( enemy->isFinished( ) ) {
 				//エネミーが倒れた場合、倒れた位置で爆発する
 				dropMoney( enemy );
-				int impact_chip_size = enemy->getChipSize( ) * 2;
-				_impacts.push_back( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), Character::STATE_EVENT, impact_chip_size ) ) );
-				ite = _event_enemies.erase( ite );
+				int impact_chip_size = enemy->getChipSize( );
+				_impacts.push_back( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), Character::STATE_MAIN, impact_chip_size ) ) );
+				ite = _enemies.erase( ite );
+				continue;
+			}
+			if ( !enemy->isInScreen( ) ) {
+				//エネミーが画面外に行くと消える
+				ite = _enemies.erase( ite );
 				continue;
 			}
 			for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {

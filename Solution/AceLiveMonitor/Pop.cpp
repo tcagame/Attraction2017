@@ -3,7 +3,7 @@
 #include "Family.h"
 
 static const int POP_INTERVAL_COUNT = 600;
-static const int MAX_PAGE = SCREEN_WIDTH / GRAPH_SIZE + 1;
+static const int MAX_PAGE = SCREEN_WIDTH / GRAPH_SIZE;
 
 Pop::Pop( const Vector& pos ) :
 _pos( pos ),
