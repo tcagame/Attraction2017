@@ -17,9 +17,6 @@ RockArmoury::~RockArmoury( ) {
 
 void RockArmoury::initialize( ) {
 	Drawer::getTask( )->loadEffect( EFFECT_SHOT, "effect/laser.efk" );
-	for ( int i = 0; i < 3; i++ ) {
-		addShot( RockShotPtr( new RockShot( Vector( i * 2, 0 ) ) ) );
-	}
 }
 
 void RockArmoury::update( ) {
@@ -30,7 +27,12 @@ void RockArmoury::update( ) {
 			ite++;
 			continue;
 		}
-		shot->update( );
+		if ( shot->isfinished( ) ) {
+			ite = _shots.erase( ite );
+			continue;
+		} else {
+			shot->update( );
+		}
 		ite++;
 	}
 }
