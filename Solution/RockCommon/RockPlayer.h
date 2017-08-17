@@ -23,6 +23,7 @@ private:
 		ACTION_JUMP,
 		ACTION_WALK,
 		ACTION_BRAKE,
+		ACTION_ATTACK,
 		ACTION_DEAD,
 	};
 private:
@@ -30,6 +31,7 @@ private:
 	void actOnWaiting( );
 	void actOnJumping( );
 	void actOnWalking( );
+	void actOnAttacking( );
 	void actOnBraking( );
 	void actOnDead( );
 private:

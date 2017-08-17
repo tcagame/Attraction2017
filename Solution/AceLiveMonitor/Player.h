@@ -44,6 +44,7 @@ private:
 	void actOnOverCharge( );
 	void actOnCamera( );
 	void actOnDamege( );
+	void actOnBlowAway( );
 	void updateState( );
 private:
 	ACTION _action;

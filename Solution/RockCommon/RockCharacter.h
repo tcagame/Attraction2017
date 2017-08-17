@@ -13,6 +13,7 @@ public:
 	DOLL getDoll( ) const;
 	void update( );
 	Vector getPos( ) const;
+	Vector getDir( ) const;
 	int getRadius( ) const;
 	int getHeight( ) const;
 	virtual double getAnimTime( ) const = 0;
@@ -35,6 +36,7 @@ protected:
 private:
 	Vector _pos;
 	Vector _vec;
+	Vector _dir;
 	DOLL _doll;
 	bool _mass;
 	bool _standing;

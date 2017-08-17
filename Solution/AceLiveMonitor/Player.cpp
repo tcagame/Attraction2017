@@ -71,6 +71,9 @@ void Player::act( ) {
 	case ACTION_DAMEGE:
 		actOnDamege( );
 		break;
+	case ACTION_BLOW_AWAY:
+		actOnBlowAway( );
+		break;
 	}
 	actOnCamera( );
 	updateState( );
@@ -325,8 +328,22 @@ void Player::actOnDamege( ) {
 }
 
 
+void Player::actOnBlowAway( ) {
+	Vector pos = getPos( );
+	if ( pos.y < -GRAPH_SIZE ) {
+		setPos( Vector( Family::getTask( )->getCameraPos( ) + SCREEN_WIDTH / 2, -GRAPH_SIZE ) );
+		_action = ACTION_WAIT;
+		setVec( Vector( ) );
+		return;
+	}
+	setVec( Vector( getVec( ).x, BLOW_POWER ) );
+}
+
 void Player::damage( int force ) {
 	if ( _damege_count > 0 ) {
+		return;
+	}
+	if ( _action == ACTION_BLOW_AWAY ) {
 		return;
 	}
 	Character::damage( force );
@@ -558,6 +575,7 @@ void Player::bound( ) {
 }
 
 void Player::blowAway( ) {
+	_action = ACTION_BLOW_AWAY;
 }
 
 int Player::getHandMoney( ) const {
