@@ -17,7 +17,7 @@ static const int PLAYER_FOOT = 7;
 static const int MAX_SPEED = 20;
 static const int MOVE_SPEED = 7;
 static const int BRAKE_ACCEL = 1;
-static const int JUMP_MAX_HP = -15;
+static const int JUMP_POWER = -10;
 //UŒ‚ŠÖŒW
 static const int CHARGE_PHASE_COUNT = 25;
 static const int MAX_CHARGE_COUNT = CHARGE_PHASE_COUNT * 4 - 1;
@@ -101,7 +101,7 @@ void Player::actOnWaiting( ) {
 	}
 	if ( isStanding( ) && device->getPush( _id ) & BUTTON_C ) {
 		_action = ACTION_FLOAT;
-		vec.y = JUMP_MAX_HP;
+		vec.y = JUMP_POWER;
 	}
 	setVec( vec );
 	_charge_count -= 2;
@@ -129,7 +129,7 @@ void Player::actOnWalking( ) {
 
 	if ( isStanding( ) && device->getPush( _id ) & BUTTON_C ) {
 		_action = ACTION_FLOAT;
-		vec.y = JUMP_MAX_HP;
+		vec.y = JUMP_POWER;
 	}
 	if ( device->getDirX( _id ) < -50 ) {
 		vec.x = -MOVE_SPEED;
@@ -154,7 +154,7 @@ void Player::actOnBreaking( ) {
 		_action = ACTION_WALK;
 	}
 	if ( isStanding( ) && device->getPush( _id ) & BUTTON_C ) {
-		vec.y = JUMP_MAX_HP;
+		vec.y = JUMP_POWER;
 		_action = ACTION_FLOAT;
 	}
 	if ( vec.x < 0 ) {
@@ -250,7 +250,7 @@ void Player::actOnCharge( ) {
 		}
 		Vector vec = getVec( );
 		if ( device->getPush( _id ) & BUTTON_C ) {
-			vec.y = JUMP_MAX_HP;
+			vec.y = JUMP_POWER;
 			setVec( vec );
 			_action = ACTION_FLOAT;
 			return;
@@ -552,7 +552,7 @@ bool Player::isOnHead( EnemyPtr target ) const {
 void Player::bound( ) {
 	_action = ACTION_FLOAT;
 	Vector vec = getVec( );
-	vec.y = JUMP_MAX_HP;
+	vec.y = JUMP_POWER;
 	setVec( vec );
 }
 
