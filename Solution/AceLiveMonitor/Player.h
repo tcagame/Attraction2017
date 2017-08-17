@@ -30,10 +30,10 @@ public:
 	bool isOnHead( EnemyPtr target ) const;
 	void bound( );
 	void blowAway( );
-	int getHandMoney( ) const;
-	void getMoney( int money );
-	int getHandToku( ) const;
-	void getToku( );
+	int getMoneyNum( ) const;
+	int getTokuNum( ) const;
+	void pickUpMoney( int money );
+	void pickUpToku( );
 private:
 	void actOnWaiting( );
 	void actOnWalking( );

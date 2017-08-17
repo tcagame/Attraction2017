@@ -12,6 +12,7 @@
 #include "ViewerStorage.h"
 
 #include "ViewerDebug.h"
+#include "Debug.h"
 
 ViewerPtr Viewer::getTask( ) {
 	return std::dynamic_pointer_cast< Viewer >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -54,7 +55,7 @@ void Viewer::update( ) {
 	_viewer_family->draw( );
 	_viewer_armoury->draw( );
 	_viewer_street->draw( ViewerStreet::LAYER_FRONT );
-	if ( _debug ) {
+	if ( Debug::getTask( )->isDebug( ) ) {
 		_viewer_debug->draw( );
 	}
 }

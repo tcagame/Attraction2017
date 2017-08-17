@@ -159,6 +159,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Debug.cpp" />
     <ClCompile Include="EnemyHellFire.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemFire.cpp" />
@@ -277,6 +278,7 @@
     <ClCompile Include="ViewerStreet.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Debug.h" />
     <ClInclude Include="EnemyHellFire.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemFire.h" />

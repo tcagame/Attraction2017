@@ -191,6 +191,7 @@ EnemyPtr Military::getOverlappedEnemy( CharacterConstPtr character ) const {
 
 void Military::createBoss( ) {
 	MapEvent::TYPE type = MapEvent::getTask( )->getType( );
+	Storage::getTask( )->eraseEventItem( );
 	_event_enemies.clear( );
 	switch ( type ) {
 	case MapEvent::TYPE_TITLE:

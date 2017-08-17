@@ -18,6 +18,7 @@ public:
 	void add( ItemPtr item );
 	bool isExistanceEventItem( ) const;
 	std::list< ItemPtr > getItems( ) const;
+	void eraseEventItem( );
 private:
 	bool isOverLappedPlayer( ItemPtr item ) const;
 	void createToku( ); //debug—p

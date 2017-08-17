@@ -330,6 +330,7 @@
     <ClCompile Include="EnemyHellFire.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="Debug.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -660,6 +661,7 @@
     <ClInclude Include="EnemyHellFire.h">
       <Filter>Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="Debug.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">

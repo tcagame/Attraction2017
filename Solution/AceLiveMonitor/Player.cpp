@@ -10,6 +10,7 @@
 #include "Military.h"
 #include "Enemy.h"
 #include "Storage.h"
+#include "Debug.h"
 
 //‰æ‘œƒTƒCƒY
 static const int PLAYER_FOOT = 7;
@@ -340,6 +341,9 @@ void Player::actOnBlowAway( ) {
 }
 
 void Player::damage( int force ) {
+	if ( Debug::getTask( )->isDebug( ) ) {
+		return;
+	}
 	if ( _damege_count > 0 ) {
 		return;
 	}
@@ -492,6 +496,7 @@ void Player::updateState( ) {
 	MapPtr map( Map::getTask( ) );
 	MapEventPtr map_event( MapEvent::getTask( ) );
 	FamilyPtr family( Family::getTask( ) );
+
 	MapEvent::TYPE event_type = map_event->getType( );
 	if ( event_type == MapEvent::TYPE_TITLE ) {
 		bool event_obj = true;
@@ -575,21 +580,23 @@ void Player::bound( ) {
 }
 
 void Player::blowAway( ) {
-	_action = ACTION_BLOW_AWAY;
+	if ( !Debug::getTask( )->isDebug( ) ) {
+		_action = ACTION_BLOW_AWAY;
+	}
 }
 
-int Player::getHandMoney( ) const {
+int Player::getMoneyNum( ) const {
 	return _money;
 }
 
-void Player::getMoney( int money ) {
+void Player::pickUpMoney( int money ) {
 	_money += money;
 }
 
-int Player::getHandToku( ) const {
+int Player::getTokuNum( ) const {
 	return _toku;
 }
 
-void Player::getToku( ) {
+void Player::pickUpToku( ) {
 	_toku++;
 }
