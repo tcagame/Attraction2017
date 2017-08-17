@@ -41,3 +41,19 @@ Chip ItemMoney::getChip( ) const {
 void ItemMoney::act( ) {
 
 }
+
+int ItemMoney::getValue( ) const {
+	int result = 0;
+	switch ( _type ) {
+	case TYPE_PETTY:
+		result = 100;
+		break;
+	case TYPE_BAG:
+		result = 200;
+		break;
+	case TYPE_500:
+		result = 500;
+		break;
+	}
+	return result;
+}

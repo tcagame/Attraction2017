@@ -3,6 +3,11 @@
 #include "Item.h"
 #include "Family.h"
 #include "Player.h"
+#include "ItemMoney.h"
+#include "ItemToku.h"
+
+PTR( ItemMoney );
+PTR( ItemToku );
 
 StoragePtr Storage::getTask( ) {
 	return std::dynamic_pointer_cast< Storage >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -31,6 +36,7 @@ void Storage::update( ) {
 		}
 		ite++;
 	}
+	createToku( );
 }
 
 void Storage::add( ItemPtr item ) {
@@ -59,15 +65,35 @@ bool Storage::isExistanceEventItem( ) const {
 	return result;
 }
 
-bool Storage::isOverRappedPlayer( ItemConstPtr item ) const {
+bool Storage::isOverRappedPlayer( ItemPtr item ) const {
 	bool result = false;
 	FamilyPtr family( Family::getTask( ) );
 	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
 		PlayerPtr player = family->getPlayer( i );
 		if ( item->isOverlapped( player ) ) {
+			ItemMoneyPtr money = std::dynamic_pointer_cast< ItemMoney >( item );
+			if ( money ) {
+				player->getMoney( money->getValue( ) );
+			}
+
+			ItemTokuPtr toku = std::dynamic_pointer_cast< ItemToku >( item );
+			if ( toku ) {
+				player->getToku( );
+			}
 			result = true;
 			break;
 		}
 	}
 	return result;
+}
+
+void Storage::createToku( ) {
+	static int count = 0;
+	count++;
+	const int create_time = 30;
+	if ( !( count % create_time ) ) {
+		FamilyPtr family( Family::getTask( ) );
+		Vector pos = Vector( family->getCameraPos( ) + ( rand( ) % SCREEN_WIDTH ), 100 );
+		add( ItemPtr( new ItemToku( pos ) ) );
+	}
 }

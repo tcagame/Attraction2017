@@ -19,7 +19,8 @@ public:
 	bool isExistanceEventItem( ) const;
 	std::list< ItemPtr > getItems( ) const;
 private:
-	bool isOverRappedPlayer( ItemConstPtr item ) const;
+	bool isOverRappedPlayer( ItemPtr item ) const;
+	void createToku( ); //debug—p
 private:
 	std::list< ItemPtr > _items;
 };

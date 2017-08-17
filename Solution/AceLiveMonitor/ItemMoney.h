@@ -13,6 +13,7 @@ public:
 	virtual ~ItemMoney( );
 public:
 	Chip getChip( ) const;
+	int getValue( ) const;
 protected:
 	void act( );
 private:
