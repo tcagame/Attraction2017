@@ -4,17 +4,13 @@
 
 
 PopEyeDemon::PopEyeDemon( const Vector& pos ) :
-_pos( pos ),
-_pop( false ) {
+Pop( pos ) {
 }
 
 
 PopEyeDemon::~PopEyeDemon( ) {
 }
 
-void PopEyeDemon::update( ) {
-	if ( !_pop ) {
-		Military::getTask( )->popUp( EnemyPtr( new EnemyEyeDemon( _pos ) ) );
-		_pop = true;
-	}
+void PopEyeDemon::create( ) {
+	Military::getTask( )->popUp( EnemyPtr( new EnemyEyeDemon( getPos( ) ) ) );
 }

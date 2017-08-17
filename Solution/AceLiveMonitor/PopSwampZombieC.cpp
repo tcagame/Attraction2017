@@ -3,17 +3,13 @@
 #include "Military.h"
 
 PopSwampZombieC::PopSwampZombieC( const Vector& pos ) :
-_pos( pos ),
-_pop( false ) {
+Pop( pos ) {
 }
 
 
 PopSwampZombieC::~PopSwampZombieC( ) {
 }
 
-void PopSwampZombieC::update( ) {
-	if ( !_pop ) {
-		Military::getTask( )->popUp( EnemyPtr( new EnemySwampZombieC( _pos ) ) );
-		_pop = true;
-	}
+void PopSwampZombieC::create( ) {
+	Military::getTask( )->popUp( EnemyPtr( new EnemySwampZombieC( getPos( ) ) ) );
 }

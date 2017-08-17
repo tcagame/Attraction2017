@@ -33,7 +33,7 @@ void RockMilitary::update( ) {
 		//player‚Æ‚Ì“–‚½‚è”»’è
 		for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 			RockPlayerPtr player = family->getPlayer( i );
-			if ( player->isActive( ) && player->isOverRapped( enemy ) ) {
+			if ( player->isActive( ) && player->isOverLapped( enemy ) ) {
 				if ( player->isOnHead( enemy ) ) {
 					player->bound( );
 				} else {

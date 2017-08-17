@@ -4,17 +4,13 @@
 
 
 PopStone::PopStone( const Vector& pos ) :
-_pos( pos ),
-_pop( false ) {
+Pop( pos ) {
 }
 
 
 PopStone::~PopStone( ) {
 }
 
-void PopStone::update( ) {
-	if ( !_pop ) {
-		Military::getTask( )->popUp( EnemyPtr( new EnemyStone( _pos ) ) );
-		_pop = true;
-	}
+void PopStone::create( ) {
+	Military::getTask( )->popUp( EnemyPtr( new EnemyStone( getPos( ) ) ) );
 }

@@ -4,12 +4,9 @@
 
 class PopFaceAndHand : public Pop {
 public:
-	PopFaceAndHand( Vector pos );
+	PopFaceAndHand( const Vector& pos );
 	virtual ~PopFaceAndHand( );
-public:
-	void update( );
-private:
-	Vector _pos;
-	bool _pop;
+protected:
+	void create( );
 };
 

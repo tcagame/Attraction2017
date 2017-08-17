@@ -3,17 +3,13 @@
 #include "Military.h"
 
 PopShishimai::PopShishimai( const Vector& pos ) :
-_pos( pos ),
-_pop( false ) {
+Pop( pos ) {
 }
 
 
 PopShishimai::~PopShishimai( ) {
 }
 
-void PopShishimai::update( ) {
-	if ( !_pop ) {
-		Military::getTask( )->popUp( EnemyPtr( new EnemyShishimai( _pos ) ) );
-		_pop = true;
-	}
+void PopShishimai::create( ) {
+	Military::getTask( )->popUp( EnemyPtr( new EnemyShishimai( getPos( ) ) ) );
 }

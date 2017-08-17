@@ -2,17 +2,13 @@
 #include "EnemyNoFace.h"
 #include "Military.h"
 
-PopNoFace::PopNoFace( Vector pos ) :
-_pos( pos ),
-_pop( false ) {
+PopNoFace::PopNoFace( const Vector& pos ) :
+Pop( pos ) {
 }
 
 PopNoFace::~PopNoFace( ) {
 }
 
-void PopNoFace::update( ) {
-	if ( !_pop ) {
-		Military::getTask( )->popUp( EnemyPtr( new EnemyNoFace( _pos ) ) );
-		_pop = true;
-	}
+void PopNoFace::create( ) {
+	Military::getTask( )->popUp( EnemyPtr( new EnemyNoFace( getPos( ) ) ) );
 }

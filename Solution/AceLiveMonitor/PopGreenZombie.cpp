@@ -4,8 +4,7 @@
 
 
 PopGreenZombie::PopGreenZombie( const Vector& pos ) :
-_pos( pos ),
-_pop( false ) {
+Pop( pos ) {
 }
 
 
@@ -13,9 +12,6 @@ PopGreenZombie::~PopGreenZombie( ) {
 }
 
 
-void PopGreenZombie::update( ) {
-	if ( !_pop ) {
-		Military::getTask( )->popUp( EnemyPtr( new EnemyGreenZombie( _pos ) ) );
-		_pop = true;
-	}
+void PopGreenZombie::create( ) {
+	Military::getTask( )->popUp( EnemyPtr( new EnemyGreenZombie( getPos( ) ) ) );
 }

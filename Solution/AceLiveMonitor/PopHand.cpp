@@ -3,17 +3,13 @@
 #include "Military.h"
 
 PopHand::PopHand( const Vector& pos ) :
-_pos( pos ),
-_pop( false ) {
+Pop( pos ) {
 }
 
 
 PopHand::~PopHand( ) {
 }
 
-void PopHand::update( ) {
-	if ( !_pop ) {
-		Military::getTask( )->popUp( EnemyPtr( new EnemyHand( _pos ) ) );
-		_pop = true;
-	}
+void PopHand::create( ) {
+	Military::getTask( )->popUp( EnemyPtr( new EnemyHand( getPos( ) ) ) );
 }

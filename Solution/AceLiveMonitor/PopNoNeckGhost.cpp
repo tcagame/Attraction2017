@@ -3,17 +3,13 @@
 #include "Military.h"
 
 PopNoNeckGhost::PopNoNeckGhost( const Vector& pos ) :
-_pos( pos ),
-_pop( false ) {
+Pop( pos ) {
 }
 
 
 PopNoNeckGhost::~PopNoNeckGhost( ) {
 }
 
-void PopNoNeckGhost::update( ) {
-	if ( !_pop ) {
-		Military::getTask( )->popUp( EnemyPtr( new EnemyNoNeckGhost( _pos ) ) );
-		_pop = true;
-	}
+void PopNoNeckGhost::create( ) {
+	Military::getTask( )->popUp( EnemyPtr( new EnemyNoNeckGhost( getPos( ) ) ) );
 }

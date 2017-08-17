@@ -24,7 +24,7 @@ void Storage::update( ) {
 			continue;
 		}
 		item->update( );
-		if ( isOverRappedPlayer( item ) ) {
+		if ( isOverLappedPlayer( item ) ) {
 			//プレイヤーがアイテムと接触
 			ite = _items.erase( ite );
 			continue;
@@ -59,7 +59,7 @@ bool Storage::isExistanceEventItem( ) const {
 	return result;
 }
 
-bool Storage::isOverRappedPlayer( ItemConstPtr item ) const {
+bool Storage::isOverLappedPlayer( ItemConstPtr item ) const {
 	bool result = false;
 	FamilyPtr family( Family::getTask( ) );
 	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {

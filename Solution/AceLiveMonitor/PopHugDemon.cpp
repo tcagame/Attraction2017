@@ -4,17 +4,13 @@
 
 
 PopHugDemon::PopHugDemon( const Vector& pos ) :
-_pos( pos ),
-_pop( false ) {
+Pop( pos ) {
 }
 
 
 PopHugDemon::~PopHugDemon( ) {
 }
 
-void PopHugDemon::update( ) {
-	if ( !_pop ) {
-		Military::getTask( )->popUp( EnemyPtr( new EnemyHugDemon( _pos ) ) );
-		_pop = true;
-	}
+void PopHugDemon::create( ) {
+	Military::getTask( )->popUp( EnemyPtr( new EnemyHugDemon( getPos( ) ) ) );
 }

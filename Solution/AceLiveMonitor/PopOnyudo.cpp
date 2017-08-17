@@ -3,16 +3,12 @@
 #include "Military.h"
 
 PopOnyudo::PopOnyudo( const Vector& pos ) :
-_pos( pos ),
-_pop( false ) {
+Pop( pos ) {
 }
 
 PopOnyudo::~PopOnyudo( ) {
 }
 
-void PopOnyudo::update( ) {
-	if ( !_pop ) {
-		Military::getTask( )->popUp( EnemyPtr( new EnemyOnyudo( _pos ) ) );
-		_pop = true;
-	}
+void PopOnyudo::create( ) {
+	Military::getTask( )->popUp( EnemyPtr( new EnemyOnyudo( getPos( ) ) ) );
 }

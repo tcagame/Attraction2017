@@ -4,17 +4,13 @@
 
 
 PopMoth::PopMoth( const Vector& pos ) :
-_pos( pos ),
-_pop( false ) {
+Pop( pos ) {
 }
 
 
 PopMoth::~PopMoth( ) {
 }
 
-void PopMoth::update( ) {
-	if ( !_pop ) {
-		Military::getTask( )->popUp( EnemyPtr( new EnemyMoth( _pos ) ) );
-		_pop = true;
-	}
+void PopMoth::create( ) {
+	Military::getTask( )->popUp( EnemyPtr( new EnemyMoth( getPos( ) ) ) );
 }

@@ -3,17 +3,13 @@
 #include "Military.h"
 
 PopArcher::PopArcher( const Vector& pos ) :
-_pos( pos ),
-_pop( false ) {
+Pop( pos ) {
 }
 
 
 PopArcher::~PopArcher( ) {
 }
 
-void PopArcher::update( ) {
-	if ( !_pop ) {
-		Military::getTask( )->popUp( EnemyPtr( new EnemyArcher( _pos ) ) );
-		_pop = true;
-	}
+void PopArcher::create( ) {
+	Military::getTask( )->popUp( EnemyPtr( new EnemyArcher( getPos( ) ) ) );
 }

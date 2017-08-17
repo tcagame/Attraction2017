@@ -131,7 +131,7 @@ void Military::popUpEventEnemy( EnemyPtr enemy ) {
 	_event_enemies.push_back( enemy );
 }
 
-EnemyPtr Military::getOverLappedEnemy( CharacterConstPtr character ) const {
+EnemyPtr Military::getOverlappedEnemy( CharacterConstPtr character ) const {
 	EnemyPtr result = EnemyPtr( );
 	if ( character->getState( ) == Character::STATE_MAIN ) {
 		std::list< EnemyPtr >::const_iterator ite = _enemies.begin( );

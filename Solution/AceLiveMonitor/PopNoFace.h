@@ -4,12 +4,9 @@
 
 class PopNoFace : public Pop {
 public:
-	PopNoFace( Vector pos );
+	PopNoFace( const Vector& pos );
 	virtual ~PopNoFace( );
-public:
-	void update( );
-private:
-	Vector _pos;
-	bool _pop;
+protected:
+	void create( );
 };
 

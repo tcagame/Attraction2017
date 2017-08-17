@@ -6,10 +6,7 @@ class PopSkeleton : public Pop {
 public:
 	PopSkeleton( const Vector& pos );
 	virtual ~PopSkeleton( );
-public:
-	void update( );
-private:
-	bool _pop;
-	Vector _pos;
+protected:
+	void create( );
 };
 
