@@ -327,6 +327,9 @@
     <ClCompile Include="ItemToku.cpp">
       <Filter>Item</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyHellFire.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -653,6 +656,9 @@
     </ClInclude>
     <ClInclude Include="ItemToku.h">
       <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyHellFire.h">
+      <Filter>Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

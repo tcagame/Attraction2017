@@ -18,6 +18,7 @@ static const int MAX_SPEED = 20;
 static const int MOVE_SPEED = 7;
 static const int BRAKE_ACCEL = 1;
 static const int JUMP_POWER = -10;
+static const int BLOW_POWER = -30;
 //çUåÇä÷åW
 static const int CHARGE_PHASE_COUNT = 25;
 static const int MAX_CHARGE_COUNT = CHARGE_PHASE_COUNT * 4 - 1;
@@ -554,6 +555,9 @@ void Player::bound( ) {
 	Vector vec = getVec( );
 	vec.y = JUMP_POWER;
 	setVec( vec );
+}
+
+void Player::blowAway( ) {
 }
 
 int Player::getHandMoney( ) const {
