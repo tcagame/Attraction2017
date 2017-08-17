@@ -11,7 +11,7 @@
 #include "Impact.h"
 #include "Storage.h"
 #include "ItemMoney.h"
-#include "EnemyBat.h"
+#include "EnemyHellFire.h"
 
 PTR( Player );
 
@@ -25,6 +25,10 @@ Military::Military( ) {
 
 
 Military::~Military( ) {
+}
+
+void Military::initialize( ) {
+	_hell_fire = EnemyPtr( new EnemyHellFire( Vector( Family::getTask( )->getCameraPos( ), 64 ) ) );
 }
 
 void Military::update( ) {
@@ -116,6 +120,15 @@ void Military::update( ) {
 			}
 			enemy->update( );
 			ite++;
+		}
+	}
+	//’n–‰Î
+	_hell_fire->update( );
+	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
+		PlayerPtr player( family->getPlayer( i ) );
+		if ( player->isOverlapped( _hell_fire ) ) {
+			player->damage( 3 );
+			player->blowAway( );
 		}
 	}
 

@@ -1,6 +1,7 @@
 #include "Pop.h"
 #include "ace_define.h"
 #include "Family.h"
+#include "Map.h"
 
 static const int POP_INTERVAL_COUNT = 600;
 static const int MAX_PAGE = SCREEN_WIDTH / GRAPH_SIZE;
@@ -14,9 +15,16 @@ Pop::~Pop( ) {
 }
 
 void Pop::update( ) {
+	//posをカメラに合わせる
+	double camera_pos = Family::getTask( )->getCameraPos( );
+	while ( _pos.x < camera_pos ) {
+		int width = Map::getTask( )->getPageNum( ) * GRAPH_SIZE;
+		_pos.x += width;
+	}
+
+	//エネミーを出現させる
 	if ( _count > POP_INTERVAL_COUNT ) {
 		if ( isInScreen( ) ) {
-			//エネミーを出現させる
 			create( );
 			_count = 0;
 		}

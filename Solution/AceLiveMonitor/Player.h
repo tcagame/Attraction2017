@@ -15,6 +15,7 @@ public:
 		ACTION_CHARGE,
 		ACTION_OVER_CHARGE,
 		ACTION_DAMEGE,
+		ACTION_BLOW_AWAY,
 	};
 public:
 	Player( int player_id, Vector pos );
@@ -28,6 +29,7 @@ public:
 	Chip getChargeChip( ) const;
 	bool isOnHead( EnemyPtr target ) const;
 	void bound( );
+	void blowAway( );
 	int getHandMoney( ) const;
 	void getMoney( int money );
 	int getHandToku( ) const;

@@ -1,10 +1,14 @@
 #include "EnemyNoNeckGhost.h"
 
-static const int WAIT_ANIM_TIME = 5;
-static const int MAX_HP = 3;
+const int WAIT_ANIM_TIME = 5;
+const int MAX_HP = 3;
+const int MOVE_SPEED = -4;
+const int FLOAT_RANGE = 5;
 
 EnemyNoNeckGhost::EnemyNoNeckGhost( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP, false ) {
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP, false ),
+_vy( 0 ),
+_dir( 1 ) {
 	setRadius( 36 );
 }
 
@@ -13,7 +17,15 @@ EnemyNoNeckGhost::~EnemyNoNeckGhost( ) {
 }
 
 void EnemyNoNeckGhost::act( ) {
+	_vy += _dir;
+	setVec( Vector( MOVE_SPEED, _vy ) );
 
+	if ( _vy < -FLOAT_RANGE ) {
+		_dir = 1;
+	}
+	if ( _vy > FLOAT_RANGE ) {
+		_dir = -1;
+	}
 }
 
 Chip EnemyNoNeckGhost::getChip( ) const {

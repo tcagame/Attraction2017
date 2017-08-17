@@ -1,7 +1,12 @@
 #include "EnemyHugDemon.h"
+#include "Family.h"
+#include "Player.h"
 
-static const int WAIT_ANIM_TIME = 5;
-static const int MAX_HP = 3;
+const int WAIT_ANIM_TIME = 5;
+const int MAX_HP = 3;
+const int JUMP_POWER = -13;
+const int RANGE = 150;
+const int MOVE_SPEED = -2;
 
 EnemyHugDemon::EnemyHugDemon( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ) {
@@ -13,7 +18,19 @@ EnemyHugDemon::~EnemyHugDemon( ) {
 }
 
 void EnemyHugDemon::act( ) {
-
+	Vector vec = getVec( );
+	vec.x = MOVE_SPEED;
+	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
+		 PlayerPtr player = Family::getTask( )->getPlayer( i );
+		 Vector diff = player->getPos( ) - getPos( );
+		 if ( diff.getLength( ) < RANGE &&
+			  player->getPos( ).x < getPos( ).x &&
+			  player->getPos( ).y < getPos( ).y &&
+			  isStanding( ) ) {
+				vec.y = JUMP_POWER;
+		 }
+	}
+	setVec( vec );
 }
 
 Chip EnemyHugDemon::getChip( ) const {

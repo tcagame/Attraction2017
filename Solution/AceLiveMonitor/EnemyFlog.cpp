@@ -4,6 +4,7 @@ const int WAIT_ANIM_TIME = 6;
 const int JUMP_TIME = WAIT_ANIM_TIME * 5;
 const int MAX_HP = 2;
 const int JUMP_POWER = -5;
+const int MOVE_SPEED = 2;
 
 EnemyFlog::EnemyFlog( const Vector& pos ) :
 Enemy( pos, SMALL_CHAR_GRAPH_SIZE, MAX_HP ) {
@@ -19,7 +20,11 @@ void EnemyFlog::act( ) {
 		setVec( Vector( ) );
 	}
 	if ( isStanding( ) && !( ( getActCount( ) + WAIT_ANIM_TIME * 3 ) % JUMP_TIME ) ) {
-		setVec( Vector( -2, JUMP_POWER ) );
+		if ( rand( ) % 2 ) {
+			setVec( Vector( MOVE_SPEED, JUMP_POWER ) );
+		} else {
+			setVec( Vector( -MOVE_SPEED, JUMP_POWER ) );
+		}
 	}
 }
 
