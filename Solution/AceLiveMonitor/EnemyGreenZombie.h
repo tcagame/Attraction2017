@@ -12,6 +12,5 @@ protected:
 private:
 	Vector _vec;
 	Vector _before_pos;
-	int _jump_count;
 };
 

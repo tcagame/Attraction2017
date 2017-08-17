@@ -28,6 +28,8 @@ public:
 	Chip getChargeChip( ) const;
 	bool isOnHead( EnemyPtr target ) const;
 	void bound( );
+	int getHandMoney( ) const;
+	void getMoney( int money );
 private:
 	void actOnWaiting( );
 	void actOnWalking( );
@@ -42,6 +44,7 @@ private:
 private:
 	ACTION _action;
 	int _id;
+	int _money;
 	int _charge_count;
 	int _damege_count;
 	int _over_charge_time;
