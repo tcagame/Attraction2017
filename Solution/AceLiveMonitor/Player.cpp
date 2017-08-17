@@ -34,6 +34,7 @@ _charge_count( 0 ),
 _damege_count( 0 ),
 _over_charge_time( -1 ),
 _id( 0 ),
+_money( rand( ) ),
 _action( ACTION_WAIT ) {
 	setRadius( 25 );
 	setDir( DIR_RIGHT );
@@ -552,4 +553,12 @@ void Player::bound( ) {
 	Vector vec = getVec( );
 	vec.y = JUMP_MAX_HP;
 	setVec( vec );
+}
+
+int Player::getHandMoney( ) const {
+	return _money;
+}
+
+void Player::getMoney( int money ) {
+	_money += money;
 }
