@@ -4,12 +4,9 @@
 
 class PopPurpleZombie : public Pop {
 public:
-	PopPurpleZombie( Vector pos );
+	PopPurpleZombie( const Vector& pos );
 	virtual ~PopPurpleZombie( );
-public:
-	void update( );
-private:
-	bool _pop;
-	Vector _pos;
+protected:
+	void create( );
 };
 

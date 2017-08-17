@@ -17,7 +17,7 @@ public:
 	virtual ~Military( );
 public:
 	void update( );
-	EnemyPtr getOverLappedEnemy( CharacterConstPtr character ) const;
+	EnemyPtr getOverlappedEnemy( CharacterConstPtr character ) const;
 	const std::list< EnemyPtr > getEnemyList( ) const;
 	const std::list< EnemyPtr > getEventEnemyList( ) const;
 	void popUp( EnemyPtr enemy );

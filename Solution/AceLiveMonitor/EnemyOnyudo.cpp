@@ -1,11 +1,14 @@
 #include "EnemyOnyudo.h"
 
-static const int WAIT_ANIM_TIME = 5;
-static const int GRAPH_WIDTH_NUM = 10;
-static const int MAX_HP = 6;
+const int WAIT_ANIM_TIME = 5;
+const int GRAPH_WIDTH_NUM = 10;
+const int MOVE_SPEED = 1;
+const int MAX_HP = 6;
 
 EnemyOnyudo::EnemyOnyudo( const Vector& pos ) :
-Enemy( pos, BIG_CHAR_GRAPH_SIZE, MAX_HP ) {
+Enemy( pos, BIG_CHAR_GRAPH_SIZE, MAX_HP ),
+_before_pos( Vector( ) ), 
+_vec( MOVE_SPEED, 0 ) {
 	setRadius( 48 );
 }
 
@@ -14,6 +17,11 @@ EnemyOnyudo::~EnemyOnyudo( ) {
 }
 
 void EnemyOnyudo::act( ) {
+	if ( _before_pos.x == getPos( ).x ) {
+		_vec.x *= -1;
+		setVec( _vec );
+	}
+	_before_pos = getPos( );
 }
 
 Chip EnemyOnyudo::getChip( ) const {

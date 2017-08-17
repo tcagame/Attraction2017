@@ -3,17 +3,13 @@
 #include "Military.h"
 
 PopLancer::PopLancer( const Vector& pos ) :
-_pos( pos ),
-_pop( false ) {
+Pop( pos ) {
 }
 
 
 PopLancer::~PopLancer( ) {
 }
 
-void PopLancer::update( ) {
-	if ( !_pop ) {
-		Military::getTask( )->popUp( EnemyPtr( new EnemyLancer( _pos ) ) );
-		_pop = true;
-	}
+void PopLancer::create( ) {
+	Military::getTask( )->popUp( EnemyPtr( new EnemyLancer( getPos( ) ) ) );
 }

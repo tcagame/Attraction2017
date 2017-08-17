@@ -4,17 +4,13 @@
 
 
 PopFlog::PopFlog( const Vector& pos ) :
-_pos( pos ),
-_pop( false ) {
+Pop( pos ) {
 }
 
 
 PopFlog::~PopFlog( ) {
 }
 
-void PopFlog::update( ) {
-	if ( !_pop ) {
-		Military::getTask( )->popUp( EnemyPtr( new EnemyFlog( _pos ) ) );
-		_pop = true;
-	}
+void PopFlog::create( ) {
+	Military::getTask( )->popUp( EnemyPtr( new EnemyFlog( getPos( ) ) ) );
 }

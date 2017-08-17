@@ -32,7 +32,7 @@ void RockFamily::update( ) {
 			if ( i == j ) {
 				continue;
 			}
-			if ( _player[ i ]->isOverRapped( _player[ j ] ) ) {
+			if ( _player[ i ]->isOverLapped( _player[ j ] ) ) {
 				if ( _player[ i ]->isOnHead( _player[ j ] ) ) {
 					_player[ i ]->bound( );
 				} else {

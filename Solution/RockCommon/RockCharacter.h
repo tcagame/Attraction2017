@@ -19,7 +19,7 @@ public:
 	virtual void damage( int force );
 	bool isHead( ) const;
 	bool isOnHead( RockCharacterConstPtr target ) const;
-	bool isOverRapped( RockCharacterConstPtr target ) const;
+	bool isOverLapped( RockCharacterConstPtr target ) const;
 	void back( );
 	virtual void bound( );
 protected:

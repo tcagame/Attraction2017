@@ -6,10 +6,7 @@ class PopOneEyeSnake : public Pop {
 public:
 	PopOneEyeSnake( const Vector& pos );
 	virtual ~PopOneEyeSnake( );
-public:
-	void update( );
-private:
-	bool _pop;
-	Vector _pos;
+protected:
+	void create( );
 };
 

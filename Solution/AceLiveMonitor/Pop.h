@@ -1,9 +1,18 @@
 #pragma once
+#include "mathmatics.h"
 class Pop {
 public:
-	Pop( );
+	Pop( const Vector& pos );
 	virtual ~Pop( );
 public:
-	virtual void update( ) = 0;
+	void update( );
+protected:
+	virtual void create( ) = 0;
+	Vector getPos( ) const;
+private:
+	bool isInScreen( ) const;
+private:
+	Vector _pos;
+	int _count;
 };
 

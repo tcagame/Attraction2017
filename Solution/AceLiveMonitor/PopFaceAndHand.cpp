@@ -2,17 +2,13 @@
 #include "EnemyFaceAndHand.h"
 #include "Military.h"
 
-PopFaceAndHand::PopFaceAndHand( Vector pos ) : 
-_pos( pos ),
-_pop( false ) {
+PopFaceAndHand::PopFaceAndHand( const Vector& pos ) : 
+Pop( pos ) {
 }
 
 PopFaceAndHand::~PopFaceAndHand( ) {
 }
 
-void PopFaceAndHand::update( ) {
-	if ( !_pop ) {
-		Military::getTask( )->popUp( EnemyPtr( new EnemyFaceAndHand( _pos ) ) );
-		_pop = true;
-	}	
+void PopFaceAndHand::create( ) {
+	Military::getTask( )->popUp( EnemyPtr( new EnemyFaceAndHand( getPos( ) ) ) );
 }

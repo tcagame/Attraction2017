@@ -3,16 +3,12 @@
 #include "Military.h"
 
 PopWhiteMist::PopWhiteMist( const Vector& pos ) :
-_pos( pos ),
-_pop( false ) {
+Pop( pos ) {
 }
 
 PopWhiteMist::~PopWhiteMist( ) {
 }
 
-void PopWhiteMist::update( ) {
-	if ( !_pop ) {
-		Military::getTask( )->popUp( EnemyPtr( new EnemyWhiteMist( _pos ) ) );
-		_pop = true;
-	}
+void PopWhiteMist::create( ) {
+	Military::getTask( )->popUp( EnemyPtr( new EnemyWhiteMist( getPos( ) ) ) );
 }

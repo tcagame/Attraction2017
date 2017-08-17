@@ -3,16 +3,12 @@
 #include "Military.h"
 
 PopGhost::PopGhost( const Vector& pos ) :
-_pos( pos ),
-_pop( false ) {
+Pop( pos ) {
 }
 
 PopGhost::~PopGhost( ) {
 }
 
-void PopGhost::update( ) {
-	if ( !_pop ) {
-		Military::getTask( )->popUp( EnemyPtr( new EnemyGhost( _pos ) ) );
-		_pop = true;
-	}
+void PopGhost::create( ) {
+	Military::getTask( )->popUp( EnemyPtr( new EnemyGhost( getPos( ) ) ) );
 }
