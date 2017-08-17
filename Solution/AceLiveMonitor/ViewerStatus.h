@@ -10,6 +10,7 @@ public:
 private:
 	void drawHp( ) const;
 	void drawMoney( ) const;
+	void drawToku( ) const;
 private:
 	ImagePtr _status_flame;
 	ImagePtr _status_ui;
