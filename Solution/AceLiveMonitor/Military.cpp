@@ -21,15 +21,13 @@ MilitaryPtr Military::getTask( ) {
 
 
 Military::Military( ) {
+	_hell_fire = EnemyPtr( new EnemyHellFire( Vector( 64, 64 ) ) );
 }
 
 
 Military::~Military( ) {
 }
 
-void Military::initialize( ) {
-	_hell_fire = EnemyPtr( new EnemyHellFire( Vector( Family::getTask( )->getCameraPos( ), 64 ) ) );
-}
 
 void Military::update( ) {
 	FamilyPtr family( Family::getTask( ) );
@@ -127,7 +125,7 @@ void Military::update( ) {
 	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
 		PlayerPtr player( family->getPlayer( i ) );
 		if ( player->isOverlapped( _hell_fire ) ) {
-			player->damage( 3 );
+			//player->damage( 3 );
 			player->blowAway( );
 		}
 	}
@@ -215,6 +213,10 @@ void Military::createBoss( ) {
 
 EnemyPtr Military::getBoss( ) const {
 	return _boss;
+}
+
+EnemyPtr Military::getHellFire( ) const {
+	return _hell_fire;
 }
 
 void Military::updateImpact( ) {
