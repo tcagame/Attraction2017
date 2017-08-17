@@ -3,5 +3,9 @@
   <ItemGroup>
     <ClInclude Include="ace_define.h" />
     <ClInclude Include="ace_enemy_rect.h" />
+    <ClInclude Include="SynchronousData.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="SynchronousData.cpp" />
   </ItemGroup>
 </Project>
