@@ -52,7 +52,7 @@ void SynchronousData::setStatusPower( int idx, int power ) {
 void SynchronousData::setStatusMoney( int idx, int money ) {
 	assert( idx < ACE_PLAYER_NUM );
 	assert( money >= 0 );
-	_data.status[ idx ].power = ( unsigned long )money;
+	_data.status[ idx ].power = ( unsigned char )money;
 }
 
 void SynchronousData::setInProssessionOfStatusItem( int idx, unsigned char item, bool possession ) {
