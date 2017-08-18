@@ -1,7 +1,13 @@
 #include "ViewerObject.h"
 #include "SynchronousData.h"
+#include "Drawer.h"
 
 ViewerObject::ViewerObject( ) {
+	DrawerPtr drawer( Drawer::getTask( ) );
+	_image[ GRAPH_PLAYER_TAROSUKE ] = drawer->createImage( "Family/tarosuke.png" );
+	_image[ GRAPH_PLAYER_TAROJIRO ] = drawer->createImage( "Family/tarojiro.png" );
+	_image[ GRAPH_PLAYER_GARISUKE ] = drawer->createImage( "Family/garisuke.png" );
+	_image[ GRAPH_PLAYER_TAROMI   ] = drawer->createImage( "Family/taromi.png"   );
 }
 
 

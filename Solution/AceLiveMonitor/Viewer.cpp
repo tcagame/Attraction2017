@@ -15,6 +15,8 @@
 
 #include "ViewerObject.h"
 
+#include "SynchronousData.h"
+
 const int EVENT_SX = 0;
 const int EVENT_SY = 0;
 const int MAIN_SX  = 0;
@@ -76,4 +78,8 @@ void Viewer::update( ) {
 	if ( Debug::getTask( )->isDebug( ) ) {
 		_viewer_debug->draw( );
 	}
+
+	// “¯Šúƒf[ƒ^‰Šú‰»
+	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	data->resetObject( );
 }
