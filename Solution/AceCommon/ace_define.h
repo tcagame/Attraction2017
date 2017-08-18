@@ -15,6 +15,8 @@ const int SMALL_CHAR_GRAPH_SIZE = 32;
 const int NORMAL_CHAR_GRAPH_SIZE = 64;
 const int BIG_CHAR_GRAPH_SIZE = 128;
 
+const int PLAYER_CHAR_GRAPH_FOOT = 7;
+const int PLAYER_CHAR_CHIP_WIDTH = 16;
 const int VIEW_EVENT_Y = 0;
 const int VIEW_TITLE_Y = 0;
 const int VIEW_TITLE_HEIGHT = 256;
@@ -25,6 +27,12 @@ const int VIEW_STATUS_Y = VIEW_STREET_Y + VIEW_STREET_HEIGHT;
 enum DIR {
 	DIR_LEFT,
 	DIR_RIGHT,
+};
+
+enum AREA {
+	AREA_MAIN,
+	AREA_EVENT,
+	MAX_AREA
 };
 
 struct Chip {

@@ -23,6 +23,7 @@ public:
 	double getCameraPos( ) const;
 private:
 	void updateCameraPos( );
+	void setSynchronousData( ) const;
 private:
 	double _camera_pos;
 	std::array< PlayerPtr, ACE_PLAYER_NUM > _player;

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "ace_define.h"
 #include "Image.h"
 #include <array>
 
@@ -8,11 +9,13 @@ public:
 	ViewerObject();
 	virtual ~ViewerObject( );
 public:
-	void drawMain( ) const;
-	void drawEvent( ) const;
+	void draw( AREA area, int sx, int sy ) const;
 private:
 	enum GRAPH {
-
+		GRAPH_PLAYER_TAROSUKE,
+		GRAPH_PLAYER_TAROJIRO,
+		GRAPH_PLAYER_GARISUKE,
+		GRAPH_PLAYER_TAROMI,
 		MAX_GRAPH,
 	};
 	struct Sprite {
@@ -27,7 +30,8 @@ private:
 		int sy2;
 	};
 private:
-	void draw( int idx ) const;
+	void drawSprite( int x, int y, unsigned char type, unsigned char attribute, int pattern ) const;
+	Sprite getSpritePlayer( GRAPH graph, int x, int y, unsigned char attribute, int pattern ) const;
 private:
 	std::array< ImagePtr, MAX_GRAPH > _image;
 };

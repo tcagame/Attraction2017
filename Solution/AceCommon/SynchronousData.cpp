@@ -129,6 +129,10 @@ unsigned char SynchronousData::getObjectType( int idx ) const {
 	return _data.object[ idx ].type;
 }
 
+unsigned char SynchronousData::getObjectAttribute( int idx ) const {
+	return _data.object[ idx ].attribute;
+}
+
 int SynchronousData::getObjectPattern( int idx ) const {
 	return _data.object[ idx ].pattern;
 }
@@ -154,4 +158,3 @@ void SynchronousData::addObject( AREA area, unsigned char type, int pattern, uns
 	_data.object[ idx ].x         = ( unsigned long )x;
 	_data.object[ idx ].y         = ( unsigned long )y;
 }
-
