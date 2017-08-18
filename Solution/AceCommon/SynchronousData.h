@@ -18,12 +18,12 @@ public:
 	static const unsigned char ITEM_MINERAL     = 0x40;
 	static const unsigned char STATE_MAIN       = 0x01;
 	static const unsigned char STATE_EVENT      = 0x02;
-
-	enum AREA {
-		AREA_EVENT,
-		AREA_MAIN,
-		MAX_AREA
-	};
+	static const unsigned char ATTRIBUTE_REVERSE = 0x01;
+	static const unsigned char ATTRIBUTE_EVENT   = 0x02;
+	static const unsigned char TYPE_TAROSUKE = 10;
+	static const unsigned char TYPE_TAROJIRO = 11;
+	static const unsigned char TYPE_GARISUKE = 12;
+	static const unsigned char TYPE_TAROMI   = 13;
 public:
 	static std::string getTag( ) { return "SYNCHRONOUSDATA"; };
 	static SynchronousDataPtr getTask( );
@@ -42,6 +42,7 @@ public:
 	int getObjectX( int idx ) const;
 	int getObjectY( int idx ) const;
 	unsigned char getObjectType( int idx ) const;
+	unsigned char getObjectAttribute( int idx ) const;
 	int getObjectPattern( int idx ) const;
 	int getIdx( AREA area, int relative_idx ) const;
 public:

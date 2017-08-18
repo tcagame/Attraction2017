@@ -15,6 +15,13 @@
 
 #include "ViewerObject.h"
 
+const int EVENT_SX = 0;
+const int EVENT_SY = 0;
+const int MAIN_SX  = 0;
+const int MAIN_SY  = 256;
+
+
+
 ViewerPtr Viewer::getTask( ) {
 	return std::dynamic_pointer_cast< Viewer >( Application::getInstance( )->getTask( getTag( ) ) );
 }
@@ -49,12 +56,12 @@ void Viewer::update( ) {
 
 	// Main•`‰æ
 	_viewer_street->draw( ViewerStreet::LAYER_BACK );
-	_viewer_object->drawMain( );
+	_viewer_object->draw( AREA_MAIN, MAIN_SX, MAIN_SY );
 	_viewer_street->draw( ViewerStreet::LAYER_FRONT );
 
 	// ƒCƒxƒ“ƒg•`‰æ
 	_viewer_event->draw( );
-	_viewer_object->drawEvent( );
+	_viewer_object->draw( AREA_EVENT, EVENT_SX, EVENT_SY );
 	
 	// ‹Œ•`‰æi‘S‚ÄˆÚs‚³‚¹‚é)
 	_viewer_military->draw( );
