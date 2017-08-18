@@ -1,11 +1,19 @@
 #include "EnemyShishimai.h"
+#include "Player.h"
+#include "Family.h"
 
-static const int WAIT_ANIM_TIME = 5;
-static const int MAX_HP = 3;
+const int WAIT_ANIM_TIME = 5;
+const int MAX_HP = 3;
+const int MOVE_SPEED = -4;
+const int RANGE = 100;
+const int RANGE_SUB = 300;
 
 EnemyShishimai::EnemyShishimai( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ) {
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ),
+_origin_pos( pos ),
+_attack( false ) {
 	setRadius( 36 );
+	setVec( Vector( MOVE_SPEED, 0 ) );
 }
 
 
@@ -13,7 +21,29 @@ EnemyShishimai::~EnemyShishimai( ) {
 }
 
 void EnemyShishimai::act( ) {
+	FamilyPtr family( Family::getTask( ) );
+	PlayerPtr near = family->getPlayer( 0 );
+	for ( int i = 0; i < ACE_PLAYER_NUM - 1; i++ ) {
+		PlayerPtr player = family->getPlayer( i + 1 );
+		Vector diff_player = player->getPos( ) - getPos( );
+		Vector diff_near = near->getPos( ) - getPos( );
+		if ( diff_player.getLength2( ) < diff_near.getLength2( ) ) {
+			near = player;
+		}
+	}
 
+	if ( !_attack ) {
+		Vector vec = getVec( );
+		Vector diff_near = near->getPos( ) - getPos( );
+		if ( diff_near.getLength( ) < RANGE && near->getPos( ).x < getPos( ).x ) {
+			vec.x *= -1;
+		}
+		if ( diff_near.getLength( ) > RANGE_SUB && getActCount( ) % 30 == 0 && getDir( ) == DIR_RIGHT ) {
+			vec = Vector( MOVE_SPEED * 3, 0 );
+			_attack = true;
+		}
+		setVec( vec );
+	}
 }
 
 Chip EnemyShishimai::getChip( ) const {
