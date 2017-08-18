@@ -54,3 +54,7 @@ Chip EnemyBossRedDemon::getChip2( ) const {
 	chip.ty = 320;
 	return chip;
 }
+
+void EnemyBossRedDemon::dropItem( ) {
+
+}

@@ -4,7 +4,7 @@
 
 class RockEnemy:  public RockCharacter {
 public:
-	RockEnemy( const Vector& pos, DOLL id, int force = 1, int radius = 10, int height = 30, bool mass = true, bool head = true );
+	RockEnemy( const Vector& pos, DOLL id, int hp, int force = 1, int radius = 10, int height = 30, bool mass = true, bool head = true );
 	virtual ~RockEnemy( );
 public:
 	int getForce( ) const;
@@ -12,6 +12,7 @@ public:
 	bool isFinished( ) const;
 private:
 	int _force;
+	int _hp;
 	bool _finished;
 };
 

@@ -10,6 +10,7 @@ public:
 	virtual ~EnemyBossMonsteTree( );
 public:
 	Chip getChip( ) const;
+	void dropItem( );
 protected:
 	void act( );
 private:

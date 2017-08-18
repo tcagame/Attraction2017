@@ -13,6 +13,7 @@
 #include "ItemMoney.h"
 #include "EnemyHellFire.h"
 #include "EnemyAttack.h"
+#include "EnemyBoss.h"
 
 PTR( Player );
 
@@ -85,9 +86,10 @@ void Military::update( ) {
 				}
 			}
 			if ( _boss->isFinished( ) ) {
+				_boss->dropItem( );
 				int impact_chip_size = _boss->getChipSize( ) * 2;
 				_impacts.push_back( ImpactPtr( new Impact( _boss->getPos( ) + Vector( 0, _boss->getChipSize( ) / 2 ), Character::STATE_EVENT, impact_chip_size ) ) );
-				_boss = EnemyPtr( );
+				_boss = EnemyBossPtr( );
 			}
 		}
 		std::list< EnemyPtr >::const_iterator ite = _event_enemies.begin( );
@@ -201,19 +203,19 @@ void Military::createBoss( ) {
 	_event_enemies.clear( );
 	switch ( type ) {
 	case MapEvent::TYPE_TITLE:
-		_boss = EnemyPtr( );
+		_boss = EnemyBossPtr( );
 		break;
 	case MapEvent::TYPE_RED_DEMON:
-		_boss = EnemyPtr( new EnemyBossRedDemon( Vector( 800, 200 ) ) );
+		_boss = EnemyBossPtr( new EnemyBossRedDemon( Vector( 800, 200 ) ) );
 		break;
 	case MapEvent::TYPE_FIRE:
-		_boss = EnemyPtr( new EnemyBossBloodDemon( Vector( 800, 200 ) ) );
+		_boss = EnemyBossPtr( new EnemyBossBloodDemon( Vector( 800, 200 ) ) );
 		break;
 	case MapEvent::TYPE_TREE:
-		_boss = EnemyPtr( new EnemyBossMonsteTree( Vector( 800, 225 ) ) );
+		_boss = EnemyBossPtr( new EnemyBossMonsteTree( Vector( 800, 225 ) ) );
 		break;
 	case MapEvent::TYPE_ROCK:
-		_boss = EnemyPtr( new EnemyBossRock( Vector( 800, 225 ) ) );
+		_boss = EnemyBossPtr( new EnemyBossRock( Vector( 800, 225 ) ) );
 		break;
 	}
 }
