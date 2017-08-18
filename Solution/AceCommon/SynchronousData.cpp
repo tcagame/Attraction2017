@@ -93,65 +93,65 @@ void SynchronousData::setStatusState( int idx, unsigned char state ) {
 
 
 void SynchronousData::resetObject( ) {
-	_object_index[ AREA_MAIN ] = 0;
-	_object_index[ AREA_EVENT ] = OBJECT_NUM - 1;
+	_object_idx[ AREA_MAIN ] = 0;
+	_object_idx[ AREA_EVENT ] = OBJECT_NUM - 1;
 }
 
 int SynchronousData::getObjectNum( AREA area ) const {
-	int num = _object_index[ area ];
+	int num = _object_idx[ area ];
 	if ( area == AREA_EVENT ) {
 		num = OBJECT_NUM - 1 - num;
 	}
 	return num;
 }
 
-int SynchronousData::getIndex( AREA area, int idx ) const {
-	int index = 0;
+int SynchronousData::getIdx( AREA area, int relative_idx ) const {
+	int idx = 0;
 	if ( area == AREA_MAIN ) {
-		index = idx;
-		assert( index < _object_index[ AREA_MAIN ] );
+		idx = relative_idx;
+		assert( idx < _object_idx[ AREA_MAIN ] );
 	} else {
-		index = OBJECT_NUM - 1 - idx;
-		assert( index > _object_index[ AREA_EVENT ] );
+		idx = OBJECT_NUM - 1 - relative_idx;
+		assert( idx > _object_idx[ AREA_EVENT ] );
 	}
-	return index;
+	return idx;
 }
 
-int SynchronousData::getObjectX( AREA area, int idx ) const {
-	return _data.object[ getIndex( area, idx ) ].x;
+int SynchronousData::getObjectX( int idx ) const {
+	return _data.object[ idx ].x;
 }
 
-int SynchronousData::getObjectY( AREA area, int idx ) const {
-	return _data.object[ getIndex( area, idx ) ].y;
+int SynchronousData::getObjectY( int idx ) const {
+	return _data.object[ idx ].y;
 }
 
-unsigned char SynchronousData::getObjectType( AREA area, int idx ) const {
-	return _data.object[ getIndex( area, idx ) ].type;
+unsigned char SynchronousData::getObjectType( int idx ) const {
+	return _data.object[ idx ].type;
 }
 
-int SynchronousData::getObjectPattern( AREA area, int idx ) const {
-	return _data.object[ getIndex( area, idx ) ].pattern;
+int SynchronousData::getObjectPattern( int idx ) const {
+	return _data.object[ idx ].pattern;
 }
 
 void SynchronousData::addObject( AREA area, unsigned char type, int pattern, unsigned char attribute, int x, int y ) {
-	if ( _object_index[ AREA_MAIN ] >= _object_index[ AREA_EVENT ] ) {
+	if ( _object_idx[ AREA_MAIN ] >= _object_idx[ AREA_EVENT ] ) {
 		return;
 	}
 	assert( x >= 0 );
 	assert( y >= 0 );
 	assert( pattern >= 0 );
 
-	int index = _object_index[ area ];
+	int idx = _object_idx[ area ];
 	if ( area == AREA_MAIN ) {
-		_object_index[ AREA_MAIN ]++;
+		_object_idx[ AREA_MAIN ]++;
 	} else {
-		_object_index[ AREA_EVENT ]--;
+		_object_idx[ AREA_EVENT ]--;
 	}
 
-	_data.object[ index ].type      = type;
-	_data.object[ index ].pattern   = ( unsigned char )pattern;
-	_data.object[ index ].attribute = attribute;
-	_data.object[ index ].x         = ( unsigned long )x;
-	_data.object[ index ].y         = ( unsigned long )y;
+	_data.object[ idx ].type      = type;
+	_data.object[ idx ].pattern   = ( unsigned char )pattern;
+	_data.object[ idx ].attribute = attribute;
+	_data.object[ idx ].x         = ( unsigned long )x;
+	_data.object[ idx ].y         = ( unsigned long )y;
 }
 

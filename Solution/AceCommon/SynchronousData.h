@@ -39,10 +39,11 @@ public:
 	int getStatusRedo( int idx ) const;
 	unsigned char getStatusState( int idx ) const;
 	int getObjectNum( AREA area ) const;
-	int getObjectX( AREA area, int idx ) const;
-	int getObjectY( AREA area, int idx ) const;
-	unsigned char getObjectType( AREA area, int idx ) const;
-	int getObjectPattern( AREA area, int idx ) const;
+	int getObjectX( int idx ) const;
+	int getObjectY( int idx ) const;
+	unsigned char getObjectType( int idx ) const;
+	int getObjectPattern( int idx ) const;
+	int getIdx( AREA area, int relative_idx ) const;
 public:
 	void * getPtr( );
 	int getSize( );
@@ -77,9 +78,7 @@ private:
 		};
 	#pragma pack( )
 private:
-	int getIndex( AREA area, int idx ) const;
-private:
 	SyncData _data;
-	int _object_index[ MAX_AREA ];
+	int _object_idx[ MAX_AREA ];
 };
 
