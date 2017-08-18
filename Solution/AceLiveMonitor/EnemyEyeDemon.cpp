@@ -2,9 +2,13 @@
 
 static const int WAIT_ANIM_TIME = 5;
 static const int MAX_HP = 2;
+const int MOVE_SPEED = 1;
+const int JUMP_COUNT = 6;
 
 EnemyEyeDemon::EnemyEyeDemon( const Vector& pos ) :
-Enemy( pos, SMALL_CHAR_GRAPH_SIZE, MAX_HP ) {
+Enemy( pos, SMALL_CHAR_GRAPH_SIZE, MAX_HP ),
+_before_pos( pos ),
+_air_jump( false ) {
 	setRadius( 16 );
 }
 
@@ -13,7 +17,29 @@ EnemyEyeDemon::~EnemyEyeDemon( ) {
 }
 
 void EnemyEyeDemon::act( ) {
+	if ( _before_pos.x == getPos( ).x ) {
+		if ( getDir( ) == DIR_LEFT ) {
+			setVec( Vector( MOVE_SPEED, 0 ) );
+		} else {
+			setVec( Vector( -MOVE_SPEED, 0 ) );
+		}
+	}
+	if ( getActCount( ) % JUMP_COUNT == 0 && isStanding( ) ) {
+		Vector vec = getVec( );
+		vec.y -= 12;
+		setVec( vec );
+	}
+	if ( !_air_jump && getVec( ).y > 0 ) {
+		_air_jump = true;
+		Vector vec( getVec( ) );
+		vec.y -= 12;
+		setVec( vec );
+	}
+	if ( isStanding( ) ) {
+		_air_jump = false;
+	}
 
+	_before_pos = getPos( );
 }
 
 Chip EnemyEyeDemon::getChip( ) const {

@@ -5,6 +5,7 @@ static const int WAIT_ANIM_TIME = 5;
 static const int FADE_IN_TIME = WAIT_ANIM_TIME * 2;
 static const int MAX_HP = 3;
 static const int MOVE_SPEED = -3;
+static const double ASCEND_SPEED = -0.1;
 
 EnemyGhost::EnemyGhost( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP, false ),
@@ -27,14 +28,13 @@ void EnemyGhost::act( ) {
 	case ACTION_MOVE:
 	{
 		Vector vec = getVec( );
-		int ascend_pos = ( int )Family::getTask( )->getCameraPos( ) + 250;
+		int ascend_pos = ( int )Family::getTask( )->getCameraPos( ) + 150;
 		if ( getPos( ).x < ascend_pos ) {
-			vec.y -= 0.1;
+			vec.y += ASCEND_SPEED;
 			setVec( vec );
 		} else {
 			setVec( vec );
 		}
-
 		break;
 	}
 	}
