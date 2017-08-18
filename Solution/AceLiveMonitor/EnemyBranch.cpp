@@ -7,7 +7,7 @@ static const int ATTACK_TIME = WAIT_ANIM_TIME * 11;
 static const int MAX_HP = 3;
 
 EnemyBranch::EnemyBranch( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP, false ) {
+EnemyAttack( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP, false ) {
 	setRadius( 36 );
 }
 

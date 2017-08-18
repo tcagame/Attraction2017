@@ -12,6 +12,7 @@
 #include "Storage.h"
 #include "ItemMoney.h"
 #include "EnemyHellFire.h"
+#include "EnemyAttack.h"
 
 PTR( Player );
 
@@ -42,7 +43,10 @@ void Military::update( ) {
 			}
 			if ( enemy->isFinished( ) ) {
 				//エネミーが倒れた場合、倒れた位置で爆発する
-				dropMoney( enemy );
+				if ( !std::dynamic_pointer_cast< EnemyAttack >( enemy ) ) {
+					dropMoney( enemy );
+				}
+				
 				int impact_chip_size = enemy->getChipSize( );
 				_impacts.push_back( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), Character::STATE_MAIN, impact_chip_size ) ) );
 				ite = _enemies.erase( ite );
@@ -95,7 +99,9 @@ void Military::update( ) {
 			}
 			if ( enemy->isFinished( ) ) {
 				//エネミーが倒れた場合、倒れた位置で爆発する
-				dropMoney( enemy );
+				if ( !std::dynamic_pointer_cast< EnemyAttack >( enemy ) ) {
+					dropMoney( enemy );
+				}
 				int impact_chip_size = enemy->getChipSize( );
 				_impacts.push_back( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), Character::STATE_MAIN, impact_chip_size ) ) );
 				ite = _event_enemies.erase( ite );

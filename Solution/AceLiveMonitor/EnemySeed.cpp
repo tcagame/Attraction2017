@@ -8,7 +8,7 @@ static const int JUMP_MAX_HP = -15;
 static const int MAX_HP = 2;
 
 EnemySeed::EnemySeed( const Vector& pos ) :
-Enemy( pos, SMALL_CHAR_GRAPH_SIZE, MAX_HP ) {
+EnemyAttack( pos, SMALL_CHAR_GRAPH_SIZE, MAX_HP ) {
 	setRadius( 16 );
 	setVec( Vector( -10, 0 ) );
 }
