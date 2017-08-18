@@ -32,16 +32,16 @@ void ViewerObject::drawSprite( int x, int y, unsigned char type, unsigned char a
 	Sprite sprite;
 	switch ( type ) {
 	case SynchronousData::TYPE_TAROSUKE:
-		sprite = getSpritePlayerWait( GRAPH_PLAYER_TAROSUKE, x, y, attribute, pattern );
+		sprite = getSpritePlayer( GRAPH_PLAYER_TAROSUKE, x, y, attribute, pattern );
 		break;
 	case SynchronousData::TYPE_TAROJIRO:
-		sprite = getSpritePlayerWait( GRAPH_PLAYER_TAROJIRO, x, y, attribute, pattern );
+		sprite = getSpritePlayer( GRAPH_PLAYER_TAROJIRO, x, y, attribute, pattern );
 		break;
 	case SynchronousData::TYPE_GARISUKE:
-		sprite = getSpritePlayerWait( GRAPH_PLAYER_GARISUKE, x, y, attribute, pattern );
+		sprite = getSpritePlayer( GRAPH_PLAYER_GARISUKE, x, y, attribute, pattern );
 		break;
 	case SynchronousData::TYPE_TAROMI:
-		sprite = getSpritePlayerWait( GRAPH_PLAYER_TAROMI  , x, y, attribute, pattern );
+		sprite = getSpritePlayer( GRAPH_PLAYER_TAROMI  , x, y, attribute, pattern );
 		break;
 	};
 
@@ -50,12 +50,14 @@ void ViewerObject::drawSprite( int x, int y, unsigned char type, unsigned char a
 	_image[ sprite.graph ]->draw( );
 }
 
-ViewerObject::Sprite ViewerObject::getSpritePlayerWait( GRAPH graph, int x, int y, unsigned char attribute, int pattern ) const {
+ViewerObject::Sprite ViewerObject::getSpritePlayer( GRAPH graph, int x, int y, unsigned char attribute, int pattern ) const {
 	Sprite sprite;
 	sprite.graph = graph;
 	
 	sprite.tx = pattern % PLAYER_CHAR_CHIP_WIDTH * NORMAL_CHAR_GRAPH_SIZE;
 	sprite.ty = pattern / PLAYER_CHAR_CHIP_WIDTH * NORMAL_CHAR_GRAPH_SIZE;
+	sprite.tw = NORMAL_CHAR_GRAPH_SIZE;
+	sprite.th = NORMAL_CHAR_GRAPH_SIZE;
 
 	if ( attribute & SynchronousData::ATTRIBUTE_REVERSE ) {
 		sprite.sx1 = x - NORMAL_CHAR_GRAPH_SIZE / 2 + NORMAL_CHAR_GRAPH_SIZE;

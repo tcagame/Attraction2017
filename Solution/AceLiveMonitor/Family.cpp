@@ -1,6 +1,7 @@
 #include "Family.h"
 #include "Player.h"
 #include "Application.h"
+#include "SynchronousData.h"
 #include <assert.h>
 
 const int CAMERA_SCROLL_SPEED = 8;
@@ -54,7 +55,7 @@ void Family::update( ) {
 	}
 
 	// ìØä˙ÉfÅ[É^
-
+	setSynchronousData( );
 }
 
 PlayerConstPtr Family::getPlayer( int player_id ) const {
@@ -103,4 +104,18 @@ void Family::updateCameraPos( ) {
 
 double Family::getCameraPos( ) const {
 	return _camera_pos;
+}
+
+void Family::setSynchronousData( ) const {
+	unsigned char TYPE[ 4 ] = {
+		SynchronousData::TYPE_TAROSUKE,
+		SynchronousData::TYPE_TAROJIRO,
+		SynchronousData::TYPE_GARISUKE,
+		SynchronousData::TYPE_TAROMI  ,
+	};
+
+	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
+		PlayerConstPtr player = getPlayer( i );
+		player->setSynchronousData( TYPE[ i ], ( int )getCameraPos( ) );
+	}
 }
