@@ -1,11 +1,12 @@
 #pragma once
 #include "Enemy.h"
 #include "smart_ptr.h"
+#include "EnemyAttack.h"
 #include <list>
 
 PTR( Enemy );
 
-class EnemyBranch : public Enemy {
+class EnemyBranch : public EnemyAttack {
 public:
 	EnemyBranch( const Vector& pos );
 	virtual ~EnemyBranch( );

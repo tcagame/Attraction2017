@@ -4,7 +4,7 @@ static const int WAIT_ANIM_TIME = 1;
 static const int MAX_HP = 2;
 
 EnemyHandAttack::EnemyHandAttack( const Vector& pos ) :
-Enemy( pos, SMALL_CHAR_GRAPH_SIZE, MAX_HP ) {
+EnemyAttack( pos, SMALL_CHAR_GRAPH_SIZE, MAX_HP ) {
 	setRadius( 18 );
 	Vector vec( -20, -8 );
 	setVec( vec );
