@@ -29,8 +29,10 @@ void Storage::update( ) {
 			continue;
 		}
 		item->update( );
-		if ( isOverLappedPlayer( item ) ) {
+		PlayerPtr hit_player = getOverLappedPlayer( item );
+		if ( hit_player ) {
 			//プレイヤーがアイテムと接触
+			pickUpItem( item, hit_player );
 			ite = _items.erase( ite );
 			continue;
 		}
@@ -65,22 +67,13 @@ bool Storage::isExistanceEventItem( ) const {
 	return result;
 }
 
-bool Storage::isOverLappedPlayer( ItemPtr item ) const {
-	bool result = false;
+PlayerPtr Storage::getOverLappedPlayer( ItemPtr item ) const {
+	PlayerPtr result = PlayerPtr( );
 	FamilyPtr family( Family::getTask( ) );
 	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
 		PlayerPtr player = family->getPlayer( i );
-		if ( item->isOverlapped( player ) ) {
-			ItemMoneyPtr money = std::dynamic_pointer_cast< ItemMoney >( item );
-			if ( money ) {
-				player->pickUpMoney( money->getValue( ) );
-			}
-
-			ItemTokuPtr toku = std::dynamic_pointer_cast< ItemToku >( item );
-			if ( toku ) {
-				player->pickUpToku( );
-			}
-			result = true;
+		if ( player->isOverlapped( item ) ) {
+			result = player;
 			break;
 		}
 	}
@@ -111,5 +104,20 @@ void Storage::eraseEventItem( ) {
 			continue;
 		}
 		ite++;
+	}
+}
+
+void Storage::pickUpItem( ItemPtr item, PlayerPtr player ) {
+	{//お金
+		ItemMoneyPtr money = std::dynamic_pointer_cast< ItemMoney >( item );
+		if ( money ) {
+			player->pickUpMoney( money->getValue( ) );
+		}
+	}
+	{//徳
+		ItemTokuPtr toku = std::dynamic_pointer_cast< ItemToku >( item );
+		if ( toku ) {
+			player->pickUpToku( );
+		}
 	}
 }

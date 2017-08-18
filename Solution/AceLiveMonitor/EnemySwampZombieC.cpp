@@ -41,3 +41,6 @@ Chip EnemySwampZombieC::getChip( ) const {
 	}
 	return chip;
 }
+
+void EnemySwampZombieC::damage( int force ) {
+}

@@ -68,7 +68,6 @@ void Viewer::update( ) {
 	// 旧描画（全て移行させる)
 	_viewer_military->draw( );
 	_viewer_storage->draw( );
-	_viewer_family->draw( );
 	_viewer_armoury->draw( );
 
 	// ステータス描画

@@ -49,3 +49,6 @@ Chip EnemyStone::getChip( ) const {
 	}
 	return chip;
 }
+
+void EnemyStone::damage( int force ) {
+}

@@ -11,6 +11,7 @@
 #include "Enemy.h"
 #include "Storage.h"
 #include "Debug.h"
+#include "SynchronousData.h"
 
 //‰æ‘œƒTƒCƒY
 static const int PLAYER_FOOT = 7;
@@ -601,7 +602,8 @@ void Player::bound( ) {
 }
 
 void Player::blowAway( ) {
-	if ( !Debug::getTask( )->isDebug( ) ) {
+	if ( !Debug::getTask( )->isDebug( ) &&
+		 _action != ACTION_DAED ) {
 		setAction( ACTION_BLOW_AWAY );
 	}
 }
@@ -626,3 +628,118 @@ void Player::setAction( ACTION action ) {
 	_action = action;
 	setActCount( 0 );
 }
+
+void Player::setSynchronousData( unsigned char type, int camera_pos ) const {
+	STATE state = getState( );
+	int add_sy = 0;
+	int add_sx = 0;
+	
+	Vector pos = getPos( );
+	int x = ( int )pos.x;
+	int y = ( int )pos.y;
+
+	AREA area = AREA_EVENT;
+	if ( getState( ) == STATE_MAIN ) {
+		x -= camera_pos;
+		area = AREA_MAIN;
+	}
+
+	int pattern = 0;
+	switch ( _action ) {
+	case ACTION_WAIT:
+		{
+			const int ANIM[ ] = {
+				0,
+			};
+			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
+			pattern = ANIM[ ( getActCount( ) / PLAYER_ANIM_WAIT_COUNT ) % anim_num ];
+		}
+		break;
+	case ACTION_WALK:
+		{
+			const int ANIM[ ] = {
+				0, 1, 2, 1, 0, 3, 4, 3
+			};
+			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
+			pattern = ANIM[ ( ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT ) % anim_num ];
+		}
+		break;
+	case ACTION_BRAKE:
+		{
+			const int ANIM[ ] = {
+				6,
+			};
+			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
+			pattern = ANIM[ ( ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT ) % anim_num ];
+		}
+		break;
+	case ACTION_FLOAT:
+		{
+			const int ANIM[ ] = {
+				5,
+			};
+			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
+			pattern = ANIM[ ( ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT ) % anim_num ];
+		}
+		break;
+	case ACTION_CHARGE:
+		{
+			const int ANIM[ ] = {
+				48, 49, 50, 51, 52, 53, 54
+			};
+			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
+			pattern = ANIM[ ( _charge_count / ( CHARGE_PHASE_COUNT / 2 ) ) % anim_num ];
+		}
+		break;
+	case ACTION_OVER_CHARGE:
+		{
+			const int ANIM[ ] = {
+				48, 49
+			};
+			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
+			pattern = ANIM[ ( getActCount( ) / PLAYER_ANIM_WAIT_COUNT ) % anim_num ];
+		}
+		break;
+	case ACTION_DAMEGE:
+		{
+			const int ANIM[ ] = {
+				96
+			};
+			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
+			pattern = ANIM[ ( getActCount( ) / PLAYER_ANIM_WAIT_COUNT ) % anim_num ];
+		}
+		break;
+	case ACTION_BLOW_AWAY:
+		{
+			const int ANIM[ ] = {
+				5,
+			};
+			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
+			pattern = ANIM[ ( ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT ) % anim_num ];
+		}
+		break;
+	case ACTION_DAED:
+		{
+			const int ANIM[ ] = {
+				96, 97, 98, 99, 100, 101, 102, 103, 104
+			};
+			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
+			int anim = getActCount( ) / PLAYER_ANIM_WAIT_COUNT;
+			if ( anim >= anim_num ) {
+				anim = anim_num - 1;
+			}
+			pattern = ANIM[ anim ];
+		}
+		break;
+	}
+
+
+	unsigned char attribute = 0;
+	if ( getDir( ) == DIR_RIGHT ) {
+		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
+	}
+
+	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	data->addObject( area, type, pattern, attribute, x, y );
+}
+

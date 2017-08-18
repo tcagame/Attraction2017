@@ -1,17 +1,53 @@
 #include "EnemyStoneFace.h"
+#include "Family.h"
 
 static const int WAIT_ANIM_TIME = 5;
 static const int MAX_HP = 3;
+static const double MAX_MOVE_SPEED = 5;
+static const double ACCEL = 0.3;
 
 EnemyStoneFace::EnemyStoneFace( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP, false ) {
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP, false ),
+_action( ACTION_IN ) {
+	Vector target = Vector( Family::getTask( )->getCameraPos( ) + SCREEN_WIDTH / 2, GRAPH_SIZE );
+	Vector vec = target - getPos( );
+	if ( fabs( vec.x ) < fabs( vec.y ) ) {
+		vec.y *= 0.5;
+	}
+	vec = vec.normalize( ) * MAX_MOVE_SPEED;
+	setVec( vec );
 }
 
 EnemyStoneFace::~EnemyStoneFace( ) {
 }
 
 void EnemyStoneFace::act( ) {
-
+	Vector vec = getVec( );
+	switch ( _action ) {
+	case ACTION_IN:
+			_action = ACTION_MOVE;
+		if ( getPos( ).y > GRAPH_SIZE / 2 ) {
+		}
+	break;
+	case ACTION_MOVE:
+	{
+		Vector target = Vector( Family::getTask( )->getCameraPos( ) + SCREEN_WIDTH / 2, GRAPH_SIZE / 2 + getChipSize( ) );
+		double angle = fmod( ( double )getActCount( ) * PI * 0.01, PI * 2 );
+		Vector add = Vector( sin( angle ) * 150, sin( angle * 2 ) * 40 );
+		target += add;
+		Vector pos = getPos( );
+		Vector distance = target - pos;
+		vec += distance.normalize( ) * ACCEL;
+		if ( vec.getLength2( ) > MAX_MOVE_SPEED * MAX_MOVE_SPEED ) {
+			vec = vec.normalize( ) * MAX_MOVE_SPEED;
+		}
+		if ( pos.y + vec.y > GRAPH_SIZE ) {
+			vec.y = GRAPH_SIZE - pos.y - 0.1;
+		}
+	}
+	break;
+	}
+	setVec( vec );
 }
 
 Chip EnemyStoneFace::getChip( ) const {

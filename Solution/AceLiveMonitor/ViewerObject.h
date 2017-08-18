@@ -31,7 +31,7 @@ private:
 	};
 private:
 	void drawSprite( int x, int y, unsigned char type, unsigned char attribute, int pattern ) const;
-	Sprite getSpritePlayerWait( GRAPH graph, int x, int y, unsigned char attribute, int pattern ) const;
+	Sprite getSpritePlayer( GRAPH graph, int x, int y, unsigned char attribute, int pattern ) const;
 private:
 	std::array< ImagePtr, MAX_GRAPH > _image;
 };

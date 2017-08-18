@@ -7,6 +7,7 @@ public:
 	virtual ~EnemySwampZombieB( );
 public:
 	Chip getChip( ) const;
+	void damage( int force );
 protected:
 	void act( );
 };

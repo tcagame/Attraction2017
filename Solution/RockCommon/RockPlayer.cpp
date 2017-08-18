@@ -97,6 +97,9 @@ void RockPlayer::setAction( ACTION action ) {
 	case ACTION_DEAD:
 		setDoll( ( DOLL )( DOLL_TAROSUKE_DEAD + _id * ROCK_PLAYER_MOTION_NUM ) );
 		break;
+	case ACTION_CHARGE:
+		setDoll( ( DOLL )( DOLL_TAROSUKE_CHARGE + _id * ROCK_PLAYER_MOTION_NUM ) );
+		break;
 	default:
 		setDoll( ( DOLL )( DOLL_TAROSUKE_WAIT + _id * ROCK_PLAYER_MOTION_NUM ) );
 		break;
@@ -116,7 +119,7 @@ void RockPlayer::actOnWaiting( ) {
 	}
 	//ジャンプ
 	if ( isStanding( ) ) {
-		if ( player.device_button & BUTTON_B ) {
+		if ( player.device_button & BUTTON_C ) {
 			setAction( ACTION_JUMP );
 			Vector vec = getVec( );
 			vec.y = JUMP_POWER;
@@ -155,12 +158,13 @@ void RockPlayer::actOnJumping( ) {
 		return;
 	}
 	if ( isStanding( ) ) {
-		setAction( ACTION_WAIT );
-		return;
-	}
 	//攻撃
-	if ( player.device_button & BUTTON_A ) {
-		setAction( ACTION_CHARGE );
+		if ( player.device_button & BUTTON_A ) {
+			setAction( ACTION_CHARGE );
+		} else {
+			setAction( ACTION_WAIT );
+		}
+		return;
 	}
 	//移動
 	Vector vec = Vector( player.device_x, 0, player.device_y ).normalize( ) * MOVE_SPEED;
@@ -177,7 +181,7 @@ void RockPlayer::actOnWalking( ) {
 	}
 	//ジャンプ
 	if ( isStanding( ) ) {
-		if ( player.device_button & BUTTON_B ) {
+		if ( player.device_button & BUTTON_C ) {
 			setAction( ACTION_JUMP );
 			Vector vec = getVec( );
 			vec.y = JUMP_POWER;
@@ -211,6 +215,7 @@ void RockPlayer::actOnAttacking( ) {
 		RockShotPtr shot( new RockShot( _id, getPos( ), getDir( ) ) );
 		RockArmoury::getTask( )->addShot( shot );
 		setAction( ACTION_WAIT );
+		Effect::getTask( )->stopEffect( _effect_handle );
 		_attack_count = 0;
 		_effect_handle = -1;
 	}
@@ -227,6 +232,7 @@ void RockPlayer::actOnCharging( ) {
 	}
 	// ジャンプ中であればチャージしない
 	if ( !isStanding( ) ) {
+		setAction( ACTION_WAIT );
 		return;
 	}
 
@@ -246,8 +252,11 @@ void RockPlayer::actOnCharging( ) {
 		setAction( ACTION_WALK );
 		return;
 	}
-	if ( player.device_button & BUTTON_B ) {
+	if ( player.device_button & BUTTON_C ) {
 		setAction( ACTION_JUMP );
+		Vector vec( getVec( ) );
+		vec.y = JUMP_POWER;
+		setVec( vec );
 		return;
 	}
 }
@@ -302,6 +311,9 @@ double RockPlayer::getAnimTime( ) const {
 		anim_time = ( double )getActCount( ) * ANIM_SPEED;
 		break;
 	case ACTION_DEAD:
+		anim_time = ( double )getActCount( ) * ANIM_SPEED;
+		break;
+	case ACTION_CHARGE:
 		anim_time = ( double )getActCount( ) * ANIM_SPEED;
 		break;
 	default:

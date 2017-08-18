@@ -35,6 +35,7 @@ public:
 	int getTokuNum( ) const;
 	void pickUpMoney( int money );
 	void pickUpToku( );
+	void setSynchronousData( unsigned char type, int camera_pos ) const;
 private:
 	void actOnWaiting( );
 	void actOnWalking( );

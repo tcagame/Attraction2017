@@ -19,7 +19,6 @@ public:
 	static const unsigned char STATE_MAIN       = 0x01;
 	static const unsigned char STATE_EVENT      = 0x02;
 	static const unsigned char ATTRIBUTE_REVERSE = 0x01;
-	static const unsigned char ATTRIBUTE_EVENT   = 0x02;
 	static const unsigned char TYPE_TAROSUKE = 10;
 	static const unsigned char TYPE_TAROJIRO = 11;
 	static const unsigned char TYPE_GARISUKE = 12;
