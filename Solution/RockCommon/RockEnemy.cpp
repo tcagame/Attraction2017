@@ -2,9 +2,10 @@
 #include "RockPlayer.h"
 
 
-RockEnemy::RockEnemy( const Vector& pos, DOLL id, int force, int radius, int height, bool mass, bool head ) :
+RockEnemy::RockEnemy( const Vector& pos, DOLL id, int hp, int force, int radius, int height, bool mass, bool head ) :
 RockCharacter( pos, id, radius, height, mass, head ),
 _force( 1 ),
+_hp( hp ),
 _finished( false ) {
 }
 
@@ -17,7 +18,17 @@ int RockEnemy::getForce( ) const {
 }
 
 void RockEnemy::damage( int force ) {
-	_finished = true;
+	if ( force < 0 ) {
+		_hp = 0;
+		_finished = true;
+		return;
+	}
+
+	_hp -= force;
+	if ( _hp < 0 ) {
+		_hp = 0;
+		_finished = true;
+	}
 }
 
 bool RockEnemy::isFinished( ) const {
