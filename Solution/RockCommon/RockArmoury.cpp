@@ -21,7 +21,16 @@ RockArmoury::~RockArmoury( ) {
 
 void RockArmoury::initialize( ) {
 	EffectPtr effect( Effect::getTask( ) );
-	effect->loadEffect( EFFECT_SHOT, "effect/laser.efk" );
+	_shot_id = effect->loadEffect( EFFECT_SHOT, "laser.efk" );
+	_charge_id = effect->loadEffect( EFFECT_CHARGE, "charge.efk" );
+}
+
+int RockArmoury::getEffectShotId( ) const {
+	return _shot_id;
+}
+
+int RockArmoury::getEffectChargeId( ) const {
+	return _charge_id;
 }
 
 void RockArmoury::update( ) {

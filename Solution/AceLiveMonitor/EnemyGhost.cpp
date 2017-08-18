@@ -1,13 +1,17 @@
 #include "EnemyGhost.h"
+#include "Family.h"
 
 static const int WAIT_ANIM_TIME = 5;
 static const int FADE_IN_TIME = WAIT_ANIM_TIME * 2;
 static const int MAX_HP = 3;
+static const int MOVE_SPEED = -3;
 
 EnemyGhost::EnemyGhost( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP, false ),
-_act( ACTION_FADE_IN ) {
+_act( ACTION_FADE_IN ),
+_ascend_speed( 0 ) {
 	setRadius( 36 );
+	setVec( Vector ( MOVE_SPEED, MOVE_SPEED / 2 ) );
 }
 
 EnemyGhost::~EnemyGhost( ) {
@@ -21,7 +25,18 @@ void EnemyGhost::act( ) {
 		}
 		break;
 	case ACTION_MOVE:
+	{
+		Vector vec = getVec( );
+		int ascend_pos = ( int )Family::getTask( )->getCameraPos( ) + 250;
+		if ( getPos( ).x < ascend_pos ) {
+			vec.y -= 0.1;
+			setVec( vec );
+		} else {
+			setVec( vec );
+		}
+
 		break;
+	}
 	}
 }
 

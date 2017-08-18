@@ -2,6 +2,7 @@
 #include "RockFamily.h"
 #include "RockPlayer.h"
 #include "Effect.h"
+#include "RockArmoury.h"
 
 const int ACTIVE_COUNT = 150;
 const int MOVE_SPEED = 3;
@@ -13,7 +14,7 @@ _player_id( id_ ),
 _back( false ),
 _finished( false ) {
 	setVec( dir * MOVE_SPEED );
-	_effect_handle = Effect::getTask( )->playEffect( EFFECT_SHOT );
+	_effect_handle = Effect::getTask( )->playEffect( RockArmoury::getTask( )->getEffectShotId( ) );
 	Effect::getTask( )->updateEffectTransform( _effect_handle, pos + FOOT );
 }
 

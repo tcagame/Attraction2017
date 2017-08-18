@@ -10,20 +10,28 @@
 #include "MessageSender.h"
 #include "RockArmoury.h"
 #include "RockShot.h"
+#include "Effect.h"
 
 //移動
-const double JUMP_POWER = 3.0;
-const double MOVE_SPEED = 1.0;
-const double BRAKE_SPEED = 0.3;
+static const double JUMP_POWER = 3.0;
+static const double MOVE_SPEED = 1.0;
+static const double BRAKE_SPEED = 0.3;
 //アニメーション
-const double ANIM_SPEED = 0.5;
+static const double ANIM_SPEED = 0.5;
 
-const int RADIUS = 10;
-const int HEIGHT = 20;
+static const int RADIUS = 10;
+static const int HEIGHT = 20;
+
+//チャージ時間
+static const int CHARGE_PHASE_COUNT = 25;
+static const int MAX_CHARGE_COUNT = CHARGE_PHASE_COUNT * 4 - 1;
+//チャージエフェクト位置
+static const Vector EFFECT_ADJUST( 0, 15, 0 );
 
 RockPlayer::RockPlayer( StatusPtr status, const Vector& pos, int id ) :
 RockCharacter( pos, ( DOLL )( DOLL_TAROSUKE_WAIT + id * ROCK_PLAYER_MOTION_NUM ), RADIUS, HEIGHT ),
-_is_push_button_a( false ) {
+_attack_count( 0 ),
+_effect_handle( -1 ) {
 	_id = id;
 	_status = status;
 	setAction( ACTION_WAIT );
@@ -47,17 +55,15 @@ void RockPlayer::act( ) {
 	case ACTION_BRAKE:
 		actOnBraking( );
 		break;
-	case ACTION_ATTACK:
-		actOnAttacking( );
+	case ACTION_CHARGE:
+		actOnCharging( );
 		break;
 	case ACTION_DEAD:
 		actOnDead( );
 		break;
 	}
-	if ( _is_push_button_a &&
-		 !( _status->getPlayer( _id ).device_button & BUTTON_A ) ) {
-		_is_push_button_a = false;
-	}
+	actOnAttacking( );
+	updateEffect( );
 	// カメラに入り続ける
 	DrawerPtr drawer( Drawer::getTask( ) );
 	if ( !drawer->isInCamera( getPos( ) + getVec( ) ) ) {
@@ -67,6 +73,12 @@ void RockPlayer::act( ) {
 	while( !drawer->isInCamera( getPos( ) + getVec( ) ) ) {
 		setVec( getVec( ) + dir );
 	}
+}
+
+void RockPlayer::updateEffect( ) {
+	EffectPtr effect( Effect::getTask( ) );
+	int size = ( ( _attack_count / CHARGE_PHASE_COUNT ) * 2 ) + 4;
+	effect->updateEffectTransform( _effect_handle, getPos( ) + EFFECT_ADJUST, size );
 }
 
 void RockPlayer::setAction( ACTION action ) {
@@ -113,10 +125,8 @@ void RockPlayer::actOnWaiting( ) {
 		}
 	}
 	//攻撃
-	if ( player.device_button & BUTTON_A &&
-		 !_is_push_button_a ) {
-		_is_push_button_a = true;
-		setAction( ACTION_ATTACK );
+	if ( player.device_button & BUTTON_A ) {
+		setAction( ACTION_CHARGE );
 		return;
 	}
 	//移動
@@ -134,6 +144,7 @@ void RockPlayer::actOnWaiting( ) {
 		setAction( ACTION_BRAKE );
 		return;
 	}
+	//_attack_count -= 2;
 }
 
 void RockPlayer::actOnJumping( ) {
@@ -148,10 +159,8 @@ void RockPlayer::actOnJumping( ) {
 		return;
 	}
 	//攻撃
-	if ( player.device_button & BUTTON_A &&
-		 !_is_push_button_a ) {
-		_is_push_button_a = true;
-		setAction( ACTION_ATTACK );
+	if ( player.device_button & BUTTON_A ) {
+		setAction( ACTION_CHARGE );
 	}
 	//移動
 	Vector vec = Vector( player.device_x, 0, player.device_y ).normalize( ) * MOVE_SPEED;
@@ -194,16 +203,53 @@ void RockPlayer::actOnWalking( ) {
 	setVec( vec );
 }
 
-void RockPlayer::actOnAttacking( ) {
+void RockPlayer::actOnAttacking( ) {	
+	Status::Player player = _status->getPlayer( _id );
+	// 攻撃ボタンが離されたら攻撃
+	if ( !( player.device_button & BUTTON_A ) &&
+		 _attack_count > 0 ) {
+		RockShotPtr shot( new RockShot( _id, getPos( ), getDir( ) ) );
+		RockArmoury::getTask( )->addShot( shot );
+		setAction( ACTION_WAIT );
+		_attack_count = 0;
+		_effect_handle = -1;
+	}
+}
+
+void RockPlayer::actOnCharging( ) {
 	Status::Player player = _status->getPlayer( _id );
 	//死亡
 	if ( player.power <= 0 ) {
 		setAction( ACTION_DEAD );
+		_attack_count = 0;
+		_effect_handle = -1;
 		return;
 	}
-	RockShotPtr shot( new RockShot( _id, getPos( ), getDir( ) ) );
-	RockArmoury::getTask( )->addShot( shot );
-	setAction( ACTION_WAIT );
+	// ジャンプ中であればチャージしない
+	if ( !isStanding( ) ) {
+		return;
+	}
+
+	if ( _attack_count == 0 ) {
+		EffectPtr effect( Effect::getTask( ) );
+		_effect_handle = effect->playEffect( RockArmoury::getTask( )->getEffectChargeId( ) );
+		effect->updateEffectTransform( _effect_handle, getPos( ) + EFFECT_ADJUST );
+	}
+	_attack_count++;
+	if ( _attack_count > MAX_CHARGE_COUNT ) {
+		_attack_count = MAX_CHARGE_COUNT;
+	}
+
+	//攻撃中の移動
+	if ( player.device_x != 0 ||
+		 player.device_y != 0 ) {
+		setAction( ACTION_WALK );
+		return;
+	}
+	if ( player.device_button & BUTTON_B ) {
+		setAction( ACTION_JUMP );
+		return;
+	}
 }
 
 void RockPlayer::actOnBraking( ) {
@@ -217,9 +263,13 @@ void RockPlayer::actOnBraking( ) {
 	Vector vec = getVec( );
 	double tmp_y = vec.y;
 	vec.y = 0;
-	//ベクトルがない場合待機に移行する
+	//ベクトルがない場合は待機かチャージに移行する
 	if ( vec.getLength( ) < 0.001 ) {
-		setAction( ACTION_WAIT );
+		if ( player.device_button & BUTTON_A ) {
+			setAction( ACTION_CHARGE );
+		} else {
+			setAction( ACTION_WAIT );
+		}
 		return;
 	}
 

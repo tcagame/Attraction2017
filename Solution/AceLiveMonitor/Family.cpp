@@ -52,6 +52,9 @@ void Family::update( ) {
 	if ( update_camera ) {
 		updateCameraPos( );
 	}
+
+	// “¯Šúƒf[ƒ^
+
 }
 
 PlayerConstPtr Family::getPlayer( int player_id ) const {
