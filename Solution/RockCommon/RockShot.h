@@ -16,7 +16,8 @@ protected:
 private:
 	void actOutBack( );
 private:
-	int _id;
+	int _player_id;
+	int _effect_handle;
 	double _size = 1.0;
 	bool _back;
 	bool _finished;

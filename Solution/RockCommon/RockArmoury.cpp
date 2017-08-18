@@ -6,6 +6,7 @@
 #include "RockMilitary.h"
 #include "RockEnemy.h"
 #include <list>
+#include "Effect.h"
 
 RockArmouryPtr RockArmoury::getTask( ) {
 	return std::dynamic_pointer_cast< RockArmoury >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -19,7 +20,8 @@ RockArmoury::~RockArmoury( ) {
 }
 
 void RockArmoury::initialize( ) {
-	Drawer::getTask( )->loadEffect( EFFECT_SHOT, "effect/laser.efk" );
+	EffectPtr effect( Effect::getTask( ) );
+	effect->loadEffect( EFFECT_SHOT, "effect/laser.efk" );
 }
 
 void RockArmoury::update( ) {

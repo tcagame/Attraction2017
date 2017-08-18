@@ -6,6 +6,7 @@
 #include "RockPlayer.h"
 #include "RockImpact.h"
 #include "define.h"
+#include "Effect.h"
 
 RockMilitaryPtr RockMilitary::getTask( ) {
 	return std::dynamic_pointer_cast< RockMilitary >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -20,8 +21,8 @@ RockMilitary::~RockMilitary( ) {
 }
 
 void RockMilitary::initialize( ) {
-	DrawerPtr drawer( Drawer::getTask( ) );
-	drawer->loadEffect( EFFECT_IMPACT, "effect/impact.efk" );
+	EffectPtr effect( Effect::getTask( ) );
+	effect->loadEffect( EFFECT_IMPACT, "effect/impact.efk" );
 }
 
 std::list< RockEnemyPtr > RockMilitary::getEnemyList( ) const {

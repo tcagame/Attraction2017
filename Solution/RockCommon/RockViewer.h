@@ -18,8 +18,7 @@ private:
 	void drawMap( ) const;
 	void drawEnemy( ) const;
 	void drawPlayer( ) const;
-	void drawShot( ) const;
-	void drawImpact( ) const;
+	void drawShot( ) const; // debug
 private:
 	StatusPtr _status;
 };
