@@ -275,6 +275,7 @@
     <ClCompile Include="Viewer.cpp" />
     <ClCompile Include="ViewerArmoury.cpp" />
     <ClCompile Include="ViewerMilitary.cpp" />
+    <ClCompile Include="ViewerObject.cpp" />
     <ClCompile Include="ViewerStatus.cpp" />
     <ClCompile Include="ViewerStorage.cpp" />
     <ClCompile Include="ViewerStreet.cpp" />
@@ -395,6 +396,7 @@
     <ClInclude Include="Viewer.h" />
     <ClInclude Include="ViewerArmoury.h" />
     <ClInclude Include="ViewerMilitary.h" />
+    <ClInclude Include="ViewerObject.h" />
     <ClInclude Include="ViewerStatus.h" />
     <ClInclude Include="ViewerStorage.h" />
     <ClInclude Include="ViewerStreet.h" />

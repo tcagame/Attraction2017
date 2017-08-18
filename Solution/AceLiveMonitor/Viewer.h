@@ -14,6 +14,8 @@ PTR( ViewerStorage );
 
 PTR( ViewerDebug );
 
+PTR( ViewerObject );
+
 class Viewer : public Task {
 public:
 	static std::string getTag( ) { return "VIEWER"; };
@@ -25,7 +27,6 @@ public:
 	void initialize( );
 	void update( );
 private:
-	bool _debug;
 	ViewerFamilyConstPtr _viewer_family;
 	ViewerStreetConstPtr _viewer_street;
 	ViewerArmouryConstPtr _viewer_armoury;
@@ -35,5 +36,7 @@ private:
 	ViewerStoragePtr _viewer_storage;
 
 	ViewerDebugConstPtr _viewer_debug;
+
+	ViewerObjectPtr _viewer_object;
 };
 
