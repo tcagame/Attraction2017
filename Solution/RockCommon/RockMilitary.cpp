@@ -22,7 +22,7 @@ RockMilitary::~RockMilitary( ) {
 
 void RockMilitary::initialize( ) {
 	EffectPtr effect( Effect::getTask( ) );
-	effect->loadEffect( EFFECT_IMPACT, "effect/impact.efk" );
+	effect->loadEffect( EFFECT_IMPACT, "impact.efk" );
 }
 
 std::list< RockEnemyPtr > RockMilitary::getEnemyList( ) const {
