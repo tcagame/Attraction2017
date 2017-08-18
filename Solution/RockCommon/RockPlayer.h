@@ -23,7 +23,7 @@ private:
 		ACTION_JUMP,
 		ACTION_WALK,
 		ACTION_BRAKE,
-		ACTION_ATTACK,
+		ACTION_CHARGE,
 		ACTION_DEAD,
 	};
 private:
@@ -32,12 +32,15 @@ private:
 	void actOnJumping( );
 	void actOnWalking( );
 	void actOnAttacking( );
+	void actOnCharging( );
 	void actOnBraking( );
 	void actOnDead( );
+	void updateEffect( );
 private:
 	StatusPtr _status;
 	ACTION _action;
 	int _id;
-	bool _is_push_button_a;
+	int _attack_count;
+	int _effect_handle;
 };
 
