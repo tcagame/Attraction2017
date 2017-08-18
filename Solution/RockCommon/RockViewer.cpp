@@ -58,6 +58,12 @@ void RockViewer::drawEnemy( ) const {
 		DOLL doll = enemy->getDoll( );
 		Vector pos = enemy->getPos( );
 		ModelMV1Ptr model = doll_house->getModel( doll );
+		double rot = Vector( 0, 0, -1 ).angle( enemy->getDir( ) );
+		Vector axis = Vector( 0, 1, 0 );
+		if ( Vector( 0, 0, -1 ).cross( enemy->getDir( ) ).y < 0 ) {
+			axis = Vector( 0, -1, 0 );
+		}
+		model->setRot( Matrix::makeTransformRotation( axis, rot ) );
 		model->setTrans( Matrix::makeTransformTranslation( pos ) );
 		model->draw( );
 		ite++;
@@ -83,6 +89,12 @@ void RockViewer::drawPlayer( ) const {
 			anim_time = model->getEndAnimTime( );
 		}
 		model->setAnimTime( anim_time );
+		double rot = Vector( 0, 0, -1 ).angle( player->getDir( ) );
+		Vector axis = Vector( 0, 1, 0 );
+		if ( Vector( 0, 0, -1 ).cross( player->getDir( ) ).y < 0 ) {
+			axis = Vector( 0, -1, 0 );
+		}
+		model->setRot( Matrix::makeTransformRotation( axis, rot ) );
 		model->setTrans( Matrix::makeTransformTranslation( pos ) );
 		model->draw( );
 	}
