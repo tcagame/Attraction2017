@@ -2,8 +2,12 @@
 
 #include "ace_define.h"
 #include "Data.h"
+#include "Task.h"
+#include <string>
 
-class SynchronousData : public Data {
+PTR( SynchronousData );
+
+class SynchronousData : public Data, public Task {
 public:
 	static const unsigned char ITEM_DANGO       = 0x01;
 	static const unsigned char ITEM_HEART       = 0x02;
@@ -12,6 +16,10 @@ public:
 	static const unsigned char ITEM_WOOD        = 0x10;
 	static const unsigned char ITEM_FLAME       = 0x20;
 	static const unsigned char ITEM_MINERAL     = 0x40;
+public:
+	static std::string getTag( ) { return "SYNCHRONOUSDATA"; };
+	static SynchronousDataPtr getTask( );
+	void update( );
 public:
 	SynchronousData( );
 	virtual ~SynchronousData( );

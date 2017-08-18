@@ -8,6 +8,7 @@ public:
 	virtual ~EnemyBossBloodDemon( );
 public:
 	Chip getChip( ) const;
+	void dropItem( );
 protected:
 	void act( );
 };

@@ -16,10 +16,6 @@ EnemyBoss( pos, BIG_CHAR_GRAPH_SIZE, MAX_HP ) {
 
 
 EnemyBossMonsteTree::~EnemyBossMonsteTree( ) {
-	_branch->isFinished( );
-	ItemPtr item = ItemPtr( new ItemTree( getPos( ) ) );
-	item->setState( STATE_EVENT );
-	Storage::getTask( )->add( item );
 }
 
 void EnemyBossMonsteTree::act( ) {
@@ -36,4 +32,10 @@ Chip EnemyBossMonsteTree::getChip( ) const {
 	chip.tx = 0;
 	chip.ty = 128;
 	return chip;
+}
+
+void EnemyBossMonsteTree:: dropItem( ) {
+	ItemPtr item = ItemPtr( new ItemTree( getPos( ) ) );
+	item->setState( STATE_EVENT );
+	Storage::getTask( )->add( item );
 }

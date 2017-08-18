@@ -5,6 +5,7 @@
 
 PTR( Military );
 PTR( Enemy );
+PTR( EnemyBoss );
 PTR( Character );
 PTR( Impact );
 
@@ -34,6 +35,6 @@ private:
 	std::list< EnemyPtr > _event_enemies;
 	std::list< ImpactPtr > _impacts;
 	EnemyPtr _hell_fire;
-	EnemyPtr _boss;
+	EnemyBossPtr _boss;
 };
 

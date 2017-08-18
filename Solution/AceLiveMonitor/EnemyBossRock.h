@@ -7,6 +7,7 @@ public:
 public:
 	Chip getChip( ) const;
 	Chip getChip2( ) const;
+	void dropItem( );
 protected:
 	void act( );
 };

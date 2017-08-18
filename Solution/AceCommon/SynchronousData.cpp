@@ -1,11 +1,20 @@
 #include "SynchronousData.h"
+#include "Application.h"
 #include <assert.h>
+
+SynchronousDataPtr SynchronousData::getTask( ) {
+	return std::dynamic_pointer_cast< SynchronousData >( Application::getInstance( )->getTask( getTag( ) ) );
+}
 
 SynchronousData::SynchronousData( ) {
 }
 
 
 SynchronousData::~SynchronousData( ) {
+}
+
+void SynchronousData::update( ) {
+
 }
 
 void * SynchronousData::getPtr( ) {
