@@ -1,10 +1,14 @@
 #include "EnemyGhoul.h"
 
-static const int WAIT_ANIM_TIME = 5;
-static const int MAX_HP = 3;
+const int WAIT_ANIM_TIME = 5;
+const int MAX_HP = 3;
+const int MOVE_SPEED = 1;
+const int MOVE_RANGE = 25;
 
 EnemyGhoul::EnemyGhoul( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ) {
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ),
+_origin_pos( pos ) {
+	setVec( Vector( MOVE_SPEED, 0 ) );
 }
 
 
@@ -12,6 +16,18 @@ EnemyGhoul::~EnemyGhoul( ) {
 }
 
 void EnemyGhoul::act( ) {
+	Vector vec = getVec( );
+	Vector diff = getPos( ) - _origin_pos;
+	if ( diff.getLength( ) > MOVE_RANGE ) {
+		if ( getDir( ) == DIR_RIGHT ) {
+			vec.x *= -1;
+			setVec( vec );
+		}
+		if ( getDir( ) == DIR_LEFT ) {
+			vec.x *= -1;
+			setVec( vec );
+		}
+	}
 }
 
 Chip EnemyGhoul::getChip( ) const {
