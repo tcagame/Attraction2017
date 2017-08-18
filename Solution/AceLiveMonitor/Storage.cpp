@@ -36,7 +36,7 @@ void Storage::update( ) {
 		}
 		ite++;
 	}
-	createToku( );
+	//createToku( );
 }
 
 void Storage::add( ItemPtr item ) {

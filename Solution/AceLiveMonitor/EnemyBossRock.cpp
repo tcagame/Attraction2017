@@ -10,9 +10,6 @@ EnemyBoss( pos, BIG_CHAR_GRAPH_SIZE, MAX_HP ) {
 
 
 EnemyBossRock::~EnemyBossRock( ) {
-	ItemPtr item = ItemPtr( new ItemRock( getPos( ) ) );
-	item->setState( STATE_EVENT );
-	Storage::getTask( )->add( item );
 }
 
 void EnemyBossRock::act( ) {
@@ -44,3 +41,10 @@ Chip EnemyBossRock::getChip2( ) const {
 	chip.ty = 0;
 	return chip;
 }
+
+void EnemyBossRock::dropItem( ) {
+	ItemPtr item = ItemPtr( new ItemRock( getPos( ) ) );
+	item->setState( STATE_EVENT );
+	Storage::getTask( )->add( item );
+}
+

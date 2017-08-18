@@ -11,9 +11,6 @@ EnemyBoss( pos, BIG_CHAR_GRAPH_SIZE, MAX_HP ) {
 
 
 EnemyBossBloodDemon::~EnemyBossBloodDemon( ) {
-	ItemPtr item = ItemPtr( new ItemFire( getPos( ) ) );
-	item->setState( STATE_EVENT );
-	Storage::getTask( )->add( item );
 }
 
 void EnemyBossBloodDemon::act( ) {
@@ -38,4 +35,10 @@ Chip EnemyBossBloodDemon::getChip( ) const {
 	chip.tx = cx * chip.size;
 	chip.ty = 0;
 	return chip;
+}
+
+void EnemyBossBloodDemon::dropItem( ) {
+	ItemPtr item = ItemPtr( new ItemFire( getPos( ) ) );
+	item->setState( STATE_EVENT );
+	Storage::getTask( )->add( item );
 }
