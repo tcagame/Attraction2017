@@ -25,30 +25,30 @@ int SynchronousData::getSize( ) {
 	return sizeof( _data );
 }
 
-int SynchronousData::getStatusPower( int idx ) {
+int SynchronousData::getStatusPower( int idx ) const {
 	assert( idx < ACE_PLAYER_NUM );
 	return _data.status[ idx ].power;
 }
 
-int SynchronousData::getStatusMoney( int idx ) {
+int SynchronousData::getStatusMoney( int idx ) const {
 	assert( idx < ACE_PLAYER_NUM );
 	return _data.status[ idx ].money;
 }
 
-bool SynchronousData::isInProssessionOfStatusItem( int idx, unsigned char item ) {
+bool SynchronousData::isInProssessionOfStatusItem( int idx, unsigned char item ) const {
 	assert( idx < ACE_PLAYER_NUM );
 	return ( _data.status[ idx ].items & item) != 0;
 }
 
-int SynchronousData::getStatusVirtue( int idx ) {
+int SynchronousData::getStatusVirtue( int idx ) const {
 	return _data.status[ idx ].virtue;
 }
 
-int SynchronousData::getStatusRedo( int idx ) {
+int SynchronousData::getStatusRedo( int idx ) const {
 	return _data.status[ idx ].redo;
 }
 
-unsigned char SynchronousData::getStatusState( int idx ) {
+unsigned char SynchronousData::getStatusState( int idx ) const {
 	return _data.status[ idx ].state;
 }
 
@@ -95,26 +95,26 @@ void SynchronousData::resetObject( ) {
 	_object_num = 0;
 }
 
-int SynchronousData::getObjectNum( ) {
+int SynchronousData::getObjectNum( ) const {
 	return _object_num;
 }
 
-int SynchronousData::getObjectX( int idx ) {
+int SynchronousData::getObjectX( int idx ) const {
 	assert( idx < _object_num );
 	return _data.object[ idx ].x;
 }
 
-int SynchronousData::getObjectY( int idx ) {
+int SynchronousData::getObjectY( int idx ) const {
 	assert( idx < _object_num );
 	return _data.object[ idx ].y;
 }
 
-unsigned char SynchronousData::getObjectType( int idx ) {
+unsigned char SynchronousData::getObjectType( int idx ) const {
 	assert( idx < _object_num );
 	return _data.object[ idx ].type;
 }
 
-int SynchronousData::getObjectPattern( int idx ) {
+int SynchronousData::getObjectPattern( int idx ) const {
 	assert( idx < _object_num );
 	return _data.object[ idx ].pattern;
 }

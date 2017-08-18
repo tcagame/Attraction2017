@@ -1,7 +1,6 @@
 #include "Viewer.h"
 #include "Application.h"
 #include "Drawer.h"
-#include "Keyboard.h"
 
 #include "ViewerFamily.h"
 #include "ViewerStreet.h"
@@ -14,12 +13,13 @@
 #include "ViewerDebug.h"
 #include "Debug.h"
 
+#include "ViewerObject.h"
+
 ViewerPtr Viewer::getTask( ) {
 	return std::dynamic_pointer_cast< Viewer >( Application::getInstance( )->getTask( getTag( ) ) );
 }
 
-Viewer::Viewer( ) :
-_debug( false ) {
+Viewer::Viewer( ) {
 }
 
 Viewer::~Viewer( ) {
@@ -38,23 +38,33 @@ void Viewer::initialize( ) {
 	_viewer_storage		= ViewerStoragePtr  ( new ViewerStorage );
 
 	_viewer_debug = ViewerDebugPtr( new ViewerDebug );
+
+	_viewer_object = ViewerObjectPtr  ( new ViewerObject );
 }
 
 void Viewer::update( ) {
-	if ( Keyboard::getTask( )->isPushKey( "SPACE" ) ) {
-		_debug = !_debug;
-	}
 
 	DrawerPtr drawer( Drawer::getTask( ) );
 	drawer->flip( );
-	_viewer_event->draw( );
-	_viewer_status->draw( );
+
+	// Main描画
 	_viewer_street->draw( ViewerStreet::LAYER_BACK );
 	_viewer_military->draw( );
 	_viewer_storage->draw( );
 	_viewer_family->draw( );
 	_viewer_armoury->draw( );
+	_viewer_object->drawMain( );
 	_viewer_street->draw( ViewerStreet::LAYER_FRONT );
+
+	// イベント描画
+	_viewer_event->draw( );
+	_viewer_object->drawEvent( );
+
+
+	// ステータス描画
+	_viewer_status->draw( );
+
+	// デバッグ
 	if ( Debug::getTask( )->isDebug( ) ) {
 		_viewer_debug->draw( );
 	}
