@@ -5,6 +5,7 @@
 
 PTR( Storage );
 PTR( Item );
+PTR( Player );
 
 class Storage : public Task {
 public:
@@ -20,8 +21,9 @@ public:
 	std::list< ItemPtr > getItems( ) const;
 	void eraseEventItem( );
 private:
-	bool isOverLappedPlayer( ItemPtr item ) const;
+	PlayerPtr getOverLappedPlayer( ItemPtr item ) const;
 	void createToku( ); //debug—p
+	void pickUpItem( ItemPtr item, PlayerPtr player );
 private:
 	std::list< ItemPtr > _items;
 };

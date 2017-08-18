@@ -193,7 +193,8 @@ int Character::getChipSize( ) const {
 }
 
 bool Character::isOverlapped( CharacterConstPtr target ) const {
-	if ( _state != target->getState( ) ) {
+	if ( _state != target->getState( ) ||
+		 _finished ) {
 		return false;
 	}
 	double length = ( _pos - target->getPos( ) ).getLength( );
