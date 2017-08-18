@@ -601,7 +601,8 @@ void Player::bound( ) {
 }
 
 void Player::blowAway( ) {
-	if ( !Debug::getTask( )->isDebug( ) ) {
+	if ( !Debug::getTask( )->isDebug( ) &&
+		 _action != ACTION_DAED ) {
 		setAction( ACTION_BLOW_AWAY );
 	}
 }
