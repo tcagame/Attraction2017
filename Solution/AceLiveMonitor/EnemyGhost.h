@@ -16,5 +16,6 @@ private:
 	};
 private:
 	ACTION _act;
+	int _ascend_speed;
 };
 

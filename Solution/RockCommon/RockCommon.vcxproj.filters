@@ -28,6 +28,7 @@
     <ClInclude Include="RockArmoury.h" />
     <ClInclude Include="RockShot.h" />
     <ClInclude Include="RockImpact.h" />
+    <ClInclude Include="RockPop.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RockDollHouse.cpp" />
@@ -54,6 +55,7 @@
     <ClCompile Include="RockArmoury.cpp" />
     <ClCompile Include="RockShot.cpp" />
     <ClCompile Include="RockImpact.cpp" />
+    <ClCompile Include="RockPop.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Enemy">

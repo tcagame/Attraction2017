@@ -190,6 +190,7 @@
     <ClInclude Include="RockMap.h" />
     <ClInclude Include="RockMilitary.h" />
     <ClInclude Include="RockPlayer.h" />
+    <ClInclude Include="RockPop.h" />
     <ClInclude Include="RockShot.h" />
     <ClInclude Include="RockViewer.h" />
     <ClInclude Include="Status.h" />
@@ -209,6 +210,7 @@
     <ClCompile Include="RockMap.cpp" />
     <ClCompile Include="RockMilitary.cpp" />
     <ClCompile Include="RockPlayer.cpp" />
+    <ClCompile Include="RockPop.cpp" />
     <ClCompile Include="RockShot.cpp" />
     <ClCompile Include="RockViewer.cpp" />
   </ItemGroup>

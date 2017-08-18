@@ -9,6 +9,7 @@
 PTR( RockMilitary );
 PTR( RockEnemy );
 PTR( RockImpact );
+PTR( RockPop );
 
 class RockMilitary : public Task {
 public:
@@ -20,17 +21,19 @@ public:
 public:
 	void update( );
 	void initialize( );
+	void add( RockEnemyPtr enemy );
 	std::list< RockEnemyPtr > getEnemyList( ) const;
 	std::list< RockImpactPtr > getImpactList( ) const;
 protected:
-	void add( RockEnemyPtr enemy );
 	void add( RockImpactPtr impact );
 private:
 	void updateEnemies( );
 	void updateImpact( );
+	void updatePop( );
 private:
 	std::list< RockEnemyPtr > _enemies;
 	std::list< RockImpactPtr > _impacts;
+	std::list< RockPopPtr > _pops;
 	std::array< ModelMV1Ptr, MAX_DOLL > _enemy_model;
 };
 

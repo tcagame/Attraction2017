@@ -17,8 +17,12 @@ public:
 	void initialize( );
 	void update( );
 	void addShot( RockShotPtr shot );
+	int getEffectChargeId( ) const;
+	int getEffectShotId( ) const;
 	std::list< RockShotPtr > getShots( ) const;
 private:
+	int _shot_id;
+	int _charge_id;
 	std::list< RockShotPtr > _shots;
 };
 

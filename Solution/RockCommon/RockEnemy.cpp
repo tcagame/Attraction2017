@@ -6,12 +6,21 @@ RockEnemy::RockEnemy( const Vector& pos, DOLL id, int hp, int force, int radius,
 RockCharacter( pos, id, radius, height, mass, head ),
 _force( 1 ),
 _hp( hp ),
-_finished( false ) {
+_finished( false ),
+_max_hp( hp ),
+_start_pos( pos ) {
 }
 
 
 RockEnemy::~RockEnemy( ) {
 }
+
+void RockEnemy::reset( ) {
+	setPos( _start_pos );
+	_hp = _max_hp;
+	_finished = false;
+}
+
 
 int RockEnemy::getForce( ) const {
 	return _force;

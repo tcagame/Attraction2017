@@ -5,6 +5,7 @@
 #include "RockFamily.h"
 #include "RockPlayer.h"
 #include "RockImpact.h"
+#include "RockPop.h"
 #include "define.h"
 #include "Effect.h"
 
@@ -22,7 +23,7 @@ RockMilitary::~RockMilitary( ) {
 
 void RockMilitary::initialize( ) {
 	EffectPtr effect( Effect::getTask( ) );
-	effect->loadEffect( EFFECT_IMPACT, "effect/impact.efk" );
+	effect->loadEffect( EFFECT_IMPACT, "impact.efk" );
 }
 
 std::list< RockEnemyPtr > RockMilitary::getEnemyList( ) const {
@@ -36,6 +37,7 @@ std::list< RockImpactPtr > RockMilitary::getImpactList( ) const {
 void RockMilitary::update( ) {
 	updateEnemies( );
 	updateImpact( );
+	updatePop( );
 }
 
 void RockMilitary::updateEnemies( ) {
@@ -49,6 +51,8 @@ void RockMilitary::updateEnemies( ) {
 		}
 		if ( enemy->isFinished( ) ) {
 			add( RockImpactPtr( new RockImpact( enemy->getPos( ) + Vector( 0, 30, 0 ) ) ) );
+			enemy->reset( );
+			_pops.push_back( RockPopPtr( new RockPop( enemy ) ) );
 			ite = _enemies.erase( ite );
 			continue;
 		}
@@ -85,6 +89,23 @@ void RockMilitary::updateImpact( ) {
 			continue;
 		}
 		impact->update( );
+		ite++;
+	}
+}
+
+void RockMilitary::updatePop( ) {
+	std::list< RockPopPtr >::iterator ite = _pops.begin( );
+	while ( ite != _pops.end( ) ) {
+		RockPopPtr pop = *ite;
+		if ( !pop ) {
+			ite++;
+			continue;
+		}
+		pop->update( );
+		if ( pop->isFinished( ) ) {
+			ite = _pops.erase( ite );
+			continue;
+		}
 		ite++;
 	}
 }
