@@ -18,6 +18,12 @@ public:
 	static const unsigned char ITEM_MINERAL     = 0x40;
 	static const unsigned char STATE_MAIN       = 0x01;
 	static const unsigned char STATE_EVENT      = 0x02;
+
+	enum AREA {
+		AREA_EVENT,
+		AREA_MAIN,
+		MAX_AREA
+	};
 public:
 	static std::string getTag( ) { return "SYNCHRONOUSDATA"; };
 	static SynchronousDataPtr getTask( );
@@ -32,11 +38,11 @@ public:
 	int getStatusVirtue( int idx ) const;
 	int getStatusRedo( int idx ) const;
 	unsigned char getStatusState( int idx ) const;
-	int getObjectNum( ) const;
-	int getObjectX( int idx ) const;
-	int getObjectY( int idx ) const;
-	unsigned char getObjectType( int idx ) const;
-	int getObjectPattern( int idx ) const;
+	int getObjectNum( AREA area ) const;
+	int getObjectX( AREA area, int idx ) const;
+	int getObjectY( AREA area, int idx ) const;
+	unsigned char getObjectType( AREA area, int idx ) const;
+	int getObjectPattern( AREA area, int idx ) const;
 public:
 	void * getPtr( );
 	int getSize( );
@@ -47,7 +53,7 @@ public:
 	void setStatusRedo( int idx, int redo );
 	void setStatusState( int idx, unsigned char state );
 	void resetObject( );
-	void addObject( unsigned char type, int pattern, unsigned char attribute, int x, int y );
+	void addObject( AREA area, unsigned char type, int pattern, unsigned char attribute, int x, int y );
 private:
 	static const int OBJECT_NUM = 140;
 
@@ -69,9 +75,11 @@ private:
 				unsigned long y;
 			} object[ OBJECT_NUM ];
 		};
-	#pragma pack( )	
+	#pragma pack( )
+private:
+	int getIndex( AREA area, int idx ) const;
 private:
 	SyncData _data;
-	int _object_num;
+	int _object_index[ MAX_AREA ];
 };
 

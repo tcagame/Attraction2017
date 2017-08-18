@@ -49,17 +49,18 @@ void Viewer::update( ) {
 
 	// Main描画
 	_viewer_street->draw( ViewerStreet::LAYER_BACK );
-	_viewer_military->draw( );
-	_viewer_storage->draw( );
-	_viewer_family->draw( );
-	_viewer_armoury->draw( );
 	_viewer_object->drawMain( );
 	_viewer_street->draw( ViewerStreet::LAYER_FRONT );
 
 	// イベント描画
 	_viewer_event->draw( );
 	_viewer_object->drawEvent( );
-
+	
+	// 旧描画（全て移行させる)
+	_viewer_military->draw( );
+	_viewer_storage->draw( );
+	_viewer_family->draw( );
+	_viewer_armoury->draw( );
 
 	// ステータス描画
 	_viewer_status->draw( );

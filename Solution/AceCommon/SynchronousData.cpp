@@ -7,6 +7,7 @@ SynchronousDataPtr SynchronousData::getTask( ) {
 }
 
 SynchronousData::SynchronousData( ) {
+	resetObject( );
 }
 
 
@@ -92,45 +93,65 @@ void SynchronousData::setStatusState( int idx, unsigned char state ) {
 
 
 void SynchronousData::resetObject( ) {
-	_object_num = 0;
+	_object_index[ AREA_MAIN ] = 0;
+	_object_index[ AREA_EVENT ] = OBJECT_NUM - 1;
 }
 
-int SynchronousData::getObjectNum( ) const {
-	return _object_num;
+int SynchronousData::getObjectNum( AREA area ) const {
+	int num = _object_index[ area ];
+	if ( area == AREA_EVENT ) {
+		num = OBJECT_NUM - 1 - num;
+	}
+	return num;
 }
 
-int SynchronousData::getObjectX( int idx ) const {
-	assert( idx < _object_num );
-	return _data.object[ idx ].x;
+int SynchronousData::getIndex( AREA area, int idx ) const {
+	int index = 0;
+	if ( area == AREA_MAIN ) {
+		index = idx;
+		assert( index < _object_index[ AREA_MAIN ] );
+	} else {
+		index = OBJECT_NUM - 1 - idx;
+		assert( index > _object_index[ AREA_EVENT ] );
+	}
+	return index;
 }
 
-int SynchronousData::getObjectY( int idx ) const {
-	assert( idx < _object_num );
-	return _data.object[ idx ].y;
+int SynchronousData::getObjectX( AREA area, int idx ) const {
+	return _data.object[ getIndex( area, idx ) ].x;
 }
 
-unsigned char SynchronousData::getObjectType( int idx ) const {
-	assert( idx < _object_num );
-	return _data.object[ idx ].type;
+int SynchronousData::getObjectY( AREA area, int idx ) const {
+	return _data.object[ getIndex( area, idx ) ].y;
 }
 
-int SynchronousData::getObjectPattern( int idx ) const {
-	assert( idx < _object_num );
-	return _data.object[ idx ].pattern;
+unsigned char SynchronousData::getObjectType( AREA area, int idx ) const {
+	return _data.object[ getIndex( area, idx ) ].type;
 }
 
-void SynchronousData::addObject( unsigned char type, int pattern, unsigned char attribute, int x, int y ) {
-	if ( _object_num >= OBJECT_NUM ) {
+int SynchronousData::getObjectPattern( AREA area, int idx ) const {
+	return _data.object[ getIndex( area, idx ) ].pattern;
+}
+
+void SynchronousData::addObject( AREA area, unsigned char type, int pattern, unsigned char attribute, int x, int y ) {
+	if ( _object_index[ AREA_MAIN ] >= _object_index[ AREA_EVENT ] ) {
 		return;
 	}
 	assert( x >= 0 );
 	assert( y >= 0 );
 	assert( pattern >= 0 );
-	_data.object[ _object_num ].type      = type;
-	_data.object[ _object_num ].pattern   = ( unsigned char )pattern;
-	_data.object[ _object_num ].attribute = attribute;
-	_data.object[ _object_num ].x         = ( unsigned long )x;
-	_data.object[ _object_num ].y         = ( unsigned long )y;
-	_object_num++;
+
+	int index = _object_index[ area ];
+	if ( area == AREA_MAIN ) {
+		_object_index[ AREA_MAIN ]++;
+	} else {
+		_object_index[ AREA_EVENT ]--;
+	}
+
+	_data.object[ index ].type      = type;
+	_data.object[ index ].pattern   = ( unsigned char )pattern;
+	_data.object[ index ].attribute = attribute;
+	_data.object[ index ].x         = ( unsigned long )x;
+	_data.object[ index ].y         = ( unsigned long )y;
 }
 

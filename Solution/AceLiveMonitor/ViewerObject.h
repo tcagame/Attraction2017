@@ -7,5 +7,7 @@ public:
 public:
 	void drawMain( ) const;
 	void drawEvent( ) const;
+private:
+	void draw( bool event, int idx ) const;
 };
 
