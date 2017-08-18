@@ -10,9 +10,12 @@ public:
 	int getForce( ) const;
 	void damage( int force );
 	bool isFinished( ) const;
+	void reset( );
 private:
 	int _force;
 	int _hp;
+	int _max_hp;
+	Vector _start_pos;
 	bool _finished;
 };
 

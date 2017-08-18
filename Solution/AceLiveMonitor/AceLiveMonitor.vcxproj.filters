@@ -337,6 +337,9 @@
     <ClCompile Include="EnemyAttack.cpp">
       <Filter>EnemyAttack</Filter>
     </ClCompile>
+    <ClCompile Include="ViewerObject.cpp">
+      <Filter>Viewer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -673,6 +676,9 @@
     </ClInclude>
     <ClInclude Include="EnemyAttack.h">
       <Filter>EnemyAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewerObject.h">
+      <Filter>Viewer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
