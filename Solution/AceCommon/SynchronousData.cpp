@@ -117,12 +117,12 @@ int SynchronousData::getIdx( AREA area, int relative_idx ) const {
 	return idx;
 }
 
-int SynchronousData::getObjectX( int idx ) const {
-	return _data.object[ idx ].x;
+int SynchronousData::getObjectAX( int idx ) const {
+	return _data.object[ idx ].ax;
 }
 
-int SynchronousData::getObjectY( int idx ) const {
-	return _data.object[ idx ].y;
+int SynchronousData::getObjectAY( int idx ) const {
+	return _data.object[ idx ].ay;
 }
 
 unsigned char SynchronousData::getObjectType( int idx ) const {
@@ -137,12 +137,10 @@ int SynchronousData::getObjectPattern( int idx ) const {
 	return _data.object[ idx ].pattern;
 }
 
-void SynchronousData::addObject( AREA area, unsigned char type, int pattern, unsigned char attribute, int x, int y ) {
+void SynchronousData::addObject( AREA area, unsigned char type, int pattern, unsigned char attribute, int ax, int ay ) {
 	if ( _object_idx[ AREA_MAIN ] >= _object_idx[ AREA_EVENT ] ) {
 		return;
 	}
-	assert( x >= 0 );
-	assert( y >= 0 );
 	assert( pattern >= 0 );
 
 	int idx = _object_idx[ area ];
@@ -155,6 +153,6 @@ void SynchronousData::addObject( AREA area, unsigned char type, int pattern, uns
 	_data.object[ idx ].type      = type;
 	_data.object[ idx ].pattern   = ( unsigned char )pattern;
 	_data.object[ idx ].attribute = attribute;
-	_data.object[ idx ].x         = ( unsigned long )x;
-	_data.object[ idx ].y         = ( unsigned long )y;
+	_data.object[ idx ].ax        = ( long )ax;
+	_data.object[ idx ].ay        = ( long )ay;
 }

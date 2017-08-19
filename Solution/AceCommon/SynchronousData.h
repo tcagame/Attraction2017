@@ -38,8 +38,8 @@ public:
 	int getStatusRedo( int idx ) const;
 	unsigned char getStatusState( int idx ) const;
 	int getObjectNum( AREA area ) const;
-	int getObjectX( int idx ) const;
-	int getObjectY( int idx ) const;
+	int getObjectAX( int idx ) const;
+	int getObjectAY( int idx ) const;
 	unsigned char getObjectType( int idx ) const;
 	unsigned char getObjectAttribute( int idx ) const;
 	int getObjectPattern( int idx ) const;
@@ -54,7 +54,7 @@ public:
 	void setStatusRedo( int idx, int redo );
 	void setStatusState( int idx, unsigned char state );
 	void resetObject( );
-	void addObject( AREA area, unsigned char type, int pattern, unsigned char attribute, int x, int y );
+	void addObject( AREA area, unsigned char type, int pattern, unsigned char attribute, int ax, int ay );
 private:
 	static const int OBJECT_NUM = 140;
 
@@ -72,8 +72,8 @@ private:
 				unsigned char type;
 				unsigned char pattern;
 				unsigned char attribute;
-				unsigned long x;
-				unsigned long y;
+				long          ax;
+				long          ay;
 			} object[ OBJECT_NUM ];
 		};
 	#pragma pack( )

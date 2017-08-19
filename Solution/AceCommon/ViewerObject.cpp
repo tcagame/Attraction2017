@@ -19,8 +19,8 @@ void ViewerObject::draw( AREA area, int sx, int sy ) const {
 	int num = data->getObjectNum( area );
 	for ( int i = 0; i < num; i++ ) {
 		int idx = data->getIdx( area, i );
-		int x = data->getObjectX( idx ) + sx;
-		int y = data->getObjectY( idx ) + sy;
+		int x = data->getObjectAX( idx ) + sx;
+		int y = data->getObjectAY( idx ) + sy;
 		unsigned char type = data->getObjectType( idx );
 		unsigned char attribute = data->getObjectAttribute( idx );
 		int pattern = data->getObjectPattern( idx );

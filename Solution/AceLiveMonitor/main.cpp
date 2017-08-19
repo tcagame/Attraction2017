@@ -14,12 +14,18 @@
 #include "Popper.h"
 #include "SynchronousData.h"
 #include "Debug.h"
+#include "Server.h"
 
 void main( ) {
-	ApplicationPtr app( Application::getInstance( ) );
+	ApplicationPtr app( Application::getInstance( ) ); 
 	app->setWindowSize( SCREEN_WIDTH, SCREEN_HEIGHT );
 
-	app->addTask( SynchronousData::getTag( ), SynchronousDataPtr( new SynchronousData ) );
+	SynchronousDataPtr data( new SynchronousData );
+	ServerPtr server( new Server( data ) );
+	server->saveIP( );
+
+	app->addTask( Server::getTag( ), server );
+	app->addTask( SynchronousData::getTag( ), data );
 
 	app->addTask( Drawer  ::getTag( ), DrawerPtr( new Drawer( "Resource/Ace" ) ) );
 	app->addTask( Device  ::getTag( ), DevicePtr( new Device( ) ) );

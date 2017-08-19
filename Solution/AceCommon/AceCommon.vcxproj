@@ -22,9 +22,11 @@
     <ClInclude Include="ace_define.h" />
     <ClInclude Include="ace_enemy_rect.h" />
     <ClInclude Include="SynchronousData.h" />
+    <ClInclude Include="ViewerObject.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SynchronousData.cpp" />
+    <ClCompile Include="ViewerObject.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{05398435-0DB2-4938-8464-8CC567ABBB40}</ProjectGuid>

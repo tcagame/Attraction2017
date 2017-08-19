@@ -159,11 +159,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AceConsoleMain.cpp" />
+    <ClCompile Include="ViewerConsole.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Framework2017ver2\Framework2017Ver2.vcxproj">
       <Project>{0bd19263-3452-4219-af86-db8b26e4ee02}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\AceCommon\AceCommon.vcxproj">
+      <Project>{05398435-0db2-4938-8464-8cc567abbb40}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="ViewerConsole.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
