@@ -8,5 +8,7 @@ public:
 	Chip getChip( ) const;
 protected:
 	void act( );
+private:
+	double _vec_x;
 };
 
