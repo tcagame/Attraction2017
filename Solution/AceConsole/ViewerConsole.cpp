@@ -5,10 +5,10 @@
 #include "SynchronousData.h"
 #include "Client.h"
 
-const int EVENT_SX = 0;
+const int EVENT_SX = -256;
 const int EVENT_SY = 0;
-const int MAIN_SX  = 0;
-const int MAIN_SY  = 256;
+const int MAIN_SX  = -256;
+const int MAIN_SY  = 480 - 256;
 
 ViewerConsolePtr ViewerConsole::getTask( ) {
 	return std::dynamic_pointer_cast< ViewerConsole >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -38,7 +38,7 @@ void ViewerConsole::update( ) {
 
 	// イベント描画
 	//_viewer_event->draw( );
-	//_viewer_object->draw( AREA_EVENT, EVENT_SX, EVENT_SY );
+	_viewer_object->draw( AREA_EVENT, EVENT_SX, EVENT_SY );
 	
 	// ステータス描画
 	//_viewer_status->draw( );
