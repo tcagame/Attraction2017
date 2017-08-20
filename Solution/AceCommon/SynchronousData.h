@@ -76,10 +76,10 @@ private:
 				long          ax;
 				long          ay;
 			} object[ OBJECT_NUM ];
+			int idx[ MAX_AREA ];
 		};
 	#pragma pack( )
 private:
 	SyncData _data;
-	int _object_idx[ MAX_AREA ];
 };
 
