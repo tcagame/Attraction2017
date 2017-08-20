@@ -56,5 +56,6 @@ private:
 	int _toku;
 	int _over_charge_time;
 	int _charge_count;
+	int _unrivaled_count;
 };
 

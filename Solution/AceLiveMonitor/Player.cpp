@@ -29,8 +29,11 @@ static const int MAX_HP = 16;
 //アニメーション
 static const int PLAYER_ANIM_WAIT_COUNT = 12;
 static const int PLAYER_ANIM_WIDTH_NUM = 10;
+static const int PLAYER_FLASH_WAIT_TIME = 2;
+//カウント
 static const int MAX_DAMEGE_COUNT = 20;
 static const int MAX_BACK_COUNT = 6;
+static const int MAX_UNRIVALED_COUNT = 45;
 
 Player::Player( int player_id, Vector pos ) :
 Character( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ),
@@ -39,6 +42,7 @@ _id( 0 ),
 _money( 0 ),
 _toku( 0 ),
 _charge_count( 0 ),
+_unrivaled_count( MAX_UNRIVALED_COUNT ),
 _action( ACTION_WAIT ) {
 	setRadius( 25 );
 	setDir( DIR_RIGHT );
@@ -81,6 +85,7 @@ void Player::act( ) {
 	}
 	actOnCamera( );
 	updateState( );
+	_unrivaled_count++;
 }
 
 void Player::actOnWaiting( ) {
@@ -352,6 +357,7 @@ void Player::damage( int force ) {
 	}
 	if ( _action == ACTION_DAMEGE ||
 		 _action == ACTION_BLOW_AWAY ||
+		 _unrivaled_count < MAX_UNRIVALED_COUNT ||
 		 isFinished( ) ) {
 		return;
 	}
@@ -367,6 +373,7 @@ void Player::damage( int force ) {
 			setVec( Vector( -4, 0 ) );
 		}
 	}
+	_unrivaled_count = 0;
 }
 
 Player::ACTION Player::getAction( ) const {
@@ -645,6 +652,11 @@ void Player::setAction( ACTION action ) {
 }
 
 void Player::setSynchronousData( unsigned char type, int camera_pos ) const {
+	if ( _unrivaled_count < MAX_UNRIVALED_COUNT ) {
+		if ( _unrivaled_count / PLAYER_FLASH_WAIT_TIME % 2 == 0 ) {
+			return;
+		}
+	}
 	STATE state = getState( );
 	int add_sy = 0;
 	int add_sx = 0;
