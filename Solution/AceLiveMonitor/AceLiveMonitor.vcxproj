@@ -175,6 +175,7 @@
     <ClCompile Include="ItemRock.cpp" />
     <ClCompile Include="ItemToku.cpp" />
     <ClCompile Include="ItemTree.cpp" />
+    <ClCompile Include="Magazine.cpp" />
     <ClCompile Include="NPCAngel.cpp" />
     <ClCompile Include="NPCMermaid.cpp" />
     <ClCompile Include="NPCMiko.cpp" />
@@ -275,6 +276,7 @@
     <ClCompile Include="Armoury.cpp" />
     <ClCompile Include="Viewer.cpp" />
     <ClCompile Include="ViewerArmoury.cpp" />
+    <ClCompile Include="ViewerMagazine.cpp" />
     <ClCompile Include="ViewerMilitary.cpp" />
     <ClCompile Include="ViewerStatus.cpp" />
     <ClCompile Include="ViewerStorage.cpp" />
@@ -297,6 +299,7 @@
     <ClInclude Include="ItemRock.h" />
     <ClInclude Include="ItemToku.h" />
     <ClInclude Include="ItemTree.h" />
+    <ClInclude Include="Magazine.h" />
     <ClInclude Include="NPCAngel.h" />
     <ClInclude Include="NPCMermaid.h" />
     <ClInclude Include="NPCMiko.h" />
@@ -396,6 +399,7 @@
     <ClInclude Include="Armoury.h" />
     <ClInclude Include="Viewer.h" />
     <ClInclude Include="ViewerArmoury.h" />
+    <ClInclude Include="ViewerMagazine.h" />
     <ClInclude Include="ViewerMilitary.h" />
     <ClInclude Include="ViewerStatus.h" />
     <ClInclude Include="ViewerStorage.h" />

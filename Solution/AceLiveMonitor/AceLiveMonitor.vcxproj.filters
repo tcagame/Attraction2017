@@ -338,6 +338,8 @@
       <Filter>EnemyAttack</Filter>
     </ClCompile>
     <ClCompile Include="Sender.cpp" />
+    <ClCompile Include="Magazine.cpp" />
+    <ClCompile Include="ViewerMagazine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -676,6 +678,8 @@
       <Filter>EnemyAttack</Filter>
     </ClInclude>
     <ClInclude Include="Sender.h" />
+    <ClInclude Include="Magazine.h" />
+    <ClInclude Include="ViewerMagazine.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">

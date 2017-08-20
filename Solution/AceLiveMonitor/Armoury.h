@@ -22,14 +22,11 @@ public:
 	void update( );
 	ShotConstPtr getShot( int idx ) const;
 	int getMaxShotNum( ) const;
-	std::list< ImpactPtr > getImpactList( ) const;
 private:
 	void updateEnemy( );
-	void updateImpact( );
 private:
 	static const int MAX_SHOT_NUM = 100;
 	int _shot_id;
 	std::array< ShotPtr, MAX_SHOT_NUM > _shot_list;
-	std::list< ImpactPtr > _impacts;
 };
 

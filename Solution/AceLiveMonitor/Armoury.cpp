@@ -5,6 +5,7 @@
 #include "Military.h"
 #include "Enemy.h"
 #include "Impact.h"
+#include "Magazine.h"
 
 ArmouryPtr Armoury::getTask( ) {
 	return std::dynamic_pointer_cast< Armoury >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -19,7 +20,6 @@ Armoury::~Armoury( ) {
 
 void Armoury::update( ) {
 	updateEnemy( );
-	updateImpact( );
 }
 
 void Armoury::updateEnemy( ) {
@@ -40,27 +40,10 @@ void Armoury::updateEnemy( ) {
 				//エネミーが倒れなかったらショットが当たった位置で爆発
 				Vector impact_pos = _shot_list[ i ]->getPos( );
 				impact_pos.y += NORMAL_CHAR_GRAPH_SIZE / 2;
-				_impacts.push_back( ImpactPtr( new Impact( impact_pos, _shot_list[ i ]->getState( ), 64 ) ) );
+				Magazine::getTask( )->add( ImpactPtr( new Impact( impact_pos, _shot_list[ i ]->getState( ), 64 ) ) );
 				_shot_list[ i ] = ShotPtr( );
 			}
 		}
-	}
-}
-
-void Armoury::updateImpact( ) {
-	std::list< ImpactPtr >::iterator ite = _impacts.begin( );
-	while ( ite != _impacts.end( ) ) {
-		ImpactPtr impact = (*ite);
-		if ( !impact ) {
-			ite++;
-			continue;
-		}
-		if ( impact->isFinished( ) ) {
-			ite = _impacts.erase( ite );
-			continue;
-		}
-		impact->update( );
-		ite++;
 	}
 }
 
@@ -80,6 +63,4 @@ void Armoury::add( ShotPtr shot ) {
 	_shot_id %= MAX_SHOT_NUM;
 }
 
-std::list< ImpactPtr > Armoury::getImpactList( ) const {
-	return _impacts;
-}
+

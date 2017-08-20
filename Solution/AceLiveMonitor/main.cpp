@@ -16,6 +16,7 @@
 #include "Debug.h"
 #include "Server.h"
 #include "Sender.h"
+#include "Magazine.h"
 
 void main( ) {
 	ApplicationPtr app( Application::getInstance( ) ); 
@@ -36,6 +37,7 @@ void main( ) {
 	app->addTask( MapEvent::getTag( ), MapEventPtr( new MapEvent( ) ) );
 	app->addTask( Family  ::getTag( ), FamilyPtr  ( new Family  ( ) ) );
 	app->addTask( Armoury ::getTag( ), ArmouryPtr ( new Armoury ( ) ) );
+	app->addTask( Magazine::getTag( ), MagazinePtr( new Magazine( ) ) );
 	app->addTask( Storage ::getTag( ), StoragePtr ( new Storage ( ) ) );
 	app->addTask( Popper  ::getTag( ), PopperPtr  ( new Popper  ( ) ) );
 	app->addTask( Military::getTag( ), MilitaryPtr( new Military( ) ) );
