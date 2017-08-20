@@ -1,7 +1,7 @@
 #include "EnemyCrocoSnake.h"
 
 static const int WAIT_ANIM_TIME = 5;
-static const int MOVE_SPEED = 1;
+static const int MOVE_SPEED = -1;
 static const int MAX_HP = 3;
 
 EnemyCrocoSnake::EnemyCrocoSnake( const Vector& pos ) :

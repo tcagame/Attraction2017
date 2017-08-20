@@ -5,6 +5,7 @@
 
 static const int POP_INTERVAL_COUNT = 600;
 static const int MAX_PAGE = SCREEN_WIDTH / GRAPH_SIZE;
+static const int POP_RANGE = SCREEN_WIDTH * 3 / 2;
 
 Pop::Pop( const Vector& pos ) :
 _pos( pos ),
@@ -29,7 +30,10 @@ void Pop::update( ) {
 			_count = 0;
 		}
 	}
-	_count++;
+	if ( camera_pos < _pos.x &&
+		 _pos.x < camera_pos + POP_RANGE ) {
+		_count++;
+	}
 }
 
 bool Pop::isInScreen( ) const {
