@@ -18,6 +18,7 @@ EnemyArcher::~EnemyArcher( ) {
 void EnemyArcher::act( ) {
 	setVec( Vector( MOVE_SPEED, getVec( ).y ) );
 	if ( ( getActCount( ) % ANIM_LOOP_TIME ) >= MOVE_TIME ) {
+		setVec( Vector( ) );
 	}
 }
 
