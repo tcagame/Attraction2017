@@ -1,11 +1,18 @@
 #include "EnemyShishimaiDemon.h"
+#include "Family.h"
+#include "Player.h"
 
-static const int WAIT_ANIM_TIME = 5;
-static const int MAX_HP = 3;
+const int WAIT_ANIM_TIME = 5;
+const int MAX_HP = 3;
+const int ESCAPE_RANGE = 150;
+const int MOVE_SPEED = -4;
 
 EnemyShishimaiDemon::EnemyShishimaiDemon( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ) {
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ),
+_escape( false ),
+_befor_pos( pos ) {
 	setRadius( 36 );
+	setVec( Vector( MOVE_SPEED, 0 ) );
 }
 
 
@@ -13,6 +20,30 @@ EnemyShishimaiDemon::~EnemyShishimaiDemon( ) {
 }
 
 void EnemyShishimaiDemon::act( ) {
+	FamilyPtr family( Family::getTask( ) );
+	PlayerPtr near = family->getPlayer( 0 );
+	for ( int i = 0; i < ACE_PLAYER_NUM - 1; i++ ) {
+		PlayerPtr player = family->getPlayer( i + 1 );
+		Vector diff_player = player->getPos( ) - getPos( );
+		Vector diff_near = near->getPos( ) - getPos( );
+		if ( diff_player.getLength2( ) < diff_near.getLength2( ) ) {
+			near = player;
+		}
+	}
+
+	if ( _escape && getPos( ) == _befor_pos && getDir( ) == DIR_RIGHT ) {
+		setVec( Vector( MOVE_SPEED * 2, getVec( ).y ) );
+	}
+	if ( !_escape ) {
+		Vector vec = getVec( );
+		Vector diff_near = near->getPos( ) - getPos( );
+		if ( diff_near.getLength( ) < ESCAPE_RANGE && near->getPos( ).x < getPos( ).x ) {
+			vec.x *= -1;
+			_escape = true;
+		}
+		setVec( vec );
+	}
+	_befor_pos = getPos( );
 }
 
 Chip EnemyShishimaiDemon::getChip( ) const {
