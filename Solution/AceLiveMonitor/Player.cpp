@@ -30,6 +30,7 @@ static const int MAX_HP = 16;
 static const int PLAYER_ANIM_WAIT_COUNT = 12;
 static const int PLAYER_ANIM_WIDTH_NUM = 10;
 static const int MAX_DAMEGE_COUNT = 20;
+static const int MAX_BACK_COUNT = 6;
 
 Player::Player( int player_id, Vector pos ) :
 Character( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ),
@@ -307,19 +308,27 @@ void Player::actOnCamera( ) {
 }
 
 void Player::actOnDamege( ) {
-	if ( getActCount( ) >= MAX_DAMEGE_COUNT ) {
+	int act_count = getActCount( );
+	if ( act_count >= MAX_DAMEGE_COUNT ) {
 		setAction( ACTION_WAIT );
 		return;
 	}
-	if ( getActCount( ) > MAX_DAMEGE_COUNT / 2 ) {
+	if ( act_count > MAX_BACK_COUNT ) {
+		setVec( Vector( 0, getVec( ).y ) );
+	}
+	if ( act_count > MAX_DAMEGE_COUNT / 2 ) {
 		Vector vec = getVec( );
 		//‚Ð‚é‚Ý’†‚Å‚àˆÚ“®‚Å‚«‚é‚æ‚¤‚É‚·‚é
 		DevicePtr device( Device::getTask( ) );
-		if ( device->getDirX( _id ) < -50 ) {
+		char dir_x = device->getDirX( _id );
+		if ( dir_x < -50 ) {
 			vec.x = -MOVE_SPEED;
 		}
-		if ( device->getDirX( _id ) > 50 ) {
+		if ( dir_x > 50 ) {
 			vec.x = MOVE_SPEED;
+		}
+		if ( dir_x == 0 ) {
+			vec.x = 0;
 		}
 		setVec( vec );
 	}
@@ -349,10 +358,15 @@ void Player::damage( int force ) {
 	Character::damage( force );
 	if ( isFinished( ) ) {
 		setAction( ACTION_DAED );
+		setVec( Vector( ) );
 	} else {
 		setAction( ACTION_DAMEGE );
+		if ( getDir( ) == DIR_LEFT ) {
+			setVec( Vector( 4, 0 ) );
+		} else {
+			setVec( Vector( -4, 0 ) );
+		}
 	}
-	setVec( Vector( ) );
 }
 
 Player::ACTION Player::getAction( ) const {
