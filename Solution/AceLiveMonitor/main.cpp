@@ -15,13 +15,14 @@
 #include "SynchronousData.h"
 #include "Debug.h"
 #include "Server.h"
+#include "Sender.h"
 
 void main( ) {
 	ApplicationPtr app( Application::getInstance( ) ); 
 	app->setWindowSize( SCREEN_WIDTH, SCREEN_HEIGHT );
 
 	SynchronousDataPtr data( new SynchronousData );
-	ServerPtr server( new Server( data ) );
+	ServerPtr server( new Server( DataPtr( ) ) );
 	server->saveIP( );
 
 	app->addTask( Server::getTag( ), server );
@@ -41,4 +42,6 @@ void main( ) {
 	app->addTask( NPC	  ::getTag( ), NPCPtr	  ( new NPC		( ) ) );
 	app->addTask( Debug	  ::getTag( ), DebugPtr   ( new Debug   ( ) ) );
 	app->addTask( Viewer  ::getTag( ), ViewerPtr  ( new Viewer  ( ) ) );
+	app->addTask( Sender  ::getTag( ), SenderPtr  ( new Sender  ( data ) ) );
+
 }
