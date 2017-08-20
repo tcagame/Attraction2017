@@ -4,6 +4,7 @@
 #include "Drawer.h"
 #include "Device.h"
 #include "Keyboard.h"
+#include "ViewerConsole.h"
 
 void main( ) {
 	ApplicationPtr app( Application::getInstance( ) );
@@ -15,7 +16,8 @@ void main( ) {
 	app->addTask( SynchronousData::getTag( ), data );
 	app->addTask( Client::getTag( ), client );
 
-	app->addTask( Drawer  ::getTag( ), DrawerPtr( new Drawer( "Resource/Ace" ) ) );
-	app->addTask( Device  ::getTag( ), DevicePtr( new Device( ) ) );
-	app->addTask( Keyboard::getTag( ), KeyboardPtr( new Keyboard( ) ) );
+	app->addTask( Drawer  ::getTag( )	  , DrawerPtr	    ( new Drawer( "Resource/Ace" ) ) );
+	app->addTask( Device  ::getTag( )	  , DevicePtr	    ( new Device( ) ) );
+	app->addTask( Keyboard::getTag( )	  , KeyboardPtr	    ( new Keyboard( ) ) );
+	app->addTask( ViewerConsole::getTag( ), ViewerConsolePtr( new ViewerConsole ) );
 }

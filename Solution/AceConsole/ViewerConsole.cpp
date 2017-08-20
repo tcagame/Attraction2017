@@ -3,6 +3,7 @@
 #include "Drawer.h"
 #include "ViewerObject.h"
 #include "SynchronousData.h"
+#include "Client.h"
 
 const int EVENT_SX = 0;
 const int EVENT_SY = 0;
@@ -41,4 +42,9 @@ void ViewerConsole::update( ) {
 	
 	// ステータス描画
 	//_viewer_status->draw( );
+	if ( Client::getTask( )->getPhase( ) == "PHASE_CONNECTING" ) {
+		Drawer::getTask( )->drawString( 0, 0, "CONNECTING" );
+	} else {
+		Drawer::getTask( )->drawString( 0, 0, "NOT_CONNECTING" );
+	}
 }

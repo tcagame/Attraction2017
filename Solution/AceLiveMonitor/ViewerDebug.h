@@ -11,6 +11,7 @@ public:
 	void drawEnemy( ) const;
 	void drawShot( ) const;
 	void drawChip( ) const;
+	void drawConnect( ) const;
 private:
 	ImagePtr _block;
 };
