@@ -9,6 +9,7 @@
 #include "Player.h"
 #include "Map.h"
 #include "MapEvent.h"
+#include "Server.h"
 
 ViewerDebug::ViewerDebug( ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
@@ -23,6 +24,7 @@ void ViewerDebug::draw( ) const {
 	drawEnemy( );
 	drawShot( );
 	drawChip( );
+	drawConnect( );
 }
 
 void ViewerDebug::drawPlayer( ) const {
@@ -174,6 +176,17 @@ void ViewerDebug::drawChip( ) const {
 				}
 			}
 		}
+	}
+}
+
+void ViewerDebug::drawConnect( ) const {
+	DrawerPtr drawer( Drawer::getTask( ) );
+	ServerPtr server( Server::getTask( ) );
+	int sx = 0;
+	int sy = 70;
+	for ( int i = 0; i < Server::MAX_MACHINES; i++ ) {
+		drawer->drawString( sx, sy, "IP:%s", server->getMachineIPStr( i ).c_str( ) );
+		sy += 20;
 	}
 }
 
