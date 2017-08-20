@@ -263,6 +263,7 @@
     <ClCompile Include="PopTree.cpp" />
     <ClCompile Include="PopWhiteMist.cpp" />
     <ClCompile Include="PopWind.cpp" />
+    <ClCompile Include="Sender.cpp" />
     <ClCompile Include="Storage.cpp" />
     <ClCompile Include="ViewerDebug.cpp" />
     <ClCompile Include="ViewerEvent.cpp" />
@@ -384,6 +385,7 @@
     <ClInclude Include="PopTree.h" />
     <ClInclude Include="PopWhiteMist.h" />
     <ClInclude Include="PopWind.h" />
+    <ClInclude Include="Sender.h" />
     <ClInclude Include="Storage.h" />
     <ClInclude Include="ViewerDebug.h" />
     <ClInclude Include="ViewerEvent.h" />
