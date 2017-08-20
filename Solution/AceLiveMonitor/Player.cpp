@@ -37,6 +37,7 @@ _over_charge_time( -1 ),
 _id( 0 ),
 _money( 0 ),
 _toku( 0 ),
+_charge_count( 0 ),
 _action( ACTION_WAIT ) {
 	setRadius( 25 );
 	setDir( DIR_RIGHT );
@@ -741,5 +742,14 @@ void Player::setSynchronousData( unsigned char type, int camera_pos ) const {
 
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
 	data->addObject( area, type, pattern, attribute, x, y );
+	if ( _charge_count > 0 ) {
+		const int ANIM[ ] = {
+			2, 3, 4, 5, 6, 7, 8, 9, 10, 11
+		};
+		int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
+		int phase = ( _charge_count / CHARGE_PHASE_COUNT ) * 2;
+		int time = ( getActCount( ) / 2 ) % 2;
+		data->addObject( area, SynchronousData::TYPE_CHARGE, ANIM[ phase + time ], attribute, x, y );
+	}
 }
 

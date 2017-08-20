@@ -23,6 +23,7 @@ public:
 	static const unsigned char TYPE_TAROJIRO = 11;
 	static const unsigned char TYPE_GARISUKE = 12;
 	static const unsigned char TYPE_TAROMI   = 13;
+	static const unsigned char TYPE_CHARGE   = 14;
 public:
 	static std::string getTag( ) { return "SYNCHRONOUSDATA"; };
 	static SynchronousDataPtr getTask( );

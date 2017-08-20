@@ -4,10 +4,11 @@
 
 ViewerObject::ViewerObject( ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
-	_image[ GRAPH_PLAYER_TAROSUKE ] = drawer->createImage( "Family/tarosuke.png" );
-	_image[ GRAPH_PLAYER_TAROJIRO ] = drawer->createImage( "Family/tarojiro.png" );
-	_image[ GRAPH_PLAYER_GARISUKE ] = drawer->createImage( "Family/garisuke.png" );
-	_image[ GRAPH_PLAYER_TAROMI   ] = drawer->createImage( "Family/taromi.png"   );
+	_image[ GRAPH_PLAYER_TAROSUKE	] = drawer->createImage( "Family/tarosuke.png"	);
+	_image[ GRAPH_PLAYER_TAROJIRO	] = drawer->createImage( "Family/tarojiro.png"	);
+	_image[ GRAPH_PLAYER_GARISUKE	] = drawer->createImage( "Family/garisuke.png"	);
+	_image[ GRAPH_PLAYER_TAROMI		] = drawer->createImage( "Family/taromi.png"	);
+	_image[ GRAPH_SHOT				] = drawer->createImage( "Effect/psychic.png"	);
 }
 
 
@@ -32,16 +33,19 @@ void ViewerObject::drawSprite( int x, int y, unsigned char type, unsigned char a
 	Sprite sprite;
 	switch ( type ) {
 	case SynchronousData::TYPE_TAROSUKE:
-		sprite = getSpritePlayer( GRAPH_PLAYER_TAROSUKE, x, y, attribute, pattern );
+		sprite = getSpritePlayer( GRAPH_PLAYER_TAROSUKE	, x, y, attribute, pattern );
 		break;
 	case SynchronousData::TYPE_TAROJIRO:
-		sprite = getSpritePlayer( GRAPH_PLAYER_TAROJIRO, x, y, attribute, pattern );
+		sprite = getSpritePlayer( GRAPH_PLAYER_TAROJIRO	, x, y, attribute, pattern );
 		break;
 	case SynchronousData::TYPE_GARISUKE:
-		sprite = getSpritePlayer( GRAPH_PLAYER_GARISUKE, x, y, attribute, pattern );
+		sprite = getSpritePlayer( GRAPH_PLAYER_GARISUKE	, x, y, attribute, pattern );
 		break;
 	case SynchronousData::TYPE_TAROMI:
-		sprite = getSpritePlayer( GRAPH_PLAYER_TAROMI  , x, y, attribute, pattern );
+		sprite = getSpritePlayer( GRAPH_PLAYER_TAROMI	, x, y, attribute, pattern );
+		break;
+	case SynchronousData::TYPE_CHARGE:
+		sprite = getSpritePlayer( GRAPH_SHOT			, x, y, attribute, pattern );
 		break;
 	};
 
