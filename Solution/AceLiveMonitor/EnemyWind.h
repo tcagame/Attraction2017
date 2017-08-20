@@ -9,6 +9,7 @@ public:
 	Chip getChip( ) const;
 protected:
 	void act( );
+	void damage( int force );
 private:
 	int _count;
 };

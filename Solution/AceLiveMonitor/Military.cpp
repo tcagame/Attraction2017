@@ -65,7 +65,10 @@ void Military::update( ) {
 					if ( player->isOnHead( enemy ) ) {
 						player->bound( );
 					} else {
-						player->damage( 3 );
+						int force = enemy->getForce( );
+						if ( force > 0 ) {
+							player->damage( force );
+						}
 					}
 				}
 			}

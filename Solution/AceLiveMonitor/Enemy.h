@@ -6,7 +6,11 @@ public:
 	virtual ~Enemy( );
 public:
 	bool isInScreen( ) const;
+	int getForce( ) const;
 protected:
 	virtual void act( ) = 0;
+	void setForce( int force );
+private:
+	int _force;
 };
 

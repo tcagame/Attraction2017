@@ -35,6 +35,7 @@ EnemyWind::~EnemyWind( ) {
 }
 
 void EnemyWind::act( ) {
+	setForce( 0 );
 	if ( ( getActCount( ) + WAIT_ANIM_TIME * 8 ) % ANIM_LOOP_TIME < MOVE_TIME ) {
 		Vector dir( ( DESTINATION_POS[ _count + 1 ] - DESTINATION_POS[ _count ] ).normalize( ) );
 		setVec( dir * MOVE_SPEED );
@@ -48,11 +49,13 @@ void EnemyWind::act( ) {
 	if ( getPos( ).y + getVec( ).y > GRAPH_SIZE - 50 ) {
 		Vector vec = getVec( );
 		vec.y *= -1;
+		DESTINATION_POS[ _count + 1 ].y -= 10;
 		setVec( vec );
 	}
 
 	if ( ( getActCount( ) + WAIT_ANIM_TIME * 8 ) % ANIM_LOOP_TIME > MOVE_TIME ) {
 		setVec( Vector( ) );
+		setForce( 3 );
 	}
 	if ( !( getActCount( ) % ( WAIT_ANIM_TIME * 13 ) ) ) {
 		_count = ( _count++ ) % MAX_DESTINATION_POS;
@@ -83,4 +86,14 @@ Chip EnemyWind::getChip( ) const {
 		chip.sy2 = chip.sy1 + chip.size;
 	}
 	return chip;
+}
+
+void EnemyWind::damage( int force ) {
+	if ( force < 0 ) {
+		Enemy::damage( force );
+	}
+	if ( getVec( ) != Vector( ) ) {
+		return;
+	}
+	Enemy::damage( force );
 }
