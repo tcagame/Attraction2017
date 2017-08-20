@@ -26,14 +26,11 @@ public:
 	void createBoss( );
 	EnemyPtr getBoss( ) const;
 	EnemyPtr getHellFire( ) const;
-	std::list< ImpactPtr > getImpactList( ) const;
 private:
-	void updateImpact( );
 	void dropMoney( EnemyConstPtr enemy );
 private:
 	std::list< EnemyPtr > _enemies;
 	std::list< EnemyPtr > _event_enemies;
-	std::list< ImpactPtr > _impacts;
 	EnemyPtr _hell_fire;
 	EnemyBossPtr _boss;
 };

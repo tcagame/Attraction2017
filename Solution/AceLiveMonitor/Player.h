@@ -47,6 +47,7 @@ private:
 	void actOnCamera( );
 	void actOnDamege( );
 	void actOnBlowAway( );
+	void actOnDead( );
 	void updateState( );
 	void setAction( ACTION action );
 private:

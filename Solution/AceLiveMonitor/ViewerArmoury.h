@@ -5,15 +5,11 @@
 
 class ViewerArmoury {
 public:
-	ViewerArmoury( ImagePtr impact );
+	ViewerArmoury( );
 	virtual ~ViewerArmoury( );
 public:
 	void draw( ) const;
 private:
-	void drawShot( ) const;
-	void drawImpact( ) const;
-private:
 	ImagePtr _image_shot;
-	ImagePtr _image_impact;
 };
 

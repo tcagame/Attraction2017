@@ -9,6 +9,7 @@
 #include "ViewerStatus.h"
 #include "ViewerEvent.h"
 #include "ViewerStorage.h"
+#include "ViewerMagazine.h"
 
 #include "ViewerDebug.h"
 #include "Debug.h"
@@ -35,13 +36,11 @@ Viewer::~Viewer( ) {
 }
 
 void Viewer::initialize( ) {
-	DrawerPtr drawer( Drawer::getTask( ) );
-	ImagePtr impact = drawer->createImage( "Effect/impact.png" );
-
+	_viewer_magazine	= ViewerMagazinePtr	( new ViewerMagazine( ) );
 	_viewer_family		= ViewerFamilyPtr	( new ViewerFamily ); 
 	_viewer_street		= ViewerStreetPtr	( new ViewerStreet );
-	_viewer_armoury		= ViewerArmouryPtr	( new ViewerArmoury( impact ) );
-	_viewer_military	= ViewerMilitaryPtr	( new ViewerMilitary( impact ) );
+	_viewer_armoury		= ViewerArmouryPtr	( new ViewerArmoury( ) );
+	_viewer_military	= ViewerMilitaryPtr	( new ViewerMilitary( ) );
 	_viewer_event		= ViewerEventPtr	( new ViewerEvent );
 	_viewer_status		= ViewerStatusPtr	( new ViewerStatus );
 	_viewer_storage		= ViewerStoragePtr  ( new ViewerStorage );
@@ -69,6 +68,7 @@ void Viewer::update( ) {
 	_viewer_military->draw( );
 	_viewer_storage->draw( );
 	_viewer_armoury->draw( );
+	_viewer_magazine->draw( );
 
 	// ステータス描画
 	_viewer_status->draw( );

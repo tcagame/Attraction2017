@@ -6,8 +6,7 @@
 #include "Family.h"
 #include "Impact.h"
 
-ViewerMilitary::ViewerMilitary( ImagePtr impact ) :
-_impact( impact ) {
+ViewerMilitary::ViewerMilitary( ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
 	_enemy_small = drawer->createImage( "Enemy/enemy_small.png" );
 	_enemy_midium = drawer->createImage( "Enemy/enemy_medium.png" );
@@ -21,7 +20,6 @@ ViewerMilitary::~ViewerMilitary( ) {
 
 void ViewerMilitary::draw( ) const {
 	drawEnemyies( );
-	drawImpacts( );
 }
 
 void ViewerMilitary::drawEnemyies( ) const {
@@ -111,34 +109,5 @@ void ViewerMilitary::drawEnemyies( ) const {
 		_enemy_midium->setRect( chip.tx, chip.ty, chip.size, chip.size );
 		_enemy_midium->setPos( chip.sx1, chip.sy1, chip.sx2, chip.sy2 );
 		_enemy_midium->draw( );
-	}
-}
-
-void ViewerMilitary::drawImpacts( ) const {
-	FamilyConstPtr family( Family::getTask( ) );
-	int camera_pos = ( int )family->getCameraPos( );
-	std::list< ImpactPtr > impacts = Military::getTask( )->getImpactList( );
-	std::list< ImpactPtr >::iterator ite = impacts.begin( );
-	while ( ite != impacts.end( ) ) {
-		ImpactPtr impact = (*ite);
-		if ( !impact ) {
-			ite++;
-			continue;
-		}
-		int add_sx = -camera_pos;
-		int add_sy = VIEW_STREET_Y;
-		if ( impact->getState( ) == Character::STATE_EVENT ) {
-			add_sx = 0;
-			add_sy = VIEW_EVENT_Y;
-		}
-		Chip chip = impact->getChip( );
-		chip.sx1 += add_sx;
-		chip.sx2 += add_sx;
-		chip.sy1 += add_sy;
-		chip.sy2 += add_sy;
-		_impact->setRect( chip.tx, chip.ty, chip.size, chip.size );
-		_impact->setPos( chip.sx1, chip.sy1, chip.sx2, chip.sy2 );
-		_impact->draw( );
-		ite++;
 	}
 }

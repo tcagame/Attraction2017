@@ -12,6 +12,8 @@
 #include "Storage.h"
 #include "Debug.h"
 #include "SynchronousData.h"
+#include "Magazine.h"
+#include "Impact.h"
 
 //画像サイズ
 static const int PLAYER_FOOT = 7;
@@ -34,6 +36,8 @@ static const int PLAYER_FLASH_WAIT_TIME = 2;
 static const int MAX_DAMEGE_COUNT = 20;
 static const int MAX_BACK_COUNT = 6;
 static const int MAX_UNRIVALED_COUNT = 45;
+static const int MAX_DEAD_ACTCOUNT = 120;
+static const int MAX_IMPACT_COUNT = 30;
 
 Player::Player( int player_id, Vector pos ) :
 Character( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ),
@@ -81,6 +85,7 @@ void Player::act( ) {
 		actOnBlowAway( );
 		break;
 	case ACTION_DAED:
+		actOnDead( );
 		break;
 	}
 	actOnCamera( );
@@ -349,6 +354,31 @@ void Player::actOnBlowAway( ) {
 		return;
 	}
 	setVec( Vector( getVec( ).x, BLOW_POWER ) );
+}
+
+void Player::actOnDead( ) {
+	int act_count = getActCount( );
+	int chip_size = getChipSize( );
+	STATE state = getState( );
+	if ( act_count == MAX_DEAD_ACTCOUNT ) {
+		if ( state == STATE_EVENT ) {
+			//イベントで倒れたら、爆発する
+			Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, chip_size / 2 ), state, chip_size * 2 ) ) );
+		}
+	}
+	if ( act_count > MAX_DEAD_ACTCOUNT + MAX_IMPACT_COUNT ) {
+		if ( getState( ) == STATE_EVENT ) {
+			//メインの画面中央上部に移動
+			setState( STATE_MAIN );
+			MapEvent::getTask( )->setType( MapEvent::TYPE_TITLE );
+			setPos( Vector( Family::getTask( )->getCameraPos( ) + SCREEN_WIDTH / 2, chip_size ) );
+			Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, chip_size / 2 ), getState( ), chip_size * 2 ) ) );
+		}
+		if ( act_count < MAX_DEAD_ACTCOUNT + MAX_IMPACT_COUNT * 2 ) {
+			setVec( Vector( 0, -GRAVITY ) );
+		}
+	}
+
 }
 
 void Player::damage( int force ) {

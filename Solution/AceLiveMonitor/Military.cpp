@@ -14,6 +14,7 @@
 #include "EnemyHellFire.h"
 #include "EnemyAttack.h"
 #include "EnemyBoss.h"
+#include "Magazine.h"
 
 PTR( Player );
 
@@ -49,7 +50,7 @@ void Military::update( ) {
 				}
 				
 				int impact_chip_size = enemy->getChipSize( );
-				_impacts.push_back( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), Character::STATE_MAIN, impact_chip_size ) ) );
+				Magazine::getTask( )->add( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), Character::STATE_MAIN, impact_chip_size ) ) );
 				ite = _enemies.erase( ite );
 				continue;
 			}
@@ -88,7 +89,7 @@ void Military::update( ) {
 			if ( _boss->isFinished( ) ) {
 				_boss->dropItem( );
 				int impact_chip_size = _boss->getChipSize( ) * 2;
-				_impacts.push_back( ImpactPtr( new Impact( _boss->getPos( ) + Vector( 0, _boss->getChipSize( ) / 2 ), Character::STATE_EVENT, impact_chip_size ) ) );
+				Magazine::getTask( )->add( ImpactPtr( new Impact( _boss->getPos( ) + Vector( 0, _boss->getChipSize( ) / 2 ), Character::STATE_EVENT, impact_chip_size ) ) );
 				_boss = EnemyBossPtr( );
 			}
 		}
@@ -105,7 +106,7 @@ void Military::update( ) {
 					dropMoney( enemy );
 				}
 				int impact_chip_size = enemy->getChipSize( );
-				_impacts.push_back( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), Character::STATE_MAIN, impact_chip_size ) ) );
+				Magazine::getTask( )->add( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), Character::STATE_MAIN, impact_chip_size ) ) );
 				ite = _event_enemies.erase( ite );
 				continue;
 			}
@@ -137,8 +138,6 @@ void Military::update( ) {
 			player->blowAway( );
 		}
 	}
-
-	updateImpact( );
 }
 
 const std::list< EnemyPtr > Military::getEnemyList( ) const {
@@ -226,28 +225,6 @@ EnemyPtr Military::getBoss( ) const {
 
 EnemyPtr Military::getHellFire( ) const {
 	return _hell_fire;
-}
-
-void Military::updateImpact( ) {
-	std::list< ImpactPtr >::iterator ite = _impacts.begin( );
-	while( ite != _impacts.end( ) ) {
-		if ( !( *ite ) ) {
-			ite++;
-			continue;
-		}
-
-		ImpactPtr impact = *ite;
-		if ( impact->isFinished( ) ) {
-			ite = _impacts.erase( ite );
-			continue;
-		}
-		impact->update( );
-		ite++;
-	}
-}
-
-std::list< ImpactPtr > Military::getImpactList( ) const {
-	return _impacts;
 }
 
 void Military::dropMoney( EnemyConstPtr enemy ) {
