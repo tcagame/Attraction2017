@@ -9,6 +9,7 @@
 #include "Player.h"
 #include "Map.h"
 #include "MapEvent.h"
+#include "Server.h"
 
 ViewerDebug::ViewerDebug( ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
@@ -23,6 +24,7 @@ void ViewerDebug::draw( ) const {
 	drawEnemy( );
 	drawShot( );
 	drawChip( );
+	drawConnect( );
 }
 
 void ViewerDebug::drawPlayer( ) const {
@@ -137,7 +139,7 @@ void ViewerDebug::drawChip( ) const {
 					_block->setPos( x, y + VIEW_STREET_Y );
 					_block->draw( );
 				}
-				if ( obj >= OBJECT_EVENT_REDDEAMON ) {
+				if ( obj >= OBJECT_EVENT_REDDAEMON ) {
 					_block->setRect( 32, 0, OBJECT_CHIP_SIZE, OBJECT_CHIP_SIZE );
 					_block->setPos( x, y + VIEW_STREET_Y );
 					_block->draw( );
@@ -166,7 +168,7 @@ void ViewerDebug::drawChip( ) const {
 						_block->setPos( x, y + VIEW_EVENT_Y );
 						_block->draw( );
 					}
-					if ( obj >= OBJECT_EVENT_REDDEAMON ) {
+					if ( obj >= OBJECT_EVENT_REDDAEMON ) {
 						_block->setRect( 32, 0, OBJECT_CHIP_SIZE, OBJECT_CHIP_SIZE );
 						_block->setPos( x, y + VIEW_EVENT_Y );
 						_block->draw( );
@@ -174,6 +176,17 @@ void ViewerDebug::drawChip( ) const {
 				}
 			}
 		}
+	}
+}
+
+void ViewerDebug::drawConnect( ) const {
+	DrawerPtr drawer( Drawer::getTask( ) );
+	ServerPtr server( Server::getTask( ) );
+	int sx = 0;
+	int sy = 70;
+	for ( int i = 0; i < Server::MAX_MACHINES; i++ ) {
+		drawer->drawString( sx, sy, "IP:%s", server->getMachineIPStr( i ).c_str( ) );
+		sy += 20;
 	}
 }
 

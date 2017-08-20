@@ -1,10 +1,13 @@
 #include "EnemyArcher.h"
+#include "EnemyArcherAttack.h"
+#include "Military.h"
 
 const int WAIT_ANIM_TIME = 5;
 const int MAX_HP = 0;
 const int MOVE_SPEED = -2;
 const int MOVE_TIME = WAIT_ANIM_TIME * 12;
 const int ANIM_LOOP_TIME = WAIT_ANIM_TIME * 21;
+const int SHOT_TIMING = ( MOVE_TIME + WAIT_ANIM_TIME * 5 ) - 2;
 
 EnemyArcher::EnemyArcher( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ),
@@ -18,6 +21,10 @@ EnemyArcher::~EnemyArcher( ) {
 void EnemyArcher::act( ) {
 	setVec( Vector( MOVE_SPEED, getVec( ).y ) );
 	if ( ( getActCount( ) % ANIM_LOOP_TIME ) >= MOVE_TIME ) {
+		setVec( Vector( ) );
+	}
+	if ( ( getActCount( ) % ANIM_LOOP_TIME ) == SHOT_TIMING ) {
+		Military::getTask( )->popUp( EnemyPtr( new EnemyArcherAttack( getPos( ) + Vector( -11, -18, 0 ) ) ) );
 	}
 }
 

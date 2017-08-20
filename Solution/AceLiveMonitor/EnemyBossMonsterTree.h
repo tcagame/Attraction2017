@@ -4,10 +4,10 @@
 
 PTR( Enemy );
 
-class EnemyBossMonsteTree : public EnemyBoss {
+class EnemyBossMonsterTree : public EnemyBoss {
 public:
-	EnemyBossMonsteTree( const Vector& pos );
-	virtual ~EnemyBossMonsteTree( );
+	EnemyBossMonsterTree( const Vector& pos );
+	virtual ~EnemyBossMonsterTree( );
 public:
 	Chip getChip( ) const;
 	void dropItem( );

@@ -1,10 +1,13 @@
 #include "EnemyBat.h"
 
-static const int WAIT_ANIM_TIME = 5;
-static const int MAX_HP = 0;
+const int WAIT_ANIM_TIME = 3;
+const int MAX_HP = 1;
+const int MOVE_SPEED = 2;
+const Vector POS( 10, 0 );
 
 EnemyBat::EnemyBat( const Vector& pos ) :
-Enemy( pos, SMALL_CHAR_GRAPH_SIZE, MAX_HP, false ) {
+Enemy( pos + POS, SMALL_CHAR_GRAPH_SIZE, MAX_HP, false ),
+_center( pos ) {
 	setRadius( 16 );
 }
 
@@ -13,7 +16,11 @@ EnemyBat::~EnemyBat( ) {
 }
 
 void EnemyBat::act( ) {
-
+	Vector radius = getPos( ) - _center;
+	Matrix mat = Matrix::makeTransformRotation( Vector( 0, 0, -1 ), 1 / radius.getLength( ) );
+	Vector f_pos = mat.multiply( radius );
+	Vector rot = ( f_pos + _center ) - getPos( );
+	setVec( rot * MOVE_SPEED );
 }
 
 Chip EnemyBat::getChip( ) const {

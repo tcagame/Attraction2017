@@ -3,9 +3,9 @@
 #include "ace_define.h"
 #include "Family.h"
 #include "Player.h"
-#include "EnemyBossRedDemon.h"
-#include "EnemyBossBloodDemon.h"
-#include "EnemyBossMonsteTree.h"
+#include "EnemyBossRedDaemon.h"
+#include "EnemyBossBloodDaemon.h"
+#include "EnemyBossMonsterTree.h"
 #include "EnemyBossRock.h"
 #include "MapEvent.h"
 #include "Impact.h"
@@ -14,6 +14,7 @@
 #include "EnemyHellFire.h"
 #include "EnemyAttack.h"
 #include "EnemyBoss.h"
+#include "Magazine.h"
 
 PTR( Player );
 
@@ -49,7 +50,7 @@ void Military::update( ) {
 				}
 				
 				int impact_chip_size = enemy->getChipSize( );
-				_impacts.push_back( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), Character::STATE_MAIN, impact_chip_size ) ) );
+				Magazine::getTask( )->add( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), Character::STATE_MAIN, impact_chip_size ) ) );
 				ite = _enemies.erase( ite );
 				continue;
 			}
@@ -64,7 +65,10 @@ void Military::update( ) {
 					if ( player->isOnHead( enemy ) ) {
 						player->bound( );
 					} else {
-						player->damage( 3 );
+						int force = enemy->getForce( );
+						if ( force > 0 ) {
+							player->damage( force );
+						}
 					}
 				}
 			}
@@ -88,7 +92,7 @@ void Military::update( ) {
 			if ( _boss->isFinished( ) ) {
 				_boss->dropItem( );
 				int impact_chip_size = _boss->getChipSize( ) * 2;
-				_impacts.push_back( ImpactPtr( new Impact( _boss->getPos( ) + Vector( 0, _boss->getChipSize( ) / 2 ), Character::STATE_EVENT, impact_chip_size ) ) );
+				Magazine::getTask( )->add( ImpactPtr( new Impact( _boss->getPos( ) + Vector( 0, _boss->getChipSize( ) / 2 ), Character::STATE_EVENT, impact_chip_size ) ) );
 				_boss = EnemyBossPtr( );
 			}
 		}
@@ -105,7 +109,7 @@ void Military::update( ) {
 					dropMoney( enemy );
 				}
 				int impact_chip_size = enemy->getChipSize( );
-				_impacts.push_back( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), Character::STATE_MAIN, impact_chip_size ) ) );
+				Magazine::getTask( )->add( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), Character::STATE_MAIN, impact_chip_size ) ) );
 				ite = _event_enemies.erase( ite );
 				continue;
 			}
@@ -137,8 +141,6 @@ void Military::update( ) {
 			player->blowAway( );
 		}
 	}
-
-	updateImpact( );
 }
 
 const std::list< EnemyPtr > Military::getEnemyList( ) const {
@@ -205,14 +207,14 @@ void Military::createBoss( ) {
 	case MapEvent::TYPE_TITLE:
 		_boss = EnemyBossPtr( );
 		break;
-	case MapEvent::TYPE_RED_DEMON:
-		_boss = EnemyBossPtr( new EnemyBossRedDemon( Vector( 800, 200 ) ) );
+	case MapEvent::TYPE_RED_DAEMON:
+		_boss = EnemyBossPtr( new EnemyBossRedDaemon( Vector( 800, 200 ) ) );
 		break;
 	case MapEvent::TYPE_FIRE:
-		_boss = EnemyBossPtr( new EnemyBossBloodDemon( Vector( 800, 200 ) ) );
+		_boss = EnemyBossPtr( new EnemyBossBloodDaemon( Vector( 800, 200 ) ) );
 		break;
 	case MapEvent::TYPE_TREE:
-		_boss = EnemyBossPtr( new EnemyBossMonsteTree( Vector( 800, 225 ) ) );
+		_boss = EnemyBossPtr( new EnemyBossMonsterTree( Vector( 800, 225 ) ) );
 		break;
 	case MapEvent::TYPE_ROCK:
 		_boss = EnemyBossPtr( new EnemyBossRock( Vector( 800, 225 ) ) );
@@ -226,28 +228,6 @@ EnemyPtr Military::getBoss( ) const {
 
 EnemyPtr Military::getHellFire( ) const {
 	return _hell_fire;
-}
-
-void Military::updateImpact( ) {
-	std::list< ImpactPtr >::iterator ite = _impacts.begin( );
-	while( ite != _impacts.end( ) ) {
-		if ( !( *ite ) ) {
-			ite++;
-			continue;
-		}
-
-		ImpactPtr impact = *ite;
-		if ( impact->isFinished( ) ) {
-			ite = _impacts.erase( ite );
-			continue;
-		}
-		impact->update( );
-		ite++;
-	}
-}
-
-std::list< ImpactPtr > Military::getImpactList( ) const {
-	return _impacts;
 }
 
 void Military::dropMoney( EnemyConstPtr enemy ) {

@@ -1,11 +1,11 @@
-#include "EnemyEyeDemon.h"
+#include "EnemyEyeDaemon.h"
 
 static const int WAIT_ANIM_TIME = 5;
 static const int MAX_HP = 2;
 const int MOVE_SPEED = 1;
 const int JUMP_COUNT = 6;
 
-EnemyEyeDemon::EnemyEyeDemon( const Vector& pos ) :
+EnemyEyeDaemon::EnemyEyeDaemon( const Vector& pos ) :
 Enemy( pos, SMALL_CHAR_GRAPH_SIZE, MAX_HP ),
 _before_pos( pos ),
 _air_jump( false ) {
@@ -13,10 +13,10 @@ _air_jump( false ) {
 }
 
 
-EnemyEyeDemon::~EnemyEyeDemon( ) {
+EnemyEyeDaemon::~EnemyEyeDaemon( ) {
 }
 
-void EnemyEyeDemon::act( ) {
+void EnemyEyeDaemon::act( ) {
 	if ( _before_pos.x == getPos( ).x ) {
 		if ( getDir( ) == DIR_LEFT ) {
 			setVec( Vector( MOVE_SPEED, 0 ) );
@@ -42,7 +42,7 @@ void EnemyEyeDemon::act( ) {
 	_before_pos = getPos( );
 }
 
-Chip EnemyEyeDemon::getChip( ) const {
+Chip EnemyEyeDaemon::getChip( ) const {
 	const int ANIM[ ] = {
 		2, 3, 4, 5
 	};

@@ -82,7 +82,7 @@ unsigned char MapEvent::getObject( int mx, int my ) const {
 	switch ( _type ) {
 	case TYPE_TITLE:
 		break;
-	case TYPE_RED_DEMON:
+	case TYPE_RED_DAEMON:
 		mx = ( mx + EVENT_PAGE_NUM * PAGE_OBJECT_WIDTH_NUM ) % ( EVENT_PAGE_NUM * PAGE_OBJECT_WIDTH_NUM );
 		type = 0;
 		break;

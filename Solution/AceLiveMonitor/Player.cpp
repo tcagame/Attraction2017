@@ -12,6 +12,8 @@
 #include "Storage.h"
 #include "Debug.h"
 #include "SynchronousData.h"
+#include "Magazine.h"
+#include "Impact.h"
 
 //画像サイズ
 static const int PLAYER_FOOT = 7;
@@ -29,7 +31,13 @@ static const int MAX_HP = 16;
 //アニメーション
 static const int PLAYER_ANIM_WAIT_COUNT = 12;
 static const int PLAYER_ANIM_WIDTH_NUM = 10;
+static const int PLAYER_FLASH_WAIT_TIME = 2;
+//カウント
 static const int MAX_DAMEGE_COUNT = 20;
+static const int MAX_BACK_COUNT = 6;
+static const int MAX_UNRIVALED_COUNT = 45;
+static const int MAX_DEAD_ACTCOUNT = 120;
+static const int MAX_IMPACT_COUNT = 30;
 
 Player::Player( int player_id, Vector pos ) :
 Character( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ),
@@ -37,6 +45,8 @@ _over_charge_time( -1 ),
 _id( 0 ),
 _money( 0 ),
 _toku( 0 ),
+_charge_count( 0 ),
+_unrivaled_count( MAX_UNRIVALED_COUNT ),
 _action( ACTION_WAIT ) {
 	setRadius( 25 );
 	setDir( DIR_RIGHT );
@@ -75,10 +85,12 @@ void Player::act( ) {
 		actOnBlowAway( );
 		break;
 	case ACTION_DAED:
+		actOnDead( );
 		break;
 	}
 	actOnCamera( );
 	updateState( );
+	_unrivaled_count++;
 }
 
 void Player::actOnWaiting( ) {
@@ -306,19 +318,27 @@ void Player::actOnCamera( ) {
 }
 
 void Player::actOnDamege( ) {
-	if ( getActCount( ) >= MAX_DAMEGE_COUNT ) {
+	int act_count = getActCount( );
+	if ( act_count >= MAX_DAMEGE_COUNT ) {
 		setAction( ACTION_WAIT );
 		return;
 	}
-	if ( getActCount( ) > MAX_DAMEGE_COUNT / 2 ) {
+	if ( act_count > MAX_BACK_COUNT ) {
+		setVec( Vector( 0, getVec( ).y ) );
+	}
+	if ( act_count > MAX_DAMEGE_COUNT / 2 ) {
 		Vector vec = getVec( );
 		//ひるみ中でも移動できるようにする
 		DevicePtr device( Device::getTask( ) );
-		if ( device->getDirX( _id ) < -50 ) {
+		char dir_x = device->getDirX( _id );
+		if ( dir_x < -50 ) {
 			vec.x = -MOVE_SPEED;
 		}
-		if ( device->getDirX( _id ) > 50 ) {
+		if ( dir_x > 50 ) {
 			vec.x = MOVE_SPEED;
+		}
+		if ( dir_x == 0 ) {
+			vec.x = 0;
 		}
 		setVec( vec );
 	}
@@ -336,22 +356,54 @@ void Player::actOnBlowAway( ) {
 	setVec( Vector( getVec( ).x, BLOW_POWER ) );
 }
 
+void Player::actOnDead( ) {
+	int act_count = getActCount( );
+	int chip_size = getChipSize( );
+	STATE state = getState( );
+	if ( act_count == MAX_DEAD_ACTCOUNT ) {
+		if ( state == STATE_EVENT ) {
+			//イベントで倒れたら、爆発する
+			Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, chip_size / 2 ), state, chip_size * 2 ) ) );
+		}
+	}
+	if ( act_count > MAX_DEAD_ACTCOUNT + MAX_IMPACT_COUNT ) {
+		if ( getState( ) == STATE_EVENT ) {
+			//メインの画面中央上部に移動
+			setState( STATE_MAIN );
+			MapEvent::getTask( )->setType( MapEvent::TYPE_TITLE );
+			setPos( Vector( Family::getTask( )->getCameraPos( ) + SCREEN_WIDTH / 2, chip_size ) );
+			Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, chip_size / 2 ), getState( ), chip_size * 2 ) ) );
+		}
+		if ( act_count < MAX_DEAD_ACTCOUNT + MAX_IMPACT_COUNT * 2 ) {
+			setVec( Vector( 0, -GRAVITY ) );
+		}
+	}
+
+}
+
 void Player::damage( int force ) {
 	if ( Debug::getTask( )->isDebug( ) ) {
 		return;
 	}
 	if ( _action == ACTION_DAMEGE ||
 		 _action == ACTION_BLOW_AWAY ||
+		 _unrivaled_count < MAX_UNRIVALED_COUNT ||
 		 isFinished( ) ) {
 		return;
 	}
 	Character::damage( force );
 	if ( isFinished( ) ) {
 		setAction( ACTION_DAED );
+		setVec( Vector( ) );
 	} else {
 		setAction( ACTION_DAMEGE );
+		if ( getDir( ) == DIR_LEFT ) {
+			setVec( Vector( 4, 0 ) );
+		} else {
+			setVec( Vector( -4, 0 ) );
+		}
 	}
-	setVec( Vector( ) );
+	_unrivaled_count = 0;
 }
 
 Player::ACTION Player::getAction( ) const {
@@ -524,8 +576,8 @@ void Player::updateState( ) {
 		bool event_obj = true;
 		unsigned char obj = map->getObject( getPos( ) + getVec( ) );
 		switch ( obj ) {
-		case OBJECT_EVENT_REDDEAMON:
-			map_event->setType( MapEvent::TYPE_RED_DEMON );
+		case OBJECT_EVENT_REDDAEMON:
+			map_event->setType( MapEvent::TYPE_RED_DAEMON );
 			break;
 		case OBJECT_EVENT_FIRE:
 			map_event->setType( MapEvent::TYPE_FIRE );
@@ -630,6 +682,11 @@ void Player::setAction( ACTION action ) {
 }
 
 void Player::setSynchronousData( unsigned char type, int camera_pos ) const {
+	if ( _unrivaled_count < MAX_UNRIVALED_COUNT ) {
+		if ( _unrivaled_count / PLAYER_FLASH_WAIT_TIME % 2 == 0 ) {
+			return;
+		}
+	}
 	STATE state = getState( );
 	int add_sy = 0;
 	int add_sx = 0;
@@ -741,5 +798,14 @@ void Player::setSynchronousData( unsigned char type, int camera_pos ) const {
 
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
 	data->addObject( area, type, pattern, attribute, x, y );
+	if ( _charge_count > 0 ) {
+		const int ANIM[ ] = {
+			2, 3, 4, 5, 6, 7, 8, 9, 10, 11
+		};
+		int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
+		int phase = ( _charge_count / CHARGE_PHASE_COUNT ) * 2;
+		int time = ( getActCount( ) / 2 ) % 2;
+		data->addObject( area, SynchronousData::TYPE_CHARGE, ANIM[ phase + time ], attribute, x, y );
+	}
 }
 

@@ -54,14 +54,14 @@ const Rect enemies_rect[ ] = {
 	RECT_GRAY_MIST,
 	RECT_STONE_FACE,
 	RECT_NO_NECK_GHOST,
-	RECT_SHISHIMAI_DEMON,
+	RECT_SHISHIMAI_DAEMON,
 	RECT_SHISHIMAI,
 	RECT_ARCHER,
 	RECT_HAND,
 	RECT_RED_BIRD,
 	RECT_BLUE_MONK,
 	RECT_GREEN_ZOMBIE,
-	RECT_HUG_DEMON,
+	RECT_HUG_DAEMON,
 	RECT_SWAMP_ZOMBIE_A,
 	RECT_SWAMP_ZOMBIE_B,
 	RECT_SWAMP_ZOMBIE_C,
@@ -76,7 +76,7 @@ const Rect enemies_rect[ ] = {
 	RECT_BAT,
 	RECT_STONE,
 	RECT_MOTH,
-	RECT_EYE_DEMON,
+	RECT_EYE_DAEMON,
 };
 const int MAX_ENEMY = sizeof( enemies_rect ) / sizeof( enemies_rect[ 0 ] );
 
@@ -241,7 +241,7 @@ unsigned char ObjectMenu::getEnemy( int idx ) const {
 		result = OBJECT_NO_NECK_GHOST;
 		break;
 	case 12:
-		result = OBJECT_SHISHIMAI_DEMON;
+		result = OBJECT_SHISHIMAI_DAEMON;
 		break;
 	case 13:
 		result = OBJECT_SHISHIMAI;
@@ -262,7 +262,7 @@ unsigned char ObjectMenu::getEnemy( int idx ) const {
 		result = OBJECT_GREEN_ZOMBIE;
 		break;
 	case 19:
-		result = OBJECT_HUG_DEMON;
+		result = OBJECT_HUG_DAEMON;
 		break;
 	case 20:
 		result = OBJECT_SWAMP_ZOMBIE_A;
@@ -307,7 +307,7 @@ unsigned char ObjectMenu::getEnemy( int idx ) const {
 		result = OBJECT_MOTH;
 		break;
 	case 34:
-		result = OBJECT_EYE_DEMON;
+		result = OBJECT_EYE_DAEMON;
 		break;
 	default:
 		result = OBJECT_NONE;
@@ -320,7 +320,7 @@ unsigned char ObjectMenu::getEvent( int idx ) const {
 	unsigned char result = OBJECT_NONE;
 	switch( idx ) {
 	case 0:
-		result = OBJECT_EVENT_REDDEAMON;
+		result = OBJECT_EVENT_REDDAEMON;
 		break;
 	case 1:
 		result = OBJECT_EVENT_FIRE;

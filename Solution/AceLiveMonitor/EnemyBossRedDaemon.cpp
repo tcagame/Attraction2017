@@ -1,28 +1,28 @@
-#include "EnemyBossRedDemon.h"
-#include "EnemyLittleRedDemon.h"
+#include "EnemyBossRedDaemon.h"
+#include "EnemyLittleRedDaemon.h"
 #include "Military.h"
 
 static const int WAIT_ANIM_TIME = 10;
 static const int WAIT_POP_TIME = 30000;
 static const int MAX_HP = 12;
 
-EnemyBossRedDemon::EnemyBossRedDemon( const Vector& pos ) :
+EnemyBossRedDaemon::EnemyBossRedDaemon( const Vector& pos ) :
 EnemyBoss( pos, BIG_CHAR_GRAPH_SIZE, MAX_HP ) {
 }
 
 
-EnemyBossRedDemon::~EnemyBossRedDemon( ) {
+EnemyBossRedDaemon::~EnemyBossRedDaemon( ) {
 }
 
-void EnemyBossRedDemon::act( ) {
+void EnemyBossRedDaemon::act( ) {
 	if ( getActCount( ) % WAIT_POP_TIME == 0 ) {
-		EnemyPtr enemy = EnemyPtr( new EnemyLittleRedDemon( getPos( ) + Vector( 100, 0 ) ) );
+		EnemyPtr enemy = EnemyPtr( new EnemyLittleRedDaemon( getPos( ) + Vector( 100, 0 ) ) );
 		enemy->setState( Character::STATE_EVENT );
 		Military::getTask( )->popUpEventEnemy( enemy );
 	}
 }
 
-Chip EnemyBossRedDemon::getChip( ) const {
+Chip EnemyBossRedDaemon::getChip( ) const {
 	Chip chip = Chip( );
 	Vector pos = getPos( );
 	chip.size = 192;
@@ -42,7 +42,7 @@ Chip EnemyBossRedDemon::getChip( ) const {
 	return chip;
 }
 
-Chip EnemyBossRedDemon::getChip2( ) const {
+Chip EnemyBossRedDaemon::getChip2( ) const {
 	Chip chip = Chip( );
 	Vector pos = getPos( );
 	chip.size = 192;
@@ -55,6 +55,6 @@ Chip EnemyBossRedDemon::getChip2( ) const {
 	return chip;
 }
 
-void EnemyBossRedDemon::dropItem( ) {
+void EnemyBossRedDaemon::dropItem( ) {
 
 }

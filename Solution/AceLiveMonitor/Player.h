@@ -47,6 +47,7 @@ private:
 	void actOnCamera( );
 	void actOnDamege( );
 	void actOnBlowAway( );
+	void actOnDead( );
 	void updateState( );
 	void setAction( ACTION action );
 private:
@@ -56,5 +57,6 @@ private:
 	int _toku;
 	int _over_charge_time;
 	int _charge_count;
+	int _unrivaled_count;
 };
 

@@ -1,4 +1,4 @@
-#include "EnemyBossMonsteTree.h"
+#include "EnemyBossMonsterTree.h"
 #include "EnemyBranch.h"
 #include "Military.h"
 #include "ItemTree.h"
@@ -7,7 +7,7 @@
 static const int ATTACK_TIME = 50;
 static const int MAX_HP = 12;
 
-EnemyBossMonsteTree::EnemyBossMonsteTree( const Vector& pos ) :
+EnemyBossMonsterTree::EnemyBossMonsterTree( const Vector& pos ) :
 EnemyBoss( pos, BIG_CHAR_GRAPH_SIZE, MAX_HP ) {
 	_branch = EnemyPtr( new EnemyBranch( getPos( ) + Vector( -70, -20 ) ) );
 	_branch->setState( Character::STATE_EVENT );
@@ -15,13 +15,13 @@ EnemyBoss( pos, BIG_CHAR_GRAPH_SIZE, MAX_HP ) {
 }
 
 
-EnemyBossMonsteTree::~EnemyBossMonsteTree( ) {
+EnemyBossMonsterTree::~EnemyBossMonsterTree( ) {
 }
 
-void EnemyBossMonsteTree::act( ) {
+void EnemyBossMonsterTree::act( ) {
 }
 
-Chip EnemyBossMonsteTree::getChip( ) const {
+Chip EnemyBossMonsterTree::getChip( ) const {
 	Chip chip = Chip( );
 	Vector pos = getPos( );
 	chip.size = 192;
@@ -34,7 +34,7 @@ Chip EnemyBossMonsteTree::getChip( ) const {
 	return chip;
 }
 
-void EnemyBossMonsteTree:: dropItem( ) {
+void EnemyBossMonsterTree:: dropItem( ) {
 	ItemPtr item = ItemPtr( new ItemTree( getPos( ) ) );
 	item->setState( STATE_EVENT );
 	Storage::getTask( )->add( item );

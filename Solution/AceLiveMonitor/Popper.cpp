@@ -16,14 +16,14 @@
 #include "PopGrayMist.h"
 #include "PopStoneFace.h"
 #include "PopNoNeckGhost.h"
-#include "PopShishimaiDemon.h"
+#include "PopShishimaiDaemon.h"
 #include "PopShishimai.h"
 #include "PopArcher.h"
 #include "PopHand.h"
 #include "PopRedBird.h"
 #include "PopBlueMonk.h"
 #include "PopGreenZombie.h"
-#include "PopHugDemon.h"
+#include "PopHugDaemon.h"
 #include "PopSwampZombieA.h"
 #include "PopSwampZombieB.h"
 #include "PopSwampZombieC.h"
@@ -38,7 +38,7 @@
 #include "PopBat.h"
 #include "PopStone.h"
 #include "PopMoth.h"
-#include "PopEyeDemon.h"
+#include "PopEyeDaemon.h"
 
 PopperPtr Popper::getTask( ) {
 	return std::dynamic_pointer_cast< Popper >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -95,8 +95,8 @@ void Popper::initialize( ) {
 			case OBJECT_NO_NECK_GHOST:
 				_pops.push_back( PopPtr( new PopNoNeckGhost( Vector( x, y ) ) ) );
 				break;
-			case OBJECT_SHISHIMAI_DEMON:
-				_pops.push_back( PopPtr( new PopShishimaiDemon( Vector( x, y ) ) ) );
+			case OBJECT_SHISHIMAI_DAEMON:
+				_pops.push_back( PopPtr( new PopShishimaiDaemon( Vector( x, y ) ) ) );
 				break;
 			case OBJECT_SHISHIMAI:
 				_pops.push_back( PopPtr( new PopShishimai( Vector( x, y ) ) ) );
@@ -116,8 +116,8 @@ void Popper::initialize( ) {
 			case OBJECT_GREEN_ZOMBIE:
 				_pops.push_back( PopPtr( new PopGreenZombie( Vector( x, y ) ) ) );
 				break;
-			case OBJECT_HUG_DEMON:
-				_pops.push_back( PopPtr( new PopHugDemon( Vector( x, y ) ) ) );
+			case OBJECT_HUG_DAEMON:
+				_pops.push_back( PopPtr( new PopHugDaemon( Vector( x, y ) ) ) );
 				break;
 			case OBJECT_SWAMP_ZOMBIE_A:
 				_pops.push_back( PopPtr( new PopSwampZombieA( Vector( x, y ) ) ) );
@@ -161,8 +161,8 @@ void Popper::initialize( ) {
 			case OBJECT_MOTH:
 				_pops.push_back( PopPtr( new PopMoth( Vector( x, y ) ) ) );
 				break;
-			case OBJECT_EYE_DEMON:
-				_pops.push_back( PopPtr( new PopEyeDemon( Vector( x, y ) ) ) );
+			case OBJECT_EYE_DAEMON:
+				_pops.push_back( PopPtr( new PopEyeDaemon( Vector( x, y ) ) ) );
 				break;
 			}
 		}

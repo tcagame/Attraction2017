@@ -54,9 +54,6 @@
     <ClCompile Include="EnemyShishimai.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyShishimaiDemon.cpp">
-      <Filter>Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyStoneFace.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
@@ -72,23 +69,14 @@
     <ClCompile Include="EnemySwampZombieA.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyHugDemon.cpp">
-      <Filter>Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="EnemySwampZombieB.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemySwampZombieC.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyBossRedDemon.cpp">
-      <Filter>Boss</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyBoss.cpp">
       <Filter>Boss</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyLittleRedDemon.cpp">
-      <Filter>Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyJizo.cpp">
       <Filter>Enemy</Filter>
@@ -117,9 +105,6 @@
     <ClCompile Include="EnemyBat.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyEyeDemon.cpp">
-      <Filter>Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyFlog.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
@@ -136,9 +121,6 @@
       <Filter>Pop</Filter>
     </ClCompile>
     <ClCompile Include="PopBat.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
-    <ClCompile Include="PopEyeDemon.cpp">
       <Filter>Pop</Filter>
     </ClCompile>
     <ClCompile Include="PopFlog.cpp">
@@ -195,9 +177,6 @@
     <ClCompile Include="PopShishimai.cpp">
       <Filter>Pop</Filter>
     </ClCompile>
-    <ClCompile Include="PopShishimaiDemon.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
     <ClCompile Include="PopStoneFace.cpp">
       <Filter>Pop</Filter>
     </ClCompile>
@@ -208,9 +187,6 @@
       <Filter>Pop</Filter>
     </ClCompile>
     <ClCompile Include="PopGreenZombie.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
-    <ClCompile Include="PopHugDemon.cpp">
       <Filter>Pop</Filter>
     </ClCompile>
     <ClCompile Include="PopSwampZombieA.cpp">
@@ -267,13 +243,7 @@
     <ClCompile Include="ViewerStorage.cpp">
       <Filter>Viewer</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyBossBloodDemon.cpp">
-      <Filter>Boss</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyBossRock.cpp">
-      <Filter>Boss</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyBossMonsteTree.cpp">
       <Filter>Boss</Filter>
     </ClCompile>
     <ClCompile Include="NPC.cpp">
@@ -337,8 +307,39 @@
     <ClCompile Include="EnemyAttack.cpp">
       <Filter>EnemyAttack</Filter>
     </ClCompile>
-    <ClCompile Include="ViewerObject.cpp">
-      <Filter>Viewer</Filter>
+    <ClCompile Include="Sender.cpp" />
+    <ClCompile Include="Magazine.cpp" />
+    <ClCompile Include="ViewerMagazine.cpp" />
+    <ClCompile Include="EnemyArcherAttack.cpp" />
+    <ClCompile Include="EnemyEyeDaemon.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyHugDaemon.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyLittleRedDaemon.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyShishimaiDaemon.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBossBloodDaemon.cpp">
+      <Filter>Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBossRedDaemon.cpp">
+      <Filter>Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBossMonsterTree.cpp">
+      <Filter>Boss</Filter>
+    </ClCompile>
+    <ClCompile Include="PopEyeDaemon.cpp">
+      <Filter>Pop</Filter>
+    </ClCompile>
+    <ClCompile Include="PopHugDaemon.cpp">
+      <Filter>Pop</Filter>
+    </ClCompile>
+    <ClCompile Include="PopShishimaiDaemon.cpp">
+      <Filter>Pop</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -394,9 +395,6 @@
     <ClInclude Include="EnemyShishimai.h">
       <Filter>Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyShishimaiDemon.h">
-      <Filter>Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="EnemyStoneFace.h">
       <Filter>Enemy</Filter>
     </ClInclude>
@@ -412,23 +410,14 @@
     <ClInclude Include="EnemySwampZombieA.h">
       <Filter>Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyHugDemon.h">
-      <Filter>Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="EnemySwampZombieB.h">
       <Filter>Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemySwampZombieC.h">
       <Filter>Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyBossRedDemon.h">
-      <Filter>Boss</Filter>
-    </ClInclude>
     <ClInclude Include="EnemyBoss.h">
       <Filter>Boss</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyLittleRedDemon.h">
-      <Filter>Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyJizo.h">
       <Filter>Enemy</Filter>
@@ -457,9 +446,6 @@
     <ClInclude Include="EnemyBat.h">
       <Filter>Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyEyeDemon.h">
-      <Filter>Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="EnemyFlog.h">
       <Filter>Enemy</Filter>
     </ClInclude>
@@ -476,9 +462,6 @@
       <Filter>Pop</Filter>
     </ClInclude>
     <ClInclude Include="PopBat.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
-    <ClInclude Include="PopEyeDemon.h">
       <Filter>Pop</Filter>
     </ClInclude>
     <ClInclude Include="PopFlog.h">
@@ -535,9 +518,6 @@
     <ClInclude Include="PopShishimai.h">
       <Filter>Pop</Filter>
     </ClInclude>
-    <ClInclude Include="PopShishimaiDemon.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
     <ClInclude Include="PopStoneFace.h">
       <Filter>Pop</Filter>
     </ClInclude>
@@ -548,9 +528,6 @@
       <Filter>Pop</Filter>
     </ClInclude>
     <ClInclude Include="PopGreenZombie.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
-    <ClInclude Include="PopHugDemon.h">
       <Filter>Pop</Filter>
     </ClInclude>
     <ClInclude Include="PopSwampZombieA.h">
@@ -607,13 +584,7 @@
     <ClInclude Include="ViewerStorage.h">
       <Filter>Viewer</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyBossBloodDemon.h">
-      <Filter>Boss</Filter>
-    </ClInclude>
     <ClInclude Include="EnemyBossRock.h">
-      <Filter>Boss</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyBossMonsteTree.h">
       <Filter>Boss</Filter>
     </ClInclude>
     <ClInclude Include="NPC.h">
@@ -677,8 +648,39 @@
     <ClInclude Include="EnemyAttack.h">
       <Filter>EnemyAttack</Filter>
     </ClInclude>
-    <ClInclude Include="ViewerObject.h">
-      <Filter>Viewer</Filter>
+    <ClInclude Include="Sender.h" />
+    <ClInclude Include="Magazine.h" />
+    <ClInclude Include="ViewerMagazine.h" />
+    <ClInclude Include="EnemyArcherAttack.h" />
+    <ClInclude Include="EnemyEyeDaemon.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyHugDaemon.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyLittleRedDaemon.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyShishimaiDaemon.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBossBloodDaemon.h">
+      <Filter>Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBossRedDaemon.h">
+      <Filter>Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBossMonsterTree.h">
+      <Filter>Boss</Filter>
+    </ClInclude>
+    <ClInclude Include="PopEyeDaemon.h">
+      <Filter>Pop</Filter>
+    </ClInclude>
+    <ClInclude Include="PopHugDaemon.h">
+      <Filter>Pop</Filter>
+    </ClInclude>
+    <ClInclude Include="PopShishimaiDaemon.h">
+      <Filter>Pop</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

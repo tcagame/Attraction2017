@@ -1,4 +1,4 @@
-#include "EnemyHugDemon.h"
+#include "EnemyHugDaemon.h"
 #include "Family.h"
 #include "Player.h"
 
@@ -8,16 +8,16 @@ const int JUMP_POWER = -13;
 const int RANGE = 150;
 const int MOVE_SPEED = -2;
 
-EnemyHugDemon::EnemyHugDemon( const Vector& pos ) :
+EnemyHugDaemon::EnemyHugDaemon( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ) {
 	setRadius( 36 );
 }
 
 
-EnemyHugDemon::~EnemyHugDemon( ) {
+EnemyHugDaemon::~EnemyHugDaemon( ) {
 }
 
-void EnemyHugDemon::act( ) {
+void EnemyHugDaemon::act( ) {
 	Vector vec = getVec( );
 	vec.x = MOVE_SPEED;
 	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
@@ -33,7 +33,7 @@ void EnemyHugDemon::act( ) {
 	setVec( vec );
 }
 
-Chip EnemyHugDemon::getChip( ) const {
+Chip EnemyHugDaemon::getChip( ) const {
 	const int ANIM[ ] = {
 		13, 14, 15, 14
 	};

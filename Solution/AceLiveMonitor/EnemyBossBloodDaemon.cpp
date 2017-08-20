@@ -1,23 +1,23 @@
-#include "EnemyBossBloodDemon.h"
+#include "EnemyBossBloodDaemon.h"
 #include "ItemFire.h"
 #include "Storage.h"
 
 static const int WAIT_ANIM_TIME = 10;
 static const int MAX_HP = 12;
 
-EnemyBossBloodDemon::EnemyBossBloodDemon( const Vector& pos ) :
+EnemyBossBloodDaemon::EnemyBossBloodDaemon( const Vector& pos ) :
 EnemyBoss( pos, BIG_CHAR_GRAPH_SIZE, MAX_HP ) {
 }
 
 
-EnemyBossBloodDemon::~EnemyBossBloodDemon( ) {
+EnemyBossBloodDaemon::~EnemyBossBloodDaemon( ) {
 }
 
-void EnemyBossBloodDemon::act( ) {
+void EnemyBossBloodDaemon::act( ) {
 
 }
 
-Chip EnemyBossBloodDemon::getChip( ) const {
+Chip EnemyBossBloodDaemon::getChip( ) const {
 	Chip chip = Chip( );
 	Vector pos = getPos( );
 	chip.size = getChipSize( );
@@ -37,7 +37,7 @@ Chip EnemyBossBloodDemon::getChip( ) const {
 	return chip;
 }
 
-void EnemyBossBloodDemon::dropItem( ) {
+void EnemyBossBloodDaemon::dropItem( ) {
 	ItemPtr item = ItemPtr( new ItemFire( getPos( ) ) );
 	item->setState( STATE_EVENT );
 	Storage::getTask( )->add( item );

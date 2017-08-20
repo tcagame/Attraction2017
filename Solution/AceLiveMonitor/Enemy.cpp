@@ -4,7 +4,9 @@
 
 
 Enemy::Enemy( const Vector& pos, const int chip_size, const int hp, bool mass ) :
-Character( pos, chip_size, hp, mass ) {
+Character( pos, chip_size, hp, mass ),
+//後に全てのエネミーのコンストラクターで指定する
+_force( 3 ) {
 	setDir( DIR_LEFT );
 }
 
@@ -36,4 +38,12 @@ bool Enemy::isInScreen( ) const {
 		}
 	}
 	return result;
+}
+
+int Enemy::getForce( ) const {
+	return _force;
+}
+
+void Enemy::setForce( int force ) {
+	_force = force;
 }
