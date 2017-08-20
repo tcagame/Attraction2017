@@ -62,7 +62,7 @@ void ObjectGuide::draw( ) const {
 				ty = 32;
 			}
 			//イベント配置ブロック
-			if ( obj >= OBJECT_EVENT_REDDEAMON ) {
+			if ( obj >= OBJECT_EVENT_REDDAEMON ) {
 				tx = 32;
 				ty = 32;
 			}

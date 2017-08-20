@@ -12,7 +12,7 @@ ViewerEvent::ViewerEvent( ) {
 	char buf[ 256 ];
 	//TITLE
 	_images.push_back( drawer->createImage( "Event/title_logo.png" ) );
-	//RED_DEMON
+	//RED_DAEMON
 	for ( int i = 0; i < EVENT_PAGE_NUM; i++ ) {
 		sprintf_s( buf, "Event/akaoni/back_%003d.png", i );
 		_images.push_back( drawer->createImage( buf ) );
@@ -65,7 +65,7 @@ void ViewerEvent::draw( ) const {
 		int sx = 256;
 		for ( int i = 0; i < 8; i++ ) {
 			switch ( type ) {
-			case MapEvent::TYPE_RED_DEMON:
+			case MapEvent::TYPE_RED_DAEMON:
 				idx = type + ( i % EVENT_PAGE_NUM );
 				break;
 			case MapEvent::TYPE_FIRE:

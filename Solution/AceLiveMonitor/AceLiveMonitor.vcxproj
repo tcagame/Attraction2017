@@ -166,7 +166,7 @@
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemFire.cpp" />
     <ClCompile Include="EnemyBat.cpp" />
-    <ClCompile Include="EnemyEyeDemon.cpp" />
+    <ClCompile Include="EnemyEyeDaemon.cpp" />
     <ClCompile Include="EnemyFlog.cpp" />
     <ClCompile Include="EnemyGama.cpp" />
     <ClCompile Include="EnemyGrayMist.cpp" />
@@ -186,9 +186,9 @@
     <ClCompile Include="EnemyArcher.cpp" />
     <ClCompile Include="EnemyBlueMonk.cpp" />
     <ClCompile Include="EnemyBoss.cpp" />
-    <ClCompile Include="EnemyBossBloodDemon.cpp" />
-    <ClCompile Include="EnemyBossMonsteTree.cpp" />
-    <ClCompile Include="EnemyBossRedDemon.cpp" />
+    <ClCompile Include="EnemyBossBloodDaemon.cpp" />
+    <ClCompile Include="EnemyBossMonsterTree.cpp" />
+    <ClCompile Include="EnemyBossRedDaemon.cpp" />
     <ClCompile Include="EnemyBossRock.cpp" />
     <ClCompile Include="EnemyBranch.cpp" />
     <ClCompile Include="EnemyCrocoSnake.cpp" />
@@ -198,11 +198,11 @@
     <ClCompile Include="EnemyGreenZombie.cpp" />
     <ClCompile Include="EnemyHand.cpp" />
     <ClCompile Include="EnemyHandAttack.cpp" />
-    <ClCompile Include="EnemyHugDemon.cpp" />
+    <ClCompile Include="EnemyHugDaemon.cpp" />
     <ClCompile Include="EnemyJizo.cpp" />
     <ClCompile Include="EnemyLady.cpp" />
     <ClCompile Include="EnemyLancer.cpp" />
-    <ClCompile Include="EnemyLittleRedDemon.cpp" />
+    <ClCompile Include="EnemyLittleRedDaemon.cpp" />
     <ClCompile Include="EnemyNoFace.cpp" />
     <ClCompile Include="EnemyNoNeckGhost.cpp" />
     <ClCompile Include="EnemyOneEyeSnake.cpp" />
@@ -212,7 +212,7 @@
     <ClCompile Include="EnemyRedBirdAttack.cpp" />
     <ClCompile Include="EnemySeed.cpp" />
     <ClCompile Include="EnemyShishimai.cpp" />
-    <ClCompile Include="EnemyShishimaiDemon.cpp" />
+    <ClCompile Include="EnemyShishimaiDaemon.cpp" />
     <ClCompile Include="EnemySkeleton.cpp" />
     <ClCompile Include="EnemyStoneFace.cpp" />
     <ClCompile Include="EnemySwampZombieA.cpp" />
@@ -230,7 +230,7 @@
     <ClCompile Include="PopBat.cpp" />
     <ClCompile Include="PopBlueMonk.cpp" />
     <ClCompile Include="PopCrocoSnake.cpp" />
-    <ClCompile Include="PopEyeDemon.cpp" />
+    <ClCompile Include="PopEyeDaemon.cpp" />
     <ClCompile Include="PopFaceAndHand.cpp" />
     <ClCompile Include="PopFlog.cpp" />
     <ClCompile Include="PopGama.cpp" />
@@ -239,7 +239,7 @@
     <ClCompile Include="PopGrayMist.cpp" />
     <ClCompile Include="PopGreenZombie.cpp" />
     <ClCompile Include="PopHand.cpp" />
-    <ClCompile Include="PopHugDemon.cpp" />
+    <ClCompile Include="PopHugDaemon.cpp" />
     <ClCompile Include="PopJizo.cpp" />
     <ClCompile Include="PopLady.cpp" />
     <ClCompile Include="PopLancer.cpp" />
@@ -255,7 +255,7 @@
     <ClCompile Include="Popper.cpp" />
     <ClCompile Include="PopRedBird.cpp" />
     <ClCompile Include="PopShishimai.cpp" />
-    <ClCompile Include="PopShishimaiDemon.cpp" />
+    <ClCompile Include="PopShishimaiDaemon.cpp" />
     <ClCompile Include="PopSkeleton.cpp" />
     <ClCompile Include="PopStone.cpp" />
     <ClCompile Include="PopStoneFace.cpp" />
@@ -291,7 +291,7 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemFire.h" />
     <ClInclude Include="EnemyBat.h" />
-    <ClInclude Include="EnemyEyeDemon.h" />
+    <ClInclude Include="EnemyEyeDaemon.h" />
     <ClInclude Include="EnemyFlog.h" />
     <ClInclude Include="EnemyGama.h" />
     <ClInclude Include="EnemyGrayMist.h" />
@@ -311,9 +311,9 @@
     <ClInclude Include="EnemyArcher.h" />
     <ClInclude Include="EnemyBlueMonk.h" />
     <ClInclude Include="EnemyBoss.h" />
-    <ClInclude Include="EnemyBossBloodDemon.h" />
-    <ClInclude Include="EnemyBossMonsteTree.h" />
-    <ClInclude Include="EnemyBossRedDemon.h" />
+    <ClInclude Include="EnemyBossBloodDaemon.h" />
+    <ClInclude Include="EnemyBossMonsterTree.h" />
+    <ClInclude Include="EnemyBossRedDaemon.h" />
     <ClInclude Include="EnemyBossRock.h" />
     <ClInclude Include="EnemyBranch.h" />
     <ClInclude Include="EnemyCrocoSnake.h" />
@@ -323,11 +323,11 @@
     <ClInclude Include="EnemyGreenZombie.h" />
     <ClInclude Include="EnemyHand.h" />
     <ClInclude Include="EnemyHandAttack.h" />
-    <ClInclude Include="EnemyHugDemon.h" />
+    <ClInclude Include="EnemyHugDaemon.h" />
     <ClInclude Include="EnemyJizo.h" />
     <ClInclude Include="EnemyLady.h" />
     <ClInclude Include="EnemyLancer.h" />
-    <ClInclude Include="EnemyLittleRedDemon.h" />
+    <ClInclude Include="EnemyLittleRedDaemon.h" />
     <ClInclude Include="EnemyNoFace.h" />
     <ClInclude Include="EnemyNoNeckGhost.h" />
     <ClInclude Include="EnemyOneEyeSnake.h" />
@@ -337,7 +337,7 @@
     <ClInclude Include="EnemyRedBirdAttack.h" />
     <ClInclude Include="EnemySeed.h" />
     <ClInclude Include="EnemyShishimai.h" />
-    <ClInclude Include="EnemyShishimaiDemon.h" />
+    <ClInclude Include="EnemyShishimaiDaemon.h" />
     <ClInclude Include="EnemySkeleton.h" />
     <ClInclude Include="EnemyStoneFace.h" />
     <ClInclude Include="EnemySwampZombieA.h" />
@@ -355,7 +355,7 @@
     <ClInclude Include="PopBat.h" />
     <ClInclude Include="PopBlueMonk.h" />
     <ClInclude Include="PopCrocoSnake.h" />
-    <ClInclude Include="PopEyeDemon.h" />
+    <ClInclude Include="PopEyeDaemon.h" />
     <ClInclude Include="PopFaceAndHand.h" />
     <ClInclude Include="PopFlog.h" />
     <ClInclude Include="PopGama.h" />
@@ -364,7 +364,7 @@
     <ClInclude Include="PopGrayMist.h" />
     <ClInclude Include="PopGreenZombie.h" />
     <ClInclude Include="PopHand.h" />
-    <ClInclude Include="PopHugDemon.h" />
+    <ClInclude Include="PopHugDaemon.h" />
     <ClInclude Include="PopJizo.h" />
     <ClInclude Include="PopLady.h" />
     <ClInclude Include="PopLancer.h" />
@@ -380,7 +380,7 @@
     <ClInclude Include="Popper.h" />
     <ClInclude Include="PopRedBird.h" />
     <ClInclude Include="PopShishimai.h" />
-    <ClInclude Include="PopShishimaiDemon.h" />
+    <ClInclude Include="PopShishimaiDaemon.h" />
     <ClInclude Include="PopSkeleton.h" />
     <ClInclude Include="PopStone.h" />
     <ClInclude Include="PopStoneFace.h" />

@@ -3,10 +3,10 @@
 
 PTR( Enemy );
 
-class EnemyBossRedDemon : public EnemyBoss {
+class EnemyBossRedDaemon : public EnemyBoss {
 public:
-	EnemyBossRedDemon( const Vector& pos );
-	virtual ~EnemyBossRedDemon( );
+	EnemyBossRedDaemon( const Vector& pos );
+	virtual ~EnemyBossRedDaemon( );
 public:
 	Chip getChip( ) const;
 	Chip getChip2( ) const;

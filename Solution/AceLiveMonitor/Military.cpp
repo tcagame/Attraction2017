@@ -3,9 +3,9 @@
 #include "ace_define.h"
 #include "Family.h"
 #include "Player.h"
-#include "EnemyBossRedDemon.h"
-#include "EnemyBossBloodDemon.h"
-#include "EnemyBossMonsteTree.h"
+#include "EnemyBossRedDaemon.h"
+#include "EnemyBossBloodDaemon.h"
+#include "EnemyBossMonsterTree.h"
 #include "EnemyBossRock.h"
 #include "MapEvent.h"
 #include "Impact.h"
@@ -207,14 +207,14 @@ void Military::createBoss( ) {
 	case MapEvent::TYPE_TITLE:
 		_boss = EnemyBossPtr( );
 		break;
-	case MapEvent::TYPE_RED_DEMON:
-		_boss = EnemyBossPtr( new EnemyBossRedDemon( Vector( 800, 200 ) ) );
+	case MapEvent::TYPE_RED_DAEMON:
+		_boss = EnemyBossPtr( new EnemyBossRedDaemon( Vector( 800, 200 ) ) );
 		break;
 	case MapEvent::TYPE_FIRE:
-		_boss = EnemyBossPtr( new EnemyBossBloodDemon( Vector( 800, 200 ) ) );
+		_boss = EnemyBossPtr( new EnemyBossBloodDaemon( Vector( 800, 200 ) ) );
 		break;
 	case MapEvent::TYPE_TREE:
-		_boss = EnemyBossPtr( new EnemyBossMonsteTree( Vector( 800, 225 ) ) );
+		_boss = EnemyBossPtr( new EnemyBossMonsterTree( Vector( 800, 225 ) ) );
 		break;
 	case MapEvent::TYPE_ROCK:
 		_boss = EnemyBossPtr( new EnemyBossRock( Vector( 800, 225 ) ) );

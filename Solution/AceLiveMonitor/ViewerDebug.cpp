@@ -139,7 +139,7 @@ void ViewerDebug::drawChip( ) const {
 					_block->setPos( x, y + VIEW_STREET_Y );
 					_block->draw( );
 				}
-				if ( obj >= OBJECT_EVENT_REDDEAMON ) {
+				if ( obj >= OBJECT_EVENT_REDDAEMON ) {
 					_block->setRect( 32, 0, OBJECT_CHIP_SIZE, OBJECT_CHIP_SIZE );
 					_block->setPos( x, y + VIEW_STREET_Y );
 					_block->draw( );
@@ -168,7 +168,7 @@ void ViewerDebug::drawChip( ) const {
 						_block->setPos( x, y + VIEW_EVENT_Y );
 						_block->draw( );
 					}
-					if ( obj >= OBJECT_EVENT_REDDEAMON ) {
+					if ( obj >= OBJECT_EVENT_REDDAEMON ) {
 						_block->setRect( 32, 0, OBJECT_CHIP_SIZE, OBJECT_CHIP_SIZE );
 						_block->setPos( x, y + VIEW_EVENT_Y );
 						_block->draw( );

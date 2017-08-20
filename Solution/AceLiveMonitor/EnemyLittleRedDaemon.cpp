@@ -1,17 +1,17 @@
-#include "EnemyLittleRedDemon.h"
+#include "EnemyLittleRedDaemon.h"
 
 static const int WAIT_ANIM_TIME = 6;
 static const int MAX_HP = 3;
 
-EnemyLittleRedDemon::EnemyLittleRedDemon( const Vector& pos ):
+EnemyLittleRedDaemon::EnemyLittleRedDaemon( const Vector& pos ):
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ) {
 }
 
 
-EnemyLittleRedDemon::~EnemyLittleRedDemon( ) {
+EnemyLittleRedDaemon::~EnemyLittleRedDaemon( ) {
 }
 
-Chip EnemyLittleRedDemon::getChip( ) const {
+Chip EnemyLittleRedDaemon::getChip( ) const {
 	Chip chip = Chip( );
 	Vector pos = getPos( );
 	chip.size = getChipSize( );
@@ -30,7 +30,7 @@ Chip EnemyLittleRedDemon::getChip( ) const {
 	return chip;
 }
 
-void EnemyLittleRedDemon::act( ) {
+void EnemyLittleRedDaemon::act( ) {
 	setVec( Vector( -3, 0 ) );
 }
 

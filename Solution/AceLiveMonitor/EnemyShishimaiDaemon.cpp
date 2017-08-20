@@ -1,4 +1,4 @@
-#include "EnemyShishimaiDemon.h"
+#include "EnemyShishimaiDaemon.h"
 #include "Family.h"
 #include "Player.h"
 
@@ -7,7 +7,7 @@ const int MAX_HP = 3;
 const int ESCAPE_RANGE = 150;
 const int MOVE_SPEED = -4;
 
-EnemyShishimaiDemon::EnemyShishimaiDemon( const Vector& pos ) :
+EnemyShishimaiDaemon::EnemyShishimaiDaemon( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ),
 _escape( false ),
 _befor_pos( pos ) {
@@ -16,10 +16,10 @@ _befor_pos( pos ) {
 }
 
 
-EnemyShishimaiDemon::~EnemyShishimaiDemon( ) {
+EnemyShishimaiDaemon::~EnemyShishimaiDaemon( ) {
 }
 
-void EnemyShishimaiDemon::act( ) {
+void EnemyShishimaiDaemon::act( ) {
 	FamilyPtr family( Family::getTask( ) );
 	PlayerPtr near = family->getPlayer( 0 );
 	for ( int i = 0; i < ACE_PLAYER_NUM - 1; i++ ) {
@@ -46,7 +46,7 @@ void EnemyShishimaiDemon::act( ) {
 	_befor_pos = getPos( );
 }
 
-Chip EnemyShishimaiDemon::getChip( ) const {
+Chip EnemyShishimaiDaemon::getChip( ) const {
 	const int ANIM[ ] = {
 		8, 9, 10, 11, 12, 13
 	};

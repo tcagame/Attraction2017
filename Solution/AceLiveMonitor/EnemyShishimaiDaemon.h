@@ -1,10 +1,10 @@
 #pragma once
 #include "Enemy.h"
 
-class EnemyShishimaiDemon : public Enemy {
+class EnemyShishimaiDaemon : public Enemy {
 public:
-	EnemyShishimaiDemon( const Vector& pos );
-	virtual ~EnemyShishimaiDemon( );
+	EnemyShishimaiDaemon( const Vector& pos );
+	virtual ~EnemyShishimaiDaemon( );
 public:
 	Chip getChip( ) const;
 protected:

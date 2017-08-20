@@ -576,8 +576,8 @@ void Player::updateState( ) {
 		bool event_obj = true;
 		unsigned char obj = map->getObject( getPos( ) + getVec( ) );
 		switch ( obj ) {
-		case OBJECT_EVENT_REDDEAMON:
-			map_event->setType( MapEvent::TYPE_RED_DEMON );
+		case OBJECT_EVENT_REDDAEMON:
+			map_event->setType( MapEvent::TYPE_RED_DAEMON );
 			break;
 		case OBJECT_EVENT_FIRE:
 			map_event->setType( MapEvent::TYPE_FIRE );
