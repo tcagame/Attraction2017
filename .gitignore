@@ -11,3 +11,5 @@
 *.pdb
 *.idb
 *.exe
+*.iobj
+*.ipdb
