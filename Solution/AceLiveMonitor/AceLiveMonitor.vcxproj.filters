@@ -340,6 +340,7 @@
     <ClCompile Include="Sender.cpp" />
     <ClCompile Include="Magazine.cpp" />
     <ClCompile Include="ViewerMagazine.cpp" />
+    <ClCompile Include="EnemyArcherAttack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -680,6 +681,7 @@
     <ClInclude Include="Sender.h" />
     <ClInclude Include="Magazine.h" />
     <ClInclude Include="ViewerMagazine.h" />
+    <ClInclude Include="EnemyArcherAttack.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">

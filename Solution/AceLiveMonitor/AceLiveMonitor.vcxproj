@@ -160,6 +160,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Debug.cpp" />
+    <ClCompile Include="EnemyArcherAttack.cpp" />
     <ClCompile Include="EnemyAttack.cpp" />
     <ClCompile Include="EnemyHellFire.cpp" />
     <ClCompile Include="Item.cpp" />
@@ -284,6 +285,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Debug.h" />
+    <ClInclude Include="EnemyArcherAttack.h" />
     <ClInclude Include="EnemyAttack.h" />
     <ClInclude Include="EnemyHellFire.h" />
     <ClInclude Include="Item.h" />
