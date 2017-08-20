@@ -9,5 +9,8 @@ public:
 	Chip getChip( ) const;
 protected:
 	void act( );
+private:
+	bool _escape;
+	Vector _befor_pos;
 };
 
