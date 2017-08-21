@@ -341,7 +341,25 @@
       <Filter>Pop</Filter>
     </ClCompile>
     <ClCompile Include="EnemyArcherAttack.cpp">
-      <Filter>EnemyAttack</Filter>
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyRay.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyShell.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyWaterGhost.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopRay.cpp">
+      <Filter>Pop</Filter>
+    </ClCompile>
+    <ClCompile Include="PopShell.cpp">
+      <Filter>Pop</Filter>
+    </ClCompile>
+    <ClCompile Include="PopWaterGhost.cpp">
+      <Filter>Pop</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -684,7 +702,25 @@
       <Filter>Pop</Filter>
     </ClInclude>
     <ClInclude Include="EnemyArcherAttack.h">
-      <Filter>EnemyAttack</Filter>
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyRay.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyShell.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyWaterGhost.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopRay.h">
+      <Filter>Pop</Filter>
+    </ClInclude>
+    <ClInclude Include="PopShell.h">
+      <Filter>Pop</Filter>
+    </ClInclude>
+    <ClInclude Include="PopWaterGhost.h">
+      <Filter>Pop</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
