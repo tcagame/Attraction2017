@@ -309,7 +309,6 @@
     </ClCompile>
     <ClCompile Include="Sender.cpp" />
     <ClCompile Include="Magazine.cpp" />
-    <ClCompile Include="ViewerMagazine.cpp" />
     <ClCompile Include="EnemyEyeDaemon.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
@@ -360,6 +359,9 @@
     </ClCompile>
     <ClCompile Include="PopWaterGhost.cpp">
       <Filter>Pop</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewerMagazine.cpp">
+      <Filter>Viewer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -670,7 +672,6 @@
     </ClInclude>
     <ClInclude Include="Sender.h" />
     <ClInclude Include="Magazine.h" />
-    <ClInclude Include="ViewerMagazine.h" />
     <ClInclude Include="EnemyEyeDaemon.h">
       <Filter>Enemy</Filter>
     </ClInclude>
@@ -721,6 +722,9 @@
     </ClInclude>
     <ClInclude Include="PopWaterGhost.h">
       <Filter>Pop</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewerMagazine.h">
+      <Filter>Viewer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

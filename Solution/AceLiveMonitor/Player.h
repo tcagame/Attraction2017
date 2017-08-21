@@ -19,10 +19,12 @@ public:
 		ACTION_DAED,
 	};
 public:
-	Player( int player_id, Vector pos );
+	Player( Vector pos );
 	virtual ~Player( );
 public:
 	void act( );
+	void setDeviceId( int id );
+	int getDeviceId( ) const;
 	void damage( int force );
 	Chip getChip( ) const;
 	ACTION getAction( ) const;

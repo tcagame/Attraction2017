@@ -15,6 +15,8 @@
 #include "Magazine.h"
 #include "Impact.h"
 
+#include <assert.h>
+
 //画像サイズ
 static const int PLAYER_FOOT = 7;
 //速度
@@ -39,10 +41,10 @@ static const int MAX_UNRIVALED_COUNT = 45;
 static const int MAX_DEAD_ACTCOUNT = 120;
 static const int MAX_IMPACT_COUNT = 30;
 
-Player::Player( int player_id, Vector pos ) :
+Player::Player( Vector pos ) :
 Character( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ),
 _over_charge_time( -1 ),
-_id( 0 ),
+_id( -1 ),
 _money( 0 ),
 _toku( 0 ),
 _charge_count( 0 ),
@@ -56,6 +58,11 @@ Player::~Player( ) {
 }
 
 void Player::act( ) {
+	if ( _id < 0 ) {
+		actOnCamera( );
+		return;
+	}
+
 	switch ( _action ) {
 	case ACTION_WAIT:
 		actOnWaiting( );
@@ -809,3 +816,11 @@ void Player::setSynchronousData( unsigned char type, int camera_pos ) const {
 	}
 }
 
+void Player::setDeviceId( int id ) {
+	assert( 0 <= id && id < ACE_PLAYER_NUM );
+	_id = id;
+}
+
+int Player::getDeviceId( ) const {
+	return _id;
+}
