@@ -53,13 +53,13 @@ void ViewerObject::drawSprite( int x, int y, unsigned char type, unsigned char a
 		sprite = getSpritePlayer( GRAPH_SHOT			, x, y, attribute, pattern );
 		break;
 	case SynchronousData::TYPE_ENEMY_MIDIUM:
-		sprite = getSpriteEnemy( GRAPH_ENEMY_MIDIUM		, x, y, attribute, pattern );
+		sprite = getSpriteEnemy( GRAPH_ENEMY_MIDIUM		, x, y, attribute, pattern, size );
 		break;
 	case SynchronousData::TYPE_ENEMY_SMALL:
-		sprite = getSpriteEnemy( GRAPH_ENEMY_SMALL		, x, y, attribute, pattern );
+		sprite = getSpriteEnemy( GRAPH_ENEMY_SMALL		, x, y, attribute, pattern, size );
 		break;
 	case SynchronousData::TYPE_ENEMY_BIG:
-		sprite = getSpriteEnemy( GRAPH_ENEMY_BIG		, x, y, attribute, pattern );
+		sprite = getSpriteEnemy( GRAPH_ENEMY_BIG		, x, y, attribute, pattern, size );
 		break;
 	case SynchronousData::TYPE_ENEMY_BOSS:
 		sprite = getSpriteEnemyBoss( GRAPH_ENEMY_BOSS	, x, y, attribute, pattern, size );
@@ -95,24 +95,38 @@ ViewerObject::Sprite ViewerObject::getSpritePlayer( GRAPH graph, int x, int y, u
 	return sprite;
 }
 
-ViewerObject::Sprite ViewerObject::getSpriteEnemy( GRAPH graph, int x, int y, unsigned char attribute, int pattern ) const {
+ViewerObject::Sprite ViewerObject::getSpriteEnemy( GRAPH graph, int x, int y, unsigned char attribute, int pattern, int size ) const {
 	Sprite sprite;
 	sprite.graph = graph;
-	int chip_size = 0;
+	int chip_size = size;
 	int width_num = 0;
-	switch ( graph ) {
-	case GRAPH_ENEMY_SMALL:
-		chip_size = SMALL_CHAR_GRAPH_SIZE;
-		width_num = ENEMY_SMALL_CHIP_WIDTH;
-		break;
-	case GRAPH_ENEMY_MIDIUM:
-		chip_size = NORMAL_CHAR_GRAPH_SIZE;
-		width_num = ENEMY_NORMAL_CHIP_WIDTH;
-		break;
-	case GRAPH_ENEMY_BIG:
-		chip_size = BIG_CHAR_GRAPH_SIZE;
-		width_num = ENEMY_BIG_CHIP_WIDTH;
-		break;
+	if ( size < 0 ) {
+		switch ( graph ) {
+		case GRAPH_ENEMY_SMALL:
+			chip_size = SMALL_CHAR_GRAPH_SIZE;
+			width_num = ENEMY_SMALL_CHIP_WIDTH;
+			break;
+		case GRAPH_ENEMY_MIDIUM:
+			chip_size = NORMAL_CHAR_GRAPH_SIZE;
+			width_num = ENEMY_NORMAL_CHIP_WIDTH;
+			break;
+		case GRAPH_ENEMY_BIG:
+			chip_size = BIG_CHAR_GRAPH_SIZE;
+			width_num = ENEMY_BIG_CHIP_WIDTH;
+			break;
+		}
+	} else {
+		switch ( graph ) {
+		case GRAPH_ENEMY_SMALL:
+			width_num = 256 / size;
+			break;
+		case GRAPH_ENEMY_MIDIUM:
+			width_num = 1280 / size;
+			break;
+		case GRAPH_ENEMY_BIG:
+			width_num = 1280 / size;
+			break;
+		}
 	}
 	sprite.tx = pattern % width_num * chip_size;
 	sprite.ty = pattern / width_num * chip_size;

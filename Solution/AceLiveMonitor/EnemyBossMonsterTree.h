@@ -9,7 +9,7 @@ public:
 	EnemyBossMonsterTree( const Vector& pos );
 	virtual ~EnemyBossMonsterTree( );
 public:
-	Chip getChip( ) const;
+	void setSynchronousData( unsigned char type, int camera_pos ) const;
 	void dropItem( );
 protected:
 	void act( );

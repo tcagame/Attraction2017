@@ -25,29 +25,28 @@ void EnemyBossRedDaemon::act( ) {
 }
 
 void EnemyBossRedDaemon::setSynchronousData( unsigned char type, int camera_pos ) const {
-	{//–{‘Ì
-		const int ANIM[ ] = {
-			8, 9
-		};
-		int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-		
-		Vector pos = getPos( );
-		int x = ( int )pos.x;
-		int y = ( int )pos.y;
+	const int ANIM[ ] = {
+		8, 9
+	};
+	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
+	
+	Vector pos = getPos( );
+	int x = ( int )pos.x;
+	int y = ( int )pos.y;
 
-		AREA area = AREA_EVENT;
-		if ( getState( ) == STATE_MAIN ) {
-			x -= camera_pos;
-			area = AREA_MAIN;
-		}
-		int chip_size = getChipSize( );
-		SynchronousDataPtr data( SynchronousData::getTask( ) );
-		//–{‘Ì
-		data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], 0, x, y, chip_size );
-		//˜r
-		y -= ( int )( sin( ( double )getActCount( ) / PI * 1 ) * 40 ) - 20;
-		data->addObject( area, type, 10, 0, x, y, chip_size );
+	AREA area = AREA_EVENT;
+	if ( getState( ) == STATE_MAIN ) {
+		x -= camera_pos;
+		area = AREA_MAIN;
 	}
+	int chip_size = getChipSize( );
+	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	//–{‘Ì
+	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], 0, x, y, chip_size );
+	//˜r
+	y -= ( int )( sin( ( double )getActCount( ) / PI * 1 ) * 40 ) - 20;
+	data->addObject( area, type, 10, 0, x, y, chip_size );
+	
 }
 
 void EnemyBossRedDaemon::dropItem( ) {
