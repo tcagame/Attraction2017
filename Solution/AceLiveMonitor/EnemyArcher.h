@@ -6,7 +6,6 @@ public:
 	EnemyArcher( const Vector& pos );
 	virtual ~EnemyArcher( );
 public:
-	Chip getChip( ) const;
 	void setSynchronousData( unsigned char type, int camera_pos ) const;
 protected:
 	void act( );
