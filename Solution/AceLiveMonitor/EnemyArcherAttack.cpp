@@ -1,4 +1,5 @@
 #include "EnemyArcherAttack.h"
+#include "SynchronousData.h"
 
 const int MAX_HP = 2;
 const Vector MOVE_SPEED( -6, 0 );
@@ -14,23 +15,21 @@ EnemyArcherAttack::~EnemyArcherAttack( ) {
 void EnemyArcherAttack::act( ) {
 }
 
-Chip EnemyArcherAttack::getChip( ) const {
-	Chip chip;
-	chip.size = getChipSize( );
-	chip.tx = SMALL_CHAR_GRAPH_SIZE * 6;
-	chip.ty = SMALL_CHAR_GRAPH_SIZE * 1;
+void EnemyArcherAttack::setSynchronousData( unsigned char type, int camera_pos ) const {
+	
 	Vector pos = getPos( );
-	DIR dir = getDir( );
-	if ( dir == DIR_RIGHT ){
-		chip.sx1 = ( int )pos.x - chip.size / 2 + chip.size;
-		chip.sy1 = ( int )pos.y - chip.size;
-		chip.sx2 = chip.sx1 - chip.size;
-		chip.sy2 = chip.sy1 + chip.size;
-	} else {
-		chip.sx1 = ( int )pos.x - chip.size / 2;
-		chip.sy1 = ( int )pos.y - chip.size;
-		chip.sx2 = chip.sx1 + chip.size;
-		chip.sy2 = chip.sy1 + chip.size;
+	int x = ( int )pos.x;
+	int y = ( int )pos.y;
+
+	AREA area = AREA_EVENT;
+	if ( getState( ) == STATE_MAIN ) {
+		x -= camera_pos;
+		area = AREA_MAIN;
 	}
-	return chip;
+	unsigned char attribute = 0;
+	if ( getDir( ) == DIR_RIGHT ) {
+		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
+	}
+	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	data->addObject( area, type, 14, attribute, x, y );
 }

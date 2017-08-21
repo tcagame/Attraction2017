@@ -34,3 +34,27 @@ void EnemyLittleRedDaemon::act( ) {
 	setVec( Vector( -3, 0 ) );
 }
 
+/*
+void EnemyLittleRedDaemon::setSynchronousData( unsigned char type, int camera_pos ) const {
+	const int ANIM[ ] = {
+		220, 221, 222, 223, 224, 225, 226, 227, 226, 227, 226, 225, 224, 223, 222, 221
+	};
+	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
+	
+	Vector pos = getPos( );
+	int x = ( int )pos.x;
+	int y = ( int )pos.y;
+
+	AREA area = AREA_EVENT;
+	if ( getState( ) == STATE_MAIN ) {
+		x -= camera_pos;
+		area = AREA_MAIN;
+	}
+	unsigned char attribute = 0;
+	if ( getDir( ) == DIR_RIGHT ) {
+		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
+	}
+	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
+}
+*/

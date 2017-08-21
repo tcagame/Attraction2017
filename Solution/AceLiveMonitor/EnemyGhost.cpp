@@ -1,5 +1,6 @@
 #include "EnemyGhost.h"
 #include "Family.h"
+#include "SynchronousData.h"
 
 static const int WAIT_ANIM_TIME = 5;
 static const int FADE_IN_TIME = WAIT_ANIM_TIME * 2;
@@ -40,39 +41,38 @@ void EnemyGhost::act( ) {
 	}
 }
 
-Chip EnemyGhost::getChip( ) const {
-	Chip chip = Chip( );
+void EnemyGhost::setSynchronousData( unsigned char type, int camera_pos ) const {
+	int anim = 0;
 	switch ( _act ) {
 	case ACTION_FADE_IN:
 	{
-		const int ANIM[ ] = { 8, 9, 10, 11, 12, 13 };
+		const int ANIM[ ] = { 228, 229, 230, 231, 232, 233 };
 		int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-		chip.tx = ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ] * 64;
+		anim = ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ];
 	}
 		break;
 	case ACTION_MOVE:
 	{
-		const int ANIM[ ] = { 14, 15, 16, 17, 18 };
+		const int ANIM[ ] = { 234, 235, 236, 237, 238 };
 		int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-		chip.tx = ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ] * 64;
+		anim = ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ];
 	}
 		break;
 	}
-	chip.ty = 11 * 64;
-	chip.size = getChipSize( );
 	
 	Vector pos = getPos( );
-	DIR dir = getDir( );
-	if ( dir == DIR_RIGHT ){
-		chip.sx1 = ( int )pos.x - chip.size / 2 + chip.size;
-		chip.sy1 = ( int )pos.y - chip.size;
-		chip.sx2 = chip.sx1 - chip.size;
-		chip.sy2 = chip.sy1 + chip.size;
-	} else {
-		chip.sx1 = ( int )pos.x - chip.size / 2;
-		chip.sy1 = ( int )pos.y - chip.size;
-		chip.sx2 = chip.sx1 + chip.size;
-		chip.sy2 = chip.sy1 + chip.size;
+	int x = ( int )pos.x;
+	int y = ( int )pos.y;
+
+	AREA area = AREA_EVENT;
+	if ( getState( ) == STATE_MAIN ) {
+		x -= camera_pos;
+		area = AREA_MAIN;
 	}
-	return chip;
+	unsigned char attribute = 0;
+	if ( getDir( ) == DIR_RIGHT ) {
+		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
+	}
+	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	data->addObject( area, type, anim, attribute, x, y );
 }

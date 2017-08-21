@@ -310,7 +310,6 @@
     <ClCompile Include="Sender.cpp" />
     <ClCompile Include="Magazine.cpp" />
     <ClCompile Include="ViewerMagazine.cpp" />
-    <ClCompile Include="EnemyArcherAttack.cpp" />
     <ClCompile Include="EnemyEyeDaemon.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
@@ -340,6 +339,9 @@
     </ClCompile>
     <ClCompile Include="PopShishimaiDaemon.cpp">
       <Filter>Pop</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyArcherAttack.cpp">
+      <Filter>EnemyAttack</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -651,7 +653,6 @@
     <ClInclude Include="Sender.h" />
     <ClInclude Include="Magazine.h" />
     <ClInclude Include="ViewerMagazine.h" />
-    <ClInclude Include="EnemyArcherAttack.h" />
     <ClInclude Include="EnemyEyeDaemon.h">
       <Filter>Enemy</Filter>
     </ClInclude>
@@ -681,6 +682,9 @@
     </ClInclude>
     <ClInclude Include="PopShishimaiDaemon.h">
       <Filter>Pop</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyArcherAttack.h">
+      <Filter>EnemyAttack</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

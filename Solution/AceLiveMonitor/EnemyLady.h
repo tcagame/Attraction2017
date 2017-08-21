@@ -6,7 +6,7 @@ public:
 	EnemyLady( const Vector& pos );
 	virtual ~EnemyLady( );
 public:
-	Chip getChip( ) const;
+	void setSynchronousData( unsigned char type, int camera_pos ) const;
 protected:
 	void act( );
 };
