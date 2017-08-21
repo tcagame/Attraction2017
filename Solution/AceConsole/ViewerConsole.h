@@ -6,6 +6,7 @@
 
 PTR( ViewerConsole );
 PTR( ViewerObject );
+PTR( Image );
 
 class ViewerConsole : public Task {
 public:
@@ -18,6 +19,13 @@ public:
 	void initialize( );
 	void update( );
 private:
+	void drawArea( );
+	void drawUI( );
+private:
 	ViewerObjectPtr _viewer_object;
+	ImagePtr _image_bar_upper;
+	ImagePtr _image_bar_lower;
+	ImagePtr _image_status;
+	ImagePtr _image_minimap;
 };
 
