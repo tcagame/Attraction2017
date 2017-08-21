@@ -1,14 +1,15 @@
 #include "EnemyGreenZombie.h"
+#include "SynchronousData.h"
 
 static const int WAIT_ANIM_TIME = 5;
-static const int MOVE_SPEED = 5;
+static const int MOVE_SPEED = -5;
 static const int JUMP_POWER = -10;
 static const int MAX_HP = 3;
 
 EnemyGreenZombie::EnemyGreenZombie( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ),
-_before_pos( Vector( ) ),
-_vec( Vector( MOVE_SPEED, 0 ) ) {
+_before_pos( Vector( ) ) {
+	setVec( Vector( MOVE_SPEED, 0 ) );
 	setRadius( 36 );
 }
 
@@ -18,37 +19,41 @@ EnemyGreenZombie::~EnemyGreenZombie( ) {
 
 void EnemyGreenZombie::act( ) {
 	if ( _before_pos.x == getPos( ).x ) {
-		_vec.x *= -1;
+		Vector vec( getVec( ) );
+		vec.x *= -1;
+		setVec( vec );
 	}
 	if ( isStanding( ) && getActCount( ) % 30 == 0 ) {
-		_vec.y += JUMP_POWER;
+		Vector vec( getVec( ) );
+		vec.y = JUMP_POWER;
+		setVec( vec );
 	}
-	setVec( _vec );
 	_before_pos = getPos( );
 }
 
-Chip EnemyGreenZombie::getChip( ) const {
+void EnemyGreenZombie::setSynchronousData( unsigned char type, int camera_pos ) const {
 	const int ANIM[ ] = {
-		6, 7, 8, 9, 10, 11
+		66, 67, 68, 69, 70, 71
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-	Chip chip = Chip( );
-	chip.tx = ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ] * 64;
-	chip.ty = 3 * 64;
-	chip.size = getChipSize( );
 	
 	Vector pos = getPos( );
-	DIR dir = getDir( );
-	if ( dir == DIR_RIGHT ){
-		chip.sx1 = ( int )pos.x - chip.size / 2 + chip.size;
-		chip.sy1 = ( int )pos.y - chip.size;
-		chip.sx2 = chip.sx1 - chip.size;
-		chip.sy2 = chip.sy1 + chip.size;
-	} else {
-		chip.sx1 = ( int )pos.x - chip.size / 2;
-		chip.sy1 = ( int )pos.y - chip.size;
-		chip.sx2 = chip.sx1 + chip.size;
-		chip.sy2 = chip.sy1 + chip.size;
+	int x = ( int )pos.x;
+	int y = ( int )pos.y;
+
+	AREA area = AREA_EVENT;
+	if ( getState( ) == STATE_MAIN ) {
+		x -= camera_pos;
+		area = AREA_MAIN;
 	}
-	return chip;
+	unsigned char attribute = 0;
+	if ( getDir( ) == DIR_RIGHT ) {
+		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
+	}
+	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
+}
+
+Chip EnemyGreenZombie::getChip( ) const {
+	return Chip( );
 }
