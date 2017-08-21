@@ -1,6 +1,7 @@
 #include "EnemyFaceAndHand.h"
+#include "SynchronousData.h"
 
-static const int ANIM_WAIT_TIME = 6;
+static const int WAIT_ANIM_TIME = 6;
 static const int FADE_IN_TIME = 15;
 static const int MAX_HP = 3;
 
@@ -13,42 +14,6 @@ _act( ACTION_FADE_IN ){
 EnemyFaceAndHand::~EnemyFaceAndHand( ) {
 }
 
-Chip EnemyFaceAndHand::getChip( ) const {
-	Chip chip = Chip( );
-	int cx = 0;
-	int cy = 9;
-	switch ( _act ) {
-	case ACTION_FADE_IN:
-	{
-		const int ANIM[ ] = { 0, 1 };
-		int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-		cx = ANIM[ getActCount( ) / ANIM_WAIT_TIME % anim_size ];
-	}
-		break;
-	case ACTION_MOVE:
-	{
-		const int ANIM[ ] = { 2, 3, 4, 5, 4, 3 };
-		int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-		cx = ANIM[ getActCount( ) / ANIM_WAIT_TIME % anim_size ];
-	}
-		break;
-	}
-	chip.size = getChipSize( );
-	chip.tx = cx * chip.size;
-	chip.ty = cy * chip.size;
-	Vector pos = getPos( );
-	chip.sy1 = ( int )pos.y - chip.size;
-	chip.sy2 = chip.sy1 + chip.size; 
-	if ( getDir( ) == DIR_LEFT ) {
-		chip.sx1 = ( int )pos.x - chip.size / 2;
-		chip.sx2 = chip.sx1 + chip.size;	
-	} else {
-		chip.sx1 = ( int )pos.x - chip.size / 2 + chip.size;
-		chip.sx2 = chip.sx1 - chip.size;
-	}
-	return chip;
-}
-
 void EnemyFaceAndHand::act( ) {
 	switch ( _act ) {
 	case ACTION_FADE_IN:
@@ -57,6 +22,40 @@ void EnemyFaceAndHand::act( ) {
 		}
 		break;
 	case ACTION_MOVE:
+		break;
+	}
+}
+
+void EnemyFaceAndHand::setSynchronousData( unsigned char type, int camera_pos ) const {	
+	Vector pos = getPos( );
+	int x = ( int )pos.x;
+	int y = ( int )pos.y;
+
+	AREA area = AREA_EVENT;
+	if ( getState( ) == STATE_MAIN ) {
+		x -= camera_pos;
+		area = AREA_MAIN;
+	}
+	unsigned char attribute = 0;
+	if ( getDir( ) == DIR_RIGHT ) {
+		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
+	}
+
+	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	switch ( _act ) {
+	case ACTION_FADE_IN:
+	{
+		const int ANIM[ ] = { 180, 181 };
+		int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
+		data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
+	}
+		break;
+	case ACTION_MOVE:
+	{
+		const int ANIM[ ] = { 182, 183, 184, 185, 184, 183 };
+		int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
+		data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
+	}
 		break;
 	}
 }
