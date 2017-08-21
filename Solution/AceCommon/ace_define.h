@@ -121,6 +121,10 @@ const unsigned char OBJECT_BAT				= 0x21;
 const unsigned char OBJECT_STONE			= 0x22;
 const unsigned char OBJECT_MOTH 			= 0x23;
 const unsigned char OBJECT_EYE_DAEMON		= 0x24;
+// êÖê±ódâˆ
+const unsigned char OBJECT_SHELL			= 0x25;
+const unsigned char OBJECT_RAY				= 0x26;
+const unsigned char OBJECT_WATER_GHOST		= 0x27;
 
 const unsigned char OBJECT_ENEMY_END = 0x7F;
 //block
