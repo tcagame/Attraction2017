@@ -23,8 +23,11 @@ public:
 	double getCameraPos( ) const;
 private:
 	void updateCameraPos( );
+	void updateSetDevice( );
 	void setSynchronousData( ) const;
+	bool isSettingDevice( int device_id ) const;
 private:
+	int _set_device;
 	double _camera_pos;
 	std::array< PlayerPtr, ACE_PLAYER_NUM > _player;
 };

@@ -12,6 +12,7 @@ public:
 	void drawShot( ) const;
 	void drawChip( ) const;
 	void drawConnect( ) const;
+	void drawDeviceId( ) const;
 private:
 	ImagePtr _block;
 };

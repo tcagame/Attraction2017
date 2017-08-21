@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "Application.h"
 #include "SynchronousData.h"
+#include "Device.h"
 #include <assert.h>
 
 const int CAMERA_SCROLL_SPEED = 8;
@@ -30,13 +31,14 @@ Family::~Family( ) {
 
 void Family::initialize( ) {
 	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
-		_player[ i ] = PlayerPtr( new Player( i, INIT_PLAYER_POS[ i ] ) );
+		_player[ i ] = PlayerPtr( new Player( INIT_PLAYER_POS[ i ] ) );
 	}
 	double camera_pos = 0.0;
 	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
 		camera_pos += _player[ i ]->getPos( ).x;
 	}
 	_camera_pos = camera_pos * 0.25 - SCREEN_WIDTH / 2;
+	_set_device = 0;
 }
 
 void Family::update( ) {
@@ -56,6 +58,9 @@ void Family::update( ) {
 
 	// “¯Šúƒf[ƒ^
 	setSynchronousData( );
+
+	// device
+	updateSetDevice( );
 }
 
 PlayerConstPtr Family::getPlayer( int player_id ) const {
@@ -118,4 +123,29 @@ void Family::setSynchronousData( ) const {
 		PlayerConstPtr player = getPlayer( i );
 		player->setSynchronousData( TYPE[ i ], ( int )getCameraPos( ) );
 	}
+}
+
+void Family::updateSetDevice( ) {
+	DevicePtr device( Device::getTask( ) );
+	if ( !( _set_device < ACE_PLAYER_NUM ) ) {
+		return;
+	}
+
+	for ( int i = 0; i < device->getDeviceNum( ); i++ ) {
+		if ( device->getButton( i ) &&
+			 !isSettingDevice( i ) ) {
+			_player[ _set_device ]->setDeviceId( i );
+			_set_device++;
+		}
+	}
+}
+
+bool Family::isSettingDevice( int device_id ) const {
+	bool result = false;
+	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
+		if ( _player[ i ]->getDeviceId( ) == device_id ) {
+			result = true;
+		}
+	}
+	return result;
 }
