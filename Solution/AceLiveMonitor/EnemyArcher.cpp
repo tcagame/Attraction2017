@@ -50,6 +50,3 @@ void EnemyArcher::setSynchronousData( unsigned char type, int camera_pos ) const
 	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
 }
 
-Chip EnemyArcher::getChip( ) const {
-	return Chip( );
-}
