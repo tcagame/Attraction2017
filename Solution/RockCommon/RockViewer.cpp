@@ -2,11 +2,11 @@
 #include "Drawer.h"
 #include "Application.h"
 #include "RockMilitary.h"
+#include "RockFamily.h"
+#include "RockPlayer.h"
 #include "RockEnemy.h"
 #include "RockMap.h"
 #include "RockDollHouse.h"
-#include "RockFamily.h"
-#include "RockPlayer.h"
 #include "RockClientInfo.h"
 #include "Status.h"
 #include "Drawer.h"
@@ -56,47 +56,20 @@ void RockViewer::drawEnemy( ) const {
 			ite++;
 			continue;
 		}
-		DOLL doll = enemy->getDoll( );
-		Vector pos = enemy->getPos( );
-		ModelMV1Ptr model = doll_house->getModel( doll );
-		double rot = Vector( 0, 0, -1 ).angle( enemy->getDir( ) );
-		Vector axis = Vector( 0, 1, 0 );
-		if ( Vector( 0, 0, -1 ).cross( enemy->getDir( ) ).y < 0 ) {
-			axis = Vector( 0, -1, 0 );
-		}
-		model->setRot( Matrix::makeTransformRotation( axis, rot ) );
-		model->setTrans( Matrix::makeTransformTranslation( pos ) );
+		ModelMV1Ptr model = enemy->getModel( );
 		model->draw( );
 		ite++;
 	}
 }
 
 void RockViewer::drawPlayer( ) const {
-	RockDollHousePtr doll_house( RockDollHouse::getTask( ) );
 	RockFamilyPtr family( RockFamily::getTask( ) );
 	unsigned int client_id = RockClientInfo::getTask( )->getClientId( );
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		if ( client_id != _status->getPlayer( i ).state ) {
 			continue;
 		}
-		RockPlayerPtr player( family->getPlayer( i ) );
-		DOLL doll = player->getDoll( );
-		Vector pos = player->getPos( );
-		ModelMV1Ptr model = doll_house->getModel( doll );
-		double anim_time = fmod( player->getAnimTime( ), model->getEndAnimTime( ) );
-		if ( player->isDead( ) &&
-			 player->getAnimTime( ) >= model->getEndAnimTime( ) ) {
-			//死亡アニメーションはループさせない
-			anim_time = model->getEndAnimTime( );
-		}
-		model->setAnimTime( anim_time );
-		double rot = Vector( 0, 0, -1 ).angle( player->getDir( ) );
-		Vector axis = Vector( 0, 1, 0 );
-		if ( Vector( 0, 0, -1 ).cross( player->getDir( ) ).y < 0 ) {
-			axis = Vector( 0, -1, 0 );
-		}
-		model->setRot( Matrix::makeTransformRotation( axis, rot ) );
-		model->setTrans( Matrix::makeTransformTranslation( pos ) );
+		ModelMV1Ptr model = family->getPlayer( i )->getModel( );
 		model->draw( );
 	}
 }

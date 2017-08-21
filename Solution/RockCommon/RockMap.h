@@ -2,9 +2,9 @@
 #include "Task.h"
 #include <string>
 #include <vector>
-#include "ModelMV1.h"
 
 PTR( RockMap );
+PTR( ModelMV1 );
 
 class RockMap : public Task {
 public:

@@ -1,7 +1,6 @@
 #include "RockFamily.h"
 #include "Application.h"
 #include "RockPlayer.h"
-#include "Status.h"
 #include "RockClientInfo.h"
 #include <assert.h>
 

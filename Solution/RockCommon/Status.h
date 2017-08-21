@@ -1,7 +1,7 @@
 #pragma once
+#include "Data.h"
 #include <array>
 #include "define.h"
-#include "Data.h"
 #include <assert.h>
 
 class Status : public Data {
@@ -37,22 +37,22 @@ public:
 
 	virtual ~Status( ) {
 
-	}
+	};
 
 	Player& getPlayer( int idx ) {
 		assert( idx >= 0 );
 		assert( idx < PLAYER_NUM );
 
 		return _player[ idx ];
-	}
+	};
 
 	void * getPtr( ) {
 		return ( void * )_player;
-	}
+	};
 
 	int getSize( ) {
 		return sizeof( _player );
-	}
+	};
 
 private:
 #	pragma pack( 1 )

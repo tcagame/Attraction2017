@@ -2,10 +2,10 @@
 #include "Task.h"
 #include <string>
 #include <array>
-#include "ModelMV1.h"
 #include "define.h"
 
 PTR( RockDollHouse );
+PTR( ModelMV1 );
 
 class RockDollHouse : public Task {
 public:

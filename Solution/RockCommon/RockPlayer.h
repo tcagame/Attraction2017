@@ -9,12 +9,11 @@ public:
 	RockPlayer( StatusPtr status, const Vector& pos, int id );
 	virtual ~RockPlayer( );
 public:
-	double getAnimTime( ) const;
 	bool isActive( ) const;
 	void bound( );
 	void damage( int force );
 	void back( );
-	bool isDead( ) const;
+	ModelMV1Ptr getModel( ) const;
 protected:
 	void act( );
 private:

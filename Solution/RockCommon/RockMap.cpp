@@ -1,5 +1,6 @@
 #include "RockMap.h"
 #include "Application.h"
+#include "ModelMV1.h"
 	
 RockMapPtr RockMap::getTask( ) {
 	return std::dynamic_pointer_cast<RockMap>( Application::getInstance( )->getTask( getTag( ) ) );

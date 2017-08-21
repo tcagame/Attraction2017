@@ -3,7 +3,6 @@
 #include <string>
 #include <array>
 #include "define.h"
-#include "Status.h"
 #include "mathmatics.h"
 
 PTR( RockFamily );

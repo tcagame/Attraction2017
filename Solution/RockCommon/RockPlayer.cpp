@@ -11,6 +11,7 @@
 #include "RockArmoury.h"
 #include "RockShot.h"
 #include "Effect.h"
+#include "RockDollHouse.h"
 
 //ˆÚ“®
 static const double JUMP_POWER = 3.0;
@@ -298,20 +299,32 @@ void RockPlayer::actOnBraking( ) {
 void RockPlayer::actOnDead( ) {
 }
 
-double RockPlayer::getAnimTime( ) const {
+ModelMV1Ptr RockPlayer::getModel( ) const {
+	ModelMV1Ptr model = RockDollHouse::getTask( )->getModel( getDoll( ) );
 	double anim_time = 0;
+	double end_time = model->getEndAnimTime( );
 	switch ( _action ) {
 	case ACTION_WAIT:		
-		anim_time = ( double )getActCount( ) * ANIM_SPEED;
+		anim_time = fmod( ( double )getActCount( ) * ANIM_SPEED, end_time );
 		break;
 	case ACTION_JUMP:
+	{
 		anim_time = ( double )getActCount( ) * ANIM_SPEED;
+		if ( anim_time >= end_time ) {
+			anim_time = end_time;
+		}
+	}
 		break;
 	case ACTION_WALK:
-		anim_time = ( double )getActCount( ) * ANIM_SPEED;
+		anim_time = fmod( ( double )getActCount( ) * ANIM_SPEED, end_time );
 		break;
 	case ACTION_DEAD:
+	{
 		anim_time = ( double )getActCount( ) * ANIM_SPEED;
+		if ( anim_time >= end_time ) {
+			anim_time = end_time;
+		}
+	}
 		break;
 	case ACTION_CHARGE:
 		anim_time = ( double )getActCount( ) * ANIM_SPEED;
@@ -320,7 +333,16 @@ double RockPlayer::getAnimTime( ) const {
 		anim_time = 0;
 		break;
 	}
-	return anim_time;
+
+	model->setAnimTime( anim_time );
+	double rot = Vector( 0, 0, -1 ).angle( getDir( ) );
+	Vector axis = Vector( 0, 1, 0 );
+	if ( Vector( 0, 0, -1 ).cross( getDir( ) ).y < 0 ) {
+		axis = Vector( 0, -1, 0 );
+	}
+	model->setRot( Matrix::makeTransformRotation( axis, rot ) );
+	model->setTrans( Matrix::makeTransformTranslation( getPos( ) ) );
+	return model;
 }
 
 void RockPlayer::damage( int force ) {
@@ -336,8 +358,4 @@ void RockPlayer::bound( ) {
 void RockPlayer::back( ) {
 	Vector vec = getVec( );
 	setPos( getPos( ) - Vector( vec.x, 0, vec.z ) );
-}
-
-bool RockPlayer::isDead( ) const {
-	return _action == ACTION_DEAD;
 }

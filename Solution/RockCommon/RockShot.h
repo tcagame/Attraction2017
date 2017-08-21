@@ -11,6 +11,7 @@ public:
 	bool isFinished( ) const;
 	void setBack( );
 	void setFinished( );
+	ModelMV1Ptr getModel( ) const;
 protected:
 	void act( );
 private:

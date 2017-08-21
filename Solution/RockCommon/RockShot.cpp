@@ -60,3 +60,7 @@ void RockShot::setFinished( ) {
 void RockShot::setBack( ) {
 	_back = true;
 }
+
+ModelMV1Ptr RockShot::getModel( ) const {
+	return ModelMV1Ptr( );
+}

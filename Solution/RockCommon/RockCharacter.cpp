@@ -12,9 +12,9 @@ const double BOUND_POWER = 1.0;
 
 RockCharacter::RockCharacter( const Vector& pos, DOLL doll, int radius, int height, bool mass, bool head ) :
 _pos( pos ),
-_doll( doll ),
 _mass( mass ),
 _act_count( 0 ),
+_doll( doll ),
 _radius( radius ),
 _height( height ),
 _head( head ),
@@ -96,14 +96,6 @@ Vector RockCharacter::getDir( ) const {
 	return _dir;
 }
 
-DOLL RockCharacter::getDoll( ) const {
-	return _doll;
-}
-
-void RockCharacter::setDoll( DOLL doll ) {
-	_doll = doll;
-}
-
 bool RockCharacter::isStanding( ) const {
 	return _standing;
 }
@@ -122,6 +114,14 @@ int RockCharacter::getActCount( ) const {
 
 void RockCharacter::setRadius( int radius ) {
 	_radius = radius;
+}
+
+DOLL RockCharacter::getDoll( ) const {
+	return _doll;
+}
+
+void RockCharacter::setDoll( DOLL doll ) {
+	_doll = doll;
 }
 
 int RockCharacter::getRadius( ) const {

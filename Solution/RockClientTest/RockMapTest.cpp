@@ -9,6 +9,7 @@ const double ENTRY_RADIUS = 40;
 RockMapTest::RockMapTest( ) {
 	_filenames = { };
 	_filenames.push_back( "Resource/Rock/map/map01.mv1" );
+	_filenames.push_back( "Resource/Rock/object/obj06/obj06.mv1" );
 	_filename_col = "Resource/Rock/map/map01_col.mv1";
 }
 
@@ -39,7 +40,7 @@ void RockMapTest::update( ) {
 	}
 }
 
-bool RockMapTest::isNext( Vector pos ) const {
+bool RockMapTest::isNext( const Vector& pos ) const {
 	bool result = false;
 	double length = ( pos - ENTRY_POS ).getLength( );
 	if ( ENTRY_RADIUS > length ) {

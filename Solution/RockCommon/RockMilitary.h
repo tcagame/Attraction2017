@@ -1,10 +1,8 @@
 #pragma once
 #include "Task.h"
 #include "define.h"
-#include "ModelMV1.h"
 #include <string>
 #include <list>
-#include <array>
 
 PTR( RockMilitary );
 PTR( RockEnemy );
@@ -34,6 +32,5 @@ private:
 	std::list< RockEnemyPtr > _enemies;
 	std::list< RockImpactPtr > _impacts;
 	std::list< RockPopPtr > _pops;
-	std::array< ModelMV1Ptr, MAX_DOLL > _enemy_model;
 };
 
