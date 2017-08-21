@@ -1,5 +1,5 @@
 #include "EnemyWind.h"
-#include "Drawer.h"
+#include "SynchronousData.h"
 
 const int WAIT_ANIM_TIME = 5;
 const int GRAPH_WIDTH_NUM = 10;
@@ -62,30 +62,27 @@ void EnemyWind::act( ) {
 	}
 }
 
-Chip EnemyWind::getChip( ) const {
+void EnemyWind::setSynchronousData( unsigned char type, int camera_pos ) const {
 	const int ANIM[ ] = {
 		20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21
 	};
-	const int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-	Chip chip = Chip( );
-	chip.tx = ( ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ] % GRAPH_WIDTH_NUM ) * 128;
-	chip.ty = ( ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ] / GRAPH_WIDTH_NUM ) * 128;
-	chip.size = getChipSize( );
+	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	
 	Vector pos = getPos( );
-	DIR dir = getDir( );
-	if ( dir == DIR_RIGHT ){
-		chip.sx1 = ( int )pos.x - chip.size / 2 + chip.size;
-		chip.sy1 = ( int )pos.y - chip.size;
-		chip.sx2 = chip.sx1 - chip.size;
-		chip.sy2 = chip.sy1 + chip.size;
-	} else {
-		chip.sx1 = ( int )pos.x - chip.size / 2;
-		chip.sy1 = ( int )pos.y - chip.size;
-		chip.sx2 = chip.sx1 + chip.size;
-		chip.sy2 = chip.sy1 + chip.size;
+	int x = ( int )pos.x;
+	int y = ( int )pos.y;
+
+	AREA area = AREA_EVENT;
+	if ( getState( ) == STATE_MAIN ) {
+		x -= camera_pos;
+		area = AREA_MAIN;
 	}
-	return chip;
+	unsigned char attribute = 0;
+	if ( getDir( ) == DIR_RIGHT ) {
+		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
+	}
+	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
 }
 
 void EnemyWind::damage( int force ) {

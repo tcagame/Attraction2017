@@ -1,6 +1,7 @@
 #include "EnemyHand.h"
 #include "Military.h"
 #include "EnemyHandAttack.h"
+#include "SynchronousData.h"
 
 static const int WAIT_ANIM_TIME = 3;
 static const int ATTACK_TIME = WAIT_ANIM_TIME * 21;
@@ -24,21 +25,25 @@ void EnemyHand::act( ) {
 	}
 }
 
-Chip EnemyHand::getChip( ) const {
+void EnemyHand::setSynchronousData( unsigned char type, int camera_pos ) const {
 	const int ANIM[ ] = {
-		0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 2, 1, 0
+		40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 42, 41, 40
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-	Chip chip = Chip( );
-	chip.tx = ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ] * 64;
-	chip.ty = 2 * 64;
-	chip.size = getChipSize( );
 	
 	Vector pos = getPos( );
-	chip.sx1 = ( int )pos.x - chip.size / 2 + chip.size;
-	chip.sy1 = ( int )pos.y - chip.size;
-	chip.sx2 = chip.sx1 - chip.size;
-	chip.sy2 = chip.sy1 + chip.size;
-	
-	return chip;
+	int x = ( int )pos.x;
+	int y = ( int )pos.y;
+
+	AREA area = AREA_EVENT;
+	if ( getState( ) == STATE_MAIN ) {
+		x -= camera_pos;
+		area = AREA_MAIN;
+	}
+	unsigned char attribute = 0;
+	if ( getDir( ) == DIR_RIGHT ) {
+		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
+	}
+	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
 }

@@ -5,7 +5,7 @@ public:
 	EnemyPurpleZombie( const Vector& pos );
 	virtual ~EnemyPurpleZombie( );
 public:
-	Chip getChip( ) const;
+	void setSynchronousData( unsigned char type, int camera_pos ) const;
 protected:
 	void act( );
 private:
