@@ -6,7 +6,7 @@ public:
 	EnemySwampZombieC( const Vector& pos );
 	virtual ~EnemySwampZombieC( );
 public:
-	Chip getChip( ) const;
+	void setSynchronousData( unsigned char type, int camera_pos ) const;
 	void damage( int force );
 protected:
 	void act( );
