@@ -29,11 +29,12 @@ void ViewerObject::draw( AREA area, int sx, int sy ) const {
 		unsigned char type = data->getObjectType( idx );
 		unsigned char attribute = data->getObjectAttribute( idx );
 		int pattern = data->getObjectPattern( idx );
-		drawSprite( x, y, type, attribute, pattern );
+		int size = data->getObjectSize( idx );
+		drawSprite( x, y, type, attribute, pattern, size );
 	}
 }
 
-void ViewerObject::drawSprite( int x, int y, unsigned char type, unsigned char attribute, int pattern ) const {
+void ViewerObject::drawSprite( int x, int y, unsigned char type, unsigned char attribute, int pattern, int size ) const {
 	Sprite sprite;
 	switch ( type ) {
 	case SynchronousData::TYPE_TAROSUKE:
@@ -61,7 +62,7 @@ void ViewerObject::drawSprite( int x, int y, unsigned char type, unsigned char a
 		sprite = getSpriteEnemy( GRAPH_ENEMY_BIG		, x, y, attribute, pattern );
 		break;
 	case SynchronousData::TYPE_ENEMY_BOSS:
-		sprite = getSpriteEnemy( GRAPH_ENEMY_BOSS		, x, y, attribute, pattern );
+		sprite = getSpriteEnemyBoss( GRAPH_ENEMY_BOSS	, x, y, attribute, pattern, size );
 		break;
 	};
 
@@ -112,10 +113,6 @@ ViewerObject::Sprite ViewerObject::getSpriteEnemy( GRAPH graph, int x, int y, un
 		chip_size = BIG_CHAR_GRAPH_SIZE;
 		width_num = ENEMY_BIG_CHIP_WIDTH;
 		break;
-	case GRAPH_ENEMY_BOSS:
-		//chip_size = SMALL_CHAR_GRAPH_SIZE;
-		//width_num = ENEMY_SMALL_CHIP_WIDTH;
-		break;
 	}
 	sprite.tx = pattern % width_num * chip_size;
 	sprite.ty = pattern / width_num * chip_size;
@@ -132,6 +129,30 @@ ViewerObject::Sprite ViewerObject::getSpriteEnemy( GRAPH graph, int x, int y, un
 		sprite.sy1 = y - chip_size;
 		sprite.sx2 = sprite.sx1 + chip_size;
 		sprite.sy2 = sprite.sy1 + chip_size;
+	}
+
+	return sprite;
+}
+
+ViewerObject::Sprite ViewerObject::getSpriteEnemyBoss( GRAPH graph, int x, int y, unsigned char attribute, int pattern, int size ) const {
+	Sprite sprite;
+	sprite.graph = graph;
+	int width_num = 1024 / size;
+	sprite.tx = pattern % width_num * size;
+	sprite.ty = pattern / width_num * size;
+	sprite.tw = size;
+	sprite.th = size;
+
+	if ( attribute & SynchronousData::ATTRIBUTE_REVERSE ) {
+		sprite.sx1 = x - size / 2 + size;
+		sprite.sy1 = y - size;
+		sprite.sx2 = sprite.sx1 - size;
+		sprite.sy2 = sprite.sy1 + size;
+	} else {
+		sprite.sx1 = x - size / 2;
+		sprite.sy1 = y - size;
+		sprite.sx2 = sprite.sx1 + size;
+		sprite.sy2 = sprite.sy1 + size;
 	}
 
 	return sprite;

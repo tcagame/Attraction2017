@@ -137,7 +137,11 @@ int SynchronousData::getObjectPattern( int idx ) const {
 	return _data.object[ idx ].pattern;
 }
 
-void SynchronousData::addObject( AREA area, unsigned char type, int pattern, unsigned char attribute, int ax, int ay ) {
+int SynchronousData::getObjectSize( int idx ) const {
+	return _data.object[ idx ].size;
+}
+
+void SynchronousData::addObject( AREA area, unsigned char type, int pattern, unsigned char attribute, int ax, int ay, int size ) {
 	if ( _data.idx[ AREA_MAIN ] >= _data.idx[ AREA_EVENT ] ) {
 		return;
 	}
@@ -155,4 +159,5 @@ void SynchronousData::addObject( AREA area, unsigned char type, int pattern, uns
 	_data.object[ index ].attribute = attribute;
 	_data.object[ index ].ax        = ( long )ax;
 	_data.object[ index ].ay        = ( long )ay;
+	_data.object[ index ].size      = size;
 }

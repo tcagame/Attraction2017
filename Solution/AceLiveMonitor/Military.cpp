@@ -94,6 +94,7 @@ void Military::update( ) {
 	{//event
 		if ( _boss ) {
 			_boss->update( );
+			_boss->setSynchronousData( SynchronousData::TYPE_ENEMY_BOSS, camera_pos );
 			for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
 				PlayerPtr player( family->getPlayer( i ) );
 				if ( player->isOverlapped( _boss ) ) {

@@ -41,7 +41,7 @@ void EnemyHand::setSynchronousData( unsigned char type, int camera_pos ) const {
 		area = AREA_MAIN;
 	}
 	unsigned char attribute = 0;
-	if ( getDir( ) == DIR_RIGHT ) {
+	if ( getDir( ) == DIR_LEFT ) {
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );

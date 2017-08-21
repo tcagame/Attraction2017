@@ -1,13 +1,15 @@
 #include "EnemyBossRedDaemon.h"
 #include "EnemyLittleRedDaemon.h"
 #include "Military.h"
+#include "SynchronousData.h"
 
 static const int WAIT_ANIM_TIME = 10;
 static const int WAIT_POP_TIME = 30000;
 static const int MAX_HP = 12;
+static const int CHIP_SIZE = 256;
 
 EnemyBossRedDaemon::EnemyBossRedDaemon( const Vector& pos ) :
-EnemyBoss( pos, BIG_CHAR_GRAPH_SIZE, MAX_HP ) {
+EnemyBoss( pos, CHIP_SIZE, MAX_HP ) {
 }
 
 
@@ -22,37 +24,30 @@ void EnemyBossRedDaemon::act( ) {
 	}
 }
 
-Chip EnemyBossRedDaemon::getChip( ) const {
-	Chip chip = Chip( );
-	Vector pos = getPos( );
-	chip.size = 192;
-	chip.sx1 = ( int )pos.x - chip.size / 2;
-	chip.sy1 = ( int )pos.y - chip.size;
-	chip.sx2 = chip.sx1 + chip.size;
-	chip.sy2 = chip.sy1 + chip.size;
-	
-	const int ANIM[ ] = {
-		0, 1
-	};
-	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-	int cx = ANIM[ ( getActCount( ) / WAIT_ANIM_TIME ) % anim_size ];
-	//int cy = 2;
-	chip.tx = cx * chip.size;
-	chip.ty = 320;
-	return chip;
-}
+void EnemyBossRedDaemon::setSynchronousData( unsigned char type, int camera_pos ) const {
+	{//–{‘Ì
+		const int ANIM[ ] = {
+			8, 9
+		};
+		int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
+		
+		Vector pos = getPos( );
+		int x = ( int )pos.x;
+		int y = ( int )pos.y;
 
-Chip EnemyBossRedDaemon::getChip2( ) const {
-	Chip chip = Chip( );
-	Vector pos = getPos( );
-	chip.size = 192;
-	chip.sx1 = ( int )pos.x - chip.size / 2;
-	chip.sy1 = ( int )pos.y - chip.size - ( int )( sin( ( double )getActCount( ) / PI * 1 ) * 40 ) - 20;
-	chip.sx2 = chip.sx1 + chip.size;
-	chip.sy2 = chip.sy1 + chip.size;
-	chip.tx = 2 * chip.size;
-	chip.ty = 320;
-	return chip;
+		AREA area = AREA_EVENT;
+		if ( getState( ) == STATE_MAIN ) {
+			x -= camera_pos;
+			area = AREA_MAIN;
+		}
+		int chip_size = getChipSize( );
+		SynchronousDataPtr data( SynchronousData::getTask( ) );
+		//–{‘Ì
+		data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], 0, x, y, chip_size );
+		//˜r
+		y -= ( int )( sin( ( double )getActCount( ) / PI * 1 ) * 40 ) - 20;
+		data->addObject( area, type, 10, 0, x, y, chip_size );
+	}
 }
 
 void EnemyBossRedDaemon::dropItem( ) {
