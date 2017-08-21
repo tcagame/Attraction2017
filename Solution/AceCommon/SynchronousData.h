@@ -24,6 +24,10 @@ public:
 	static const unsigned char TYPE_GARISUKE = 12;
 	static const unsigned char TYPE_TAROMI   = 13;
 	static const unsigned char TYPE_CHARGE   = 14;
+	static const unsigned char TYPE_ENEMY_MIDIUM   = 15;
+	static const unsigned char TYPE_ENEMY_SMALL    = 16;
+	static const unsigned char TYPE_ENEMY_BIG      = 17;
+	static const unsigned char TYPE_ENEMY_BOSS     = 18;
 public:
 	static std::string getTag( ) { return "SYNCHRONOUSDATA"; };
 	static SynchronousDataPtr getTask( );
@@ -71,7 +75,7 @@ private:
 			} status[ ACE_PLAYER_NUM ];
 			struct Object {
 				unsigned char type;
-				unsigned char pattern;
+				unsigned int pattern;
 				unsigned char attribute;
 				long          ax;
 				long          ay;

@@ -17,6 +17,10 @@ private:
 		GRAPH_PLAYER_GARISUKE,
 		GRAPH_PLAYER_TAROMI,
 		GRAPH_SHOT,
+		GRAPH_ENEMY_MIDIUM,
+		GRAPH_ENEMY_SMALL,
+		GRAPH_ENEMY_BIG,
+		GRAPH_ENEMY_BOSS,
 		MAX_GRAPH,
 	};
 	struct Sprite {
@@ -33,6 +37,7 @@ private:
 private:
 	void drawSprite( int x, int y, unsigned char type, unsigned char attribute, int pattern ) const;
 	Sprite getSpritePlayer( GRAPH graph, int x, int y, unsigned char attribute, int pattern ) const;
+	Sprite getSpriteEnemy( GRAPH graph, int x, int y, unsigned char attribute, int pattern ) const;
 private:
 	std::array< ImagePtr, MAX_GRAPH > _image;
 };

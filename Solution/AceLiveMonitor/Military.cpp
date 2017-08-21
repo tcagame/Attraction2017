@@ -15,6 +15,7 @@
 #include "EnemyAttack.h"
 #include "EnemyBoss.h"
 #include "Magazine.h"
+#include "SynchronousData.h"
 
 PTR( Player );
 
@@ -35,6 +36,7 @@ Military::~Military( ) {
 void Military::update( ) {
 	FamilyPtr family( Family::getTask( ) );
 	StoragePtr storage( Storage::getTask( ) );
+	int camera_pos = ( int )family->getCameraPos( );
 	{//main
 		std::list< EnemyPtr >::const_iterator ite = _enemies.begin( );
 		while ( ite != _enemies.end( ) ) {
@@ -73,6 +75,19 @@ void Military::update( ) {
 				}
 			}
 			enemy->update( );
+			unsigned char type = 0;
+			switch ( enemy->getChipSize( ) ) {
+			case SMALL_CHAR_GRAPH_SIZE:
+				type = SynchronousData::TYPE_ENEMY_SMALL;
+				break;
+			case NORMAL_CHAR_GRAPH_SIZE:
+				type = SynchronousData::TYPE_ENEMY_MIDIUM;
+				break;
+			case BIG_CHAR_GRAPH_SIZE:
+				type = SynchronousData::TYPE_ENEMY_BIG;
+				break;
+			}
+			enemy->setSynchronousData( type, camera_pos );
 			ite++;
 		}
 	}
@@ -129,6 +144,20 @@ void Military::update( ) {
 				}
 			}
 			enemy->update( );
+			
+			unsigned char type = 0;
+			switch ( enemy->getChipSize( ) ) {
+			case SMALL_CHAR_GRAPH_SIZE:
+				type = SynchronousData::TYPE_ENEMY_SMALL;
+				break;
+			case NORMAL_CHAR_GRAPH_SIZE:
+				type = SynchronousData::TYPE_ENEMY_MIDIUM;
+				break;
+			case BIG_CHAR_GRAPH_SIZE:
+				type = SynchronousData::TYPE_ENEMY_BIG;
+				break;
+			}
+			enemy->setSynchronousData( type, camera_pos );
 			ite++;
 		}
 	}
@@ -141,6 +170,8 @@ void Military::update( ) {
 			player->blowAway( );
 		}
 	}
+	_hell_fire->setSynchronousData( SynchronousData::TYPE_ENEMY_MIDIUM, camera_pos );
+
 }
 
 const std::list< EnemyPtr > Military::getEnemyList( ) const {

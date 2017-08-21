@@ -151,7 +151,7 @@ void SynchronousData::addObject( AREA area, unsigned char type, int pattern, uns
 	}
 
 	_data.object[ index ].type      = type;
-	_data.object[ index ].pattern   = ( unsigned char )pattern;
+	_data.object[ index ].pattern   = pattern;
 	_data.object[ index ].attribute = attribute;
 	_data.object[ index ].ax        = ( long )ax;
 	_data.object[ index ].ay        = ( long )ay;
