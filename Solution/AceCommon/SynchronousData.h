@@ -48,6 +48,7 @@ public:
 	unsigned char getObjectType( int idx ) const;
 	unsigned char getObjectAttribute( int idx ) const;
 	int getObjectPattern( int idx ) const;
+	int getObjectSize( int idx ) const;
 	int getIdx( AREA area, int relative_idx ) const;
 public:
 	void * getPtr( );
@@ -59,7 +60,7 @@ public:
 	void setStatusRedo( int idx, int redo );
 	void setStatusState( int idx, unsigned char state );
 	void resetObject( );
-	void addObject( AREA area, unsigned char type, int pattern, unsigned char attribute, int ax, int ay );
+	void addObject( AREA area, unsigned char type, int pattern, unsigned char attribute, int ax, int ay, int size = -1 );
 private:
 	static const int OBJECT_NUM = 140;
 
@@ -79,6 +80,7 @@ private:
 				unsigned char attribute;
 				long          ax;
 				long          ay;
+				unsigned int size;
 			} object[ OBJECT_NUM ];
 			int idx[ MAX_AREA ];
 		};

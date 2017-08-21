@@ -35,9 +35,10 @@ private:
 		int sy2;
 	};
 private:
-	void drawSprite( int x, int y, unsigned char type, unsigned char attribute, int pattern ) const;
+	void drawSprite( int x, int y, unsigned char type, unsigned char attribute, int pattern, int size ) const;
 	Sprite getSpritePlayer( GRAPH graph, int x, int y, unsigned char attribute, int pattern ) const;
 	Sprite getSpriteEnemy( GRAPH graph, int x, int y, unsigned char attribute, int pattern ) const;
+	Sprite getSpriteEnemyBoss( GRAPH graph, int x, int y, unsigned char attribute, int pattern, int size ) const;
 private:
 	std::array< ImagePtr, MAX_GRAPH > _image;
 };
