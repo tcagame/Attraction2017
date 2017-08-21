@@ -39,7 +39,3 @@ void EnemyGama::setSynchronousData( unsigned char type, int camera_pos ) const {
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
 	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
 }
-
-Chip EnemyGama::getChip( ) const {
-	return Chip( );
-}

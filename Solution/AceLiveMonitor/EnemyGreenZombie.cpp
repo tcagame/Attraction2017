@@ -53,7 +53,3 @@ void EnemyGreenZombie::setSynchronousData( unsigned char type, int camera_pos ) 
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
 	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
 }
-
-Chip EnemyGreenZombie::getChip( ) const {
-	return Chip( );
-}

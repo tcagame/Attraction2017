@@ -49,7 +49,3 @@ void EnemyCrocoSnake::setSynchronousData( unsigned char type, int camera_pos ) c
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
 	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
 }
-
-Chip EnemyCrocoSnake::getChip( ) const {
-	return Chip( );
-}

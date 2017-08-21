@@ -59,7 +59,3 @@ void EnemyFaceAndHand::setSynchronousData( unsigned char type, int camera_pos ) 
 		break;
 	}
 }
-
-Chip EnemyFaceAndHand::getChip( ) const {
-	return Chip( );
-}
