@@ -39,6 +39,9 @@
 #include "PopStone.h"
 #include "PopMoth.h"
 #include "PopEyeDaemon.h"
+#include "PopShell.h"
+#include "PopWaterGhost.h"
+#include "PopRay.h"
 
 PopperPtr Popper::getTask( ) {
 	return std::dynamic_pointer_cast< Popper >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -163,6 +166,15 @@ void Popper::initialize( ) {
 				break;
 			case OBJECT_EYE_DAEMON:
 				_pops.push_back( PopPtr( new PopEyeDaemon( Vector( x, y ) ) ) );
+				break;
+			case OBJECT_SHELL:
+				_pops.push_back( PopPtr( new PopShell( Vector( x, y ) ) ) );
+				break;
+			case OBJECT_WATER_GHOST:
+				_pops.push_back( PopPtr( new PopWaterGhost( Vector( x, y ) ) ) );
+				break;
+			case OBJECT_RAY:
+				_pops.push_back( PopPtr( new PopRay( Vector( x, y ) ) ) );
 				break;
 			}
 		}

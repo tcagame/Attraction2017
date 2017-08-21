@@ -163,6 +163,9 @@
     <ClCompile Include="EnemyArcherAttack.cpp" />
     <ClCompile Include="EnemyAttack.cpp" />
     <ClCompile Include="EnemyHellFire.cpp" />
+    <ClCompile Include="EnemyRay.cpp" />
+    <ClCompile Include="EnemyShell.cpp" />
+    <ClCompile Include="EnemyWaterGhost.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemFire.cpp" />
     <ClCompile Include="EnemyBat.cpp" />
@@ -253,7 +256,9 @@
     <ClCompile Include="Impact.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Popper.cpp" />
+    <ClCompile Include="PopRay.cpp" />
     <ClCompile Include="PopRedBird.cpp" />
+    <ClCompile Include="PopShell.cpp" />
     <ClCompile Include="PopShishimai.cpp" />
     <ClCompile Include="PopShishimaiDaemon.cpp" />
     <ClCompile Include="PopSkeleton.cpp" />
@@ -263,6 +268,7 @@
     <ClCompile Include="PopSwampZombieA.cpp" />
     <ClCompile Include="PopSwampZombieB.cpp" />
     <ClCompile Include="PopTree.cpp" />
+    <ClCompile Include="PopWaterGhost.cpp" />
     <ClCompile Include="PopWhiteMist.cpp" />
     <ClCompile Include="PopWind.cpp" />
     <ClCompile Include="Sender.cpp" />
@@ -288,6 +294,9 @@
     <ClInclude Include="EnemyArcherAttack.h" />
     <ClInclude Include="EnemyAttack.h" />
     <ClInclude Include="EnemyHellFire.h" />
+    <ClInclude Include="EnemyRay.h" />
+    <ClInclude Include="EnemyShell.h" />
+    <ClInclude Include="EnemyWaterGhost.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemFire.h" />
     <ClInclude Include="EnemyBat.h" />
@@ -378,7 +387,9 @@
     <ClInclude Include="Impact.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Popper.h" />
+    <ClInclude Include="PopRay.h" />
     <ClInclude Include="PopRedBird.h" />
+    <ClInclude Include="PopShell.h" />
     <ClInclude Include="PopShishimai.h" />
     <ClInclude Include="PopShishimaiDaemon.h" />
     <ClInclude Include="PopSkeleton.h" />
@@ -388,6 +399,7 @@
     <ClInclude Include="PopSwampZombieA.h" />
     <ClInclude Include="PopSwampZombieB.h" />
     <ClInclude Include="PopTree.h" />
+    <ClInclude Include="PopWaterGhost.h" />
     <ClInclude Include="PopWhiteMist.h" />
     <ClInclude Include="PopWind.h" />
     <ClInclude Include="Sender.h" />
