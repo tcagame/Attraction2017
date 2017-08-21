@@ -5,7 +5,7 @@ public:
 	EnemyRedBird( const Vector& pos );
 	virtual ~EnemyRedBird( );
 public:
-	Chip getChip( ) const;
+	void setSynchronousData( unsigned char type, int camera_pos ) const;
 protected:
 	void act( );
 };

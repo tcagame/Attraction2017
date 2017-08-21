@@ -1,6 +1,7 @@
 #include "EnemyRedBird.h"
 #include "EnemyRedBirdAttack.h"
 #include "Military.h"
+#include "SynchronousData.h"
 
 const int WAIT_ANIM_TIME = 5;
 const int ATTACK_TIME = 30;
@@ -24,28 +25,25 @@ void EnemyRedBird::act( ) {
 	}
 }
 
-Chip EnemyRedBird::getChip( ) const {
+void EnemyRedBird::setSynchronousData( unsigned char type, int camera_pos ) const {
 	const int ANIM[ ] = {
-		0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+		280, 281, 282, 283, 284, 285, 286, 287, 288, 289
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-	Chip chip = Chip( );
-	chip.tx = ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ] * 64;
-	chip.ty = 14 * 64;
-	chip.size = getChipSize( );
 	
 	Vector pos = getPos( );
-	DIR dir = getDir( );
-	if ( dir == DIR_RIGHT ){
-		chip.sx1 = ( int )pos.x - chip.size / 2 + chip.size;
-		chip.sy1 = ( int )pos.y - chip.size;
-		chip.sx2 = chip.sx1 - chip.size;
-		chip.sy2 = chip.sy1 + chip.size;
-	} else {
-		chip.sx1 = ( int )pos.x - chip.size / 2;
-		chip.sy1 = ( int )pos.y - chip.size;
-		chip.sx2 = chip.sx1 + chip.size;
-		chip.sy2 = chip.sy1 + chip.size;
+	int x = ( int )pos.x;
+	int y = ( int )pos.y;
+
+	AREA area = AREA_EVENT;
+	if ( getState( ) == STATE_MAIN ) {
+		x -= camera_pos;
+		area = AREA_MAIN;
 	}
-	return chip;
+	unsigned char attribute = 0;
+	if ( getDir( ) == DIR_RIGHT ) {
+		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
+	}
+	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
 }

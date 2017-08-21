@@ -6,7 +6,7 @@ public:
 	EnemyLancer( const Vector& pos );
 	virtual ~EnemyLancer( );
 public:
-	Chip getChip( ) const;
+	void setSynchronousData( unsigned char type, int camera_pos ) const;
 protected:
 	void act( );
 };

@@ -6,7 +6,7 @@ public:
 	EnemyOnyudo( const Vector& pos );
 	virtual ~EnemyOnyudo( );
 public:
-	Chip getChip( ) const;
+	void setSynchronousData( unsigned char type, int camera_pos ) const;
 protected:
 	void act( );
 private:
