@@ -1,11 +1,12 @@
 #include "EnemyBossRock.h"
 #include "ItemRock.h"
 #include "Storage.h"
+#include "SynchronousData.h"
 
 static const int MAX_HP = 12;
 
 EnemyBossRock::EnemyBossRock( const Vector& pos ) :
-EnemyBoss( pos, BIG_CHAR_GRAPH_SIZE, MAX_HP ) {
+EnemyBoss( pos, 128, MAX_HP ) {
 }
 
 
@@ -16,30 +17,23 @@ void EnemyBossRock::act( ) {
 
 }
 
-Chip EnemyBossRock::getChip( ) const {
-	Chip chip = Chip( );
+void EnemyBossRock::setSynchronousData( unsigned char type, int camera_pos ) const {
 	Vector pos = getPos( );
-	chip.size = getChipSize( );
-	chip.sx1 = ( int )pos.x - chip.size / 2;
-	chip.sy1 = ( int )pos.y - chip.size;
-	chip.sx2 = chip.sx1 + chip.size;
-	chip.sy2 = chip.sy1 + chip.size;
-	chip.tx = 512;
-	chip.ty = 0;
-	return chip;
-}
+	int x = ( int )pos.x;
+	int y = ( int )pos.y;
 
-Chip EnemyBossRock::getChip2( ) const {
-	Chip chip = Chip( );
-	Vector pos = getPos( );
-	chip.size = getChipSize( );
-	chip.sx1 = ( int )pos.x - chip.size / 2;
-	chip.sy1 = ( int )pos.y - chip.size;
-	chip.sx2 = chip.sx1 + chip.size;
-	chip.sy2 = chip.sy1 + chip.size;
-	chip.tx = 896;
-	chip.ty = 0;
-	return chip;
+	AREA area = AREA_EVENT;
+	if ( getState( ) == STATE_MAIN ) {
+		x -= camera_pos;
+		area = AREA_MAIN;
+	}
+	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	//Šâ
+	data->addObject( area, type, 4, 0, x, y, getChipSize( ) );
+	//“ê
+	data->addObject( area, type, 7, 0, x, y, getChipSize( ) );
+
+	
 }
 
 void EnemyBossRock::dropItem( ) {

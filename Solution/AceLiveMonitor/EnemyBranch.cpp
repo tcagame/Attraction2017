@@ -1,6 +1,7 @@
 #include "EnemyBranch.h"
 #include "EnemySeed.h"
 #include "Military.h"
+#include "SynchronousData.h"
 
 static const int WAIT_ANIM_TIME = 5;
 static const int ATTACK_TIME = WAIT_ANIM_TIME * 11;
@@ -24,17 +25,18 @@ void EnemyBranch::act( ) {
 	}
 }
 
-Chip EnemyBranch::getChip( ) const {
-	Chip chip = Chip( );
-	const int ANIM[ ] = { 0, 1, 2, 3, 4, 5, 6, 3, 2, 1, 0  };
+void EnemyBranch::setSynchronousData( unsigned char type, int camera_pos ) const {
+	const int ANIM[ ] = { 68, 69, 70, 71, 72, 73, 74, 71, 70, 79, 68  };
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-	chip.tx = ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ] * 64 + 3 * 64;
-	chip.ty = 4 * 64;
-	chip.size = getChipSize( );
 	Vector pos = getPos( );
-	chip.sx1 = ( int )pos.x - chip.size / 2;
-	chip.sy1 = ( int )pos.y - chip.size;
-	chip.sx2 = chip.sx1 + chip.size;
-	chip.sy2 = chip.sy1 + chip.size;
-	return chip;
+	int x = ( int )pos.x;
+	int y = ( int )pos.y;
+
+	AREA area = AREA_EVENT;
+	if ( getState( ) == STATE_MAIN ) {
+		x -= camera_pos;
+		area = AREA_MAIN;
+	}
+	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	data->addObject( area, SynchronousData::TYPE_ENEMY_BOSS, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], 0, x, y, getChipSize( ) );
 }

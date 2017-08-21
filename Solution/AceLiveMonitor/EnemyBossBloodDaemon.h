@@ -7,7 +7,7 @@ public:
 	EnemyBossBloodDaemon( const Vector& pos );
 	virtual ~EnemyBossBloodDaemon( );
 public:
-	Chip getChip( ) const;
+	void setSynchronousData( unsigned char type, int camera_pos ) const;
 	void dropItem( );
 protected:
 	void act( );

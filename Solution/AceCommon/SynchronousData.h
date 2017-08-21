@@ -80,7 +80,7 @@ private:
 				unsigned char attribute;
 				long          ax;
 				long          ay;
-				unsigned int size;
+				int size;
 			} object[ OBJECT_NUM ];
 			int idx[ MAX_AREA ];
 		};

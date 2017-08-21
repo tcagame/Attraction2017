@@ -1,6 +1,6 @@
 #include "EnemySeed.h"
-
 #include "Military.h"
+#include "SynchronousData.h"
 
 static const int WAIT_ANIM_TIME = 5;
 static const int ATTACK_TIME = WAIT_ANIM_TIME * 11;
@@ -20,18 +20,21 @@ void EnemySeed::act( ) {
 	if ( isStanding( ) ) setVec( getVec( ) + Vector( 0, JUMP_MAX_HP ) );
 }
 
-Chip EnemySeed::getChip( ) const {
-	Chip chip = Chip( );
-	chip.tx = 0 * 32 + 10 * 64;
+void EnemySeed::setSynchronousData( unsigned char type, int camera_pos ) const {
+	int anim = 278;
 	if ( isStanding( ) ) {
-		chip.tx += 32;
+		anim++;
 	}
-	chip.ty = 4 * 64;
-	chip.size = getChipSize( );
 	Vector pos = getPos( );
-	chip.sx1 = ( int )pos.x - chip.size / 2;
-	chip.sy1 = ( int )pos.y - chip.size;
-	chip.sx2 = chip.sx1 + chip.size;
-	chip.sy2 = chip.sy1 + chip.size;
-	return chip;
+	int x = ( int )pos.x;
+	int y = ( int )pos.y;
+
+	AREA area = AREA_EVENT;
+	if ( getState( ) == STATE_MAIN ) {
+		x -= camera_pos;
+		area = AREA_MAIN;
+	}
+	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	data->addObject( area, SynchronousData::TYPE_ENEMY_BOSS, anim, 0, x, y, getChipSize( ) );
+	
 }

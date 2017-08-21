@@ -6,7 +6,7 @@ public:
 	EnemyTree( const Vector& pos );
 	virtual ~EnemyTree( );
 public:
-	Chip getChip( ) const;
+	void setSynchronousData( unsigned char type, int camera_pos ) const;
 protected:
 	void act( );
 };
