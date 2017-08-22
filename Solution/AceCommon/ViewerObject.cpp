@@ -8,6 +8,7 @@ ViewerObject::ViewerObject( ) {
 	_image[ GRAPH_PLAYER_TAROJIRO	] = drawer->createImage( "Family/tarojiro.png"		);
 	_image[ GRAPH_PLAYER_GARISUKE	] = drawer->createImage( "Family/garisuke.png"		);
 	_image[ GRAPH_PLAYER_TAROMI		] = drawer->createImage( "Family/taromi.png"		);
+	_image[ GRAPH_MONMOTARO			] = drawer->createImage( "Family/momotaro.png"		);
 	_image[ GRAPH_SHOT				] = drawer->createImage( "Effect/psychic.png"		);
 	_image[ GRAPH_ENEMY_MIDIUM		] = drawer->createImage( "Enemy/enemy_medium.png"	);
 	_image[ GRAPH_ENEMY_SMALL		] = drawer->createImage( "Enemy/enemy_small.png"	);
@@ -48,6 +49,9 @@ void ViewerObject::drawSprite( int x, int y, unsigned char type, unsigned char a
 		break;
 	case SynchronousData::TYPE_TAROMI:
 		sprite = getSpritePlayer( GRAPH_PLAYER_TAROMI	, x, y, attribute, pattern );
+		break;
+	case SynchronousData::TYPE_MONMOTARO:
+		sprite = getSpritePlayer( GRAPH_MONMOTARO		, x, y, attribute, pattern );
 		break;
 	case SynchronousData::TYPE_CHARGE:
 		sprite = getSpritePlayer( GRAPH_SHOT			, x, y, attribute, pattern );

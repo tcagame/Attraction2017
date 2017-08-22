@@ -14,6 +14,7 @@
 #include "SynchronousData.h"
 #include "Magazine.h"
 #include "Impact.h"
+#include "Monmotaro.h"
 
 #include <assert.h>
 
@@ -49,6 +50,7 @@ _money( 0 ),
 _toku( 0 ),
 _charge_count( 0 ),
 _unrivaled_count( MAX_UNRIVALED_COUNT ),
+_monmo( MonmotaroPtr( ) ),
 _action( ACTION_WAIT ) {
 	setRadius( 25 );
 	setDir( DIR_RIGHT );
@@ -101,6 +103,13 @@ void Player::act( ) {
 	actOnCamera( );
 	updateState( );
 	_unrivaled_count++;
+
+	if ( _monmo ) {
+		Vector pos = getPos( );
+		pos.x += getChipSize( ) / 2;
+		_monmo->setTarget( pos );
+		_monmo->update( );
+	}
 }
 
 void Player::actOnWaiting( ) {
@@ -392,6 +401,14 @@ void Player::actOnDead( ) {
 }
 
 void Player::actOnCall( ) {
+	if ( !_monmo ) {
+		setAction( ACTION_WAIT );
+		return;
+	}
+
+	if ( _monmo->getAction( ) == Monmotaro::ACTION_WAIT ) {
+		setAction( ACTION_WAIT );
+	}
 }
 
 void Player::damage( int force ) {
@@ -424,140 +441,6 @@ void Player::damage( int force ) {
 
 Player::ACTION Player::getAction( ) const {
 	return _action;
-}
-
-Chip Player::getChip( ) const {
-	Chip chip = Chip( );
-	chip.size = NORMAL_CHAR_GRAPH_SIZE;
-	int cx = 0;
-	int cy = 0;
-	switch ( _action ) {
-	case ACTION_WAIT:
-		{
-			const int ANIM[ ] = {
-				0,
-			};
-			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-			cx = ANIM[ ( getActCount( ) / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] % PLAYER_ANIM_WIDTH_NUM;
-			cy = ANIM[ ( getActCount( ) / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] / PLAYER_ANIM_WIDTH_NUM;
-		}
-		break;
-	case ACTION_WALK:
-		{
-			const int ANIM[ ] = {
-				0, 1, 2, 1, 0, 3, 4, 3
-			};
-			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-			cx = ANIM[ ( ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] % PLAYER_ANIM_WIDTH_NUM;
-			cy = ANIM[ ( ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] / PLAYER_ANIM_WIDTH_NUM;
-		}
-		break;
-	case ACTION_BRAKE:
-		{
-			const int ANIM[ ] = {
-				6,
-			};
-			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-			cx = ANIM[ ( ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] % PLAYER_ANIM_WIDTH_NUM;
-			cy = ANIM[ ( ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] / PLAYER_ANIM_WIDTH_NUM;
-		}
-		break;
-	case ACTION_FLOAT:
-		{
-			const int ANIM[ ] = {
-				5,
-			};
-			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-			cx = ANIM[ ( ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] % PLAYER_ANIM_WIDTH_NUM;
-			cy = ANIM[ ( ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] / PLAYER_ANIM_WIDTH_NUM;
-		}
-		break;
-	case ACTION_CHARGE:
-		{
-			const int ANIM[ ] = {
-				30, 31, 32, 33, 34, 35, 36
-			};
-			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-			cx = ANIM[ ( _charge_count / ( CHARGE_PHASE_COUNT / 2 ) ) % anim_num ] % PLAYER_ANIM_WIDTH_NUM;
-			cy = ANIM[ ( _charge_count / ( CHARGE_PHASE_COUNT / 2 ) ) % anim_num ] / PLAYER_ANIM_WIDTH_NUM;
-		}
-		break;
-	case ACTION_OVER_CHARGE:
-		{
-			const int ANIM[ ] = {
-				38, 39
-			};
-			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-			cx = ANIM[ ( getActCount( ) / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] % PLAYER_ANIM_WIDTH_NUM;
-			cy = ANIM[ ( getActCount( ) / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] / PLAYER_ANIM_WIDTH_NUM;
-		}
-		break;
-	case ACTION_DAMEGE:
-		{
-			const int ANIM[ ] = {
-				63
-			};
-			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-			cx = ANIM[ ( getActCount( ) / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] % PLAYER_ANIM_WIDTH_NUM;
-			cy = ANIM[ ( getActCount( ) / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] / PLAYER_ANIM_WIDTH_NUM;
-		}
-		break;
-	case ACTION_BLOW_AWAY:
-		{
-			const int ANIM[ ] = {
-				5,
-			};
-			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-			cx = ANIM[ ( ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] % PLAYER_ANIM_WIDTH_NUM;
-			cy = ANIM[ ( ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT ) % anim_num ] / PLAYER_ANIM_WIDTH_NUM;
-		}
-		break;
-	case ACTION_DAED:
-		{
-			const int ANIM[ ] = {
-				60, 61, 62, 63, 64, 65, 66, 67, 68
-			};
-			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-			int anim = getActCount( ) / PLAYER_ANIM_WAIT_COUNT;
-			if ( anim >= anim_num ) {
-				anim = anim_num - 1;
-			}
-			cx = ANIM[ anim ] % PLAYER_ANIM_WIDTH_NUM;
-			cy = ANIM[ anim ] / PLAYER_ANIM_WIDTH_NUM;
-		}
-		break;
-	case ACTION_CALL:
-		{
-			const int ANIM[ ] = {
-				40, 41, 42, 43, 44, 45, 46, 47, 48
-			};
-			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-			int anim = getActCount( ) / PLAYER_ANIM_WAIT_COUNT;
-			if ( anim >= anim_num ) {
-				anim = anim_num - 1;
-			}
-			cx = ANIM[ anim ] % PLAYER_ANIM_WIDTH_NUM;
-			cy = ANIM[ anim ] / PLAYER_ANIM_WIDTH_NUM;
-		}
-		break;
-	}
-
-	
-	chip.tx = cx * NORMAL_CHAR_GRAPH_SIZE;
-	chip.ty = cy * NORMAL_CHAR_GRAPH_SIZE;
-	Vector pos = getPos( );
-	if ( getDir( ) == DIR_LEFT ) {
-		chip.sx1 = (int)pos.x - NORMAL_CHAR_GRAPH_SIZE / 2;
-		chip.sy1 = (int)pos.y - NORMAL_CHAR_GRAPH_SIZE + PLAYER_FOOT;
-		chip.sx2 = chip.sx1 + NORMAL_CHAR_GRAPH_SIZE;
-		chip.sy2 = chip.sy1 + NORMAL_CHAR_GRAPH_SIZE;
-	} else {
-		chip.sx1 = (int)pos.x - NORMAL_CHAR_GRAPH_SIZE / 2 + NORMAL_CHAR_GRAPH_SIZE;
-		chip.sy1 = (int)pos.y - NORMAL_CHAR_GRAPH_SIZE + PLAYER_FOOT;
-		chip.sx2 = chip.sx1 - NORMAL_CHAR_GRAPH_SIZE;
-		chip.sy2 = chip.sy1 + NORMAL_CHAR_GRAPH_SIZE;
-	}
-	return chip;
 }
 
 int Player::getChargeCount( ) const {
@@ -639,7 +522,11 @@ void Player::updateState( ) {
 	}
 	
 	if ( map->getObject( getPos( ) + getVec( ) ) == OBJECT_EVENT_CALL ) {
-		_action = ACTION_CALL;
+		map->usedObject( getPos( ) + getVec( ) );
+		Vector pos = getPos( );
+		pos.x += getChipSize( ) / 2;
+		_monmo = MonmotaroPtr( new Monmotaro( Vector( family->getCameraPos( ), 0 ), pos ) );
+		setAction( ACTION_CALL );
 		setVec( Vector( ) );
 	}
 

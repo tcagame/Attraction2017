@@ -41,7 +41,7 @@ void ViewerDebug::drawPlayer( ) const {
 			add_sx = 0;
 			add_sy = VIEW_EVENT_Y;
 		}
-		Vector pos( player->getPos( ) - Vector( 0, player->getChip( ).size / 2 ) );
+		Vector pos( player->getPos( ) - Vector( 0, player->getChipSize( ) / 2 ) );
 		drawer->drawCircle( pos + Vector( add_sx, add_sy ), player->getRadius( ) );
 	}
 }

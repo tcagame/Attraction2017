@@ -68,3 +68,12 @@ unsigned char Map::getObject( int mx, int my ) const {
 	}
 	return obj;
 }
+
+void Map::usedObject( const Vector& pos ) {
+	int object_width_num = _page_num * PAGE_OBJECT_WIDTH_NUM;
+	int mx = ( ( int )pos.x / OBJECT_CHIP_SIZE ) % object_width_num;
+	int my = ( int )pos.y / OBJECT_CHIP_SIZE;
+	assert( mx >= 0 && my >= 0 && mx < _page_num * PAGE_OBJECT_WIDTH_NUM && my < OBJECT_CHIP_HEIGHT_NUM );
+	int idx = mx + my * ( _page_num * PAGE_OBJECT_WIDTH_NUM );
+	_objects[ idx ] = OBJECT_NONE;
+}
