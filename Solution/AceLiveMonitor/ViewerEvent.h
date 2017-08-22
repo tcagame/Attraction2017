@@ -8,7 +8,7 @@ public:
 	ViewerEvent( );
 	virtual ~ViewerEvent( );
 public:
-	void draw( ) const;
+	void draw( int sx, int sy ) const;
 private:
 	std::vector< ImagePtr > _images;
 	ImagePtr _frame;

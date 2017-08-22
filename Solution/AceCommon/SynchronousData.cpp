@@ -27,17 +27,17 @@ int SynchronousData::getSize( ) {
 }
 
 int SynchronousData::getStatusPower( int idx ) const {
-	assert( idx < ACE_PLAYER_NUM );
+	assert( idx < MAX_PLAYER );
 	return _data.status[ idx ].power;
 }
 
 int SynchronousData::getStatusMoney( int idx ) const {
-	assert( idx < ACE_PLAYER_NUM );
+	assert( idx < MAX_PLAYER );
 	return _data.status[ idx ].money;
 }
 
 bool SynchronousData::isInProssessionOfStatusItem( int idx, unsigned char item ) const {
-	assert( idx < ACE_PLAYER_NUM );
+	assert( idx < MAX_PLAYER );
 	return ( _data.status[ idx ].items & item) != 0;
 }
 
@@ -54,19 +54,19 @@ unsigned char SynchronousData::getStatusState( int idx ) const {
 }
 
 void SynchronousData::setStatusPower( int idx, int power ) {
-	assert( idx < ACE_PLAYER_NUM );
+	assert( idx < MAX_PLAYER );
 	assert( power >= 0 );
 	_data.status[ idx ].power = ( unsigned char )power;
 }
 
 void SynchronousData::setStatusMoney( int idx, int money ) {
-	assert( idx < ACE_PLAYER_NUM );
+	assert( idx < MAX_PLAYER );
 	assert( money >= 0 );
 	_data.status[ idx ].power = ( unsigned char )money;
 }
 
 void SynchronousData::setInProssessionOfStatusItem( int idx, unsigned char item, bool possession ) {
-	assert( idx < ACE_PLAYER_NUM );
+	assert( idx < MAX_PLAYER );
 	if ( possession ) {
 		_data.status[ idx ].items |= item;
 	} else {
@@ -75,25 +75,25 @@ void SynchronousData::setInProssessionOfStatusItem( int idx, unsigned char item,
 }
 
 void SynchronousData::setStatusVirtue( int idx, int virtue ) {
-	assert( idx < ACE_PLAYER_NUM );
+	assert( idx < MAX_PLAYER );
 	assert( virtue >= 0 );
 	_data.status[ idx ].power = ( unsigned char )virtue;
 }
 
 void SynchronousData::setStatusRedo( int idx, int redo ) {
-	assert( idx < ACE_PLAYER_NUM );
+	assert( idx < MAX_PLAYER );
 	assert( redo >= 0 );
 	_data.status[ idx ].power = ( unsigned char )redo;
 }
 
 void SynchronousData::setStatusState( int idx, unsigned char state ) {
-	assert( idx < ACE_PLAYER_NUM );
+	assert( idx < MAX_PLAYER );
 	_data.status[ idx ].power = ( unsigned char )state;
 }
 
 
 void SynchronousData::resetObject( ) {
-	_data.idx[ AREA_MAIN ] = 0;
+	_data.idx[ AREA_STREET ] = 0;
 	_data.idx[ AREA_EVENT ] = OBJECT_NUM - 1;
 }
 
@@ -107,9 +107,9 @@ int SynchronousData::getObjectNum( AREA area ) const {
 
 int SynchronousData::getIdx( AREA area, int relative_idx ) const {
 	int index = 0;
-	if ( area == AREA_MAIN ) {
+	if ( area == AREA_STREET ) {
 		index = relative_idx;
-		assert( index < _data.idx[ AREA_MAIN ] );
+		assert( index < _data.idx[ AREA_STREET ] );
 	} else {
 		index = OBJECT_NUM - 1 - relative_idx;
 		assert( index > _data.idx[ AREA_EVENT ] );
@@ -142,14 +142,14 @@ int SynchronousData::getObjectSize( int idx ) const {
 }
 
 void SynchronousData::addObject( AREA area, unsigned char type, int pattern, unsigned char attribute, int ax, int ay, int size ) {
-	if ( _data.idx[ AREA_MAIN ] >= _data.idx[ AREA_EVENT ] ) {
+	if ( _data.idx[ AREA_STREET ] >= _data.idx[ AREA_EVENT ] ) {
 		return;
 	}
 	assert( pattern >= 0 );
 
 	int index = _data.idx[ area ];
-	if ( area == AREA_MAIN ) {
-		_data.idx[ AREA_MAIN ]++;
+	if ( area == AREA_STREET ) {
+		_data.idx[ AREA_STREET ]++;
 	} else {
 		_data.idx[ AREA_EVENT ]--;
 	}

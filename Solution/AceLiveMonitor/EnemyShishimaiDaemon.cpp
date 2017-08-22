@@ -23,7 +23,7 @@ EnemyShishimaiDaemon::~EnemyShishimaiDaemon( ) {
 void EnemyShishimaiDaemon::act( ) {
 	FamilyPtr family( Family::getTask( ) );
 	PlayerPtr near = family->getPlayer( 0 );
-	for ( int i = 0; i < ACE_PLAYER_NUM - 1; i++ ) {
+	for ( int i = 0; i < MAX_PLAYER - 1; i++ ) {
 		PlayerPtr player = family->getPlayer( i + 1 );
 		Vector diff_player = player->getPos( ) - getPos( );
 		Vector diff_near = near->getPos( ) - getPos( );
@@ -58,9 +58,9 @@ void EnemyShishimaiDaemon::setSynchronousData( unsigned char type, int camera_po
 	int y = ( int )pos.y;
 
 	AREA area = AREA_EVENT;
-	if ( getState( ) == STATE_MAIN ) {
+	if ( getState( ) == STATE_STREET ) {
 		x -= camera_pos;
-		area = AREA_MAIN;
+		area = AREA_STREET;
 	}
 	unsigned char attribute = 0;
 	if ( getDir( ) == DIR_RIGHT ) {

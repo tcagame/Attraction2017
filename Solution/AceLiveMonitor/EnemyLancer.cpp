@@ -19,7 +19,7 @@ EnemyLancer::~EnemyLancer( ) {
 
 void EnemyLancer::act( ) {
 	Vector vec = getVec( );
-	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
+	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		 PlayerPtr player = Family::getTask( )->getPlayer( i );
 		 Vector diff = player->getPos( ) - getPos( );
 		 if ( diff.getLength( ) < RANGE &&
@@ -41,9 +41,9 @@ void EnemyLancer::setSynchronousData( unsigned char type, int camera_pos ) const
 	int y = ( int )pos.y;
 
 	AREA area = AREA_EVENT;
-	if ( getState( ) == STATE_MAIN ) {
+	if ( getState( ) == STATE_STREET ) {
 		x -= camera_pos;
-		area = AREA_MAIN;
+		area = AREA_STREET;
 	}
 	unsigned char attribute = 0;
 	if ( getDir( ) == DIR_RIGHT ) {

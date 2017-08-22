@@ -8,7 +8,7 @@ PTR( Character );
 class Character {
 public:
 	enum STATE {
-		STATE_MAIN,
+		STATE_STREET,
 		STATE_EVENT,
 	};
 public:

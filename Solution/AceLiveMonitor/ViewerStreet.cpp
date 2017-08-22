@@ -2,6 +2,7 @@
 #include "Drawer.h"
 #include "Family.h"
 #include "Map.h"
+#include "ace_define.h"
 
 ViewerStreet::ViewerStreet( ) {
 	MapPtr map = Map::getTask( );
@@ -25,7 +26,7 @@ ViewerStreet::ViewerStreet( ) {
 ViewerStreet::~ViewerStreet( ) {
 }
 
-void ViewerStreet::draw( LAYER layer ) const {
+void ViewerStreet::draw( LAYER layer, int sx, int sy ) const {
 	FamilyConstPtr family( Family::getTask( ) );
 	double camera_pos = family->getCameraPos( );
 	int origin = ( int )camera_pos / GRAPH_SIZE;
@@ -34,9 +35,9 @@ void ViewerStreet::draw( LAYER layer ) const {
 		offset = _num;
 	}
 	for ( int i = 0; i < ACE_MAP_SIZE; i++ ) {
-		int sx1 = GRAPH_SIZE * i - ( (int)camera_pos % GRAPH_SIZE );
+		int sx1 = GRAPH_SIZE * i - ( (int)camera_pos % GRAPH_SIZE ) + sx;
 		int idx = ( origin + i) % _num + offset;
-		_images[ idx ]->setPos( sx1, VIEW_STREET_Y );
+		_images[ idx ]->setPos( sx1, sy );
 		_images[ idx ]->draw( );
 	}
 }

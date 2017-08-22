@@ -2,10 +2,11 @@
 #include "Client.h"
 #include "SynchronousData.h"
 #include "Drawer.h"
-#include "Device.h"
 #include "Keyboard.h"
 #include "ViewerConsole.h"
+#include "ace_define.h"
 
+extern PLAYER getPlayer( );
 void main( ) {
 	ApplicationPtr app( Application::getInstance( ) );
 	app->setWindowSize( 640, 480 );
@@ -17,7 +18,6 @@ void main( ) {
 	app->addTask( Client::getTag( ), client );
 
 	app->addTask( Drawer  ::getTag( )	  , DrawerPtr	    ( new Drawer( "Resource/Ace" ) ) );
-	app->addTask( Device  ::getTag( )	  , DevicePtr	    ( new Device( ) ) );
 	app->addTask( Keyboard::getTag( )	  , KeyboardPtr	    ( new Keyboard( ) ) );
-	app->addTask( ViewerConsole::getTag( ), ViewerConsolePtr( new ViewerConsole ) );
+	app->addTask( ViewerConsole::getTag( ), ViewerConsolePtr( new ViewerConsole( getPlayer( ) ) ) );
 }

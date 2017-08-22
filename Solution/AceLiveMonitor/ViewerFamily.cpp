@@ -22,13 +22,13 @@ void ViewerFamily::draw( ) const {
 	FamilyPtr family( Family::getTask( ) );
 	int camera_pos = (int)family->getCameraPos( );
 
-	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
+	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		PlayerConstPtr player = family->getPlayer( i );
 		Player::STATE state = player->getState( );
 		int add_sy = 0;
 		int add_sx = 0;
 		switch ( state ) {
-		case Player::STATE_MAIN:
+		case Player::STATE_STREET:
 			add_sy = VIEW_STREET_Y;
 			add_sx = -camera_pos;
 			break;

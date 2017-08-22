@@ -16,8 +16,7 @@ public:
 	static const unsigned char ITEM_WOOD			= 0x10;
 	static const unsigned char ITEM_FLAME			= 0x20;
 	static const unsigned char ITEM_MINERAL			= 0x40;
-	static const unsigned char STATE_MAIN			= 0x01;
-	static const unsigned char STATE_EVENT			= 0x02;
+	static const unsigned char STATE_EVENT			= 0x01;
 	static const unsigned char ATTRIBUTE_REVERSE	= 0x01;
 	static const unsigned char TYPE_TAROSUKE		= 10;
 	static const unsigned char TYPE_TAROJIRO		= 11;
@@ -74,7 +73,7 @@ private:
 				unsigned char virtue;
 				unsigned char redo;
 				unsigned char state;
-			} status[ ACE_PLAYER_NUM ];
+			} status[ MAX_PLAYER ];
 			struct Object {
 				unsigned char type;
 				unsigned int pattern;

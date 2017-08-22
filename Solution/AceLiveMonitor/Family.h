@@ -29,6 +29,6 @@ private:
 private:
 	int _set_device;
 	double _camera_pos;
-	std::array< PlayerPtr, ACE_PLAYER_NUM > _player;
+	std::array< PlayerPtr, MAX_PLAYER > _player;
 };
 

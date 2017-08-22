@@ -52,7 +52,7 @@ void Military::update( ) {
 				}
 				
 				int impact_chip_size = enemy->getChipSize( );
-				Magazine::getTask( )->add( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), Character::STATE_MAIN, impact_chip_size ) ) );
+				Magazine::getTask( )->add( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), Character::STATE_STREET, impact_chip_size ) ) );
 				ite = _enemies.erase( ite );
 				continue;
 			}
@@ -61,7 +61,7 @@ void Military::update( ) {
 				ite = _enemies.erase( ite );
 				continue;
 			}
-			for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
+			for ( int i = 0; i < MAX_PLAYER; i++ ) {
 				PlayerPtr player( family->getPlayer( i ) );
 				if ( player->isOverlapped( enemy ) ) {
 					if ( player->isOnHead( enemy ) ) {
@@ -95,7 +95,7 @@ void Military::update( ) {
 		if ( _boss ) {
 			_boss->update( );
 			_boss->setSynchronousData( SynchronousData::TYPE_ENEMY_BOSS, camera_pos );
-			for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
+			for ( int i = 0; i < MAX_PLAYER; i++ ) {
 				PlayerPtr player( family->getPlayer( i ) );
 				if ( player->isOverlapped( _boss ) ) {
 					if ( player->isOnHead( _boss ) ) {
@@ -125,7 +125,7 @@ void Military::update( ) {
 					dropMoney( enemy );
 				}
 				int impact_chip_size = enemy->getChipSize( );
-				Magazine::getTask( )->add( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), Character::STATE_MAIN, impact_chip_size ) ) );
+				Magazine::getTask( )->add( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), Character::STATE_STREET, impact_chip_size ) ) );
 				ite = _event_enemies.erase( ite );
 				continue;
 			}
@@ -134,7 +134,7 @@ void Military::update( ) {
 				ite = _event_enemies.erase( ite );
 				continue;
 			}
-			for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
+			for ( int i = 0; i < MAX_PLAYER; i++ ) {
 				PlayerPtr player( family->getPlayer( i ) );
 				if ( player->isOverlapped( enemy ) ) {
 					if ( player->isOnHead( enemy ) ) {
@@ -164,7 +164,7 @@ void Military::update( ) {
 	}
 	//’n–‰Î
 	_hell_fire->update( );
-	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
+	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		PlayerPtr player( family->getPlayer( i ) );
 		if ( player->isOverlapped( _hell_fire ) ) {
 			//player->damage( 3 );
@@ -194,7 +194,7 @@ void Military::popUpEventEnemy( EnemyPtr enemy ) {
 
 EnemyPtr Military::getOverlappedEnemy( CharacterConstPtr character ) const {
 	EnemyPtr result = EnemyPtr( );
-	if ( character->getState( ) == Character::STATE_MAIN ) {
+	if ( character->getState( ) == Character::STATE_STREET ) {
 		std::list< EnemyPtr >::const_iterator ite = _enemies.begin( );
 		while ( ite != _enemies.end( ) ) {
 			EnemyPtr enemy = (*ite);

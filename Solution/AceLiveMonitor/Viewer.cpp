@@ -54,12 +54,12 @@ void Viewer::update( ) {
 	drawer->flip( );
 
 	// Main描画
-	_viewer_street->draw( ViewerStreet::LAYER_BACK );
-	_viewer_object->draw( AREA_MAIN, MAIN_SX, MAIN_SY );
-	_viewer_street->draw( ViewerStreet::LAYER_FRONT );
+	_viewer_street->draw( ViewerStreet::LAYER_BACK, MAIN_SX, MAIN_SY  );
+	_viewer_object->draw( AREA_STREET, MAIN_SX, MAIN_SY );
+	_viewer_street->draw( ViewerStreet::LAYER_FRONT, MAIN_SX, MAIN_SY );
 
 	// イベント描画
-	_viewer_event->draw( );
+	_viewer_event->draw( EVENT_SX, EVENT_SY );
 	_viewer_object->draw( AREA_EVENT, EVENT_SX, EVENT_SY );
 	
 	// 旧描画（全て移行させる)

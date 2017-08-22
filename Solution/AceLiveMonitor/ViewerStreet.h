@@ -1,6 +1,5 @@
 #pragma once
 #include "Image.h"
-#include "ace_define.h"
 #include <vector>
 
 class ViewerStreet {
@@ -13,7 +12,7 @@ public:
 		LAYER_FRONT,
 	};
 public:
-	void draw( LAYER layer ) const;
+	void draw( LAYER layer, int sx, int sy ) const;
 private:
 	std::vector< ImagePtr > _images;
 	int _num;

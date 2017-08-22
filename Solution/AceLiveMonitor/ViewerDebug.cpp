@@ -33,7 +33,7 @@ void ViewerDebug::drawPlayer( ) const {
 	FamilyPtr family( Family::getTask( ) );
 	int camera_pos = ( int )family->getCameraPos( );
 	DrawerPtr drawer( Drawer::getTask( ) );
-	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
+	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		PlayerConstPtr player = family->getPlayer( i );
 		int add_sx = - camera_pos;
 		int add_sy = VIEW_STREET_Y;
@@ -208,7 +208,7 @@ void ViewerDebug::drawDeviceId( ) const {
 	};
 	for ( int i = 0; i < MAX_DEVICE_NUM; i++, sy += 20 ) {
 		bool not_setting = true;
-		for ( int j = 0; j < ACE_PLAYER_NUM; j++ ) {
+		for ( int j = 0; j < MAX_PLAYER; j++ ) {
 			int id = family->getPlayer( j )->getDeviceId( );
 			if ( id < 0 ) {
 				continue;

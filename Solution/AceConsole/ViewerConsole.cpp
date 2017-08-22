@@ -5,16 +5,15 @@
 #include "SynchronousData.h"
 #include "Client.h"
 
-const int EVENT_SX = -256;
-const int EVENT_SY = 0;
-const int MAIN_SX  = -256;
-const int MAIN_SY  = 480 - 256;
+const int AREA_SX  = -256;
+const int AREA_SY  = 480 - 256;
 
 ViewerConsolePtr ViewerConsole::getTask( ) {
 	return std::dynamic_pointer_cast< ViewerConsole >( Application::getInstance( )->getTask( getTag( ) ) );
 }
 
-ViewerConsole::ViewerConsole( ) {
+ViewerConsole::ViewerConsole( PLAYER player ) :
+_player( player ){
 }
 
 ViewerConsole::~ViewerConsole( ) {
@@ -60,14 +59,19 @@ void ViewerConsole::update( ) {
 }
 
 void ViewerConsole::drawArea( ) {
-	// Main•`‰æ
-	//_viewer_street->draw( ViewerStreet::LAYER_BACK );
-	_viewer_object->draw( AREA_MAIN, MAIN_SX, MAIN_SY );
-	//_viewer_street->draw( ViewerStreet::LAYER_FRONT );
+	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	unsigned char state = data->getStatusState( _player );
 
-	// ƒCƒxƒ“ƒg•`‰æ
-	//_viewer_event->draw( );
-	_viewer_object->draw( AREA_EVENT, EVENT_SX, EVENT_SY );
+	if ( state & SynchronousData::STATE_EVENT ) {
+		// ƒCƒxƒ“ƒg•`‰æ
+		//_viewer_event->draw( );
+		_viewer_object->draw( AREA_EVENT, AREA_SX, AREA_SY );
+	} else {
+		// Main•`‰æ
+		//_viewer_street->draw( ViewerStreet::LAYER_BACK, AREA_SX, AREA_SY );
+		_viewer_object->draw( AREA_STREET, AREA_SX, AREA_SY );
+		//_viewer_street->draw( ViewerStreet::LAYER_FRONT, AREA_SX, AREA_SY );
+	}
 }
 
 void ViewerConsole::drawUI( ) {

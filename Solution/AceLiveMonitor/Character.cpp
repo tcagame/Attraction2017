@@ -18,7 +18,7 @@ _hp( hp ),
 _mass( mass ),
 _radius( chip_size / 2 ),
 _finished( false ),
-_state( STATE_MAIN ) {
+_state( STATE_STREET ) {
 }
 
 
@@ -40,7 +40,7 @@ void Character::update( ) {
 	if ( _vec.y < -MAX_SPEED_Y ) {
 		_vec.y = -MAX_SPEED_Y;
 	}
-	if ( _state == STATE_MAIN ) {
+	if ( _state == STATE_STREET ) {
 		if ( _mass ) {
 			MapConstPtr map( Map::getTask( ) );
 			{//ã‰º”»’è

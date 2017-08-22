@@ -388,7 +388,7 @@ void Player::actOnDead( ) {
 	if ( act_count > MAX_DEAD_ACTCOUNT + MAX_IMPACT_COUNT ) {
 		if ( getState( ) == STATE_EVENT ) {
 			//メインの画面中央上部に移動
-			setState( STATE_MAIN );
+			setState( STATE_STREET );
 			MapEvent::getTask( )->setType( MapEvent::TYPE_TITLE );
 			setPos( Vector( Family::getTask( )->getCameraPos( ) + SCREEN_WIDTH / 2, chip_size ) );
 			Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, chip_size / 2 ), getState( ), chip_size * 2 ) ) );
@@ -533,7 +533,7 @@ void Player::updateState( ) {
 	if ( getState( ) == STATE_EVENT ) {
 		//一ページ目にいたらメインに戻る
 		if ( getPos( ).x < GRAPH_SIZE ) {
-			setState( STATE_MAIN );
+			setState( STATE_STREET );
 			map_event->setType( MapEvent::TYPE_TITLE );
 			setPos( Vector( family->getCameraPos( ) + SCREEN_WIDTH / 2, 0 ) );
 			setVec( Vector( ) );
@@ -544,7 +544,7 @@ void Player::updateState( ) {
 		if ( !Military::getTask( )->getBoss( ) &&
 			 !storage->isExistanceEventItem( ) &&
 			 map_event->getType( ) < MapEvent::TYPE_SHOP ) {
-			setState( STATE_MAIN );
+			setState( STATE_STREET );
 			map_event->setType( MapEvent::TYPE_TITLE );
 			setPos( Vector( family->getCameraPos( ) + SCREEN_WIDTH / 2, 0 ) );
 			setVec( Vector( ) );
@@ -622,9 +622,9 @@ void Player::setSynchronousData( unsigned char type, int camera_pos ) const {
 	int y = ( int )pos.y;
 
 	AREA area = AREA_EVENT;
-	if ( getState( ) == STATE_MAIN ) {
+	if ( getState( ) == STATE_STREET ) {
 		x -= camera_pos;
-		area = AREA_MAIN;
+		area = AREA_STREET;
 	}
 
 	int pattern = 0;
@@ -747,7 +747,7 @@ void Player::setSynchronousData( unsigned char type, int camera_pos ) const {
 }
 
 void Player::setDeviceId( int id ) {
-	assert( 0 <= id && id < ACE_PLAYER_NUM );
+	assert( 0 <= id && id < MAX_PLAYER );
 	_id = id;
 }
 

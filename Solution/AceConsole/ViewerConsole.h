@@ -1,8 +1,9 @@
 #pragma once
 
 #include "Task.h"
-#include <string>
 #include "smart_ptr.h"
+#include "ace_define.h"
+#include <string>
 
 PTR( ViewerConsole );
 PTR( ViewerObject );
@@ -13,7 +14,7 @@ public:
 	static std::string getTag( ) { return "VIEWERCONSOLE"; };
 	static ViewerConsolePtr getTask( );
 public:
-	ViewerConsole( );
+	ViewerConsole( PLAYER player );
 	virtual ~ViewerConsole( );
 public:
 	void initialize( );
@@ -22,6 +23,7 @@ private:
 	void drawArea( );
 	void drawUI( );
 private:
+	const PLAYER _player;
 	ViewerObjectPtr _viewer_object;
 	ImagePtr _image_bar_upper;
 	ImagePtr _image_bar_lower;

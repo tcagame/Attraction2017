@@ -3,7 +3,6 @@
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 720;
 
-const int ACE_PLAYER_NUM = 4;
 const int ACE_MAP_NUM = 4;
 const int ACE_MAP_SIZE = 8;
 
@@ -20,12 +19,20 @@ const int PLAYER_CHAR_CHIP_WIDTH = 16;
 const int ENEMY_NORMAL_CHIP_WIDTH = 20;
 const int ENEMY_SMALL_CHIP_WIDTH = 8;
 const int ENEMY_BIG_CHIP_WIDTH = 10;
-const int VIEW_EVENT_Y = 0;
 const int VIEW_TITLE_Y = 0;
-const int VIEW_TITLE_HEIGHT = 256;
-const int VIEW_STREET_Y = VIEW_TITLE_Y + VIEW_TITLE_HEIGHT;
+const int VIEW_EVENT_HEIGHT = 256;
 const int VIEW_STREET_HEIGHT = 256;
-const int VIEW_STATUS_Y = VIEW_STREET_Y + VIEW_STREET_HEIGHT;
+const int VIEW_STATUS_Y = VIEW_EVENT_HEIGHT + VIEW_STREET_HEIGHT;
+const int VIEW_STREET_Y = 256;
+const int VIEW_EVENT_Y = 0;
+
+enum PLAYER {
+	PLAYER_TAROSUKE,
+	PLAYER_TAROJIRO,
+	PLAYER_GARISUKE,
+	PLAYER_TAROMI,
+	MAX_PLAYER,
+};
 
 enum DIR {
 	DIR_LEFT,
@@ -33,7 +40,7 @@ enum DIR {
 };
 
 enum AREA {
-	AREA_MAIN,
+	AREA_STREET,
 	AREA_EVENT,
 	MAX_AREA
 };

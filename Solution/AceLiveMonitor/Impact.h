@@ -5,7 +5,7 @@
 
 class Impact {
 public:
-	Impact( const Vector& pos, Character::STATE state = Character::STATE_MAIN, int sprite_size = 128 );
+	Impact( const Vector& pos, Character::STATE state = Character::STATE_STREET, int sprite_size = 128 );
 	virtual ~Impact( );
 public:
 	void update( );

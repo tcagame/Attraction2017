@@ -70,7 +70,7 @@ bool Storage::isExistanceEventItem( ) const {
 PlayerPtr Storage::getOverLappedPlayer( ItemPtr item ) const {
 	PlayerPtr result = PlayerPtr( );
 	FamilyPtr family( Family::getTask( ) );
-	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
+	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		PlayerPtr player = family->getPlayer( i );
 		if ( player->isOverlapped( item ) ) {
 			result = player;

@@ -28,9 +28,9 @@ void EnemySwampZombieA::setSynchronousData( unsigned char type, int camera_pos )
 	int y = ( int )pos.y;
 
 	AREA area = AREA_EVENT;
-	if ( getState( ) == STATE_MAIN ) {
+	if ( getState( ) == STATE_STREET ) {
 		x -= camera_pos;
-		area = AREA_MAIN;
+		area = AREA_STREET;
 	}
 	unsigned char attribute = 0;
 	if ( getDir( ) == DIR_RIGHT ) {

@@ -7,10 +7,10 @@
 
 const int CAMERA_SCROLL_SPEED = 8;
 const int SCROLL_BUFFER = SCREEN_WIDTH / 10;
-const double CAMERA_MAIN_RATIO = 1.0 / ACE_PLAYER_NUM;
-const double CAMERA_EVENT_RATIO = 1.0 / ( ACE_PLAYER_NUM - 1 );
+const double CAMERA_MAIN_RATIO = 1.0 / MAX_PLAYER;
+const double CAMERA_EVENT_RATIO = 1.0 / ( MAX_PLAYER - 1 );
 
-const Vector INIT_PLAYER_POS[ ACE_PLAYER_NUM ] = {
+const Vector INIT_PLAYER_POS[ MAX_PLAYER ] = {
 	Vector( SCREEN_WIDTH / 2 + 150, NORMAL_CHAR_GRAPH_SIZE ),
 	Vector( SCREEN_WIDTH / 2 + 250, NORMAL_CHAR_GRAPH_SIZE ),
 	Vector( SCREEN_WIDTH / 2 + 350, NORMAL_CHAR_GRAPH_SIZE ),
@@ -30,11 +30,11 @@ Family::~Family( ) {
 }
 
 void Family::initialize( ) {
-	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
+	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		_player[ i ] = PlayerPtr( new Player( INIT_PLAYER_POS[ i ] ) );
 	}
 	double camera_pos = 0.0;
-	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
+	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		camera_pos += _player[ i ]->getPos( ).x;
 	}
 	_camera_pos = camera_pos * 0.25 - SCREEN_WIDTH / 2;
@@ -43,7 +43,7 @@ void Family::initialize( ) {
 
 void Family::update( ) {
 	bool update_camera = true;
-	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
+	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		_player[ i ]->update( );
 		if ( _player[ i ]->getState( ) != Character::STATE_EVENT ) {
 			//キャラクターが右端にいる場合、カメラのポジションを変えない
@@ -64,13 +64,13 @@ void Family::update( ) {
 }
 
 PlayerConstPtr Family::getPlayer( int player_id ) const {
-	assert( player_id < ACE_PLAYER_NUM );
+	assert( player_id < MAX_PLAYER );
 	assert( player_id >= 0 );
 	return _player[ player_id ];
 }
 
 PlayerPtr Family::getPlayer( int player_id ) {
-	assert( player_id < ACE_PLAYER_NUM );
+	assert( player_id < MAX_PLAYER );
 	assert( player_id >= 0 );
 	return _player[ player_id ];
 }
@@ -80,7 +80,7 @@ void Family::updateCameraPos( ) {
 	//プレイヤーの平均を出すための値
 	double pos_ratio = CAMERA_MAIN_RATIO;
 	//プレイヤーの位置の合計を出す
-	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
+	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		if ( _player[ i ]->getState( ) == Character::STATE_EVENT ) {
 			pos_ratio = CAMERA_EVENT_RATIO;
 			continue;
@@ -119,7 +119,7 @@ void Family::setSynchronousData( ) const {
 		SynchronousData::TYPE_TAROMI  ,
 	};
 
-	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
+	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		PlayerConstPtr player = getPlayer( i );
 		player->setSynchronousData( TYPE[ i ], ( int )getCameraPos( ) );
 	}
@@ -127,7 +127,7 @@ void Family::setSynchronousData( ) const {
 
 void Family::updateSetDevice( ) {
 	DevicePtr device( Device::getTask( ) );
-	if ( !( _set_device < ACE_PLAYER_NUM ) ) {
+	if ( !( _set_device < MAX_PLAYER ) ) {
 		return;
 	}
 
@@ -135,7 +135,7 @@ void Family::updateSetDevice( ) {
 	int device_num = device->getDeviceNum( );
 	if ( device_num < 1 ) {
 		_player[ 0 ]->setDeviceId( 0 );
-		_set_device = ACE_PLAYER_NUM;
+		_set_device = MAX_PLAYER;
 	}
 
 	for ( int i = 0; i < device_num; i++ ) {
@@ -149,7 +149,7 @@ void Family::updateSetDevice( ) {
 
 bool Family::isSettingDevice( int device_id ) const {
 	bool result = false;
-	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
+	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		if ( _player[ i ]->getDeviceId( ) == device_id ) {
 			result = true;
 		}

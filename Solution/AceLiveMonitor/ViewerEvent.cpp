@@ -54,15 +54,15 @@ ViewerEvent::ViewerEvent( ) {
 ViewerEvent::~ViewerEvent( ) {
 }
 
-void ViewerEvent::draw( ) const {
+void ViewerEvent::draw( int sx, int sy ) const {
 	MapEventPtr map( MapEvent::getTask( ) );
 	MapEvent::TYPE type = map->getType( );
 	if( type == MapEvent::TYPE_TITLE ) {
-		_images[ 0 ]->setPos( 0, VIEW_TITLE_Y );
+		_images[ 0 ]->setPos( sx, sy );
 		_images[ 0 ]->draw( );
 	} else {
 		int idx = 0;
-		int sx = 256;
+		int width = 256;
 		for ( int i = 0; i < 8; i++ ) {
 			switch ( type ) {
 			case MapEvent::TYPE_RED_DAEMON:
@@ -110,7 +110,7 @@ void ViewerEvent::draw( ) const {
 				}
 				break;
 			}
-			_images[ idx ]->setPos( i * sx, VIEW_TITLE_Y );
+			_images[ idx ]->setPos( i * width + sx, sy );
 			_images[ idx ]->draw( );
 		}
 		{// npc chara
@@ -126,8 +126,10 @@ void ViewerEvent::draw( ) const {
 				}
 				CharacterPtr chara = ( *ite );
 				Chip chip = chara->getChip( );
-				chip.sy1 += VIEW_EVENT_Y;
-				chip.sy2 += VIEW_EVENT_Y;
+				chip.sy1 += sy;
+				chip.sy2 += sy;
+				chip.sx1 += sx;
+				chip.sx2 += sx;
 				_characters->setRect( chip.tx, chip.ty, chip.size, chip.size );
 				_characters->setPos( chip.sx1, chip.sy1, chip.sx2, chip.sy2 );
 				_characters->draw( );

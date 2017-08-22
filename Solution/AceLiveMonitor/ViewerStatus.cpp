@@ -17,7 +17,7 @@ ViewerStatus::~ViewerStatus( ) {
 }
 
 void ViewerStatus::draw( ) const {
-	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
+	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		int sx = i * 320;
 		_status_flame->setPos( sx, VIEW_STATUS_Y );
 		_status_flame->draw( );
@@ -30,7 +30,7 @@ void ViewerStatus::draw( ) const {
 void ViewerStatus::drawHp( ) const {
 	//(POWER)
 	FamilyPtr family( Family::getTask( ) );
-	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
+	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		PlayerPtr player = family->getPlayer( i );
 		int tw = HP_GRAPH_WIDTH * player->getHp( );
 		_status_ui->setRect( 0, 256, tw, HP_GRAPH_HEIGHT );
@@ -45,7 +45,7 @@ void ViewerStatus::drawMoney( ) const {
 	//Money
 	FamilyPtr family( Family::getTask( ) );
 	DrawerPtr drawer( Drawer::getTask( ) );
-	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
+	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		PlayerPtr player = family->getPlayer( i );
 		int sx = i * 320 + 160;
 		int sy = VIEW_STATUS_Y + 105;
@@ -57,7 +57,7 @@ void ViewerStatus::drawToku( ) const {
 	//Toku
 	FamilyPtr family( Family::getTask( ) );
 	DrawerPtr drawer( Drawer::getTask( ) );
-	for ( int i = 0; i < ACE_PLAYER_NUM; i++ ) {
+	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		PlayerPtr player = family->getPlayer( i );
 		int sx = i * 320 + 280;
 		int sy = VIEW_STATUS_Y + 180;
