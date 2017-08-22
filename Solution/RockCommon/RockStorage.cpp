@@ -5,6 +5,7 @@
 #include "RockItemMoney.h"
 #include "RockFamily.h"
 #include "RockPlayer.h"
+#include "MessageSender.h"
 
 RockStoragePtr RockStorage::getTask( ) {
 	return std::dynamic_pointer_cast< RockStorage >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -38,6 +39,7 @@ void RockStorage::update( ) {
 			RockPlayerPtr player = family->getPlayer( i );
 			if ( item->isOverLapped( player ) ) {
 				col = true;
+				pickUpItem( item, i );
 				break;//for•¶‚ð”²‚¯‚é
 			}
 		}
@@ -55,4 +57,15 @@ void RockStorage::add( RockItemPtr item ) {
 
 std::list< RockItemPtr > RockStorage::getItems( ) const {
 	return _items;
+}
+
+void RockStorage::pickUpItem( RockItemPtr item, int player_id ) {
+	MessageSenderPtr sender = MessageSender::getTask( );
+	
+	//‚¨‹à
+	RockItemMoneyPtr money = std::dynamic_pointer_cast< RockItemMoney >( item );
+	if ( money ) {
+		int value = money->getValue( );
+		sender->sendMessage( player_id, Message::COMMAND_MONEY, &value );
+	}
 }

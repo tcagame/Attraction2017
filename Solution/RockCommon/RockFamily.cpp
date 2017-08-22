@@ -9,9 +9,9 @@ RockFamilyPtr RockFamily::getTask( ) {
 }
 
 
-RockFamily::RockFamily( StatusPtr status ) {
+RockFamily::RockFamily( StatusPtr status, const Vector& base_pos ) {
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
-		_player[ i ] = RockPlayerPtr( new RockPlayer( status, Vector( i * 35, 30 ), i ) );
+		_player[ i ] = RockPlayerPtr( new RockPlayer( status, Vector( i * 35, 1 ) + base_pos, i ) );
 	}
 }
 

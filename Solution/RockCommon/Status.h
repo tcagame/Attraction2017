@@ -17,7 +17,7 @@ public:
 		unsigned char continue_num;
 		unsigned char toku;
 		unsigned char item;
-		unsigned char money;
+		unsigned money;
 		signed int power;
 	};
 

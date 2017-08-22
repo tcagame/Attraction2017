@@ -22,6 +22,7 @@ RockItem( pos, DOLL_NONE ) {
 		setDoll( DOLL_MONEY_1 );
 		break;
 	}
+	_value = value;
 }
 
 RockItemMoney::~RockItemMoney( ) {
@@ -31,4 +32,9 @@ ModelMV1Ptr RockItemMoney::getModel( ) const {
 	ModelMV1Ptr model = RockDollHouse::getTask( )->getModel( getDoll( ) );
 	model->setTrans( Matrix::makeTransformTranslation( getPos( ) ) );
 	return model;
+}
+
+
+int RockItemMoney::getValue( ) const {
+	return _value;
 }

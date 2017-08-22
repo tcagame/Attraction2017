@@ -36,7 +36,9 @@
     <ClInclude Include="RockItemDango.h">
       <Filter>Item</Filter>
     </ClInclude>
-    <ClInclude Include="RockItemMoney.h" />
+    <ClInclude Include="RockItemMoney.h">
+      <Filter>Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RockDollHouse.cpp" />
@@ -71,7 +73,9 @@
     <ClCompile Include="RockItemDango.cpp">
       <Filter>Item</Filter>
     </ClCompile>
-    <ClCompile Include="RockItemMoney.cpp" />
+    <ClCompile Include="RockItemMoney.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Enemy">

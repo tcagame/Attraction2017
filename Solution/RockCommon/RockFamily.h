@@ -14,7 +14,7 @@ public:
 	static std::string getTag( ) { return "ROCKFAMILY"; };
 	static RockFamilyPtr getTask( );
 public:
-	RockFamily( StatusPtr status );
+	RockFamily( StatusPtr status, const Vector& base_pos );
 	virtual ~RockFamily( );
 public:
 	void initialize( );

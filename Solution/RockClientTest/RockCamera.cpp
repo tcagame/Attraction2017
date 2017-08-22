@@ -28,7 +28,9 @@ void RockCamera::initialize( ) {
 
 void RockCamera::update( ) {
 	RockFamilyPtr family( RockFamily::getTask( ) );
-	_target = family->getCameraPos( );
+	Vector target = family->getCameraPos( );
+	_pos += target - _target;
+	_target = target;
 	DrawerPtr drawer( Drawer::getTask( ) );
 	drawer->setCamera( _pos, _target );
 }

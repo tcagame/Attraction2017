@@ -14,6 +14,8 @@
 #include "RockFamily.h"
 #include "RockClientInfo.h"
 #include "RockArmoury.h"
+#include "Effect.h"
+#include "RockStorage.h"
 
 void main( ) {
 
@@ -23,12 +25,14 @@ void main( ) {
 	app->setWindowSize( SCREEN_WIDTH, SCREEN_HEIGHT );
 	app->addTask( Drawer::getTag( ), TaskPtr( new Drawer( "Resource/Rock" ) ) );
 	app->addTask( Client::getTag( ), TaskPtr( new Client( status, message ) ) );
+	app->addTask( Effect::getTag( ), TaskPtr( new Effect( "Resource/Rock/effect" ) ) );
 	app->addTask( RockMap::getTag( ), TaskPtr( new RockMapStreet ) );
 	app->addTask( RockMilitary::getTag( ), TaskPtr( new RockMilitaryStreet ) );
 	app->addTask( RockDollHouse::getTag( ), TaskPtr( new RockDollHouse ) );
-	app->addTask( RockFamily::getTag( ), TaskPtr( new RockFamily( status ) ) );
+	app->addTask( RockFamily::getTag( ), TaskPtr( new RockFamily( status, Vector( 0, 30, -500 ) ) ) );
 	app->addTask( RockMapStreetCamera::getTag( ), TaskPtr( new RockMapStreetCamera ) );
 	app->addTask( RockArmoury::getTag( ), TaskPtr( new RockArmoury( ) ) );
 	app->addTask( RockViewer::getTag( ), TaskPtr( new RockViewer( status ) ) );
+	app->addTask( RockStorage::getTag( ), TaskPtr( new RockStorage( ) ) );
 	app->addTask( RockClientInfo::getTag( ), TaskPtr( new RockClientInfo( STATE_STREET_1 ) ) );
 }
