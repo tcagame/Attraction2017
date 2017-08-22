@@ -9,25 +9,26 @@ PTR( SynchronousData );
 
 class SynchronousData : public Data, public Task {
 public:
-	static const unsigned char ITEM_DANGO       = 0x01;
-	static const unsigned char ITEM_HEART       = 0x02;
-	static const unsigned char ITEM_HYPERTROPHY = 0x04;
-	static const unsigned char ITEM_SHORTENING  = 0x08;
-	static const unsigned char ITEM_WOOD        = 0x10;
-	static const unsigned char ITEM_FLAME       = 0x20;
-	static const unsigned char ITEM_MINERAL     = 0x40;
-	static const unsigned char STATE_MAIN       = 0x01;
-	static const unsigned char STATE_EVENT      = 0x02;
-	static const unsigned char ATTRIBUTE_REVERSE = 0x01;
-	static const unsigned char TYPE_TAROSUKE = 10;
-	static const unsigned char TYPE_TAROJIRO = 11;
-	static const unsigned char TYPE_GARISUKE = 12;
-	static const unsigned char TYPE_TAROMI   = 13;
-	static const unsigned char TYPE_CHARGE   = 14;
-	static const unsigned char TYPE_ENEMY_MIDIUM   = 15;
-	static const unsigned char TYPE_ENEMY_SMALL    = 16;
-	static const unsigned char TYPE_ENEMY_BIG      = 17;
-	static const unsigned char TYPE_ENEMY_BOSS     = 18;
+	static const unsigned char ITEM_DANGO			= 0x01;
+	static const unsigned char ITEM_HEART			= 0x02;
+	static const unsigned char ITEM_HYPERTROPHY		= 0x04;
+	static const unsigned char ITEM_SHORTENING		= 0x08;
+	static const unsigned char ITEM_WOOD			= 0x10;
+	static const unsigned char ITEM_FLAME			= 0x20;
+	static const unsigned char ITEM_MINERAL			= 0x40;
+	static const unsigned char STATE_MAIN			= 0x01;
+	static const unsigned char STATE_EVENT			= 0x02;
+	static const unsigned char ATTRIBUTE_REVERSE	= 0x01;
+	static const unsigned char TYPE_TAROSUKE		= 10;
+	static const unsigned char TYPE_TAROJIRO		= 11;
+	static const unsigned char TYPE_GARISUKE		= 12;
+	static const unsigned char TYPE_TAROMI			= 13;
+	static const unsigned char TYPE_MONMOTARO		= 14;
+	static const unsigned char TYPE_CHARGE			= 15;
+	static const unsigned char TYPE_ENEMY_MIDIUM	= 16;
+	static const unsigned char TYPE_ENEMY_SMALL		= 17;
+	static const unsigned char TYPE_ENEMY_BIG		= 18;
+	static const unsigned char TYPE_ENEMY_BOSS		= 19;
 public:
 	static std::string getTag( ) { return "SYNCHRONOUSDATA"; };
 	static SynchronousDataPtr getTask( );

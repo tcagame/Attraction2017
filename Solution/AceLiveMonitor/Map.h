@@ -19,6 +19,7 @@ public:
 	int getPageNum( ) const;
 	unsigned char getObject( const Vector& pos ) const;
 	unsigned char getObject( int mx, int my ) const;
+	void usedObject( const Vector& pos );
 private:
 	void load( );
 private:

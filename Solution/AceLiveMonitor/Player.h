@@ -3,6 +3,7 @@
 #include "Character.h"
 
 PTR( Enemy );
+PTR( Monmotaro );
 
 class Player : public Character {
 public:
@@ -27,7 +28,6 @@ public:
 	void setDeviceId( int id );
 	int getDeviceId( ) const;
 	void damage( int force );
-	Chip getChip( ) const;
 	ACTION getAction( ) const;
 	int getChargeCount( ) const;
 	Chip getChargeChip( ) const;
@@ -55,6 +55,7 @@ private:
 	void updateState( );
 	void setAction( ACTION action );
 private:
+	MonmotaroPtr _monmo;
 	ACTION _action;
 	int _id;
 	int _money;

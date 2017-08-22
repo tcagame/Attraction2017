@@ -231,9 +231,6 @@
     <ClCompile Include="ViewerFamily.cpp">
       <Filter>Viewer</Filter>
     </ClCompile>
-    <ClCompile Include="ViewerMilitary.cpp">
-      <Filter>Viewer</Filter>
-    </ClCompile>
     <ClCompile Include="ViewerStatus.cpp">
       <Filter>Viewer</Filter>
     </ClCompile>
@@ -363,6 +360,7 @@
     <ClCompile Include="ViewerMagazine.cpp">
       <Filter>Viewer</Filter>
     </ClCompile>
+    <ClCompile Include="Monmotaro.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -594,9 +592,6 @@
     <ClInclude Include="ViewerFamily.h">
       <Filter>Viewer</Filter>
     </ClInclude>
-    <ClInclude Include="ViewerMilitary.h">
-      <Filter>Viewer</Filter>
-    </ClInclude>
     <ClInclude Include="ViewerStatus.h">
       <Filter>Viewer</Filter>
     </ClInclude>
@@ -726,6 +721,7 @@
     <ClInclude Include="ViewerMagazine.h">
       <Filter>Viewer</Filter>
     </ClInclude>
+    <ClInclude Include="Monmotaro.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">
