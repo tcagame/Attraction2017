@@ -51,6 +51,7 @@ void RockMilitary::updateEnemies( ) {
 		}
 		if ( enemy->isFinished( ) ) {
 			add( RockImpactPtr( new RockImpact( enemy->getPos( ) + Vector( 0, 30, 0 ) ) ) );
+			enemy->dropItem( );
 			enemy->reset( );
 			_pops.push_back( RockPopPtr( new RockPop( enemy ) ) );
 			ite = _enemies.erase( ite );
