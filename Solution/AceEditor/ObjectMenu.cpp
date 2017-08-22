@@ -356,6 +356,9 @@ unsigned char ObjectMenu::getEvent( int idx ) const {
 	case 6:
 		result = OBJECT_EVENT_RYUGU;
 		break;
+	case 7:
+		result = OBJECT_EVENT_CALL;
+		break;
 	default:
 		result = OBJECT_NONE;
 		break;
