@@ -13,6 +13,7 @@ public:
 	void reset( );
 	ModelMV1Ptr getModel( ) const;
 	virtual double getAnimTime( ) const = 0;
+	virtual void dropItem( ) { };
 private:
 	int _force;
 	int _hp;
