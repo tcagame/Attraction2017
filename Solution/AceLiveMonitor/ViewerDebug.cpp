@@ -1,5 +1,6 @@
 #include "ViewerDebug.h"
 #include "Drawer.h"
+#include "Device.h"
 #include "ace_define.h"
 #include "Armoury.h"
 #include "Shot.h"
@@ -202,10 +203,11 @@ void ViewerDebug::drawDeviceId( ) const {
 		"GARISUKE",
 		"TAROJIRO",
 		"TAROMI",
+		"STAND BY",
 		"NOT CONNECT"
 	};
 	for ( int i = 0; i < MAX_DEVICE_NUM; i++, sy += 20 ) {
-		bool not_connect = true;
+		bool not_setting = true;
 		for ( int j = 0; j < ACE_PLAYER_NUM; j++ ) {
 			int id = family->getPlayer( j )->getDeviceId( );
 			if ( id < 0 ) {
@@ -213,11 +215,15 @@ void ViewerDebug::drawDeviceId( ) const {
 			}
 			if ( i == id ) {
 				drawer->drawString( sx, sy, "devive%d %s", i, MESSAGE[ j ] );
-				not_connect = false;
+				not_setting = false;
 			}
 		}
-		if ( not_connect ) {
-			drawer->drawString( sx, sy, "devive%d %s", i, MESSAGE[ 4 ] );
+		if ( not_setting ) {
+			int massage_num = 4;
+			if ( i >= Device::getTask( )->getDeviceNum( ) ) {
+				massage_num++;
+			}
+			drawer->drawString( sx, sy, "devive%d %s", i, MESSAGE[ massage_num ] );
 		}
 	}
 }

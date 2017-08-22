@@ -131,7 +131,14 @@ void Family::updateSetDevice( ) {
 		return;
 	}
 
-	for ( int i = 0; i < device->getDeviceNum( ); i++ ) {
+	// デバイスが接続されていなかったら、たろすけのみキーボードで操作できるようにする
+	int device_num = device->getDeviceNum( );
+	if ( device_num < 1 ) {
+		_player[ 0 ]->setDeviceId( 0 );
+		_set_device = ACE_PLAYER_NUM;
+	}
+
+	for ( int i = 0; i < device_num; i++ ) {
 		if ( device->getButton( i ) &&
 			 !isSettingDevice( i ) ) {
 			_player[ _set_device ]->setDeviceId( i );
