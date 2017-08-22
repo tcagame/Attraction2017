@@ -26,7 +26,8 @@ RockCharacter::~RockCharacter( ) {
 }
 
 void RockCharacter::update( ) {
-	ModelMV1Ptr map_model = RockMap::getTask( )->getColModel( );
+	std::vector< ModelMV1Ptr > col_models = RockMap::getTask( )->getColModels( );
+	int col_models_size = ( int )col_models.size( );
 	act( );
 	_act_count++;
 	_standing = false;
@@ -41,30 +42,41 @@ void RockCharacter::update( ) {
 		Vector leg = _pos + _vec + Vector( 0, -GRAVITY * 2, 0 );
 
 		//“ª‚ÌˆÊ’u‚Å‚ ‚½‚é
-		if ( map_model->isHitLine( head, head - Vector( 0, _radius, 0 ) ) ) {
-			_vec.x = 0;
-			_vec.z = 0;
+		for ( int i = 0; i < col_models_size; i++ ) {
+			if ( col_models[ i ]->isHitLine( head, head - Vector( 0, _radius, 0 ) ) ) {
+				_vec.x = 0;
+				_vec.z = 0;
+				break;
+			}
+			//‘«Œ³‚ª‚È‚¢
+			if ( !col_models[ i ]->isHitLine( leg, leg + Vector( 0, -100, 0 ) ) ) {
+				_vec.x = 0;
+				_vec.z = 0;
+				break;
+			}
 		}
-		//‘«Œ³‚ª‚È‚¢
-		if ( !map_model->isHitLine( leg, leg + Vector( 0, -100, 0 ) ) ) {
-			_vec.x = 0;
-			_vec.z = 0;
-		}
+		
 	}
 	{//ã‰º”»’è
 		Vector pos = _pos + Vector( 0, -GRAVITY * 2, 0 );
 		Vector fpos = _pos + Vector( 0, _vec.y, 0 );
-		if ( map_model->isHitLine( pos, fpos ) ) {
-			_vec.y = 0;
-			_standing = true;
+		for ( int i = 0; i < col_models_size; i++ ) {
+			if ( col_models[ i ]->isHitLine( pos, fpos ) ) {
+				_vec.y = 0;
+				_standing = true;
+				break;
+			}
 		}
 	}
 	{//‰¡”»’è
 		Vector fpos = _pos + Vector( _vec.x, 0, _vec.z );
-		if ( map_model->isHitLine( _pos, fpos ) ) {
-			_vec.x = 0;
-			_vec.z = 0;
-			_standing = true;
+		for ( int i = 0; i < col_models_size; i++ ) {
+			if ( col_models[ i ]->isHitLine( _pos, fpos ) ) {
+				_vec.x = 0;
+				_vec.z = 0;
+				_standing = true;
+				break;
+			}
 		}
 	}
 	{//Œü‚¢‚Ä‚é•ûŒü‚ğo‚·

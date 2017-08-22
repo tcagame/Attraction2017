@@ -10,13 +10,14 @@ PTR( ModelMV1 );
 class RockStorage : public Task {
 public:
 	static std::string getTag( ) { return "ROCKSTORAGE"; };
-	RockStoragePtr getTask( );
+	static RockStoragePtr getTask( );
 public:
 	RockStorage( );
 	virtual ~RockStorage( );
 public:
 	void update( );
 	void add( RockItemPtr item );
+	std::list< RockItemPtr > getItems( ) const;
 private:
 	std::list< RockItemPtr > _items;
 };

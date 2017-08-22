@@ -11,6 +11,8 @@
 #include "Status.h"
 #include "Drawer.h"
 #include "RockArmoury.h"
+#include "RockStorage.h"
+#include "RockItem.h"
 #include "RockShot.h"
 #include "RockImpact.h"
 #include "Effect.h"
@@ -35,6 +37,7 @@ void RockViewer::update( ) {
 	drawEnemy( );
 	drawPlayer( );
 	drawShot( );
+	drawItem( );
 	Effect::getTask( )->drawEffect( );
 }
 
@@ -92,3 +95,21 @@ void RockViewer::drawShot( ) const {
 		ite++;
 	}
 }
+
+void RockViewer::drawItem( ) const {
+	DrawerPtr drawer( Drawer::getTask( ) );
+	RockStoragePtr storage( RockStorage::getTask( ) );
+	std::list< RockItemPtr > items = storage->getItems( );
+	std::list< RockItemPtr >::const_iterator ite = items.begin( );
+	while ( ite != items.end( ) ) {
+		RockItemPtr item = *ite;
+		if ( !item ) {
+			ite++;
+			continue;
+		}
+		ModelMV1Ptr model = item->getModel( );
+		model->draw( );
+		ite++;
+	}
+}
+

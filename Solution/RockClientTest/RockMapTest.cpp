@@ -7,22 +7,24 @@ const Vector ENTRY_POS = Vector( 200, 0, 270 );
 const double ENTRY_RADIUS = 40;
 
 RockMapTest::RockMapTest( ) {
-	_filenames = { };
-	_filenames.push_back( "Resource/Rock/map/map01.mv1" );
-	_filenames.push_back( "Resource/Rock/object/obj06/obj06.mv1" );
-	_filename_col = "Resource/Rock/map/map01_col.mv1";
+	ModelMV1Ptr map01 = ModelMV1Ptr( new ModelMV1 );
+	map01->load( "Resource/Rock/map/map01.mv1" );
+	addModel( map01 );
+
+	ModelMV1Ptr obj06 = ModelMV1Ptr( new ModelMV1 );
+	obj06->load( "Resource/Rock/object/obj06/obj06.mv1" );
+	obj06->setScale( Matrix::makeTransformScaling( Vector( 5, 1, 5 ) ) );
+	addModel( obj06 );
+
+	ModelMV1Ptr col01 = ModelMV1Ptr( new ModelMV1 );
+	col01->load( "Resource/Rock/map/map01_col.mv1" );
+	col01->setTrans( Matrix::makeTransformTranslation( Vector( 0, 10, 0 ) ) );
+	col01->draw( );
+	addColModel( col01 );
 }
 
 
 RockMapTest::~RockMapTest( ) {
-}
-
-std::vector< std::string > RockMapTest::getFilenames( ) const {
-	return _filenames;
-}
-
-std::string RockMapTest::getFilenameCol( ) const {
-	return _filename_col;
 }
 
 void RockMapTest::update( ) {

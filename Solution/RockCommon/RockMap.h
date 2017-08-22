@@ -16,12 +16,12 @@ public:
 public:
 	void initialize( );
 	std::vector< ModelMV1Ptr > getModels( ) const;
-	ModelMV1Ptr getColModel( ) const;
+	std::vector< ModelMV1Ptr > getColModels( ) const;
 protected:
-	virtual std::vector< std::string > getFilenames( ) const = 0;
-	virtual std::string getFilenameCol( ) const = 0;
+	void addModel( ModelMV1Ptr model );
+	void addColModel( ModelMV1Ptr model );
 private:
 	std::vector< ModelMV1Ptr > _models;
-	ModelMV1Ptr _col_model;
+	std::vector< ModelMV1Ptr > _col_models;
 };
 

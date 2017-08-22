@@ -6,6 +6,7 @@ public:
 	virtual ~RockEnemyGhost( );
 public:
 	double getAnimTime( ) const;
+	void dropItem( );
 protected:
 	void act( );
 };

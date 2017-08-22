@@ -23,6 +23,7 @@ private:
 	ImagePtr _block;
 	ImagePtr _enemy[ MAX_GRAPH_ENEMY ];
 	ImagePtr _event;
+	ImagePtr _altar; //•§’d
 	ImagePtr _choise;
 	DataConstPtr _data;
 	ObjectCursorConstPtr _object_cursor;

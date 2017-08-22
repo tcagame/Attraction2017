@@ -27,10 +27,16 @@
     <ClInclude Include="MessageSender.h" />
     <ClInclude Include="RockArmoury.h" />
     <ClInclude Include="RockShot.h" />
-    <ClInclude Include="RockImpact.h" />
     <ClInclude Include="RockPop.h" />
     <ClInclude Include="RockStorage.h" />
-    <ClInclude Include="RockItem.h" />
+    <ClInclude Include="RockItem.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="RockImpact.h" />
+    <ClInclude Include="RockItemDango.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="RockItemMoney.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RockDollHouse.cpp" />
@@ -56,14 +62,23 @@
     <ClCompile Include="MessageSender.cpp" />
     <ClCompile Include="RockArmoury.cpp" />
     <ClCompile Include="RockShot.cpp" />
-    <ClCompile Include="RockImpact.cpp" />
     <ClCompile Include="RockPop.cpp" />
     <ClCompile Include="RockStorage.cpp" />
-    <ClCompile Include="RockItem.cpp" />
+    <ClCompile Include="RockItem.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="RockImpact.cpp" />
+    <ClCompile Include="RockItemDango.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="RockItemMoney.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Enemy">
       <UniqueIdentifier>{798042c5-9a2c-4eb9-b79f-655988dd30a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Item">
+      <UniqueIdentifier>{594e114e-192e-4280-97d9-f9da9516142a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
