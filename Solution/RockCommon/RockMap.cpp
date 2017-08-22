@@ -15,24 +15,20 @@ RockMap::RockMap( ) {
 RockMap::~RockMap( ) {
 }
 
-void RockMap::initialize( ) {	
-	std::vector< std::string > filenames = getFilenames( );
-	int size = ( int )filenames.size( );
-	_models = { };
-	for ( int i = 0; i < size; i++ ) {
-		ModelMV1Ptr model( new ModelMV1 );
-		model->load( filenames[ i ].c_str( ) );
-		_models.push_back( model );
-	}
-	_col_model = ModelMV1Ptr( new ModelMV1 );
-	_col_model->load( getFilenameCol( ).c_str( ) );
+void RockMap::initialize( ) {
 }
 
 std::vector< ModelMV1Ptr > RockMap::getModels( ) const {
 	return _models;
 }
 
-ModelMV1Ptr RockMap::getColModel( ) const {
-	return _col_model;
+std::vector< ModelMV1Ptr > RockMap::getColModels( ) const {
+	return _col_models;
 }
 
+void RockMap::addModel( ModelMV1Ptr model ) {
+	_models.push_back( model );
+}
+void RockMap::addColModel( ModelMV1Ptr model ) {
+	_col_models.push_back( model );
+}
