@@ -46,7 +46,11 @@ void RockDollHouse::initialize( ) {
 	_dolls[ DOLL_WATERGHOST ]->load( "Resource/Rock/enemy/enm17_mizunoyokai/enm17_a01.mv1" );
 
 	//item
-	_dolls[ DOLL_DANGO ]->load( "Resource/Rock/item/itm01/itm01.mv1" );
+	_dolls[ DOLL_DANGO	 ]->load( "Resource/Rock/item/itm01/itm01.mv1" );
+	_dolls[ DOLL_MONEY_1 ]->load( "Resource/Rock/item/itm04/itm04.mv1" );
+	_dolls[ DOLL_MONEY_2 ]->load( "Resource/Rock/item/itm06/itm06.mv1" );
+	_dolls[ DOLL_MONEY_3 ]->load( "Resource/Rock/item/itm07/itm07.mv1" );
+	_dolls[ DOLL_MONEY_4 ]->load( "Resource/Rock/item/itm08/itm08.mv1" );
 }
 
 ModelMV1Ptr RockDollHouse::getModel( DOLL id ) const {
