@@ -17,6 +17,7 @@ public:
 		ACTION_DAMEGE,
 		ACTION_BLOW_AWAY,
 		ACTION_DAED,
+		ACTION_CALL,
 	};
 public:
 	Player( Vector pos );
@@ -50,6 +51,7 @@ private:
 	void actOnDamege( );
 	void actOnBlowAway( );
 	void actOnDead( );
+	void actOnCall( );
 	void updateState( );
 	void setAction( ACTION action );
 private:

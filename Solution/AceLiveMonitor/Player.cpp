@@ -94,6 +94,9 @@ void Player::act( ) {
 	case ACTION_DAED:
 		actOnDead( );
 		break;
+	case ACTION_CALL:
+		actOnCall( );
+		break;
 	}
 	actOnCamera( );
 	updateState( );
@@ -388,17 +391,23 @@ void Player::actOnDead( ) {
 
 }
 
+void Player::actOnCall( ) {
+}
+
 void Player::damage( int force ) {
 	if ( Debug::getTask( )->isDebug( ) ) {
 		return;
 	}
 	if ( _action == ACTION_DAMEGE ||
 		 _action == ACTION_BLOW_AWAY ||
+		 _action == ACTION_CALL ||
 		 _unrivaled_count < MAX_UNRIVALED_COUNT ||
 		 isFinished( ) ) {
 		return;
 	}
+
 	Character::damage( force );
+
 	if ( isFinished( ) ) {
 		setAction( ACTION_DAED );
 		setVec( Vector( ) );
@@ -517,6 +526,20 @@ Chip Player::getChip( ) const {
 			cy = ANIM[ anim ] / PLAYER_ANIM_WIDTH_NUM;
 		}
 		break;
+	case ACTION_CALL:
+		{
+			const int ANIM[ ] = {
+				40, 41, 42, 43, 44, 45, 46, 47, 48
+			};
+			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
+			int anim = getActCount( ) / PLAYER_ANIM_WAIT_COUNT;
+			if ( anim >= anim_num ) {
+				anim = anim_num - 1;
+			}
+			cx = ANIM[ anim ] % PLAYER_ANIM_WIDTH_NUM;
+			cy = ANIM[ anim ] / PLAYER_ANIM_WIDTH_NUM;
+		}
+		break;
 	}
 
 	
@@ -614,6 +637,11 @@ void Player::updateState( ) {
 			setVec( Vector( ) );
 		}
 	}
+	
+	if ( map->getObject( getPos( ) + getVec( ) ) == OBJECT_EVENT_CALL ) {
+		_action = ACTION_CALL;
+		setVec( Vector( ) );
+	}
 
 	if ( getState( ) == STATE_EVENT ) {
 		//一ページ目にいたらメインに戻る
@@ -661,6 +689,10 @@ void Player::bound( ) {
 }
 
 void Player::blowAway( ) {
+	if ( _action == ACTION_CALL ) {
+		return;
+	}
+
 	if ( !Debug::getTask( )->isDebug( ) &&
 		 _action != ACTION_DAED ) {
 		setAction( ACTION_BLOW_AWAY );
@@ -792,6 +824,17 @@ void Player::setSynchronousData( unsigned char type, int camera_pos ) const {
 			if ( anim >= anim_num ) {
 				anim = anim_num - 1;
 			}
+			pattern = ANIM[ anim ];
+		}
+		break;
+	case ACTION_CALL:
+		{
+			const int ANIM[ ] = {
+				64, 65, 66, 67, 68, 69, 70, 71
+			};
+			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
+			int anim = getActCount( ) / PLAYER_ANIM_WAIT_COUNT;
+			anim %= anim_num;
 			pattern = ANIM[ anim ];
 		}
 		break;
