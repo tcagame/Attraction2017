@@ -1,6 +1,7 @@
 #include "RockStorage.h"
 #include "Application.h"
 #include "RockItem.h"
+#include "RockItemDango.h"
 
 RockStoragePtr RockStorage::getTask( ) {
 	return std::dynamic_pointer_cast< RockStorage >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -8,6 +9,7 @@ RockStoragePtr RockStorage::getTask( ) {
 
 
 RockStorage::RockStorage( ) {
+	_items.push_back( RockItemPtr( new RockItemDango( Vector( 0, 10, 0 ) ) ) );
 }
 
 
@@ -29,4 +31,8 @@ void RockStorage::update( ) {
 
 void RockStorage::add( RockItemPtr item ) {
 	_items.push_back( item );
+}
+
+std::list< RockItemPtr > RockStorage::getItems( ) const {
+	return _items;
 }

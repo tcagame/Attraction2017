@@ -47,7 +47,6 @@ void RockDollHouse::initialize( ) {
 
 	//item
 	_dolls[ DOLL_DANGO ]->load( "Resource/Rock/item/itm01/itm01.mv1" );
-
 }
 
 ModelMV1Ptr RockDollHouse::getModel( DOLL id ) const {
