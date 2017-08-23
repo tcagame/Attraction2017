@@ -13,3 +13,5 @@
 *.exe
 *.iobj
 *.ipdb
+*.lib
+*.ilk
