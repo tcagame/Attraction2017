@@ -609,11 +609,15 @@ void Player::setAction( ACTION action ) {
 	setActCount( 0 );
 }
 
-void Player::setSynchronousData( unsigned char type, int camera_pos ) const {
+void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
 
 	// Status
-	//data->set
+	if ( getArea( ) == AREA_STREET ) {
+		data->setStatusState( player, SynchronousData::STATE_PLAY_STREET );
+	} else {
+		data->setStatusState( player, SynchronousData::STATE_PLAY_EVENT );
+	}
 
 	// Object
 	if ( _unrivaled_count < MAX_UNRIVALED_COUNT ) {
@@ -621,10 +625,16 @@ void Player::setSynchronousData( unsigned char type, int camera_pos ) const {
 			return;
 		}
 	}
+
 	AREA area = getArea( );
-	int add_sy = 0;
-	int add_sx = 0;
-	
+	unsigned char type;
+	switch ( player ) {
+	case PLAYER_TAROSUKE: type = SynchronousData::TYPE_TAROSUKE; break;
+	case PLAYER_TAROJIRO: type = SynchronousData::TYPE_TAROJIRO; break;
+	case PLAYER_GARISUKE: type = SynchronousData::TYPE_GARISUKE; break;
+	case PLAYER_TAROMI  : type = SynchronousData::TYPE_TAROMI  ; break;
+	};
+
 	Vector pos = getPos( );
 	int x = ( int )pos.x;
 	int y = ( int )pos.y;
