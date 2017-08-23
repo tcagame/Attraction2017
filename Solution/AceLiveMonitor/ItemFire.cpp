@@ -1,4 +1,5 @@
 #include "ItemFire.h"
+#include "SynchronousData.h"
 
 ItemFire::ItemFire( const Vector& pos ) :
 Item( pos ) {
@@ -8,19 +9,20 @@ Item( pos ) {
 ItemFire::~ItemFire( ) {
 }
 
-Chip ItemFire::getChip( ) const {
-	Chip chip = Chip( );
-	Vector pos = getPos( );
-	chip.size = getChipSize( );
-	chip.tx = 160;
-	chip.ty = 128;
-	chip.sx1 = ( int )pos.x - chip.size / 2;
-	chip.sy1 = ( int )pos.y - chip.size;
-	chip.sx2 = chip.sx1 + chip.size;
-	chip.sy2 = chip.sy1 + chip.size;
-	return chip;
+void ItemFire::act( ) {
 }
 
-void ItemFire::act( ) {
+void ItemFire::setSynchronousData( unsigned char type, int camera_pos ) const {
+	Vector pos = getPos( );
+	int x = ( int )pos.x;
+	int y = ( int )pos.y;
 
+	AREA area = AREA_EVENT;
+	if ( getArea( ) == AREA_STREET ) {
+		x -= camera_pos;
+		area = AREA_STREET;
+	}
+	unsigned char attribute = 0;
+	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	data->addObject( area, type, 37, attribute, x, y );
 }

@@ -3,14 +3,14 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="StatusDrawer.cpp" />
-    <ClCompile Include="RockCamera.cpp" />
     <ClCompile Include="RockMapTest.cpp" />
     <ClCompile Include="RockMilitaryTest.cpp" />
+    <ClCompile Include="RockCameraTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StatusDrawer.h" />
-    <ClInclude Include="RockCamera.h" />
     <ClInclude Include="RockMapTest.h" />
     <ClInclude Include="RockMilitaryTest.h" />
+    <ClInclude Include="RockCameraTest.h" />
   </ItemGroup>
 </Project>

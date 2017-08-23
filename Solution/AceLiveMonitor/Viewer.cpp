@@ -2,13 +2,9 @@
 #include "Application.h"
 #include "Drawer.h"
 
-#include "ViewerFamily.h"
 #include "ViewerStreet.h"
-#include "ViewerArmoury.h"
 #include "ViewerStatus.h"
 #include "ViewerEvent.h"
-#include "ViewerStorage.h"
-#include "ViewerMagazine.h"
 
 #include "ViewerDebug.h"
 #include "Debug.h"
@@ -35,13 +31,9 @@ Viewer::~Viewer( ) {
 }
 
 void Viewer::initialize( ) {
-	_viewer_magazine	= ViewerMagazinePtr	( new ViewerMagazine( ) );
-	_viewer_family		= ViewerFamilyPtr	( new ViewerFamily ); 
 	_viewer_street		= ViewerStreetPtr	( new ViewerStreet );
-	_viewer_armoury		= ViewerArmouryPtr	( new ViewerArmoury( ) );
 	_viewer_event		= ViewerEventPtr	( new ViewerEvent );
 	_viewer_status		= ViewerStatusPtr	( new ViewerStatus );
-	_viewer_storage		= ViewerStoragePtr  ( new ViewerStorage );
 
 	_viewer_debug = ViewerDebugPtr( new ViewerDebug );
 
@@ -62,11 +54,6 @@ void Viewer::update( ) {
 	_viewer_event->draw( EVENT_SX, EVENT_SY );
 	_viewer_object->draw( AREA_EVENT, EVENT_SX, EVENT_SY );
 	
-	// 旧描画（全て移行させる)
-	_viewer_storage->draw( );
-	_viewer_armoury->draw( );
-	_viewer_magazine->draw( );
-
 	// ステータス描画
 	_viewer_status->draw( );
 

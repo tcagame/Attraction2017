@@ -25,11 +25,13 @@ public:
 	static const unsigned char TYPE_GARISUKE		= 0x12;
 	static const unsigned char TYPE_TAROMI			= 0x13;
 	static const unsigned char TYPE_MONMOTARO		= 0x20;
-	static const unsigned char TYPE_CHARGE			= 0x21;
+	static const unsigned char TYPE_SHOT			= 0x21;
 	static const unsigned char TYPE_ENEMY_MIDIUM	= 0x22;
 	static const unsigned char TYPE_ENEMY_SMALL		= 0x23;
 	static const unsigned char TYPE_ENEMY_BIG		= 0x24;
 	static const unsigned char TYPE_ENEMY_BOSS		= 0x25;
+	static const unsigned char TYPE_IMPACT			= 0x26;
+	static const unsigned char TYPE_ITEM			= 0x27;
 public:
 	static std::string getTag( ) { return "SYNCHRONOUSDATA"; };
 	static SynchronousDataPtr getTask( );

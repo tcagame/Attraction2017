@@ -1,6 +1,5 @@
 #include "ItemToku.h"
-
-
+#include "SynchronousData.h"
 
 ItemToku::ItemToku( Vector pos ) :
 Item( pos ) {
@@ -13,15 +12,17 @@ ItemToku::~ItemToku( ) {
 void ItemToku::act( ) {
 }
 
-Chip ItemToku::getChip( ) const {
-	Chip chip = Chip( );
+void ItemToku::setSynchronousData( unsigned char type, int camera_pos ) const {
 	Vector pos = getPos( );
-	chip.size = getChipSize( );
-	chip.sx1 = ( int )pos.x - chip.size / 2;
-	chip.sy1 = ( int )pos.y - chip.size;
-	chip.sx2 = chip.sx1 + chip.size;
-	chip.sy2 = chip.sy1 + chip.size;
-	chip.tx = 64;
-	chip.ty = 128;
-	return chip;
+	int x = ( int )pos.x;
+	int y = ( int )pos.y;
+
+	AREA area = AREA_EVENT;
+	if ( getArea( ) == AREA_STREET ) {
+		x -= camera_pos;
+		area = AREA_STREET;
+	}
+	unsigned char attribute = 0;
+	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	data->addObject( area, type, 34, attribute, x, y );
 }

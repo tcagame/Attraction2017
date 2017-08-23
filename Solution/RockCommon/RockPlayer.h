@@ -13,6 +13,7 @@ public:
 	void bound( );
 	void damage( int force );
 	void back( );
+	void wish( );
 	ModelMV1Ptr getModel( ) const;
 protected:
 	void act( );
@@ -24,6 +25,7 @@ private:
 		ACTION_BRAKE,
 		ACTION_CHARGE,
 		ACTION_DEAD,
+		ACTION_WISH
 	};
 private:
 	void setAction( ACTION action );
@@ -34,6 +36,7 @@ private:
 	void actOnCharging( );
 	void actOnBraking( );
 	void actOnDead( );
+	void actOnWish( );
 	void updateEffect( );
 private:
 	StatusPtr _status;

@@ -1,7 +1,6 @@
 #pragma once
 #include "Task.h"
 #include <string>
-#include "Shot.h"
 #include "smart_ptr.h"
 #include <list>
 #include <array>
@@ -9,6 +8,8 @@
 PTR( Shot );
 PTR( Armoury );
 PTR( Impact );
+PTR( ShotPlayer );
+PTR( ShotMonmotaro );
 
 class Armoury : public Task {
 public:

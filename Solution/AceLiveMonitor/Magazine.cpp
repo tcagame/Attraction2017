@@ -1,6 +1,7 @@
 #include "Magazine.h"
 #include "Application.h"
 #include "Impact.h"
+#include "Family.h"
 
 MagazinePtr Magazine::getTask( ) {
 	return std::dynamic_pointer_cast< Magazine >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -30,6 +31,7 @@ void Magazine::update( ) {
 			continue;
 		}
 		impact->update( );
+		impact->setSynchronousData( ( int )Family::getTask( )->getCameraPos( ) );
 		ite++;
 	}
 }

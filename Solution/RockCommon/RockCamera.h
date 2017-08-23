@@ -10,13 +10,17 @@ public:
 	static std::string getTag( ) { return "ROCKCAMERA"; };
 	static RockCameraPtr getTask( );
 public:
-	RockCamera( );
+	RockCamera( const Vector& pos, const Vector& target );
 	virtual ~RockCamera( );
 public:
 	void initialize( );
-	void update( );
+	virtual void update( ) = 0;
+	Vector getPos( ) const;
+	Vector getTarget( ) const;
+protected:
+	void setPos( const Vector& pos );
+	void setTarget( const Vector& target );
 private:
 	Vector _pos;
 	Vector _target;
 };
-

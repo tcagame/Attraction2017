@@ -13,7 +13,9 @@ ViewerObject::ViewerObject( ) {
 	_image[ GRAPH_ENEMY_MIDIUM		] = drawer->createImage( "Enemy/enemy_medium.png"	);
 	_image[ GRAPH_ENEMY_SMALL		] = drawer->createImage( "Enemy/enemy_small.png"	);
 	_image[ GRAPH_ENEMY_BIG			] = drawer->createImage( "Enemy/enemy_big.png"		);
-	_image[ GRAPH_ENEMY_BOSS		] = drawer->createImage( "Enemy/enemy_boss.png"	);
+	_image[ GRAPH_ENEMY_BOSS		] = drawer->createImage( "Enemy/enemy_boss.png"		);
+	_image[ GRAPH_IMPACT			] = drawer->createImage( "Effect/impact.png"		);
+	_image[ GRAPH_ITEM				] = drawer->createImage( "Item/item.png"			);
 }
 
 
@@ -53,8 +55,8 @@ void ViewerObject::drawSprite( int x, int y, unsigned char type, unsigned char a
 	case SynchronousData::TYPE_MONMOTARO:
 		sprite = getSpritePlayer( GRAPH_MONMOTARO		, x, y, attribute, pattern );
 		break;
-	case SynchronousData::TYPE_CHARGE:
-		sprite = getSpritePlayer( GRAPH_SHOT			, x, y, attribute, pattern );
+	case SynchronousData::TYPE_SHOT:
+		sprite = getSpriteEffect( GRAPH_SHOT			, x, y, attribute, pattern );
 		break;
 	case SynchronousData::TYPE_ENEMY_MIDIUM:
 		sprite = getSpriteEnemy( GRAPH_ENEMY_MIDIUM		, x, y, attribute, pattern, size );
@@ -67,6 +69,12 @@ void ViewerObject::drawSprite( int x, int y, unsigned char type, unsigned char a
 		break;
 	case SynchronousData::TYPE_ENEMY_BOSS:
 		sprite = getSpriteEnemyBoss( GRAPH_ENEMY_BOSS	, x, y, attribute, pattern, size );
+		break;
+	case SynchronousData::TYPE_IMPACT:
+		sprite = getSpriteImpact( GRAPH_IMPACT			, x, y, attribute, pattern, size );
+		break;
+	case SynchronousData::TYPE_ITEM:
+		sprite = getSpriteItem( GRAPH_ITEM				, x, y, attribute, pattern, size );
 		break;
 	};
 
@@ -81,6 +89,30 @@ ViewerObject::Sprite ViewerObject::getSpritePlayer( GRAPH graph, int x, int y, u
 	
 	sprite.tx = pattern % PLAYER_CHAR_CHIP_WIDTH * NORMAL_CHAR_GRAPH_SIZE;
 	sprite.ty = pattern / PLAYER_CHAR_CHIP_WIDTH * NORMAL_CHAR_GRAPH_SIZE;
+	sprite.tw = NORMAL_CHAR_GRAPH_SIZE;
+	sprite.th = NORMAL_CHAR_GRAPH_SIZE;
+
+	if ( attribute & SynchronousData::ATTRIBUTE_REVERSE ) {
+		sprite.sx1 = x - NORMAL_CHAR_GRAPH_SIZE / 2 + NORMAL_CHAR_GRAPH_SIZE;
+		sprite.sy1 = y - NORMAL_CHAR_GRAPH_SIZE + PLAYER_CHAR_GRAPH_FOOT;
+		sprite.sx2 = sprite.sx1 - NORMAL_CHAR_GRAPH_SIZE;
+		sprite.sy2 = sprite.sy1 + NORMAL_CHAR_GRAPH_SIZE;
+	} else {
+		sprite.sx1 = x - NORMAL_CHAR_GRAPH_SIZE / 2;
+		sprite.sy1 = y - NORMAL_CHAR_GRAPH_SIZE + PLAYER_CHAR_GRAPH_FOOT;
+		sprite.sx2 = sprite.sx1 + NORMAL_CHAR_GRAPH_SIZE;
+		sprite.sy2 = sprite.sy1 + NORMAL_CHAR_GRAPH_SIZE;
+	}
+
+	return sprite;
+}
+
+ViewerObject::Sprite ViewerObject::getSpriteEffect( GRAPH graph, int x, int y, unsigned char attribute, int pattern ) const {
+	Sprite sprite;
+	sprite.graph = graph;
+	
+	sprite.tx = pattern % EFFECT_CHIP_WIDTH * NORMAL_CHAR_GRAPH_SIZE;
+	sprite.ty = pattern / EFFECT_CHIP_WIDTH * NORMAL_CHAR_GRAPH_SIZE;
 	sprite.tw = NORMAL_CHAR_GRAPH_SIZE;
 	sprite.th = NORMAL_CHAR_GRAPH_SIZE;
 
@@ -172,6 +204,41 @@ ViewerObject::Sprite ViewerObject::getSpriteEnemyBoss( GRAPH graph, int x, int y
 		sprite.sx2 = sprite.sx1 + size;
 		sprite.sy2 = sprite.sy1 + size;
 	}
+
+	return sprite;
+}
+
+ViewerObject::Sprite ViewerObject::getSpriteImpact( GRAPH graph, int x, int y, unsigned char attribute, int pattern, int size ) const {
+	Sprite sprite;
+	sprite.graph = graph;
+	sprite.tx = pattern % IMPACT_CHIP_WIDTH * IMPACT_GRAPH_SIZE;
+	sprite.ty = pattern / IMPACT_CHIP_WIDTH * IMPACT_GRAPH_SIZE;
+	sprite.tw = IMPACT_GRAPH_SIZE;
+	sprite.th = IMPACT_GRAPH_SIZE;
+
+	sprite.sx1 = x - size / 2;
+	sprite.sy1 = y - size;
+	sprite.sx2 = sprite.sx1 + size;
+	sprite.sy2 = sprite.sy1 + size;
+
+	return sprite;
+}
+
+ViewerObject::Sprite ViewerObject::getSpriteItem( GRAPH graph, int x, int y, unsigned char attribute, int pattern, int size ) const {
+	Sprite sprite;
+	sprite.graph = graph;
+	sprite.tx = pattern % ITEM_CHIP_WIDTH * ITEM_GRAPH_SIZE;
+	sprite.ty = pattern / ITEM_CHIP_WIDTH * ITEM_GRAPH_SIZE;
+	sprite.tw = ITEM_GRAPH_SIZE;
+	sprite.th = ITEM_GRAPH_SIZE;
+	
+	if ( size < 0 ) {
+		size = ITEM_GRAPH_SIZE;
+	}
+	sprite.sx1 = x - size / 2;
+	sprite.sy1 = y - size;
+	sprite.sx2 = sprite.sx1 + size;
+	sprite.sy2 = sprite.sy1 + size;
 
 	return sprite;
 }

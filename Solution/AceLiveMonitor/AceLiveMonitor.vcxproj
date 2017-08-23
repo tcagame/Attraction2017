@@ -273,20 +273,18 @@
     <ClCompile Include="PopWhiteMist.cpp" />
     <ClCompile Include="PopWind.cpp" />
     <ClCompile Include="Sender.cpp" />
+    <ClCompile Include="ShotMonmotaro.cpp" />
+    <ClCompile Include="ShotPlayer.cpp" />
     <ClCompile Include="Storage.cpp" />
     <ClCompile Include="ViewerDebug.cpp" />
     <ClCompile Include="ViewerEvent.cpp" />
-    <ClCompile Include="ViewerFamily.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Military.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Shot.cpp" />
     <ClCompile Include="Armoury.cpp" />
     <ClCompile Include="Viewer.cpp" />
-    <ClCompile Include="ViewerArmoury.cpp" />
-    <ClCompile Include="ViewerMagazine.cpp" />
     <ClCompile Include="ViewerStatus.cpp" />
-    <ClCompile Include="ViewerStorage.cpp" />
     <ClCompile Include="ViewerStreet.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -404,19 +402,17 @@
     <ClInclude Include="PopWhiteMist.h" />
     <ClInclude Include="PopWind.h" />
     <ClInclude Include="Sender.h" />
+    <ClInclude Include="ShotMonmotaro.h" />
+    <ClInclude Include="ShotPlayer.h" />
     <ClInclude Include="Storage.h" />
     <ClInclude Include="ViewerDebug.h" />
     <ClInclude Include="ViewerEvent.h" />
-    <ClInclude Include="ViewerFamily.h" />
     <ClInclude Include="Military.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Shot.h" />
     <ClInclude Include="Armoury.h" />
     <ClInclude Include="Viewer.h" />
-    <ClInclude Include="ViewerArmoury.h" />
-    <ClInclude Include="ViewerMagazine.h" />
     <ClInclude Include="ViewerStatus.h" />
-    <ClInclude Include="ViewerStorage.h" />
     <ClInclude Include="ViewerStreet.h" />
   </ItemGroup>
   <ItemGroup>

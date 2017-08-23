@@ -6,6 +6,8 @@
 #include "Enemy.h"
 #include "Impact.h"
 #include "Magazine.h"
+#include "SynchronousData.h"
+#include "Family.h"
 
 ArmouryPtr Armoury::getTask( ) {
 	return std::dynamic_pointer_cast< Armoury >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -24,6 +26,7 @@ void Armoury::update( ) {
 
 void Armoury::updateEnemy( ) {
 	MilitaryPtr militari( Military::getTask( ) );
+	int camera_pos = ( int )Family::getTask( )->getCameraPos( );
 	for ( int i = 0; i < MAX_SHOT_NUM; i ++ ) {
 		if ( !_shot_list[ i ] ) {
 			continue;
@@ -33,14 +36,16 @@ void Armoury::updateEnemy( ) {
 			continue;
 		}
 		_shot_list[ i ]->update( );
+		_shot_list[ i ]->setSynchronousData( SynchronousData::TYPE_SHOT, camera_pos );
 		EnemyPtr hit_enemy = militari->getOverlappedEnemy( _shot_list[ i ] );
 		if ( hit_enemy ) {
 			hit_enemy->damage( _shot_list[ i ]->getPower( ) );
 			if ( !hit_enemy->isFinished( ) ) {
 				//エネミーが倒れなかったらショットが当たった位置で爆発
 				Vector impact_pos = _shot_list[ i ]->getPos( );
-				impact_pos.y += NORMAL_CHAR_GRAPH_SIZE / 2;
-				Magazine::getTask( )->add( ImpactPtr( new Impact( impact_pos, _shot_list[ i ]->getArea( ), 64 ) ) );
+				impact_pos.y -= _shot_list[ i ]->getChipSize( ) / 2;
+				int impact_size = 16 * _shot_list[ i ]->getPower( );
+				Magazine::getTask( )->add( ImpactPtr( new Impact( impact_pos, _shot_list[ i ]->getArea( ), impact_size ) ) );
 				_shot_list[ i ] = ShotPtr( );
 			}
 		}
@@ -59,8 +64,7 @@ int Armoury::getMaxShotNum( ) const {
 
 void Armoury::add( ShotPtr shot ) {
 	_shot_list[ _shot_id ] = shot;
-	_shot_id++;
-	_shot_id %= MAX_SHOT_NUM;
+	_shot_id = ( _shot_id + 1 ) % MAX_SHOT_NUM;
 }
 
 

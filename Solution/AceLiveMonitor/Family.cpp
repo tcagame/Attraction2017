@@ -44,6 +44,16 @@ void Family::initialize( ) {
 void Family::update( ) {
 	bool update_camera = true;
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
+		// playerの頭の上で跳ねる
+		for ( int j = 0; j < MAX_PLAYER; j++ ) {
+			if ( i == j ) {
+				continue;
+			}
+			if ( _player[ i ]->isOverlapped( _player[ j ] ) &&
+				 _player[ i ]->isOnHead( _player[ j ] ) ) {
+				_player[ i ]->bound( );
+			}
+		}
 		_player[ i ]->update( );
 		if ( _player[ i ]->getArea( ) != AREA_EVENT ) {
 			//キャラクターが右端にいる場合、カメラのポジションを変えない

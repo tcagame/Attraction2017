@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "ItemMoney.h"
 #include "ItemToku.h"
+#include "SynchronousData.h"
 
 PTR( ItemMoney );
 PTR( ItemToku );
@@ -21,6 +22,7 @@ Storage::~Storage( ) {
 }
 
 void Storage::update( ) {
+	int camera_pos = ( int )Family::getTask( )->getCameraPos( );
 	std::list< ItemPtr >::iterator ite = _items.begin( );
 	while ( ite != _items.end( ) ) {
 		ItemPtr item = *ite;
@@ -29,6 +31,7 @@ void Storage::update( ) {
 			continue;
 		}
 		item->update( );
+		item->setSynchronousData( SynchronousData::TYPE_ITEM, camera_pos );
 		PlayerPtr hit_player = getOverLappedPlayer( item );
 		if ( hit_player ) {
 			//プレイヤーがアイテムと接触
