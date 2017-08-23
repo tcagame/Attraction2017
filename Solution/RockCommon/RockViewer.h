@@ -20,6 +20,7 @@ private:
 	void drawPlayer( ) const;
 	void drawShot( ) const;// debug
 	void drawItem( ) const; 
+	void drawAlter( ) const;
 private:
 	StatusPtr _status;
 };

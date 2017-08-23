@@ -16,6 +16,7 @@
 #include "RockShot.h"
 #include "RockImpact.h"
 #include "Effect.h"
+#include "RockAlter.h"
 
 RockViewerPtr RockViewer::getTask( ) {
 	return std::dynamic_pointer_cast< RockViewer >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -38,6 +39,7 @@ void RockViewer::update( ) {
 	drawPlayer( );
 	drawShot( );
 	drawItem( );
+	drawAlter( );
 	Effect::getTask( )->drawEffect( );
 }
 
@@ -112,4 +114,22 @@ void RockViewer::drawItem( ) const {
 		ite++;
 	}
 }
+
+void RockViewer::drawAlter( ) const {
+	DrawerPtr drawer( Drawer::getTask( ) );
+	RockStoragePtr storage( RockStorage::getTask( ) );
+	std::list< RockAlterPtr > alters = storage->getAlters( );
+	std::list< RockAlterPtr >::const_iterator ite = alters.begin( );
+	while ( ite != alters.end( ) ) {
+		RockAlterPtr alter = *ite;
+		if ( !alter ) {
+			ite++;
+			continue;
+		}
+		ModelMV1Ptr model = alter->getModel( );
+		model->draw( );
+		ite++;
+	}
+}
+
 
