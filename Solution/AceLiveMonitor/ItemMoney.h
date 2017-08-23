@@ -12,7 +12,7 @@ public:
 	ItemMoney( const Vector& pos, TYPE money );
 	virtual ~ItemMoney( );
 public:
-	Chip getChip( ) const;
+	void setSynchronousData( unsigned char type, int camera_pos ) const;
 	int getValue( ) const;
 protected:
 	void act( );

@@ -231,9 +231,6 @@
     <ClCompile Include="ViewerStreet.cpp">
       <Filter>Viewer</Filter>
     </ClCompile>
-    <ClCompile Include="ViewerStorage.cpp">
-      <Filter>Viewer</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyBossRock.cpp">
       <Filter>Boss</Filter>
     </ClCompile>
@@ -581,9 +578,6 @@
       <Filter>Viewer</Filter>
     </ClInclude>
     <ClInclude Include="ViewerStreet.h">
-      <Filter>Viewer</Filter>
-    </ClInclude>
-    <ClInclude Include="ViewerStorage.h">
       <Filter>Viewer</Filter>
     </ClInclude>
     <ClInclude Include="EnemyBossRock.h">

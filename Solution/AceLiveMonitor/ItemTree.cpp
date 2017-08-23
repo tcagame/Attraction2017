@@ -1,4 +1,5 @@
 #include "ItemTree.h"
+#include "SynchronousData.h"
 
 ItemTree::ItemTree( const Vector& pos ) :
 Item( pos ) {
@@ -8,19 +9,20 @@ Item( pos ) {
 ItemTree::~ItemTree( ) {
 }
 
-Chip ItemTree::getChip( ) const {
-	Chip chip = Chip( );
-	Vector pos = getPos( );
-	chip.size = getChipSize( );
-	chip.tx = 128;
-	chip.ty = 128;
-	chip.sx1 = ( int )pos.x - chip.size / 2;
-	chip.sy1 = ( int )pos.y - chip.size;
-	chip.sx2 = chip.sx1 + chip.size;
-	chip.sy2 = chip.sy1 + chip.size;
-	return chip;
+void ItemTree::act( ) {
 }
 
-void ItemTree::act( ) {
+void ItemTree::setSynchronousData( unsigned char type, int camera_pos ) const {
+	Vector pos = getPos( );
+	int x = ( int )pos.x;
+	int y = ( int )pos.y;
 
+	AREA area = AREA_EVENT;
+	if ( getArea( ) == AREA_STREET ) {
+		x -= camera_pos;
+		area = AREA_STREET;
+	}
+	unsigned char attribute = 0;
+	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	data->addObject( area, type, 36, attribute, x, y );
 }

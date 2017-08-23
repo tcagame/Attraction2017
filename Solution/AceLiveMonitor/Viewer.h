@@ -7,7 +7,6 @@ PTR( Viewer );
 PTR( ViewerStreet );
 PTR( ViewerEvent );
 PTR( ViewerStatus );
-PTR( ViewerStorage );
 
 PTR( ViewerDebug );
 
@@ -27,7 +26,6 @@ private:
 	ViewerStreetConstPtr _viewer_street;
 	ViewerStatusConstPtr _viewer_status;
 	ViewerEventConstPtr _viewer_event;
-	ViewerStoragePtr _viewer_storage;
 
 	ViewerDebugConstPtr _viewer_debug;
 

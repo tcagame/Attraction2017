@@ -15,6 +15,7 @@ ViewerObject::ViewerObject( ) {
 	_image[ GRAPH_ENEMY_BIG			] = drawer->createImage( "Enemy/enemy_big.png"		);
 	_image[ GRAPH_ENEMY_BOSS		] = drawer->createImage( "Enemy/enemy_boss.png"		);
 	_image[ GRAPH_IMPACT			] = drawer->createImage( "Effect/impact.png"		);
+	_image[ GRAPH_ITEM				] = drawer->createImage( "Item/item.png"			);
 }
 
 
@@ -69,8 +70,11 @@ void ViewerObject::drawSprite( int x, int y, unsigned char type, unsigned char a
 	case SynchronousData::TYPE_ENEMY_BOSS:
 		sprite = getSpriteEnemyBoss( GRAPH_ENEMY_BOSS	, x, y, attribute, pattern, size );
 		break;
-	case SynchronousData::TYEP_IMPACT:
+	case SynchronousData::TYPE_IMPACT:
 		sprite = getSpriteImpact( GRAPH_IMPACT			, x, y, attribute, pattern, size );
+		break;
+	case SynchronousData::TYPE_ITEM:
+		sprite = getSpriteItem( GRAPH_ITEM				, x, y, attribute, pattern, size );
 		break;
 	};
 
@@ -212,6 +216,25 @@ ViewerObject::Sprite ViewerObject::getSpriteImpact( GRAPH graph, int x, int y, u
 	sprite.tw = IMPACT_GRAPH_SIZE;
 	sprite.th = IMPACT_GRAPH_SIZE;
 
+	sprite.sx1 = x - size / 2;
+	sprite.sy1 = y - size;
+	sprite.sx2 = sprite.sx1 + size;
+	sprite.sy2 = sprite.sy1 + size;
+
+	return sprite;
+}
+
+ViewerObject::Sprite ViewerObject::getSpriteItem( GRAPH graph, int x, int y, unsigned char attribute, int pattern, int size ) const {
+	Sprite sprite;
+	sprite.graph = graph;
+	sprite.tx = pattern % ITEM_CHIP_WIDTH * ITEM_GRAPH_SIZE;
+	sprite.ty = pattern / ITEM_CHIP_WIDTH * ITEM_GRAPH_SIZE;
+	sprite.tw = ITEM_GRAPH_SIZE;
+	sprite.th = ITEM_GRAPH_SIZE;
+	
+	if ( size < 0 ) {
+		size = ITEM_GRAPH_SIZE;
+	}
 	sprite.sx1 = x - size / 2;
 	sprite.sy1 = y - size;
 	sprite.sx2 = sprite.sx1 + size;

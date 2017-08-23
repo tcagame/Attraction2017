@@ -23,6 +23,7 @@ private:
 		GRAPH_ENEMY_BIG,
 		GRAPH_ENEMY_BOSS,
 		GRAPH_IMPACT,
+		GRAPH_ITEM,
 		MAX_GRAPH,
 	};
 	struct Sprite {
@@ -43,6 +44,7 @@ private:
 	Sprite getSpriteEnemy( GRAPH graph, int x, int y, unsigned char attribute, int pattern, int size ) const;
 	Sprite getSpriteEnemyBoss( GRAPH graph, int x, int y, unsigned char attribute, int pattern, int size ) const;
 	Sprite getSpriteImpact( GRAPH graph, int x, int y, unsigned char attribute, int pattern, int size ) const;
+	Sprite getSpriteItem( GRAPH graph, int x, int y, unsigned char attribute, int pattern, int size ) const;
 private:
 	std::array< ImagePtr, MAX_GRAPH > _image;
 };

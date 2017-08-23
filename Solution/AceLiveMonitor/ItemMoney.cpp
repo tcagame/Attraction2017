@@ -1,4 +1,5 @@
 #include "ItemMoney.h"
+#include "SynchronousData.h"
 
 const int WAIT_ANIM_TIME = 150;
 const int MAX_ANIM_NUM = 2;
@@ -12,34 +13,35 @@ _type( type ) {
 ItemMoney::~ItemMoney( ) {
 }
 
-Chip ItemMoney::getChip( ) const {
-	Chip chip = Chip( );
-	Vector pos = getPos( );
-	chip.size = getChipSize( );
-	chip.sx1 = ( int )pos.x - chip.size / 2;
-	chip.sy1 = ( int )pos.y - chip.size;
-	chip.sx2 = chip.sx1 + chip.size;
-	chip.sy2 = chip.sy1 + chip.size;
-	int anim = getActCount( ) / WAIT_ANIM_TIME % MAX_ANIM_NUM;
-	switch ( _type ) {
-	case TYPE_PETTY:
-		chip.tx = anim * chip.size;
-		chip.ty = 164;
-		break;
-	case TYPE_BAG:
-		chip.tx = anim * chip.size;
-		chip.ty = 128;
-		break;
-	case TYPE_500:
-		chip.tx = 128 + anim * chip.size;
-		chip.ty = 228;
-		break;
-	}
-	return chip;
+void ItemMoney::act( ) {
 }
 
-void ItemMoney::act( ) {
+void ItemMoney::setSynchronousData( unsigned char type, int camera_pos ) const {
+	Vector pos = getPos( );
+	int x = ( int )pos.x;
+	int y = ( int )pos.y;
 
+	AREA area = AREA_EVENT;
+	if ( getArea( ) == AREA_STREET ) {
+		x -= camera_pos;
+		area = AREA_STREET;
+	}
+	unsigned char attribute = 0;
+	int anim = getActCount( ) / WAIT_ANIM_TIME % MAX_ANIM_NUM;
+	int pattern = -1;
+	switch ( _type ) {
+	case TYPE_PETTY:
+		pattern = anim + 40;
+		break;
+	case TYPE_BAG:
+		pattern = anim + 32;
+		break;
+	case TYPE_500:
+		pattern = anim + 60;
+		break;
+	}
+	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	data->addObject( area, type, pattern, attribute, x, y );
 }
 
 int ItemMoney::getValue( ) const {

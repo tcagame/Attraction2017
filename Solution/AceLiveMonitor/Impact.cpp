@@ -36,7 +36,7 @@ void Impact::setSynchronousData( int camera_pos ) const {
 	}
 	unsigned char attribute = 0;
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
-	data->addObject( area, SynchronousData::TYEP_IMPACT, ANIM[ pattern ], attribute, x, y, _sprite_size );
+	data->addObject( area, SynchronousData::TYPE_IMPACT, ANIM[ pattern ], attribute, x, y, _sprite_size );
 }
 
 bool Impact::isFinished( ) const {

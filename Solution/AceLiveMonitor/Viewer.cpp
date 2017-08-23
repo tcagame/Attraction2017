@@ -5,7 +5,6 @@
 #include "ViewerStreet.h"
 #include "ViewerStatus.h"
 #include "ViewerEvent.h"
-#include "ViewerStorage.h"
 
 #include "ViewerDebug.h"
 #include "Debug.h"
@@ -35,7 +34,6 @@ void Viewer::initialize( ) {
 	_viewer_street		= ViewerStreetPtr	( new ViewerStreet );
 	_viewer_event		= ViewerEventPtr	( new ViewerEvent );
 	_viewer_status		= ViewerStatusPtr	( new ViewerStatus );
-	_viewer_storage		= ViewerStoragePtr  ( new ViewerStorage );
 
 	_viewer_debug = ViewerDebugPtr( new ViewerDebug );
 
@@ -56,9 +54,6 @@ void Viewer::update( ) {
 	_viewer_event->draw( EVENT_SX, EVENT_SY );
 	_viewer_object->draw( AREA_EVENT, EVENT_SX, EVENT_SY );
 	
-	// 旧描画（全て移行させる)
-	_viewer_storage->draw( );
-
 	// ステータス描画
 	_viewer_status->draw( );
 
