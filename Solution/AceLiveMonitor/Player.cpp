@@ -105,9 +105,10 @@ void Player::act( ) {
 	_unrivaled_count++;
 
 	if ( _monmo ) {
-		Vector pos = getPos( );
-		pos.x += getChipSize( ) / 2;
-		_monmo->setTarget( pos );
+		Monmotaro::Target target;
+		target.pos = getPos( );
+		target.dir = getDir( );
+		_monmo->setTarget( target );
 		_monmo->update( );
 	}
 }
@@ -406,7 +407,7 @@ void Player::actOnCall( ) {
 		return;
 	}
 
-	if ( _monmo->getAction( ) == Monmotaro::ACTION_WAIT ) {
+	if ( _monmo->getAction( ) == Monmotaro::ACTION_MOVE ) {
 		setAction( ACTION_WAIT );
 	}
 }
@@ -523,9 +524,10 @@ void Player::updateState( ) {
 	
 	if ( map->getObject( getPos( ) + getVec( ) ) == OBJECT_EVENT_CALL ) {
 		map->usedObject( getPos( ) + getVec( ) );
-		Vector pos = getPos( );
-		pos.x += getChipSize( ) / 2;
-		_monmo = MonmotaroPtr( new Monmotaro( Vector( family->getCameraPos( ), 0 ), pos ) );
+		Monmotaro::Target target;
+		target.pos = getPos( );
+		target.dir = getDir( );
+		_monmo = MonmotaroPtr( new Monmotaro( Vector( family->getCameraPos( ), 0 ), target ) );
 		setAction( ACTION_CALL );
 		setVec( Vector( ) );
 	}

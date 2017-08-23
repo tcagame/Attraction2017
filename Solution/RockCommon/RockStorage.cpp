@@ -13,11 +13,11 @@ RockStoragePtr RockStorage::getTask( ) {
 
 
 RockStorage::RockStorage( ) {
-	_items.push_back( RockItemPtr( new RockItemDango( Vector( 0, 10, 0 ) ) ) );
-	_items.push_back( RockItemPtr( new RockItemMoney( Vector( 20, 10, 200 ), RockItemMoney::MONEY_VALUE_1 ) ) );
-	_items.push_back( RockItemPtr( new RockItemMoney( Vector( 40, 10, 200 ), RockItemMoney::MONEY_VALUE_2 ) ) );
-	_items.push_back( RockItemPtr( new RockItemMoney( Vector( 60, 10, 200 ), RockItemMoney::MONEY_VALUE_3 ) ) );
-	_items.push_back( RockItemPtr( new RockItemMoney( Vector( 80, 10, 200 ), RockItemMoney::MONEY_VALUE_4 ) ) );
+	//_items.push_back( RockItemPtr( new RockItemDango( Vector( 0, 10, 0 ) ) ) );
+	//_items.push_back( RockItemPtr( new RockItemMoney( Vector( 20, 10, 200 ), RockItemMoney::MONEY_VALUE_1 ) ) );
+	//_items.push_back( RockItemPtr( new RockItemMoney( Vector( 40, 10, 200 ), RockItemMoney::MONEY_VALUE_2 ) ) );
+	//_items.push_back( RockItemPtr( new RockItemMoney( Vector( 60, 10, 200 ), RockItemMoney::MONEY_VALUE_3 ) ) );
+	//_items.push_back( RockItemPtr( new RockItemMoney( Vector( 80, 10, 200 ), RockItemMoney::MONEY_VALUE_4 ) ) );
 }
 
 

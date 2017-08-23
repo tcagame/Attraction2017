@@ -131,10 +131,12 @@ void Family::updateSetDevice( ) {
 		return;
 	}
 
-	// デバイスが接続されていなかったら、たろすけのみキーボードで操作できるようにする
+	// デバイスが接続されていなかったら、キーボードで全プレイヤーを操作できるようにする
 	int device_num = device->getDeviceNum( );
 	if ( device_num < 1 ) {
-		_player[ 0 ]->setDeviceId( 0 );
+		for ( int i = 0; i < MAX_PLAYER; i++ ) {
+			_player[ i ]->setDeviceId( 0 );
+		}
 		_set_device = MAX_PLAYER;
 	}
 

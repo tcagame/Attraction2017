@@ -13,3 +13,6 @@
 *.exe
 *.iobj
 *.ipdb
+*.lib
+*.ilk
+*.cache
