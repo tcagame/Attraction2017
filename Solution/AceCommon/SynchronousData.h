@@ -25,7 +25,7 @@ public:
 	static const unsigned char TYPE_GARISUKE		= 0x12;
 	static const unsigned char TYPE_TAROMI			= 0x13;
 	static const unsigned char TYPE_MONMOTARO		= 0x20;
-	static const unsigned char TYPE_CHARGE			= 0x21;
+	static const unsigned char TYPE_SHOT			= 0x21;
 	static const unsigned char TYPE_ENEMY_MIDIUM	= 0x22;
 	static const unsigned char TYPE_ENEMY_SMALL		= 0x23;
 	static const unsigned char TYPE_ENEMY_BIG		= 0x24;

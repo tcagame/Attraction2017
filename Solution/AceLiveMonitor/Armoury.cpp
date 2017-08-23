@@ -6,6 +6,8 @@
 #include "Enemy.h"
 #include "Impact.h"
 #include "Magazine.h"
+#include "SynchronousData.h"
+#include "Family.h"
 
 ArmouryPtr Armoury::getTask( ) {
 	return std::dynamic_pointer_cast< Armoury >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -24,6 +26,7 @@ void Armoury::update( ) {
 
 void Armoury::updateEnemy( ) {
 	MilitaryPtr militari( Military::getTask( ) );
+	int camera_pos = ( int )Family::getTask( )->getCameraPos( );
 	for ( int i = 0; i < MAX_SHOT_NUM; i ++ ) {
 		if ( !_shot_list[ i ] ) {
 			continue;
@@ -33,6 +36,7 @@ void Armoury::updateEnemy( ) {
 			continue;
 		}
 		_shot_list[ i ]->update( );
+		_shot_list[ i ]->setSynchronousData( SynchronousData::TYPE_SHOT, camera_pos );
 		EnemyPtr hit_enemy = militari->getOverlappedEnemy( _shot_list[ i ] );
 		if ( hit_enemy ) {
 			hit_enemy->damage( _shot_list[ i ]->getPower( ) );

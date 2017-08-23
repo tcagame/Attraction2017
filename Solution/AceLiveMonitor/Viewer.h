@@ -5,7 +5,6 @@
 
 PTR( Viewer );
 PTR( ViewerStreet );
-PTR( ViewerArmoury );
 PTR( ViewerEvent );
 PTR( ViewerStatus );
 PTR( ViewerStorage );
@@ -27,7 +26,6 @@ public:
 	void update( );
 private:
 	ViewerStreetConstPtr _viewer_street;
-	ViewerArmouryConstPtr _viewer_armoury;
 	ViewerStatusConstPtr _viewer_status;
 	ViewerEventConstPtr _viewer_event;
 	ViewerStoragePtr _viewer_storage;

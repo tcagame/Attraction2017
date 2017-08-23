@@ -139,7 +139,7 @@ void Family::updateSetDevice( ) {
 	int device_num = device->getDeviceNum( );
 	if ( device_num < 1 ) {
 		for ( int i = 0; i < MAX_PLAYER; i++ ) {
-			_player[ 0 ]->setDeviceId( 0 );
+			_player[ i ]->setDeviceId( 0 );
 		}
 		_set_device = MAX_PLAYER;
 	}

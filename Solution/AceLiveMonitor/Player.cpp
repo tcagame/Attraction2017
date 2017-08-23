@@ -726,7 +726,7 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 		int phase = ( _charge_count / CHARGE_PHASE_COUNT ) * 2;
 		int time = ( getActCount( ) / 2 ) % 2;
-		data->addObject( area, SynchronousData::TYPE_CHARGE, ANIM[ phase + time ], attribute, x, y );
+		data->addObject( area, SynchronousData::TYPE_SHOT, ANIM[ phase + time ], attribute, x, y );
 	}
 }
 

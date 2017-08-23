@@ -3,7 +3,6 @@
 #include "Drawer.h"
 
 #include "ViewerStreet.h"
-#include "ViewerArmoury.h"
 #include "ViewerStatus.h"
 #include "ViewerEvent.h"
 #include "ViewerStorage.h"
@@ -36,7 +35,6 @@ Viewer::~Viewer( ) {
 void Viewer::initialize( ) {
 	_viewer_magazine	= ViewerMagazinePtr	( new ViewerMagazine( ) );
 	_viewer_street		= ViewerStreetPtr	( new ViewerStreet );
-	_viewer_armoury		= ViewerArmouryPtr	( new ViewerArmoury( ) );
 	_viewer_event		= ViewerEventPtr	( new ViewerEvent );
 	_viewer_status		= ViewerStatusPtr	( new ViewerStatus );
 	_viewer_storage		= ViewerStoragePtr  ( new ViewerStorage );
@@ -62,7 +60,6 @@ void Viewer::update( ) {
 	
 	// 旧描画（全て移行させる)
 	_viewer_storage->draw( );
-	_viewer_armoury->draw( );
 	_viewer_magazine->draw( );
 
 	// ステータス描画
