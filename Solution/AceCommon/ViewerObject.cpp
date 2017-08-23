@@ -53,8 +53,8 @@ void ViewerObject::drawSprite( int x, int y, unsigned char type, unsigned char a
 	case SynchronousData::TYPE_MONMOTARO:
 		sprite = getSpritePlayer( GRAPH_MONMOTARO		, x, y, attribute, pattern );
 		break;
-	case SynchronousData::TYPE_CHARGE:
-		sprite = getSpritePlayer( GRAPH_SHOT			, x, y, attribute, pattern );
+	case SynchronousData::TYPE_SHOT:
+		sprite = getSpriteEffect( GRAPH_SHOT			, x, y, attribute, pattern );
 		break;
 	case SynchronousData::TYPE_ENEMY_MIDIUM:
 		sprite = getSpriteEnemy( GRAPH_ENEMY_MIDIUM		, x, y, attribute, pattern, size );
@@ -81,6 +81,30 @@ ViewerObject::Sprite ViewerObject::getSpritePlayer( GRAPH graph, int x, int y, u
 	
 	sprite.tx = pattern % PLAYER_CHAR_CHIP_WIDTH * NORMAL_CHAR_GRAPH_SIZE;
 	sprite.ty = pattern / PLAYER_CHAR_CHIP_WIDTH * NORMAL_CHAR_GRAPH_SIZE;
+	sprite.tw = NORMAL_CHAR_GRAPH_SIZE;
+	sprite.th = NORMAL_CHAR_GRAPH_SIZE;
+
+	if ( attribute & SynchronousData::ATTRIBUTE_REVERSE ) {
+		sprite.sx1 = x - NORMAL_CHAR_GRAPH_SIZE / 2 + NORMAL_CHAR_GRAPH_SIZE;
+		sprite.sy1 = y - NORMAL_CHAR_GRAPH_SIZE + PLAYER_CHAR_GRAPH_FOOT;
+		sprite.sx2 = sprite.sx1 - NORMAL_CHAR_GRAPH_SIZE;
+		sprite.sy2 = sprite.sy1 + NORMAL_CHAR_GRAPH_SIZE;
+	} else {
+		sprite.sx1 = x - NORMAL_CHAR_GRAPH_SIZE / 2;
+		sprite.sy1 = y - NORMAL_CHAR_GRAPH_SIZE + PLAYER_CHAR_GRAPH_FOOT;
+		sprite.sx2 = sprite.sx1 + NORMAL_CHAR_GRAPH_SIZE;
+		sprite.sy2 = sprite.sy1 + NORMAL_CHAR_GRAPH_SIZE;
+	}
+
+	return sprite;
+}
+
+ViewerObject::Sprite ViewerObject::getSpriteEffect( GRAPH graph, int x, int y, unsigned char attribute, int pattern ) const {
+	Sprite sprite;
+	sprite.graph = graph;
+	
+	sprite.tx = pattern % EFFECT_CHIP_WIDTH * NORMAL_CHAR_GRAPH_SIZE;
+	sprite.ty = pattern / EFFECT_CHIP_WIDTH * NORMAL_CHAR_GRAPH_SIZE;
 	sprite.tw = NORMAL_CHAR_GRAPH_SIZE;
 	sprite.th = NORMAL_CHAR_GRAPH_SIZE;
 

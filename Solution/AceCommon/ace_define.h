@@ -16,6 +16,7 @@ const int BIG_CHAR_GRAPH_SIZE = 128;
 
 const int PLAYER_CHAR_GRAPH_FOOT = 7;
 const int PLAYER_CHAR_CHIP_WIDTH = 16;
+const int EFFECT_CHIP_WIDTH = 8;
 const int ENEMY_NORMAL_CHIP_WIDTH = 20;
 const int ENEMY_SMALL_CHIP_WIDTH = 8;
 const int ENEMY_BIG_CHIP_WIDTH = 10;

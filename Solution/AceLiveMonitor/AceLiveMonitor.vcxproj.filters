@@ -219,16 +219,10 @@
     <ClCompile Include="Viewer.cpp">
       <Filter>Viewer</Filter>
     </ClCompile>
-    <ClCompile Include="ViewerArmoury.cpp">
-      <Filter>Viewer</Filter>
-    </ClCompile>
     <ClCompile Include="ViewerDebug.cpp">
       <Filter>Viewer</Filter>
     </ClCompile>
     <ClCompile Include="ViewerEvent.cpp">
-      <Filter>Viewer</Filter>
-    </ClCompile>
-    <ClCompile Include="ViewerFamily.cpp">
       <Filter>Viewer</Filter>
     </ClCompile>
     <ClCompile Include="ViewerStatus.cpp">
@@ -580,16 +574,10 @@
     <ClInclude Include="Viewer.h">
       <Filter>Viewer</Filter>
     </ClInclude>
-    <ClInclude Include="ViewerArmoury.h">
-      <Filter>Viewer</Filter>
-    </ClInclude>
     <ClInclude Include="ViewerDebug.h">
       <Filter>Viewer</Filter>
     </ClInclude>
     <ClInclude Include="ViewerEvent.h">
-      <Filter>Viewer</Filter>
-    </ClInclude>
-    <ClInclude Include="ViewerFamily.h">
       <Filter>Viewer</Filter>
     </ClInclude>
     <ClInclude Include="ViewerStatus.h">

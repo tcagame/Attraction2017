@@ -106,6 +106,9 @@ void Player::act( ) {
 
 	if ( _monmo ) {
 		Monmotaro::Target target;
+		target.id  = _id;
+		target.radius = getRadius( );
+		target.attack = ( _action == ACTION_ATTACK );
 		target.pos = getPos( );
 		target.dir = getDir( );
 		_monmo->setTarget( target );
@@ -439,37 +442,6 @@ int Player::getChargeCount( ) const {
 	return _charge_count;
 }
 
-Chip Player::getChargeChip( ) const {
-	if ( !( _charge_count > 0 ) ) {
-		return Chip( );
-	}
-
-	Chip chip = Chip( );
-	Vector pos = getPos( );
-	if ( getDir( ) == DIR_LEFT ) {
-		chip.sx1 = (int)pos.x - NORMAL_CHAR_GRAPH_SIZE / 2;
-		chip.sy1 = (int)pos.y - NORMAL_CHAR_GRAPH_SIZE + PLAYER_FOOT;
-		chip.sx2 = chip.sx1 + NORMAL_CHAR_GRAPH_SIZE;
-		chip.sy2 = chip.sy1 + NORMAL_CHAR_GRAPH_SIZE;
-	} else {
-		chip.sx1 = (int)pos.x - NORMAL_CHAR_GRAPH_SIZE / 2 + NORMAL_CHAR_GRAPH_SIZE;
-		chip.sy1 = (int)pos.y - NORMAL_CHAR_GRAPH_SIZE + PLAYER_FOOT;
-		chip.sx2 = chip.sx1 - NORMAL_CHAR_GRAPH_SIZE;
-		chip.sy2 = chip.sy1 + NORMAL_CHAR_GRAPH_SIZE;
-	}
-	const int ANIM[ ] = {
-		2, 3, 4, 5, 6, 7, 8, 9, 10, 11
-	};
-	int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-	int phase = ( _charge_count / CHARGE_PHASE_COUNT ) * 2;
-	int time = ( getActCount( ) / 2 ) % 2;
-	chip.tx = ( ANIM[ phase + time ] % 8 ) * NORMAL_CHAR_GRAPH_SIZE;
-	chip.ty = ( ANIM[ phase + time ] / 8 ) * NORMAL_CHAR_GRAPH_SIZE;
-	chip.size = NORMAL_CHAR_GRAPH_SIZE;
-
-	return chip;
-}
-
 void Player::updateState( ) {
 	//ƒCƒxƒ“ƒg
 	MapPtr map( Map::getTask( ) );
@@ -516,6 +488,9 @@ void Player::updateState( ) {
 	if ( map->getObject( getPos( ) + getVec( ) ) == OBJECT_EVENT_CALL ) {
 		map->usedObject( getPos( ) + getVec( ) );
 		Monmotaro::Target target;
+		target.id  = _id;
+		target.radius = getRadius( );
+		target.attack = false;
 		target.pos = getPos( );
 		target.dir = getDir( );
 		_monmo = MonmotaroPtr( new Monmotaro( Vector( family->getCameraPos( ), 0 ), target ) );
@@ -545,17 +520,21 @@ void Player::updateState( ) {
 	}
 }
 
-bool Player::isOnHead( EnemyPtr target ) const {
+bool Player::isOnHead( CharacterPtr target ) const {
 	if ( _action != ACTION_FLOAT ) {
 		return false;
 	}
-	Vector player = getPos( ) + Vector( 0, -getChipSize( ) / 2 );
-	Vector enemy  = target->getPos( ) + Vector( 0, -target->getChipSize( ) / 2 );
-	Vector vec = enemy - player;
+	Vector self = getPos( ) + Vector( 0, -getChipSize( ) / 2 );
+	Vector nonself  = target->getPos( ) + Vector( 0, -target->getChipSize( ) / 2 );
+	Vector vec = nonself - self;
 	if ( vec.y < 0 ) {
 		return false;
 	}
 	if ( vec.getLength( ) < target->getRadius( ) ) {
+		return false;
+	}
+	if ( getPos( ).x < nonself.x - target->getChipSize( ) / 2 ||
+		 getPos( ).x > nonself.x + target->getChipSize( ) / 2 ) {
 		return false;
 	}
 	return true;
@@ -747,7 +726,7 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 		int phase = ( _charge_count / CHARGE_PHASE_COUNT ) * 2;
 		int time = ( getActCount( ) / 2 ) % 2;
-		data->addObject( area, SynchronousData::TYPE_CHARGE, ANIM[ phase + time ], attribute, x, y );
+		data->addObject( area, SynchronousData::TYPE_SHOT, ANIM[ phase + time ], attribute, x, y );
 	}
 }
 

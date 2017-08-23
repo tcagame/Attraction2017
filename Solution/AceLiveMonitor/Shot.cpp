@@ -1,4 +1,5 @@
 #include "Shot.h"
+#include "SynchronousData.h"
 
 static const int SHOT_SPEED = 10; 
 static const int VANISH_LENGTH = 500;
@@ -34,20 +35,23 @@ int Shot::getPower( ) const {
 	return _power;
 }
 
-Chip Shot::getChip( ) const {
+void Shot::setSynchronousData( unsigned char type, int camera_pos ) const {
+	int ANIM[ ] = { 16, 17, 18, 19, 20, 21, 22, 23 };
+	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
+	
 	Vector pos = getPos( );
-	Chip chip = Chip( );
-	chip.tx = 0 + ( _power - 1 ) * 128 + 64 * ( getActCount( ) % 2 );
-	chip.ty = 128;
-	chip.size = getChipSize( );
-	chip.sx1 = ( int )pos.x - chip.size / 2;
-	chip.sx2 = chip.sx1 + chip.size;
-	chip.sy1 = ( int )pos.y - chip.size;
-	chip.sy2 = chip.sy1 + chip.size;
-	if ( getDir( ) == DIR_RIGHT ) {
-		int tmp = chip.sx1;
-		chip.sx1 = chip.sx2;
-		chip.sx2 = tmp;
+	int x = ( int )pos.x;
+	int y = ( int )pos.y;
+
+	AREA area = AREA_EVENT;
+	if ( getArea( ) == AREA_STREET ) {
+		x -= camera_pos;
+		area = AREA_STREET;
 	}
-	return chip;
+	unsigned char attribute = 0;
+	if ( getDir( ) == DIR_RIGHT ) {
+		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
+	}
+	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	data->addObject( area, type, ANIM[ ( _power - 1 ) * 2 + ( getActCount( ) % 2 ) ], attribute, x, y );
 }

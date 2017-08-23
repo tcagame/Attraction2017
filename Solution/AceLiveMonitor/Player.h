@@ -30,8 +30,7 @@ public:
 	void damage( int force );
 	ACTION getAction( ) const;
 	int getChargeCount( ) const;
-	Chip getChargeChip( ) const;
-	bool isOnHead( EnemyPtr target ) const;
+	bool isOnHead( CharacterPtr target ) const;
 	void bound( );
 	void blowAway( );
 	int getMoneyNum( ) const;
