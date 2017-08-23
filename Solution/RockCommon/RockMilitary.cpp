@@ -112,7 +112,7 @@ void RockMilitary::updatePop( ) {
 }
 
 void RockMilitary::add( RockEnemyPtr enemy ) {
-	_enemies.push_back( enemy );
+	//_enemies.push_back( enemy );
 }
 
 void RockMilitary::add( RockImpactPtr impact ) {

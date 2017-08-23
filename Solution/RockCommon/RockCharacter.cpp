@@ -35,27 +35,32 @@ void RockCharacter::update( ) {
 		//落下
 		_vec.y += GRAVITY;
 	}
-	{//水平移動できるかどうか
-		//頭
-		Vector head = _pos + _vec + Vector( 0, _radius * 2, 0 );
-		//足元
-		Vector leg = _pos + _vec + Vector( 0, -GRAVITY * 2, 0 );
 
-		//頭の位置であたる
-		for ( int i = 0; i < col_models_size; i++ ) {
-			if ( col_models[ i ]->isHitLine( head, head - Vector( 0, _radius, 0 ) ) ) {
-				_vec.x = 0;
-				_vec.z = 0;
-				break;
+	//水平移動できるかどうか
+	{
+		Vector vec = Vector( _vec.x, 0, _vec.z );
+		if ( vec.getLength2( ) > 0 ) {
+			Vector central_pos = _pos + vec + Vector( 0, _radius, 0 );
+
+			for ( int i = 0; i < col_models_size; i++ ) {
+				//頭の位置であたる( pos1:中心、pos2:頭 )
+				if ( col_models[ i ]->isHitLine( central_pos, central_pos + Vector( 0, _radius, 0 ) ) ) {
+					_vec.x = 0;
+					_vec.z = 0;
+					break;
+				}
+				//足元がない( pos1:中心、pos2:足元より少し下の位置 )
+				Vector hit_pos = col_models[ i ]->getHitPos( central_pos, central_pos - Vector( 0, _radius * 2, 0 ) );
+				if ( hit_pos.isOrijin( ) ) {
+					_vec.x = 0;
+					_vec.z = 0;
+					break;
+				} else {
+					_vec.y = hit_pos.y - _pos.y + GRAVITY / 2;
+				}
 			}
-			//足元がない
-			if ( !col_models[ i ]->isHitLine( leg, leg + Vector( 0, -100, 0 ) ) ) {
-				_vec.x = 0;
-				_vec.z = 0;
-				break;
-			}
+			
 		}
-		
 	}
 	{//上下判定
 		Vector pos = _pos + Vector( 0, -GRAVITY * 2, 0 );
@@ -63,17 +68,6 @@ void RockCharacter::update( ) {
 		for ( int i = 0; i < col_models_size; i++ ) {
 			if ( col_models[ i ]->isHitLine( pos, fpos ) ) {
 				_vec.y = 0;
-				_standing = true;
-				break;
-			}
-		}
-	}
-	{//横判定
-		Vector fpos = _pos + Vector( _vec.x, 0, _vec.z );
-		for ( int i = 0; i < col_models_size; i++ ) {
-			if ( col_models[ i ]->isHitLine( _pos, fpos ) ) {
-				_vec.x = 0;
-				_vec.z = 0;
 				_standing = true;
 				break;
 			}
