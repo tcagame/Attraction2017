@@ -110,6 +110,9 @@ void Player::act( ) {
 		target.dir = getDir( );
 		_monmo->setTarget( target );
 		_monmo->update( );
+		if ( _monmo->isFinished( ) ) {
+			_monmo = MonmotaroPtr( );
+		}
 	}
 }
 

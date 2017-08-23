@@ -7,8 +7,11 @@ static const int ENTRY_SPEED = 3;
 static const int MAX_SPEED = 18;
 static const int MOVE_SPEED = 6;
 
+//Á‚¦‚éŽžŠÔ
+static const int FADE_OUT_TIME = 30 * 60;
+
 static const int WAIT_ANIM_TIME = 3;
-static const int MOVE_IN_TIME = WAIT_ANIM_TIME * 8;
+static const int FADE_IN_OUT_TIME = WAIT_ANIM_TIME * 8;
 static const Vector LEAVE_POS[ 2 ] {
 	Vector(  32, -64 ),
 	Vector( -32, -64 )
@@ -41,21 +44,32 @@ void Monmotaro::act( ) {
 		}
 		break;
 	case ACTION_FADE_IN:
-		if ( getActCount( ) > MOVE_IN_TIME ) {
+		if ( getActCount( ) > FADE_IN_OUT_TIME ) {
 			_action = ACTION_MOVE;
 			setVec( Vector( ) );
 		}
 		break;
 	case ACTION_MOVE:
-		Vector target_pos = _target.pos + LEAVE_POS[ _target.dir ];
-		Vector vec = ( target_pos - getPos( ) ).normalize( ) * MOVE_SPEED;
-		if ( vec.getLength2( ) > MAX_SPEED * MAX_SPEED ) {
-			vec = vec.normalize( ) * MAX_SPEED;
+		{
+			Vector target_pos = _target.pos + LEAVE_POS[ _target.dir ];
+			Vector vec = ( target_pos - getPos( ) ).normalize( ) * MOVE_SPEED;
+			if ( vec.getLength2( ) > MAX_SPEED * MAX_SPEED ) {
+				vec = vec.normalize( ) * MAX_SPEED;
+			}
+			if ( vec.getLength2( ) > ( target_pos - getPos( ) ).getLength2( ) ) {
+				vec = ( target_pos - getPos( ) );
+			}
+			setVec( vec );
+			if ( getActCount( ) > FADE_OUT_TIME ) {
+				_action = ACTION_FADE_OUT;
+				setActCount( 0 );
+			}
 		}
-		if ( vec.getLength2( ) > ( target_pos - getPos( ) ).getLength2( ) ) {
-			vec = ( target_pos - getPos( ) );
+		break;
+	case ACTION_FADE_OUT:
+		if ( getActCount( ) > FADE_IN_OUT_TIME ) {
+			setFinished( );
 		}
-		setVec( vec );
 		break;
 	}
 	setSynchronousData( );
@@ -63,7 +77,7 @@ void Monmotaro::act( ) {
 
 void Monmotaro::damage( int force ) {
 	if ( force < 0 ) {
-		_action = ACTION_OUT;
+		_action = ACTION_FADE_OUT;
 	}
 }
 
@@ -108,6 +122,13 @@ void Monmotaro::setSynchronousData( ) {
 	case ACTION_MOVE:
 		{
 			const int ANIM[ ] = { 3, 4, 5, 6, 5, 4 };
+			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
+			pattern = ANIM[ ( getActCount( ) / WAIT_ANIM_TIME ) % anim_num ];
+		}
+		break;
+	case ACTION_FADE_OUT:
+		{
+			const int ANIM[ ] = { 23, 22, 21, 20, 19, 18, 17, 16, 16 };
 			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 			pattern = ANIM[ ( getActCount( ) / WAIT_ANIM_TIME ) % anim_num ];
 		}
