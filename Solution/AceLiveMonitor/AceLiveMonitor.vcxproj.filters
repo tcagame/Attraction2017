@@ -351,9 +351,6 @@
     <ClCompile Include="PopWaterGhost.cpp">
       <Filter>Pop</Filter>
     </ClCompile>
-    <ClCompile Include="ViewerMagazine.cpp">
-      <Filter>Viewer</Filter>
-    </ClCompile>
     <ClCompile Include="Monmotaro.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -705,9 +702,6 @@
     </ClInclude>
     <ClInclude Include="PopWaterGhost.h">
       <Filter>Pop</Filter>
-    </ClInclude>
-    <ClInclude Include="ViewerMagazine.h">
-      <Filter>Viewer</Filter>
     </ClInclude>
     <ClInclude Include="Monmotaro.h" />
   </ItemGroup>

@@ -9,7 +9,7 @@ public:
 	virtual ~Impact( );
 public:
 	void update( );
-	Chip getChip( ) const;
+	void setSynchronousData( int camera_pos ) const;
 	bool isFinished( ) const;
 	AREA getArea( ) const;
 private:

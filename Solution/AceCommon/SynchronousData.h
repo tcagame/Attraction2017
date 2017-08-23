@@ -30,6 +30,7 @@ public:
 	static const unsigned char TYPE_ENEMY_SMALL		= 0x23;
 	static const unsigned char TYPE_ENEMY_BIG		= 0x24;
 	static const unsigned char TYPE_ENEMY_BOSS		= 0x25;
+	static const unsigned char TYEP_IMPACT			= 0x26;
 public:
 	static std::string getTag( ) { return "SYNCHRONOUSDATA"; };
 	static SynchronousDataPtr getTask( );

@@ -13,7 +13,8 @@ ViewerObject::ViewerObject( ) {
 	_image[ GRAPH_ENEMY_MIDIUM		] = drawer->createImage( "Enemy/enemy_medium.png"	);
 	_image[ GRAPH_ENEMY_SMALL		] = drawer->createImage( "Enemy/enemy_small.png"	);
 	_image[ GRAPH_ENEMY_BIG			] = drawer->createImage( "Enemy/enemy_big.png"		);
-	_image[ GRAPH_ENEMY_BOSS		] = drawer->createImage( "Enemy/enemy_boss.png"	);
+	_image[ GRAPH_ENEMY_BOSS		] = drawer->createImage( "Enemy/enemy_boss.png"		);
+	_image[ GRAPH_IMPACT			] = drawer->createImage( "Effect/impact.png"		);
 }
 
 
@@ -67,6 +68,9 @@ void ViewerObject::drawSprite( int x, int y, unsigned char type, unsigned char a
 		break;
 	case SynchronousData::TYPE_ENEMY_BOSS:
 		sprite = getSpriteEnemyBoss( GRAPH_ENEMY_BOSS	, x, y, attribute, pattern, size );
+		break;
+	case SynchronousData::TYEP_IMPACT:
+		sprite = getSpriteImpact( GRAPH_IMPACT			, x, y, attribute, pattern, size );
 		break;
 	};
 
@@ -196,6 +200,22 @@ ViewerObject::Sprite ViewerObject::getSpriteEnemyBoss( GRAPH graph, int x, int y
 		sprite.sx2 = sprite.sx1 + size;
 		sprite.sy2 = sprite.sy1 + size;
 	}
+
+	return sprite;
+}
+
+ViewerObject::Sprite ViewerObject::getSpriteImpact( GRAPH graph, int x, int y, unsigned char attribute, int pattern, int size ) const {
+	Sprite sprite;
+	sprite.graph = graph;
+	sprite.tx = pattern % IMPACT_CHIP_WIDTH * IMPACT_GRAPH_SIZE;
+	sprite.ty = pattern / IMPACT_CHIP_WIDTH * IMPACT_GRAPH_SIZE;
+	sprite.tw = IMPACT_GRAPH_SIZE;
+	sprite.th = IMPACT_GRAPH_SIZE;
+
+	sprite.sx1 = x - size / 2;
+	sprite.sy1 = y - size;
+	sprite.sx2 = sprite.sx1 + size;
+	sprite.sy2 = sprite.sy1 + size;
 
 	return sprite;
 }

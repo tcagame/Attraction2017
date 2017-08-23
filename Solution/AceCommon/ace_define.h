@@ -13,6 +13,7 @@ const int MAX_EVENT = 10;
 const int SMALL_CHAR_GRAPH_SIZE = 32;
 const int NORMAL_CHAR_GRAPH_SIZE = 64;
 const int BIG_CHAR_GRAPH_SIZE = 128;
+const int IMPACT_GRAPH_SIZE = 128;
 
 const int PLAYER_CHAR_GRAPH_FOOT = 7;
 const int PLAYER_CHAR_CHIP_WIDTH = 16;
@@ -20,6 +21,7 @@ const int EFFECT_CHIP_WIDTH = 8;
 const int ENEMY_NORMAL_CHIP_WIDTH = 20;
 const int ENEMY_SMALL_CHIP_WIDTH = 8;
 const int ENEMY_BIG_CHIP_WIDTH = 10;
+const int IMPACT_CHIP_WIDTH = 2;
 const int VIEW_TITLE_Y = 0;
 const int VIEW_EVENT_HEIGHT = 256;
 const int VIEW_STREET_HEIGHT = 256;

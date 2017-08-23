@@ -8,7 +8,6 @@ PTR( ViewerStreet );
 PTR( ViewerEvent );
 PTR( ViewerStatus );
 PTR( ViewerStorage );
-PTR( ViewerMagazine );
 
 PTR( ViewerDebug );
 
@@ -29,7 +28,6 @@ private:
 	ViewerStatusConstPtr _viewer_status;
 	ViewerEventConstPtr _viewer_event;
 	ViewerStoragePtr _viewer_storage;
-	ViewerMagazinePtr _viewer_magazine;
 
 	ViewerDebugConstPtr _viewer_debug;
 

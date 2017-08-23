@@ -51,7 +51,7 @@ void Military::update( ) {
 					dropMoney( enemy );
 				}
 				
-				int impact_chip_size = enemy->getChipSize( );
+				int impact_chip_size = enemy->getChipSize( ) * 2;
 				Magazine::getTask( )->add( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), AREA_STREET, impact_chip_size ) ) );
 				ite = _enemies.erase( ite );
 				continue;
@@ -124,7 +124,7 @@ void Military::update( ) {
 				if ( !std::dynamic_pointer_cast< EnemyAttack >( enemy ) ) {
 					dropMoney( enemy );
 				}
-				int impact_chip_size = enemy->getChipSize( );
+				int impact_chip_size = enemy->getChipSize( ) * 2;
 				Magazine::getTask( )->add( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), AREA_STREET, impact_chip_size ) ) );
 				ite = _event_enemies.erase( ite );
 				continue;

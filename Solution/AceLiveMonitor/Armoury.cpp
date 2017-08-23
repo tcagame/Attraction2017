@@ -43,8 +43,9 @@ void Armoury::updateEnemy( ) {
 			if ( !hit_enemy->isFinished( ) ) {
 				//エネミーが倒れなかったらショットが当たった位置で爆発
 				Vector impact_pos = _shot_list[ i ]->getPos( );
-				impact_pos.y += NORMAL_CHAR_GRAPH_SIZE / 2;
-				Magazine::getTask( )->add( ImpactPtr( new Impact( impact_pos, _shot_list[ i ]->getArea( ), 64 ) ) );
+				impact_pos.y -= _shot_list[ i ]->getChipSize( ) / 2;
+				int impact_size = 16 * _shot_list[ i ]->getPower( );
+				Magazine::getTask( )->add( ImpactPtr( new Impact( impact_pos, _shot_list[ i ]->getArea( ), impact_size ) ) );
 				_shot_list[ i ] = ShotPtr( );
 			}
 		}
