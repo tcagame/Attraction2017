@@ -30,6 +30,9 @@ static const int MAX_CHARGE_COUNT = CHARGE_PHASE_COUNT * 4 - 1;
 //チャージエフェクト位置
 static const Vector EFFECT_ADJUST( 0, 15, 0 );
 
+//カウント
+static const int MAX_WISH_COUNT = 400;
+
 RockPlayer::RockPlayer( StatusPtr status, const Vector& pos, int id ) :
 RockCharacter( pos, ( DOLL )( DOLL_TAROSUKE_WAIT + id * ROCK_PLAYER_MOTION_NUM ), RADIUS, HEIGHT ),
 _attack_count( 0 ),
@@ -62,6 +65,9 @@ void RockPlayer::act( ) {
 		break;
 	case ACTION_DEAD:
 		actOnDead( );
+		break;
+	case ACTION_WISH:
+		actOnWish( );
 		break;
 	}
 	actOnAttacking( );
@@ -101,6 +107,9 @@ void RockPlayer::setAction( ACTION action ) {
 		break;
 	case ACTION_CHARGE:
 		setDoll( ( DOLL )( DOLL_TAROSUKE_CHARGE + _id * ROCK_PLAYER_MOTION_NUM ) );
+		break;
+	case ACTION_WISH:
+		setDoll( ( DOLL )( DOLL_TAROSUKE_WISH + _id * ROCK_PLAYER_MOTION_NUM ) );
 		break;
 	default:
 		setDoll( ( DOLL )( DOLL_TAROSUKE_WAIT + _id * ROCK_PLAYER_MOTION_NUM ) );
@@ -300,6 +309,12 @@ void RockPlayer::actOnBraking( ) {
 void RockPlayer::actOnDead( ) {
 }
 
+void RockPlayer::actOnWish( ) {
+	if ( getActCount( ) > MAX_WISH_COUNT ) {
+		setAction( ACTION_WAIT );
+	}
+}
+
 ModelMV1Ptr RockPlayer::getModel( ) const {
 	ModelMV1Ptr model = RockDollHouse::getTask( )->getModel( getDoll( ) );
 	double anim_time = 0;
@@ -330,6 +345,9 @@ ModelMV1Ptr RockPlayer::getModel( ) const {
 	case ACTION_CHARGE:
 		anim_time = ( double )getActCount( ) * ANIM_SPEED;
 		break;
+	case ACTION_WISH:
+		anim_time = fmod( ( double )getActCount( ) * ANIM_SPEED, end_time );
+		break;
 	default:
 		anim_time = 0;
 		break;
@@ -359,4 +377,13 @@ void RockPlayer::bound( ) {
 void RockPlayer::back( ) {
 	Vector vec = getVec( );
 	setPos( getPos( ) - Vector( vec.x, 0, vec.z ) );
+}
+
+void RockPlayer::wish( ) {
+	if ( !isStanding( ) ||
+		 _action == ACTION_WISH ) {
+		return;
+	}
+	setAction( ACTION_WISH );
+	setVec( Vector( ) );
 }
