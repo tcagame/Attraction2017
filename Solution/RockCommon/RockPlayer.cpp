@@ -1,21 +1,22 @@
 #include "RockPlayer.h"
 #include "RockClientInfo.h"
+#include "RockFamily.h"
+#include "RockEnemy.h"
+#include "RockMilitary.h"
+#include "RockCamera.h"
+#include "RockCharacter.h"
+#include "RockArmoury.h"
+#include "RockShot.h"
+#include "RockDollHouse.h"
 #include "Status.h"
 #include "Device.h"
 #include "Drawer.h"
-#include "RockFamily.h"
-#include "RockEnemy.h"
-#include "RockCharacter.h"
-#include "RockMilitary.h"
 #include "MessageSender.h"
-#include "RockArmoury.h"
-#include "RockShot.h"
 #include "Effect.h"
-#include "RockDollHouse.h"
 
 //移動
 static const double JUMP_POWER = 3.0;
-static const double MOVE_SPEED = 1.0;
+static const double MOVE_SPEED = 3.0;
 static const double BRAKE_SPEED = 0.3;
 //アニメーション
 static const double ANIM_SPEED = 0.5;
@@ -70,7 +71,7 @@ void RockPlayer::act( ) {
 	if ( !drawer->isInCamera( getPos( ) + getVec( ) ) ) {
 		setVec( Vector( ) );
 	}
-	Vector dir = ( RockFamily::getTask( )->getCameraPos( ) - getPos( ) ).normalize( );
+	Vector dir = ( RockCamera::getTask( )->getTarget( ) - getPos( ) ).normalize( );
 	while( !drawer->isInCamera( getPos( ) + getVec( ) ) ) {
 		setVec( getVec( ) + dir );
 	}

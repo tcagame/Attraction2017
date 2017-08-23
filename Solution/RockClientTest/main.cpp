@@ -10,7 +10,7 @@
 #include "RockViewer.h"
 #include "RockMapTest.h"
 #include "RockMilitaryTest.h"
-#include "RockCamera.h"
+#include "RockCameraTest.h"
 #include "RockDollHouse.h"
 #include "RockFamily.h"
 #include "RockClientInfo.h"
@@ -33,7 +33,7 @@ void main( ) {
 	app->addTask( RockDollHouse::getTag( ), TaskPtr( new RockDollHouse ) );
 	app->addTask( RockFamily::getTag( ), TaskPtr( new RockFamily( status, Vector( 0, 10, 0 ) ) ) );
 	app->addTask( RockArmoury::getTag( ), TaskPtr( new RockArmoury ) );
-	app->addTask( RockCamera::getTag( ), TaskPtr( new RockCamera ) );
+	app->addTask( RockCamera::getTag( ), TaskPtr( new RockCameraTest ) );
 	app->addTask( RockClientInfo::getTag( ), TaskPtr( new RockClientInfo( STATE_TEST ) ) );
 	app->addTask( MessageSender::getTag( ), TaskPtr( new MessageSender( message ) ) );
 	app->addTask( RockStorage::getTag( ), TaskPtr( new RockStorage( ) ) );

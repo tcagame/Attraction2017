@@ -176,6 +176,7 @@
     <ClInclude Include="Message.h" />
     <ClInclude Include="MessageSender.h" />
     <ClInclude Include="RockArmoury.h" />
+    <ClInclude Include="RockCamera.h" />
     <ClInclude Include="RockCharacter.h" />
     <ClInclude Include="RockClientInfo.h" />
     <ClInclude Include="RockDollHouse.h" />
@@ -200,6 +201,7 @@
   <ItemGroup>
     <ClCompile Include="MessageSender.cpp" />
     <ClCompile Include="RockArmoury.cpp" />
+    <ClCompile Include="RockCamera.cpp" />
     <ClCompile Include="RockCharacter.cpp" />
     <ClCompile Include="RockClientInfo.cpp" />
     <ClCompile Include="RockDollHouse.cpp" />

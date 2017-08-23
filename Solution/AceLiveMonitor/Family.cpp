@@ -112,16 +112,10 @@ double Family::getCameraPos( ) const {
 }
 
 void Family::setSynchronousData( ) const {
-	unsigned char TYPE[ 4 ] = {
-		SynchronousData::TYPE_TAROSUKE,
-		SynchronousData::TYPE_TAROJIRO,
-		SynchronousData::TYPE_GARISUKE,
-		SynchronousData::TYPE_TAROMI  ,
-	};
 
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		PlayerConstPtr player = getPlayer( i );
-		player->setSynchronousData( TYPE[ i ], ( int )getCameraPos( ) );
+		player->setSynchronousData( ( PLAYER )i, ( int )getCameraPos( ) );
 	}
 }
 
