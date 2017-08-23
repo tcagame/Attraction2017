@@ -16,7 +16,7 @@ public:
 	static const unsigned char ITEM_WOOD			= 0x10;
 	static const unsigned char ITEM_FLAME			= 0x20;
 	static const unsigned char ITEM_MINERAL			= 0x40;
-	static const unsigned char STATE_EVENT			= 0x01;
+	static const unsigned char AREA_EVENT			= 0x01;
 	static const unsigned char ATTRIBUTE_REVERSE	= 0x01;
 	static const unsigned char TYPE_TAROSUKE		= 10;
 	static const unsigned char TYPE_TAROJIRO		= 11;
@@ -58,7 +58,7 @@ public:
 	void setInProssessionOfStatusItem( int idx, unsigned char item, bool possession );
 	void setStatusVirtue( int idx, int virtue );
 	void setStatusRedo( int idx, int redo );
-	void setStatusState( int idx, unsigned char state );
+	void setStatusState( int idx, unsigned char area );
 	void resetObject( );
 	void addObject( AREA area, unsigned char type, int pattern, unsigned char attribute, int ax, int ay, int size = -1 );
 private:
@@ -72,7 +72,7 @@ private:
 				unsigned char items;
 				unsigned char virtue;
 				unsigned char redo;
-				unsigned char state;
+				unsigned char area;
 			} status[ MAX_PLAYER ];
 			struct Object {
 				unsigned char type;

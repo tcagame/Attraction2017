@@ -19,7 +19,7 @@ EnemyBossRedDaemon::~EnemyBossRedDaemon( ) {
 void EnemyBossRedDaemon::act( ) {
 	if ( getActCount( ) % WAIT_POP_TIME == 0 ) {
 		EnemyPtr enemy = EnemyPtr( new EnemyLittleRedDaemon( getPos( ) + Vector( 100, 0 ) ) );
-		enemy->setState( Character::STATE_EVENT );
+		enemy->setArea( AREA_EVENT );
 		Military::getTask( )->popUpEventEnemy( enemy );
 	}
 }
@@ -35,7 +35,7 @@ void EnemyBossRedDaemon::setSynchronousData( unsigned char type, int camera_pos 
 	int y = ( int )pos.y;
 
 	AREA area = AREA_EVENT;
-	if ( getState( ) == STATE_STREET ) {
+	if ( getArea( ) == AREA_STREET ) {
 		x -= camera_pos;
 		area = AREA_STREET;
 	}

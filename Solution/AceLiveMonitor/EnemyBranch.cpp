@@ -19,7 +19,7 @@ EnemyBranch::~EnemyBranch( ) {
 void EnemyBranch::act( ) {
 	if ( !( ( getActCount( ) + WAIT_ANIM_TIME * 5 ) % ATTACK_TIME ) ) {
 		EnemyPtr seed( new EnemySeed( getPos( ) ) );
-		seed->setState( STATE_EVENT );
+		seed->setArea( AREA_EVENT );
 		_seeds.push_back( seed );
 		Military::getTask( )->popUpEventEnemy( seed );
 	}
@@ -33,7 +33,7 @@ void EnemyBranch::setSynchronousData( unsigned char type, int camera_pos ) const
 	int y = ( int )pos.y;
 
 	AREA area = AREA_EVENT;
-	if ( getState( ) == STATE_STREET ) {
+	if ( getArea( ) == AREA_STREET ) {
 		x -= camera_pos;
 		area = AREA_STREET;
 	}

@@ -261,7 +261,7 @@ void Player::actOnFloating( ) {
 void Player::actOnAttack( ) {
 	int power = ( _charge_count / CHARGE_PHASE_COUNT ) + 1;
 	ShotPtr shot( new Shot( getPos( ), getDir( ), power ) );
-	shot->setState( getState( ) );
+	shot->setArea( getArea( ) );
 	Armoury::getTask( )->add( shot );
 	setAction( ACTION_WAIT );
 	_charge_count = 0;
@@ -316,7 +316,7 @@ void Player::actOnOverCharge( ) {
 void Player::actOnCamera( ) {
 	FamilyConstPtr family( Family::getTask( ) );
 	int x = 0;
-	if ( getState( ) != STATE_EVENT ) {
+	if ( getArea( ) != AREA_EVENT ) {
 		x += ( int )family->getCameraPos( );
 	}
 	Vector pos = getPos( );
@@ -378,20 +378,20 @@ void Player::actOnBlowAway( ) {
 void Player::actOnDead( ) {
 	int act_count = getActCount( );
 	int chip_size = getChipSize( );
-	STATE state = getState( );
+	AREA area = getArea( );
 	if ( act_count == MAX_DEAD_ACTCOUNT ) {
-		if ( state == STATE_EVENT ) {
+		if ( area == AREA_EVENT ) {
 			//イベントで倒れたら、爆発する
-			Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, chip_size / 2 ), state, chip_size * 2 ) ) );
+			Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, chip_size / 2 ), area, chip_size * 2 ) ) );
 		}
 	}
 	if ( act_count > MAX_DEAD_ACTCOUNT + MAX_IMPACT_COUNT ) {
-		if ( getState( ) == STATE_EVENT ) {
+		if ( getArea( ) == AREA_EVENT ) {
 			//メインの画面中央上部に移動
-			setState( STATE_STREET );
+			setArea( AREA_STREET );
 			MapEvent::getTask( )->setType( MapEvent::TYPE_TITLE );
 			setPos( Vector( Family::getTask( )->getCameraPos( ) + SCREEN_WIDTH / 2, chip_size ) );
-			Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, chip_size / 2 ), getState( ), chip_size * 2 ) ) );
+			Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, chip_size / 2 ), getArea( ), chip_size * 2 ) ) );
 		}
 		if ( act_count < MAX_DEAD_ACTCOUNT + MAX_IMPACT_COUNT * 2 ) {
 			setVec( Vector( 0, -GRAVITY ) );
@@ -515,7 +515,7 @@ void Player::updateState( ) {
 			break;
 		}
 		if ( event_obj ) {
-			setState( STATE_EVENT );
+			setArea( AREA_EVENT );
 			setPos( Vector( GRAPH_SIZE * 3 / 2, 0 ) );
 			setVec( Vector( ) );
 		}
@@ -530,10 +530,10 @@ void Player::updateState( ) {
 		setVec( Vector( ) );
 	}
 
-	if ( getState( ) == STATE_EVENT ) {
+	if ( getArea( ) == AREA_EVENT ) {
 		//一ページ目にいたらメインに戻る
 		if ( getPos( ).x < GRAPH_SIZE ) {
-			setState( STATE_STREET );
+			setArea( AREA_STREET );
 			map_event->setType( MapEvent::TYPE_TITLE );
 			setPos( Vector( family->getCameraPos( ) + SCREEN_WIDTH / 2, 0 ) );
 			setVec( Vector( ) );
@@ -544,7 +544,7 @@ void Player::updateState( ) {
 		if ( !Military::getTask( )->getBoss( ) &&
 			 !storage->isExistanceEventItem( ) &&
 			 map_event->getType( ) < MapEvent::TYPE_SHOP ) {
-			setState( STATE_STREET );
+			setArea( AREA_STREET );
 			map_event->setType( MapEvent::TYPE_TITLE );
 			setPos( Vector( family->getCameraPos( ) + SCREEN_WIDTH / 2, 0 ) );
 			setVec( Vector( ) );
@@ -608,23 +608,26 @@ void Player::setAction( ACTION action ) {
 }
 
 void Player::setSynchronousData( unsigned char type, int camera_pos ) const {
+	SynchronousDataPtr data( SynchronousData::getTask( ) );
+
+	// Status
+	//data->set
+
+	// Object
 	if ( _unrivaled_count < MAX_UNRIVALED_COUNT ) {
 		if ( _unrivaled_count / PLAYER_FLASH_WAIT_TIME % 2 == 0 ) {
 			return;
 		}
 	}
-	STATE state = getState( );
+	AREA area = getArea( );
 	int add_sy = 0;
 	int add_sx = 0;
 	
 	Vector pos = getPos( );
 	int x = ( int )pos.x;
 	int y = ( int )pos.y;
-
-	AREA area = AREA_EVENT;
-	if ( getState( ) == STATE_STREET ) {
+	if ( area == AREA_STREET ) {
 		x -= camera_pos;
-		area = AREA_STREET;
 	}
 
 	int pattern = 0;
@@ -733,7 +736,6 @@ void Player::setSynchronousData( unsigned char type, int camera_pos ) const {
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 
-	SynchronousDataPtr data( SynchronousData::getTask( ) );
 	data->addObject( area, type, pattern, attribute, x, y );
 	if ( _charge_count > 0 ) {
 		const int ANIM[ ] = {

@@ -5,17 +5,17 @@
 
 class Impact {
 public:
-	Impact( const Vector& pos, Character::STATE state = Character::STATE_STREET, int sprite_size = 128 );
+	Impact( const Vector& pos, AREA area = AREA_STREET, int sprite_size = 128 );
 	virtual ~Impact( );
 public:
 	void update( );
 	Chip getChip( ) const;
 	bool isFinished( ) const;
-	Character::STATE getState( ) const;
+	AREA getArea( ) const;
 private:
 	Vector _pos;
 	int _anim_count;
-	Character::STATE _state;
+	AREA _area;
 	int _sprite_size;
 };
 

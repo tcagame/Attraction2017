@@ -24,7 +24,7 @@ private:
 	void excuteMoney( std::vector< std::string > command );
 	void excuteItem( std::vector< std::string > command );
 	void excuteState( std::vector< std::string > command );
-	unsigned int getState( std::string str );
+	unsigned int getArea( std::string str );
 private:
 	StatusPtr _status;
 	MessagePtr _message;

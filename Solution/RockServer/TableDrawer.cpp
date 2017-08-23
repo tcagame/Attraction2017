@@ -171,37 +171,37 @@ void TableDrawer::drawState( ) const {
 		sx += BOX_WIDTH[ i ];
 	}
 	int sy = STATUS_FLAME_Y + 10;
-	drawer->drawString( sx, sy, "STATE" );
+	drawer->drawString( sx, sy, "AREA" );
 	for ( int i = 0; i < Status::PLAYER_NUM; i++ ) {
 		sy += BOX_HEIGHT;
-		std::string state = "\0";
-		switch ( _status->getPlayer( i ).state ) {
+		std::string area = "\0";
+		switch ( _status->getPlayer( i ).area ) {
 		case STATE_NONE:
-			state = "NONE";
+			area = "NONE";
 			break;
 		case STATE_ENTRY:
-			state = "ENTRY";
+			area = "ENTRY";
 			break;
-		case STATE_STREET_1:
-			state = "street1";
+		case AREA_STREET_1:
+			area = "street1";
 			break;
-		case STATE_STREET_2:
-			state = "street2";
+		case AREA_STREET_2:
+			area = "street2";
 			break;
-		case STATE_STREET_3:
-			state = "street3";
+		case AREA_STREET_3:
+			area = "street3";
 			break;
 		case STATE_BOSS:
-			state = "BOSS";
+			area = "BOSS";
 			break;
 		case STATE_RESULT:
-			state = "RESULT";
+			area = "RESULT";
 			break;
 		case STATE_TEST:
-			state = "TEST";
+			area = "TEST";
 			break;
 		}
-		drawer->drawString( sx, sy, "%s", state.c_str( ) );
+		drawer->drawString( sx, sy, "%s", area.c_str( ) );
 	}
 }
 

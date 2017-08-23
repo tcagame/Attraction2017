@@ -26,7 +26,7 @@ void ViewerMagazine::draw( ) const {
 		}
 		int add_sx = -camera_pos;
 		int add_sy = VIEW_STREET_Y;
-		if ( impact->getState( ) == Character::STATE_EVENT ) {
+		if ( impact->getArea( ) == AREA_EVENT ) {
 			add_sx = 0;
 			add_sy = VIEW_EVENT_Y;
 		}

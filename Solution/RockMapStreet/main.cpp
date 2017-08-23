@@ -34,5 +34,5 @@ void main( ) {
 	app->addTask( RockArmoury::getTag( ), TaskPtr( new RockArmoury( ) ) );
 	app->addTask( RockViewer::getTag( ), TaskPtr( new RockViewer( status ) ) );
 	app->addTask( RockStorage::getTag( ), TaskPtr( new RockStorage( ) ) );
-	app->addTask( RockClientInfo::getTag( ), TaskPtr( new RockClientInfo( STATE_STREET_1 ) ) );
+	app->addTask( RockClientInfo::getTag( ), TaskPtr( new RockClientInfo( AREA_STREET_1 ) ) );
 }

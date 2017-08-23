@@ -60,9 +60,9 @@ void ViewerConsole::update( ) {
 
 void ViewerConsole::drawArea( ) {
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
-	unsigned char state = data->getStatusState( _player );
+	unsigned char area = data->getStatusState( _player );
 
-	if ( state & SynchronousData::STATE_EVENT ) {
+	if ( area & SynchronousData::AREA_EVENT ) {
 		// ƒCƒxƒ“ƒg•`‰æ
 		//_viewer_event->draw( );
 		_viewer_object->draw( AREA_EVENT, AREA_SX, AREA_SY );

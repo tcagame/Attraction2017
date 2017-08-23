@@ -10,11 +10,11 @@ const std::string COMMAND_FIRST_WORD[ Message::MAX_COMMAND ] = {
 	"power",//POWER
 	"money",//MONEY
 	"item",//ITEM
-	"state",//STATE
+	"area",//AREA
 };
 
 const int STATE_NUM = 8;
-const std::string STATE[ STATE_NUM ] = {
+const std::string AREA[ STATE_NUM ] = {
 	"none",	
 	"entry",
 	"street1",
@@ -132,16 +132,16 @@ void MessageReceiver::excuteItem( std::vector< std::string > command ) {
 void MessageReceiver::excuteState( std::vector< std::string > command ) {
 	if ( command.size( ) == 3 ) {
 		int player_num = std::atoi( command[ 1 ].c_str( ) );
-		unsigned int state = 0b0000000000000000;
+		unsigned int area = 0b0000000000000000;
 		int check = std::atoi( command[ 2 ].c_str( ) );
 		for ( int i = 0; i < 16; i++ ) {
 			if ( check % 2 == 1 ) {
-				state |= ( 1 << i );
+				area |= ( 1 << i );
 			}
 			check /= 10;
 		}
 		if ( player_num >= 0 && player_num <= ROCK_PLAYER_NUM ) {
-			_status->getPlayer( player_num ).state = state;
+			_status->getPlayer( player_num ).area = area;
 		}
 	}
 }

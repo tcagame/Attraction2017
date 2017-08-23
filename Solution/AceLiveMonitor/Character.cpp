@@ -18,7 +18,7 @@ _hp( hp ),
 _mass( mass ),
 _radius( chip_size / 2 ),
 _finished( false ),
-_state( STATE_STREET ) {
+_area( AREA_STREET ) {
 }
 
 
@@ -40,7 +40,7 @@ void Character::update( ) {
 	if ( _vec.y < -MAX_SPEED_Y ) {
 		_vec.y = -MAX_SPEED_Y;
 	}
-	if ( _state == STATE_STREET ) {
+	if ( _area == AREA_STREET ) {
 		if ( _mass ) {
 			MapConstPtr map( Map::getTask( ) );
 			{//ã‰º”»’è
@@ -171,8 +171,8 @@ bool Character::isFinished( ) const {
 	return _finished;
 }
 
-Character::STATE Character::getState( ) const {
-	return _state;
+AREA Character::getArea( ) const {
+	return _area;
 }
 
 void Character::updateDir( ) {
@@ -193,7 +193,7 @@ int Character::getChipSize( ) const {
 }
 
 bool Character::isOverlapped( CharacterConstPtr target ) const {
-	if ( _state != target->getState( ) ||
+	if ( _area != target->getArea( ) ||
 		 _finished ) {
 		return false;
 	}
@@ -218,6 +218,6 @@ void Character::setActCount( int count ) {
 	_act_count = count;
 }
 
-void Character::setState( STATE state ) {
-	_state = state;
+void Character::setArea( AREA area ) {
+	_area = area;
 }

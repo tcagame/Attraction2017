@@ -23,7 +23,7 @@ void EnemyBossRock::setSynchronousData( unsigned char type, int camera_pos ) con
 	int y = ( int )pos.y;
 
 	AREA area = AREA_EVENT;
-	if ( getState( ) == STATE_STREET ) {
+	if ( getArea( ) == AREA_STREET ) {
 		x -= camera_pos;
 		area = AREA_STREET;
 	}
@@ -38,7 +38,7 @@ void EnemyBossRock::setSynchronousData( unsigned char type, int camera_pos ) con
 
 void EnemyBossRock::dropItem( ) {
 	ItemPtr item = ItemPtr( new ItemRock( getPos( ) ) );
-	item->setState( STATE_EVENT );
+	item->setArea( AREA_EVENT );
 	Storage::getTask( )->add( item );
 }
 
