@@ -282,7 +282,6 @@
     <ClCompile Include="Shot.cpp" />
     <ClCompile Include="Armoury.cpp" />
     <ClCompile Include="Viewer.cpp" />
-    <ClCompile Include="ViewerArmoury.cpp" />
     <ClCompile Include="ViewerMagazine.cpp" />
     <ClCompile Include="ViewerStatus.cpp" />
     <ClCompile Include="ViewerStorage.cpp" />
@@ -411,7 +410,6 @@
     <ClInclude Include="Shot.h" />
     <ClInclude Include="Armoury.h" />
     <ClInclude Include="Viewer.h" />
-    <ClInclude Include="ViewerArmoury.h" />
     <ClInclude Include="ViewerMagazine.h" />
     <ClInclude Include="ViewerStatus.h" />
     <ClInclude Include="ViewerStorage.h" />

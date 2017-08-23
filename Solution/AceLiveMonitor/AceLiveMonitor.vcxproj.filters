@@ -219,9 +219,6 @@
     <ClCompile Include="Viewer.cpp">
       <Filter>Viewer</Filter>
     </ClCompile>
-    <ClCompile Include="ViewerArmoury.cpp">
-      <Filter>Viewer</Filter>
-    </ClCompile>
     <ClCompile Include="ViewerDebug.cpp">
       <Filter>Viewer</Filter>
     </ClCompile>
@@ -575,9 +572,6 @@
       <Filter>Pop</Filter>
     </ClInclude>
     <ClInclude Include="Viewer.h">
-      <Filter>Viewer</Filter>
-    </ClInclude>
-    <ClInclude Include="ViewerArmoury.h">
       <Filter>Viewer</Filter>
     </ClInclude>
     <ClInclude Include="ViewerDebug.h">
