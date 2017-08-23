@@ -27,7 +27,7 @@ void ViewerStorage::draw( ) const {
 		}
 		int add_sx = -camera_pos;
 		int add_sy = VIEW_STREET_Y;
-		if ( item->getState( ) == Character::STATE_EVENT ) {
+		if ( item->getArea( ) == AREA_EVENT ) {
 			add_sx = 0;
 			add_sy = VIEW_EVENT_Y;
 		}

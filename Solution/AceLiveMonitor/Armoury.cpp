@@ -40,7 +40,7 @@ void Armoury::updateEnemy( ) {
 				//エネミーが倒れなかったらショットが当たった位置で爆発
 				Vector impact_pos = _shot_list[ i ]->getPos( );
 				impact_pos.y += NORMAL_CHAR_GRAPH_SIZE / 2;
-				Magazine::getTask( )->add( ImpactPtr( new Impact( impact_pos, _shot_list[ i ]->getState( ), 64 ) ) );
+				Magazine::getTask( )->add( ImpactPtr( new Impact( impact_pos, _shot_list[ i ]->getArea( ), 64 ) ) );
 				_shot_list[ i ] = ShotPtr( );
 			}
 		}

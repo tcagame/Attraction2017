@@ -7,11 +7,6 @@ PTR( Character );
 
 class Character {
 public:
-	enum STATE {
-		STATE_STREET,
-		STATE_EVENT,
-	};
-public:
 	Character( const Vector& pos, const int chip_size, const int hp, bool mass = true );
 	virtual ~Character( );
 public:
@@ -23,8 +18,8 @@ public:
 	bool isOverlapped( CharacterConstPtr target ) const;
 	double getRadius( ) const;
 	bool isFinished( ) const;
-	STATE getState( ) const;
-	void setState( STATE state );
+	AREA getArea( ) const;
+	void setArea( AREA area );
 	int getChipSize( ) const;
 	int getHp( ) const;
 protected:
@@ -51,6 +46,6 @@ private:
 	bool _finished;
 	double _radius;
 	DIR _dir;
-	STATE _state;
+	AREA _area;
 };
 

@@ -20,10 +20,10 @@ const std::string COMMAND_FIRST_WORD[ Command::MAX_COMMAND ] = {
 	"power",//POWER
 	"money",//MONEY
 	"item",//ITEM
-	"state",//STATE
+	"area",//AREA
 };
 const int STATE_NUM = 8;
-const std::string STATE[ STATE_NUM ] = {
+const std::string AREA[ STATE_NUM ] = {
 	"none",	
 	"entry",
 	"street1",
@@ -212,15 +212,15 @@ bool Command::excuteState( std::vector< std::string > command ) {
 	bool result = false;
 	if ( command.size( ) == 3 ) {
 		int player_num = std::atoi( command[ 1 ].c_str( ) );
-		unsigned int state = 0;
+		unsigned int area = 0;
 		for ( int i = 0; i < STATE_NUM; i++ ) {
-			if ( command[ 2 ] == STATE[ i ] ) {
-				state |= 1 << ( i - 1 );
+			if ( command[ 2 ] == AREA[ i ] ) {
+				area |= 1 << ( i - 1 );
 				break;
 			}
 		}
 		if ( player_num >= 0 && player_num <= ROCK_PLAYER_NUM ) {
-			_status->getPlayer( player_num ).state = state;
+			_status->getPlayer( player_num ).area = area;
 			result = true;
 		}
 	}

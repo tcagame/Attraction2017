@@ -37,7 +37,7 @@ void StatusSender::update( ) {
 	for ( int i = 0; i < Status::PLAYER_NUM; i++ ) {
 		if ( _reset_count[ i ] > RESET_TIME ) {
 			// リセットすべき情報を記述
-			_status->getPlayer( i ).state = STATE_ENTRY;
+			_status->getPlayer( i ).area = STATE_ENTRY;
 		}
 	}
 	Server::getTask( )->sendUdp( _status );
@@ -84,10 +84,10 @@ bool StatusSender::setItem( int idx, int item ) {
 	return true;
 }
 
-bool StatusSender::setState( int idx, unsigned int state ) {
+bool StatusSender::setArea( int idx, unsigned int area ) {
 	if ( idx < 0 || idx >= Status::PLAYER_NUM ) {
 		return false;
 	}
-	_status->getPlayer( idx ).state = state;
+	_status->getPlayer( idx ).area = area;
 	return true;
 }

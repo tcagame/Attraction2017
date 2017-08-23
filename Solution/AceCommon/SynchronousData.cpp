@@ -26,69 +26,60 @@ int SynchronousData::getSize( ) {
 	return sizeof( _data );
 }
 
-int SynchronousData::getStatusPower( int idx ) const {
-	assert( idx < MAX_PLAYER );
-	return _data.status[ idx ].power;
+int SynchronousData::getStatusPower( PLAYER player ) const {
+	return _data.status[ player ].power;
 }
 
-int SynchronousData::getStatusMoney( int idx ) const {
-	assert( idx < MAX_PLAYER );
-	return _data.status[ idx ].money;
+int SynchronousData::getStatusMoney( PLAYER player ) const {
+	return _data.status[ player ].money;
 }
 
-bool SynchronousData::isInProssessionOfStatusItem( int idx, unsigned char item ) const {
-	assert( idx < MAX_PLAYER );
-	return ( _data.status[ idx ].items & item) != 0;
+bool SynchronousData::isInProssessionOfStatusItem( PLAYER player, unsigned char item ) const {
+	return ( _data.status[ player ].items & item ) != 0;
 }
 
-int SynchronousData::getStatusVirtue( int idx ) const {
-	return _data.status[ idx ].virtue;
+int SynchronousData::getStatusVirtue( PLAYER player ) const {
+	return _data.status[ player ].virtue;
 }
 
-int SynchronousData::getStatusRedo( int idx ) const {
-	return _data.status[ idx ].redo;
+int SynchronousData::getStatusRedo( PLAYER player ) const {
+	return _data.status[ player ].redo;
 }
 
-unsigned char SynchronousData::getStatusState( int idx ) const {
-	return _data.status[ idx ].state;
+unsigned char SynchronousData::getStatusState( PLAYER player ) const {
+	return _data.status[ player ].area;
 }
 
-void SynchronousData::setStatusPower( int idx, int power ) {
-	assert( idx < MAX_PLAYER );
+void SynchronousData::setStatusPower( PLAYER player, int power ) {
 	assert( power >= 0 );
-	_data.status[ idx ].power = ( unsigned char )power;
+	_data.status[ player ].power = ( unsigned char )power;
 }
 
-void SynchronousData::setStatusMoney( int idx, int money ) {
-	assert( idx < MAX_PLAYER );
+void SynchronousData::setStatusMoney( PLAYER player, int money ) {
 	assert( money >= 0 );
-	_data.status[ idx ].power = ( unsigned char )money;
+	_data.status[ player ].power = ( unsigned char )money;
 }
 
-void SynchronousData::setInProssessionOfStatusItem( int idx, unsigned char item, bool possession ) {
-	assert( idx < MAX_PLAYER );
+void SynchronousData::setInProssessionOfStatusItem( PLAYER player, unsigned char item, bool possession ) {
 	if ( possession ) {
-		_data.status[ idx ].items |= item;
+		_data.status[ player ].items |= item;
 	} else {
-		_data.status[ idx ].items &= ~item;
+		_data.status[ player ].items &= ~item;
 	}
 }
 
-void SynchronousData::setStatusVirtue( int idx, int virtue ) {
-	assert( idx < MAX_PLAYER );
+void SynchronousData::setStatusVirtue( PLAYER player, int virtue ) {
 	assert( virtue >= 0 );
-	_data.status[ idx ].power = ( unsigned char )virtue;
+	_data.status[ player ].power = ( unsigned char )virtue;
 }
 
-void SynchronousData::setStatusRedo( int idx, int redo ) {
-	assert( idx < MAX_PLAYER );
+void SynchronousData::setStatusRedo( PLAYER player, int redo ) {
 	assert( redo >= 0 );
-	_data.status[ idx ].power = ( unsigned char )redo;
+	_data.status[ player ].power = ( unsigned char )redo;
 }
 
-void SynchronousData::setStatusState( int idx, unsigned char state ) {
-	assert( idx < MAX_PLAYER );
-	_data.status[ idx ].power = ( unsigned char )state;
+void SynchronousData::setStatusState( PLAYER player, unsigned char area ) {
+	_data.status[ player ].power = ( unsigned char )area;
 }
 
 

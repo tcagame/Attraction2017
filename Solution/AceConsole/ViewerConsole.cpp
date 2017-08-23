@@ -62,15 +62,15 @@ void ViewerConsole::drawArea( ) {
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
 	unsigned char state = data->getStatusState( _player );
 
-	if ( state & SynchronousData::STATE_EVENT ) {
-		// ƒCƒxƒ“ƒg•`‰æ
-		//_viewer_event->draw( );
-		_viewer_object->draw( AREA_EVENT, AREA_SX, AREA_SY );
-	} else {
+	if ( state & SynchronousData::STATE_PLAY_STREET ) {
 		// Main•`‰æ
 		//_viewer_street->draw( ViewerStreet::LAYER_BACK, AREA_SX, AREA_SY );
 		_viewer_object->draw( AREA_STREET, AREA_SX, AREA_SY );
 		//_viewer_street->draw( ViewerStreet::LAYER_FRONT, AREA_SX, AREA_SY );
+	} else {
+		// ƒCƒxƒ“ƒg•`‰æ
+		//_viewer_event->draw( );
+		_viewer_object->draw( AREA_EVENT, AREA_SX, AREA_SY );
 	}
 }
 

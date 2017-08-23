@@ -11,7 +11,7 @@ static const int MAX_HP = 12;
 EnemyBossMonsterTree::EnemyBossMonsterTree( const Vector& pos ) :
 EnemyBoss( pos, 256, MAX_HP ) {
 	_branch = EnemyPtr( new EnemyBranch( getPos( ) + Vector( -70, -20 ) ) );
-	_branch->setState( Character::STATE_EVENT );
+	_branch->setArea( AREA_EVENT );
 	Military::getTask( )->popUpEventEnemy( _branch );
 }
 
@@ -28,7 +28,7 @@ void EnemyBossMonsterTree::setSynchronousData( unsigned char type, int camera_po
 	int y = ( int )pos.y;
 
 	AREA area = AREA_EVENT;
-	if ( getState( ) == STATE_STREET ) {
+	if ( getArea( ) == AREA_STREET ) {
 		x -= camera_pos;
 		area = AREA_STREET;
 	}
@@ -39,6 +39,6 @@ void EnemyBossMonsterTree::setSynchronousData( unsigned char type, int camera_po
 
 void EnemyBossMonsterTree:: dropItem( ) {
 	ItemPtr item = ItemPtr( new ItemTree( getPos( ) ) );
-	item->setState( STATE_EVENT );
+	item->setArea( AREA_EVENT );
 	Storage::getTask( )->add( item );
 }

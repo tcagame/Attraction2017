@@ -29,7 +29,7 @@ void EnemyBossBloodDaemon::setSynchronousData( unsigned char type, int camera_po
 	int y = ( int )pos.y;
 
 	AREA area = AREA_EVENT;
-	if ( getState( ) == STATE_STREET ) {
+	if ( getArea( ) == AREA_STREET ) {
 		x -= camera_pos;
 		area = AREA_STREET;
 	}
@@ -40,6 +40,6 @@ void EnemyBossBloodDaemon::setSynchronousData( unsigned char type, int camera_po
 
 void EnemyBossBloodDaemon::dropItem( ) {
 	ItemPtr item = ItemPtr( new ItemFire( getPos( ) ) );
-	item->setState( STATE_EVENT );
+	item->setArea( AREA_EVENT );
 	Storage::getTask( )->add( item );
 }

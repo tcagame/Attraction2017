@@ -22,7 +22,7 @@ bool Enemy::isInScreen( ) const {
 	int enemy_page = ( int )getPos( ).x / GRAPH_SIZE;
 	//スクリーンの端
 	int add = 0;
-	if ( getState( ) != STATE_EVENT ) {
+	if ( getArea( ) != AREA_EVENT ) {
 		add = ( int )Family::getTask( )->getCameraPos( ) / GRAPH_SIZE;
 	}
 	int screen_page_min = 0 + add;
@@ -31,7 +31,7 @@ bool Enemy::isInScreen( ) const {
 		 enemy_page > screen_page_max ) {
 		result = false;
 	}
-	if ( getState( ) == STATE_EVENT ) {
+	if ( getArea( ) == AREA_EVENT ) {
 		Vector vec = getVec( );
 		if ( pos.x + vec.x - getRadius( ) < 0 ) {
 			result = false;

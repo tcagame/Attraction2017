@@ -64,7 +64,7 @@ void StatusDrawer::update( ) {
 		drawer->drawString( sx, sy, "State" );
 		for ( int i = 0; i < Status::PLAYER_NUM; i++ ) {
 			sy += HEIGHT;
-			drawer->drawString( sx, sy, BToS( _status->getPlayer( i ).state ).c_str( ) );
+			drawer->drawString( sx, sy, BToS( _status->getPlayer( i ).area ).c_str( ) );
 		}
 	}
 	{//drawContinue

@@ -24,15 +24,15 @@ void ViewerFamily::draw( ) const {
 
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		PlayerConstPtr player = family->getPlayer( i );
-		Player::STATE state = player->getState( );
 		int add_sy = 0;
 		int add_sx = 0;
-		switch ( state ) {
-		case Player::STATE_STREET:
+		AREA area = player->getArea( );
+		switch ( area ) {
+		case AREA_STREET:
 			add_sy = VIEW_STREET_Y;
 			add_sx = -camera_pos;
 			break;
-		case Player::STATE_EVENT:
+		case AREA_EVENT:
 			add_sy = VIEW_EVENT_Y;
 			add_sx = 0;
 			break;

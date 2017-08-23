@@ -105,10 +105,14 @@ void Player::act( ) {
 	_unrivaled_count++;
 
 	if ( _monmo ) {
-		Vector pos = getPos( );
-		pos.x += getChipSize( ) / 2;
-		_monmo->setTarget( pos );
+		Monmotaro::Target target;
+		target.pos = getPos( );
+		target.dir = getDir( );
+		_monmo->setTarget( target );
 		_monmo->update( );
+		if ( _monmo->isFinished( ) ) {
+			_monmo = MonmotaroPtr( );
+		}
 	}
 }
 
@@ -261,7 +265,7 @@ void Player::actOnFloating( ) {
 void Player::actOnAttack( ) {
 	int power = ( _charge_count / CHARGE_PHASE_COUNT ) + 1;
 	ShotPtr shot( new Shot( getPos( ), getDir( ), power ) );
-	shot->setState( getState( ) );
+	shot->setArea( getArea( ) );
 	Armoury::getTask( )->add( shot );
 	setAction( ACTION_WAIT );
 	_charge_count = 0;
@@ -316,7 +320,7 @@ void Player::actOnOverCharge( ) {
 void Player::actOnCamera( ) {
 	FamilyConstPtr family( Family::getTask( ) );
 	int x = 0;
-	if ( getState( ) != STATE_EVENT ) {
+	if ( getArea( ) != AREA_EVENT ) {
 		x += ( int )family->getCameraPos( );
 	}
 	Vector pos = getPos( );
@@ -346,20 +350,8 @@ void Player::actOnDamege( ) {
 		setVec( Vector( 0, getVec( ).y ) );
 	}
 	if ( act_count > MAX_DAMEGE_COUNT / 2 ) {
-		Vector vec = getVec( );
 		//ひるみ中でも移動できるようにする
-		DevicePtr device( Device::getTask( ) );
-		char dir_x = device->getDirX( _id );
-		if ( dir_x < -50 ) {
-			vec.x = -MOVE_SPEED;
-		}
-		if ( dir_x > 50 ) {
-			vec.x = MOVE_SPEED;
-		}
-		if ( dir_x == 0 ) {
-			vec.x = 0;
-		}
-		setVec( vec );
+		setAction( ACTION_WAIT );
 	}
 }
 
@@ -378,20 +370,20 @@ void Player::actOnBlowAway( ) {
 void Player::actOnDead( ) {
 	int act_count = getActCount( );
 	int chip_size = getChipSize( );
-	STATE state = getState( );
+	AREA area = getArea( );
 	if ( act_count == MAX_DEAD_ACTCOUNT ) {
-		if ( state == STATE_EVENT ) {
+		if ( area == AREA_EVENT ) {
 			//イベントで倒れたら、爆発する
-			Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, chip_size / 2 ), state, chip_size * 2 ) ) );
+			Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, chip_size / 2 ), area, chip_size * 2 ) ) );
 		}
 	}
 	if ( act_count > MAX_DEAD_ACTCOUNT + MAX_IMPACT_COUNT ) {
-		if ( getState( ) == STATE_EVENT ) {
+		if ( getArea( ) == AREA_EVENT ) {
 			//メインの画面中央上部に移動
-			setState( STATE_STREET );
+			setArea( AREA_STREET );
 			MapEvent::getTask( )->setType( MapEvent::TYPE_TITLE );
 			setPos( Vector( Family::getTask( )->getCameraPos( ) + SCREEN_WIDTH / 2, chip_size ) );
-			Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, chip_size / 2 ), getState( ), chip_size * 2 ) ) );
+			Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, chip_size / 2 ), getArea( ), chip_size * 2 ) ) );
 		}
 		if ( act_count < MAX_DEAD_ACTCOUNT + MAX_IMPACT_COUNT * 2 ) {
 			setVec( Vector( 0, -GRAVITY ) );
@@ -406,7 +398,7 @@ void Player::actOnCall( ) {
 		return;
 	}
 
-	if ( _monmo->getAction( ) == Monmotaro::ACTION_WAIT ) {
+	if ( _monmo->getAction( ) == Monmotaro::ACTION_MOVE ) {
 		setAction( ACTION_WAIT );
 	}
 }
@@ -515,7 +507,7 @@ void Player::updateState( ) {
 			break;
 		}
 		if ( event_obj ) {
-			setState( STATE_EVENT );
+			setArea( AREA_EVENT );
 			setPos( Vector( GRAPH_SIZE * 3 / 2, 0 ) );
 			setVec( Vector( ) );
 		}
@@ -523,17 +515,18 @@ void Player::updateState( ) {
 	
 	if ( map->getObject( getPos( ) + getVec( ) ) == OBJECT_EVENT_CALL ) {
 		map->usedObject( getPos( ) + getVec( ) );
-		Vector pos = getPos( );
-		pos.x += getChipSize( ) / 2;
-		_monmo = MonmotaroPtr( new Monmotaro( Vector( family->getCameraPos( ), 0 ), pos ) );
+		Monmotaro::Target target;
+		target.pos = getPos( );
+		target.dir = getDir( );
+		_monmo = MonmotaroPtr( new Monmotaro( Vector( family->getCameraPos( ), 0 ), target ) );
 		setAction( ACTION_CALL );
 		setVec( Vector( ) );
 	}
 
-	if ( getState( ) == STATE_EVENT ) {
+	if ( getArea( ) == AREA_EVENT ) {
 		//一ページ目にいたらメインに戻る
 		if ( getPos( ).x < GRAPH_SIZE ) {
-			setState( STATE_STREET );
+			setArea( AREA_STREET );
 			map_event->setType( MapEvent::TYPE_TITLE );
 			setPos( Vector( family->getCameraPos( ) + SCREEN_WIDTH / 2, 0 ) );
 			setVec( Vector( ) );
@@ -544,7 +537,7 @@ void Player::updateState( ) {
 		if ( !Military::getTask( )->getBoss( ) &&
 			 !storage->isExistanceEventItem( ) &&
 			 map_event->getType( ) < MapEvent::TYPE_SHOP ) {
-			setState( STATE_STREET );
+			setArea( AREA_STREET );
 			map_event->setType( MapEvent::TYPE_TITLE );
 			setPos( Vector( family->getCameraPos( ) + SCREEN_WIDTH / 2, 0 ) );
 			setVec( Vector( ) );
@@ -607,24 +600,37 @@ void Player::setAction( ACTION action ) {
 	setActCount( 0 );
 }
 
-void Player::setSynchronousData( unsigned char type, int camera_pos ) const {
+void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
+	SynchronousDataPtr data( SynchronousData::getTask( ) );
+
+	// Status
+	if ( getArea( ) == AREA_STREET ) {
+		data->setStatusState( player, SynchronousData::STATE_PLAY_STREET );
+	} else {
+		data->setStatusState( player, SynchronousData::STATE_PLAY_EVENT );
+	}
+
+	// Object
 	if ( _unrivaled_count < MAX_UNRIVALED_COUNT ) {
 		if ( _unrivaled_count / PLAYER_FLASH_WAIT_TIME % 2 == 0 ) {
 			return;
 		}
 	}
-	STATE state = getState( );
-	int add_sy = 0;
-	int add_sx = 0;
-	
+
+	AREA area = getArea( );
+	unsigned char type;
+	switch ( player ) {
+	case PLAYER_TAROSUKE: type = SynchronousData::TYPE_TAROSUKE; break;
+	case PLAYER_TAROJIRO: type = SynchronousData::TYPE_TAROJIRO; break;
+	case PLAYER_GARISUKE: type = SynchronousData::TYPE_GARISUKE; break;
+	case PLAYER_TAROMI  : type = SynchronousData::TYPE_TAROMI  ; break;
+	};
+
 	Vector pos = getPos( );
 	int x = ( int )pos.x;
 	int y = ( int )pos.y;
-
-	AREA area = AREA_EVENT;
-	if ( getState( ) == STATE_STREET ) {
+	if ( area == AREA_STREET ) {
 		x -= camera_pos;
-		area = AREA_STREET;
 	}
 
 	int pattern = 0;
@@ -733,7 +739,6 @@ void Player::setSynchronousData( unsigned char type, int camera_pos ) const {
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 
-	SynchronousDataPtr data( SynchronousData::getTask( ) );
 	data->addObject( area, type, pattern, attribute, x, y );
 	if ( _charge_count > 0 ) {
 		const int ANIM[ ] = {

@@ -58,7 +58,7 @@ bool Storage::isExistanceEventItem( ) const {
 			ite++;
 			continue;
 		}
-		if ( item->getState( ) == Character::STATE_EVENT ) {
+		if ( item->getArea( ) == AREA_EVENT ) {
 			result = true;
 			break;
 		}
@@ -99,7 +99,7 @@ void Storage::eraseEventItem( ) {
 			ite++;
 			continue;
 		}
-		if ( item->getState( ) == Character::STATE_EVENT ) {
+		if ( item->getArea( ) == AREA_EVENT ) {
 			ite = _items.erase( ite );
 			continue;
 		}

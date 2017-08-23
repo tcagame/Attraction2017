@@ -69,7 +69,7 @@ void RockViewer::drawPlayer( ) const {
 	RockFamilyPtr family( RockFamily::getTask( ) );
 	unsigned int client_id = RockClientInfo::getTask( )->getClientId( );
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
-		if ( client_id != _status->getPlayer( i ).state ) {
+		if ( client_id != _status->getPlayer( i ).area ) {
 			continue;
 		}
 		ModelMV1Ptr model = family->getPlayer( i )->getModel( );

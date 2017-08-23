@@ -109,7 +109,7 @@ void RockPlayer::setAction( ACTION action ) {
 }
 
 bool RockPlayer::isActive( ) const {
-	return (  RockClientInfo::getTask( )->getClientId( ) == _status->getPlayer( _id ).state );
+	return (  RockClientInfo::getTask( )->getClientId( ) == _status->getPlayer( _id ).area );
 }
 
 void RockPlayer::actOnWaiting( ) {

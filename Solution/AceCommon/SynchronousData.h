@@ -9,6 +9,8 @@ PTR( SynchronousData );
 
 class SynchronousData : public Data, public Task {
 public:
+	static const unsigned char STATE_PLAY_STREET    = 0x10;
+	static const unsigned char STATE_PLAY_EVENT     = 0x11;
 	static const unsigned char ITEM_DANGO			= 0x01;
 	static const unsigned char ITEM_HEART			= 0x02;
 	static const unsigned char ITEM_HYPERTROPHY		= 0x04;
@@ -16,18 +18,18 @@ public:
 	static const unsigned char ITEM_WOOD			= 0x10;
 	static const unsigned char ITEM_FLAME			= 0x20;
 	static const unsigned char ITEM_MINERAL			= 0x40;
-	static const unsigned char STATE_EVENT			= 0x01;
+	static const unsigned char AREA_EVENT			= 0x01;
 	static const unsigned char ATTRIBUTE_REVERSE	= 0x01;
-	static const unsigned char TYPE_TAROSUKE		= 10;
-	static const unsigned char TYPE_TAROJIRO		= 11;
-	static const unsigned char TYPE_GARISUKE		= 12;
-	static const unsigned char TYPE_TAROMI			= 13;
-	static const unsigned char TYPE_MONMOTARO		= 14;
-	static const unsigned char TYPE_CHARGE			= 15;
-	static const unsigned char TYPE_ENEMY_MIDIUM	= 16;
-	static const unsigned char TYPE_ENEMY_SMALL		= 17;
-	static const unsigned char TYPE_ENEMY_BIG		= 18;
-	static const unsigned char TYPE_ENEMY_BOSS		= 19;
+	static const unsigned char TYPE_TAROSUKE		= 0x10;
+	static const unsigned char TYPE_TAROJIRO		= 0x11;
+	static const unsigned char TYPE_GARISUKE		= 0x12;
+	static const unsigned char TYPE_TAROMI			= 0x13;
+	static const unsigned char TYPE_MONMOTARO		= 0x20;
+	static const unsigned char TYPE_CHARGE			= 0x21;
+	static const unsigned char TYPE_ENEMY_MIDIUM	= 0x22;
+	static const unsigned char TYPE_ENEMY_SMALL		= 0x23;
+	static const unsigned char TYPE_ENEMY_BIG		= 0x24;
+	static const unsigned char TYPE_ENEMY_BOSS		= 0x25;
 public:
 	static std::string getTag( ) { return "SYNCHRONOUSDATA"; };
 	static SynchronousDataPtr getTask( );
@@ -36,12 +38,12 @@ public:
 	SynchronousData( );
 	virtual ~SynchronousData( );
 public:
-	int getStatusPower( int idx ) const;
-	int getStatusMoney( int idx ) const;
-	bool isInProssessionOfStatusItem( int idx, unsigned char item ) const;
-	int getStatusVirtue( int idx ) const;
-	int getStatusRedo( int idx ) const;
-	unsigned char getStatusState( int idx ) const;
+	int getStatusPower( PLAYER player ) const;
+	int getStatusMoney( PLAYER player ) const;
+	bool isInProssessionOfStatusItem( PLAYER player, unsigned char item ) const;
+	int getStatusVirtue( PLAYER player ) const;
+	int getStatusRedo( PLAYER player ) const;
+	unsigned char getStatusState( PLAYER player ) const;
 	int getObjectNum( AREA area ) const;
 	int getObjectAX( int idx ) const;
 	int getObjectAY( int idx ) const;
@@ -53,12 +55,12 @@ public:
 public:
 	void * getPtr( );
 	int getSize( );
-	void setStatusPower( int idx, int power );
-	void setStatusMoney( int idx, int money );
-	void setInProssessionOfStatusItem( int idx, unsigned char item, bool possession );
-	void setStatusVirtue( int idx, int virtue );
-	void setStatusRedo( int idx, int redo );
-	void setStatusState( int idx, unsigned char state );
+	void setStatusPower( PLAYER player, int power );
+	void setStatusMoney( PLAYER player, int money );
+	void setInProssessionOfStatusItem( PLAYER player, unsigned char item, bool possession );
+	void setStatusVirtue( PLAYER player, int virtue );
+	void setStatusRedo( PLAYER player, int redo );
+	void setStatusState( PLAYER player, unsigned char area );
 	void resetObject( );
 	void addObject( AREA area, unsigned char type, int pattern, unsigned char attribute, int ax, int ay, int size = -1 );
 private:
@@ -72,7 +74,7 @@ private:
 				unsigned char items;
 				unsigned char virtue;
 				unsigned char redo;
-				unsigned char state;
+				unsigned char area;
 			} status[ MAX_PLAYER ];
 			struct Object {
 				unsigned char type;
