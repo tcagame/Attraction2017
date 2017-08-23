@@ -25,7 +25,7 @@ void ViewerArmoury::draw( ) const {
 		}
 		int add_sx = -camera_pos;
 		int add_sy = VIEW_STREET_Y;
-		if ( shot->getState( ) == Character::STATE_EVENT ) {
+		if ( shot->getArea( ) == AREA_EVENT ) {
 			add_sx = 0;
 			add_sy = VIEW_EVENT_Y;
 		}

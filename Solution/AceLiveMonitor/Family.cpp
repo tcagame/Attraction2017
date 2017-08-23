@@ -45,7 +45,7 @@ void Family::update( ) {
 	bool update_camera = true;
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		_player[ i ]->update( );
-		if ( _player[ i ]->getState( ) != Character::STATE_EVENT ) {
+		if ( _player[ i ]->getArea( ) != AREA_EVENT ) {
 			//キャラクターが右端にいる場合、カメラのポジションを変えない
 			if ( ( _camera_pos - SCREEN_WIDTH / 2 ) + SCROLL_BUFFER > _player[ i ]->getPos( ).x ) {
 				update_camera = false;
@@ -81,7 +81,7 @@ void Family::updateCameraPos( ) {
 	double pos_ratio = CAMERA_MAIN_RATIO;
 	//プレイヤーの位置の合計を出す
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
-		if ( _player[ i ]->getState( ) == Character::STATE_EVENT ) {
+		if ( _player[ i ]->getArea( ) == AREA_EVENT ) {
 			pos_ratio = CAMERA_EVENT_RATIO;
 			continue;
 		}

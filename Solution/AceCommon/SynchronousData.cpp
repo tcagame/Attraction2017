@@ -50,7 +50,7 @@ int SynchronousData::getStatusRedo( int idx ) const {
 }
 
 unsigned char SynchronousData::getStatusState( int idx ) const {
-	return _data.status[ idx ].state;
+	return _data.status[ idx ].area;
 }
 
 void SynchronousData::setStatusPower( int idx, int power ) {
@@ -86,9 +86,9 @@ void SynchronousData::setStatusRedo( int idx, int redo ) {
 	_data.status[ idx ].power = ( unsigned char )redo;
 }
 
-void SynchronousData::setStatusState( int idx, unsigned char state ) {
+void SynchronousData::setStatusState( int idx, unsigned char area ) {
 	assert( idx < MAX_PLAYER );
-	_data.status[ idx ].power = ( unsigned char )state;
+	_data.status[ idx ].power = ( unsigned char )area;
 }
 
 

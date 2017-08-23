@@ -13,7 +13,7 @@ public:
 		char device_x;
 		char device_y;
 		unsigned char device_button;
-		unsigned char state;
+		unsigned char area;
 		unsigned char continue_num;
 		unsigned char toku;
 		unsigned char item;
@@ -26,7 +26,7 @@ public:
 			_player[ i ].device_x = 0;
 			_player[ i ].device_y = 0;
 			_player[ i ].device_button = 0b00000000;
-			_player[ i ].state = STATE_NONE;
+			_player[ i ].area = STATE_NONE;
 			_player[ i ].continue_num = 0;
 			_player[ i ].toku = 0;
 			_player[ i ].item = 0b00000000;

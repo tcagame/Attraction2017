@@ -22,7 +22,7 @@ public:
 	bool setPower( int idx, int power );
 	bool setMoney( int idx, int money );
 	bool setItem( int idx, int item );
-	bool setState( int idx, unsigned int state );
+	bool setArea( int idx, unsigned int area );
 private:
 	StatusPtr _status;
 	std::array< int, Status::PLAYER_NUM > _reset_count;//ボタンのカウント

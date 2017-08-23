@@ -41,7 +41,7 @@ void EnemyLancer::setSynchronousData( unsigned char type, int camera_pos ) const
 	int y = ( int )pos.y;
 
 	AREA area = AREA_EVENT;
-	if ( getState( ) == STATE_STREET ) {
+	if ( getArea( ) == AREA_STREET ) {
 		x -= camera_pos;
 		area = AREA_STREET;
 	}

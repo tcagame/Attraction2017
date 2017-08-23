@@ -52,7 +52,7 @@ void Military::update( ) {
 				}
 				
 				int impact_chip_size = enemy->getChipSize( );
-				Magazine::getTask( )->add( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), Character::STATE_STREET, impact_chip_size ) ) );
+				Magazine::getTask( )->add( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), AREA_STREET, impact_chip_size ) ) );
 				ite = _enemies.erase( ite );
 				continue;
 			}
@@ -108,7 +108,7 @@ void Military::update( ) {
 			if ( _boss->isFinished( ) ) {
 				_boss->dropItem( );
 				int impact_chip_size = _boss->getChipSize( ) * 2;
-				Magazine::getTask( )->add( ImpactPtr( new Impact( _boss->getPos( ) + Vector( 0, _boss->getChipSize( ) / 2 ), Character::STATE_EVENT, impact_chip_size ) ) );
+				Magazine::getTask( )->add( ImpactPtr( new Impact( _boss->getPos( ) + Vector( 0, _boss->getChipSize( ) / 2 ), AREA_EVENT, impact_chip_size ) ) );
 				_boss = EnemyBossPtr( );
 			}
 		}
@@ -125,7 +125,7 @@ void Military::update( ) {
 					dropMoney( enemy );
 				}
 				int impact_chip_size = enemy->getChipSize( );
-				Magazine::getTask( )->add( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), Character::STATE_STREET, impact_chip_size ) ) );
+				Magazine::getTask( )->add( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), AREA_STREET, impact_chip_size ) ) );
 				ite = _event_enemies.erase( ite );
 				continue;
 			}
@@ -194,7 +194,7 @@ void Military::popUpEventEnemy( EnemyPtr enemy ) {
 
 EnemyPtr Military::getOverlappedEnemy( CharacterConstPtr character ) const {
 	EnemyPtr result = EnemyPtr( );
-	if ( character->getState( ) == Character::STATE_STREET ) {
+	if ( character->getArea( ) == AREA_STREET ) {
 		std::list< EnemyPtr >::const_iterator ite = _enemies.begin( );
 		while ( ite != _enemies.end( ) ) {
 			EnemyPtr enemy = (*ite);
@@ -278,6 +278,6 @@ void Military::dropMoney( EnemyConstPtr enemy ) {
 	}
 	Vector pos = enemy->getPos( ) + Vector( 0, -chip_size );
 	ItemPtr item = ItemPtr( new ItemMoney( pos, type ) );
-	item->setState( enemy->getState( ) );
+	item->setArea( enemy->getArea( ) );
 	Storage::getTask( )->add( item );
 }
