@@ -57,6 +57,7 @@ void RockCharacter::update( ) {
 					break;
 				} else {
 					_vec.y = hit_pos.y - _pos.y + GRAVITY / 2;
+					_standing = true;
 				}
 			}
 			
@@ -66,8 +67,9 @@ void RockCharacter::update( ) {
 		Vector pos = _pos + Vector( 0, -GRAVITY * 2, 0 );
 		Vector fpos = _pos + Vector( 0, _vec.y, 0 );
 		for ( int i = 0; i < col_models_size; i++ ) {
-			if ( col_models[ i ]->isHitLine( pos, fpos ) ) {
-				_vec.y = 0;
+			Vector hit_pos = col_models[ i ]->getHitPos( pos, fpos );
+			if ( !hit_pos.isOrijin( ) ) {
+				_vec.y = hit_pos.y - _pos.y;
 				_standing = true;
 				break;
 			}

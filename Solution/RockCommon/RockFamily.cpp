@@ -51,13 +51,15 @@ RockPlayerPtr RockFamily::getPlayer( int id ) const {
 
 Vector RockFamily::getCameraPos( ) const {
 	Vector result = Vector( );
-	int i = 0;
-	for ( i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+	int num = 0;
+	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		if ( _player[ i ]->isActive( ) ) {
 			result += _player[ i ]->getPos( );
+			num++;
 		}
 	}
-	result *= ( 1.0 / ( double )i );
-
+	if ( num > 0 ) {
+		result *= ( 1.0 / ( double )num );
+	}
 	return result;
 }
