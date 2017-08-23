@@ -108,6 +108,7 @@ void Player::act( ) {
 		Monmotaro::Target target;
 		target.id  = _id;
 		target.radius = getRadius( );
+		target.attack = ( _action == ACTION_ATTACK );
 		target.pos = getPos( );
 		target.dir = getDir( );
 		_monmo->setTarget( target );
@@ -489,6 +490,7 @@ void Player::updateState( ) {
 		Monmotaro::Target target;
 		target.id  = _id;
 		target.radius = getRadius( );
+		target.attack = false;
 		target.pos = getPos( );
 		target.dir = getDir( );
 		_monmo = MonmotaroPtr( new Monmotaro( Vector( family->getCameraPos( ), 0 ), target ) );
@@ -518,17 +520,21 @@ void Player::updateState( ) {
 	}
 }
 
-bool Player::isOnHead( EnemyPtr target ) const {
+bool Player::isOnHead( CharacterPtr target ) const {
 	if ( _action != ACTION_FLOAT ) {
 		return false;
 	}
-	Vector player = getPos( ) + Vector( 0, -getChipSize( ) / 2 );
-	Vector enemy  = target->getPos( ) + Vector( 0, -target->getChipSize( ) / 2 );
-	Vector vec = enemy - player;
+	Vector self = getPos( ) + Vector( 0, -getChipSize( ) / 2 );
+	Vector nonself  = target->getPos( ) + Vector( 0, -target->getChipSize( ) / 2 );
+	Vector vec = nonself - self;
 	if ( vec.y < 0 ) {
 		return false;
 	}
 	if ( vec.getLength( ) < target->getRadius( ) ) {
+		return false;
+	}
+	if ( getPos( ).x < nonself.x - target->getChipSize( ) / 2 ||
+		 getPos( ).x > nonself.x + target->getChipSize( ) / 2 ) {
 		return false;
 	}
 	return true;
