@@ -31,11 +31,13 @@ void RockFamily::update( ) {
 			if ( i == j ) {
 				continue;
 			}
-			if ( _player[ i ]->isOverLapped( _player[ j ] ) ) {
-				if ( _player[ i ]->isOnHead( _player[ j ] ) ) {
-					_player[ i ]->bound( );
-				} else {
-					_player[ i ]->back( );
+			if ( _player[ j ]->isActive( ) ) {
+				if ( _player[ i ]->isOverLapped( _player[ j ] ) ) {
+					if ( _player[ i ]->isOnHead( _player[ j ] ) ) {
+						_player[ i ]->bound( );
+					} else {
+						_player[ i ]->back( );
+					}
 				}
 			}
 		}
