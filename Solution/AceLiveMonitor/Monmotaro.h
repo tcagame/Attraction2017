@@ -8,7 +8,7 @@ public:
 		ACTION_FADE_IN,
 		ACTION_MOVE,
 		ACTION_ATTACK,
-		ACTION_OUT,
+		ACTION_FADE_OUT,
 	};
 	struct Target {
 		Vector pos;

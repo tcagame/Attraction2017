@@ -110,6 +110,9 @@ void Player::act( ) {
 		target.dir = getDir( );
 		_monmo->setTarget( target );
 		_monmo->update( );
+		if ( _monmo->isFinished( ) ) {
+			_monmo = MonmotaroPtr( );
+		}
 	}
 }
 
@@ -347,20 +350,8 @@ void Player::actOnDamege( ) {
 		setVec( Vector( 0, getVec( ).y ) );
 	}
 	if ( act_count > MAX_DAMEGE_COUNT / 2 ) {
-		Vector vec = getVec( );
 		//‚Ð‚é‚Ý’†‚Å‚àˆÚ“®‚Å‚«‚é‚æ‚¤‚É‚·‚é
-		DevicePtr device( Device::getTask( ) );
-		char dir_x = device->getDirX( _id );
-		if ( dir_x < -50 ) {
-			vec.x = -MOVE_SPEED;
-		}
-		if ( dir_x > 50 ) {
-			vec.x = MOVE_SPEED;
-		}
-		if ( dir_x == 0 ) {
-			vec.x = 0;
-		}
-		setVec( vec );
+		setAction( ACTION_WAIT );
 	}
 }
 
