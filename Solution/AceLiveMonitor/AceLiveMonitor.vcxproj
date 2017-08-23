@@ -276,7 +276,6 @@
     <ClCompile Include="Storage.cpp" />
     <ClCompile Include="ViewerDebug.cpp" />
     <ClCompile Include="ViewerEvent.cpp" />
-    <ClCompile Include="ViewerFamily.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Military.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -407,7 +406,6 @@
     <ClInclude Include="Storage.h" />
     <ClInclude Include="ViewerDebug.h" />
     <ClInclude Include="ViewerEvent.h" />
-    <ClInclude Include="ViewerFamily.h" />
     <ClInclude Include="Military.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Shot.h" />

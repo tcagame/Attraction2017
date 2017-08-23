@@ -11,8 +11,16 @@ public:
 		ACTION_FADE_OUT,
 	};
 	struct Target {
+		int id;
+		double radius;
 		Vector pos;
 		DIR dir;
+		Target( ) :
+			id ( 0 ),
+			radius( 0.0 ),
+			pos( Vector( ) ),
+			dir( DIR_RIGHT ) {
+		}
 	};
 public:
 	Monmotaro( const Vector& pos, const Target& target );

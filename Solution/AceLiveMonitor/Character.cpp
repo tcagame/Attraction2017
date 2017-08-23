@@ -197,7 +197,9 @@ bool Character::isOverlapped( CharacterConstPtr target ) const {
 		 _finished ) {
 		return false;
 	}
-	double length = ( _pos - target->getPos( ) ).getLength( );
+	Vector self = _pos + Vector( 0, getChipSize( ) / 2 );
+	Vector nonself = target->getPos( ) + Vector( 0, target->getChipSize( ) / 2 );
+	double length = ( self - nonself ).getLength( );
 	double radius = _radius + target->getRadius( );
 	return ( length < radius );
 }

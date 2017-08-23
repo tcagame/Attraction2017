@@ -2,7 +2,6 @@
 #include "Application.h"
 #include "Drawer.h"
 
-#include "ViewerFamily.h"
 #include "ViewerStreet.h"
 #include "ViewerArmoury.h"
 #include "ViewerStatus.h"
@@ -36,7 +35,6 @@ Viewer::~Viewer( ) {
 
 void Viewer::initialize( ) {
 	_viewer_magazine	= ViewerMagazinePtr	( new ViewerMagazine( ) );
-	_viewer_family		= ViewerFamilyPtr	( new ViewerFamily ); 
 	_viewer_street		= ViewerStreetPtr	( new ViewerStreet );
 	_viewer_armoury		= ViewerArmouryPtr	( new ViewerArmoury( ) );
 	_viewer_event		= ViewerEventPtr	( new ViewerEvent );

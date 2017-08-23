@@ -3,7 +3,7 @@
 #include "Family.h"
 
 //‘¬“x
-static const int ENTRY_SPEED = 3;
+static const int ENTRY_SPEED = 5;
 static const int MAX_SPEED = 18;
 static const int MOVE_SPEED = 6;
 
@@ -23,6 +23,7 @@ _action( ACTION_ENTRY ),
 _target( target ) {
 	Vector vec = ( target.pos - pos ).normalize( ) * ENTRY_SPEED;
 	setVec( vec );
+	setRadius( 36 );
 }
 
 Monmotaro::~Monmotaro( ) {
@@ -34,7 +35,7 @@ void Monmotaro::act( ) {
 		{
 			Vector vec = ( _target.pos - getPos( ) ).normalize( ) * ENTRY_SPEED;
 			setVec( vec );
-			if ( ( getPos( ) - _target.pos ).getLength( ) < 1 ) {
+			if ( ( getPos( ) - _target.pos ).getLength( ) < getRadius( ) + _target.radius ) {
 				setDir( _target.dir );
 				setPos( _target.pos + LEAVE_POS[ _target.dir ] );
 				_action = ACTION_FADE_IN;
@@ -139,5 +140,6 @@ void Monmotaro::setSynchronousData( ) {
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	pattern += ( _target.id * 16 * 2 );
 	data->addObject( area, type, pattern, attribute, x, y );
 }

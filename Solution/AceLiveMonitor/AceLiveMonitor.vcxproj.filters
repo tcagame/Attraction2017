@@ -228,9 +228,6 @@
     <ClCompile Include="ViewerEvent.cpp">
       <Filter>Viewer</Filter>
     </ClCompile>
-    <ClCompile Include="ViewerFamily.cpp">
-      <Filter>Viewer</Filter>
-    </ClCompile>
     <ClCompile Include="ViewerStatus.cpp">
       <Filter>Viewer</Filter>
     </ClCompile>
@@ -587,9 +584,6 @@
       <Filter>Viewer</Filter>
     </ClInclude>
     <ClInclude Include="ViewerEvent.h">
-      <Filter>Viewer</Filter>
-    </ClInclude>
-    <ClInclude Include="ViewerFamily.h">
       <Filter>Viewer</Filter>
     </ClInclude>
     <ClInclude Include="ViewerStatus.h">
