@@ -1,6 +1,8 @@
 #include "Monmotaro.h"
 #include "SynchronousData.h"
 #include "Family.h"
+#include "ShotMonmotaro.h"
+#include "Armoury.h"
 
 //‘¬“x
 static const int ENTRY_SPEED = 5;
@@ -72,6 +74,10 @@ void Monmotaro::act( ) {
 			setFinished( );
 		}
 		break;
+	}
+	if ( _target.attack ) {
+		ShotMonmotaroPtr shot( ShotMonmotaroPtr( new ShotMonmotaro( getPos( ), getDir( ), 1 ) ) );
+		Armoury::getTask( )->add( shot );
 	}
 	setSynchronousData( );
 }

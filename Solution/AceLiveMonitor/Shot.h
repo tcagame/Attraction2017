@@ -9,9 +9,7 @@ public:
 public:
 	DIR getDir( ) const;
 	int getPower( ) const;
-	void setSynchronousData( unsigned char type, int camera_pos ) const;
-protected:
-	void act( );
+	virtual void setSynchronousData( unsigned char type, int camera_pos ) const = 0;
 private:
 	int _power;
 	Vector _pos;

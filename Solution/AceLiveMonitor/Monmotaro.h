@@ -13,11 +13,13 @@ public:
 	struct Target {
 		int id;
 		double radius;
+		bool attack;
 		Vector pos;
 		DIR dir;
 		Target( ) :
 			id ( 0 ),
 			radius( 0.0 ),
+			attack( false ),
 			pos( Vector( ) ),
 			dir( DIR_RIGHT ) {
 		}

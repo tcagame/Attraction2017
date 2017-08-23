@@ -15,6 +15,7 @@
 #include "Magazine.h"
 #include "Impact.h"
 #include "Monmotaro.h"
+#include "ShotPlayer.h"
 
 #include <assert.h>
 
@@ -267,7 +268,7 @@ void Player::actOnFloating( ) {
 
 void Player::actOnAttack( ) {
 	int power = ( _charge_count / CHARGE_PHASE_COUNT ) + 1;
-	ShotPtr shot( new Shot( getPos( ), getDir( ), power ) );
+	ShotPlayerPtr shot( new ShotPlayer( getPos( ), getDir( ), power ) );
 	shot->setArea( getArea( ) );
 	Armoury::getTask( )->add( shot );
 	setAction( ACTION_WAIT );
