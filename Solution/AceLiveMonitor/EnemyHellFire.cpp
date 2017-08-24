@@ -17,7 +17,7 @@ EnemyHellFire::~EnemyHellFire( ) {
 }
 
 void EnemyHellFire::act( ) {
-	Vector target = Vector( Family::getTask( )->getCameraPos( ) + GRAPH_SIZE, GRAPH_SIZE / 2 );
+	Vector target = Vector( Family::getTask( )->getCameraPosX( ) + GRAPH_SIZE, GRAPH_SIZE / 2 );
 	Vector distance = target - getPos( );
 	Vector vec = getVec( ) + distance.normalize( ) * ACCEL;
 	vec = vec.normalize( ) * MOVE_SPEED;

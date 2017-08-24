@@ -36,7 +36,7 @@ Military::~Military( ) {
 void Military::update( ) {
 	FamilyPtr family( Family::getTask( ) );
 	StoragePtr storage( Storage::getTask( ) );
-	int camera_pos = ( int )family->getCameraPos( );
+	int camera_pos = family->getCameraPosX( );
 	{//main
 		std::list< EnemyPtr >::const_iterator ite = _enemies.begin( );
 		while ( ite != _enemies.end( ) ) {

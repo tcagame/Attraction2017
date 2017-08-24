@@ -37,7 +37,7 @@ void Family::initialize( ) {
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		camera_pos += _player[ i ]->getPos( ).x;
 	}
-	_camera_pos = camera_pos * 0.25 - SCREEN_WIDTH / 2;
+	_camera_pos_x = camera_pos * 0.25 - SCREEN_WIDTH / 2;
 	_set_device = 0;
 }
 
@@ -57,7 +57,7 @@ void Family::update( ) {
 		_player[ i ]->update( );
 		if ( _player[ i ]->getArea( ) != AREA_EVENT ) {
 			//キャラクターが右端にいる場合、カメラのポジションを変えない
-			if ( ( _camera_pos - SCREEN_WIDTH / 2 ) + SCROLL_BUFFER > _player[ i ]->getPos( ).x ) {
+			if ( ( _camera_pos_x - SCREEN_WIDTH / 2 ) + SCROLL_BUFFER > _player[ i ]->getPos( ).x ) {
 				update_camera = false;
 			}
 		}
@@ -102,30 +102,30 @@ void Family::updateCameraPos( ) {
 	camera_pos = camera_pos * pos_ratio - SCREEN_WIDTH / 2;
 
 	//左に行く場合抜ける
-	if ( _camera_pos - camera_pos > 0 ) {
+	if ( _camera_pos_x - camera_pos > 0 ) {
 		return;
 	}
 
-	if ( _camera_pos - camera_pos > CAMERA_SCROLL_SPEED ) {
-		_camera_pos -= CAMERA_SCROLL_SPEED;
+	if ( _camera_pos_x - camera_pos > CAMERA_SCROLL_SPEED ) {
+		_camera_pos_x -= CAMERA_SCROLL_SPEED;
 	}
-	if ( _camera_pos - camera_pos < -CAMERA_SCROLL_SPEED ) {
-		_camera_pos += CAMERA_SCROLL_SPEED;
+	if ( _camera_pos_x - camera_pos < -CAMERA_SCROLL_SPEED ) {
+		_camera_pos_x += CAMERA_SCROLL_SPEED;
 	}
-	if ( fabs( _camera_pos - camera_pos ) < CAMERA_SCROLL_SPEED ) {
-		_camera_pos = camera_pos;
+	if ( fabs( _camera_pos_x - camera_pos ) < CAMERA_SCROLL_SPEED ) {
+		_camera_pos_x = camera_pos;
 	}
 }
 
-double Family::getCameraPos( ) const {
-	return _camera_pos;
+int Family::getCameraPosX( ) const {
+	return ( int )_camera_pos_x;
 }
 
 void Family::setSynchronousData( ) const {
 
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		PlayerConstPtr player = getPlayer( i );
-		player->setSynchronousData( ( PLAYER )i, ( int )getCameraPos( ) );
+		player->setSynchronousData( ( PLAYER )i, getCameraPosX( ) );
 	}
 }
 

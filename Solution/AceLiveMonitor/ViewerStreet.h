@@ -12,7 +12,7 @@ public:
 		LAYER_FRONT,
 	};
 public:
-	void draw( LAYER layer, int sx, int sy ) const;
+	void draw( LAYER layer, int sx, int sy, int camera_pos ) const;
 private:
 	std::vector< ImagePtr > _images;
 	int _num;

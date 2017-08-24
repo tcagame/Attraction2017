@@ -32,7 +32,7 @@ void ViewerDebug::draw( ) const {
 
 void ViewerDebug::drawPlayer( ) const {
 	FamilyPtr family( Family::getTask( ) );
-	int camera_pos = ( int )family->getCameraPos( );
+	int camera_pos = family->getCameraPosX( );
 	DrawerPtr drawer( Drawer::getTask( ) );
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		PlayerConstPtr player = family->getPlayer( i );
@@ -58,7 +58,7 @@ void ViewerDebug::drawEnemy( ) const {
 	FamilyPtr family( Family::getTask( ) );
 	MilitaryPtr military( Military::getTask( ) );
 	{//main
-		int camera_pos = ( int )family->getCameraPos( );
+		int camera_pos = family->getCameraPosX( );
 		std::list< EnemyPtr > enemies = military->getEnemyList( );
 		std::list< EnemyPtr >::const_iterator ite = enemies.begin( );
 		int enemy_num = 0;
@@ -103,7 +103,7 @@ void ViewerDebug::drawEnemy( ) const {
 
 void ViewerDebug::drawShot( ) const {
 	FamilyPtr family( Family::getTask( ) );
-	int camera_pos = ( int )family->getCameraPos( );
+	int camera_pos = family->getCameraPosX( );
 	DrawerPtr drawer( Drawer::getTask( ) );
 	ArmouryPtr armoury( Armoury::getTask( ) );
 	for ( int i = 0; i < armoury->getMaxShotNum( ); i++ ) {
@@ -124,7 +124,7 @@ void ViewerDebug::drawShot( ) const {
 
 void ViewerDebug::drawChip( ) const {
 	FamilyPtr family( Family::getTask( ) );
-	int camera_pos = ( int )family->getCameraPos( );
+	int camera_pos = family->getCameraPosX( );
 	DrawerPtr drawer( Drawer::getTask( ) );
 	{//main
 		MapStreetPtr map( MapStreet::getTask( ) );

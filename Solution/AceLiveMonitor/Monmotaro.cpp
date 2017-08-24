@@ -104,7 +104,7 @@ Monmotaro::ACTION Monmotaro::getAction( ) const {
 }
 
 void Monmotaro::setSynchronousData( ) {
-	int camera_pos = ( int )Family::getTask( )->getCameraPos( );
+	int camera_pos = Family::getTask( )->getCameraPosX( );
 	
 	Vector pos = getPos( );
 	int x = ( int )pos.x;

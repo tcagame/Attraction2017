@@ -20,7 +20,7 @@ public:
 	void update( );
 	PlayerConstPtr getPlayer( int player_id ) const;
 	PlayerPtr getPlayer( int player_id );
-	double getCameraPos( ) const;
+	int getCameraPosX( ) const;
 private:
 	void updateCameraPos( );
 	void updateSetDevice( );
@@ -28,7 +28,7 @@ private:
 	bool isSettingDevice( int device_id ) const;
 private:
 	int _set_device;
-	double _camera_pos;
+	double _camera_pos_x;
 	std::array< PlayerPtr, MAX_PLAYER > _player;
 };
 

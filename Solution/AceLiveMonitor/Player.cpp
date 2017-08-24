@@ -325,7 +325,7 @@ void Player::actOnCamera( ) {
 	FamilyConstPtr family( Family::getTask( ) );
 	int x = 0;
 	if ( getArea( ) != AREA_EVENT ) {
-		x += ( int )family->getCameraPos( );
+		x += family->getCameraPosX( );
 	}
 	Vector pos = getPos( );
 	Vector vec = getVec( );
@@ -363,7 +363,7 @@ void Player::actOnDamege( ) {
 void Player::actOnBlowAway( ) {
 	Vector pos = getPos( );
 	if ( pos.y < -GRAPH_SIZE ) {
-		setPos( Vector( Family::getTask( )->getCameraPos( ) + SCREEN_WIDTH / 2, -GRAPH_SIZE ) );
+		setPos( Vector( Family::getTask( )->getCameraPosX( ) + SCREEN_WIDTH / 2, -GRAPH_SIZE ) );
 		setAction( ACTION_WAIT );
 		setVec( Vector( ) );
 		return;
@@ -386,7 +386,7 @@ void Player::actOnDead( ) {
 			//メインの画面中央上部に移動
 			setArea( AREA_STREET );
 			MapEvent::getTask( )->setType( MapEvent::TYPE_TITLE );
-			setPos( Vector( Family::getTask( )->getCameraPos( ) + SCREEN_WIDTH / 2, chip_size ) );
+			setPos( Vector( Family::getTask( )->getCameraPosX( ) + SCREEN_WIDTH / 2, chip_size ) );
 			Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, chip_size / 2 ), getArea( ), chip_size * 2 ) ) );
 		}
 		if ( act_count < MAX_DEAD_ACTCOUNT + MAX_IMPACT_COUNT * 2 ) {
@@ -494,7 +494,7 @@ void Player::updateState( ) {
 		target.attack = false;
 		target.pos = getPos( );
 		target.dir = getDir( );
-		_monmo = MonmotaroPtr( new Monmotaro( Vector( family->getCameraPos( ), 0 ), target ) );
+		_monmo = MonmotaroPtr( new Monmotaro( Vector( family->getCameraPosX( ), 0 ), target ) );
 		setAction( ACTION_CALL );
 		setVec( Vector( ) );
 	}
@@ -504,7 +504,7 @@ void Player::updateState( ) {
 		if ( getPos( ).x < GRAPH_SIZE ) {
 			setArea( AREA_STREET );
 			map_event->setType( MapEvent::TYPE_TITLE );
-			setPos( Vector( family->getCameraPos( ) + SCREEN_WIDTH / 2, 0 ) );
+			setPos( Vector( family->getCameraPosX( ) + SCREEN_WIDTH / 2, 0 ) );
 			setVec( Vector( ) );
 		}
 		//ボスが倒れている場合 && アイテムが無い[退場]
@@ -515,7 +515,7 @@ void Player::updateState( ) {
 			 map_event->getType( ) < MapEvent::TYPE_SHOP ) {
 			setArea( AREA_STREET );
 			map_event->setType( MapEvent::TYPE_TITLE );
-			setPos( Vector( family->getCameraPos( ) + SCREEN_WIDTH / 2, 0 ) );
+			setPos( Vector( family->getCameraPosX( ) + SCREEN_WIDTH / 2, 0 ) );
 			setVec( Vector( ) );
 		}
 	}

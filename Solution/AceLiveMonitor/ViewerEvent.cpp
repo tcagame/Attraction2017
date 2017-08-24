@@ -115,7 +115,7 @@ void ViewerEvent::draw( int sx, int sy ) const {
 		}
 		{// npc chara
 			FamilyConstPtr family( Family::getTask( ) );
-			int camera_pos = ( int )family->getCameraPos( );
+			int camera_pos = family->getCameraPosX( );
 			NPCPtr npc( NPC::getTask( ) );
 			std::list< CharacterPtr > chara_list = npc->getNPCChara( );
 			std::list< CharacterPtr >::const_iterator ite = chara_list.begin( );

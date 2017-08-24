@@ -26,18 +26,17 @@ ViewerStreet::ViewerStreet( ) {
 ViewerStreet::~ViewerStreet( ) {
 }
 
-void ViewerStreet::draw( LAYER layer, int sx, int sy ) const {
-	FamilyConstPtr family( Family::getTask( ) );
-	double camera_pos = family->getCameraPos( );
-	int origin = ( int )camera_pos / GRAPH_SIZE;
+void ViewerStreet::draw( LAYER layer, int sx, int sy, int camera_pos ) const {
+	int origin = camera_pos / GRAPH_SIZE;
 	int offset = 0;
 	if ( layer == LAYER_FRONT ) {
 		offset = _num;
 	}
+	int y = sy;
 	for ( int i = 0; i < ACE_MAP_SIZE; i++ ) {
-		int sx1 = GRAPH_SIZE * i - ( (int)camera_pos % GRAPH_SIZE ) + sx;
+		int x = GRAPH_SIZE * i - ( camera_pos % GRAPH_SIZE ) + sx;
 		int idx = ( origin + i) % _num + offset;
-		_images[ idx ]->setPos( sx1, sy );
+		_images[ idx ]->setPos( x, y );
 		_images[ idx ]->draw( );
 	}
 }

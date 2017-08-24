@@ -26,7 +26,7 @@ void Armoury::update( ) {
 
 void Armoury::updateEnemy( ) {
 	MilitaryPtr militari( Military::getTask( ) );
-	int camera_pos = ( int )Family::getTask( )->getCameraPos( );
+	int camera_pos = Family::getTask( )->getCameraPosX( );
 	for ( int i = 0; i < MAX_SHOT_NUM; i ++ ) {
 		if ( !_shot_list[ i ] ) {
 			continue;

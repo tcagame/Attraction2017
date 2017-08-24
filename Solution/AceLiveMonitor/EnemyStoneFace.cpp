@@ -10,7 +10,7 @@ static const double ACCEL = 0.3;
 EnemyStoneFace::EnemyStoneFace( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP, false ),
 _action( ACTION_IN ) {
-	Vector target = Vector( Family::getTask( )->getCameraPos( ) + SCREEN_WIDTH / 2, GRAPH_SIZE );
+	Vector target = Vector( Family::getTask( )->getCameraPosX( ) + SCREEN_WIDTH / 2, GRAPH_SIZE );
 	Vector vec = target - getPos( );
 	if ( fabs( vec.x ) < fabs( vec.y ) ) {
 		vec.y *= 0.5;
@@ -32,7 +32,7 @@ void EnemyStoneFace::act( ) {
 	break;
 	case ACTION_MOVE:
 	{
-		Vector target = Vector( Family::getTask( )->getCameraPos( ) + SCREEN_WIDTH / 2, GRAPH_SIZE / 2 + getChipSize( ) );
+		Vector target = Vector( Family::getTask( )->getCameraPosX( ) + SCREEN_WIDTH / 2, GRAPH_SIZE / 2 + getChipSize( ) );
 		double angle = fmod( ( double )getActCount( ) * PI * 0.01, PI * 2 );
 		Vector add = Vector( sin( angle ) * 150, sin( angle * 2 ) * 40 );
 		target += add;

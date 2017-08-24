@@ -23,7 +23,7 @@ bool Enemy::isInScreen( ) const {
 	//スクリーンの端
 	int add = 0;
 	if ( getArea( ) != AREA_EVENT ) {
-		add = ( int )Family::getTask( )->getCameraPos( ) / GRAPH_SIZE;
+		add = Family::getTask( )->getCameraPosX( ) / GRAPH_SIZE;
 	}
 	int screen_page_min = 0 + add;
 	int screen_page_max = SCREEN_WIDTH / GRAPH_SIZE + 1 + add;

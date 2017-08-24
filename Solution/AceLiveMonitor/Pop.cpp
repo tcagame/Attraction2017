@@ -17,7 +17,7 @@ Pop::~Pop( ) {
 
 void Pop::update( ) {
 	//posをカメラに合わせる
-	double camera_pos = Family::getTask( )->getCameraPos( );
+	double camera_pos = Family::getTask( )->getCameraPosX( );
 	while ( _pos.x < camera_pos ) {
 		int width = MapStreet::getTask( )->getPageNum( ) * GRAPH_SIZE;
 		_pos.x += width;
@@ -39,7 +39,7 @@ void Pop::update( ) {
 bool Pop::isInScreen( ) const {
 	bool result = true;
 	//エネミーの位置
-	int enemy_page = ( ( int )_pos.x - ( int )Family::getTask( )->getCameraPos( ) ) / GRAPH_SIZE;
+	int enemy_page = ( ( int )_pos.x - Family::getTask( )->getCameraPosX( ) ) / GRAPH_SIZE;
 	//エネミーが画面外にいるかどうか
 	if ( enemy_page < 0 ||
 		 enemy_page > MAX_PAGE ) {

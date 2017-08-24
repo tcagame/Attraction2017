@@ -22,7 +22,7 @@ Storage::~Storage( ) {
 }
 
 void Storage::update( ) {
-	int camera_pos = ( int )Family::getTask( )->getCameraPos( );
+	int camera_pos = Family::getTask( )->getCameraPosX( );
 	std::list< ItemPtr >::iterator ite = _items.begin( );
 	while ( ite != _items.end( ) ) {
 		ItemPtr item = *ite;
@@ -89,7 +89,7 @@ void Storage::createToku( ) {
 	const int create_time = 30;
 	if ( !( count % create_time ) ) {
 		FamilyPtr family( Family::getTask( ) );
-		Vector pos = Vector( family->getCameraPos( ) + ( rand( ) % SCREEN_WIDTH ), 100 );
+		Vector pos = Vector( family->getCameraPosX( ) + ( rand( ) % SCREEN_WIDTH ), 100 );
 		add( ItemPtr( new ItemToku( pos ) ) );
 	}
 }

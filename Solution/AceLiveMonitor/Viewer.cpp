@@ -10,8 +10,8 @@
 #include "Debug.h"
 
 #include "ViewerObject.h"
-
 #include "SynchronousData.h"
+#include "Family.h"
 
 const int EVENT_SX = 0;
 const int EVENT_SY = 0;
@@ -44,11 +44,14 @@ void Viewer::update( ) {
 
 	DrawerPtr drawer( Drawer::getTask( ) );
 	drawer->flip( );
+	
+	FamilyConstPtr family( Family::getTask( ) );
+	int camera_pos = family->getCameraPosX( );
 
 	// Main•`‰æ
-	_viewer_street->draw( ViewerStreet::LAYER_BACK, MAIN_SX, MAIN_SY  );
+	_viewer_street->draw( ViewerStreet::LAYER_BACK, MAIN_SX, MAIN_SY, camera_pos );
 	_viewer_object->draw( AREA_STREET, MAIN_SX, MAIN_SY );
-	_viewer_street->draw( ViewerStreet::LAYER_FRONT, MAIN_SX, MAIN_SY );
+	_viewer_street->draw( ViewerStreet::LAYER_FRONT, MAIN_SX, MAIN_SY, camera_pos );
 
 	// ƒCƒxƒ“ƒg•`‰æ
 	_viewer_event->draw( EVENT_SX, EVENT_SY );

@@ -31,7 +31,7 @@ void Magazine::update( ) {
 			continue;
 		}
 		impact->update( );
-		impact->setSynchronousData( ( int )Family::getTask( )->getCameraPos( ) );
+		impact->setSynchronousData( Family::getTask( )->getCameraPosX( ) );
 		ite++;
 	}
 }

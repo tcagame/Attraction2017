@@ -29,7 +29,7 @@ void EnemyGhost::act( ) {
 	case ACTION_MOVE:
 	{
 		Vector vec = getVec( );
-		int ascend_pos = ( int )Family::getTask( )->getCameraPos( ) + 150;
+		int ascend_pos = Family::getTask( )->getCameraPosX( ) + 150;
 		if ( getPos( ).x < ascend_pos ) {
 			vec.y += ASCEND_SPEED;
 			setVec( vec );
