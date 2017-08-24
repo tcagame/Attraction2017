@@ -3,7 +3,7 @@
 #include "Armoury.h"
 #include "ace_define.h"
 #include "Family.h"
-#include "Map.h"
+#include "MapStreet.h"
 #include "Viewer.h"
 #include "ViewerEvent.h"
 #include "MapEvent.h"
@@ -445,7 +445,7 @@ int Player::getChargeCount( ) const {
 
 void Player::updateState( ) {
 	//ƒCƒxƒ“ƒg
-	MapPtr map( Map::getTask( ) );
+	MapStreetPtr map( MapStreet::getTask( ) );
 	MapEventPtr map_event( MapEvent::getTask( ) );
 	FamilyPtr family( Family::getTask( ) );
 

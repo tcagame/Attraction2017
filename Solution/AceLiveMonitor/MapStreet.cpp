@@ -1,4 +1,4 @@
-#include "Map.h"
+#include "MapStreet.h"
 #include "Application.h"
 #include "Binary.h"
 #include "ace_define.h"
@@ -6,28 +6,28 @@
 
 const char * FILENAME = "Resource/Ace/Map/mapdata";
 
-MapPtr Map::getTask( ) {
-	return std::dynamic_pointer_cast< Map >( Application::getInstance( )->getTask( getTag( ) ) );
+MapStreetPtr MapStreet::getTask( ) {
+	return std::dynamic_pointer_cast< MapStreet >( Application::getInstance( )->getTask( getTag( ) ) );
 }
 
 
-Map::Map( ) {
+MapStreet::MapStreet( ) {
 	load( );
 }
 
 
-Map::~Map( ) {
+MapStreet::~MapStreet( ) {
 }
 
-void Map::update( ) {
+void MapStreet::update( ) {
 
 }
 
-int Map::getPageNum( ) const {
+int MapStreet::getPageNum( ) const {
 	return _page_num;
 }
 
-void Map::load( ) {
+void MapStreet::load( ) {
 	BinaryPtr binary( new Binary );
 	ApplicationPtr app( Application::getInstance( ) );
 	app->loadBinary( FILENAME, binary );
@@ -46,7 +46,7 @@ void Map::load( ) {
 	}
 }
 
-unsigned char Map::getObject( const Vector& pos ) const {
+unsigned char MapStreet::getObject( const Vector& pos ) const {
 	int object_width_num = _page_num * PAGE_OBJECT_WIDTH_NUM;
 	int x = ( ( int )pos.x / OBJECT_CHIP_SIZE ) % object_width_num;
 	int y = ( int )pos.y / OBJECT_CHIP_SIZE;
@@ -54,7 +54,7 @@ unsigned char Map::getObject( const Vector& pos ) const {
 	return obj;
 }
 
-unsigned char Map::getObject( int mx, int my ) const {
+unsigned char MapStreet::getObject( int mx, int my ) const {
 	assert( mx >= 0 && mx < _page_num * PAGE_OBJECT_WIDTH_NUM );
 	unsigned char obj = OBJECT_NONE;
 	if ( my < 0 ) {
@@ -69,7 +69,7 @@ unsigned char Map::getObject( int mx, int my ) const {
 	return obj;
 }
 
-void Map::usedObject( const Vector& pos ) {
+void MapStreet::usedObject( const Vector& pos ) {
 	int object_width_num = _page_num * PAGE_OBJECT_WIDTH_NUM;
 	int mx = ( ( int )pos.x / OBJECT_CHIP_SIZE ) % object_width_num;
 	int my = ( int )pos.y / OBJECT_CHIP_SIZE;

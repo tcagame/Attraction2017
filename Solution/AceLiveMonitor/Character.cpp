@@ -2,7 +2,7 @@
 #include "ace_define.h"
 #include "Family.h"
 #include "Player.h"
-#include "Map.h"
+#include "MapStreet.h"
 #include "MapEvent.h"
 
 const int MAX_SPEED_Y = 16;
@@ -42,7 +42,7 @@ void Character::update( ) {
 	}
 	if ( _area == AREA_STREET ) {
 		if ( _mass ) {
-			MapConstPtr map( Map::getTask( ) );
+			MapStreetConstPtr map( MapStreet::getTask( ) );
 			{//è„â∫îªíË
 				//è„
 				if ( _vec.y < 0 ) {

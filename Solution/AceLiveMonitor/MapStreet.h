@@ -5,15 +5,15 @@
 #include <string>
 #include <vector>
 
-PTR( Map );
+PTR( MapStreet );
 
-class Map : public Task {
+class MapStreet : public Task {
 public:
 	static std::string getTag( ) { return "MAP"; };
-	static MapPtr getTask( );
+	static MapStreetPtr getTask( );
 public:
-	Map( );
-	virtual ~Map( );
+	MapStreet( );
+	virtual ~MapStreet( );
 public:
 	void update( );
 	int getPageNum( ) const;

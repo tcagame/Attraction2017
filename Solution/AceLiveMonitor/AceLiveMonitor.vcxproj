@@ -255,7 +255,7 @@
     <ClCompile Include="PopPurpleZombie.cpp" />
     <ClCompile Include="Family.cpp" />
     <ClCompile Include="Impact.cpp" />
-    <ClCompile Include="Map.cpp" />
+    <ClCompile Include="MapStreet.cpp" />
     <ClCompile Include="Popper.cpp" />
     <ClCompile Include="PopRay.cpp" />
     <ClCompile Include="PopRedBird.cpp" />
@@ -384,7 +384,7 @@
     <ClInclude Include="PopPurpleZombie.h" />
     <ClInclude Include="Family.h" />
     <ClInclude Include="Impact.h" />
-    <ClInclude Include="Map.h" />
+    <ClInclude Include="MapStreet.h" />
     <ClInclude Include="Popper.h" />
     <ClInclude Include="PopRay.h" />
     <ClInclude Include="PopRedBird.h" />

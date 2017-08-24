@@ -1,11 +1,11 @@
 #include "ViewerStreet.h"
 #include "Drawer.h"
 #include "Family.h"
-#include "Map.h"
+#include "MapStreet.h"
 #include "ace_define.h"
 
 ViewerStreet::ViewerStreet( ) {
-	MapPtr map = Map::getTask( );
+	MapStreetPtr map = MapStreet::getTask( );
 	_num = map->getPageNum( );
 
 	DrawerPtr drawer( Drawer::getTask( ) );
