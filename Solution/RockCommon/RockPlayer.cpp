@@ -8,6 +8,7 @@
 #include "RockArmoury.h"
 #include "RockShot.h"
 #include "RockDollHouse.h"
+#include "RockAncestors.h"
 #include "Status.h"
 #include "Device.h"
 #include "Drawer.h"
@@ -31,12 +32,13 @@ static const int MAX_CHARGE_COUNT = CHARGE_PHASE_COUNT * 4 - 1;
 static const Vector EFFECT_ADJUST( 0, 15, 0 );
 
 //ƒJƒEƒ“ƒg
-static const int MAX_WISH_COUNT = 400;
+static const int MAX_WISH_COUNT = 100;
 
-RockPlayer::RockPlayer( StatusPtr status, const Vector& pos, int id ) :
+RockPlayer::RockPlayer( StatusPtr status, const Vector& pos, int id, RockAncestorsPtr ancestors ) :
 RockCharacter( pos, ( DOLL )( DOLL_TAROSUKE_WAIT + id * ROCK_PLAYER_MOTION_NUM ), RADIUS, HEIGHT ),
 _attack_count( 0 ),
-_effect_handle( -1 ) {
+_effect_handle( -1 ),
+_ancestors( ancestors ) {
 	_id = id;
 	_status = status;
 	setAction( ACTION_WAIT );
@@ -386,4 +388,5 @@ void RockPlayer::wish( ) {
 	}
 	setAction( ACTION_WISH );
 	setVec( Vector( ) );
+	_ancestors->pop( );
 }

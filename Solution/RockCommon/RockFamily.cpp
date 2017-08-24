@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "RockPlayer.h"
 #include "RockClientInfo.h"
+#include "RockAncestors.h"
 #include <assert.h>
 
 RockFamilyPtr RockFamily::getTask( ) {
@@ -11,7 +12,8 @@ RockFamilyPtr RockFamily::getTask( ) {
 
 RockFamily::RockFamily( StatusPtr status, const Vector& base_pos ) {
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
-		_player[ i ] = RockPlayerPtr( new RockPlayer( status, Vector( i * 35, 1 ) + base_pos, i ) );
+		_ancestors[ i ]	= RockAncestorsPtr( new RockAncestors( i ) );
+		_player[ i ]	= RockPlayerPtr   ( new RockPlayer   ( status, Vector( i * 35, 1 ) + base_pos, i, _ancestors[ i ] ) );
 	}
 }
 
@@ -26,6 +28,7 @@ void RockFamily::update( ) {
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		if ( !_player[ i ]->isActive( ) ) {
 		}
+		//player
 		_player[ i ]->update( );
 		for ( int j = 0; j < ROCK_PLAYER_NUM; j++ ) {
 			if ( i == j ) {
@@ -41,12 +44,19 @@ void RockFamily::update( ) {
 				}
 			}
 		}
+		//ancestor
+		_ancestors[ i ]->update( );
 	}
 }
 
 RockPlayerPtr RockFamily::getPlayer( int id ) const {
 	assert( 0 <= id && id < ROCK_PLAYER_NUM );
 	return _player[ id ];
+}
+
+RockAncestorsPtr RockFamily::getAncestors( int id ) const {
+	assert( 0 <= id && id < ROCK_PLAYER_NUM );
+	return _ancestors[ id ];
 }
 
 Vector RockFamily::getCameraPos( ) const {

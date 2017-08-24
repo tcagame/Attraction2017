@@ -3,10 +3,11 @@
 #include "smart_ptr.h"
 
 PTR( Status );
+PTR( RockAncestors );
 
 class RockPlayer : public RockCharacter {
 public:
-	RockPlayer( StatusPtr status, const Vector& pos, int id );
+	RockPlayer( StatusPtr status, const Vector& pos, int id, RockAncestorsPtr ancestors );
 	virtual ~RockPlayer( );
 public:
 	bool isActive( ) const;
@@ -44,5 +45,6 @@ private:
 	int _id;
 	int _attack_count;
 	int _effect_handle;
+	RockAncestorsPtr _ancestors;
 };
 

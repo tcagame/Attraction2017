@@ -8,7 +8,7 @@ PTR( RockCharacter );
 
 class RockCharacter {
 public:
-	RockCharacter( const Vector& pos, DOLL doll, int radius, int height, bool mass = true, bool head = true );
+	RockCharacter( const Vector& pos, DOLL doll, int radius, int height, bool mass = true, bool head = true, bool col = true );
 	virtual ~RockCharacter( );
 public:
 	void update( );
@@ -45,5 +45,6 @@ private:
 	int _height;
 	int _act_count;
 	bool _head;
+	bool _col;
 };
 

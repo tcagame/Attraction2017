@@ -10,7 +10,7 @@
 
 const double BOUND_POWER = 1.0;
 
-RockCharacter::RockCharacter( const Vector& pos, DOLL doll, int radius, int height, bool mass, bool head ) :
+RockCharacter::RockCharacter( const Vector& pos, DOLL doll, int radius, int height, bool mass, bool head, bool col ) :
 _pos( pos ),
 _mass( mass ),
 _act_count( 0 ),
@@ -18,6 +18,7 @@ _doll( doll ),
 _radius( radius ),
 _height( height ),
 _head( head ),
+_col( col ),
 _dir( Vector( 0, 0, -1 ) ) {
 }
 
@@ -37,7 +38,7 @@ void RockCharacter::update( ) {
 	}
 
 	//êÖïΩà⁄ìÆÇ≈Ç´ÇÈÇ©Ç«Ç§Ç©
-	{
+	if ( _col ) {
 		Vector vec = Vector( _vec.x, 0, _vec.z );
 		if ( vec.getLength2( ) > 0 ) {
 			Vector central_pos = _pos + vec + Vector( 0, _radius, 0 );
@@ -63,7 +64,7 @@ void RockCharacter::update( ) {
 			
 		}
 	}
-	{//è„â∫îªíË
+	if ( _col ) {//è„â∫îªíË
 		Vector pos = _pos + Vector( 0, -GRAVITY * 2, 0 );
 		Vector fpos = _pos + Vector( 0, _vec.y, 0 );
 		for ( int i = 0; i < col_models_size; i++ ) {
