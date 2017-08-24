@@ -67,6 +67,17 @@ void Monmotaro::act( ) {
 				_action = ACTION_FADE_OUT;
 				setActCount( 0 );
 			}
+			if ( _target.attack ) {
+				for ( int i = 0; i < 2; i++ ) {
+					Vector pos( getPos( ) );
+					int chip_size = getChipSize( );
+					int random = rand( );
+					pos.x += random % ( chip_size / 2 ) * ( getDir( ) == DIR_RIGHT ? 1 : -1 );
+					pos.y += sin( PI2 / random * getActCount( ) ) * ( chip_size / 2 );
+					ShotMonmotaroPtr shot( ShotMonmotaroPtr( new ShotMonmotaro( pos, getDir( ), 1 ) ) );
+					Armoury::getTask( )->add( shot );
+				}
+			}
 		}
 		break;
 	case ACTION_FADE_OUT:
@@ -74,10 +85,6 @@ void Monmotaro::act( ) {
 			setFinished( );
 		}
 		break;
-	}
-	if ( _target.attack ) {
-		ShotMonmotaroPtr shot( ShotMonmotaroPtr( new ShotMonmotaro( getPos( ), getDir( ), 1 ) ) );
-		Armoury::getTask( )->add( shot );
 	}
 	setSynchronousData( );
 }

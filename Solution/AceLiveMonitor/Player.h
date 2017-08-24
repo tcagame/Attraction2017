@@ -38,6 +38,7 @@ public:
 	void pickUpMoney( int money );
 	void pickUpToku( );
 	void setSynchronousData( PLAYER player, int camera_pos ) const;
+	MonmotaroConstPtr getMonmotaro( ) const;
 private:
 	void actOnWaiting( );
 	void actOnWalking( );

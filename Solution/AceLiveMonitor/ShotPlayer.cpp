@@ -1,10 +1,16 @@
 #include "ShotPlayer.h"
 #include "SynchronousData.h"
 
+static const int SHOT_SPEED = 10;
 static const int VANISH_LENGTH = 500;
 
 ShotPlayer::ShotPlayer( const Vector& pos, DIR dir, int power ) :
 Shot( pos, dir, power ) {
+	Vector vec = Vector( SHOT_SPEED, 0 );
+	if ( dir == DIR_LEFT ) {
+		vec.x *= -1;
+	}
+	setVec( vec );
 }
 
 ShotPlayer::~ShotPlayer( ) {

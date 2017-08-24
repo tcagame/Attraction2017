@@ -118,12 +118,12 @@ ViewerObject::Sprite ViewerObject::getSpriteEffect( GRAPH graph, int x, int y, u
 
 	if ( attribute & SynchronousData::ATTRIBUTE_REVERSE ) {
 		sprite.sx1 = x - NORMAL_CHAR_GRAPH_SIZE / 2 + NORMAL_CHAR_GRAPH_SIZE;
-		sprite.sy1 = y - NORMAL_CHAR_GRAPH_SIZE + PLAYER_CHAR_GRAPH_FOOT;
+		sprite.sy1 = y - NORMAL_CHAR_GRAPH_SIZE;
 		sprite.sx2 = sprite.sx1 - NORMAL_CHAR_GRAPH_SIZE;
 		sprite.sy2 = sprite.sy1 + NORMAL_CHAR_GRAPH_SIZE;
 	} else {
 		sprite.sx1 = x - NORMAL_CHAR_GRAPH_SIZE / 2;
-		sprite.sy1 = y - NORMAL_CHAR_GRAPH_SIZE + PLAYER_CHAR_GRAPH_FOOT;
+		sprite.sy1 = y - NORMAL_CHAR_GRAPH_SIZE;
 		sprite.sx2 = sprite.sx1 + NORMAL_CHAR_GRAPH_SIZE;
 		sprite.sy2 = sprite.sy1 + NORMAL_CHAR_GRAPH_SIZE;
 	}

@@ -8,6 +8,7 @@
 #include "Enemy.h"
 #include "Family.h"
 #include "Player.h"
+#include "Monmotaro.h"
 #include "Map.h"
 #include "MapEvent.h"
 #include "Server.h"
@@ -43,6 +44,12 @@ void ViewerDebug::drawPlayer( ) const {
 		}
 		Vector pos( player->getPos( ) - Vector( 0, player->getChipSize( ) / 2 ) );
 		drawer->drawCircle( pos + Vector( add_sx, add_sy ), player->getRadius( ) );
+
+		MonmotaroConstPtr monmo = player->getMonmotaro( );
+		if ( monmo ) {
+			Vector monmo_pos( monmo->getPos( ) - Vector( 0, monmo->getChipSize( ) / 2 ) );
+			drawer->drawCircle( monmo_pos + Vector( add_sx, add_sy ), monmo->getRadius( ) );
+		}
 	}
 }
 
@@ -110,7 +117,7 @@ void ViewerDebug::drawShot( ) const {
 			add_sx = 0;
 			add_sy = VIEW_EVENT_Y;
 		}
-		Vector pos( shot->getPos( ) - Vector( 0, shot->getChip( ).size / 2 ) );
+		Vector pos( shot->getPos( ) - Vector( 0, shot->getChipSize( ) / 2 ) );
 		drawer->drawCircle( pos + Vector( add_sx, add_sy ), shot->getRadius( ) );
 	}
 }

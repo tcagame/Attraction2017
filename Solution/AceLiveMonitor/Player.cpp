@@ -739,3 +739,7 @@ void Player::setDeviceId( int id ) {
 int Player::getDeviceId( ) const {
 	return _id;
 }
+
+MonmotaroConstPtr Player::getMonmotaro( ) const {
+	return _monmo;
+}

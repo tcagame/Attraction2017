@@ -1,14 +1,26 @@
 #include "ShotMonmotaro.h"
 #include "SynchronousData.h"
 
+static const int SHOT_SPEED = 10;
+static const int MAX_HEIGHT = 5;
+static const int WAVE_COUNT = 30;
+
 ShotMonmotaro::ShotMonmotaro( const Vector& pos, DIR dir, int power ) :
 Shot( pos, dir, power ) {
+	Vector vec( SHOT_SPEED, 0 );
+	if ( dir == DIR_LEFT ) {
+		vec.x *= -1;
+	}
+	setVec( vec );
 }
 
 ShotMonmotaro::~ShotMonmotaro( ) {
 }
 
 void ShotMonmotaro::act( ) {
+	Vector vec( getVec( ) );
+	vec.y = sin( PI2 / WAVE_COUNT * getActCount( ) ) * ( MAX_HEIGHT / 2 );
+	setVec( vec );
 }
 
 void ShotMonmotaro::setSynchronousData( unsigned char type, int camera_pos ) const {
