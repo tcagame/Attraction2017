@@ -17,6 +17,7 @@
 #include "RockImpact.h"
 #include "Effect.h"
 #include "RockAlter.h"
+#include "RockAncestors.h"
 
 RockViewerPtr RockViewer::getTask( ) {
 	return std::dynamic_pointer_cast< RockViewer >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -37,6 +38,7 @@ void RockViewer::update( ) {
 	drawMap( );
 	drawEnemy( );
 	drawPlayer( );
+	drawAncestors( );
 	drawShot( );
 	drawItem( );
 	drawAlter( );
@@ -78,6 +80,21 @@ void RockViewer::drawPlayer( ) const {
 		model->draw( );
 	}
 }
+
+void RockViewer::drawAncestors( ) const {
+	RockFamilyPtr family( RockFamily::getTask( ) );
+	unsigned int client_id = RockClientInfo::getTask( )->getClientId( );
+	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+		RockAncestorsPtr ancestors = family->getAncestors( i );
+		if ( client_id != _status->getPlayer( i ).area ||
+			 !ancestors->isActive( ) ) {
+			continue;
+		}
+		ModelMV1Ptr model = ancestors->getModel( );
+		model->draw( );
+	}
+}
+
 
 
 void RockViewer::drawShot( ) const {

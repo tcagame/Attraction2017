@@ -44,6 +44,9 @@ void RockDollHouse::initialize( ) {
 	_dolls[ DOLL_TAROMI_DEAD		]->load( "Resource/Rock/player/taromi_dead.mv1" );
 	_dolls[ DOLL_TAROMI_CHARGE		]->load( "Resource/Rock/player/taromi_charge.mv1" );
 	_dolls[ DOLL_TAROMI_WISH		]->load( "Resource/Rock/player/taromi_wish.mv1" );
+
+	_dolls[ DOLL_ANCESTORS			]->load( "Resource/Rock/player/ancestors.mv1" );
+
 	//enemy
 	_dolls[ DOLL_GHOST		]->load( "Resource/Rock/enemy/enm05_yurei/enm05_a01.mv1" );
 	_dolls[ DOLL_REDBARD	]->load( "Resource/Rock/enemy/enm02_bird/enm02_a01.mv1" );
