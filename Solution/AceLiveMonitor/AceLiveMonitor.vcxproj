@@ -226,7 +226,6 @@
     <ClCompile Include="EnemyTreeNuts.cpp" />
     <ClCompile Include="EnemyWhiteMist.cpp" />
     <ClCompile Include="EnemyWind.cpp" />
-    <ClCompile Include="MapEvent.cpp" />
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="NPCOtohime.cpp" />
     <ClCompile Include="Pop.cpp" />
@@ -255,7 +254,6 @@
     <ClCompile Include="PopPurpleZombie.cpp" />
     <ClCompile Include="Family.cpp" />
     <ClCompile Include="Impact.cpp" />
-    <ClCompile Include="MapStreet.cpp" />
     <ClCompile Include="Popper.cpp" />
     <ClCompile Include="PopRay.cpp" />
     <ClCompile Include="PopRedBird.cpp" />
@@ -277,7 +275,6 @@
     <ClCompile Include="ShotPlayer.cpp" />
     <ClCompile Include="Storage.cpp" />
     <ClCompile Include="ViewerDebug.cpp" />
-    <ClCompile Include="ViewerEvent.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Military.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -285,7 +282,6 @@
     <ClCompile Include="Armoury.cpp" />
     <ClCompile Include="Viewer.cpp" />
     <ClCompile Include="ViewerStatus.cpp" />
-    <ClCompile Include="ViewerStreet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Debug.h" />
@@ -355,7 +351,6 @@
     <ClInclude Include="EnemyTreeNuts.h" />
     <ClInclude Include="EnemyWhiteMist.h" />
     <ClInclude Include="EnemyWind.h" />
-    <ClInclude Include="MapEvent.h" />
     <ClInclude Include="NPC.h" />
     <ClInclude Include="NPCOtohime.h" />
     <ClInclude Include="Pop.h" />
@@ -384,7 +379,6 @@
     <ClInclude Include="PopPurpleZombie.h" />
     <ClInclude Include="Family.h" />
     <ClInclude Include="Impact.h" />
-    <ClInclude Include="MapStreet.h" />
     <ClInclude Include="Popper.h" />
     <ClInclude Include="PopRay.h" />
     <ClInclude Include="PopRedBird.h" />
@@ -406,14 +400,12 @@
     <ClInclude Include="ShotPlayer.h" />
     <ClInclude Include="Storage.h" />
     <ClInclude Include="ViewerDebug.h" />
-    <ClInclude Include="ViewerEvent.h" />
     <ClInclude Include="Military.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Shot.h" />
     <ClInclude Include="Armoury.h" />
     <ClInclude Include="Viewer.h" />
     <ClInclude Include="ViewerStatus.h" />
-    <ClInclude Include="ViewerStreet.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Framework2017ver2\Framework2017Ver2.vcxproj">

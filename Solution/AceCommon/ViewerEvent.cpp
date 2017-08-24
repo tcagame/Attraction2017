@@ -1,13 +1,10 @@
 #include "ViewerEvent.h"
 #include "Drawer.h"
 #include "ace_define.h"
-#include "Family.h"
 #include "MapEvent.h"
-#include "NPC.h"
 
 ViewerEvent::ViewerEvent( ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
-	_frame = drawer->createImage( "Event/event_frame.png");
 
 	char buf[ 256 ];
 	//TITLE
@@ -47,7 +44,6 @@ ViewerEvent::ViewerEvent( ) {
 		sprintf_s( buf, "Event/lake/back_%003d.png", i );
 		_images.push_back( drawer->createImage( buf ) );
 	}
-	_characters = drawer->createImage( "Event/character/character.png" );
 
 }
 
@@ -57,7 +53,7 @@ ViewerEvent::~ViewerEvent( ) {
 void ViewerEvent::draw( int sx, int sy ) const {
 	MapEventPtr map( MapEvent::getTask( ) );
 	MapEvent::TYPE type = map->getType( );
-	if( type == MapEvent::TYPE_TITLE ) {
+	if ( type == MapEvent::TYPE_TITLE ) {
 		_images[ 0 ]->setPos( sx, sy );
 		_images[ 0 ]->draw( );
 	} else {
@@ -113,30 +109,5 @@ void ViewerEvent::draw( int sx, int sy ) const {
 			_images[ idx ]->setPos( i * width + sx, sy );
 			_images[ idx ]->draw( );
 		}
-		{// npc chara
-			FamilyConstPtr family( Family::getTask( ) );
-			int camera_pos = family->getCameraPosX( );
-			NPCPtr npc( NPC::getTask( ) );
-			std::list< CharacterPtr > chara_list = npc->getNPCChara( );
-			std::list< CharacterPtr >::const_iterator ite = chara_list.begin( );
-			while( ite != chara_list.end( ) ) {
-				if ( !( *ite ) ) {
-					ite++;
-					continue;
-				}
-				CharacterPtr chara = ( *ite );
-				Chip chip = chara->getChip( );
-				chip.sy1 += sy;
-				chip.sy2 += sy;
-				chip.sx1 += sx;
-				chip.sx2 += sx;
-				_characters->setRect( chip.tx, chip.ty, chip.size, chip.size );
-				_characters->setPos( chip.sx1, chip.sy1, chip.sx2, chip.sy2 );
-				_characters->draw( );
-				ite++;
-			}
-		}
 	}
-	_frame->setPos( 0, VIEW_TITLE_Y );
-	_frame->draw( );
 }

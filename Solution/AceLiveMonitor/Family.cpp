@@ -122,6 +122,8 @@ int Family::getCameraPosX( ) const {
 }
 
 void Family::setSynchronousData( ) const {
+	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	data->setCameraX( getCameraPosX( ) );
 
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		PlayerConstPtr player = getPlayer( i );

@@ -5,6 +5,8 @@
 #include "Keyboard.h"
 #include "ViewerConsole.h"
 #include "ace_define.h"
+#include "MapStreet.h"
+#include "MapEvent.h"
 
 extern PLAYER getPlayer( );
 void main( ) {
@@ -20,4 +22,7 @@ void main( ) {
 	app->addTask( Drawer  ::getTag( )	  , DrawerPtr	    ( new Drawer( "Resource/Ace" ) ) );
 	app->addTask( Keyboard::getTag( )	  , KeyboardPtr	    ( new Keyboard( ) ) );
 	app->addTask( ViewerConsole::getTag( ), ViewerConsolePtr( new ViewerConsole( getPlayer( ) ) ) );
+
+	app->addTask( MapStreet::getTag( ), MapStreetPtr( new MapStreet( ) ) );
+	app->addTask( MapEvent ::getTag( ), MapEventPtr ( new MapEvent ( ) ) );
 }

@@ -2,10 +2,12 @@
 #include "Application.h"
 #include "Drawer.h"
 #include "ViewerObject.h"
+#include "ViewerStreet.h"
+#include "ViewerEvent.h"
 #include "SynchronousData.h"
 #include "Client.h"
 
-const int AREA_SX  = -256;
+const int AREA_SX  = 0;
 const int AREA_SY  = 480 - 256;
 
 ViewerConsolePtr ViewerConsole::getTask( ) {
@@ -22,7 +24,9 @@ ViewerConsole::~ViewerConsole( ) {
 void ViewerConsole::initialize( ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
 
-	_viewer_object = ViewerObjectPtr  ( new ViewerObject );
+	_viewer_object = ViewerObjectPtr( new ViewerObject );
+	_viewer_street = ViewerStreetPtr( new ViewerStreet );
+	_viewer_event  = ViewerEventPtr	( new ViewerEvent );
 
 	_image_bar_upper = drawer->createImage( "UI/ui_bar.png" );
 	_image_bar_upper->setRect( 0, 0, 640, 8 );
@@ -62,15 +66,19 @@ void ViewerConsole::drawArea( ) {
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
 	unsigned char state = data->getStatusState( _player );
 
+
 	if ( state & SynchronousData::STATE_PLAY_STREET ) {
+		int camera_pos = data->getStatusX( _player ) - 320;
+		int offset_x = data->getStatusX( _player ) - data->getCameraX( ) - 320;
 		// Main•`‰æ
-		//_viewer_street->draw( ViewerStreet::LAYER_BACK, AREA_SX, AREA_SY );
-		_viewer_object->draw( AREA_STREET, AREA_SX, AREA_SY );
-		//_viewer_street->draw( ViewerStreet::LAYER_FRONT, AREA_SX, AREA_SY );
+		_viewer_street->draw( ViewerStreet::LAYER_BACK, AREA_SX, AREA_SY, camera_pos );
+		_viewer_object->draw( AREA_STREET, AREA_SX - offset_x, AREA_SY );
+		_viewer_street->draw( ViewerStreet::LAYER_FRONT, AREA_SX, AREA_SY, camera_pos );
 	} else {
+		int camera_pos = data->getStatusX( _player );
 		// ƒCƒxƒ“ƒg•`‰æ
-		//_viewer_event->draw( );
-		_viewer_object->draw( AREA_EVENT, AREA_SX, AREA_SY );
+		_viewer_event->draw( AREA_SX - camera_pos, AREA_SY );
+		_viewer_object->draw( AREA_EVENT, AREA_SX - camera_pos, AREA_SY );
 	}
 }
 

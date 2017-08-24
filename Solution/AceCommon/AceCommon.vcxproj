@@ -21,12 +21,20 @@
   <ItemGroup>
     <ClInclude Include="ace_define.h" />
     <ClInclude Include="ace_enemy_rect.h" />
+    <ClInclude Include="MapEvent.h" />
+    <ClInclude Include="MapStreet.h" />
     <ClInclude Include="SynchronousData.h" />
+    <ClInclude Include="ViewerEvent.h" />
     <ClInclude Include="ViewerObject.h" />
+    <ClInclude Include="ViewerStreet.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="MapEvent.cpp" />
+    <ClCompile Include="MapStreet.cpp" />
     <ClCompile Include="SynchronousData.cpp" />
+    <ClCompile Include="ViewerEvent.cpp" />
     <ClCompile Include="ViewerObject.cpp" />
+    <ClCompile Include="ViewerStreet.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{05398435-0DB2-4938-8464-8CC567ABBB40}</ProjectGuid>

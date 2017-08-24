@@ -26,6 +26,18 @@ int SynchronousData::getSize( ) {
 	return sizeof( _data );
 }
 
+int SynchronousData::getCameraX( ) const {
+	return _data.camera_x;
+}
+
+void SynchronousData::setCameraX( int x ) {
+	_data.camera_x = x; 
+}
+
+int SynchronousData::getStatusX( PLAYER player ) const {
+	return _data.status[ player ].x;
+}
+
 int SynchronousData::getStatusPower( PLAYER player ) const {
 	return _data.status[ player ].power;
 }
@@ -47,7 +59,11 @@ int SynchronousData::getStatusRedo( PLAYER player ) const {
 }
 
 unsigned char SynchronousData::getStatusState( PLAYER player ) const {
-	return _data.status[ player ].area;
+	return _data.status[ player ].state;
+}
+
+void SynchronousData::setStatusX( PLAYER player, int x ) {
+	_data.status[ player ].x = ( long )x;
 }
 
 void SynchronousData::setStatusPower( PLAYER player, int power ) {
@@ -57,7 +73,7 @@ void SynchronousData::setStatusPower( PLAYER player, int power ) {
 
 void SynchronousData::setStatusMoney( PLAYER player, int money ) {
 	assert( money >= 0 );
-	_data.status[ player ].power = ( unsigned char )money;
+	_data.status[ player ].money = ( unsigned char )money;
 }
 
 void SynchronousData::setInProssessionOfStatusItem( PLAYER player, unsigned char item, bool possession ) {
@@ -70,16 +86,16 @@ void SynchronousData::setInProssessionOfStatusItem( PLAYER player, unsigned char
 
 void SynchronousData::setStatusVirtue( PLAYER player, int virtue ) {
 	assert( virtue >= 0 );
-	_data.status[ player ].power = ( unsigned char )virtue;
+	_data.status[ player ].virtue = ( unsigned char )virtue;
 }
 
 void SynchronousData::setStatusRedo( PLAYER player, int redo ) {
 	assert( redo >= 0 );
-	_data.status[ player ].power = ( unsigned char )redo;
+	_data.status[ player ].redo = ( unsigned char )redo;
 }
 
 void SynchronousData::setStatusState( PLAYER player, unsigned char area ) {
-	_data.status[ player ].power = ( unsigned char )area;
+	_data.status[ player ].state = ( unsigned char )area;
 }
 
 

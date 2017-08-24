@@ -11,7 +11,5 @@ public:
 	void draw( int sx, int sy ) const;
 private:
 	std::vector< ImagePtr > _images;
-	ImagePtr _frame;
-	ImagePtr _characters;
 };
 

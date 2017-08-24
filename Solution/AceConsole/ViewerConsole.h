@@ -7,6 +7,8 @@
 
 PTR( ViewerConsole );
 PTR( ViewerObject );
+PTR( ViewerStreet );
+PTR( ViewerEvent );
 PTR( Image );
 
 class ViewerConsole : public Task {
@@ -25,6 +27,8 @@ private:
 private:
 	const PLAYER _player;
 	ViewerObjectPtr _viewer_object;
+	ViewerStreetPtr _viewer_street;
+	ViewerEventPtr _viewer_event;
 	ImagePtr _image_bar_upper;
 	ImagePtr _image_bar_lower;
 	ImagePtr _image_status;

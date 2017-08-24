@@ -40,6 +40,8 @@ public:
 	SynchronousData( );
 	virtual ~SynchronousData( );
 public:
+	int getCameraX( ) const;
+	int getStatusX( PLAYER player ) const;
 	int getStatusPower( PLAYER player ) const;
 	int getStatusMoney( PLAYER player ) const;
 	bool isInProssessionOfStatusItem( PLAYER player, unsigned char item ) const;
@@ -57,6 +59,8 @@ public:
 public:
 	void * getPtr( );
 	int getSize( );
+	void setCameraX( int x );
+	void setStatusX( PLAYER player, int x );
 	void setStatusPower( PLAYER player, int power );
 	void setStatusMoney( PLAYER player, int money );
 	void setInProssessionOfStatusItem( PLAYER player, unsigned char item, bool possession );
@@ -70,13 +74,15 @@ private:
 
 	#pragma pack( 1 )
 		struct SyncData {
+			int camera_x;
 			struct Status {
+				long          x;
 				unsigned char power;
 				unsigned char money;
 				unsigned char items;
 				unsigned char virtue;
 				unsigned char redo;
-				unsigned char area;
+				unsigned char state;
 			} status[ MAX_PLAYER ];
 			struct Object {
 				unsigned char type;

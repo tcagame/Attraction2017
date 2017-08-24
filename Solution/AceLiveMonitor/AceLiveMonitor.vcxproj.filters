@@ -3,7 +3,6 @@
   <ItemGroup>
     <ClCompile Include="Character.cpp" />
     <ClCompile Include="Family.cpp" />
-    <ClCompile Include="MapEvent.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Military.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -221,9 +220,6 @@
     <ClCompile Include="ViewerDebug.cpp">
       <Filter>Viewer</Filter>
     </ClCompile>
-    <ClCompile Include="ViewerEvent.cpp">
-      <Filter>Viewer</Filter>
-    </ClCompile>
     <ClCompile Include="ViewerStatus.cpp">
       <Filter>Viewer</Filter>
     </ClCompile>
@@ -345,17 +341,12 @@
       <Filter>Pop</Filter>
     </ClCompile>
     <ClCompile Include="Monmotaro.cpp" />
-    <ClCompile Include="ViewerStreet.cpp">
-      <Filter>Viewer</Filter>
-    </ClCompile>
     <ClCompile Include="ShotMonmotaro.cpp" />
     <ClCompile Include="ShotPlayer.cpp" />
-    <ClCompile Include="MapStreet.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
     <ClInclude Include="Family.h" />
-    <ClInclude Include="MapEvent.h" />
     <ClInclude Include="Military.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Shot.h" />
@@ -572,9 +563,6 @@
     <ClInclude Include="ViewerDebug.h">
       <Filter>Viewer</Filter>
     </ClInclude>
-    <ClInclude Include="ViewerEvent.h">
-      <Filter>Viewer</Filter>
-    </ClInclude>
     <ClInclude Include="ViewerStatus.h">
       <Filter>Viewer</Filter>
     </ClInclude>
@@ -696,12 +684,8 @@
       <Filter>Pop</Filter>
     </ClInclude>
     <ClInclude Include="Monmotaro.h" />
-    <ClInclude Include="ViewerStreet.h">
-      <Filter>Viewer</Filter>
-    </ClInclude>
     <ClInclude Include="ShotMonmotaro.h" />
     <ClInclude Include="ShotPlayer.h" />
-    <ClInclude Include="MapStreet.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">
