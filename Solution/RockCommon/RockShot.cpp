@@ -8,11 +8,12 @@ const int ACTIVE_COUNT = 150;
 const int MOVE_SPEED = 3;
 const Vector FOOT( 0, 30, 0 ); // ƒvƒŒƒCƒ„[‚Ì‘«Œ³‚©‚ç‚Ì‚‚³
 
-RockShot::RockShot( const int id_, const Vector& pos, const Vector& dir ) :
+RockShot::RockShot( const int id_, const Vector& pos, const Vector& dir, const int power ) :
 RockCharacter( pos + FOOT, DOLL_NONE, 32, 32, false, false ),
 _player_id( id_ ),
 _back( false ),
-_finished( false ) {
+_finished( false ),
+_power( power ) {
 	setVec( dir * MOVE_SPEED );
 	_effect_handle = Effect::getTask( )->playEffect( RockArmoury::getTask( )->getEffectShotId( ) );
 	Effect::getTask( )->updateEffectTransform( _effect_handle, pos + FOOT );
@@ -64,3 +65,8 @@ void RockShot::setBack( ) {
 ModelMV1Ptr RockShot::getModel( ) const {
 	return ModelMV1Ptr( );
 }
+
+int RockShot::getPower( ) {
+	return _power;
+}
+

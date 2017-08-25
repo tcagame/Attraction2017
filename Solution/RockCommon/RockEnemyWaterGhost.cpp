@@ -2,8 +2,10 @@
 #include "RockStorage.h"
 #include "RockItemMoney.h"
 
+const int HP = 20;
+
 RockEnemyWaterGhost::RockEnemyWaterGhost( const Vector& pos ) :
-RockEnemy( pos, DOLL_WATERGHOST, 3, 1, 10, 10, true, true ) {
+RockEnemy( pos, DOLL_WATERGHOST, HP, 1, 10, 10, true, true ) {
 }
 
 

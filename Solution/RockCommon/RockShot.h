@@ -3,7 +3,7 @@
 
 class RockShot : public RockCharacter {
 public:
-	RockShot( const int id_, const Vector& pos, const Vector& dir );
+	RockShot( const int id_, const Vector& pos, const Vector& dir, const int power );
 	virtual ~RockShot( );
 public:
 	double getAnimTime( ) const;
@@ -11,6 +11,7 @@ public:
 	bool isFinished( ) const;
 	void setBack( );
 	void setFinished( );
+	int getPower( );
 	ModelMV1Ptr getModel( ) const;
 protected:
 	void act( );
@@ -19,6 +20,7 @@ private:
 private:
 	int _player_id;
 	int _effect_handle;
+	int _power;
 	double _size = 1.0;
 	bool _back;
 	bool _finished;

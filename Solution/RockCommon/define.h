@@ -14,6 +14,8 @@ const unsigned int STATE_BOSS		= 0b0000000000010000;
 const unsigned int STATE_RESULT		= 0b0000000000100000;
 const unsigned int STATE_TEST		= 0b0000000001000000;
 
+const unsigned int ITEM_ENHANCED_ATTACK	= 0b00000001;
+
 const int ROCK_PLAYER_NUM = 4;
 const int ROCK_PLAYER_MOTION_NUM = 10;
 const double GRAVITY = -0.1;
