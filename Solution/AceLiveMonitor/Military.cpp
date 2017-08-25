@@ -237,7 +237,6 @@ void Military::createBoss( ) {
 	_event_enemies.clear( );
 	switch ( type ) {
 	case MapEvent::TYPE_TITLE:
-		_boss = EnemyBossPtr( );
 		break;
 	case MapEvent::TYPE_RED_DAEMON:
 		_boss = EnemyBossPtr( new EnemyBossRedDaemon( Vector( 800, 200 ) ) );
@@ -251,7 +250,15 @@ void Military::createBoss( ) {
 	case MapEvent::TYPE_ROCK:
 		_boss = EnemyBossPtr( new EnemyBossRock( Vector( 800, 225 ) ) );
 		break;
+	default:
+		_boss = EnemyBossPtr( );
+		break;
 	}
+}
+
+void Military::eraseEventEnemy( ) {
+	_event_enemies.clear( );
+	_boss = EnemyBossPtr( );
 }
 
 EnemyPtr Military::getBoss( ) const {

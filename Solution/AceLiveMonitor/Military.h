@@ -24,6 +24,7 @@ public:
 	void popUp( EnemyPtr enemy );
 	void popUpEventEnemy( EnemyPtr enemy );
 	void createBoss( );
+	void eraseEventEnemy( );
 	EnemyPtr getBoss( ) const;
 	EnemyPtr getHellFire( ) const;
 private:

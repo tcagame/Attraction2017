@@ -16,6 +16,7 @@
 #include "Impact.h"
 #include "Monmotaro.h"
 #include "ShotPlayer.h"
+#include "NPC.h"
 
 #include <assert.h>
 
@@ -386,6 +387,7 @@ void Player::actOnDead( ) {
 			//メインの画面中央上部に移動
 			setArea( AREA_STREET );
 			MapEvent::getTask( )->setType( MapEvent::TYPE_TITLE );
+			Military::getTask( )->createBoss( );
 			setPos( Vector( Family::getTask( )->getCameraPosX( ) + SCREEN_WIDTH / 2, chip_size ) );
 			Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, chip_size / 2 ), getArea( ), chip_size * 2 ) ) );
 		}
@@ -447,39 +449,47 @@ void Player::updateState( ) {
 	//イベント
 	MapStreetPtr map( MapStreet::getTask( ) );
 	MapEventPtr map_event( MapEvent::getTask( ) );
+	NPCPtr npc( NPC::getTask( ) );
+	MilitaryPtr militaly( Military::getTask( ) );
 	FamilyPtr family( Family::getTask( ) );
 
 	MapEvent::TYPE event_type = map_event->getType( );
 	if ( event_type == MapEvent::TYPE_TITLE ) {
-		bool event_obj = true;
+		bool enter = true;
 		unsigned char obj = map->getObject( getPos( ) + getVec( ) );
 		switch ( obj ) {
 		case OBJECT_EVENT_REDDAEMON:
-			map_event->setType( MapEvent::TYPE_RED_DAEMON );
+			event_type = MapEvent::TYPE_RED_DAEMON;
 			break;
 		case OBJECT_EVENT_FIRE:
-			map_event->setType( MapEvent::TYPE_FIRE );
+			event_type = MapEvent::TYPE_FIRE;
 			break;
 		case OBJECT_EVENT_TREE:
-			map_event->setType( MapEvent::TYPE_TREE );
+			event_type = MapEvent::TYPE_TREE;
 			break;
 		case OBJECT_EVENT_ROCK:
-			map_event->setType( MapEvent::TYPE_ROCK );
+			event_type = MapEvent::TYPE_ROCK;
 			break;
 		case OBJECT_EVENT_SHOP:
-			map_event->setType( MapEvent::TYPE_SHOP );
+			event_type = MapEvent::TYPE_SHOP;
 			break;
 		case OBJECT_EVENT_RYUGU:
-			map_event->setType( MapEvent::TYPE_RYUGU );
+			event_type = MapEvent::TYPE_RYUGU;
 			break;
 		case OBJECT_EVENT_LAKE:
-			map_event->setType( MapEvent::TYPE_LAKE );
+			event_type = MapEvent::TYPE_LAKE;
 			break;
 		default:
-			event_obj = false;
+			enter = false;
 			break;
 		}
-		if ( event_obj ) {
+		//イベントに入るとき
+		if ( event_type != MapEvent::TYPE_TITLE ) {
+			map_event->setType( event_type );
+			if ( event_type >= MapEvent::TYPE_SHOP ) {
+				npc->popUpNPC( );
+			}
+			militaly->createBoss( );
 			setArea( AREA_EVENT );
 			setPos( Vector( GRAPH_SIZE * 3 / 2, 0 ) );
 			setVec( Vector( ) );
@@ -504,6 +514,7 @@ void Player::updateState( ) {
 		if ( getPos( ).x < GRAPH_SIZE ) {
 			setArea( AREA_STREET );
 			map_event->setType( MapEvent::TYPE_TITLE );
+			militaly->eraseEventEnemy( );
 			setPos( Vector( family->getCameraPosX( ) + SCREEN_WIDTH / 2, 0 ) );
 			setVec( Vector( ) );
 		}
@@ -515,6 +526,7 @@ void Player::updateState( ) {
 			 map_event->getType( ) < MapEvent::TYPE_SHOP ) {
 			setArea( AREA_STREET );
 			map_event->setType( MapEvent::TYPE_TITLE );
+			militaly->eraseEventEnemy( );
 			setPos( Vector( family->getCameraPosX( ) + SCREEN_WIDTH / 2, 0 ) );
 			setVec( Vector( ) );
 		}

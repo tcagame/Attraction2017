@@ -66,41 +66,41 @@ void ViewerEvent::draw( int sx, int sy ) const {
 				break;
 			case MapEvent::TYPE_FIRE:
 				if ( i / EVENT_PAGE_NUM > 0 ) {
-					idx = type + 3; 
+					idx = type + EVENT_PAGE_NUM - 1; 
 				} else {
 					idx = type + i;
 				}
 			case MapEvent::TYPE_TREE:
 				if ( i / EVENT_PAGE_NUM > 0 ) {
-					idx = type + 3; 
+					idx = type + EVENT_PAGE_NUM - 1; 
 				} else {
 					idx = type + i;
 				}
 				break;
 			case MapEvent::TYPE_ROCK:
 				if ( i / EVENT_PAGE_NUM > 0 ) {
-					idx = type + 3; 
+					idx = type + EVENT_PAGE_NUM - 1; 
 				} else {
 					idx = type + i;
 				}
 				break;
 			case MapEvent::TYPE_SHOP:
 				if ( i / EVENT_PAGE_NUM > 0 ) {
-					idx = type + 3; 
+					idx = type + EVENT_PAGE_NUM - 1; 
 				} else {
 					idx = type + i;
 				}
 				break;
 			case MapEvent::TYPE_RYUGU:
 				if ( i / EVENT_PAGE_NUM > 0 ) {
-					idx = type + 3; 
+					idx = type + EVENT_PAGE_NUM - 1; 
 				} else {
 					idx = type + i;
 				}
 				break;
 			case MapEvent::TYPE_LAKE:
 				if ( i / EVENT_PAGE_NUM > 0 ) {
-					idx = type + 3; 
+					idx = type + EVENT_PAGE_NUM - 1; 
 				} else {
 					idx = type + i;
 				}
@@ -110,4 +110,5 @@ void ViewerEvent::draw( int sx, int sy ) const {
 			_images[ idx ]->draw( );
 		}
 	}
+	
 }

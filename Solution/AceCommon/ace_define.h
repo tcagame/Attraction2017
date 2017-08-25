@@ -3,12 +3,11 @@
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 720;
 
-const int ACE_MAP_NUM = 4;
 const int ACE_MAP_SIZE = 8;
 
 const double GRAVITY = 1.0;
 
-const int EVENT_PAGE_NUM = 4;
+const int EVENT_PAGE_NUM = 5;
 const int MAX_EVENT = 10;
 const int SMALL_CHAR_GRAPH_SIZE = 32;
 const int NORMAL_CHAR_GRAPH_SIZE = 64;

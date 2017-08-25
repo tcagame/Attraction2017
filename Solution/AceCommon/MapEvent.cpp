@@ -56,13 +56,6 @@ void MapEvent::update( ) {
 
 void MapEvent::setType( TYPE type ) {
 	_type = type;
-	/*
-	if ( type >= TYPE_SHOP ) {
-		NPC::getTask( )->popUpNPC( );
-	} else {
-		Military::getTask( )->createBoss( );
-	}
-	*/
 }
 
 MapEvent::TYPE MapEvent::getType( ) const {
