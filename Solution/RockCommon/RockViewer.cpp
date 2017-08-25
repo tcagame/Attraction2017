@@ -19,6 +19,10 @@
 #include "RockAlter.h"
 #include "RockAncestors.h"
 
+const int DRAW_UI_Y = 512;
+const int HP_GRAPH_HEIGHT = 16;
+const int HP_GRAPH_WIDTH = 8;
+
 RockViewerPtr RockViewer::getTask( ) {
 	return std::dynamic_pointer_cast< RockViewer >( Application::getInstance( )->getTask( getTag( ) ) );
 }
@@ -32,6 +36,12 @@ _status( status ) {
 RockViewer::~RockViewer( ) {
 }
 
+void RockViewer::initialize( ) {
+	DrawerPtr drawer( Drawer::getTask( ) );
+	_status_flame = drawer->createImage( "UI/status_plate.png" );
+	_status_ui = drawer->createImage( "UI/ui.png" );
+}
+
 void RockViewer::update( ) {
 	DrawerPtr drawer = Drawer::getTask( );
 	drawer->flip( );
@@ -42,6 +52,7 @@ void RockViewer::update( ) {
 	drawShot( );
 	drawItem( );
 	drawAlter( );
+	drawUI( );
 	Effect::getTask( )->drawEffect( );
 }
 
@@ -149,4 +160,23 @@ void RockViewer::drawAlter( ) const {
 	}
 }
 
+void RockViewer::drawUI( ) const {
+	RockFamilyPtr family( RockFamily::getTask( ) );
+	unsigned int client_id = RockClientInfo::getTask( )->getClientId( );
+	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+		if ( client_id != _status->getPlayer( i ).area ) {
+			continue;
+		}
+		int sx = i * 320;
+		_status_flame->setPos( sx, DRAW_UI_Y );
+		_status_flame->draw( );
 
+		//(POWER)
+		int tw = HP_GRAPH_WIDTH * _status->getPlayer( i ).power;
+		_status_ui->setRect( 0, 256, tw, HP_GRAPH_HEIGHT );
+		sx += 160;
+		int sy = DRAW_UI_Y + 50;
+		_status_ui->setPos( sx, sy );
+		_status_ui->draw( );
+	}
+}
