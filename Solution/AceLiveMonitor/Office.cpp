@@ -6,6 +6,7 @@
 #include "NPCOtohime.h"
 #include "NPCAngel.h"
 #include "NPCMermaid.h"
+#include "NPCShaker.h"
 #include "NPC.h"
 
 OfficePtr Office::getTask( ) {
@@ -59,6 +60,10 @@ void Office::popUpNPC( ) {
 		_npc.push_back( NPCPtr( new NPCMermaid( Vector( 225, 250 ) ) ) );
 		_npc.push_back( NPCPtr( new NPCMermaid( Vector( 864, 250 ) ) ) );
 		break;
+	case MapEvent::TYPE_GAMBLE:
+		//ÉcÉ{êUÇË
+		_npc.push_back( NPCPtr( new NPCShaker( Vector( 650, 225 ) ) ) );
+		//íÜñ~
 	}
 }
 

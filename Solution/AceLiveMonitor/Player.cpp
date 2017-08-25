@@ -498,7 +498,7 @@ void Player::updateState( ) {
 		}
 	}
 	//“q”Žê‚É“ü‚é
-	if ( _entry_gamble ) {
+	if ( _entry_gamble && event_type == MapEvent::TYPE_TITLE ) {
 		map_event->setType( MapEvent::TYPE_GAMBLE );
 		office->popUpNPC( );
 		setArea( AREA_EVENT );

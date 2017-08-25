@@ -6,6 +6,7 @@ public:
 	EnemyGama( const Vector& pos );
 	virtual ~EnemyGama( );
 public:
+	bool isGuide( ) const;
 	void setSynchronousData( unsigned char type, int camera_pos ) const;
 protected:
 	void act( );

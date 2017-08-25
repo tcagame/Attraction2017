@@ -22,6 +22,10 @@ void EnemyGama::act( ) {
 	}
 }
 
+bool EnemyGama::isGuide( ) const {
+	return _guide;
+}
+
 void EnemyGama::setSynchronousData( unsigned char type, int camera_pos ) const {
 	const int ANIM[ ] = {
 		60, 61, 62, 63, 62, 61

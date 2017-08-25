@@ -227,6 +227,7 @@
     <ClCompile Include="EnemyTreeNuts.cpp" />
     <ClCompile Include="EnemyWhiteMist.cpp" />
     <ClCompile Include="EnemyWind.cpp" />
+    <ClCompile Include="NPCShaker.cpp" />
     <ClCompile Include="Office.cpp" />
     <ClCompile Include="NPCOtohime.cpp" />
     <ClCompile Include="Pop.cpp" />
@@ -353,6 +354,7 @@
     <ClInclude Include="EnemyTreeNuts.h" />
     <ClInclude Include="EnemyWhiteMist.h" />
     <ClInclude Include="EnemyWind.h" />
+    <ClInclude Include="NPCShaker.h" />
     <ClInclude Include="Office.h" />
     <ClInclude Include="NPCOtohime.h" />
     <ClInclude Include="Pop.h" />

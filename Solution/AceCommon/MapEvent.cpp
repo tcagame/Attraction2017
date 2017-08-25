@@ -11,6 +11,7 @@ const std::string FILENAME[ MAX_EVENT ] {
 	"Resource/Ace/Event/shop/mapdata",  //shop
 	"Resource/Ace/Event/ryugu/mapdata", //ryugu
 	"Resource/Ace/Event/lake/mapdata",  //lake
+	"Resource/Ace/Event/gamble/mapdata",  //gamble
 };
 
 MapEventPtr MapEvent::getTask( ) {
