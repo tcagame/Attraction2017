@@ -86,11 +86,13 @@ PlayerPtr Storage::getOverLappedPlayer( ItemPtr item ) const {
 void Storage::createToku( ) {
 	static int count = 0;
 	count++;
-	const int create_time = 30;
+	const int create_time = 60;
 	if ( !( count % create_time ) ) {
 		FamilyPtr family( Family::getTask( ) );
 		Vector pos = Vector( family->getCameraPosX( ) + ( rand( ) % SCREEN_WIDTH ), 100 );
-		add( ItemPtr( new ItemToku( pos ) ) );
+		ItemPtr toku( new ItemToku( pos ) );
+		toku->setArea( AREA_STREET );
+		add( toku );
 	}
 }
 

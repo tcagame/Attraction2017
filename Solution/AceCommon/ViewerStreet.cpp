@@ -34,7 +34,7 @@ void ViewerStreet::draw( LAYER layer, int sx, int sy, int camera_pos ) const {
 	int y = sy;
 	for ( int i = 0; i < ACE_MAP_SIZE; i++ ) {
 		int x = GRAPH_SIZE * i - ( camera_pos % GRAPH_SIZE ) + sx;
-		int idx = ( origin + i) % _num + offset;
+		int idx = ( origin + i ) % _num + offset;
 		_images[ idx ]->setPos( x, y );
 		_images[ idx ]->draw( );
 	}
