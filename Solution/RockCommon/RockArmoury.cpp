@@ -57,7 +57,7 @@ void RockArmoury::update( ) {
 			}
 
 			if ( shot->isOverLapped( enemy ) ) {
-				enemy->damage( 1 );
+				enemy->damage( shot->getPower( ) );
 				shot->setBack( );
 				break;
 			}

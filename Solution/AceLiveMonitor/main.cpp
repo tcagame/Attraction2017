@@ -9,7 +9,7 @@
 #include "MapStreet.h"
 #include "MapEvent.h"
 #include "Military.h"
-#include "NPC.h"
+#include "Office.h"
 #include "Storage.h"
 #include "Popper.h"
 #include "SynchronousData.h"
@@ -41,7 +41,7 @@ void main( ) {
 	app->addTask( Storage  ::getTag( ), StoragePtr  ( new Storage  ( ) ) );
 	app->addTask( Popper   ::getTag( ), PopperPtr   ( new Popper   ( ) ) );
 	app->addTask( Military ::getTag( ), MilitaryPtr ( new Military ( ) ) );
-	app->addTask( NPC	   ::getTag( ), NPCPtr	    ( new NPC	   ( ) ) );
+	app->addTask( Office   ::getTag( ), OfficePtr	( new Office   ( ) ) );
 	app->addTask( Debug	   ::getTag( ), DebugPtr    ( new Debug    ( ) ) );
 	app->addTask( Viewer   ::getTag( ), ViewerPtr   ( new Viewer   ( ) ) );
 	app->addTask( Sender   ::getTag( ), SenderPtr   ( new Sender   ( data ) ) );

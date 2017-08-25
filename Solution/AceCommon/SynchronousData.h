@@ -32,6 +32,7 @@ public:
 	static const unsigned char TYPE_ENEMY_BOSS		= 0x25;
 	static const unsigned char TYPE_IMPACT			= 0x26;
 	static const unsigned char TYPE_ITEM			= 0x27;
+	static const unsigned char TYPE_NPC 			= 0x28;
 public:
 	static std::string getTag( ) { return "SYNCHRONOUSDATA"; };
 	static SynchronousDataPtr getTask( );

@@ -4,18 +4,19 @@
 
 ViewerObject::ViewerObject( ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
-	_image[ GRAPH_PLAYER_TAROSUKE	] = drawer->createImage( "Family/tarosuke.png"		);
-	_image[ GRAPH_PLAYER_TAROJIRO	] = drawer->createImage( "Family/tarojiro.png"		);
-	_image[ GRAPH_PLAYER_GARISUKE	] = drawer->createImage( "Family/garisuke.png"		);
-	_image[ GRAPH_PLAYER_TAROMI		] = drawer->createImage( "Family/taromi.png"		);
-	_image[ GRAPH_MONMOTARO			] = drawer->createImage( "Family/momotaro.png"		);
-	_image[ GRAPH_SHOT				] = drawer->createImage( "Effect/psychic.png"		);
-	_image[ GRAPH_ENEMY_MIDIUM		] = drawer->createImage( "Enemy/enemy_medium.png"	);
-	_image[ GRAPH_ENEMY_SMALL		] = drawer->createImage( "Enemy/enemy_small.png"	);
-	_image[ GRAPH_ENEMY_BIG			] = drawer->createImage( "Enemy/enemy_big.png"		);
-	_image[ GRAPH_ENEMY_BOSS		] = drawer->createImage( "Enemy/enemy_boss.png"		);
-	_image[ GRAPH_IMPACT			] = drawer->createImage( "Effect/impact.png"		);
-	_image[ GRAPH_ITEM				] = drawer->createImage( "Item/item.png"			);
+	_image[ GRAPH_PLAYER_TAROSUKE	] = drawer->createImage( "Family/tarosuke.png"				);
+	_image[ GRAPH_PLAYER_TAROJIRO	] = drawer->createImage( "Family/tarojiro.png"				);
+	_image[ GRAPH_PLAYER_GARISUKE	] = drawer->createImage( "Family/garisuke.png"				);
+	_image[ GRAPH_PLAYER_TAROMI		] = drawer->createImage( "Family/taromi.png"				);
+	_image[ GRAPH_MONMOTARO			] = drawer->createImage( "Family/momotaro.png"				);
+	_image[ GRAPH_SHOT				] = drawer->createImage( "Effect/psychic.png"				);
+	_image[ GRAPH_ENEMY_MIDIUM		] = drawer->createImage( "Enemy/enemy_medium.png"			);
+	_image[ GRAPH_ENEMY_SMALL		] = drawer->createImage( "Enemy/enemy_small.png"			);
+	_image[ GRAPH_ENEMY_BIG			] = drawer->createImage( "Enemy/enemy_big.png"				);
+	_image[ GRAPH_ENEMY_BOSS		] = drawer->createImage( "Enemy/enemy_boss.png"				);
+	_image[ GRAPH_IMPACT			] = drawer->createImage( "Effect/impact.png"				);
+	_image[ GRAPH_ITEM				] = drawer->createImage( "Item/item.png"					);
+	_image[ GRAPH_NPC				] = drawer->createImage( "Event/character/character.png"	);
 }
 
 
@@ -75,6 +76,9 @@ void ViewerObject::drawSprite( int x, int y, unsigned char type, unsigned char a
 		break;
 	case SynchronousData::TYPE_ITEM:
 		sprite = getSpriteItem( GRAPH_ITEM				, x, y, attribute, pattern, size );
+		break;
+	case SynchronousData::TYPE_NPC:
+		sprite = getSpriteNPC( GRAPH_NPC				, x, y, attribute, pattern, size );
 		break;
 	};
 
@@ -240,5 +244,28 @@ ViewerObject::Sprite ViewerObject::getSpriteItem( GRAPH graph, int x, int y, uns
 	sprite.sx2 = sprite.sx1 + size;
 	sprite.sy2 = sprite.sy1 + size;
 
+	return sprite;
+}
+
+ViewerObject::Sprite ViewerObject::getSpriteNPC( GRAPH graph, int x, int y, unsigned char attribute, int pattern, int size ) const {
+	Sprite sprite;
+	sprite.graph = graph;
+	int width_num = 1024 / size;
+	sprite.tx = pattern % width_num * size;
+	sprite.ty = pattern / width_num * size;
+	sprite.tw = size;
+	sprite.th = size;
+
+	if ( attribute & SynchronousData::ATTRIBUTE_REVERSE ) {
+		sprite.sx1 = x - size / 2 + size;
+		sprite.sy1 = y - size;
+		sprite.sx2 = sprite.sx1 - size;
+		sprite.sy2 = sprite.sy1 + size;
+	} else {
+		sprite.sx1 = x - size / 2;
+		sprite.sy1 = y - size;
+		sprite.sx2 = sprite.sx1 + size;
+		sprite.sy2 = sprite.sy1 + size;
+	}
 	return sprite;
 }

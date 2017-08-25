@@ -1,13 +1,12 @@
 #pragma once
-#include "Character.h"
+#include "NPC.h"
 
-class NPCAngel: public Character {
+class NPCAngel: public NPC {
 public:
 	NPCAngel( const Vector& pos );
 	virtual ~NPCAngel( );
 public:
-	Chip getChip( ) const;
+	void setSynchronousData( ) const;
 protected:
 	void act( );
-	void damage( int force );
 };

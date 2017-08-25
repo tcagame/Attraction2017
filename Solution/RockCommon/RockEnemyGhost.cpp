@@ -2,9 +2,10 @@
 #include "RockStorage.h"
 #include "RockItemMoney.h"
 
+const int HP = 10;
 
 RockEnemyGhost::RockEnemyGhost( const Vector& pos ) :
-RockEnemy( pos, DOLL_GHOST, 3, 1, 10, 10, false, false ) {
+RockEnemy( pos, DOLL_GHOST, HP, 1, 10, 10, false, false ) {
 }
 
 

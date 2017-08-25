@@ -31,8 +31,10 @@ static const int MAX_CHARGE_COUNT = CHARGE_PHASE_COUNT * 4 - 1;
 //チャージエフェクト位置
 static const Vector EFFECT_ADJUST( 0, 15, 0 );
 
-//カウント
+//その他
+static const int MAX_POWER = 5;
 static const int MAX_WISH_COUNT = 100;
+static const int ENHANCED_POWER = 2;
 
 RockPlayer::RockPlayer( StatusPtr status, const Vector& pos, int id, RockAncestorsPtr ancestors ) :
 RockCharacter( pos, ( DOLL )( DOLL_TAROSUKE_WAIT + id * ROCK_PLAYER_MOTION_NUM ), RADIUS, HEIGHT ),
@@ -225,7 +227,11 @@ void RockPlayer::actOnAttacking( ) {
 	// 攻撃ボタンが離されたら攻撃
 	if ( !( player.device_button & BUTTON_A ) &&
 		 _attack_count > 0 ) {
-		RockShotPtr shot( new RockShot( _id, getPos( ), getDir( ) ) );
+		int power = _attack_count / ( MAX_CHARGE_COUNT / ( MAX_POWER - 1 ) ) + 1;
+		if ( player.item & ITEM_ENHANCED_ATTACK ) {
+			power *= ENHANCED_POWER;
+		}
+		RockShotPtr shot( new RockShot( _id, getPos( ), getDir( ), power ) );
 		RockArmoury::getTask( )->addShot( shot );
 		setAction( ACTION_WAIT );
 		Effect::getTask( )->stopEffect( _effect_handle );

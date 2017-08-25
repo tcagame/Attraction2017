@@ -1,14 +1,13 @@
 #pragma once
-#include "Character.h"
+#include "NPC.h"
 
-class NPCObaba: public Character {
+class NPCObaba: public NPC {
 public:
 	NPCObaba( const Vector& pos );
 	virtual ~NPCObaba( );
 public:
-	Chip getChip( ) const;
+	void setSynchronousData( ) const;
 protected:
 	void act( );
-	void damage( int force );
 };
 

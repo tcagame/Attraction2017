@@ -181,6 +181,7 @@
     <ClCompile Include="ItemTree.cpp" />
     <ClCompile Include="Magazine.cpp" />
     <ClCompile Include="Monmotaro.cpp" />
+    <ClCompile Include="NPC.cpp" />
     <ClCompile Include="NPCAngel.cpp" />
     <ClCompile Include="NPCMermaid.cpp" />
     <ClCompile Include="NPCMiko.cpp" />
@@ -226,7 +227,7 @@
     <ClCompile Include="EnemyTreeNuts.cpp" />
     <ClCompile Include="EnemyWhiteMist.cpp" />
     <ClCompile Include="EnemyWind.cpp" />
-    <ClCompile Include="NPC.cpp" />
+    <ClCompile Include="Office.cpp" />
     <ClCompile Include="NPCOtohime.cpp" />
     <ClCompile Include="Pop.cpp" />
     <ClCompile Include="PopArcher.cpp" />
@@ -306,6 +307,7 @@
     <ClInclude Include="ItemTree.h" />
     <ClInclude Include="Magazine.h" />
     <ClInclude Include="Monmotaro.h" />
+    <ClInclude Include="NPC.h" />
     <ClInclude Include="NPCAngel.h" />
     <ClInclude Include="NPCMermaid.h" />
     <ClInclude Include="NPCMiko.h" />
@@ -351,7 +353,7 @@
     <ClInclude Include="EnemyTreeNuts.h" />
     <ClInclude Include="EnemyWhiteMist.h" />
     <ClInclude Include="EnemyWind.h" />
-    <ClInclude Include="NPC.h" />
+    <ClInclude Include="Office.h" />
     <ClInclude Include="NPCOtohime.h" />
     <ClInclude Include="Pop.h" />
     <ClInclude Include="PopArcher.h" />
