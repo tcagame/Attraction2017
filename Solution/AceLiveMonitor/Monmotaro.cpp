@@ -19,8 +19,9 @@ static const Vector LEAVE_POS[ 2 ] {
 	Vector( -32, -64 )
 };
 
-Monmotaro::Monmotaro( const Vector& pos, const Target& target ) :
+Monmotaro::Monmotaro( const PLAYER player, const Vector& pos, const Target& target ) :
 Character( pos, NORMAL_CHAR_GRAPH_SIZE, 1, false ),
+_player( player ),
 _action( ACTION_ENTRY ),
 _target( target ) {
 	Vector vec = ( target.pos - pos ).normalize( ) * ENTRY_SPEED;
@@ -74,7 +75,7 @@ void Monmotaro::act( ) {
 					int random = rand( );
 					pos.x += random % ( chip_size / 2 ) * ( getDir( ) == DIR_RIGHT ? 1 : -1 );
 					pos.y += sin( PI2 / random * getActCount( ) ) * ( chip_size / 2 );
-					ShotMonmotaroPtr shot( ShotMonmotaroPtr( new ShotMonmotaro( pos, getDir( ), 1 ) ) );
+					ShotMonmotaroPtr shot( ShotMonmotaroPtr( new ShotMonmotaro( _player, pos, getDir( ), 1 ) ) );
 					Armoury::getTask( )->add( shot );
 				}
 			}

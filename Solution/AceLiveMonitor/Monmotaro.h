@@ -25,7 +25,7 @@ public:
 		}
 	};
 public:
-	Monmotaro( const Vector& pos, const Target& target );
+	Monmotaro( const PLAYER player, const Vector& pos, const Target& target );
 	virtual ~Monmotaro( );
 public:
 	void setTarget( const Target& target );
@@ -35,6 +35,7 @@ private:
 	void damage( int force );
 	void setSynchronousData( );
 private:
+	PLAYER _player;
 	ACTION _action;
 	Target _target;
 };

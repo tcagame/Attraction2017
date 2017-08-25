@@ -21,7 +21,7 @@ public:
 		ACTION_CALL,
 	};
 public:
-	Player( Vector pos );
+	Player( PLAYER player, Vector pos );
 	virtual ~Player( );
 public:
 	void act( );
@@ -39,6 +39,7 @@ public:
 	void pickUpToku( );
 	void setSynchronousData( PLAYER player, int camera_pos ) const;
 	MonmotaroConstPtr getMonmotaro( ) const;
+	void presentGmblePath( );
 private:
 	void actOnWaiting( );
 	void actOnWalking( );
@@ -55,6 +56,7 @@ private:
 	void updateState( );
 	void setAction( ACTION action );
 private:
+	PLAYER _player;
 	MonmotaroPtr _monmo;
 	ACTION _action;
 	int _id;
@@ -63,5 +65,6 @@ private:
 	int _over_charge_time;
 	int _charge_count;
 	int _unrivaled_count;
+	bool _entry_gamble;
 };
 

@@ -44,6 +44,11 @@ ViewerEvent::ViewerEvent( ) {
 		sprintf_s( buf, "Event/lake/back_%003d.png", i );
 		_images.push_back( drawer->createImage( buf ) );
 	}
+	//GAMBLE
+	for ( int i = 0; i < EVENT_PAGE_NUM; i++ ) {
+		sprintf_s( buf, "Event/gamble/back_%003d.png", i );
+		_images.push_back( drawer->createImage( buf ) );
+	}
 
 }
 
@@ -59,53 +64,12 @@ void ViewerEvent::draw( int sx, int sy ) const {
 	} else {
 		int idx = 0;
 		int width = 256;
-		for ( int i = 0; i < 8; i++ ) {
-			switch ( type ) {
-			case MapEvent::TYPE_RED_DAEMON:
-				idx = type + ( i % EVENT_PAGE_NUM );
-				break;
-			case MapEvent::TYPE_FIRE:
-				if ( i / EVENT_PAGE_NUM > 0 ) {
+		for ( int i = 0; i < EVENT_PAGE_NUM; i++ ) {
+			if ( i / EVENT_PAGE_NUM > 0 ) {
 					idx = type + EVENT_PAGE_NUM - 1; 
 				} else {
 					idx = type + i;
 				}
-			case MapEvent::TYPE_TREE:
-				if ( i / EVENT_PAGE_NUM > 0 ) {
-					idx = type + EVENT_PAGE_NUM - 1; 
-				} else {
-					idx = type + i;
-				}
-				break;
-			case MapEvent::TYPE_ROCK:
-				if ( i / EVENT_PAGE_NUM > 0 ) {
-					idx = type + EVENT_PAGE_NUM - 1; 
-				} else {
-					idx = type + i;
-				}
-				break;
-			case MapEvent::TYPE_SHOP:
-				if ( i / EVENT_PAGE_NUM > 0 ) {
-					idx = type + EVENT_PAGE_NUM - 1; 
-				} else {
-					idx = type + i;
-				}
-				break;
-			case MapEvent::TYPE_RYUGU:
-				if ( i / EVENT_PAGE_NUM > 0 ) {
-					idx = type + EVENT_PAGE_NUM - 1; 
-				} else {
-					idx = type + i;
-				}
-				break;
-			case MapEvent::TYPE_LAKE:
-				if ( i / EVENT_PAGE_NUM > 0 ) {
-					idx = type + EVENT_PAGE_NUM - 1; 
-				} else {
-					idx = type + i;
-				}
-				break;
-			}
 			_images[ idx ]->setPos( i * width + sx, sy );
 			_images[ idx ]->draw( );
 		}

@@ -3,7 +3,7 @@
 
 class ShotMonmotaro : public Shot {
 public:
-	ShotMonmotaro( const Vector& pos, DIR dir, int power );
+	ShotMonmotaro( const PLAYER player, const Vector& pos, DIR dir, int power );
 	virtual ~ShotMonmotaro( );
 protected:
 	void act( );

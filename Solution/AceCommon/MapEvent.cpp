@@ -114,6 +114,12 @@ unsigned char MapEvent::getObject( int mx, int my ) const {
 		}
 		type = 6;
 		break;
+	case TYPE_GAMBLE:
+		while ( mx >= EVENT_PAGE_NUM * PAGE_OBJECT_WIDTH_NUM ) {
+			mx -= PAGE_OBJECT_WIDTH_NUM;
+		}
+		type = 7;
+		break;
 	}
 	assert( mx >= 0 && mx < EVENT_PAGE_NUM * PAGE_OBJECT_WIDTH_NUM && my < OBJECT_CHIP_HEIGHT_NUM );
 	int idx = mx + my * ( EVENT_PAGE_NUM * PAGE_OBJECT_WIDTH_NUM );

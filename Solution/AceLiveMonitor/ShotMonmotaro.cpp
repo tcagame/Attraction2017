@@ -5,8 +5,8 @@ static const int SHOT_SPEED = 10;
 static const int MAX_HEIGHT = 5;
 static const int WAVE_COUNT = 30;
 
-ShotMonmotaro::ShotMonmotaro( const Vector& pos, DIR dir, int power ) :
-Shot( pos, dir, power ) {
+ShotMonmotaro::ShotMonmotaro( const PLAYER player, const Vector& pos, DIR dir, int power ) :
+Shot( player, pos, dir, power ) {
 	Vector vec( SHOT_SPEED, 0 );
 	if ( dir == DIR_LEFT ) {
 		vec.x *= -1;

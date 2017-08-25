@@ -44,16 +44,18 @@ static const int MAX_UNRIVALED_COUNT = 45;
 static const int MAX_DEAD_ACTCOUNT = 120;
 static const int MAX_IMPACT_COUNT = 30;
 
-Player::Player( Vector pos ) :
+Player::Player( PLAYER player, Vector pos ) :
 Character( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ),
 _over_charge_time( -1 ),
+_player( player ),
 _id( -1 ),
 _money( 0 ),
 _toku( 0 ),
 _charge_count( 0 ),
 _unrivaled_count( MAX_UNRIVALED_COUNT ),
 _monmo( MonmotaroPtr( ) ),
-_action( ACTION_WAIT ) {
+_action( ACTION_WAIT ),
+_entry_gamble( false ) {
 	setRadius( 25 );
 	setDir( DIR_RIGHT );
 }
@@ -269,7 +271,7 @@ void Player::actOnFloating( ) {
 
 void Player::actOnAttack( ) {
 	int power = ( _charge_count / CHARGE_PHASE_COUNT ) + 1;
-	ShotPlayerPtr shot( new ShotPlayer( getPos( ), getDir( ), power ) );
+	ShotPlayerPtr shot( new ShotPlayer( _player, getPos( ), getDir( ), power ) );
 	shot->setArea( getArea( ) );
 	Armoury::getTask( )->add( shot );
 	setAction( ACTION_WAIT );
@@ -495,6 +497,15 @@ void Player::updateState( ) {
 			setVec( Vector( ) );
 		}
 	}
+	//“q”Žê‚É“ü‚é
+	if ( _entry_gamble ) {
+		map_event->setType( MapEvent::TYPE_GAMBLE );
+		npc->popUpNPC( );
+		setArea( AREA_EVENT );
+		setPos( Vector( GRAPH_SIZE * 3 / 2, 0 ) );
+		setVec( Vector( ) );
+		_entry_gamble = false;
+	}
 	
 	if ( map->getObject( getPos( ) + getVec( ) ) == OBJECT_EVENT_CALL ) {
 		map->usedObject( getPos( ) + getVec( ) );
@@ -504,7 +515,7 @@ void Player::updateState( ) {
 		target.attack = false;
 		target.pos = getPos( );
 		target.dir = getDir( );
-		_monmo = MonmotaroPtr( new Monmotaro( Vector( family->getCameraPosX( ), 0 ), target ) );
+		_monmo = MonmotaroPtr( new Monmotaro( _player, Vector( family->getCameraPosX( ), 0 ), target ) );
 		setAction( ACTION_CALL );
 		setVec( Vector( ) );
 	}
@@ -755,4 +766,8 @@ int Player::getDeviceId( ) const {
 
 MonmotaroConstPtr Player::getMonmotaro( ) const {
 	return _monmo;
+}
+
+void Player::presentGmblePath( ) {
+	_entry_gamble = true;
 }

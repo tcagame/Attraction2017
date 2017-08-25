@@ -3,7 +3,7 @@
 
 class ShotPlayer : public Shot {
 public:
-	ShotPlayer( const Vector& pos, DIR dir, int power );
+	ShotPlayer( const PLAYER player, const Vector& pos, DIR dir, int power );
 	virtual ~ShotPlayer( );
 protected:
 	void act( );

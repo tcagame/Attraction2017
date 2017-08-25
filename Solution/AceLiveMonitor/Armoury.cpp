@@ -8,6 +8,10 @@
 #include "Magazine.h"
 #include "SynchronousData.h"
 #include "Family.h"
+#include "Player.h"
+#include "EnemyGama.h"
+
+PTR( EnemyGama );
 
 ArmouryPtr Armoury::getTask( ) {
 	return std::dynamic_pointer_cast< Armoury >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -47,6 +51,11 @@ void Armoury::updateEnemy( ) {
 				int impact_size = 16 * _shot_list[ i ]->getPower( );
 				Magazine::getTask( )->add( ImpactPtr( new Impact( impact_pos, _shot_list[ i ]->getArea( ), impact_size ) ) );
 				_shot_list[ i ] = ShotPtr( );
+			} else {
+				if ( std::dynamic_pointer_cast< EnemyGama >( hit_enemy ) ) {
+					PLAYER player_id = _shot_list[ i ]->getPlayer( );
+					Family::getTask( )->getPlayer( player_id )->presentGmblePath( );
+				}
 			}
 		}
 	}

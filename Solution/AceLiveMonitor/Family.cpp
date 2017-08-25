@@ -31,7 +31,7 @@ Family::~Family( ) {
 
 void Family::initialize( ) {
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
-		_player[ i ] = PlayerPtr( new Player( INIT_PLAYER_POS[ i ] ) );
+		_player[ i ] = PlayerPtr( new Player( ( PLAYER )i, INIT_PLAYER_POS[ i ] ) );
 	}
 	double camera_pos = 0.0;
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
