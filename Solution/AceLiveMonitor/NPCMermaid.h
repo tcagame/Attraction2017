@@ -1,13 +1,12 @@
 #pragma once
-#include "Character.h"
+#include "NPC.h"
 
-class NPCMermaid: public Character {
+class NPCMermaid: public NPC {
 public:
 	NPCMermaid( const Vector& pos );
 	virtual ~NPCMermaid( );
 public:
-	Chip getChip( ) const;
+	void setSynchronousData( ) const;
 protected:
 	void act( );
-	void damage( int force );
 };

@@ -1,12 +1,12 @@
 #pragma once
-#include "Character.h"
-class NPCOtohime : public Character {
+#include "NPC.h"
+
+class NPCOtohime : public NPC {
 public:
 	NPCOtohime( const Vector& pos );
 	virtual ~NPCOtohime( );
 public:
-	Chip getChip( ) const;
+	void setSynchronousData( ) const;
 protected:
 	void act( );
-	void damage( int force );
 };

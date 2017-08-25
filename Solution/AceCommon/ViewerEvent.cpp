@@ -44,7 +44,6 @@ ViewerEvent::ViewerEvent( ) {
 		sprintf_s( buf, "Event/lake/back_%003d.png", i );
 		_images.push_back( drawer->createImage( buf ) );
 	}
-
 }
 
 ViewerEvent::~ViewerEvent( ) {

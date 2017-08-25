@@ -1,10 +1,11 @@
 #include "NPCAngel.h"
+#include "SynchronousData.h"
 
 static const int WAIT_ANIM_TIME = 10;
-static const int MAX_HP = 6;
+
 
 NPCAngel::NPCAngel( const Vector& pos ) :
-Character( pos, BIG_CHAR_GRAPH_SIZE, false ) {
+NPC( pos, BIG_CHAR_GRAPH_SIZE ) {
 }
 
 
@@ -14,25 +15,20 @@ NPCAngel::~NPCAngel( ) {
 void NPCAngel::act( ) {
 }
 
-Chip NPCAngel::getChip( ) const {
-	Chip chip = Chip( );
-	Vector pos = getPos( );
-	chip.size = getChipSize( );
-	chip.sx1 = ( int )pos.x - chip.size / 2;
-	chip.sy1 = ( int )pos.y - chip.size;
-	chip.sx2 = chip.sx1 + chip.size;
-	chip.sy2 = chip.sy1 + chip.size;
-	
+void NPCAngel::setSynchronousData( ) const {
 	const int ANIM[ ] = {
-		0, 1, 2, 3
+		24, 25, 26, 27
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-	int cx = ANIM[ ( getActCount( ) / WAIT_ANIM_TIME ) % anim_size ];
-	//int cy = 2;
-	chip.tx = cx * chip.size;
-	chip.ty = 384;
-	return chip;
-}
+	
+	Vector pos = getPos( );
+	int x = ( int )pos.x;
+	int y = ( int )pos.y;
 
-void NPCAngel::damage( int force ) {
+	unsigned char attribute = 0;
+	if ( getDir( ) == DIR_RIGHT ) {
+		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
+	}
+	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	data->addObject( AREA_EVENT, SynchronousData::TYPE_NPC, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y, getChipSize( ) );
 }

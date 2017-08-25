@@ -16,7 +16,7 @@
 #include "Impact.h"
 #include "Monmotaro.h"
 #include "ShotPlayer.h"
-#include "NPC.h"
+#include "Office.h"
 
 #include <assert.h>
 
@@ -449,7 +449,7 @@ void Player::updateState( ) {
 	//ƒCƒxƒ“ƒg
 	MapStreetPtr map( MapStreet::getTask( ) );
 	MapEventPtr map_event( MapEvent::getTask( ) );
-	NPCPtr npc( NPC::getTask( ) );
+	OfficePtr office( Office::getTask( ) );
 	MilitaryPtr militaly( Military::getTask( ) );
 	FamilyPtr family( Family::getTask( ) );
 
@@ -487,7 +487,7 @@ void Player::updateState( ) {
 		if ( event_type != MapEvent::TYPE_TITLE ) {
 			map_event->setType( event_type );
 			if ( event_type >= MapEvent::TYPE_SHOP ) {
-				npc->popUpNPC( );
+				office->popUpNPC( );
 			}
 			militaly->createBoss( );
 			setArea( AREA_EVENT );
