@@ -9,7 +9,7 @@ PTR( Player );
 
 class Storage : public Task {
 public:
-	static std::string getTag( ) { return "STORAGE"; };
+	static std::string getTag( ) { return "ITEM"; };
 	static StoragePtr getTask( );
 public:
 	Storage( );

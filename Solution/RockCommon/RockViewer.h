@@ -1,6 +1,7 @@
 #pragma once
 #include "Task.h"
 #include <string>
+#include "Image.h"
 
 PTR( RockViewer );
 PTR( Status );
@@ -14,6 +15,7 @@ public:
 	virtual ~RockViewer( );
 public:
 	void update( );
+	void initialize( );
 private:
 	void drawMap( ) const;
 	void drawEnemy( ) const;
@@ -22,7 +24,10 @@ private:
 	void drawShot( ) const;// debug
 	void drawItem( ) const; 
 	void drawAlter( ) const;
+	void drawUI( ) const;
 private:
 	StatusPtr _status;
+	ImagePtr _status_flame;
+	ImagePtr _status_ui;
 };
 

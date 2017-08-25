@@ -13,7 +13,7 @@ PTR( ShotMonmotaro );
 
 class Armoury : public Task {
 public:
-	static std::string getTag( ) { return "SHOT"; };
+	static std::string getTag( ) { return "ARMOURY"; };
 	static ArmouryPtr getTask( );
 public:
 	Armoury( );

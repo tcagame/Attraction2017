@@ -515,6 +515,7 @@ void Player::updateState( ) {
 			setArea( AREA_STREET );
 			map_event->setType( MapEvent::TYPE_TITLE );
 			militaly->eraseEventEnemy( );
+			Storage::getTask( )->eraseEventItem( );
 			setPos( Vector( family->getCameraPosX( ) + SCREEN_WIDTH / 2, 0 ) );
 			setVec( Vector( ) );
 		}
