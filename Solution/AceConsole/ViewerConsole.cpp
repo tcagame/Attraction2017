@@ -46,7 +46,10 @@ void ViewerConsole::initialize( ) {
 }
 
 void ViewerConsole::update( ) {
-
+	ClientPtr client( Client::getTask( ) );
+	if ( !client->isRecievingUDP( ) ) {
+		return;
+	}
 	DrawerPtr drawer( Drawer::getTask( ) );
 	drawer->flip( );
 

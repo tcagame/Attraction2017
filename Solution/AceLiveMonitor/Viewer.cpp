@@ -43,6 +43,7 @@ void Viewer::initialize( ) {
 void Viewer::update( ) {
 
 	DrawerPtr drawer( Drawer::getTask( ) );
+	drawer->waitForSync( );
 	drawer->flip( );
 	
 	FamilyConstPtr family( Family::getTask( ) );

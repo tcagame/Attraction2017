@@ -44,6 +44,7 @@ void RockViewer::initialize( ) {
 
 void RockViewer::update( ) {
 	DrawerPtr drawer = Drawer::getTask( );
+	drawer->waitForSync( );
 	drawer->flip( );
 	drawMap( );
 	drawEnemy( );

@@ -30,6 +30,7 @@ StatusDrawer::~StatusDrawer( ) {
 
 void StatusDrawer::update( ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
+	drawer->waitForSync( );
 	drawer->flip( );
 	{//player
 		int sx = VIEW_PLAYER_X;
