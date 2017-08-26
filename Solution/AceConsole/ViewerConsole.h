@@ -24,6 +24,8 @@ public:
 private:
 	void drawArea( );
 	void drawUI( );
+	void drawAreaEvent( );
+	void drawAreaStreet( );
 private:
 	const PLAYER _player;
 	ViewerObjectPtr _viewer_object;

@@ -69,20 +69,34 @@ void ViewerConsole::drawArea( ) {
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
 	unsigned char state = data->getStatusState( _player );
 
-
-	if ( state & SynchronousData::STATE_PLAY_STREET ) {
-		int camera_pos = data->getStatusX( _player ) - 320;
-		int offset_x = data->getStatusX( _player ) - data->getCameraX( ) - 320;
-		// Main•`‰æ
-		_viewer_street->draw( ViewerStreet::LAYER_BACK, AREA_SX, AREA_SY, camera_pos );
-		_viewer_object->draw( AREA_STREET, AREA_SX - offset_x, AREA_SY );
-		_viewer_street->draw( ViewerStreet::LAYER_FRONT, AREA_SX, AREA_SY, camera_pos );
-	} else {
-		int camera_pos = data->getStatusX( _player );
-		// ƒCƒxƒ“ƒg•`‰æ
-		_viewer_event->draw( AREA_SX - camera_pos, AREA_SY );
-		_viewer_object->draw( AREA_EVENT, AREA_SX - camera_pos, AREA_SY );
+	switch ( state ) {
+	case SynchronousData::STATE_PLAY_STREET:
+		drawAreaStreet( );
+		break;
+	case SynchronousData::STATE_PLAY_EVENT:
+		drawAreaEvent( );
+		break;
 	}
+}
+
+void ViewerConsole::drawAreaStreet( ) {
+	SynchronousDataPtr data( SynchronousData::getTask( ) );
+
+	int camera_pos = data->getStatusX( _player ) - 320;
+	int offset_x = data->getStatusX( _player ) - data->getCameraX( ) - 320;
+	// Main•`‰æ
+	_viewer_street->draw( ViewerStreet::LAYER_BACK, AREA_SX, AREA_SY, camera_pos );
+	_viewer_object->draw( AREA_STREET, AREA_SX - offset_x, AREA_SY );
+	_viewer_street->draw( ViewerStreet::LAYER_FRONT, AREA_SX, AREA_SY, camera_pos );
+}
+
+void ViewerConsole::drawAreaEvent( ) {
+	SynchronousDataPtr data( SynchronousData::getTask( ) );
+
+	int camera_pos = data->getStatusX( _player ) - 320;
+	// ƒCƒxƒ“ƒg•`‰æ
+	_viewer_event->draw( AREA_SX - camera_pos, AREA_SY );
+	_viewer_object->draw( AREA_EVENT, AREA_SX - camera_pos, AREA_SY );
 }
 
 void ViewerConsole::drawUI( ) {
