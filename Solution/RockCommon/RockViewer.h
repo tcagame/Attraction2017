@@ -30,5 +30,6 @@ private:
 	StatusPtr _status;
 	ImagePtr _status_flame;
 	ImagePtr _status_ui;
+	ImagePtr _status_num;
 };
 
