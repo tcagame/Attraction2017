@@ -8,7 +8,6 @@ const int ACE_MAP_SIZE = 8;
 const double GRAVITY = 1.0;
 
 const int EVENT_PAGE_NUM = 5;
-const int MAX_EVENT = 10;
 const int SMALL_CHAR_GRAPH_SIZE = 32;
 const int NORMAL_CHAR_GRAPH_SIZE = 64;
 const int BIG_CHAR_GRAPH_SIZE = 128;
@@ -47,6 +46,19 @@ enum AREA {
 	AREA_STREET,
 	AREA_EVENT,
 	MAX_AREA
+};
+
+enum EVENT {
+	EVENT_NONE,
+	EVENT_REDDAEMON,
+	EVENT_FIRE,
+	EVENT_TREE,
+	EVENT_ROCK,
+	EVENT_SHOP,
+	EVENT_RYUGU,
+	EVENT_LAKE,
+	EVENT_GAMBLE,
+	MAX_EVENT,
 };
 
 struct Chip {

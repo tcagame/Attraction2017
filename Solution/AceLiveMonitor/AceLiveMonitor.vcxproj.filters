@@ -349,6 +349,7 @@
     <ClCompile Include="NPCShaker.cpp">
       <Filter>NPC</Filter>
     </ClCompile>
+    <ClCompile Include="ViewerTitle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -698,6 +699,7 @@
     <ClInclude Include="NPCShaker.h">
       <Filter>NPC</Filter>
     </ClInclude>
+    <ClInclude Include="ViewerTitle.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">

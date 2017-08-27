@@ -1,7 +1,8 @@
 #include "MapEvent.h"
 #include "Application.h"
-#include <assert.h>
 #include "Binary.h"
+#include "SynchronousData.h"
+#include <assert.h>
 
 const std::string FILENAME[ MAX_EVENT ] {
 	"Resource/Ace/Event/akaoni/mapdata",//red deamon
@@ -51,8 +52,22 @@ void MapEvent::load( ) {
 	}
 }
 
-
 void MapEvent::update( ) {
+	// 同期データにイベント情報を設定
+	EVENT event = EVENT_NONE;
+	switch ( _type ) {
+	case TYPE_RED_DAEMON: event = EVENT_REDDAEMON; break;
+	case TYPE_FIRE      : event = EVENT_FIRE     ; break;
+	case TYPE_TREE      : event = EVENT_TREE     ; break;
+	case TYPE_ROCK   	: event = EVENT_ROCK     ; break;
+	case TYPE_SHOP   	: event = EVENT_SHOP     ; break;
+	case TYPE_RYUGU  	: event = EVENT_RYUGU    ; break;
+	case TYPE_LAKE   	: event = EVENT_LAKE     ; break;
+	case TYPE_GAMBLE    : event = EVENT_GAMBLE   ; break; 
+	}
+
+	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	data->setEvent( event );
 }
 
 void MapEvent::setType( TYPE type ) {
