@@ -5,6 +5,8 @@
 #include "RockAlter.h"
 #include "RockCasket.h"
 #include "RockStorage.h"
+#include "Movie.h"
+#include "Drawer.h"
 
 const Vector ENTRY_POS = Vector( 200, 0, 270 );
 const double ENTRY_RADIUS = 40;
@@ -13,21 +15,24 @@ RockMapTest::RockMapTest( ) {
 	ModelMV1Ptr map01 = ModelMV1Ptr( new ModelMV1 );
 	map01->load( "Resource/Rock/map/test/map01.mv1" );
 	addModel( map01 );
-
+	
 	ModelMV1Ptr obj06 = ModelMV1Ptr( new ModelMV1 );
 	obj06->load( "Resource/Rock/object/obj06/obj06.mv1" );
 	obj06->setScale( Matrix::makeTransformScaling( Vector( 5, 1, 5 ) ) );
 	addModel( obj06 );
-
+	
 	ModelMV1Ptr col01 = ModelMV1Ptr( new ModelMV1 );
 	col01->load( "Resource/Rock/map/test/map01_col.mv1" );
 	col01->setTrans( Matrix::makeTransformTranslation( Vector( 0, 10, 0 ) ) );
 	col01->draw( );
 	addColModel( col01 );
-
+	
 	RockStoragePtr sorage = RockStorage::getTask();
 	sorage->addAlter( RockAlterPtr( new RockAlter( Vector( 200, 0, 0 ) ) ) );
 	sorage->addCasket( RockCasketPtr( new RockCasket( Vector( 0, 0, 0 ) ) ) );
+
+	_movie = Drawer::getTask( )->createMovie( "UI/ui_main_title_tall.mov" );
+	_movie->play( );
 }
 
 
@@ -47,6 +52,7 @@ void RockMapTest::update( ) {
 			MessageSender::getTask( )->sendMessage( i, Message::COMMAND_STATE, &area );
 		}
 	}
+	_movie->draw( );
 }
 
 bool RockMapTest::isNext( const Vector& pos ) const {
