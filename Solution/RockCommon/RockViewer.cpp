@@ -15,6 +15,7 @@
 #include "RockItem.h"
 #include "RockShot.h"
 #include "RockImpact.h"
+#include "RockCasket.h"
 #include "Effect.h"
 #include "RockAlter.h"
 #include "RockAncestors.h"
@@ -53,6 +54,7 @@ void RockViewer::update( ) {
 	drawShot( );
 	drawItem( );
 	drawAlter( );
+	drawCasket( );
 	drawUI( );
 	Effect::getTask( )->drawEffect( );
 }
@@ -160,6 +162,24 @@ void RockViewer::drawAlter( ) const {
 		ite++;
 	}
 }
+
+void RockViewer::drawCasket( ) const {
+	DrawerPtr drawer( Drawer::getTask( ) );
+	RockStoragePtr storage( RockStorage::getTask( ) );
+	std::list< RockCasketPtr > casket = storage->getCaskets( );
+	std::list< RockCasketPtr >::const_iterator ite = casket.begin( );
+	while ( ite != casket.end( ) ) {
+		RockCasketPtr casket = *ite;
+		if ( !casket ) {
+			ite++;
+			continue;
+		}
+		ModelMV1Ptr model = casket->getModel( );
+		model->draw( );
+		ite++;
+	}
+}
+
 
 void RockViewer::drawUI( ) const {
 	RockFamilyPtr family( RockFamily::getTask( ) );

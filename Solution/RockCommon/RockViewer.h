@@ -24,6 +24,7 @@ private:
 	void drawShot( ) const;// debug
 	void drawItem( ) const; 
 	void drawAlter( ) const;
+	void drawCasket( ) const;
 	void drawUI( ) const;
 private:
 	StatusPtr _status;
