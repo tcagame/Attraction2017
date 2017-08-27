@@ -4,7 +4,6 @@
 #include "Drawer.h"
 #include "Client.h"
 #include "Status.h"
-#include "Status.h"
 #include "Message.h"
 #include "RockViewer.h"
 #include "RockMapStreet.h"

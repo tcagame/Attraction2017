@@ -2,13 +2,16 @@
 #include "RockFamily.h"
 #include "RockPlayer.h"
 #include "MessageSender.h"
+#include "RockAlter.h"
+#include "RockCasket.h"
+#include "RockStorage.h"
 
 const Vector ENTRY_POS = Vector( 200, 0, 270 );
 const double ENTRY_RADIUS = 40;
 
 RockMapTest::RockMapTest( ) {
 	ModelMV1Ptr map01 = ModelMV1Ptr( new ModelMV1 );
-	map01->load( "Resource/Rock/map/map01.mv1" );
+	map01->load( "Resource/Rock/map/test/map01.mv1" );
 	addModel( map01 );
 
 	ModelMV1Ptr obj06 = ModelMV1Ptr( new ModelMV1 );
@@ -17,10 +20,14 @@ RockMapTest::RockMapTest( ) {
 	addModel( obj06 );
 
 	ModelMV1Ptr col01 = ModelMV1Ptr( new ModelMV1 );
-	col01->load( "Resource/Rock/map/map01_col.mv1" );
+	col01->load( "Resource/Rock/map/test/map01_col.mv1" );
 	col01->setTrans( Matrix::makeTransformTranslation( Vector( 0, 10, 0 ) ) );
 	col01->draw( );
 	addColModel( col01 );
+
+	RockStoragePtr sorage = RockStorage::getTask();
+	sorage->addAlter( RockAlterPtr( new RockAlter( Vector( 200, 0, 0 ) ) ) );
+	sorage->addCasket( RockCasketPtr( new RockCasket( Vector( 0, 0, 0 ) ) ) );
 }
 
 
