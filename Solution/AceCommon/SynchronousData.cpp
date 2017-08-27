@@ -27,19 +27,19 @@ int SynchronousData::getSize( ) {
 }
 
 EVENT SynchronousData::getEvent( ) const {
-	return _data.event;
+	return ( EVENT )_data.event;
 }
 
 void SynchronousData::setEvent( EVENT event ) {
-	_data.event = event;
+	_data.event = ( char )event;
 }
 
 int SynchronousData::getCameraX( ) const {
-	return _data.camera_x;
+	return ( int )_data.camera_x;
 }
 
 void SynchronousData::setCameraX( int x ) {
-	_data.camera_x = x; 
+	_data.camera_x = ( long )x; 
 }
 
 int SynchronousData::getStatusX( PLAYER player ) const {

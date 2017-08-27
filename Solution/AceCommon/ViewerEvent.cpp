@@ -7,71 +7,41 @@ ViewerEvent::ViewerEvent( ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
 
 	char buf[ 256 ];
-	//TITLE
-	_images.push_back( drawer->createImage( "Event/title_logo.png" ) );
-	//RED_DAEMON
 	for ( int i = 0; i < EVENT_PAGE_NUM; i++ ) {
+		//RED_DAEMON
 		sprintf_s( buf, "Event/akaoni/back_%003d.png", i );
-		_images.push_back( drawer->createImage( buf ) );
-	}
-	//FIRE
-	for ( int i = 0; i < EVENT_PAGE_NUM; i++ ) {
+		_images[ EVENT_REDDAEMON * EVENT_PAGE_NUM + i ] = drawer->createImage( buf );
+
+		//FIRE
 		sprintf_s( buf, "Event/fire/back_%003d.png", i );
-		_images.push_back( drawer->createImage( buf ) );
-	}
-	//TREE
-	for ( int i = 0; i < EVENT_PAGE_NUM; i++ ) {
+		_images[ EVENT_FIRE * EVENT_PAGE_NUM + i ] = drawer->createImage( buf );
+		//TREE
 		sprintf_s( buf, "Event/tree/back_%003d.png", i );
-		_images.push_back( drawer->createImage( buf ) );
-	}
-	//ROCK
-	for ( int i = 0; i < EVENT_PAGE_NUM; i++ ) {
+		_images[ EVENT_TREE * EVENT_PAGE_NUM + i ] = drawer->createImage( buf );
+		//ROCK
 		sprintf_s( buf, "Event/rock/back_%003d.png", i );
-		_images.push_back( drawer->createImage( buf ) );
-	}
-	//SHOP
-	for ( int i = 0; i < EVENT_PAGE_NUM; i++ ) {
+		_images[ EVENT_ROCK * EVENT_PAGE_NUM + i ] = drawer->createImage( buf );
+		//SHOP
 		sprintf_s( buf, "Event/shop/back_%003d.png", i );
-		_images.push_back( drawer->createImage( buf ) );
-	}
-	//RYUGU
-	for ( int i = 0; i < EVENT_PAGE_NUM; i++ ) {
+		_images[ EVENT_SHOP * EVENT_PAGE_NUM + i ] = drawer->createImage( buf );
+		//RYUGU
 		sprintf_s( buf, "Event/ryugu/back_%003d.png", i );
-		_images.push_back( drawer->createImage( buf ) );
-	}
-	//LAKE
-	for ( int i = 0; i < EVENT_PAGE_NUM; i++ ) {
+		_images[ EVENT_RYUGU * EVENT_PAGE_NUM + i ] = drawer->createImage( buf );
+		//LAKE
 		sprintf_s( buf, "Event/lake/back_%003d.png", i );
-		_images.push_back( drawer->createImage( buf ) );
-	}
-	//GAMBLE
-	for ( int i = 0; i < EVENT_PAGE_NUM; i++ ) {
+		_images[ EVENT_LAKE * EVENT_PAGE_NUM + i ] = drawer->createImage( buf );
+		//GAMBLE
 		sprintf_s( buf, "Event/gamble/back_%003d.png", i );
-		_images.push_back( drawer->createImage( buf ) );
+		_images[ EVENT_GAMBLE * EVENT_PAGE_NUM + i ] = drawer->createImage( buf );
 	}
 }
 
 ViewerEvent::~ViewerEvent( ) {
 }
 
-void ViewerEvent::draw( int sx, int sy ) const {
-	MapEventPtr map( MapEvent::getTask( ) );
-	MapEvent::TYPE type = map->getType( );
-	if ( type == MapEvent::TYPE_TITLE ) {
-		_images[ 0 ]->setPos( sx, sy );
-		_images[ 0 ]->draw( );
-	} else {
-		int idx = 0;
-		int width = 256;
-		for ( int i = 0; i < EVENT_PAGE_NUM; i++ ) {
-			if ( i / EVENT_PAGE_NUM > 0 ) {
-					idx = type + EVENT_PAGE_NUM - 1; 
-				} else {
-					idx = type + i;
-				}
-			_images[ idx ]->setPos( i * width + sx, sy );
-			_images[ idx ]->draw( );
-		}
+void ViewerEvent::draw( EVENT event, int sx, int sy ) const {
+	for ( int i = 0; i < EVENT_PAGE_NUM; i++ ) {
+		_images[ event * EVENT_PAGE_NUM + i ]->setPos( i * VIEW_WIDTH + sx, sy );
+		_images[ event * EVENT_PAGE_NUM + i ]->draw( );
 	}
-	
 }

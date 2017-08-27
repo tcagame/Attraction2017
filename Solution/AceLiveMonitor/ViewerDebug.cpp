@@ -159,7 +159,7 @@ void ViewerDebug::drawChip( ) const {
 	{//event
 		int width = 8 * PAGE_OBJECT_WIDTH_NUM;
 		MapEventPtr map( MapEvent::getTask( ) );
-		if ( map->getType( ) != MapEvent::TYPE_TITLE ) {
+		if ( map->getEvent( ) != EVENT_NONE ) {
 			for ( int i = 0; i < width; i++ ) {
 				for ( int j = 0; j < OBJECT_CHIP_HEIGHT_NUM; j++ ) {
 					int x = i * OBJECT_CHIP_SIZE;

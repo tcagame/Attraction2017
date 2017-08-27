@@ -55,11 +55,11 @@ void Viewer::update( ) {
 	_viewer_street->draw( ViewerStreet::LAYER_FRONT, MAIN_SX, MAIN_SY, camera_pos );
 
 	// ƒCƒxƒ“ƒg•`‰æ
-	unsigned char event = data->getEvent( );
+	EVENT event = data->getEvent( );
 	if ( event == EVENT_NONE ) {
 		_viewer_title->draw( );
 	} else {
-		_viewer_event->draw( /*event*/EVENT_SX, EVENT_SY );
+		_viewer_event->draw( event, EVENT_SX, EVENT_SY );
 	}
 
 	_viewer_object->draw( AREA_EVENT, EVENT_SX, EVENT_SY );
