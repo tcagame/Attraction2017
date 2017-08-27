@@ -16,6 +16,7 @@ public:
 	void back( );
 	void wish( );
 	ModelMV1Ptr getModel( ) const;
+	void warpRedDaemon( );
 protected:
 	void act( );
 private:
