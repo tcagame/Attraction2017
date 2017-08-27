@@ -42,6 +42,9 @@
     <ClInclude Include="RockCamera.h" />
     <ClInclude Include="RockAlter.h" />
     <ClInclude Include="RockAncestors.h" />
+    <ClInclude Include="RockCasket.h">
+      <Filter>Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RockDollHouse.cpp" />
@@ -82,6 +85,9 @@
     <ClCompile Include="RockCamera.cpp" />
     <ClCompile Include="RockAlter.cpp" />
     <ClCompile Include="RockAncestors.cpp" />
+    <ClCompile Include="RockCasket.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Enemy">

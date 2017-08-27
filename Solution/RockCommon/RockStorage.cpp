@@ -7,6 +7,7 @@
 #include "RockPlayer.h"
 #include "MessageSender.h"
 #include "RockAlter.h"
+#include "RockCasket.h"
 
 RockStoragePtr RockStorage::getTask( ) {
 	return std::dynamic_pointer_cast< RockStorage >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -20,6 +21,7 @@ RockStorage::RockStorage( ) {
 	//_items.push_back( RockItemPtr( new RockItemMoney( Vector( 60, 10, 200 ), RockItemMoney::MONEY_VALUE_3 ) ) );
 	//_items.push_back( RockItemPtr( new RockItemMoney( Vector( 80, 10, 200 ), RockItemMoney::MONEY_VALUE_4 ) ) );
 	addAlter( RockAlterPtr( new RockAlter( Vector( 200, 0, 0 ) ) ) );
+	addCasket( RockCasketPtr( new RockCasket( Vector( 0, 0, 0 ) ) ) );
 }
 
 
@@ -81,12 +83,29 @@ void RockStorage::updateAlter( ) {
 	}
 }
 
+void RockStorage::updateCasket( ) {
+	std::list< RockCasketPtr >::iterator ite = _caskets.begin( );
+	RockFamilyPtr family( RockFamily::getTask( ) );
+	while ( ite != _caskets.end( ) ) {
+		RockCasketPtr casket = *ite;
+		if ( !casket ) {
+			ite++;
+			continue;
+		}
+		ite++;
+	}
+}
+
 void RockStorage::addItem( RockItemPtr item ) {
 	_items.push_back( item );
 }
 
 void RockStorage::addAlter( RockAlterPtr alter ) {
 	_alters.push_back( alter );
+}
+
+void RockStorage::addCasket( RockCasketPtr casket ) {
+	_caskets.push_back( casket );
 }
 
 std::list< RockItemPtr > RockStorage::getItems( ) const {
@@ -96,6 +115,11 @@ std::list< RockItemPtr > RockStorage::getItems( ) const {
 std::list< RockAlterPtr > RockStorage::getAlters( ) const {
 	return _alters;
 }
+
+std::list< RockCasketPtr > RockStorage::getCaskets( ) const {
+	return _caskets;
+}
+
 
 
 void RockStorage::pickUpItem( RockItemPtr item, int player_id ) {

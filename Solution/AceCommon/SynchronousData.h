@@ -41,6 +41,7 @@ public:
 	SynchronousData( );
 	virtual ~SynchronousData( );
 public:
+	EVENT getEvent( ) const;
 	int getCameraX( ) const;
 	int getStatusX( PLAYER player ) const;
 	int getStatusPower( PLAYER player ) const;
@@ -60,6 +61,7 @@ public:
 public:
 	void * getPtr( );
 	int getSize( );
+	void setEvent( EVENT event );
 	void setCameraX( int x );
 	void setStatusX( PLAYER player, int x );
 	void setStatusPower( PLAYER player, int power );
@@ -76,6 +78,7 @@ private:
 	#pragma pack( 1 )
 		struct SyncData {
 			int camera_x;
+			EVENT event;
 			struct Status {
 				long          x;
 				unsigned char power;
