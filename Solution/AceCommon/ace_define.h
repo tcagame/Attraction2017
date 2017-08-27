@@ -23,6 +23,7 @@ const int ENEMY_BIG_CHIP_WIDTH = 10;
 const int IMPACT_CHIP_WIDTH = 2;
 const int ITEM_CHIP_WIDTH = 8;
 const int VIEW_TITLE_Y = 0;
+const int VIEW_WIDTH = 256;
 const int VIEW_EVENT_HEIGHT = 256;
 const int VIEW_STREET_HEIGHT = 256;
 const int VIEW_STATUS_Y = VIEW_EVENT_HEIGHT + VIEW_STREET_HEIGHT;

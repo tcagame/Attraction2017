@@ -22,7 +22,7 @@ Office::~Office( ) {
 }
 
 void Office::update( ) {
-	MapEvent::TYPE type = MapEvent::getTask( )->getType( );
+	EVENT event = MapEvent::getTask( )->getEvent( );
 	std::list< NPCPtr >::iterator ite = _npc.begin( );
 	while( ite != _npc.end( ) ) {
 		NPCPtr npc = (*ite);
@@ -32,7 +32,7 @@ void Office::update( ) {
 		}
 		npc->update( );
 		npc->setSynchronousData( );
-		if( type == MapEvent::TYPE_TITLE ) {
+		if( event == EVENT_NONE ) {
 			ite = _npc.erase( ite );
 			continue;
 		}
@@ -41,16 +41,16 @@ void Office::update( ) {
 }
 
 void Office::popUpNPC( ) {
-	MapEvent::TYPE type = MapEvent::getTask( )->getType( );
+	EVENT event = MapEvent::getTask( )->getEvent( );
 	_npc.clear( );
-	switch ( type ) {
-	case MapEvent::TYPE_SHOP:
+	switch ( event ) {
+	case EVENT_SHOP:
 		_npc.push_back( NPCPtr( new NPCObaba( Vector( 800, 225 ) ) ) );
 		break;
-	case MapEvent::TYPE_LAKE:
+	case EVENT_LAKE:
 		_npc.push_back( NPCPtr( new NPCMiko( Vector( 200, 225 ) ) ) );
 		break;
-	case MapEvent::TYPE_RYUGU:
+	case EVENT_RYUGU:
 		//ìVèó
 		_npc.push_back( NPCPtr( new NPCAngel( Vector( 325, 225 ) ) ) );
 		_npc.push_back( NPCPtr( new NPCAngel( Vector( 700, 225 ) ) ) );
@@ -60,10 +60,11 @@ void Office::popUpNPC( ) {
 		_npc.push_back( NPCPtr( new NPCMermaid( Vector( 225, 250 ) ) ) );
 		_npc.push_back( NPCPtr( new NPCMermaid( Vector( 864, 250 ) ) ) );
 		break;
-	case MapEvent::TYPE_GAMBLE:
+	case EVENT_GAMBLE:
 		//ÉcÉ{êUÇË
 		_npc.push_back( NPCPtr( new NPCShaker( Vector( 650, 225 ) ) ) );
 		//íÜñ~
+		break;
 	}
 }
 

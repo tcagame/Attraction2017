@@ -232,22 +232,20 @@ EnemyPtr Military::getOverlappedEnemy( CharacterConstPtr character ) const {
 }
 
 void Military::createBoss( ) {
-	MapEvent::TYPE type = MapEvent::getTask( )->getType( );
+	EVENT event = MapEvent::getTask( )->getEvent( );
 	Storage::getTask( )->eraseEventItem( );
 	_event_enemies.clear( );
-	switch ( type ) {
-	case MapEvent::TYPE_TITLE:
-		break;
-	case MapEvent::TYPE_RED_DAEMON:
+	switch ( event ) {
+	case EVENT_REDDAEMON:
 		_boss = EnemyBossPtr( new EnemyBossRedDaemon( Vector( 800, 200 ) ) );
 		break;
-	case MapEvent::TYPE_FIRE:
+	case EVENT_FIRE:
 		_boss = EnemyBossPtr( new EnemyBossBloodDaemon( Vector( 800, 200 ) ) );
 		break;
-	case MapEvent::TYPE_TREE:
+	case EVENT_TREE:
 		_boss = EnemyBossPtr( new EnemyBossMonsterTree( Vector( 800, 225 ) ) );
 		break;
-	case MapEvent::TYPE_ROCK:
+	case EVENT_ROCK:
 		_boss = EnemyBossPtr( new EnemyBossRock( Vector( 800, 225 ) ) );
 		break;
 	default:

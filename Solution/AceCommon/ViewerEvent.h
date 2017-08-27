@@ -1,15 +1,15 @@
 #pragma once
 #include "Image.h"
-#include <vector>
 #include "ace_define.h"
+#include <array>
 
 class ViewerEvent {
 public:
 	ViewerEvent( );
 	virtual ~ViewerEvent( );
 public:
-	void draw( int sx, int sy ) const;
+	void draw( EVENT event, int sx, int sy ) const;
 private:
-	std::vector< ImagePtr > _images;
+	std::array< ImagePtr, MAX_EVENT * EVENT_PAGE_NUM > _images;
 };
 

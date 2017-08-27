@@ -77,8 +77,8 @@ private:
 
 	#pragma pack( 1 )
 		struct SyncData {
-			int camera_x;
-			EVENT event;
+			long camera_x;
+			char event;
 			struct Status {
 				long          x;
 				unsigned char power;

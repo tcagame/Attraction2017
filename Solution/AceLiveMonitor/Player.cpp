@@ -388,7 +388,7 @@ void Player::actOnDead( ) {
 		if ( getArea( ) == AREA_EVENT ) {
 			//メインの画面中央上部に移動
 			setArea( AREA_STREET );
-			MapEvent::getTask( )->setType( MapEvent::TYPE_TITLE );
+			MapEvent::getTask( )->setEvent( EVENT_NONE );
 			Military::getTask( )->createBoss( );
 			setPos( Vector( Family::getTask( )->getCameraPosX( ) + SCREEN_WIDTH / 2, chip_size ) );
 			Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, chip_size / 2 ), getArea( ), chip_size * 2 ) ) );
@@ -455,40 +455,40 @@ void Player::updateState( ) {
 	MilitaryPtr militaly( Military::getTask( ) );
 	FamilyPtr family( Family::getTask( ) );
 
-	MapEvent::TYPE event_type = map_event->getType( );
-	if ( event_type == MapEvent::TYPE_TITLE ) {
+	EVENT event = map_event->getEvent( );
+	if ( event == EVENT_NONE ) {
 		bool enter = true;
 		unsigned char obj = map->getObject( getPos( ) + getVec( ) );
 		switch ( obj ) {
 		case OBJECT_EVENT_REDDAEMON:
-			event_type = MapEvent::TYPE_RED_DAEMON;
+			event = EVENT_REDDAEMON;
 			break;
 		case OBJECT_EVENT_FIRE:
-			event_type = MapEvent::TYPE_FIRE;
+			event = EVENT_FIRE;
 			break;
 		case OBJECT_EVENT_TREE:
-			event_type = MapEvent::TYPE_TREE;
+			event = EVENT_TREE;
 			break;
 		case OBJECT_EVENT_ROCK:
-			event_type = MapEvent::TYPE_ROCK;
+			event = EVENT_ROCK;
 			break;
 		case OBJECT_EVENT_SHOP:
-			event_type = MapEvent::TYPE_SHOP;
+			event = EVENT_SHOP;
 			break;
 		case OBJECT_EVENT_RYUGU:
-			event_type = MapEvent::TYPE_RYUGU;
+			event = EVENT_RYUGU;
 			break;
 		case OBJECT_EVENT_LAKE:
-			event_type = MapEvent::TYPE_LAKE;
+			event = EVENT_LAKE;
 			break;
 		default:
 			enter = false;
 			break;
 		}
 		//イベントに入るとき
-		if ( event_type != MapEvent::TYPE_TITLE ) {
-			map_event->setType( event_type );
-			if ( event_type >= MapEvent::TYPE_SHOP ) {
+		if ( event != EVENT_NONE ) {
+			map_event->setEvent( event );
+			if ( event >= EVENT_SHOP ) {
 				office->popUpNPC( );
 			}
 			militaly->createBoss( );
@@ -498,8 +498,8 @@ void Player::updateState( ) {
 		}
 	}
 	//賭博場に入る
-	if ( _entry_gamble && event_type == MapEvent::TYPE_TITLE ) {
-		map_event->setType( MapEvent::TYPE_GAMBLE );
+	if ( _entry_gamble && event == EVENT_NONE ) {
+		map_event->setEvent( EVENT_GAMBLE );
 		office->popUpNPC( );
 		setArea( AREA_EVENT );
 		setPos( Vector( GRAPH_SIZE * 3 / 2, 0 ) );
@@ -524,7 +524,7 @@ void Player::updateState( ) {
 		//一ページ目にいたらメインに戻る
 		if ( getPos( ).x < GRAPH_SIZE ) {
 			setArea( AREA_STREET );
-			map_event->setType( MapEvent::TYPE_TITLE );
+			map_event->setEvent( EVENT_NONE );
 			militaly->eraseEventEnemy( );
 			Storage::getTask( )->eraseEventItem( );
 			setPos( Vector( family->getCameraPosX( ) + SCREEN_WIDTH / 2, 0 ) );
@@ -535,9 +535,9 @@ void Player::updateState( ) {
 		StoragePtr storage( Storage::getTask( ) );
 		if ( !Military::getTask( )->getBoss( ) &&
 			 !storage->isExistanceEventItem( ) &&
-			 map_event->getType( ) < MapEvent::TYPE_SHOP ) {
+			 map_event->getEvent( ) < EVENT_SHOP ) {
 			setArea( AREA_STREET );
-			map_event->setType( MapEvent::TYPE_TITLE );
+			map_event->setEvent( EVENT_NONE );
 			militaly->eraseEventEnemy( );
 			setPos( Vector( family->getCameraPosX( ) + SCREEN_WIDTH / 2, 0 ) );
 			setVec( Vector( ) );

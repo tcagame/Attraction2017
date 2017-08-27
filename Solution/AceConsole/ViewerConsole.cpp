@@ -95,7 +95,11 @@ void ViewerConsole::drawAreaEvent( ) {
 
 	int camera_pos = data->getStatusX( _player ) - 320;
 	// ƒCƒxƒ“ƒg•`‰æ
-	_viewer_event->draw( AREA_SX - camera_pos, AREA_SY );
+	EVENT event = data->getEvent( );
+	if ( event == EVENT_NONE ) {
+		return;
+	}
+	_viewer_event->draw( event, AREA_SX - camera_pos, AREA_SY );
 	_viewer_object->draw( AREA_EVENT, AREA_SX - camera_pos, AREA_SY );
 }
 
