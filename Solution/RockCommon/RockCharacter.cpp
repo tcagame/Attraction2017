@@ -59,6 +59,7 @@ void RockCharacter::update( ) {
 				} else {
 					_vec.y = hit_pos.y - _pos.y + GRAVITY / 2;
 					_standing = true;
+					break;
 				}
 			}
 			
