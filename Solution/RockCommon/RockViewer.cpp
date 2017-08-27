@@ -23,6 +23,9 @@
 const int DRAW_UI_Y = 512;
 const int HP_GRAPH_HEIGHT = 16;
 const int HP_GRAPH_WIDTH = 8;
+const int MONEY_GRAPH_HEIGHT = 16;
+const int MONEY_GRAPH_WIDTH = 12;
+const int MONEY_Y = DRAW_UI_Y + 102;
 
 RockViewerPtr RockViewer::getTask( ) {
 	return std::dynamic_pointer_cast< RockViewer >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -41,6 +44,7 @@ void RockViewer::initialize( ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
 	_status_flame = drawer->createImage( "UI/status_plate.png" );
 	_status_ui = drawer->createImage( "UI/ui.png" );
+	_status_num = drawer->createImage( "UI/ui_num.png" );
 }
 
 void RockViewer::update( ) {
@@ -199,5 +203,20 @@ void RockViewer::drawUI( ) const {
 		int sy = DRAW_UI_Y + 50;
 		_status_ui->setPos( sx, sy );
 		_status_ui->draw( );
+		//(MONEY)
+		int money = _status->getPlayer( i ).money;
+		int digit = 0;
+		while( money > 0 ) {
+			digit++;
+			money /= 10;
+		}
+		for ( int j = 0; j < digit; j++ ) {
+			int num = _status->getPlayer( i ).money % (int)pow( 10.0, (double)j + 1 );
+			num /= (int)pow( 10.0, (double)j );
+			_status_num->setRect( MONEY_GRAPH_WIDTH * num, 0, MONEY_GRAPH_WIDTH, MONEY_GRAPH_HEIGHT );
+			_status_num->setPos( -j * MONEY_GRAPH_WIDTH + 275, MONEY_Y );
+			_status_num->draw( );
+		}
 	}
 }
+
