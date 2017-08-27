@@ -2,6 +2,9 @@
 #include "RockFamily.h"
 #include "RockPlayer.h"
 #include "MessageSender.h"
+#include "RockAlter.h"
+#include "RockCasket.h"
+#include "RockStorage.h"
 
 const Vector ENTRY_POS = Vector( 200, 0, 270 );
 const double ENTRY_RADIUS = 40;
@@ -21,6 +24,10 @@ RockMapTest::RockMapTest( ) {
 	col01->setTrans( Matrix::makeTransformTranslation( Vector( 0, 10, 0 ) ) );
 	col01->draw( );
 	addColModel( col01 );
+
+	RockStoragePtr sorage = RockStorage::getTask();
+	sorage->addAlter( RockAlterPtr( new RockAlter( Vector( 200, 0, 0 ) ) ) );
+	sorage->addCasket( RockCasketPtr( new RockCasket( Vector( 0, 0, 0 ) ) ) );
 }
 
 
