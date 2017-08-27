@@ -26,6 +26,14 @@ int SynchronousData::getSize( ) {
 	return sizeof( _data );
 }
 
+EVENT SynchronousData::getEvent( ) const {
+	return _data.event;
+}
+
+void SynchronousData::setEvent( EVENT event ) {
+	_data.event = event;
+}
+
 int SynchronousData::getCameraX( ) const {
 	return _data.camera_x;
 }

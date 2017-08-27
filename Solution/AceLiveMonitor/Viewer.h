@@ -6,10 +6,9 @@
 PTR( Viewer );
 PTR( ViewerStreet );
 PTR( ViewerEvent );
+PTR( ViewerTitle );
 PTR( ViewerStatus );
-
 PTR( ViewerDebug );
-
 PTR( ViewerObject );
 
 class Viewer : public Task {
@@ -23,9 +22,10 @@ public:
 	void initialize( );
 	void update( );
 private:
-	ViewerStreetConstPtr _viewer_street;
-	ViewerStatusConstPtr _viewer_status;
-	ViewerEventConstPtr _viewer_event;
+	ViewerStreetPtr _viewer_street;
+	ViewerStatusPtr _viewer_status;
+	ViewerEventPtr _viewer_event;
+	ViewerTitlePtr _viewer_title;
 
 	ViewerDebugConstPtr _viewer_debug;
 

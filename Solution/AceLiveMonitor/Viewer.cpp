@@ -5,7 +5,7 @@
 #include "ViewerStreet.h"
 #include "ViewerStatus.h"
 #include "ViewerEvent.h"
-
+#include "ViewerTitle.h"
 #include "ViewerDebug.h"
 #include "Debug.h"
 
@@ -17,8 +17,6 @@ const int EVENT_SX = 0;
 const int EVENT_SY = 0;
 const int MAIN_SX  = 0;
 const int MAIN_SY  = 256;
-
-
 
 ViewerPtr Viewer::getTask( ) {
 	return std::dynamic_pointer_cast< Viewer >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -33,14 +31,16 @@ Viewer::~Viewer( ) {
 void Viewer::initialize( ) {
 	_viewer_street		= ViewerStreetPtr	( new ViewerStreet );
 	_viewer_event		= ViewerEventPtr	( new ViewerEvent );
+	_viewer_title       = ViewerTitlePtr    ( new ViewerTitle );
 	_viewer_status		= ViewerStatusPtr	( new ViewerStatus );
 
 	_viewer_debug = ViewerDebugPtr( new ViewerDebug );
 
-	_viewer_object = ViewerObjectPtr  ( new ViewerObject );
+	_viewer_object = ViewerObjectPtr( new ViewerObject );
 }
 
 void Viewer::update( ) {
+	SynchronousDataPtr data( SynchronousData::getTask( ) );
 
 	DrawerPtr drawer( Drawer::getTask( ) );
 	drawer->waitForSync( );
@@ -55,7 +55,13 @@ void Viewer::update( ) {
 	_viewer_street->draw( ViewerStreet::LAYER_FRONT, MAIN_SX, MAIN_SY, camera_pos );
 
 	// イベント描画
-	_viewer_event->draw( EVENT_SX, EVENT_SY );
+	unsigned char event = data->getEvent( );
+	if ( event == EVENT_NONE ) {
+		_viewer_title->draw( );
+	} else {
+		_viewer_event->draw( /*event*/EVENT_SX, EVENT_SY );
+	}
+
 	_viewer_object->draw( AREA_EVENT, EVENT_SX, EVENT_SY );
 	
 	// ステータス描画
@@ -67,6 +73,5 @@ void Viewer::update( ) {
 	}
 
 	// 同期データ初期化
-	SynchronousDataPtr data( SynchronousData::getTask( ) );
 	data->resetObject( );
 }
