@@ -1,10 +1,9 @@
 #pragma once
 #include "RockEnemy.h"
-
-class RockEnemyWaterGhost : public RockEnemy {
+class RockEnemyBossRcok : public RockEnemy {
 public:
-	RockEnemyWaterGhost( const Vector& pos );
-	virtual ~RockEnemyWaterGhost( );
+	RockEnemyBossRcok( const Vector& pos );
+	virtual ~RockEnemyBossRcok( );
 public:
 	double getAnimTime( ) const;
 	void dropItem( );
