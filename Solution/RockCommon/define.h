@@ -8,9 +8,9 @@ const int MESSAGE_COUNT = 10;
 const unsigned int STATE_NONE		= 0b0000000000000000;
 const unsigned int STATE_ENTRY		= 0b0000000000000001;
 const unsigned int AREA_STREET_1	= 0b0000000000000010;
-const unsigned int AREA_STREET_2	= 0b0000000000000100;
+const unsigned int AREA_STREET_2	= 0b0000000000000100; //É{ÉXêÌ
 const unsigned int AREA_STREET_3	= 0b0000000000001000;
-const unsigned int STATE_BOSS		= 0b0000000000010000;
+const unsigned int STATE_BOSS		= 0b0000000000010000; //ëΩï™égÇÌÇ»Ç¢
 const unsigned int STATE_RESULT		= 0b0000000000100000;
 const unsigned int STATE_TEST		= 0b0000000001000000;
 
