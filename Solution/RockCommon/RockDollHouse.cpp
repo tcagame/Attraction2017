@@ -60,6 +60,7 @@ void RockDollHouse::initialize( ) {
 	_dolls[ DOLL_MONEY_2 ]->load( "Resource/Rock/item/itm06/itm06.mv1" );
 	_dolls[ DOLL_MONEY_3 ]->load( "Resource/Rock/item/itm07/itm07.mv1" );
 	_dolls[ DOLL_MONEY_4 ]->load( "Resource/Rock/item/itm08/itm08.mv1" );
+	_dolls[ DOLL_SACRED_ROCK ]->load( "Resource/Rock/object/sacred/sacred_rock.mv1" );
 
 	//obj
 	_dolls[ DOLL_ALTER_BEFORE	]->load( "Resource/Rock/object/obj04/obj04.mv1" );

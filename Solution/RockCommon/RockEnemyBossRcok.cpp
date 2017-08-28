@@ -1,6 +1,7 @@
 #include "RockEnemyBossRcok.h"
 #include "RockStorage.h"
 #include "RockItemMoney.h"
+#include "RockItemRock.h"
 
 const int HP = 50;
 
@@ -21,5 +22,7 @@ double RockEnemyBossRcok::getAnimTime( ) const {
 }
 
 void RockEnemyBossRcok::dropItem( ) {
-	RockStorage::getTask( )->addItem( RockItemPtr( new RockItemMoney( getPos( ) + Vector( 0, getRadius( ), 0 ), RockItemMoney::MONEY_VALUE_3 ) ) );
+	RockStoragePtr storage( RockStorage::getTask( ) );
+	//storage->addItem( RockItemPtr( new RockItemMoney( getPos( ) + Vector( 0, getRadius( ), 0 ), RockItemMoney::MONEY_VALUE_3 ) ) );
+	storage->addItem( RockItemPtr( new RockItemRock( getPos( ) + Vector( 0, getRadius( ), 0 ) ) ) );
 }
