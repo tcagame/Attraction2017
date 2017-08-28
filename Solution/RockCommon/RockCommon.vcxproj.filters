@@ -1,17 +1,98 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <ClCompile Include="MessageSender.cpp" />
+    <ClCompile Include="RockAlter.cpp" />
+    <ClCompile Include="RockAncestors.cpp" />
+    <ClCompile Include="RockArmoury.cpp" />
+    <ClCompile Include="RockCamera.cpp" />
+    <ClCompile Include="RockCharacter.cpp" />
+    <ClCompile Include="RockClientInfo.cpp" />
+    <ClCompile Include="RockDollHouse.cpp" />
+    <ClCompile Include="RockFamily.cpp" />
+    <ClCompile Include="RockImpact.cpp" />
+    <ClCompile Include="RockMap.cpp" />
+    <ClCompile Include="RockPlayer.cpp" />
+    <ClCompile Include="RockPop.cpp" />
+    <ClCompile Include="RockShot.cpp" />
+    <ClCompile Include="RockShotPlayer.cpp" />
+    <ClCompile Include="RockTheater.cpp" />
+    <ClCompile Include="RockViewer.cpp" />
+    <ClCompile Include="RockEnemy.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="RockEnemyBossRock.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="RockEnemyCloud.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="RockEnemyFaceAndHand.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="RockEnemyGhost.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="RockEnemyRedBard.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="RockEnemyWaterGhost.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="RockItem.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="RockItemDango.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="RockItemMoney.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="RockItemRock.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="RockStorage.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="RockMilitary.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="RockCasket.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="RockItemBubble.cpp" />
+  </ItemGroup>
+  <ItemGroup>
     <ClInclude Include="define.h" />
-    <ClInclude Include="Status.h" />
     <ClInclude Include="Message.h" />
+    <ClInclude Include="MessageSender.h" />
+    <ClInclude Include="RockAlter.h" />
+    <ClInclude Include="RockAncestors.h" />
+    <ClInclude Include="RockArmoury.h" />
+    <ClInclude Include="RockCamera.h" />
+    <ClInclude Include="RockCharacter.h" />
+    <ClInclude Include="RockClientInfo.h" />
     <ClInclude Include="RockDollHouse.h" />
+    <ClInclude Include="RockFamily.h" />
+    <ClInclude Include="RockImpact.h" />
     <ClInclude Include="RockMap.h" />
     <ClInclude Include="RockPlayer.h" />
+    <ClInclude Include="RockPop.h" />
+    <ClInclude Include="RockShot.h" />
+    <ClInclude Include="RockShotPlayer.h" />
+    <ClInclude Include="RockTheater.h" />
     <ClInclude Include="RockViewer.h" />
-    <ClInclude Include="RockFamily.h" />
-    <ClInclude Include="RockMilitary.h" />
-    <ClInclude Include="RockCharacter.h" />
+    <ClInclude Include="Status.h" />
     <ClInclude Include="RockEnemy.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="RockEnemyBossRock.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="RockEnemyCloud.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="RockEnemyFaceAndHand.h">
       <Filter>Enemy</Filter>
     </ClInclude>
     <ClInclude Include="RockEnemyGhost.h">
@@ -23,26 +104,16 @@
     <ClInclude Include="RockEnemyWaterGhost.h">
       <Filter>Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="RockClientInfo.h" />
-    <ClInclude Include="MessageSender.h" />
-    <ClInclude Include="RockArmoury.h" />
-    <ClInclude Include="RockShot.h" />
-    <ClInclude Include="RockPop.h" />
-    <ClInclude Include="RockStorage.h" />
     <ClInclude Include="RockItem.h">
       <Filter>Item</Filter>
     </ClInclude>
-    <ClInclude Include="RockImpact.h" />
     <ClInclude Include="RockItemDango.h">
       <Filter>Item</Filter>
     </ClInclude>
     <ClInclude Include="RockItemMoney.h">
       <Filter>Item</Filter>
     </ClInclude>
-    <ClInclude Include="RockCamera.h" />
-    <ClInclude Include="RockAlter.h" />
-    <ClInclude Include="RockAncestors.h" />
-    <ClInclude Include="RockCasket.h">
+    <ClInclude Include="RockItemRock.h">
       <Filter>Item</Filter>
     </ClInclude>
     <ClInclude Include="RockEnemyBossRcok.h" />
@@ -82,15 +153,13 @@
     </ClCompile>
     <ClCompile Include="RockImpact.cpp" />
     <ClCompile Include="RockItemDango.cpp">
+    <ClInclude Include="RockStorage.h">
       <Filter>Item</Filter>
-    </ClCompile>
-    <ClCompile Include="RockItemMoney.cpp">
-      <Filter>Item</Filter>
-    </ClCompile>
-    <ClCompile Include="RockCamera.cpp" />
-    <ClCompile Include="RockAlter.cpp" />
-    <ClCompile Include="RockAncestors.cpp" />
-    <ClCompile Include="RockCasket.cpp">
+    </ClInclude>
+    <ClInclude Include="RockMilitary.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="RockCasket.h">
       <Filter>Item</Filter>
     </ClCompile>
     <ClCompile Include="RockEnemyBossRcok.cpp" />
@@ -98,13 +167,15 @@
     <ClCompile Include="RockShotPlayer.cpp" />
     <ClCompile Include="RockShotAncestors.cpp" />
     <ClCompile Include="RockStudio.cpp" />
+    </ClInclude>
+    <ClInclude Include="RockItemBubble.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Enemy">
-      <UniqueIdentifier>{798042c5-9a2c-4eb9-b79f-655988dd30a0}</UniqueIdentifier>
+      <UniqueIdentifier>{0ae4bc56-cd6e-412a-b9ba-734de402e5eb}</UniqueIdentifier>
     </Filter>
     <Filter Include="Item">
-      <UniqueIdentifier>{594e114e-192e-4280-97d9-f9da9516142a}</UniqueIdentifier>
+      <UniqueIdentifier>{bed95a79-4aa9-4277-9ac5-030dba8a6c65}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
