@@ -13,6 +13,8 @@
 #include "SynchronousData.h"
 #include "Family.h"
 
+#include "MapStreet.h"
+
 const int EVENT_SX = 0;
 const int EVENT_SY = 0;
 const int MAIN_SX  = 0;
@@ -29,7 +31,9 @@ Viewer::~Viewer( ) {
 }
 
 void Viewer::initialize( ) {
-	_viewer_street		= ViewerStreetPtr	( new ViewerStreet );
+	MapStreetPtr map( MapStreet::getTask( ) );
+
+	_viewer_street		= ViewerStreetPtr	( new ViewerStreet( map->getPageNum( ) ) );
 	_viewer_event		= ViewerEventPtr	( new ViewerEvent );
 	_viewer_title       = ViewerTitlePtr    ( new ViewerTitle );
 	_viewer_status		= ViewerStatusPtr	( new ViewerStatus );

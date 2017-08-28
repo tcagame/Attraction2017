@@ -4,7 +4,7 @@
 
 class ViewerStreet {
 public:
-	ViewerStreet( );
+	ViewerStreet( int page_num );
 	virtual ~ViewerStreet( );
 public:
 	enum LAYER {
