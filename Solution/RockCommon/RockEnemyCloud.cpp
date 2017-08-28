@@ -1,8 +1,12 @@
 #include "RockEnemyCloud.h"
 #include "RockStorage.h"
 #include "RockItemMoney.h"
+#include "RockFamily.h"
+#include "RockPlayer.h"
 
 const int HP = 20;
+const int MOVE_SPEED = 2;
+const Vector SEARCH_RANGE( 10000, 10000, 10000 );
 
 RockEnemyCloud::RockEnemyCloud( const Vector& pos ) :
 RockEnemy( pos, DOLL_CLOUD, HP, 1, 10, 10, false, true ) {
@@ -13,7 +17,22 @@ RockEnemyCloud::~RockEnemyCloud( ) {
 }
 
 void RockEnemyCloud::act( ) {
-
+	Vector near_distance( SEARCH_RANGE );
+	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+		RockPlayerPtr player = RockFamily::getTask( )->getPlayer( i );
+		if ( !player->isActive( ) ) {
+			continue;
+		}
+		Vector distance = player->getPos( ) - getPos( );
+		if ( near_distance.getLength( ) > distance.getLength( ) ) {
+			near_distance = distance;
+		}
+	}
+	if ( near_distance != SEARCH_RANGE ) {
+		Vector dir = near_distance.normalize( );
+		Vector vec = dir * MOVE_SPEED;
+		setVec( vec );
+	}
 }
 
 double RockEnemyCloud::getAnimTime( ) const {
