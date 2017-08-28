@@ -20,9 +20,6 @@
     <ClInclude Include="RockEnemyRedBard.h">
       <Filter>Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="RockEnemyWaterGhost.h">
-      <Filter>Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="RockClientInfo.h" />
     <ClInclude Include="MessageSender.h" />
     <ClInclude Include="RockArmoury.h" />
@@ -46,12 +43,26 @@
       <Filter>Item</Filter>
     </ClInclude>
     <ClInclude Include="RockTheater.h" />
+<<<<<<< HEAD
     <ClInclude Include="RockEnemyBossRcok.h">
       <Filter>Enemy</Filter>
     </ClInclude>
     <ClInclude Include="RockItemRock.h">
       <Filter>Item</Filter>
     </ClInclude>
+=======
+    <ClInclude Include="RockEnemyWaterGhost.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="RockEnemyFaceAndHand.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="RockEnemyBossRock.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="RockEnemyCloud.h" />
+    <ClInclude Include="RockShotPlayer.h" />
+>>>>>>> 9e51b416a416184314b29ddfecb53347f65b1043
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RockDollHouse.cpp" />
@@ -96,12 +107,23 @@
       <Filter>Item</Filter>
     </ClCompile>
     <ClCompile Include="RockTheater.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="RockEnemyBossRcok.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
     <ClCompile Include="RockItemRock.cpp">
       <Filter>Item</Filter>
     </ClCompile>
+=======
+    <ClCompile Include="RockEnemyFaceAndHand.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="RockEnemyBossRock.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="RockEnemyCloud.cpp" />
+    <ClCompile Include="RockShotPlayer.cpp" />
+>>>>>>> 9e51b416a416184314b29ddfecb53347f65b1043
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Enemy">

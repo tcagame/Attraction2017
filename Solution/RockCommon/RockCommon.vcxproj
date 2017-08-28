@@ -175,7 +175,7 @@
     <ClInclude Include="define.h" />
     <ClInclude Include="Message.h" />
     <ClInclude Include="MessageSender.h" />
-    <ClInclude Include="RockEnemyBossRcok.h" />
+    <ClInclude Include="RockEnemyBossRock.h" />
     <ClInclude Include="RockAlter.h" />
     <ClInclude Include="RockAncestors.h" />
     <ClInclude Include="RockArmoury.h" />
@@ -184,6 +184,8 @@
     <ClInclude Include="RockClientInfo.h" />
     <ClInclude Include="RockDollHouse.h" />
     <ClInclude Include="RockEnemy.h" />
+    <ClInclude Include="RockEnemyCloud.h" />
+    <ClInclude Include="RockEnemyFaceAndHand.h" />
     <ClInclude Include="RockEnemyGhost.h" />
     <ClInclude Include="RockEnemyRedBard.h" />
     <ClInclude Include="RockEnemyWaterGhost.h" />
@@ -199,6 +201,7 @@
     <ClInclude Include="RockPlayer.h" />
     <ClInclude Include="RockPop.h" />
     <ClInclude Include="RockShot.h" />
+    <ClInclude Include="RockShotPlayer.h" />
     <ClInclude Include="RockStorage.h" />
     <ClInclude Include="RockTheater.h" />
     <ClInclude Include="RockViewer.h" />
@@ -206,7 +209,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MessageSender.cpp" />
-    <ClCompile Include="RockEnemyBossRcok.cpp" />
+    <ClCompile Include="RockEnemyBossRock.cpp" />
     <ClCompile Include="RockAlter.cpp" />
     <ClCompile Include="RockAncestors.cpp" />
     <ClCompile Include="RockArmoury.cpp" />
@@ -215,6 +218,8 @@
     <ClCompile Include="RockClientInfo.cpp" />
     <ClCompile Include="RockDollHouse.cpp" />
     <ClCompile Include="RockEnemy.cpp" />
+    <ClCompile Include="RockEnemyCloud.cpp" />
+    <ClCompile Include="RockEnemyFaceAndHand.cpp" />
     <ClCompile Include="RockEnemyGhost.cpp" />
     <ClCompile Include="RockEnemyRedBard.cpp" />
     <ClCompile Include="RockEnemyWaterGhost.cpp" />
@@ -230,6 +235,7 @@
     <ClCompile Include="RockPlayer.cpp" />
     <ClCompile Include="RockPop.cpp" />
     <ClCompile Include="RockShot.cpp" />
+    <ClCompile Include="RockShotPlayer.cpp" />
     <ClCompile Include="RockStorage.cpp" />
     <ClCompile Include="RockTheater.cpp" />
     <ClCompile Include="RockViewer.cpp" />

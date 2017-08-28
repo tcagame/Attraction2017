@@ -29,7 +29,7 @@ RockMapTest::RockMapTest( ) {
 	
 	RockStoragePtr sorage = RockStorage::getTask();
 	sorage->addAlter( RockAlterPtr( new RockAlter( Vector( 200, 0, 0 ) ) ) );
-	sorage->addCasket( RockCasketPtr( new RockCasket( Vector( 0, 0, 0 ) ) ) );
+	sorage->addCasket( RockCasketPtr( new RockCasket( Vector( 0, 0, -50 ) ) ) );
 
 }
 
@@ -50,7 +50,6 @@ void RockMapTest::update( ) {
 			MessageSender::getTask( )->sendMessage( i, Message::COMMAND_STATE, &area );
 		}
 	}
-	//_movie->draw( );
 }
 
 bool RockMapTest::isNext( const Vector& pos ) const {
