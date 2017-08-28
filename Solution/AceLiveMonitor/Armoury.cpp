@@ -43,12 +43,6 @@ void Armoury::updateEnemy( ) {
 		_shot_list[ i ]->setSynchronousData( SynchronousData::TYPE_SHOT, camera_pos );
 		EnemyPtr hit_enemy = militari->getOverlappedEnemy( _shot_list[ i ] );
 		if ( hit_enemy ) {
-			hit_enemy->damage( _shot_list[ i ]->getPower( ) );
-			EnemyGamaPtr gama( std::dynamic_pointer_cast< EnemyGama >( hit_enemy ) );
-			if ( gama->isGuide( ) ) {
-				PLAYER player_id = _shot_list[ i ]->getPlayer( );
-				Family::getTask( )->getPlayer( player_id )->presentGmblePath( );
-			}
 			if ( !hit_enemy->isFinished( ) ) {
 				//エネミーが倒れなかったらショットが当たった位置で爆発
 				Vector impact_pos = _shot_list[ i ]->getPos( );
