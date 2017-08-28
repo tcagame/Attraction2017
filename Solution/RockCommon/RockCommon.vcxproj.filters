@@ -53,6 +53,7 @@
       <Filter>Enemy</Filter>
     </ClInclude>
     <ClInclude Include="RockEnemyCloud.h" />
+    <ClInclude Include="RockShotPlayer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RockDollHouse.cpp" />
@@ -104,6 +105,7 @@
       <Filter>Enemy</Filter>
     </ClCompile>
     <ClCompile Include="RockEnemyCloud.cpp" />
+    <ClCompile Include="RockShotPlayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Enemy">

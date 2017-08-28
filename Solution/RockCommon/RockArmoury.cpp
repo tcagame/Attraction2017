@@ -7,6 +7,7 @@
 #include "RockEnemy.h"
 #include <list>
 #include "Effect.h"
+#include "RockShotPlayer.h"
 
 RockArmouryPtr RockArmoury::getTask( ) {
 	return std::dynamic_pointer_cast< RockArmoury >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -40,36 +41,27 @@ int RockArmoury::getEffectChageShotId( ) const {
 
 
 void RockArmoury::update( ) {
-	std::list< RockShotPtr >::iterator shot_ite = _shots.begin( );
-	while( shot_ite != _shots.end( ) ) {
-		RockShotPtr shot = *shot_ite;
+	std::list< RockShotPtr >::iterator ite = _shots.begin( );
+	while( ite != _shots.end( ) ) {
+		RockShotPtr shot = *ite;
 		if ( !shot ) {
-			shot_ite++;
+			ite++;
 			continue;
 		}
 		if ( shot->isFinished( ) ) {
-			shot_ite = _shots.erase( shot_ite );
+			ite = _shots.erase( ite );
 			continue;
 		}
-
 		shot->update( );
-		std::list< RockEnemyPtr > enemies = RockMilitary::getTask( )->getEnemyList( );
-		std::list< RockEnemyPtr >::iterator ene_ite = enemies.begin( );
-		while ( ene_ite != enemies.end( ) ) {
-			RockEnemyPtr enemy = *ene_ite;
-			if ( !enemy ) {
-				ene_ite++;
-				continue;
+		RockEnemyPtr enemy = getOverLappedEnemy( shot );
+		if ( enemy ) {
+			enemy->damage( shot->getPower( ) );
+			RockShotPlayerPtr player_shot = std::dynamic_pointer_cast< RockShotPlayer >( shot );
+			if ( player_shot ) {
+				player_shot->setBack( );
 			}
-
-			if ( shot->isOverLapped( enemy ) ) {
-				enemy->damage( shot->getPower( ) );
-				shot->setBack( );
-				break;
-			}
-			ene_ite++;
 		}
-		shot_ite++;
+		ite++;
 	}
 }
 
@@ -79,4 +71,23 @@ std::list< RockShotPtr > RockArmoury::getShots( ) const {
 
 void RockArmoury::addShot( RockShotPtr shot ) {
 	_shots.push_back( shot );
+}
+
+RockEnemyPtr RockArmoury::getOverLappedEnemy( RockShotPtr shot ) const {
+	RockEnemyPtr result = RockEnemyPtr( );
+	std::list< RockEnemyPtr > enemies = RockMilitary::getTask( )->getEnemyList( );
+	std::list< RockEnemyPtr >::iterator ite = enemies.begin( );
+	while ( ite != enemies.end( ) ) {
+		RockEnemyPtr enemy = *ite;
+		if ( !enemy ) {
+			ite++;
+			continue;
+		}
+		if ( shot->isOverLapped( enemy ) ) {
+			result = enemy;
+			break;
+		}
+		ite++;
+	}
+	return result;
 }
