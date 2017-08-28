@@ -64,7 +64,7 @@ void RockViewer::update( ) {
 }
 
 void RockViewer::drawMap( ) const {
-	std::vector< ModelMV1Ptr > models = RockMap::getTask( )->getModels( );
+	std::vector< ModelMV1Ptr > models = RockMap::getTask( )->getColModels( );
 	int size = ( int )models.size( );
 	for ( int i = 0; i < size; i++ ) {
 		models[ i ]->draw( );
