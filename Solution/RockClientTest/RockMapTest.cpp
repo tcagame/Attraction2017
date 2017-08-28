@@ -52,7 +52,7 @@ void RockMapTest::update( ) {
 			MessageSender::getTask( )->sendMessage( i, Message::COMMAND_STATE, &area );
 		}
 	}
-	_movie->draw( );
+	//_movie->draw( );
 }
 
 bool RockMapTest::isNext( const Vector& pos ) const {

@@ -21,7 +21,7 @@ RockArmoury::~RockArmoury( ) {
 
 void RockArmoury::initialize( ) {
 	EffectPtr effect( Effect::getTask( ) );
-	_shot_id = effect->loadEffect( EFFECT_SHOT, "laser.efk" );
+	_shot_id = effect->loadEffect( EFFECT_SHOT, "shot.efk" );
 	_charge_id = effect->loadEffect( EFFECT_CHARGE, "charge.efk" );
 }
 
