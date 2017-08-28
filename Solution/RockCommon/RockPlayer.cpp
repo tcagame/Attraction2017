@@ -14,6 +14,7 @@
 #include "Drawer.h"
 #include "MessageSender.h"
 #include "Effect.h"
+#include "RockShotPlayer.h"
 
 //ˆÚ“®
 static const double JUMP_POWER = 3.0;
@@ -226,11 +227,11 @@ void RockPlayer::actOnAttacking( ) {
 	// UŒ‚ƒ{ƒ^ƒ“‚ª—£‚³‚ê‚½‚çUŒ‚
 	if ( !( player.device_button & BUTTON_A ) &&
 		 _attack_count > 0 ) {
-		int power = _attack_count / ( MAX_CHARGE_COUNT / ( MAX_SHOT_POWER - 1 ) ) + 1;
+		int power = _attack_count / ( MAX_CHARGE_COUNT / ( MAX_PLAYER_SHOT_POWER - 1 ) ) + 1;
 		if ( player.item & ITEM_ENHANCED_ATTACK ) {
 			power *= ENHANCED_POWER;
 		}
-		RockShotPtr shot( new RockShot( _id, getPos( ), getDir( ), power ) );
+		RockShotPtr shot( new RockShotPlayer( _id, getPos( ), getDir( ), power ) );
 		RockArmoury::getTask( )->addShot( shot );
 		setAction( ACTION_WAIT );
 		Effect::getTask( )->stopEffect( _effect_handle );

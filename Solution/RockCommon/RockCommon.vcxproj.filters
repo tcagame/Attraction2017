@@ -47,6 +47,7 @@
     </ClInclude>
     <ClInclude Include="RockEnemyBossRcok.h" />
     <ClInclude Include="RockTheater.h" />
+    <ClInclude Include="RockShotPlayer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RockDollHouse.cpp" />
@@ -92,6 +93,7 @@
     </ClCompile>
     <ClCompile Include="RockEnemyBossRcok.cpp" />
     <ClCompile Include="RockTheater.cpp" />
+    <ClCompile Include="RockShotPlayer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Enemy">

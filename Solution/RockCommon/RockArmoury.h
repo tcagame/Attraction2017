@@ -5,6 +5,8 @@
 
 PTR( RockArmoury );
 PTR( RockShot );
+PTR( RockShotPlayer );
+PTR( RockEnemy );
 
 class RockArmoury : public Task {
 public:
@@ -21,6 +23,8 @@ public:
 	int getEffectShotId( ) const;
 	int getEffectChageShotId( ) const;
 	std::list< RockShotPtr > getShots( ) const;
+private:
+	RockEnemyPtr getOverLappedEnemy( RockShotPtr shot ) const;
 private:
 	int _shot_id;
 	int _charge_shot_id;
