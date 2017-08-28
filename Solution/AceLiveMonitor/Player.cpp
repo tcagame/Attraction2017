@@ -54,8 +54,7 @@ _toku( 0 ),
 _charge_count( 0 ),
 _unrivaled_count( MAX_UNRIVALED_COUNT ),
 _monmo( MonmotaroPtr( ) ),
-_action( ACTION_WAIT ),
-_entry_gamble( false ) {
+_action( ACTION_WAIT ) {
 	setRadius( 25 );
 	setDir( DIR_RIGHT );
 }
@@ -498,6 +497,7 @@ void Player::updateState( ) {
 		}
 	}
 	//“q”Žê‚É“ü‚é
+	/*
 	if ( _entry_gamble && event == EVENT_NONE ) {
 		map_event->setEvent( EVENT_GAMBLE );
 		office->popUpNPC( );
@@ -506,6 +506,8 @@ void Player::updateState( ) {
 		setVec( Vector( ) );
 		_entry_gamble = false;
 	}
+	*/
+
 	
 	if ( map->getObject( getPos( ) + getVec( ) ) == OBJECT_EVENT_CALL ) {
 		map->usedObject( getPos( ) + getVec( ) );
@@ -766,8 +768,4 @@ int Player::getDeviceId( ) const {
 
 MonmotaroConstPtr Player::getMonmotaro( ) const {
 	return _monmo;
-}
-
-void Player::presentGmblePath( ) {
-	_entry_gamble = true;
 }
