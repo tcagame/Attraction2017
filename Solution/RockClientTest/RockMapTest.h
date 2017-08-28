@@ -12,6 +12,5 @@ public:
 	void update( );
 private:
 	bool isNext( const Vector& pos ) const;
-	MoviePtr _movie;
 };
 

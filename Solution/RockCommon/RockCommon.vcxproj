@@ -199,6 +199,7 @@
     <ClInclude Include="RockPop.h" />
     <ClInclude Include="RockShot.h" />
     <ClInclude Include="RockStorage.h" />
+    <ClInclude Include="RockTheater.h" />
     <ClInclude Include="RockViewer.h" />
     <ClInclude Include="Status.h" />
   </ItemGroup>
@@ -228,6 +229,7 @@
     <ClCompile Include="RockPop.cpp" />
     <ClCompile Include="RockShot.cpp" />
     <ClCompile Include="RockStorage.cpp" />
+    <ClCompile Include="RockTheater.cpp" />
     <ClCompile Include="RockViewer.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

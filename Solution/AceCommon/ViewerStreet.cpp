@@ -3,21 +3,19 @@
 #include "MapStreet.h"
 #include "ace_define.h"
 
-ViewerStreet::ViewerStreet( ) {
+ViewerStreet::ViewerStreet( int page_num ) {
 	MapStreetPtr map = MapStreet::getTask( );
-	_num = map->getPageNum( );
+	_num = page_num;
 
 	DrawerPtr drawer( Drawer::getTask( ) );
 	char buf[ 256 ];
 
+	_images.resize( _num * 2 );
 	for ( int i = 0; i < _num; i++ ) {
 		sprintf_s( buf, "Map/back_%003d.png", i );
-		_images.push_back( drawer->createImage( buf ) );
-	}
-
-	for ( int i = 0; i < _num; i++ ) {
+		_images[ _num * 0 + i ] = drawer->createImage( buf );
 		sprintf_s( buf, "Map/front_%003d.png", i );
-		_images.push_back( drawer->createImage( buf ) );
+		_images[ _num * 1 + i ] = drawer->createImage( buf );
 	}
 
 }
