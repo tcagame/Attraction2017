@@ -3,26 +3,27 @@
 #include "RockFamily.h"
 #include "RockPlayer.h"
 #include "Effect.h"
+#include "RockStudio.h"
 
 const int MOVE_SPEED = 3;
-const Vector FOOT( 0, 35, 0 ); // ƒvƒŒƒCƒ„[‚Ì‘«Œ³‚©‚ç‚Ì‚‚³
 const double EFFECT_NORMAL_SIZE = 10.0;
 const double EFFECT_CHARGE_SIZE = 5.0;
 const int ACTIVE_COUNT = 150;
 
 RockShotPlayer::RockShotPlayer( const int id, const Vector& pos, const Vector& dir, const int power ) :
-RockShot( id, pos + FOOT, dir, power ),
-_back( false ) {
+RockShot( pos, dir, power ),
+_back( false ),
+_target_id( id ) {
 	setVec( dir * MOVE_SPEED );
 	EffectPtr effect = Effect::getTask( );
-	RockArmouryPtr armoury = RockArmoury::getTask( );
+	RockStudioPtr studio = RockStudio::getTask( );
 
 	if ( power == MAX_PLAYER_SHOT_POWER ) {
 		setSize( EFFECT_CHARGE_SIZE );
-		setEffectHandle( effect->playEffect( armoury->getEffectChageShotId( ) ) );
+		setEffectHandle( effect->playEffect( studio->getEffectHandle( EFFECT_CHARGE_SHOT ) ) );
 	} else {
 		setSize( EFFECT_NORMAL_SIZE );
-		setEffectHandle( effect->playEffect( armoury->getEffectShotId( ) ) );
+		setEffectHandle( effect->playEffect( studio->getEffectHandle( EFFECT_SHOT ) ) );
 	}
 
 
@@ -54,8 +55,8 @@ void RockShotPlayer::act( ) {
 }
 
 void RockShotPlayer::actOutBack( ) {
-	RockPlayerPtr player = RockFamily::getTask( )->getPlayer( getTargetId( ) );
-	Vector diff = ( player->getPos( ) + FOOT - getPos( ) );
+	RockPlayerPtr player = RockFamily::getTask( )->getPlayer( _target_id );
+	Vector diff = ( player->getPos( ) + Vector( 0, getRadius( ), 0 ) - getPos( ) );
 	if ( diff.getLength2( ) > MOVE_SPEED * MOVE_SPEED ) {
 		setVec( diff.normalize( ) * MOVE_SPEED );
 	} else {

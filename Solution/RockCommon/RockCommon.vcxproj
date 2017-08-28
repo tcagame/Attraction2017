@@ -202,8 +202,10 @@
     <ClInclude Include="RockPlayer.h" />
     <ClInclude Include="RockPop.h" />
     <ClInclude Include="RockShot.h" />
+    <ClInclude Include="RockShotAncestors.h" />
     <ClInclude Include="RockShotPlayer.h" />
     <ClInclude Include="RockStorage.h" />
+    <ClInclude Include="RockStudio.h" />
     <ClInclude Include="RockTheater.h" />
     <ClInclude Include="RockViewer.h" />
     <ClInclude Include="Status.h" />
@@ -237,8 +239,10 @@
     <ClCompile Include="RockPlayer.cpp" />
     <ClCompile Include="RockPop.cpp" />
     <ClCompile Include="RockShot.cpp" />
+    <ClCompile Include="RockShotAncestors.cpp" />
     <ClCompile Include="RockShotPlayer.cpp" />
     <ClCompile Include="RockStorage.cpp" />
+    <ClCompile Include="RockStudio.cpp" />
     <ClCompile Include="RockTheater.cpp" />
     <ClCompile Include="RockViewer.cpp" />
   </ItemGroup>

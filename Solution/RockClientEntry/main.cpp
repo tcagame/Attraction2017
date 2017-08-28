@@ -18,6 +18,7 @@
 #include "RockArmoury.h"
 #include "Effect.h"
 #include "RockStorage.h"
+#include "RockStudio.h"
 
 void main( ) {
 
@@ -36,6 +37,7 @@ void main( ) {
 	app->addTask( RockArmoury::getTag( ), TaskPtr( new RockArmoury ) );
 	app->addTask( RockCamera::getTag( ), TaskPtr( new RockCameraEntry ) );
 	app->addTask( RockClientInfo::getTag( ), TaskPtr( new RockClientInfo( STATE_ENTRY ) ) );
+	app->addTask( RockStudio::getTag( ), TaskPtr( new RockStudio( ) ) );
 	app->addTask( MessageSender::getTag( ), TaskPtr( new MessageSender( message ) ) );
 	
 	//通常描画orステータス描画

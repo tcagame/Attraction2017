@@ -14,6 +14,7 @@
 #include "Effect.h"
 #include "RockStorage.h"
 #include "RockDollHouse.h"
+#include "RockStudio.h"
 
 void main( ) {
 
@@ -34,5 +35,6 @@ void main( ) {
 	app->addTask( RockStorage::getTag( ), TaskPtr( new RockStorage( ) ) );
 	app->addTask( RockViewer::getTag( ), TaskPtr( new RockViewer( status ) ) );
 	app->addTask( RockClientInfo::getTag( ), TaskPtr( new RockClientInfo( AREA_STREET_2 ) ) );
+	app->addTask( RockStudio::getTag( ), TaskPtr( new RockStudio( ) ) );
 	app->addTask( RockMapBossCamera::getTag( ), TaskPtr( new RockMapBossCamera ) );
 }
