@@ -39,7 +39,6 @@ public:
 	void pickUpToku( );
 	void setSynchronousData( PLAYER player, int camera_pos ) const;
 	MonmotaroConstPtr getMonmotaro( ) const;
-	void presentGmblePath( );
 private:
 	void actOnWaiting( );
 	void actOnWalking( );
@@ -65,6 +64,5 @@ private:
 	int _over_charge_time;
 	int _charge_count;
 	int _unrivaled_count;
-	bool _entry_gamble;
 };
 

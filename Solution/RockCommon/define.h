@@ -20,6 +20,7 @@ const int ROCK_PLAYER_NUM = 4;
 const int ROCK_PLAYER_MOTION_NUM = 10;
 const double GRAVITY = -0.1;
 const int COLLISION_RANGE = 20;
+const int MAX_SHOT_POWER = 5;
 
 enum DOLL {
 	DOLL_TAROSUKE_WAIT,
@@ -72,6 +73,7 @@ enum DOLL {
 
 enum EFFECT {
 	EFFECT_SHOT,
+	EFFECT_CHARGE_SHOT,
 	EFFECT_CHARGE,
 	EFFECT_IMPACT,
 	MAX_EFFECT

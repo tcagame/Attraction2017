@@ -22,7 +22,4 @@ void main( ) {
 	app->addTask( Drawer  ::getTag( )	  , DrawerPtr	    ( new Drawer( "Resource/Ace" ) ) );
 	app->addTask( Keyboard::getTag( )	  , KeyboardPtr	    ( new Keyboard( ) ) );
 	app->addTask( ViewerConsole::getTag( ), ViewerConsolePtr( new ViewerConsole( getPlayer( ) ) ) );
-
-	app->addTask( MapStreet::getTag( ), MapStreetPtr( new MapStreet( ) ) );
-	app->addTask( MapEvent ::getTag( ), MapEventPtr ( new MapEvent ( ) ) );
 }

@@ -18,6 +18,7 @@
 #include "RockArmoury.h"
 #include "Effect.h"
 #include "RockStorage.h"
+#include "RockTheaterTest.h"
 
 void main( ) {
 
@@ -37,6 +38,7 @@ void main( ) {
 	app->addTask( RockCamera::getTag( ), TaskPtr( new RockCameraTest ) );
 	app->addTask( RockClientInfo::getTag( ), TaskPtr( new RockClientInfo( STATE_TEST ) ) );
 	app->addTask( MessageSender::getTag( ), TaskPtr( new MessageSender( message ) ) );
+	app->addTask( RockTheater::getTag( ), TaskPtr( new RockTheaterTest( ) ) );
 	
 	//通常描画orステータス描画
 	bool status_draw = false;

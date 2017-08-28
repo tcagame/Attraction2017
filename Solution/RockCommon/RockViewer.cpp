@@ -19,6 +19,8 @@
 #include "Effect.h"
 #include "RockAlter.h"
 #include "RockAncestors.h"
+#include "Movie.h"
+#include "RockTheater.h"
 
 const int DRAW_UI_Y = 512;
 const int HP_GRAPH_HEIGHT = 16;
@@ -60,11 +62,12 @@ void RockViewer::update( ) {
 	drawAlter( );
 	drawCasket( );
 	drawUI( );
+	drawMovie( );
 	Effect::getTask( )->drawEffect( );
 }
 
 void RockViewer::drawMap( ) const {
-	std::vector< ModelMV1Ptr > models = RockMap::getTask( )->getModels( );
+	std::vector< ModelMV1Ptr > models = RockMap::getTask( )->getColModels( );
 	int size = ( int )models.size( );
 	for ( int i = 0; i < size; i++ ) {
 		models[ i ]->draw( );
@@ -220,3 +223,13 @@ void RockViewer::drawUI( ) const {
 	}
 }
 
+void RockViewer::drawMovie( ) const {
+	RockTheaterPtr theater = RockTheater::getTask( );
+	if ( !theater ) {
+		return;
+	}
+	MoviePtr movie = theater->getMovie( );
+	if ( movie->isPlay( ) ) {
+		movie->draw( );
+	}
+}

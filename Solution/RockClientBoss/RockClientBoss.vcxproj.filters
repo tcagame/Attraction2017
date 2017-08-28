@@ -5,10 +5,12 @@
     <ClCompile Include="RockMapBoss.cpp" />
     <ClCompile Include="RockMapBossCamera.cpp" />
     <ClCompile Include="RockMilitatyBoss.cpp" />
+    <ClCompile Include="RockMapBossDrawer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RockMapBoss.h" />
     <ClInclude Include="RockMapBossCamera.h" />
     <ClInclude Include="RockMilitatyBoss.h" />
+    <ClInclude Include="RockMapBossDrawer.h" />
   </ItemGroup>
 </Project>

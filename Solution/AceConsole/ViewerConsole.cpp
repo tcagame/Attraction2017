@@ -6,6 +6,7 @@
 #include "ViewerEvent.h"
 #include "SynchronousData.h"
 #include "Client.h"
+#include "MapStreet.h"
 
 const int AREA_SX  = 0;
 const int AREA_SY  = 480 - 256;
@@ -23,9 +24,10 @@ ViewerConsole::~ViewerConsole( ) {
 
 void ViewerConsole::initialize( ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
+	MapStreetPtr map( new MapStreet );
 
 	_viewer_object = ViewerObjectPtr( new ViewerObject );
-	_viewer_street = ViewerStreetPtr( new ViewerStreet );
+	_viewer_street = ViewerStreetPtr( new ViewerStreet( map->getPageNum( ) ) );
 	_viewer_event  = ViewerEventPtr	( new ViewerEvent );
 
 	_image_bar_upper = drawer->createImage( "UI/ui_bar.png" );
@@ -94,6 +96,13 @@ void ViewerConsole::drawAreaEvent( ) {
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
 
 	int camera_pos = data->getStatusX( _player ) - 320;
+	if ( camera_pos < 0 ) {
+		camera_pos = 0;
+	}
+	if ( camera_pos > 1280 - 640 - 1 ) {
+		camera_pos = 1280 - 640 - 1;
+	}
+
 	// ƒCƒxƒ“ƒg•`‰æ
 	EVENT event = data->getEvent( );
 	if ( event == EVENT_NONE ) {
