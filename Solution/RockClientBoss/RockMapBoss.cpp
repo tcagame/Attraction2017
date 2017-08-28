@@ -1,5 +1,7 @@
 #include "RockMapBoss.h"
 #include "RockMapBossDrawer.h"
+#include "RockFamily.h"
+#include "RockPlayer.h"
 
 const int MOVE_TO_NEXT_TIME = 300;
 
@@ -21,5 +23,6 @@ void RockMapBoss::update( ) {
 		_drawer.reset( );
 		_drawer = RockMapBossDrawerPtr( new RockMapBossDrawer( next ) );
 		_time = 0;
+		RockFamily::getTask( )->resetPos( Vector( 0, 100, 0 ) );;		
 	}
 }
