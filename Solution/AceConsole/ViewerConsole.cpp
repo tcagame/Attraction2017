@@ -96,6 +96,13 @@ void ViewerConsole::drawAreaEvent( ) {
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
 
 	int camera_pos = data->getStatusX( _player ) - 320;
+	if ( camera_pos < 0 ) {
+		camera_pos = 0;
+	}
+	if ( camera_pos > 1280 - 640 - 1 ) {
+		camera_pos = 1280 - 640 - 1;
+	}
+
 	// ƒCƒxƒ“ƒg•`‰æ
 	EVENT event = data->getEvent( );
 	if ( event == EVENT_NONE ) {
