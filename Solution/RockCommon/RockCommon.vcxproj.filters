@@ -48,6 +48,8 @@
     <ClInclude Include="RockEnemyBossRcok.h" />
     <ClInclude Include="RockTheater.h" />
     <ClInclude Include="RockShotPlayer.h" />
+    <ClInclude Include="RockShotAncestors.h" />
+    <ClInclude Include="RockStudio.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RockDollHouse.cpp" />
@@ -94,6 +96,8 @@
     <ClCompile Include="RockEnemyBossRcok.cpp" />
     <ClCompile Include="RockTheater.cpp" />
     <ClCompile Include="RockShotPlayer.cpp" />
+    <ClCompile Include="RockShotAncestors.cpp" />
+    <ClCompile Include="RockStudio.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Enemy">

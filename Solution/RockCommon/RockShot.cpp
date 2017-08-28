@@ -5,9 +5,8 @@
 #include "RockArmoury.h"
 
 
-RockShot::RockShot( const int id, const Vector& pos, const Vector& dir, const int power ) :
+RockShot::RockShot( const Vector& pos, const Vector& dir, const int power ) :
 RockCharacter( pos, DOLL_NONE, 32, 32, false, false, false ),
-_target_id( id ),
 _finished( false ),
 _power( power ),
 _size( 1.0 ),
@@ -35,10 +34,6 @@ void RockShot::setSize( double size ) {
 
 void RockShot::setEffectHandle( int effect_handle ) {
 	_effect_handle = effect_handle;
-}
-
-int RockShot::getTargetId( ) const {
-	return _target_id;
 }
 
 double RockShot::getSize( ) {
