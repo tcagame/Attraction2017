@@ -397,6 +397,6 @@ void RockPlayer::wish( ) {
 	_ancestors->pop( );
 }
 
-void RockPlayer::warpRedDaemon( ) {
-	setPos( Vector( -10000, 10, -1500 ) );
+void RockPlayer::resetPos( const Vector& pos ) {
+	setPos( pos );
 }

@@ -20,6 +20,7 @@ public:
 public:
 	void initialize( );
 	void update( );
+	void resetPos( const Vector& base_pos );
 	RockPlayerPtr getPlayer( int id ) const;
 	RockAncestorsPtr getAncestors( int id ) const;
 	Vector getCameraPos( ) const;
