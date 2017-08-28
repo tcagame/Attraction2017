@@ -22,6 +22,7 @@ RockArmoury::~RockArmoury( ) {
 void RockArmoury::initialize( ) {
 	EffectPtr effect( Effect::getTask( ) );
 	_shot_id = effect->loadEffect( EFFECT_SHOT, "shot.efk" );
+	_charge_shot_id = effect->loadEffect( EFFECT_CHARGE_SHOT, "charge_shot.efk" );
 	_charge_id = effect->loadEffect( EFFECT_CHARGE, "charge.efk" );
 }
 
@@ -32,6 +33,11 @@ int RockArmoury::getEffectShotId( ) const {
 int RockArmoury::getEffectChargeId( ) const {
 	return _charge_id;
 }
+
+int RockArmoury::getEffectChageShotId( ) const {
+	return _charge_shot_id;	
+}
+
 
 void RockArmoury::update( ) {
 	std::list< RockShotPtr >::iterator shot_ite = _shots.begin( );

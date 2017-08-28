@@ -7,7 +7,8 @@
 const int ACTIVE_COUNT = 150;
 const int MOVE_SPEED = 3;
 const Vector FOOT( 0, 35, 0 ); // ƒvƒŒƒCƒ„[‚Ì‘«Œ³‚©‚ç‚Ì‚‚³
-const double EFFECT_SIZE = 10.0;
+const double EFFECT_NORMAL_SIZE = 10.0;
+const double EFFECT_CHARGE_SIZE = 5.0;
 
 RockShot::RockShot( const int id_, const Vector& pos, const Vector& dir, const int power ) :
 RockCharacter( pos + FOOT, DOLL_NONE, 32, 32, false, false, false ),
@@ -16,12 +17,18 @@ _back( false ),
 _finished( false ),
 _power( power ) {
 	setVec( dir * MOVE_SPEED );
-	_effect_handle = Effect::getTask( )->playEffect( RockArmoury::getTask( )->getEffectShotId( ) );
 	double angle = Vector( 0, 0, -1 ).angle( dir );
 	if ( Vector( 0, 0, -1 ).cross( dir ).y < 0 ) {
 		angle *= -1;
 	}
-	Effect::getTask( )->updateEffectTransform( _effect_handle, pos + FOOT, EFFECT_SIZE, Vector( 0, angle, 0 ) );
+	if ( power == MAX_SHOT_POWER ) {
+		_size = EFFECT_CHARGE_SIZE;
+		_effect_handle = Effect::getTask( )->playEffect( RockArmoury::getTask( )->getEffectChageShotId( ) );
+	} else {
+		_size = EFFECT_NORMAL_SIZE;
+		_effect_handle = Effect::getTask( )->playEffect( RockArmoury::getTask( )->getEffectShotId( ) );
+	}
+	Effect::getTask( )->updateEffectTransform( _effect_handle, pos + FOOT, _size, Vector( 0, angle, 0 ) );
 }
 
 RockShot::~RockShot( ) {
@@ -32,7 +39,7 @@ void RockShot::act( ) {
 	if ( Vector( 0, 0, -1 ).cross( getDir( ) ).y < 0 ) {
 		angle *= -1;
 	}
-	Effect::getTask( )->updateEffectTransform( _effect_handle, getPos( ), EFFECT_SIZE, Vector( 0, angle, 0 ) );
+	Effect::getTask( )->updateEffectTransform( _effect_handle, getPos( ), _size, Vector( 0, angle, 0 ) );
 	if ( getActCount( ) > ACTIVE_COUNT ) {
 		_back = true;
 	}
