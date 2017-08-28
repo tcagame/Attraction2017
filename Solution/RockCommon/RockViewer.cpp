@@ -62,7 +62,7 @@ void RockViewer::update( ) {
 	drawAlter( );
 	drawCasket( );
 	drawUI( );
-	//drawMovie( );
+	drawMovie( );
 	Effect::getTask( )->drawEffect( );
 }
 
