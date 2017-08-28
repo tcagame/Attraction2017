@@ -73,3 +73,12 @@ Vector RockFamily::getCameraPos( ) const {
 	}
 	return result;
 }
+
+void RockFamily::resetPos( const Vector& base_pos ) {
+	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+		if ( !_player[ i ]->isActive( ) ) {
+			continue;
+		}
+		_player[ i ]->resetPos( Vector( i * 35, 1 ) + base_pos );
+	}	
+}
