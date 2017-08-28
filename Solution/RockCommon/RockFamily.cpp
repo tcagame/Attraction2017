@@ -27,6 +27,7 @@ void RockFamily::initialize( ) {
 void RockFamily::update( ) {
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		if ( !_player[ i ]->isActive( ) ) {
+			return;
 		}
 		//player
 		_player[ i ]->update( );
