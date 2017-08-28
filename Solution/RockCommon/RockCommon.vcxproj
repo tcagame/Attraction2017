@@ -193,6 +193,7 @@
     <ClInclude Include="RockImpact.h" />
     <ClInclude Include="RockItem.h" />
     <ClInclude Include="RockCasket.h" />
+    <ClInclude Include="RockItemBubble.h" />
     <ClInclude Include="RockItemDango.h" />
     <ClInclude Include="RockItemMoney.h" />
     <ClInclude Include="RockItemRock.h" />
@@ -227,6 +228,7 @@
     <ClCompile Include="RockImpact.cpp" />
     <ClCompile Include="RockItem.cpp" />
     <ClCompile Include="RockCasket.cpp" />
+    <ClCompile Include="RockItemBubble.cpp" />
     <ClCompile Include="RockItemDango.cpp" />
     <ClCompile Include="RockItemMoney.cpp" />
     <ClCompile Include="RockItemRock.cpp" />

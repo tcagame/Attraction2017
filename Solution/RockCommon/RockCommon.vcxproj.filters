@@ -60,6 +60,7 @@
     <ClCompile Include="RockCasket.cpp">
       <Filter>Item</Filter>
     </ClCompile>
+    <ClCompile Include="RockItemBubble.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="define.h" />
@@ -124,6 +125,7 @@
     <ClInclude Include="RockCasket.h">
       <Filter>Item</Filter>
     </ClInclude>
+    <ClInclude Include="RockItemBubble.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Enemy">
