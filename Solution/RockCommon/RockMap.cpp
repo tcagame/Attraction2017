@@ -15,9 +15,6 @@ RockMap::RockMap( ) {
 RockMap::~RockMap( ) {
 }
 
-void RockMap::initialize( ) {
-}
-
 std::vector< ModelMV1Ptr > RockMap::getModels( ) const {
 	return _models;
 }
@@ -31,4 +28,9 @@ void RockMap::addModel( ModelMV1Ptr model ) {
 }
 void RockMap::addColModel( ModelMV1Ptr model ) {
 	_col_models.push_back( model );
+}
+
+void RockMap::resetModels( ) {
+	_models.clear( );
+	_col_models.clear( );
 }

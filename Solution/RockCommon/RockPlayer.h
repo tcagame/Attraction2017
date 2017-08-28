@@ -16,7 +16,7 @@ public:
 	void back( );
 	void wish( );
 	ModelMV1Ptr getModel( ) const;
-	void warpRedDaemon( );
+	void resetPos( const Vector& pos );
 protected:
 	void act( );
 private:

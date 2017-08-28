@@ -1,45 +1,33 @@
 #include "RockMapStreet.h"
-#include "ModelMV1.h"
 #include "RockFamily.h"
 #include "RockPlayer.h"
+#include "RockMapStreetDrawer.h"
 
-const int STREET_MODEL_NUM = 3;
+const int REMOVE_CAVE_TIME = 300;
 
-RockMapStreet::RockMapStreet( ) {
-	_filenames = { };
-	for ( int i = 0; i < STREET_MODEL_NUM; i++ ) {
-		ModelMV1Ptr model = ModelMV1Ptr( new ModelMV1 );
-		char filename[ 256 ];
-		sprintf_s( filename, "Resource/Rock/map/street1/map02_0%d.mv1", i + 1 );
-		model->load( filename );
-		
-		model->draw( );
-		addModel( model );
-	}
-	ModelMV1Ptr col_model = ModelMV1Ptr( new ModelMV1 );
-	col_model->load( "Resource/Rock/map/street1/map02_col.mv1" );
-	col_model->setTrans( Matrix::makeTransformTranslation( Vector( 0, 0, 0 ) ) );
-	addColModel( col_model );
-
-	// 赤鬼用ダミーマップ
-	ModelMV1Ptr boss_model = ModelMV1Ptr( new ModelMV1 );
-	boss_model->load( "Resource/Rock/map/street1/floor01.mv1" );
-	boss_model->setTrans( Matrix::makeTransformTranslation( Vector( -10000, 0, -1500 ) ) );
-	boss_model->draw( );
-	addModel( boss_model );
-	/*
-	ModelMV1Ptr boss_col_model = ModelMV1Ptr( new ModelMV1 );
-	boss_col_model->load( "Resource/Rock/map/test/map01_col.mv1" );
-	boss_col_model->setScale( Matrix::makeTransformScaling( Vector( 0.4, 0.4, 0.4 ) ) );
-	boss_col_model->setTrans( Matrix::makeTransformTranslation( Vector( -10000, 0, -1500 ) ) );
-	boss_col_model->draw( );
-	addColModel( boss_col_model );*/
+RockMapStreet::RockMapStreet( ) :
+_time( 0 ) {
 }
 
 RockMapStreet::~RockMapStreet( ) {
 }
 
+void RockMapStreet::initialize( ) {
+	_drawer = RockMapStreetDrawerPtr( new RockMapStreetDrawer( STAGE_STREET ) );
+}
+
 void RockMapStreet::update( ) {
+	switch ( _drawer->getStage( ) ) {
+	case STAGE_STREET:
+		updateStreet( );
+		break;
+	case STAGE_CAVE:
+		updateCave( );
+		break;
+	}
+}
+
+void RockMapStreet::updateStreet( ) {
 	RockFamilyPtr family = RockFamily::getTask( );
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		RockPlayerPtr player = family->getPlayer( i );
@@ -47,9 +35,29 @@ void RockMapStreet::update( ) {
 			continue;
 		}
 
-		double length = ( Vector( -0, 0, -500 ) - player->getPos( ) ).getLength( );
+		double length = ( Vector( -200, 0, -500 ) - player->getPos( ) ).getLength( );
 		if ( length < 100 ) {
-			player->warpRedDaemon( );
+			_drawer.reset( );
+			_drawer = RockMapStreetDrawerPtr( new RockMapStreetDrawer( STAGE_CAVE ) );
+			family->resetPos( Vector( 0, 10, 0 ) );
+		}
+	}
+}
+
+void RockMapStreet::updateCave( ) {
+	_time++;
+	RockFamilyPtr family = RockFamily::getTask( );
+	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+		RockPlayerPtr player = family->getPlayer( i );
+		if ( !player->isActive( ) ) {
+			continue;
+		}
+
+		if ( _time > REMOVE_CAVE_TIME ) {
+			_drawer.reset( );
+			_drawer = RockMapStreetDrawerPtr( new RockMapStreetDrawer( STAGE_STREET ) );
+			family->resetPos( Vector( 0, 30, -500 ) );
+			_time = 0;
 		}
 	}
 }
