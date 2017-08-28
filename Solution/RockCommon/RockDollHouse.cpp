@@ -61,12 +61,14 @@ void RockDollHouse::initialize( ) {
 	_dolls[ DOLL_MONEY_2 ]->load( "Resource/Rock/item/itm06/itm06.mv1" );
 	_dolls[ DOLL_MONEY_3 ]->load( "Resource/Rock/item/itm07/itm07.mv1" );
 	_dolls[ DOLL_MONEY_4 ]->load( "Resource/Rock/item/itm08/itm08.mv1" );
+	_dolls[ DOLL_SACRED_ROCK ]->load( "Resource/Rock/object/sacred/sacred_rock.mv1" );
+	_dolls[ DOLL_BUBBLE ]->load( "Resource/Rock/object/bubble/bubble.mv1" );
 
 	//obj
 	_dolls[ DOLL_ALTER_BEFORE	]->load( "Resource/Rock/object/obj04/obj04.mv1" );
 	_dolls[ DOLL_ALTER_AFTER	]->load( "Resource/Rock/object/obj05/obj05.mv1" );
 	_dolls[ DOLL_CASKET	]->load( "Resource/Rock/object/obj01/obj01.mv1" );
-	_dolls[ DOLL_CASKET]->setScale( Matrix::makeTransformScaling( Vector( 10, 10, 10 ) ) );
+	_dolls[ DOLL_CASKET ]->setScale( Matrix::makeTransformScaling( Vector( 10, 10, 10 ) ) );
 }
 
 ModelMV1Ptr RockDollHouse::getModel( DOLL id ) const {

@@ -12,5 +12,6 @@ private:
 	void actOutBack( );
 private:
 	bool _back;
+	int _target_id;
 };
 

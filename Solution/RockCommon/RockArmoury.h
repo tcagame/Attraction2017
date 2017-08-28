@@ -19,16 +19,10 @@ public:
 	void initialize( );
 	void update( );
 	void addShot( RockShotPtr shot );
-	int getEffectChargeId( ) const;
-	int getEffectShotId( ) const;
-	int getEffectChageShotId( ) const;
 	std::list< RockShotPtr > getShots( ) const;
 private:
 	RockEnemyPtr getOverLappedEnemy( RockShotPtr shot ) const;
 private:
-	int _shot_id;
-	int _charge_shot_id;
-	int _charge_id;
 	std::list< RockShotPtr > _shots;
 };
 

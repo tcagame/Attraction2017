@@ -57,12 +57,12 @@ void RockViewer::update( ) {
 	drawEnemy( );
 	drawPlayer( );
 	drawAncestors( );
-	drawShot( );
+	//drawShot( );
 	drawItem( );
 	drawAlter( );
 	drawCasket( );
 	drawUI( );
-	//drawMovie( );
+	drawMovie( );
 	Effect::getTask( )->drawEffect( );
 }
 

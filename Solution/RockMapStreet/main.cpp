@@ -15,6 +15,7 @@
 #include "RockArmoury.h"
 #include "Effect.h"
 #include "RockStorage.h"
+#include "RockStudio.h"
 
 void main( ) {
 
@@ -33,5 +34,6 @@ void main( ) {
 	app->addTask( RockArmoury::getTag( ), TaskPtr( new RockArmoury( ) ) );
 	app->addTask( RockViewer::getTag( ), TaskPtr( new RockViewer( status ) ) );
 	app->addTask( RockStorage::getTag( ), TaskPtr( new RockStorage( ) ) );
+	app->addTask( RockStudio::getTag( ), TaskPtr( new RockStudio( ) ) );
 	app->addTask( RockClientInfo::getTag( ), TaskPtr( new RockClientInfo( AREA_STREET_1 ) ) );
 }

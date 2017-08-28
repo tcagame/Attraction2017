@@ -1,6 +1,7 @@
 #include "RockImpact.h"
 #include "Effect.h"
 #include "define.h"
+#include "RockStudio.h"
 
 const int EFFECT_TIEM = 240;
 
@@ -9,7 +10,7 @@ _pos( pos ),
 _size( size ),
 _count( 0 ),
 _finished( false ) {
-	int handle = Effect::getTask( )->playEffect( EFFECT_IMPACT );
+	int handle = Effect::getTask( )->playEffect( RockStudio::getTask( )->getEffectHandle( EFFECT_IMPACT ) );
 	Effect::getTask( )->updateEffectTransform( handle, pos, 3.0 );
 }
 

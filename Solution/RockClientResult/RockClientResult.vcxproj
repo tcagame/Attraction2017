@@ -19,33 +19,33 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{8952960E-64A2-407E-9ED9-004D9A7D129B}</ProjectGuid>
+    <ProjectGuid>{1542C0F0-AE89-47DC-B787-0D3C70C0C814}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>RockCommon</RootNamespace>
+    <RootNamespace>RockClientResult</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -89,18 +89,14 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../Framework2017ver2;$(SolutionDir)RockCommon;</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(Solutiondir)../../Framework2017ver2;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用;</AdditionalLibraryDirectories>
     </Link>
-    <Lib>
-      <AdditionalLibraryDirectories>
-      </AdditionalLibraryDirectories>
-    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -110,18 +106,14 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../Framework2017ver2;$(SolutionDir)RockCommon;</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(Solutiondir)../../Framework2017ver2;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用;</AdditionalLibraryDirectories>
     </Link>
-    <Lib>
-      <AdditionalLibraryDirectories>
-      </AdditionalLibraryDirectories>
-    </Lib>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -133,19 +125,16 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../Framework2017ver2;$(SolutionDir)RockCommon;</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(Solutiondir)../../Framework2017ver2;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Link>
-    <Lib>
       <AdditionalLibraryDirectories>C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用;</AdditionalLibraryDirectories>
-    </Lib>
+    </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -157,94 +146,37 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>$(SolutionDir)../../Framework2017ver2;$(SolutionDir)RockCommon;</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AdditionalIncludeDirectories>$(Solutiondir)../../Framework2017ver2;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-    </Link>
-    <Lib>
       <AdditionalLibraryDirectories>C:\DxLib_VC\プロジェクトに追加すべきファイル_VC用;</AdditionalLibraryDirectories>
-    </Lib>
+    </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="define.h" />
-    <ClInclude Include="Message.h" />
-    <ClInclude Include="MessageSender.h" />
-    <ClInclude Include="RockEnemyBossRock.h" />
-    <ClInclude Include="RockAlter.h" />
-    <ClInclude Include="RockAncestors.h" />
-    <ClInclude Include="RockArmoury.h" />
-    <ClInclude Include="RockCamera.h" />
-    <ClInclude Include="RockCharacter.h" />
-    <ClInclude Include="RockClientInfo.h" />
-    <ClInclude Include="RockDollHouse.h" />
-    <ClInclude Include="RockEnemy.h" />
-    <ClInclude Include="RockEnemyCloud.h" />
-    <ClInclude Include="RockEnemyFaceAndHand.h" />
-    <ClInclude Include="RockEnemyGhost.h" />
-    <ClInclude Include="RockEnemyRedBard.h" />
-    <ClInclude Include="RockEnemyWaterGhost.h" />
-    <ClInclude Include="RockFamily.h" />
-    <ClInclude Include="RockImpact.h" />
-    <ClInclude Include="RockItem.h" />
-    <ClInclude Include="RockCasket.h" />
-    <ClInclude Include="RockItemBubble.h" />
-    <ClInclude Include="RockItemDango.h" />
-    <ClInclude Include="RockItemMoney.h" />
-    <ClInclude Include="RockItemRock.h" />
-    <ClInclude Include="RockMap.h" />
-    <ClInclude Include="RockMilitary.h" />
-    <ClInclude Include="RockPlayer.h" />
-    <ClInclude Include="RockPop.h" />
-    <ClInclude Include="RockShot.h" />
-    <ClInclude Include="RockShotAncestors.h" />
-    <ClInclude Include="RockShotPlayer.h" />
-    <ClInclude Include="RockStorage.h" />
-    <ClInclude Include="RockStudio.h" />
-    <ClInclude Include="RockTheater.h" />
-    <ClInclude Include="RockViewer.h" />
-    <ClInclude Include="Status.h" />
+    <ProjectReference Include="..\..\..\Framework2017ver2\Framework2017Ver2.vcxproj">
+      <Project>{0bd19263-3452-4219-af86-db8b26e4ee02}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\RockCommon\RockCommon.vcxproj">
+      <Project>{8952960e-64a2-407e-9ed9-004d9a7d129b}</Project>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MessageSender.cpp" />
-    <ClCompile Include="RockEnemyBossRock.cpp" />
-    <ClCompile Include="RockAlter.cpp" />
-    <ClCompile Include="RockAncestors.cpp" />
-    <ClCompile Include="RockArmoury.cpp" />
-    <ClCompile Include="RockCamera.cpp" />
-    <ClCompile Include="RockCharacter.cpp" />
-    <ClCompile Include="RockClientInfo.cpp" />
-    <ClCompile Include="RockDollHouse.cpp" />
-    <ClCompile Include="RockEnemy.cpp" />
-    <ClCompile Include="RockEnemyCloud.cpp" />
-    <ClCompile Include="RockEnemyFaceAndHand.cpp" />
-    <ClCompile Include="RockEnemyGhost.cpp" />
-    <ClCompile Include="RockEnemyRedBard.cpp" />
-    <ClCompile Include="RockEnemyWaterGhost.cpp" />
-    <ClCompile Include="RockFamily.cpp" />
-    <ClCompile Include="RockImpact.cpp" />
-    <ClCompile Include="RockItem.cpp" />
-    <ClCompile Include="RockCasket.cpp" />
-    <ClCompile Include="RockItemBubble.cpp" />
-    <ClCompile Include="RockItemDango.cpp" />
-    <ClCompile Include="RockItemMoney.cpp" />
-    <ClCompile Include="RockItemRock.cpp" />
-    <ClCompile Include="RockMap.cpp" />
-    <ClCompile Include="RockMilitary.cpp" />
-    <ClCompile Include="RockPlayer.cpp" />
-    <ClCompile Include="RockPop.cpp" />
-    <ClCompile Include="RockShot.cpp" />
-    <ClCompile Include="RockShotAncestors.cpp" />
-    <ClCompile Include="RockShotPlayer.cpp" />
-    <ClCompile Include="RockStorage.cpp" />
-    <ClCompile Include="RockStudio.cpp" />
-    <ClCompile Include="RockTheater.cpp" />
-    <ClCompile Include="RockViewer.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="RockCameraResult.cpp" />
+    <ClCompile Include="RockMapResult.cpp" />
+    <ClCompile Include="RockMilitaryResult.cpp" />
+    <ClCompile Include="RockTheaterResult.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="RockCameraResult.h" />
+    <ClInclude Include="RockMapResult.h" />
+    <ClInclude Include="RockMilitaryResult.h" />
+    <ClInclude Include="RockTheaterResult.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
