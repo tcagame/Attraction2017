@@ -31,8 +31,6 @@ RockMapTest::RockMapTest( ) {
 	sorage->addAlter( RockAlterPtr( new RockAlter( Vector( 200, 0, 0 ) ) ) );
 	sorage->addCasket( RockCasketPtr( new RockCasket( Vector( 0, 0, 0 ) ) ) );
 
-	_movie = Drawer::getTask( )->createMovie( "UI/ui_main_title_tall.mov" );
-	_movie->play( );
 }
 
 

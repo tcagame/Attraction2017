@@ -46,6 +46,7 @@
       <Filter>Item</Filter>
     </ClInclude>
     <ClInclude Include="RockEnemyBossRcok.h" />
+    <ClInclude Include="RockTheater.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="RockDollHouse.cpp" />
@@ -90,6 +91,7 @@
       <Filter>Item</Filter>
     </ClCompile>
     <ClCompile Include="RockEnemyBossRcok.cpp" />
+    <ClCompile Include="RockTheater.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Enemy">

@@ -5,6 +5,7 @@
 
 PTR( RockViewer );
 PTR( Status );
+PTR( Movie );
 
 class RockViewer : public Task {
 public:
@@ -26,6 +27,7 @@ private:
 	void drawAlter( ) const;
 	void drawCasket( ) const;
 	void drawUI( ) const;
+	void drawMovie( ) const;
 private:
 	StatusPtr _status;
 	ImagePtr _status_flame;
