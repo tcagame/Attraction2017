@@ -19,6 +19,7 @@
 #include "Effect.h"
 #include "RockStorage.h"
 #include "RockTheaterTest.h"
+#include "RockStudio.h"
 
 void main( ) {
 
@@ -39,6 +40,7 @@ void main( ) {
 	app->addTask( RockClientInfo::getTag( ), TaskPtr( new RockClientInfo( STATE_TEST ) ) );
 	app->addTask( MessageSender::getTag( ), TaskPtr( new MessageSender( message ) ) );
 	//app->addTask( RockTheater::getTag( ), TaskPtr( new RockTheaterTest( ) ) );
+	app->addTask( RockStudio::getTag( ), TaskPtr( new RockStudio( ) ) );
 	
 	//通常描画orステータス描画
 	bool status_draw = false;

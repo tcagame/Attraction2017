@@ -9,6 +9,7 @@
 #include "RockEnemy.h"
 
 const double BOUND_POWER = 1.0;
+const double STAND_RANGE = 100.0;
 
 RockCharacter::RockCharacter( const Vector& pos, DOLL doll, int radius, int height, bool mass, bool head, bool col ) :
 _pos( pos ),
@@ -51,7 +52,7 @@ void RockCharacter::update( ) {
 					break;
 				}
 				//‘«Œ³‚ª‚È‚¢( pos1:’†SApos2:‘«Œ³‚æ‚è­‚µ‰º‚ÌˆÊ’u )
-				Vector hit_pos = col_models[ i ]->getHitPos( central_pos, central_pos - Vector( 0, _radius * 2, 0 ) );
+				Vector hit_pos = col_models[ i ]->getHitPos( central_pos, central_pos - Vector( 0, STAND_RANGE, 0 ) );
 				if ( hit_pos.isOrijin( ) ) {
 					_vec.x = 0;
 					_vec.z = 0;

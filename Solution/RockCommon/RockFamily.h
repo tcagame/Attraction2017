@@ -9,6 +9,7 @@ PTR( RockFamily );
 PTR( RockPlayer );
 PTR( RockAncestors );
 PTR( Status );
+PTR( RockBubble );
 
 class RockFamily : public Task {
 public:
@@ -22,10 +23,12 @@ public:
 	void update( );
 	void resetPos( const Vector& base_pos );
 	RockPlayerPtr getPlayer( int id ) const;
+	RockBubblePtr getBubble( int id ) const;
 	RockAncestorsPtr getAncestors( int id ) const;
 	Vector getCameraPos( ) const;
 private:
 	std::array< RockPlayerPtr, ROCK_PLAYER_NUM > _player;
+	std::array< RockBubblePtr, ROCK_PLAYER_NUM > _bubble;
 	std::array< RockAncestorsPtr, ROCK_PLAYER_NUM > _ancestors;
 };
 

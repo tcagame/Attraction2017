@@ -2,6 +2,7 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="MessageSender.cpp" />
+    <ClCompile Include="RockEnemyBossRock.cpp" />
     <ClCompile Include="RockAlter.cpp" />
     <ClCompile Include="RockAncestors.cpp" />
     <ClCompile Include="RockArmoury.cpp" />
@@ -9,15 +10,32 @@
     <ClCompile Include="RockCharacter.cpp" />
     <ClCompile Include="RockClientInfo.cpp" />
     <ClCompile Include="RockDollHouse.cpp" />
+    <ClCompile Include="RockEnemy.cpp" />
+    <ClCompile Include="RockEnemyCloud.cpp" />
+    <ClCompile Include="RockEnemyFaceAndHand.cpp" />
+    <ClCompile Include="RockEnemyGhost.cpp" />
+    <ClCompile Include="RockEnemyRedBard.cpp" />
+    <ClCompile Include="RockEnemyWaterGhost.cpp" />
     <ClCompile Include="RockFamily.cpp" />
     <ClCompile Include="RockImpact.cpp" />
+    <ClCompile Include="RockItem.cpp" />
+    <ClCompile Include="RockCasket.cpp" />
+    <ClCompile Include="RockItemBubble.cpp" />
+    <ClCompile Include="RockItemDango.cpp" />
+    <ClCompile Include="RockItemMoney.cpp" />
+    <ClCompile Include="RockItemRock.cpp" />
     <ClCompile Include="RockMap.cpp" />
+    <ClCompile Include="RockMilitary.cpp" />
     <ClCompile Include="RockPlayer.cpp" />
     <ClCompile Include="RockPop.cpp" />
     <ClCompile Include="RockShot.cpp" />
+    <ClCompile Include="RockShotAncestors.cpp" />
     <ClCompile Include="RockShotPlayer.cpp" />
+    <ClCompile Include="RockStorage.cpp" />
+    <ClCompile Include="RockStudio.cpp" />
     <ClCompile Include="RockTheater.cpp" />
     <ClCompile Include="RockViewer.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="RockEnemy.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
@@ -66,11 +84,15 @@
     <ClCompile Include="RockItemToku.cpp">
       <Filter>Item</Filter>
     </ClCompile>
+=======
+    <ClCompile Include="RockBubble.cpp" />
+>>>>>>> 07a48be667a2800e2458e70f3df13b8452ff43bb
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="define.h" />
     <ClInclude Include="Message.h" />
     <ClInclude Include="MessageSender.h" />
+    <ClInclude Include="RockEnemyBossRock.h" />
     <ClInclude Include="RockAlter.h" />
     <ClInclude Include="RockAncestors.h" />
     <ClInclude Include="RockArmoury.h" />
@@ -78,16 +100,33 @@
     <ClInclude Include="RockCharacter.h" />
     <ClInclude Include="RockClientInfo.h" />
     <ClInclude Include="RockDollHouse.h" />
+    <ClInclude Include="RockEnemy.h" />
+    <ClInclude Include="RockEnemyCloud.h" />
+    <ClInclude Include="RockEnemyFaceAndHand.h" />
+    <ClInclude Include="RockEnemyGhost.h" />
+    <ClInclude Include="RockEnemyRedBard.h" />
+    <ClInclude Include="RockEnemyWaterGhost.h" />
     <ClInclude Include="RockFamily.h" />
     <ClInclude Include="RockImpact.h" />
+    <ClInclude Include="RockItem.h" />
+    <ClInclude Include="RockCasket.h" />
+    <ClInclude Include="RockItemBubble.h" />
+    <ClInclude Include="RockItemDango.h" />
+    <ClInclude Include="RockItemMoney.h" />
+    <ClInclude Include="RockItemRock.h" />
     <ClInclude Include="RockMap.h" />
+    <ClInclude Include="RockMilitary.h" />
     <ClInclude Include="RockPlayer.h" />
     <ClInclude Include="RockPop.h" />
     <ClInclude Include="RockShot.h" />
+    <ClInclude Include="RockShotAncestors.h" />
     <ClInclude Include="RockShotPlayer.h" />
+    <ClInclude Include="RockStorage.h" />
+    <ClInclude Include="RockStudio.h" />
     <ClInclude Include="RockTheater.h" />
     <ClInclude Include="RockViewer.h" />
     <ClInclude Include="Status.h" />
+<<<<<<< HEAD
     <ClInclude Include="RockEnemy.h">
       <Filter>Enemy</Filter>
     </ClInclude>
@@ -144,5 +183,8 @@
     <Filter Include="Item">
       <UniqueIdentifier>{bed95a79-4aa9-4277-9ac5-030dba8a6c65}</UniqueIdentifier>
     </Filter>
+=======
+    <ClInclude Include="RockBubble.h" />
+>>>>>>> 07a48be667a2800e2458e70f3df13b8452ff43bb
   </ItemGroup>
 </Project>

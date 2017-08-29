@@ -15,6 +15,8 @@
 #include "MessageSender.h"
 #include "Effect.h"
 #include "RockShotPlayer.h"
+#include "RockStudio.h"
+
 
 //ˆÚ“®
 static const double JUMP_POWER = 3.0;
@@ -35,6 +37,8 @@ static const Vector EFFECT_ADJUST( 0, 15, 0 );
 //‚»‚Ì‘¼
 static const int MAX_WISH_COUNT = 100;
 static const int ENHANCED_POWER = 2;
+static const Vector SHOT_FOOT( 0, 35, 0 );//ƒVƒ‡ƒbƒg‚Ì‚‚³
+
 
 RockPlayer::RockPlayer( StatusPtr status, const Vector& pos, int id, RockAncestorsPtr ancestors ) :
 RockCharacter( pos, ( DOLL )( DOLL_TAROSUKE_WAIT + id * ROCK_PLAYER_MOTION_NUM ), RADIUS, HEIGHT ),
@@ -231,7 +235,7 @@ void RockPlayer::actOnAttacking( ) {
 		if ( player.item & ITEM_ENHANCED_ATTACK ) {
 			power *= ENHANCED_POWER;
 		}
-		RockShotPtr shot( new RockShotPlayer( _id, getPos( ), getDir( ), power ) );
+		RockShotPtr shot( new RockShotPlayer( _id, getPos( ) + SHOT_FOOT, getDir( ), power ) );
 		RockArmoury::getTask( )->addShot( shot );
 		setAction( ACTION_WAIT );
 		Effect::getTask( )->stopEffect( _effect_handle );
@@ -257,7 +261,7 @@ void RockPlayer::actOnCharging( ) {
 
 	if ( _attack_count == 0 ) {
 		EffectPtr effect( Effect::getTask( ) );
-		_effect_handle = effect->playEffect( RockArmoury::getTask( )->getEffectChargeId( ) );
+		_effect_handle = effect->playEffect( RockStudio::getTask( )->getEffectHandle( EFFECT_CHARGE ) );
 		effect->updateEffectTransform( _effect_handle, getPos( ) + EFFECT_ADJUST );
 	}
 	_attack_count++;
@@ -400,3 +404,8 @@ void RockPlayer::wish( ) {
 void RockPlayer::resetPos( const Vector& pos ) {
 	setPos( pos );
 }
+
+bool RockPlayer::isDead( ) const {
+	return _action == ACTION_DEAD;
+}
+
