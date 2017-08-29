@@ -17,6 +17,7 @@ public:
 	void wish( );
 	ModelMV1Ptr getModel( ) const;
 	void resetPos( const Vector& pos );
+	bool isDead( ) const;
 protected:
 	void act( );
 private:

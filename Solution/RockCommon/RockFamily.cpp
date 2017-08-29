@@ -3,6 +3,7 @@
 #include "RockPlayer.h"
 #include "RockClientInfo.h"
 #include "RockAncestors.h"
+#include "RockBubble.h"
 #include <assert.h>
 
 RockFamilyPtr RockFamily::getTask( ) {
@@ -13,6 +14,7 @@ RockFamilyPtr RockFamily::getTask( ) {
 RockFamily::RockFamily( StatusPtr status, const Vector& base_pos ) {
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		_ancestors[ i ]	= RockAncestorsPtr( new RockAncestors( i ) );
+		_bubble[ i ]	= RockBubblePtr( new RockBubble( i ) );
 		_player[ i ]	= RockPlayerPtr   ( new RockPlayer   ( status, Vector( i * 35, 1 ) + base_pos, i, _ancestors[ i ] ) );
 	}
 }
@@ -47,12 +49,19 @@ void RockFamily::update( ) {
 		}
 		//ancestor
 		_ancestors[ i ]->update( );
+		//bubble
+		_bubble[ i ]->update( );
 	}
 }
 
 RockPlayerPtr RockFamily::getPlayer( int id ) const {
 	assert( 0 <= id && id < ROCK_PLAYER_NUM );
 	return _player[ id ];
+}
+
+RockBubblePtr RockFamily::getBubble( int id ) const {
+	assert( 0 <= id && id < ROCK_PLAYER_NUM );
+	return _bubble[ id ];
 }
 
 RockAncestorsPtr RockFamily::getAncestors( int id ) const {

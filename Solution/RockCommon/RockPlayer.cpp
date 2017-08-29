@@ -404,3 +404,8 @@ void RockPlayer::wish( ) {
 void RockPlayer::resetPos( const Vector& pos ) {
 	setPos( pos );
 }
+
+bool RockPlayer::isDead( ) const {
+	return _action == ACTION_DEAD;
+}
+
