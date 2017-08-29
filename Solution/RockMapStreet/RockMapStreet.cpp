@@ -2,11 +2,14 @@
 #include "RockFamily.h"
 #include "RockPlayer.h"
 #include "RockMapStreetDrawer.h"
+#include "Status.h"
 
 const int REMOVE_CAVE_TIME = 300;
+const int TELEPORT_MONEY = 50000;
 
-RockMapStreet::RockMapStreet( ) :
-_time( 0 ) {
+RockMapStreet::RockMapStreet( StatusPtr status ) :
+_time( 0 ),
+_status( status ) {
 }
 
 RockMapStreet::~RockMapStreet( ) {
@@ -23,6 +26,9 @@ void RockMapStreet::update( ) {
 		break;
 	case STAGE_CAVE:
 		updateCave( );
+		break;
+	case STAGE_TOKU:
+		updateToku( );
 		break;
 	}
 }
@@ -41,6 +47,12 @@ void RockMapStreet::updateStreet( ) {
 			_drawer = RockMapStreetDrawerPtr( new RockMapStreetDrawer( STAGE_CAVE ) );
 			family->resetPos( Vector( 0, 10, 0 ) );
 		}
+		Status::Player status = _status->getPlayer( i );
+		if ( status.money >= TELEPORT_MONEY ) {
+			_drawer.reset( );
+			_drawer = RockMapStreetDrawerPtr( new RockMapStreetDrawer( STAGE_TOKU ) );
+			family->resetPos( Vector( 0, 10000, -500 ) );
+		}
 	}
 }
 
@@ -58,6 +70,16 @@ void RockMapStreet::updateCave( ) {
 			_drawer = RockMapStreetDrawerPtr( new RockMapStreetDrawer( STAGE_STREET ) );
 			family->resetPos( Vector( 0, 30, -500 ) );
 			_time = 0;
+		}
+	}
+}
+
+void RockMapStreet::updateToku( ) {
+	RockFamilyPtr family = RockFamily::getTask( );
+	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+		RockPlayerPtr player = family->getPlayer( i );
+		if ( !player->isActive( ) ) {
+			continue;
 		}
 	}
 }
