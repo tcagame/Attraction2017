@@ -19,7 +19,7 @@
 
 
 //移動
-static const double JUMP_POWER = 3.0;
+static const double JUMP_POWER = 6.0;
 static const double MOVE_SPEED = 3.0;
 static const double BRAKE_SPEED = 0.3;
 //アニメーション
@@ -38,6 +38,10 @@ static const Vector EFFECT_ADJUST( 0, 15, 0 );
 static const int MAX_WISH_COUNT = 100;
 static const int ENHANCED_POWER = 2;
 static const Vector SHOT_FOOT( 0, 35, 0 );//ショットの高さ
+static const Vector BUBBLE_FOLLOW_RANGE = Vector( 1, 1, 1 ) * 3000.0;
+static const Vector BUBBLE_FOOT = Vector( 0, 60, 0 );
+static const double BUBBLE_MOVE_SPEED = MOVE_SPEED * 0.9;
+static const int DEAD_ANIM_TIME = 150;
 
 
 RockPlayer::RockPlayer( StatusPtr status, const Vector& pos, int id, RockAncestorsPtr ancestors ) :
@@ -324,6 +328,32 @@ void RockPlayer::actOnBraking( ) {
 }
 
 void RockPlayer::actOnDead( ) {
+	if ( getActCount( ) < DEAD_ANIM_TIME ) {
+		return;
+	}
+	RockFamilyPtr family = RockFamily::getTask( );
+	Vector near_distance = BUBBLE_FOLLOW_RANGE;
+	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+		if ( _id == i ) {
+			continue;
+		}
+		RockPlayerPtr player = family->getPlayer( i );
+		if ( !player->isActive( ) ||
+			 player->isDead( ) ) {
+			continue;
+		}
+		Vector distance = player->getPos( ) + BUBBLE_FOOT - getPos( );
+		if ( near_distance.getLength2( ) > distance.getLength2( ) ) {
+			near_distance = distance;
+		}
+	}
+	if ( near_distance != BUBBLE_FOLLOW_RANGE ) {
+		Vector vec = near_distance;
+		if ( vec.getLength2( ) > BUBBLE_MOVE_SPEED * BUBBLE_MOVE_SPEED ) {
+			vec = vec.normalize( ) * BUBBLE_MOVE_SPEED;
+		}
+		setVec( vec );
+	}
 }
 
 void RockPlayer::actOnWish( ) {
