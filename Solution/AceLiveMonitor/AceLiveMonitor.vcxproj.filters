@@ -220,9 +220,6 @@
     <ClCompile Include="ViewerDebug.cpp">
       <Filter>Viewer</Filter>
     </ClCompile>
-    <ClCompile Include="ViewerStatus.cpp">
-      <Filter>Viewer</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyBossRock.cpp">
       <Filter>Boss</Filter>
     </ClCompile>
@@ -349,9 +346,11 @@
     <ClCompile Include="NPCShaker.cpp">
       <Filter>NPC</Filter>
     </ClCompile>
-    <ClCompile Include="ViewerTitle.cpp" />
     <ClCompile Include="MapStreet.cpp" />
     <ClCompile Include="MapEvent.cpp" />
+    <ClCompile Include="ViewerTitle.cpp">
+      <Filter>Viewer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -572,9 +571,6 @@
     <ClInclude Include="ViewerDebug.h">
       <Filter>Viewer</Filter>
     </ClInclude>
-    <ClInclude Include="ViewerStatus.h">
-      <Filter>Viewer</Filter>
-    </ClInclude>
     <ClInclude Include="EnemyBossRock.h">
       <Filter>Boss</Filter>
     </ClInclude>
@@ -701,9 +697,11 @@
     <ClInclude Include="NPCShaker.h">
       <Filter>NPC</Filter>
     </ClInclude>
-    <ClInclude Include="ViewerTitle.h" />
     <ClInclude Include="MapStreet.h" />
     <ClInclude Include="MapEvent.h" />
+    <ClInclude Include="ViewerTitle.h">
+      <Filter>Viewer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">

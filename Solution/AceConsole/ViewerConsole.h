@@ -9,6 +9,7 @@ PTR( ViewerConsole );
 PTR( ViewerObject );
 PTR( ViewerStreet );
 PTR( ViewerEvent );
+PTR( ViewerStatus );
 PTR( Image );
 
 class ViewerConsole : public Task {
@@ -31,9 +32,9 @@ private:
 	ViewerObjectPtr _viewer_object;
 	ViewerStreetPtr _viewer_street;
 	ViewerEventPtr _viewer_event;
+	ViewerStatusPtr _viewer_status;
 	ImagePtr _image_bar_upper;
 	ImagePtr _image_bar_lower;
-	ImagePtr _image_status;
 	ImagePtr _image_minimap;
 };
 

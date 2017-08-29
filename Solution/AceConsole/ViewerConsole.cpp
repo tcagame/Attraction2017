@@ -4,6 +4,7 @@
 #include "ViewerObject.h"
 #include "ViewerStreet.h"
 #include "ViewerEvent.h"
+#include "ViewerStatus.h"
 #include "SynchronousData.h"
 #include "Client.h"
 
@@ -27,6 +28,7 @@ void ViewerConsole::initialize( ) {
 	_viewer_object = ViewerObjectPtr( new ViewerObject );
 	_viewer_street = ViewerStreetPtr( new ViewerStreet );
 	_viewer_event  = ViewerEventPtr	( new ViewerEvent );
+	_viewer_status = ViewerStatusPtr( new ViewerStatus );
 
 	_image_bar_upper = drawer->createImage( "UI/ui_bar.png" );
 	_image_bar_upper->setRect( 0, 0, 640, 8 );
@@ -35,10 +37,6 @@ void ViewerConsole::initialize( ) {
 	_image_bar_lower = drawer->createImage( "UI/ui_bar.png" );
 	_image_bar_lower->setRect( 0, 0, 640, 8 );
 	_image_bar_lower->setPos( 0, 208 + 8 );
-
-	_image_status = drawer->createImage( "UI/status_plate.png" );
-	_image_status->setRect( 0, 0, 320, 208 );
-	_image_status->setPos( 0, 8 );
 
 	_image_minimap = drawer->createImage( "UI/ui_minimap.png" );
 	_image_minimap->setRect( 0, 0, 320, 208 );
@@ -55,7 +53,7 @@ void ViewerConsole::update( ) {
 
 	drawArea( );
 	drawUI( );
-
+	
 	// ステータス描画
 	//_viewer_status->draw( );
 	if ( Client::getTask( )->getPhase( ) == "PHASE_CONNECTING" ) {
@@ -113,7 +111,6 @@ void ViewerConsole::drawAreaEvent( ) {
 void ViewerConsole::drawUI( ) {
 	_image_bar_upper->draw( );
 	_image_bar_lower->draw( );
-	_image_status->draw( );
-	_image_minimap->draw( );
 
+	_viewer_status->draw( _player, 0, 8 );
 }

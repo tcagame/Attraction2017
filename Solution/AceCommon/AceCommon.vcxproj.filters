@@ -7,11 +7,13 @@
     <ClInclude Include="ViewerObject.h" />
     <ClInclude Include="ViewerStreet.h" />
     <ClInclude Include="ViewerEvent.h" />
+    <ClInclude Include="ViewerStatus.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SynchronousData.cpp" />
     <ClCompile Include="ViewerObject.cpp" />
     <ClCompile Include="ViewerStreet.cpp" />
     <ClCompile Include="ViewerEvent.cpp" />
+    <ClCompile Include="ViewerStatus.cpp" />
   </ItemGroup>
 </Project>

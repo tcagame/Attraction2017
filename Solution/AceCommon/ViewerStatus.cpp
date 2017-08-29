@@ -1,8 +1,7 @@
 #include "ViewerStatus.h"
 #include "Drawer.h"
 #include "ace_define.h"
-#include "Family.h"
-#include "Player.h"
+#include "SynchronousData.h"
 
 const int HP_GRAPH_HEIGHT = 16;
 const int HP_GRAPH_WIDTH = 8;
@@ -20,12 +19,11 @@ void ViewerStatus::draw( PLAYER player, int sx, int sy ) const {
 	_status_flame->setPos( sx, sy );
 	_status_flame->draw( );
 
-	FamilyPtr family(Family::getTask());
-	PlayerPtr p = family->getPlayer( player );
+	SynchronousDataPtr data(SynchronousData::getTask());
 
-	drawPower( p->getPower( ), sx, sy );
-	drawMoney( p->getMoney( ), sx, sy );
-	drawVirtue( p->getVirtue( ), sx, sy );
+	drawPower(  data->getStatusPower( player ), sx, sy );
+	drawMoney(  data->getStatusMoney( player ), sx, sy );
+	drawVirtue( data->getStatusVirtue( player ), sx, sy );
 }
 
 void ViewerStatus::drawPower( int power, int sx, int sy ) const {

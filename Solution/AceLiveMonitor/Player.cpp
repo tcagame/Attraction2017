@@ -616,6 +616,10 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		data->setStatusState( player, SynchronousData::STATE_PLAY_EVENT );
 	}
 	data->setStatusX( player, ( int )getPos( ).x );
+	data->setStatusPower( player, getPower( ) );
+	data->setStatusMoney( player, getMoney( ) );
+	data->setStatusVirtue( player, getVirtue( ) );
+
 	// Object
 	if ( _unrivaled_count < MAX_UNRIVALED_COUNT ) {
 		if ( _unrivaled_count / PLAYER_FLASH_WAIT_TIME % 2 == 0 ) {
