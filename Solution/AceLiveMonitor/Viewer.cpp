@@ -67,7 +67,9 @@ void Viewer::update( ) {
 	_viewer_object->draw( AREA_EVENT, EVENT_SX, EVENT_SY );
 	
 	// ステータス描画
-	_viewer_status->draw( );
+	for ( int i = 0; i < MAX_PLAYER; i++ ) {
+		_viewer_status->draw( ( PLAYER )i, i * VIEW_STATUS_WIDTH, VIEW_STATUS_Y );
+	}
 
 	// デバッグ
 	if ( Debug::getTask( )->isDebug( ) ) {

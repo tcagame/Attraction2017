@@ -33,10 +33,10 @@ public:
 	bool isOnHead( CharacterPtr target ) const;
 	void bound( );
 	void blowAway( );
-	int getMoneyNum( ) const;
-	int getTokuNum( ) const;
+	int getMoney( ) const;
+	int getVirtue( ) const;
 	void pickUpMoney( int money );
-	void pickUpToku( );
+	void pickUpVirtue( );
 	void setSynchronousData( PLAYER player, int camera_pos ) const;
 	MonmotaroConstPtr getMonmotaro( ) const;
 private:
@@ -60,7 +60,7 @@ private:
 	ACTION _action;
 	int _id;
 	int _money;
-	int _toku;
+	int _virtue;
 	int _over_charge_time;
 	int _charge_count;
 	int _unrivaled_count;

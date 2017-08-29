@@ -122,7 +122,7 @@ void Storage::pickUpItem( ItemPtr item, PlayerPtr player ) {
 	{//“¿
 		ItemTokuPtr toku = std::dynamic_pointer_cast< ItemToku >( item );
 		if ( toku ) {
-			player->pickUpToku( );
+			player->pickUpVirtue( );
 		}
 	}
 }

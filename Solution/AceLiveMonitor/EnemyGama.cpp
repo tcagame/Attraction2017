@@ -61,7 +61,7 @@ void EnemyGama::damage( int force ) {
 		return;
 	}
 
-	if ( getHp( ) - force > 1 ) {
+	if ( getPower( ) - force > 1 ) {
 		Enemy::damage( force );
 	} else {
 		_guide = true;
