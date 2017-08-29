@@ -5,7 +5,8 @@
 #include "RockAlter.h"
 #include "RockCasket.h"
 #include "RockStorage.h"
-#include "RockItemToku.h"
+#include "RockItemRock.h"
+#include "RockItemBubble.h"
 #include "Movie.h"
 #include "Drawer.h"
 
@@ -27,14 +28,10 @@ RockMapTest::RockMapTest( ) {
 	col01->setTrans( Matrix::makeTransformTranslation( Vector( 0, 10, 0 ) ) );
 	col01->draw( );
 	addColModel( col01 );
-	
-	RockStoragePtr sorage = RockStorage::getTask();
-	sorage->addAlter( RockAlterPtr( new RockAlter( Vector( 200, 0, 0 ) ) ) );
-	sorage->addCasket( RockCasketPtr( new RockCasket( Vector( 0, 0, -50 ) ) ) );
 
 	RockStoragePtr storage( RockStorage::getTask( ) );
-	storage->addItem( RockItemPtr( new RockItemToku( Vector ( 100, 10, 0 ) ) ) );
-
+	storage->addItem( RockItemPtr( new RockItemRock( Vector( 200, 50, 0 ) ) ) );
+	storage->addItem( RockItemPtr( new RockItemBubble( Vector( 200, 50, 0 ) ) ) );
 }
 
 
