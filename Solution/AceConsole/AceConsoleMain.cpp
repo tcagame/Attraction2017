@@ -5,7 +5,6 @@
 #include "Keyboard.h"
 #include "ViewerConsole.h"
 #include "ace_define.h"
-#include "MapStreet.h"
 #include "MapEvent.h"
 
 extern PLAYER getPlayer( );
