@@ -31,9 +31,7 @@ Viewer::~Viewer( ) {
 }
 
 void Viewer::initialize( ) {
-	MapStreetPtr map( MapStreet::getTask( ) );
-
-	_viewer_street		= ViewerStreetPtr	( new ViewerStreet( map->getPageNum( ) ) );
+	_viewer_street		= ViewerStreetPtr	( new ViewerStreet );
 	_viewer_event		= ViewerEventPtr	( new ViewerEvent );
 	_viewer_title       = ViewerTitlePtr    ( new ViewerTitle );
 	_viewer_status		= ViewerStatusPtr	( new ViewerStatus );
@@ -69,7 +67,9 @@ void Viewer::update( ) {
 	_viewer_object->draw( AREA_EVENT, EVENT_SX, EVENT_SY );
 	
 	// ステータス描画
-	_viewer_status->draw( );
+	for ( int i = 0; i < MAX_PLAYER; i++ ) {
+		_viewer_status->draw( ( PLAYER )i, i * VIEW_STATUS_WIDTH, VIEW_STATUS_Y );
+	}
 
 	// デバッグ
 	if ( Debug::getTask( )->isDebug( ) ) {

@@ -4,8 +4,6 @@
 #include "ace_define.h"
 #include <assert.h>
 
-const char * FILENAME = "Resource/Ace/Map/mapdata";
-
 MapStreetPtr MapStreet::getTask( ) {
 	return std::dynamic_pointer_cast< MapStreet >( Application::getInstance( )->getTask( getTag( ) ) );
 }
@@ -30,7 +28,7 @@ int MapStreet::getPageNum( ) const {
 void MapStreet::load( ) {
 	BinaryPtr binary( new Binary );
 	ApplicationPtr app( Application::getInstance( ) );
-	app->loadBinary( FILENAME, binary );
+	app->loadBinary( STREET_MAPDATA_FILENAME, binary );
 	
 	binary->read( (void*)&_page_num, sizeof( int ) );
 

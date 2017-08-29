@@ -50,7 +50,7 @@ _over_charge_time( -1 ),
 _player( player ),
 _id( -1 ),
 _money( 0 ),
-_toku( 0 ),
+_virtue( 0 ),
 _charge_count( 0 ),
 _unrivaled_count( MAX_UNRIVALED_COUNT ),
 _monmo( MonmotaroPtr( ) ),
@@ -585,7 +585,7 @@ void Player::blowAway( ) {
 	}
 }
 
-int Player::getMoneyNum( ) const {
+int Player::getMoney( ) const {
 	return _money;
 }
 
@@ -593,12 +593,12 @@ void Player::pickUpMoney( int money ) {
 	_money += money;
 }
 
-int Player::getTokuNum( ) const {
-	return _toku;
+int Player::getVirtue( ) const {
+	return _virtue;
 }
 
-void Player::pickUpToku( ) {
-	_toku++;
+void Player::pickUpVirtue( ) {
+	_virtue++;
 }
 
 void Player::setAction( ACTION action ) {

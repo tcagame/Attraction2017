@@ -51,15 +51,11 @@ void RockCharacter::update( ) {
 					_vec.z = 0;
 					break;
 				}
-				//足元がない( pos1:中心、pos2:足元より少し下の位置 )
+				//足元がない( pos1:中心、pos2:結構下のほう )
 				Vector hit_pos = col_models[ i ]->getHitPos( central_pos, central_pos - Vector( 0, STAND_RANGE, 0 ) );
 				if ( hit_pos.isOrijin( ) ) {
 					_vec.x = 0;
 					_vec.z = 0;
-					break;
-				} else {
-					_vec.y = hit_pos.y - _pos.y + GRAVITY / 2;
-					_standing = true;
 					break;
 				}
 			}
@@ -67,7 +63,7 @@ void RockCharacter::update( ) {
 		}
 	}
 	if ( _col ) {//上下判定
-		Vector pos = _pos + Vector( 0, -GRAVITY * 2, 0 );
+		Vector pos = _pos + Vector( 0, _radius, 0 );
 		Vector fpos = _pos + Vector( 0, _vec.y, 0 );
 		for ( int i = 0; i < col_models_size; i++ ) {
 			Vector hit_pos = col_models[ i ]->getHitPos( pos, fpos );

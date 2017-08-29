@@ -1,7 +1,6 @@
 #include "ViewerEvent.h"
 #include "Drawer.h"
 #include "ace_define.h"
-#include "MapEvent.h"
 
 ViewerEvent::ViewerEvent( ) {
 	DrawerPtr drawer( Drawer::getTask( ) );

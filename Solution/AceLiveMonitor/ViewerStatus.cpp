@@ -16,51 +16,37 @@ ViewerStatus::ViewerStatus( ) {
 ViewerStatus::~ViewerStatus( ) {
 }
 
-void ViewerStatus::draw( ) const {
-	for ( int i = 0; i < MAX_PLAYER; i++ ) {
-		int sx = i * 320;
-		_status_flame->setPos( sx, VIEW_STATUS_Y );
-		_status_flame->draw( );
-	}
-	drawHp( );
-	drawMoney( );
-	drawToku( );
+void ViewerStatus::draw( PLAYER player, int sx, int sy ) const {
+	_status_flame->setPos( sx, sy );
+	_status_flame->draw( );
+
+	FamilyPtr family(Family::getTask());
+	PlayerPtr p = family->getPlayer( player );
+
+	drawPower( p->getPower( ), sx, sy );
+	drawMoney( p->getMoney( ), sx, sy );
+	drawVirtue( p->getVirtue( ), sx, sy );
 }
 
-void ViewerStatus::drawHp( ) const {
-	//(POWER)
-	FamilyPtr family( Family::getTask( ) );
-	for ( int i = 0; i < MAX_PLAYER; i++ ) {
-		PlayerPtr player = family->getPlayer( i );
-		int tw = HP_GRAPH_WIDTH * player->getHp( );
-		_status_ui->setRect( 0, 256, tw, HP_GRAPH_HEIGHT );
-		int sx = i * 320 + 160;
-		int sy = VIEW_STATUS_Y + 50;
-		_status_ui->setPos( sx, sy );
-		_status_ui->draw( );
-	}
+void ViewerStatus::drawPower( int power, int sx, int sy ) const {
+	int tw = HP_GRAPH_WIDTH * power;
+	_status_ui->setRect( 0, 256, tw, HP_GRAPH_HEIGHT );
+	sx += 160;
+	sy +=  50;
+	_status_ui->setPos( sx, sy );
+	_status_ui->draw( );
 }
 
-void ViewerStatus::drawMoney( ) const {
-	//Money
-	FamilyPtr family( Family::getTask( ) );
+void ViewerStatus::drawMoney( int money,  int sx, int sy ) const {
+	sx += 160;
+	sy += 105;
 	DrawerPtr drawer( Drawer::getTask( ) );
-	for ( int i = 0; i < MAX_PLAYER; i++ ) {
-		PlayerPtr player = family->getPlayer( i );
-		int sx = i * 320 + 160;
-		int sy = VIEW_STATUS_Y + 105;
-		drawer->drawString( sx, sy, "%15d", player->getMoneyNum( ) );
-	}
+	drawer->drawString( sx, sy, "%15d", money );
 }
 
-void ViewerStatus::drawToku( ) const {
-	//Toku
-	FamilyPtr family( Family::getTask( ) );
+void ViewerStatus::drawVirtue( int virtue, int sx, int sy ) const {
+	sx += 280;
+	sy += 180;
 	DrawerPtr drawer( Drawer::getTask( ) );
-	for ( int i = 0; i < MAX_PLAYER; i++ ) {
-		PlayerPtr player = family->getPlayer( i );
-		int sx = i * 320 + 280;
-		int sy = VIEW_STATUS_Y + 180;
-		drawer->drawString( sx, sy, "%2d", player->getTokuNum( ) );
-	}
+	drawer->drawString( sx, sy, "%2d", virtue);
 }
