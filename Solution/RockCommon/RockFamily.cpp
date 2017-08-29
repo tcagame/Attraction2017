@@ -15,7 +15,7 @@ RockFamily::RockFamily( StatusPtr status, const Vector& base_pos ) {
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		_ancestors[ i ]	= RockAncestorsPtr( new RockAncestors( i ) );
 		_bubble[ i ]	= RockBubblePtr( new RockBubble( i ) );
-		_player[ i ]	= RockPlayerPtr   ( new RockPlayer   ( status, Vector( i * 35, 1 ) + base_pos, i, _ancestors[ i ] ) );
+		_player[ i ]	= RockPlayerPtr   ( new RockPlayer   ( status, Vector( i * 42, 1 ) + base_pos, i, _ancestors[ i ] ) );
 	}
 }
 

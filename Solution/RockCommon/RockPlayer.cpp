@@ -38,6 +38,7 @@ static const Vector EFFECT_ADJUST( 0, 15, 0 );
 static const int MAX_WISH_COUNT = 100;
 static const int ENHANCED_POWER = 2;
 static const Vector SHOT_FOOT( 0, 35, 0 );//ÉVÉáÉbÉgÇÃçÇÇ≥
+static const Vector BUBBLE_FOLLOW_RANGE = Vector( 1, 1, 1 ) * 30.0;
 
 
 RockPlayer::RockPlayer( StatusPtr status, const Vector& pos, int id, RockAncestorsPtr ancestors ) :
@@ -319,6 +320,24 @@ void RockPlayer::actOnBraking( ) {
 }
 
 void RockPlayer::actOnDead( ) {
+	RockFamilyPtr family = RockFamily::getTask( );
+	Vector near_distance = BUBBLE_FOLLOW_RANGE;
+	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+		if ( _id == i ) {
+			continue;
+		}
+		RockPlayerPtr player = family->getPlayer( i );
+		if ( !player->isActive( ) ) {
+			continue;
+		}
+		Vector distance = player->getPos( ) - getPos( );
+		if ( near_distance.getLength2( ) > distance.getLength2( ) ) {
+			near_distance = distance;
+		}
+	}
+	if ( near_distance != BUBBLE_FOLLOW_RANGE ) {
+		setVec( near_distance.normalize( ) * MOVE_SPEED );
+	}
 }
 
 void RockPlayer::actOnWish( ) {
