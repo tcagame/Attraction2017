@@ -21,7 +21,7 @@ public:
 	AREA getArea( ) const;
 	void setArea( AREA area );
 	int getChipSize( ) const;
-	int getHp( ) const;
+	int getPower( ) const;
 protected:
 	void setDir( DIR dir );
 	DIR getDir( ) const;
@@ -39,7 +39,7 @@ private:
 	Vector _pos;
 	Vector _vec;
 	int _chip_size;
-	int _hp;
+	int _power;
 	int _act_count;
 	bool _mass;
 	bool _standing;

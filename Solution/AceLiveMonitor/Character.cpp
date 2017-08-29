@@ -8,13 +8,13 @@
 const int MAX_SPEED_Y = 16;
 const int MAX_ACT_COUNT = 0xfffffff;
 
-Character::Character( const Vector& pos, const int chip_size, const int hp, bool mass ) :
+Character::Character( const Vector& pos, const int chip_size, const int power, bool mass ) :
 _pos( pos ),
 _vec( Vector( ) ),
 _standing( false ),
 _chip_size( chip_size ),
 _act_count( 0 ),
-_hp( hp ),
+_power( power ),
 _mass( mass ),
 _radius( chip_size / 2 ),
 _finished( false ),
@@ -40,8 +40,8 @@ void Character::update( ) {
 	if ( _vec.y < -MAX_SPEED_Y ) {
 		_vec.y = -MAX_SPEED_Y;
 	}
-	if ( _area == AREA_STREET ) {
-		if ( _mass ) {
+	if ( _mass ) {
+		if ( _area == AREA_STREET ) {
 			MapStreetConstPtr map( MapStreet::getTask( ) );
 			{//ã‰º”»’è
 				//ã
@@ -81,9 +81,7 @@ void Character::update( ) {
 					}
 				}
 			}
-		}
-	} else {
-		if ( _mass ) {
+		} else {
 			MapEventConstPtr map( MapEvent::getTask( ) );
 			{//ã‰º”»’è
 				if ( _vec.y > 0 ) {
@@ -121,14 +119,14 @@ void Character::update( ) {
 
 void Character::damage( int force ) {
 	if ( force < 0 ) {
-		_hp = 0;
+		_power = 0;
 		_finished = true;
 		return;
 	}
 
-	_hp -= force;
-	if ( _hp <= 0 ) {
-		_hp = 0;
+	_power -= force;
+	if ( _power <= 0 ) {
+		_power = 0;
 		_finished = true;
 	}
 }
@@ -158,10 +156,9 @@ void Character::setDir( DIR dir ) {
 	_dir = dir;
 }
 
-int Character::getHp( ) const {
-	return _hp;
+int Character::getPower( ) const {
+	return _power;
 }
-
 
 bool Character::isStanding( ) const {
 	return _standing;
