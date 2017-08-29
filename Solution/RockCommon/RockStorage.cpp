@@ -10,6 +10,7 @@
 #include "MessageSender.h"
 #include "RockAlter.h"
 #include "RockCasket.h"
+#include "RockPopItem.h"
 
 RockStoragePtr RockStorage::getTask( ) {
 	return std::dynamic_pointer_cast< RockStorage >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -32,6 +33,8 @@ RockStorage::~RockStorage( ) {
 void RockStorage::update( ) {
 	updateItem( );
 	updateAlter( );
+	updateCasket( );
+	updatePopItem( );
 }
 
 
@@ -55,6 +58,7 @@ void RockStorage::updateItem( ) {
 			}
 		}
 		if ( col ) {
+			_pop_items.push_back( RockPopItemPtr( new RockPopItem( item ) ) );
 			ite = _items.erase( ite );
 			continue;
 		}
@@ -142,5 +146,22 @@ void RockStorage::pickUpItem( RockItemPtr item, int player_id ) {
 	if ( toku ) {
 		int virtue = 1;
 		sender->sendMessage( player_id, Message::COMMAND_TOKU, &virtue );
+	}
+}
+
+void RockStorage::updatePopItem( ) {
+	std::list< RockPopItemPtr >::iterator ite = _pop_items.begin( );
+	while ( ite != _pop_items.end( ) ) {
+		RockPopItemPtr pop_item = *ite;
+		if ( !pop_item ) {
+			ite++;
+			continue;
+		}
+		pop_item->update( );
+		if ( pop_item->isFinished( ) ) {
+			ite = _pop_items.erase( ite );
+			continue;
+		}
+		ite++;
 	}
 }

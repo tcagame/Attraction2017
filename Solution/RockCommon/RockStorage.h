@@ -11,6 +11,7 @@ PTR( RockItemRock );
 PTR( RockItemToku );
 PTR( ModelMV1 );
 PTR( RockCasket );
+PTR ( RockPopItem );
 
 class RockStorage : public Task {
 public:
@@ -32,9 +33,11 @@ private:
 	void updateItem( );
 	void updateAlter( );
 	void updateCasket( );
+	void updatePopItem( );
 private:
 	std::list< RockItemPtr > _items;
 	std::list< RockAlterPtr > _alters;
 	std::list< RockCasketPtr > _caskets;
+	std::list< RockPopItemPtr > _pop_items;
 };
 

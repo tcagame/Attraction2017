@@ -63,7 +63,7 @@ void RockCharacter::update( ) {
 		}
 	}
 	if ( _col ) {//è„â∫îªíË
-		Vector pos = _pos + Vector( 0, -GRAVITY * 2, 0 );
+		Vector pos = _pos + Vector( 0, _radius, 0 );
 		Vector fpos = _pos + Vector( 0, _vec.y, 0 );
 		for ( int i = 0; i < col_models_size; i++ ) {
 			Vector hit_pos = col_models[ i ]->getHitPos( pos, fpos );
