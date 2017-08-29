@@ -138,4 +138,9 @@ void RockStorage::pickUpItem( RockItemPtr item, int player_id ) {
 		unsigned char item = ITEM_TREE;
 		sender->sendMessage( player_id, Message::COMMAND_ITEM, &item );
 	}
+	RockItemTokuPtr toku = std::dynamic_pointer_cast< RockItemToku >( item );
+	if ( toku ) {
+		int virtue = 1;
+		sender->sendMessage( player_id, Message::COMMAND_TOKU, &virtue );
+	}
 }

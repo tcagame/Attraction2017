@@ -8,6 +8,7 @@ PTR( RockItem );
 PTR( RockAlter );
 PTR( RockItemMoney );
 PTR( RockItemRock );
+PTR( RockItemToku );
 PTR( ModelMV1 );
 PTR( RockCasket );
 
