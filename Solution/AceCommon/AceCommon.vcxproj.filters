@@ -6,14 +6,12 @@
     <ClInclude Include="SynchronousData.h" />
     <ClInclude Include="ViewerObject.h" />
     <ClInclude Include="ViewerStreet.h" />
-    <ClInclude Include="MapEvent.h" />
     <ClInclude Include="ViewerEvent.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SynchronousData.cpp" />
     <ClCompile Include="ViewerObject.cpp" />
     <ClCompile Include="ViewerStreet.cpp" />
-    <ClCompile Include="MapEvent.cpp" />
     <ClCompile Include="ViewerEvent.cpp" />
   </ItemGroup>
 </Project>
