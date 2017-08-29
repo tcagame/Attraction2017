@@ -20,7 +20,7 @@ const unsigned int ITEM_TREE			= 0b00000100;
 
 const int ROCK_PLAYER_NUM = 4;
 const int ROCK_PLAYER_MOTION_NUM = 10;
-const double GRAVITY = -0.1;
+const double GRAVITY = -0.4;
 const int COLLISION_RANGE = 20;
 const int MAX_PLAYER_SHOT_POWER = 5;
 

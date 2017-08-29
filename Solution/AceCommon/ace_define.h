@@ -30,6 +30,8 @@ const int VIEW_STATUS_Y = VIEW_EVENT_HEIGHT + VIEW_STREET_HEIGHT;
 const int VIEW_STREET_Y = 256;
 const int VIEW_EVENT_Y = 0;
 
+static const char * STREET_MAPDATA_FILENAME = "Resource/Ace/Street/mapdata";
+
 enum PLAYER {
 	PLAYER_TAROSUKE,
 	PLAYER_TAROJIRO,

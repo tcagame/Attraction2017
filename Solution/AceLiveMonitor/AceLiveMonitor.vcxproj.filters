@@ -350,6 +350,8 @@
       <Filter>NPC</Filter>
     </ClCompile>
     <ClCompile Include="ViewerTitle.cpp" />
+    <ClCompile Include="MapStreet.cpp" />
+    <ClCompile Include="MapEvent.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -700,6 +702,8 @@
       <Filter>NPC</Filter>
     </ClInclude>
     <ClInclude Include="ViewerTitle.h" />
+    <ClInclude Include="MapStreet.h" />
+    <ClInclude Include="MapEvent.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">

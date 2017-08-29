@@ -31,9 +31,7 @@ Viewer::~Viewer( ) {
 }
 
 void Viewer::initialize( ) {
-	MapStreetPtr map( MapStreet::getTask( ) );
-
-	_viewer_street		= ViewerStreetPtr	( new ViewerStreet( map->getPageNum( ) ) );
+	_viewer_street		= ViewerStreetPtr	( new ViewerStreet );
 	_viewer_event		= ViewerEventPtr	( new ViewerEvent );
 	_viewer_title       = ViewerTitlePtr    ( new ViewerTitle );
 	_viewer_status		= ViewerStatusPtr	( new ViewerStatus );
