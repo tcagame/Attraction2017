@@ -5,6 +5,7 @@
 #include "RockAlter.h"
 #include "RockCasket.h"
 #include "RockStorage.h"
+#include "RockItemToku.h"
 #include "Movie.h"
 #include "Drawer.h"
 
@@ -30,6 +31,9 @@ RockMapTest::RockMapTest( ) {
 	RockStoragePtr sorage = RockStorage::getTask();
 	sorage->addAlter( RockAlterPtr( new RockAlter( Vector( 200, 0, 0 ) ) ) );
 	sorage->addCasket( RockCasketPtr( new RockCasket( Vector( 0, 0, -50 ) ) ) );
+
+	RockStoragePtr storage( RockStorage::getTask( ) );
+	storage->addItem( RockItemPtr( new RockItemToku( Vector ( 100, 10, 0 ) ) ) );
 
 }
 

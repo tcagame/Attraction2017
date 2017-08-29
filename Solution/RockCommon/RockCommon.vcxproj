@@ -197,6 +197,7 @@
     <ClInclude Include="RockItemDango.h" />
     <ClInclude Include="RockItemMoney.h" />
     <ClInclude Include="RockItemRock.h" />
+    <ClInclude Include="RockItemToku.h" />
     <ClInclude Include="RockMap.h" />
     <ClInclude Include="RockMilitary.h" />
     <ClInclude Include="RockPlayer.h" />
@@ -232,6 +233,7 @@
     <ClCompile Include="RockItemDango.cpp" />
     <ClCompile Include="RockItemMoney.cpp" />
     <ClCompile Include="RockItemRock.cpp" />
+    <ClCompile Include="RockItemToku.cpp" />
     <ClCompile Include="RockMap.cpp" />
     <ClCompile Include="RockMilitary.cpp" />
     <ClCompile Include="RockPlayer.cpp" />

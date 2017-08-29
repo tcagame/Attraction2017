@@ -24,7 +24,8 @@ double RockEnemyBossRock::getAnimTime( ) const {
 
 void RockEnemyBossRock::dropItem( ) {
 	RockStoragePtr storage( RockStorage::getTask( ) );
-	storage->addItem( RockItemPtr( new RockItemMoney( getPos( ) + Vector( 50, getRadius( ), 0 ), RockItemMoney::MONEY_VALUE_3 ) ) );
 	storage->addItem( RockItemPtr( new RockItemRock( getPos( ) + Vector( 0, getRadius( ), 0 ) ) ) );
 	storage->addItem( RockItemPtr( new RockItemBubble( getPos( ) + Vector( 0, getRadius( ), 0 ) ) ) );
+	storage->addItem( RockItemPtr( new RockItemMoney( getPos( ) + Vector( 50, getRadius( ), 0 ), RockItemMoney::MONEY_VALUE_3 ) ) );
+	
 }

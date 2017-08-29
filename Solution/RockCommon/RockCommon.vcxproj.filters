@@ -60,7 +60,12 @@
     <ClCompile Include="RockCasket.cpp">
       <Filter>Item</Filter>
     </ClCompile>
-    <ClCompile Include="RockItemBubble.cpp" />
+    <ClCompile Include="RockItemBubble.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="RockItemToku.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="define.h" />
@@ -125,7 +130,12 @@
     <ClInclude Include="RockCasket.h">
       <Filter>Item</Filter>
     </ClInclude>
-    <ClInclude Include="RockItemBubble.h" />
+    <ClInclude Include="RockItemBubble.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="RockItemToku.h">
+      <Filter>Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Enemy">
