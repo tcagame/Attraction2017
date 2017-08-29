@@ -3,6 +3,8 @@
 #include "RockItem.h"
 #include "RockItemDango.h"
 #include "RockItemMoney.h"
+#include "RockItemRock.h"
+#include "RockItemToku.h"
 #include "RockFamily.h"
 #include "RockPlayer.h"
 #include "MessageSender.h"
@@ -129,5 +131,11 @@ void RockStorage::pickUpItem( RockItemPtr item, int player_id ) {
 	if ( money ) {
 		int value = money->getValue( );
 		sender->sendMessage( player_id, Message::COMMAND_MONEY, &value );
+	}
+	//_ŠíŠâ
+	RockItemRockPtr rock = std::dynamic_pointer_cast< RockItemRock >( item );
+	if ( rock ) {
+		unsigned char item = ITEM_TREE;
+		sender->sendMessage( player_id, Message::COMMAND_ITEM, &item );
 	}
 }

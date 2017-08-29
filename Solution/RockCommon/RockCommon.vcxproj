@@ -175,6 +175,7 @@
     <ClInclude Include="define.h" />
     <ClInclude Include="Message.h" />
     <ClInclude Include="MessageSender.h" />
+    <ClInclude Include="RockBubble.h" />
     <ClInclude Include="RockEnemyBossRock.h" />
     <ClInclude Include="RockAlter.h" />
     <ClInclude Include="RockAncestors.h" />
@@ -197,6 +198,7 @@
     <ClInclude Include="RockItemDango.h" />
     <ClInclude Include="RockItemMoney.h" />
     <ClInclude Include="RockItemRock.h" />
+    <ClInclude Include="RockItemToku.h" />
     <ClInclude Include="RockMap.h" />
     <ClInclude Include="RockMilitary.h" />
     <ClInclude Include="RockPlayer.h" />
@@ -212,6 +214,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MessageSender.cpp" />
+    <ClCompile Include="RockBubble.cpp" />
     <ClCompile Include="RockEnemyBossRock.cpp" />
     <ClCompile Include="RockAlter.cpp" />
     <ClCompile Include="RockAncestors.cpp" />
@@ -234,6 +237,7 @@
     <ClCompile Include="RockItemDango.cpp" />
     <ClCompile Include="RockItemMoney.cpp" />
     <ClCompile Include="RockItemRock.cpp" />
+    <ClCompile Include="RockItemToku.cpp" />
     <ClCompile Include="RockMap.cpp" />
     <ClCompile Include="RockMilitary.cpp" />
     <ClCompile Include="RockPlayer.cpp" />

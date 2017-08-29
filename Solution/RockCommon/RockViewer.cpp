@@ -21,6 +21,7 @@
 #include "RockAncestors.h"
 #include "Movie.h"
 #include "RockTheater.h"
+#include "RockBubble.h"
 
 const int DRAW_UI_Y = 512;
 const int HP_GRAPH_HEIGHT = 16;
@@ -56,6 +57,7 @@ void RockViewer::update( ) {
 	drawMap( );
 	drawEnemy( );
 	drawPlayer( );
+	drawBubble( );
 	drawAncestors( );
 	//drawShot( );
 	drawItem( );
@@ -101,6 +103,27 @@ void RockViewer::drawPlayer( ) const {
 		model->draw( );
 	}
 }
+
+void RockViewer::drawBubble( ) const {
+	RockFamilyPtr family( RockFamily::getTask( ) );
+	unsigned int client_id = RockClientInfo::getTask( )->getClientId( );
+	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+		if ( client_id != _status->getPlayer( i ).area ) {
+			continue;
+		}
+		RockPlayerPtr player = family->getPlayer( i );
+		if ( !player->isActive( ) ) {
+			continue;
+		}
+
+		RockBubblePtr bubble = family->getBubble( i );
+		if ( bubble->isActive( ) ) {
+			ModelMV1Ptr model = bubble->getModel( );
+			model->draw( );
+		}
+	}
+}
+
 
 void RockViewer::drawAncestors( ) const {
 	RockFamilyPtr family( RockFamily::getTask( ) );

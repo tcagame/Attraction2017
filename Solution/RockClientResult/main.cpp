@@ -37,6 +37,6 @@ void main( ) {
 	app->addTask( RockCamera::getTag( ), TaskPtr( new RockCameraResult ) );
 	app->addTask( RockClientInfo::getTag( ), TaskPtr( new RockClientInfo( STATE_TEST ) ) );
 	app->addTask( MessageSender::getTag( ), TaskPtr( new MessageSender( message ) ) );
-	app->addTask( RockTheater::getTag( ), TaskPtr( new RockTheaterResult( ) ) );
+	//app->addTask( RockTheater::getTag( ), TaskPtr( new RockTheaterResult( ) ) );
 	app->addTask( RockViewer::getTag( ), TaskPtr( new RockViewer( status ) ) );
 }

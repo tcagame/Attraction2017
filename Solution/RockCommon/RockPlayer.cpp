@@ -264,7 +264,12 @@ void RockPlayer::actOnCharging( ) {
 		_effect_handle = effect->playEffect( RockStudio::getTask( )->getEffectHandle( EFFECT_CHARGE ) );
 		effect->updateEffectTransform( _effect_handle, getPos( ) + EFFECT_ADJUST );
 	}
-	_attack_count++;
+	
+	if ( player.item & ITEM_ENHANCED_CHARGE ) {
+		_attack_count += 2;
+	} else {
+		_attack_count++;
+	}
 	if ( _attack_count > MAX_CHARGE_COUNT ) {
 		_attack_count = MAX_CHARGE_COUNT;
 	}
@@ -404,3 +409,8 @@ void RockPlayer::wish( ) {
 void RockPlayer::resetPos( const Vector& pos ) {
 	setPos( pos );
 }
+
+bool RockPlayer::isDead( ) const {
+	return _action == ACTION_DEAD;
+}
+
