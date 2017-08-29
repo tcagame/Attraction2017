@@ -47,7 +47,7 @@ void ChipDrawer::drawChip( int mx, int my, int gx, int gy, bool select ) const {
 		int width = 0;
 		int height = 0;
 		structure->getImageSize( width, height );
-		structure->setPos( sx, sy - height + CHIP_HEIGHT );
+		structure->setPos( sx + CHIP_WIDTH / 2 - width / 2, sy - height + CHIP_HEIGHT );
 		structure->setRect( );
 		structure->draw( );
 	}
