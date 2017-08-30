@@ -17,7 +17,7 @@
 #include "Monmotaro.h"
 #include "ShotPlayer.h"
 #include "Office.h"
-
+#include "World.h"
 #include <assert.h>
 
 //画像サイズ
@@ -388,6 +388,7 @@ void Player::actOnDead( ) {
 			//メインの画面中央上部に移動
 			setArea( AREA_STREET );
 			MapEvent::getTask( )->setEvent( EVENT_NONE );
+			World::getTask( )->setEvent( EVENT_NONE );
 			Military::getTask( )->createBoss( );
 			setPos( Vector( Family::getTask( )->getCameraPosX( ) + SCREEN_WIDTH / 2, chip_size ) );
 			Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, chip_size / 2 ), getArea( ), chip_size * 2 ) ) );
@@ -487,6 +488,7 @@ void Player::updateState( ) {
 		//イベントに入るとき
 		if ( event != EVENT_NONE ) {
 			map_event->setEvent( event );
+			World::getTask( )->setEvent( event );
 			if ( event >= EVENT_SHOP ) {
 				office->popUpNPC( );
 			}
@@ -496,19 +498,7 @@ void Player::updateState( ) {
 			setVec( Vector( ) );
 		}
 	}
-	//賭博場に入る
-	/*
-	if ( _entry_gamble && event == EVENT_NONE ) {
-		map_event->setEvent( EVENT_GAMBLE );
-		office->popUpNPC( );
-		setArea( AREA_EVENT );
-		setPos( Vector( GRAPH_SIZE * 3 / 2, 0 ) );
-		setVec( Vector( ) );
-		_entry_gamble = false;
-	}
-	*/
 
-	
 	if ( map->getObject( getPos( ) + getVec( ) ) == OBJECT_EVENT_CALL ) {
 		map->usedObject( getPos( ) + getVec( ) );
 		Monmotaro::Target target;
@@ -527,6 +517,7 @@ void Player::updateState( ) {
 		if ( getPos( ).x < GRAPH_SIZE ) {
 			setArea( AREA_STREET );
 			map_event->setEvent( EVENT_NONE );
+			World::getTask( )->setEvent( event );
 			militaly->eraseEventEnemy( );
 			Storage::getTask( )->eraseEventItem( );
 			setPos( Vector( family->getCameraPosX( ) + SCREEN_WIDTH / 2, 0 ) );
@@ -540,6 +531,7 @@ void Player::updateState( ) {
 			 map_event->getEvent( ) < EVENT_SHOP ) {
 			setArea( AREA_STREET );
 			map_event->setEvent( EVENT_NONE );
+			World::getTask( )->setEvent( event );
 			militaly->eraseEventEnemy( );
 			setPos( Vector( family->getCameraPosX( ) + SCREEN_WIDTH / 2, 0 ) );
 			setVec( Vector( ) );

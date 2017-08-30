@@ -55,9 +55,6 @@ void MapEvent::load( ) {
 }
 
 void MapEvent::update( ) {
-	// 同期データにイベント情報を設定
-	SynchronousDataPtr data( SynchronousData::getTask( ) );
-	data->setEvent( _event );
 }
 
 void MapEvent::setEvent( EVENT event ) {
