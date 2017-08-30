@@ -346,7 +346,6 @@
     <ClCompile Include="NPCShaker.cpp">
       <Filter>NPC</Filter>
     </ClCompile>
-    <ClCompile Include="MapStreet.cpp" />
     <ClCompile Include="MapEvent.cpp" />
     <ClCompile Include="ViewerTitle.cpp">
       <Filter>Viewer</Filter>
@@ -699,7 +698,6 @@
     <ClInclude Include="NPCShaker.h">
       <Filter>NPC</Filter>
     </ClInclude>
-    <ClInclude Include="MapStreet.h" />
     <ClInclude Include="MapEvent.h" />
     <ClInclude Include="ViewerTitle.h">
       <Filter>Viewer</Filter>

@@ -182,7 +182,6 @@
     <ClCompile Include="Magazine.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="MapEvent.cpp" />
-    <ClCompile Include="MapStreet.cpp" />
     <ClCompile Include="Monmotaro.cpp" />
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="NPCAngel.cpp" />
@@ -313,7 +312,6 @@
     <ClInclude Include="Magazine.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="MapEvent.h" />
-    <ClInclude Include="MapStreet.h" />
     <ClInclude Include="Monmotaro.h" />
     <ClInclude Include="NPC.h" />
     <ClInclude Include="NPCAngel.h" />

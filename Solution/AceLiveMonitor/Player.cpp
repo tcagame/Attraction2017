@@ -3,7 +3,6 @@
 #include "Armoury.h"
 #include "ace_define.h"
 #include "Family.h"
-#include "MapStreet.h"
 #include "Viewer.h"
 #include "ViewerEvent.h"
 #include "MapEvent.h"
@@ -18,6 +17,7 @@
 #include "ShotPlayer.h"
 #include "Office.h"
 #include "World.h"
+#include "Map.h"
 #include <assert.h>
 
 //画像サイズ
@@ -449,7 +449,7 @@ int Player::getChargeCount( ) const {
 
 void Player::updateState( ) {
 	//イベント
-	MapStreetPtr map( MapStreet::getTask( ) );
+	MapPtr map = World::getTask( )->getMap( AREA_STREET );
 	MapEventPtr map_event( MapEvent::getTask( ) );
 	OfficePtr office( Office::getTask( ) );
 	MilitaryPtr militaly( Military::getTask( ) );
@@ -500,7 +500,6 @@ void Player::updateState( ) {
 	}
 
 	if ( map->getObject( getPos( ) + getVec( ) ) == OBJECT_EVENT_CALL ) {
-		map->usedObject( getPos( ) + getVec( ) );
 		Monmotaro::Target target;
 		target.id  = _id;
 		target.radius = getRadius( );

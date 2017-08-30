@@ -13,7 +13,8 @@
 #include "SynchronousData.h"
 #include "Family.h"
 
-#include "MapStreet.h"
+#include "World.h"
+#include "Map.h"
 
 const int EVENT_SX = 0;
 const int EVENT_SY = 0;
