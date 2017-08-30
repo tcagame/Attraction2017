@@ -32,16 +32,16 @@ void main( ) {
 	app->addTask( Device  ::getTag( ), DevicePtr( new Device( ) ) );
 	app->addTask( Keyboard::getTag( ), KeyboardPtr( new Keyboard( ) ) );
 	
-	app->addTask( World    ::getTag( ), WorldPtr    ( new World    ( ) ) );
-	app->addTask( Family   ::getTag( ), FamilyPtr   ( new Family   ( ) ) );
-	app->addTask( Armoury  ::getTag( ), ArmouryPtr  ( new Armoury  ( ) ) );
-	app->addTask( Magazine ::getTag( ), MagazinePtr ( new Magazine ( ) ) );
-	app->addTask( Storage  ::getTag( ), StoragePtr  ( new Storage  ( ) ) );
-	app->addTask( Popper   ::getTag( ), PopperPtr   ( new Popper   ( ) ) );
-	app->addTask( Military ::getTag( ), MilitaryPtr ( new Military ( ) ) );
-	app->addTask( Office   ::getTag( ), OfficePtr	( new Office   ( ) ) );
-	app->addTask( Debug	   ::getTag( ), DebugPtr    ( new Debug    ( ) ) );
-	app->addTask( Viewer   ::getTag( ), ViewerPtr   ( new Viewer   ( ) ) );
-	app->addTask( Sender   ::getTag( ), SenderPtr   ( new Sender   ( data ) ) );
+	app->addTask( World     ::getTag( ), WorldPtr     ( new World     ( ) ) );
+	app->addTask( Family    ::getTag( ), FamilyPtr    ( new Family    ( ) ) );
+	app->addTask( Armoury   ::getTag( ), ArmouryPtr   ( new Armoury   ( ) ) );
+	app->addTask( Magazine  ::getTag( ), MagazinePtr  ( new Magazine  ( ) ) );
+	app->addTask( Storage   ::getTag( ), StoragePtr   ( new Storage   ( ) ) );
+	app->addTask( Popper    ::getTag( ), PopperPtr    ( new Popper    ( ) ) );
+	app->addTask( Military  ::getTag( ), MilitaryPtr  ( new Military  ( ) ) );
+	app->addTask( Office    ::getTag( ), OfficePtr	  ( new Office    ( ) ) );
+	app->addTask( Debug	    ::getTag( ), DebugPtr     ( new Debug     ( ) ) );
+	app->addTask( ViewerLive::getTag( ), ViewerLivePtr( new ViewerLive( ) ) );
+	app->addTask( Sender    ::getTag( ), SenderPtr    ( new Sender    ( data ) ) );
 
 }

@@ -21,28 +21,26 @@ const int EVENT_SY = 0;
 const int MAIN_SX  = 0;
 const int MAIN_SY  = 256;
 
-ViewerPtr Viewer::getTask( ) {
-	return std::dynamic_pointer_cast< Viewer >( Application::getInstance( )->getTask( getTag( ) ) );
+ViewerLivePtr ViewerLive::getTask( ) {
+	return std::dynamic_pointer_cast< ViewerLive >( Application::getInstance( )->getTask( getTag( ) ) );
 }
 
-Viewer::Viewer( ) {
+ViewerLive::ViewerLive( ) {
 }
 
-Viewer::~Viewer( ) {
+ViewerLive::~ViewerLive( ) {
 }
 
-void Viewer::initialize( ) {
-	_viewer_street		= ViewerStreetPtr	( new ViewerStreet );
-	_viewer_event		= ViewerEventPtr	( new ViewerEvent );
-	_viewer_title       = ViewerTitlePtr    ( new ViewerTitle );
-	_viewer_status		= ViewerStatusPtr	( new ViewerStatus );
-
-	_viewer_debug = ViewerDebugPtr( new ViewerDebug );
-
+void ViewerLive::initialize( ) {
+	_viewer_street = ViewerStreetPtr( new ViewerStreet );
+	_viewer_event  = ViewerEventPtr	( new ViewerEvent  );
+	_viewer_title  = ViewerTitlePtr ( new ViewerTitle  );
+	_viewer_status = ViewerStatusPtr( new ViewerStatus );
+	_viewer_debug  = ViewerDebugPtr( new ViewerDebug );
 	_viewer_object = ViewerObjectPtr( new ViewerObject );
 }
 
-void Viewer::update( ) {
+void ViewerLive::update( ) {
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
 
 	DrawerPtr drawer( Drawer::getTask( ) );
