@@ -351,6 +351,7 @@
     <ClCompile Include="ViewerTitle.cpp">
       <Filter>Viewer</Filter>
     </ClCompile>
+    <ClCompile Include="Map.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h" />
@@ -702,6 +703,7 @@
     <ClInclude Include="ViewerTitle.h">
       <Filter>Viewer</Filter>
     </ClInclude>
+    <ClInclude Include="Map.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">
