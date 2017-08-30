@@ -141,11 +141,18 @@ bool Command::excuteDevice( ) const {
 bool Command::excuteContinue( std::vector< std::string > command ) {
 	bool result = false;
 	if ( command.size( ) == 3 ) {
-		int player_num = std::atoi( command[ 1 ].c_str( ) );
 		int continue_num = std::atoi( command[ 2 ].c_str( ) );
-		if ( player_num >= 0 && player_num <= ROCK_PLAYER_NUM && continue_num >= 0 ) {
-			_status->getPlayer( player_num ).continue_num = continue_num;
+		if ( command[ 1 ] == "all" ) {
+			for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+				_status->getPlayer( i ).continue_num = continue_num;
+			}
 			result = true;
+		} else {
+			int player_num = std::atoi( command[ 1 ].c_str( ) );
+			if ( player_num >= 0 && player_num <= ROCK_PLAYER_NUM && continue_num >= 0 ) {
+				_status->getPlayer( player_num ).continue_num = continue_num;
+				result = true;
+			}
 		}
 	}
 	return result;
@@ -154,11 +161,18 @@ bool Command::excuteContinue( std::vector< std::string > command ) {
 bool Command::excuteToku( std::vector< std::string > command ) {
 	bool result = false;
 	if ( command.size( ) == 3 ) {
-		int player_num = std::atoi( command[ 1 ].c_str( ) );
 		int toku = std::atoi( command[ 2 ].c_str( ) );
-		if ( player_num >= 0 && player_num <= ROCK_PLAYER_NUM && toku >= 0 ) {
-			_status->getPlayer( player_num ).toku = toku;
+		if ( command[ 1 ] == "all" ) {
+			for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+				_status->getPlayer( i ).toku = toku;
+			}
 			result = true;
+		} else {
+			int player_num = std::atoi( command[ 1 ].c_str( ) );
+			if ( player_num >= 0 && player_num <= ROCK_PLAYER_NUM && toku >= 0 ) {
+				_status->getPlayer( player_num ).toku = toku;
+				result = true;
+			}
 		}
 	}
 	return result;
@@ -167,11 +181,18 @@ bool Command::excuteToku( std::vector< std::string > command ) {
 bool Command::excutePower( std::vector< std::string > command ) {
 	bool result = false;
 	if ( command.size( ) == 3 ) {
-		int player_num = std::atoi( command[ 1 ].c_str( ) );
 		int power = std::atoi( command[ 2 ].c_str( ) );
-		if ( player_num >= 0 && player_num <= ROCK_PLAYER_NUM && power >= 0 ) {
-			_status->getPlayer( player_num ).power = power;
+		if ( command[ 1 ] == "all" ) {
+			for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+				_status->getPlayer( i ).power = power;
+			}
 			result = true;
+		} else {
+			int player_num = std::atoi( command[ 1 ].c_str( ) );
+			if ( player_num >= 0 && player_num <= ROCK_PLAYER_NUM && power >= 0 ) {
+				_status->getPlayer( player_num ).power = power;
+				result = true;
+			}
 		}
 	}
 	return result;
@@ -180,11 +201,18 @@ bool Command::excutePower( std::vector< std::string > command ) {
 bool Command::excuteMoney( std::vector< std::string > command ) {
 	bool result = false;
 	if ( command.size( ) == 3 ) {
-		int player_num = std::atoi( command[ 1 ].c_str( ) );
 		int money = std::atoi( command[ 2 ].c_str( ) );
-		if ( player_num >= 0 && player_num <= ROCK_PLAYER_NUM && money >= 0 ) {
-			_status->getPlayer( player_num ).money = money;
+		if ( command[ 1 ] == "all" ) {
+			for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+				_status->getPlayer( i ).money = money;
+			}
 			result = true;
+		} else {
+			int player_num = std::atoi( command[ 1 ].c_str( ) );
+			if ( player_num >= 0 && player_num <= ROCK_PLAYER_NUM && money >= 0 ) {
+				_status->getPlayer( player_num ).money = money;
+				result = true;
+			}
 		}
 	}
 	return result;
@@ -193,15 +221,22 @@ bool Command::excuteMoney( std::vector< std::string > command ) {
 bool Command::excuteItem( std::vector< std::string > command ) {
 	bool result = false;
 	if ( command.size( ) == 3 ) {
-		int player_num = std::atoi( command[ 1 ].c_str( ) );
 		if ( command[ 2 ].size( ) == 8 ) {
 			int item = 0;
 			for ( int i = 0; i < 8; i++ ) {
 				item |= command[ 2 ][ 7 - i ] == '0' ? 0 : 1 << i;
 			}
-			if ( player_num >= 0 && player_num <= ROCK_PLAYER_NUM ) {
-				_status->getPlayer( player_num ).item = item;
+			if ( command[ 1 ] == "all" ) {
+				for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+					_status->getPlayer( i ).item = item;
+				}
 				result = true;
+			} else {
+				int player_num = std::atoi( command[ 1 ].c_str( ) );
+				if ( player_num >= 0 && player_num <= ROCK_PLAYER_NUM ) {
+					_status->getPlayer( player_num ).item = item;
+					result = true;
+				}
 			}
 		}
 	}
@@ -211,7 +246,6 @@ bool Command::excuteItem( std::vector< std::string > command ) {
 bool Command::excuteState( std::vector< std::string > command ) {
 	bool result = false;
 	if ( command.size( ) == 3 ) {
-		int player_num = std::atoi( command[ 1 ].c_str( ) );
 		unsigned int area = 0;
 		for ( int i = 0; i < STATE_NUM; i++ ) {
 			if ( command[ 2 ] == AREA[ i ] ) {
@@ -219,19 +253,35 @@ bool Command::excuteState( std::vector< std::string > command ) {
 				break;
 			}
 		}
-		// resultに他プレイヤーがいたら入らない
-		for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
-			if ( i == player_num ) {
-				continue;
+		
+		if ( command[ 1 ] == "all" ) {
+			if ( area == STATE_RESULT ) {
+				std::string message = "#ERROR# 全キャラをリザルトにはできません";
+				Log::getTask( )->addMessage( message );
+				return false;
 			}
-			if ( _status->getPlayer( i ).area == STATE_RESULT ) {
-				return result;
+			for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+				_status->getPlayer( i ).area = area;
 			}
-		}
-
-		if ( player_num >= 0 && player_num <= ROCK_PLAYER_NUM ) {
-			_status->getPlayer( player_num ).area = area;
 			result = true;
+		} else {
+			int player_num = std::atoi( command[ 1 ].c_str( ) );
+			// resultに他プレイヤーがいたら入らない
+			for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+				if ( i == player_num ) {
+					continue;
+				}
+				if ( _status->getPlayer( i ).area == STATE_RESULT ) {
+					std::string message = "#ERROR# すでに他キャラがリザルトにいます";
+					Log::getTask( )->addMessage( message );
+					return false;
+				}
+			}
+
+			if ( player_num >= 0 && player_num <= ROCK_PLAYER_NUM ) {
+				_status->getPlayer( player_num ).area = area;
+				result = true;
+			}
 		}
 	}
 	return result;
