@@ -38,6 +38,11 @@ void ViewerLive::initialize( ) {
 	_viewer_status = ViewerStatusPtr( new ViewerStatus );
 	_viewer_debug  = ViewerDebugPtr( new ViewerDebug );
 	_viewer_object = ViewerObjectPtr( new ViewerObject );
+
+	DrawerPtr drawer = Drawer::getTask( );
+	_image_frame = drawer->createImage( "UI/area_event_frame.png" );
+	_image_frame->setRect( 0, 0, 1280, 256 );
+	_image_frame->setPos( 0, 0 );
 }
 
 void ViewerLive::update( ) {
@@ -63,6 +68,10 @@ void ViewerLive::update( ) {
 		_viewer_event->draw( event, EVENT_SX, EVENT_SY );
 	}
 
+	// イベント枠描画
+	_image_frame->draw( );
+
+	// オブジェクト描画
 	_viewer_object->draw( AREA_EVENT, EVENT_SX, EVENT_SY );
 	
 	// ステータス描画
