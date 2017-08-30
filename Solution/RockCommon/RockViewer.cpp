@@ -48,6 +48,12 @@ void RockViewer::initialize( ) {
 	_status_flame = drawer->createImage( "UI/status_plate.png" );
 	_status_ui = drawer->createImage( "UI/ui.png" );
 	_status_num = drawer->createImage( "UI/ui_num.png" );
+	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {		
+		char filename[ 256 ];
+		sprintf_s( filename, "UI/breast%d.png", i + 1 );
+		ImagePtr image = drawer->createImage( filename );
+		_breasts.push_back( image );
+	}
 }
 
 void RockViewer::update( ) {
@@ -218,17 +224,26 @@ void RockViewer::drawUI( ) const {
 		if ( client_id != _status->getPlayer( i ).area ) {
 			continue;
 		}
+		if ( family->getPlayer( i )->isEntry( ) &&
+			 client_id == STATE_ENTRY ) {
+			_breasts[ i ]->setRect( 0, 0, 320, 360 );
+			_breasts[ i ]->setPos( i * ( SCREEN_WIDTH / 4 ), SCREEN_HEIGHT - 256, ( i + 1 ) * ( SCREEN_WIDTH / 4 ), SCREEN_HEIGHT );
+			_breasts[ i ]->draw( );
+			continue;
+		}
 		int sx = i * 320;
 		_status_flame->setPos( sx, DRAW_UI_Y );
 		_status_flame->draw( );
 
 		//(POWER)
 		int tw = HP_GRAPH_WIDTH * _status->getPlayer( i ).power;
-		_status_ui->setRect( 0, 256, tw, HP_GRAPH_HEIGHT );
-		sx += 160;
-		int sy = DRAW_UI_Y + 50;
-		_status_ui->setPos( sx, sy );
-		_status_ui->draw( );
+		if ( tw != 0 ) {
+			_status_ui->setRect( 0, 256, tw, HP_GRAPH_HEIGHT );
+			sx += 160;
+			int sy = DRAW_UI_Y + 50;
+			_status_ui->setPos( sx, sy );
+			_status_ui->draw( );
+		}
 		//(MONEY)
 		int money = _status->getPlayer( i ).money;
 		int digit = 0;
