@@ -29,7 +29,7 @@ void main( ) {
 
 	app->addTask( RockMap::getTag( ), TaskPtr( new RockMapBoss ) );
 	app->addTask( RockDollHouse::getTag( ), TaskPtr( new RockDollHouse ) );
-	app->addTask( RockFamily::getTag( ), TaskPtr( new RockFamily( status, Vector( 0, 100, 0 ) ) ) );
+	app->addTask( RockFamily::getTag( ), TaskPtr( new RockFamily( status, Vector( -700, 75, -25 ) ) ) );
 	app->addTask( RockArmoury::getTag( ), TaskPtr( new RockArmoury( ) ) );
 	app->addTask( RockMilitatyBoss::getTag( ), TaskPtr( new RockMilitatyBoss ) );
 	app->addTask( RockStorage::getTag( ), TaskPtr( new RockStorage( ) ) );

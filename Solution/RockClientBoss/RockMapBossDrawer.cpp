@@ -15,6 +15,11 @@ _stage( stage ) {
 	case RockMapBoss::STAGE_ROCK:
 		loadStage( "room_rock.mv1", "room_rock_col.mv1" );
 		break;
+	case RockMapBoss::STAGE_FIRE_TO_ROCK:
+	case RockMapBoss::STAGE_ROCK_TO_TREE:
+	case RockMapBoss::STAGE_TREE_TO_FIRE:
+		loadStage( "bossToboss.mv1", "bossToboss_col.mv1" );
+		break;
 	}
 }
 
