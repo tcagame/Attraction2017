@@ -38,7 +38,8 @@ static const Vector EFFECT_ADJUST( 0, 15, 0 );
 static const int MAX_WISH_COUNT = 100;
 static const int ENHANCED_POWER = 2;
 static const Vector SHOT_FOOT( 0, 35, 0 );//ÉVÉáÉbÉgÇÃçÇÇ≥
-static const Vector BUBBLE_FOLLOW_RANGE = Vector( 1, 1, 1 ) * 3000.0;
+static const Vector BUBBLE_SEARCH_RANGE = Vector( 1, 1, 1 ) * 3000.0;
+static const double BUBBLE_FOLLOW_RANGE = 60.0;
 static const Vector BUBBLE_FOOT = Vector( 0, 60, 0 );
 static const double BUBBLE_MOVE_SPEED = MOVE_SPEED * 0.9;
 static const int DEAD_ANIM_TIME = 150;
@@ -332,7 +333,7 @@ void RockPlayer::actOnDead( ) {
 		return;
 	}
 	RockFamilyPtr family = RockFamily::getTask( );
-	Vector near_distance = BUBBLE_FOLLOW_RANGE;
+	Vector near_distance = BUBBLE_SEARCH_RANGE;
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		if ( _id == i ) {
 			continue;
@@ -343,11 +344,12 @@ void RockPlayer::actOnDead( ) {
 			continue;
 		}
 		Vector distance = player->getPos( ) + BUBBLE_FOOT - getPos( );
-		if ( near_distance.getLength2( ) > distance.getLength2( ) ) {
+		if ( near_distance.getLength2( ) > distance.getLength2( ) &&
+			 distance.getLength2( ) > BUBBLE_FOLLOW_RANGE * BUBBLE_FOLLOW_RANGE ) {
 			near_distance = distance;
 		}
 	}
-	if ( near_distance != BUBBLE_FOLLOW_RANGE ) {
+	if ( near_distance != BUBBLE_SEARCH_RANGE ) {
 		Vector vec = near_distance;
 		if ( vec.getLength2( ) > BUBBLE_MOVE_SPEED * BUBBLE_MOVE_SPEED ) {
 			vec = vec.normalize( ) * BUBBLE_MOVE_SPEED;
