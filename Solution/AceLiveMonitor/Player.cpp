@@ -3,7 +3,7 @@
 #include "Armoury.h"
 #include "ace_define.h"
 #include "Family.h"
-#include "Viewer.h"
+#include "ViewerLive.h"
 #include "ViewerEvent.h"
 #include "Military.h"
 #include "Enemy.h"

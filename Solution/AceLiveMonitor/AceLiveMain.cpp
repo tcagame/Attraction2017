@@ -5,7 +5,7 @@
 #include "ace_define.h"
 #include "Family.h"
 #include "Armoury.h"
-#include "Viewer.h"
+#include "ViewerLive.h"
 #include "World.h"
 #include "Military.h"
 #include "Office.h"

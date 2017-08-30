@@ -1,115 +1,107 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Character.cpp" />
-    <ClCompile Include="Family.cpp" />
-    <ClCompile Include="Military.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Shot.cpp" />
-    <ClCompile Include="Armoury.cpp" />
-    <ClCompile Include="Impact.cpp" />
-    <ClCompile Include="Storage.cpp" />
     <ClCompile Include="Enemy.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyFaceAndHand.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyPurpleZombie.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyNoFace.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyLancer.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyCrocoSnake.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyGhoul.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyArcher.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyGhost.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyHand.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyNoNeckGhost.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyOneEyeSnake.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyRedBird.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyShishimai.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyStoneFace.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyWhiteMist.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyBlueMonk.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyGreenZombie.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemySwampZombieA.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemySwampZombieB.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemySwampZombieC.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyBoss.cpp">
       <Filter>Boss</Filter>
     </ClCompile>
     <ClCompile Include="EnemyJizo.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyLady.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyOnyudo.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemySkeleton.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyWind.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyTree.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyGrayMist.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyGama.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyBat.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyFlog.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyMoth.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyStone.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="PopGama.cpp">
       <Filter>Pop</Filter>
@@ -213,9 +205,6 @@
     <ClCompile Include="PopTree.cpp">
       <Filter>Pop</Filter>
     </ClCompile>
-    <ClCompile Include="Viewer.cpp">
-      <Filter>Viewer</Filter>
-    </ClCompile>
     <ClCompile Include="ViewerDebug.cpp">
       <Filter>Viewer</Filter>
     </ClCompile>
@@ -238,19 +227,19 @@
       <Filter>NPC</Filter>
     </ClCompile>
     <ClCompile Include="EnemyRedBirdAttack.cpp">
-      <Filter>EnemyAttack</Filter>
+      <Filter>Shot\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyBranch.cpp">
-      <Filter>EnemyAttack</Filter>
+      <Filter>Shot\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemySeed.cpp">
-      <Filter>EnemyAttack</Filter>
+      <Filter>Shot\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyTreeNuts.cpp">
-      <Filter>EnemyAttack</Filter>
+      <Filter>Shot\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyHandAttack.cpp">
-      <Filter>EnemyAttack</Filter>
+      <Filter>Shot\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyTreeNuts.cpp">
       <Filter>EnemyAttack</Filter>
@@ -271,28 +260,25 @@
       <Filter>Item</Filter>
     </ClCompile>
     <ClCompile Include="EnemyHellFire.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="Debug.cpp" />
     <ClCompile Include="ItemRock.cpp">
       <Filter>Item</Filter>
     </ClCompile>
     <ClCompile Include="EnemyAttack.cpp">
-      <Filter>EnemyAttack</Filter>
+      <Filter>Shot\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="Sender.cpp" />
-    <ClCompile Include="Magazine.cpp" />
     <ClCompile Include="EnemyEyeDaemon.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyHugDaemon.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyLittleRedDaemon.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyShishimaiDaemon.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyBossBloodDaemon.cpp">
       <Filter>Boss</Filter>
@@ -313,16 +299,16 @@
       <Filter>Pop</Filter>
     </ClCompile>
     <ClCompile Include="EnemyArcherAttack.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyRay.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyShell.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyWaterGhost.cpp">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="PopRay.cpp">
       <Filter>Pop</Filter>
@@ -333,9 +319,6 @@
     <ClCompile Include="PopWaterGhost.cpp">
       <Filter>Pop</Filter>
     </ClCompile>
-    <ClCompile Include="Monmotaro.cpp" />
-    <ClCompile Include="ShotMonmotaro.cpp" />
-    <ClCompile Include="ShotPlayer.cpp" />
     <ClCompile Include="Office.cpp">
       <Filter>NPC</Filter>
     </ClCompile>
@@ -348,120 +331,163 @@
     <ClCompile Include="ViewerTitle.cpp">
       <Filter>Viewer</Filter>
     </ClCompile>
-    <ClCompile Include="Map.cpp" />
-    <ClCompile Include="World.cpp" />
-    <ClCompile Include="AceLiveMain.cpp" />
+    <ClCompile Include="Family.cpp">
+      <Filter>Character\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Character\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="World.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Storage.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="AceLiveMain.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="Debug.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="Sender.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="Monmotaro.cpp">
+      <Filter>Character\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Impact.cpp">
+      <Filter>Impact</Filter>
+    </ClCompile>
+    <ClCompile Include="Magazine.cpp">
+      <Filter>Impact</Filter>
+    </ClCompile>
+    <ClCompile Include="Shot.cpp">
+      <Filter>Shot</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>Character</Filter>
+    </ClCompile>
+    <ClCompile Include="ShotMonmotaro.cpp">
+      <Filter>Shot\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="ShotPlayer.cpp">
+      <Filter>Shot\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Armoury.cpp">
+      <Filter>Shot</Filter>
+    </ClCompile>
+    <ClCompile Include="Military.cpp">
+      <Filter>Character\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewerLive.cpp">
+      <Filter>Viewer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Character.h" />
-    <ClInclude Include="Family.h" />
-    <ClInclude Include="Military.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="Shot.h" />
-    <ClInclude Include="Armoury.h" />
-    <ClInclude Include="Impact.h" />
-    <ClInclude Include="Storage.h" />
     <ClInclude Include="Enemy.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyFaceAndHand.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyPurpleZombie.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyNoFace.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyLancer.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyCrocoSnake.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyGhoul.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyArcher.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyGhost.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyHand.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyNoNeckGhost.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyOneEyeSnake.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyRedBird.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyShishimai.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyStoneFace.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyWhiteMist.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyBlueMonk.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyGreenZombie.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemySwampZombieA.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemySwampZombieB.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemySwampZombieC.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyBoss.h">
       <Filter>Boss</Filter>
     </ClInclude>
     <ClInclude Include="EnemyJizo.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyLady.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyOnyudo.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemySkeleton.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyWind.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyTree.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyGrayMist.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyGama.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyBat.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyFlog.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyMoth.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyStone.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="PopGama.h">
       <Filter>Pop</Filter>
@@ -565,9 +591,6 @@
     <ClInclude Include="PopTree.h">
       <Filter>Pop</Filter>
     </ClInclude>
-    <ClInclude Include="Viewer.h">
-      <Filter>Viewer</Filter>
-    </ClInclude>
     <ClInclude Include="ViewerDebug.h">
       <Filter>Viewer</Filter>
     </ClInclude>
@@ -590,19 +613,19 @@
       <Filter>NPC</Filter>
     </ClInclude>
     <ClInclude Include="EnemyRedBirdAttack.h">
-      <Filter>EnemyAttack</Filter>
+      <Filter>Shot\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyBranch.h">
-      <Filter>EnemyAttack</Filter>
+      <Filter>Shot\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemySeed.h">
-      <Filter>EnemyAttack</Filter>
+      <Filter>Shot\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyTreeNuts.h">
-      <Filter>EnemyAttack</Filter>
+      <Filter>Shot\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyHandAttack.h">
-      <Filter>EnemyAttack</Filter>
+      <Filter>Shot\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyTreeNuts.h">
       <Filter>EnemyAttack</Filter>
@@ -623,28 +646,25 @@
       <Filter>Item</Filter>
     </ClInclude>
     <ClInclude Include="EnemyHellFire.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="Debug.h" />
     <ClInclude Include="ItemRock.h">
       <Filter>Item</Filter>
     </ClInclude>
     <ClInclude Include="EnemyAttack.h">
-      <Filter>EnemyAttack</Filter>
+      <Filter>Shot\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="Sender.h" />
-    <ClInclude Include="Magazine.h" />
     <ClInclude Include="EnemyEyeDaemon.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyHugDaemon.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyLittleRedDaemon.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyShishimaiDaemon.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyBossBloodDaemon.h">
       <Filter>Boss</Filter>
@@ -665,16 +685,16 @@
       <Filter>Pop</Filter>
     </ClInclude>
     <ClInclude Include="EnemyArcherAttack.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyRay.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyShell.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyWaterGhost.h">
-      <Filter>Enemy</Filter>
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="PopRay.h">
       <Filter>Pop</Filter>
@@ -685,9 +705,6 @@
     <ClInclude Include="PopWaterGhost.h">
       <Filter>Pop</Filter>
     </ClInclude>
-    <ClInclude Include="Monmotaro.h" />
-    <ClInclude Include="ShotMonmotaro.h" />
-    <ClInclude Include="ShotPlayer.h" />
     <ClInclude Include="Office.h">
       <Filter>NPC</Filter>
     </ClInclude>
@@ -700,15 +717,61 @@
     <ClInclude Include="ViewerTitle.h">
       <Filter>Viewer</Filter>
     </ClInclude>
-    <ClInclude Include="Map.h" />
-    <ClInclude Include="World.h" />
+    <ClInclude Include="Family.h">
+      <Filter>Character\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Character\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Storage.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="Debug.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="Sender.h">
+      <Filter>core</Filter>
+    </ClInclude>
+    <ClInclude Include="Monmotaro.h">
+      <Filter>Character\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Impact.h">
+      <Filter>Impact</Filter>
+    </ClInclude>
+    <ClInclude Include="Magazine.h">
+      <Filter>Impact</Filter>
+    </ClInclude>
+    <ClInclude Include="Shot.h">
+      <Filter>Shot</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>Character</Filter>
+    </ClInclude>
+    <ClInclude Include="ShotMonmotaro.h">
+      <Filter>Shot\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="ShotPlayer.h">
+      <Filter>Shot\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="Armoury.h">
+      <Filter>Shot</Filter>
+    </ClInclude>
+    <ClInclude Include="Military.h">
+      <Filter>Character\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewerLive.h">
+      <Filter>Viewer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">
       <UniqueIdentifier>{850afb85-911e-43b2-a175-64364fee8f68}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Enemy">
-      <UniqueIdentifier>{a27163da-86d5-4ace-a4f8-ded400c8a1bd}</UniqueIdentifier>
     </Filter>
     <Filter Include="Boss">
       <UniqueIdentifier>{ac0a6380-7baf-4cac-a471-08c053d3e854}</UniqueIdentifier>
@@ -716,14 +779,38 @@
     <Filter Include="Viewer">
       <UniqueIdentifier>{947e2af3-b4cc-4bea-b71e-fe5bab2e28d9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="EnemyAttack">
-      <UniqueIdentifier>{a4bea1fa-d4cd-4c18-a4cc-4e1ee9e929f3}</UniqueIdentifier>
+    <Filter Include="Item">
+      <UniqueIdentifier>{ef8c8990-cea0-46b9-b95b-6fed73e02411}</UniqueIdentifier>
     </Filter>
     <Filter Include="NPC">
       <UniqueIdentifier>{23277578-7733-48ca-bde2-9b3e53490df2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Item">
-      <UniqueIdentifier>{ef8c8990-cea0-46b9-b95b-6fed73e02411}</UniqueIdentifier>
+    <Filter Include="core">
+      <UniqueIdentifier>{ca7d6963-fba6-429f-88fe-ee0c1194fdaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Impact">
+      <UniqueIdentifier>{7fc829d8-392f-4a47-9aea-29f843942a98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shot">
+      <UniqueIdentifier>{811ec977-08e3-4e8c-9f3a-0c056e924da0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Character">
+      <UniqueIdentifier>{1562e5f4-3b8c-4a6e-bbef-74a0a674f4c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Character\Enemy">
+      <UniqueIdentifier>{a27163da-86d5-4ace-a4f8-ded400c8a1bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Character\Player">
+      <UniqueIdentifier>{b586965a-c5df-44ef-97f3-bc1072dd8673}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shot\Player">
+      <UniqueIdentifier>{26b1eacd-4e0b-4315-85aa-31784b036a6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shot\Enemy">
+      <UniqueIdentifier>{a4bea1fa-d4cd-4c18-a4cc-4e1ee9e929f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map">
+      <UniqueIdentifier>{ef7bfeff-736b-4045-92ee-f366049380ac}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
