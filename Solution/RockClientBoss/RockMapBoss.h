@@ -1,5 +1,6 @@
 #pragma once
 #include "RockMap.h"
+#include "mathmatics.h"
 
 PTR( RockMapBossDrawer );
 
@@ -21,7 +22,8 @@ public:
 	void update( );
 	void initialize( );
 private:
+	bool isWarp( const Vector& pos );
+private:
 	RockMapBossDrawerPtr _drawer;
-	int _time;
 };
 

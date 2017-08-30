@@ -4,12 +4,14 @@
 #include "Binary.h"
 #include "Application.h"
 
+static const char * FILENAME_STREET          = "Resource/Ace/Street/mapdata";
+
 ViewerStreet::ViewerStreet( ) {
 	// マップページ数読み取り
 	{
 		BinaryPtr binary(new Binary);
 		ApplicationPtr app(Application::getInstance());
-		app->loadBinary(STREET_MAPDATA_FILENAME, binary);
+		app->loadBinary( FILENAME_STREET, binary);
 		binary->read((void*)&_num, sizeof(int));
 	}
 
