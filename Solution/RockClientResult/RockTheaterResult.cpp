@@ -1,8 +1,10 @@
 #include "RockTheaterResult.h"
 #include "Drawer.h"
+#include "RockFamily.h"
+#include "RockPlayer.h"
 
-
-RockTheaterResult::RockTheaterResult( ) {
+RockTheaterResult::RockTheaterResult( ) :
+_play( true ) {
 }
 
 
@@ -16,4 +18,16 @@ void RockTheaterResult::initialize( ) {
 }
 
 void RockTheaterResult::update( ) {
+	RockFamilyPtr family( RockFamily::getTask( ) );
+	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+		RockPlayerPtr player = family->getPlayer( i );
+		if( player->isActive( ) ) {
+			stopMovie( );
+			_play = false;
+			return;
+		}
+	}
+	if ( !_play ) {
+		playMovie( );
+	}
 }

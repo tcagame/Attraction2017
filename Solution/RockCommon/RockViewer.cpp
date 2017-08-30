@@ -221,7 +221,8 @@ void RockViewer::drawUI( ) const {
 	RockFamilyPtr family( RockFamily::getTask( ) );
 	RockClientInfoPtr info = RockClientInfo::getTask( );
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
-		if ( !info->isActiveState( _status->getPlayer( i ).area ) ) {
+		if ( !info->isActiveState( _status->getPlayer( i ).area ) ||
+			 _status->getPlayer( i ).area == STATE_RESULT ) {
 			continue;
 		}
 		if ( family->getPlayer( i )->isEntry( ) &&

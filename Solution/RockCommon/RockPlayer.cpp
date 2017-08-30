@@ -142,6 +142,13 @@ bool RockPlayer::isActive( ) const {
 }
 
 void RockPlayer::actonEntry( ) {
+	if ( _status->getPlayer( _id ).area == STATE_RESULT ) {
+		setMass( true );
+		setCol( true );
+		setAction( ACTION_WAIT );
+		return;
+	}
+
 	setMass( false );
 	setCol( false );
 	if ( _status->getPlayer( _id ).device_button ) {
