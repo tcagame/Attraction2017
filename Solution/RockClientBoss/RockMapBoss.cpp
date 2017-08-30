@@ -4,6 +4,7 @@
 #include "RockPlayer.h"
 #include "RockMilitatyBoss.h"
 #include "RockEnemyBossRock.h"
+#include "RockStorage.h"
 
 const int WARP_RANGE = 75;
 
@@ -59,6 +60,7 @@ void RockMapBoss::update( ) {
 		}
 		return;
 	}
+	RockStorage::getTask( )->clean( );
 	STAGE next = ( STAGE )( ( now + 1 ) % ( int )MAX_STAGE );
 	_drawer.reset( );
 	_drawer = RockMapBossDrawerPtr( new RockMapBossDrawer( next ) );

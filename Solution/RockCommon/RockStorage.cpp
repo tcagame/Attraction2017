@@ -60,7 +60,9 @@ void RockStorage::updateItem( ) {
 			}
 		}
 		if ( col ) {
-			_pop_items.push_back( RockPopItemPtr( new RockPopItem( item ) ) );
+			if ( item->isRepop( ) ) {
+				_pop_items.push_back( RockPopItemPtr( new RockPopItem( item ) ) );
+			}
 			ite = _items.erase( ite );
 			continue;
 		}
@@ -104,6 +106,11 @@ void RockStorage::updateCasket( ) {
 }
 
 void RockStorage::addItem( RockItemPtr item ) {
+	_items.push_back( item );
+}
+
+void RockStorage::addDropItem( RockItemPtr item ) {
+	item->setRepop( false );
 	_items.push_back( item );
 }
 
@@ -179,4 +186,9 @@ void RockStorage::updatePopItem( ) {
 		}
 		ite++;
 	}
+}
+
+void RockStorage::clean( ) {
+	_items = { };
+	_pop_items = { };
 }

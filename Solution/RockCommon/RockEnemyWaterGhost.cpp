@@ -21,5 +21,5 @@ double RockEnemyWaterGhost::getAnimTime( ) const {
 }
 
 void RockEnemyWaterGhost::dropItem( ) {
-	RockStorage::getTask( )->addItem( RockItemPtr( new RockItemMoney( getPos( ) + Vector( 0, getRadius( ), 0 ), RockItemMoney::MONEY_VALUE_3 ) ) );
+	RockStorage::getTask( )->addDropItem( RockItemPtr( new RockItemMoney( getPos( ) + Vector( 0, getRadius( ), 0 ), RockItemMoney::MONEY_VALUE_3 ) ) );
 }

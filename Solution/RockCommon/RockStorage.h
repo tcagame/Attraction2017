@@ -24,12 +24,14 @@ public:
 public:
 	void update( );
 	void addItem( RockItemPtr item );
+	void addDropItem( RockItemPtr item );
 	void addAlter( RockAlterPtr object );
 	void addCasket( RockCasketPtr object );
 	std::list< RockItemPtr > getItems( ) const;
 	std::list< RockAlterPtr > getAlters( ) const;
 	std::list< RockCasketPtr > getCaskets( ) const;
 	bool pickUpItem( RockItemPtr item, int player_id );
+	void clean( );
 private:
 	void updateItem( );
 	void updateAlter( );
