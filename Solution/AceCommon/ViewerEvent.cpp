@@ -8,7 +8,7 @@ ViewerEvent::ViewerEvent( ) {
 	char buf[ 256 ];
 	for ( int i = 0; i < EVENT_PAGE_NUM; i++ ) {
 		//RED_DAEMON
-		sprintf_s( buf, "Event/akaoni/back_%003d.png", i );
+		sprintf_s( buf, "Event/reddaemon/back_%003d.png", i );
 		_images[ EVENT_REDDAEMON * EVENT_PAGE_NUM + i ] = drawer->createImage( buf );
 
 		//FIRE

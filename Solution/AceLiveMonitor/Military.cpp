@@ -7,7 +7,6 @@
 #include "EnemyBossBloodDaemon.h"
 #include "EnemyBossMonsterTree.h"
 #include "EnemyBossRock.h"
-#include "MapEvent.h"
 #include "Impact.h"
 #include "Storage.h"
 #include "ItemMoney.h"
@@ -16,6 +15,7 @@
 #include "EnemyBoss.h"
 #include "Magazine.h"
 #include "SynchronousData.h"
+#include "World.h"
 
 PTR( Player );
 
@@ -232,7 +232,9 @@ EnemyPtr Military::getOverlappedEnemy( CharacterConstPtr character ) const {
 }
 
 void Military::createBoss( ) {
-	EVENT event = MapEvent::getTask( )->getEvent( );
+	WorldPtr world = World::getTask( );
+	EVENT event = world->getEvent( );
+
 	Storage::getTask( )->eraseEventItem( );
 	_event_enemies.clear( );
 	switch ( event ) {

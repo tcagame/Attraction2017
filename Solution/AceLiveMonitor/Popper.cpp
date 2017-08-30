@@ -1,5 +1,6 @@
 #include "Popper.h"
-#include "MapStreet.h"
+#include "World.h"
+#include "Map.h"
 #include "Application.h"
 #include "ace_define.h"
 #include "Military.h"
@@ -55,7 +56,7 @@ Popper::~Popper( ) {
 }
 
 void Popper::initialize( ) {
-	MapStreetPtr map = MapStreet::getTask( );
+	MapPtr map = World::getTask( )->getMap( AREA_STREET );
 	for ( int mx = 0; mx < map->getPageNum( ) * PAGE_OBJECT_WIDTH_NUM; mx++ ) {
 		for ( int my = 0; my < OBJECT_CHIP_HEIGHT_NUM; my++ ) {
 			unsigned char object = map->getObject( mx, my );
