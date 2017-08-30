@@ -287,6 +287,7 @@
     <ClCompile Include="Armoury.cpp" />
     <ClCompile Include="Viewer.cpp" />
     <ClCompile Include="ViewerTitle.cpp" />
+    <ClCompile Include="World.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Debug.h" />
@@ -416,6 +417,7 @@
     <ClInclude Include="Armoury.h" />
     <ClInclude Include="Viewer.h" />
     <ClInclude Include="ViewerTitle.h" />
+    <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Framework2017ver2\Framework2017Ver2.vcxproj">
