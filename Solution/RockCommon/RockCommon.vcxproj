@@ -176,6 +176,7 @@
     <ClInclude Include="Message.h" />
     <ClInclude Include="MessageSender.h" />
     <ClInclude Include="RockBubble.h" />
+    <ClInclude Include="RockEnemyBoss.h" />
     <ClInclude Include="RockEnemyBossRock.h" />
     <ClInclude Include="RockAlter.h" />
     <ClInclude Include="RockAncestors.h" />
@@ -216,6 +217,7 @@
   <ItemGroup>
     <ClCompile Include="MessageSender.cpp" />
     <ClCompile Include="RockBubble.cpp" />
+    <ClCompile Include="RockEnemyBoss.cpp" />
     <ClCompile Include="RockEnemyBossRock.cpp" />
     <ClCompile Include="RockAlter.cpp" />
     <ClCompile Include="RockAncestors.cpp" />
