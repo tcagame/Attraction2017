@@ -11,13 +11,15 @@
 #include "RockAlter.h"
 #include "RockCasket.h"
 #include "RockPopItem.h"
+#include "Status.h"
 
 RockStoragePtr RockStorage::getTask( ) {
 	return std::dynamic_pointer_cast< RockStorage >( Application::getInstance( )->getTask( getTag( ) ) );
 }
 
 
-RockStorage::RockStorage( ) {
+RockStorage::RockStorage( StatusPtr status ) :
+_status( status ) {
 	//_items.push_back( RockItemPtr( new RockItemDango( Vector( 0, 10, 0 ) ) ) );
 	//_items.push_back( RockItemPtr( new RockItemMoney( Vector( 20, 10, 200 ), RockItemMoney::MONEY_VALUE_1 ) ) );
 	//_items.push_back( RockItemPtr( new RockItemMoney( Vector( 40, 10, 200 ), RockItemMoney::MONEY_VALUE_2 ) ) );
@@ -51,10 +53,16 @@ void RockStorage::updateItem( ) {
 		bool col = false;
 		for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 			RockPlayerPtr player = family->getPlayer( i );
+			if ( !player->isActive( ) ) {
+				continue;
+			}
 			if ( item->isOverLapped( player ) ) {
-				col = true;
-				pickUpItem( item, i );
-				break;//forï∂Çî≤ÇØÇÈ
+				if ( pickUpItem( item, i ) ) {
+					col = true;
+					break;//forï∂Çî≤ÇØÇÈ
+				} else {
+					continue;
+				}
 			}
 		}
 		if ( col ) {
@@ -127,26 +135,37 @@ std::list< RockCasketPtr > RockStorage::getCaskets( ) const {
 
 
 
-void RockStorage::pickUpItem( RockItemPtr item, int player_id ) {
+bool RockStorage::pickUpItem( RockItemPtr item, int player_id ) {
 	MessageSenderPtr sender = MessageSender::getTask( );
-	
-	//Ç®ã‡
-	RockItemMoneyPtr money = std::dynamic_pointer_cast< RockItemMoney >( item );
-	if ( money ) {
-		int value = money->getValue( );
-		sender->sendMessage( player_id, Message::COMMAND_MONEY, &value );
+	bool result = true;
+	{//Ç®ã‡
+		RockItemMoneyPtr money = std::dynamic_pointer_cast< RockItemMoney >( item );
+		if ( money ) {
+			int value = money->getValue( );
+			sender->sendMessage( player_id, Message::COMMAND_MONEY, &value );
+		}
 	}
-	//ê_äÌä‚
-	RockItemRockPtr rock = std::dynamic_pointer_cast< RockItemRock >( item );
-	if ( rock ) {
-		unsigned char item = ITEM_TREE;
-		sender->sendMessage( player_id, Message::COMMAND_ITEM, &item );
+
+	{//ê_äÌä‚
+		RockItemRockPtr rock = std::dynamic_pointer_cast< RockItemRock >( item );
+		if ( rock ) {
+			unsigned char item = ITEM_TREE;
+			sender->sendMessage( player_id, Message::COMMAND_ITEM, &item );
+		}
 	}
-	RockItemTokuPtr toku = std::dynamic_pointer_cast< RockItemToku >( item );
-	if ( toku ) {
-		int virtue = 1;
-		sender->sendMessage( player_id, Message::COMMAND_TOKU, &virtue );
+	{//ìø  
+		RockItemTokuPtr toku = std::dynamic_pointer_cast< RockItemToku >( item );
+		if ( toku ) {
+			Status::Player player = _status->getPlayer( player_id );
+			if ( player.money >= TRANSITION_MONEY_NUM ) {
+				int virtue = 1;
+				sender->sendMessage( player_id, Message::COMMAND_TOKU, &virtue );
+			} else {
+				result = false;
+			}
+		}
 	}
+	return result;
 }
 
 void RockStorage::updatePopItem( ) {

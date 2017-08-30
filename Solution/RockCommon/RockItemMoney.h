@@ -1,5 +1,6 @@
 #pragma once
 #include "RockItem.h"
+
 class RockItemMoney : public RockItem {
 public:
 	static const int MONEY_VALUE_1 = 100;

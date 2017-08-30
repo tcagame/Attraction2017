@@ -24,6 +24,10 @@ const double GRAVITY = -0.4;
 const int COLLISION_RANGE = 20;
 const int MAX_PLAYER_SHOT_POWER = 5;
 
+//‘JˆÚŒn
+const int TRANSITION_TOKU_NUM = 10;
+const int TRANSITION_MONEY_NUM = 50000;
+
 enum DOLL {
 	DOLL_TAROSUKE_WAIT,
 	DOLL_TAROSUKE_JUMP,
