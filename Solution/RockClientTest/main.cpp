@@ -30,7 +30,7 @@ void main( ) {
 	app->addTask( Drawer::getTag( ), TaskPtr( new Drawer( "Resource/Rock" ) ) );
 	app->addTask( Effect::getTag( ), TaskPtr( new Effect( "Resource/Rock/effect" ) ) );
 	app->addTask( Client::getTag( ), TaskPtr( new Client( status, message ) ) );
-	app->addTask( RockStorage::getTag( ), TaskPtr( new RockStorage( ) ) );
+	app->addTask( RockStorage::getTag( ), TaskPtr( new RockStorage( status ) ) );
 	app->addTask( RockMap::getTag( ), TaskPtr( new RockMapTest ) );
 	app->addTask( RockMilitary::getTag( ), TaskPtr( new RockMilitaryTest ) );
 	app->addTask( RockDollHouse::getTag( ), TaskPtr( new RockDollHouse ) );

@@ -11,14 +11,15 @@ PTR( RockItemRock );
 PTR( RockItemToku );
 PTR( ModelMV1 );
 PTR( RockCasket );
-PTR ( RockPopItem );
+PTR( RockPopItem );
+PTR( Status );
 
 class RockStorage : public Task {
 public:
 	static std::string getTag( ) { return "ROCKSTORAGE"; };
 	static RockStoragePtr getTask( );
 public:
-	RockStorage( );
+	RockStorage( StatusPtr status );
 	virtual ~RockStorage( );
 public:
 	void update( );
@@ -28,13 +29,14 @@ public:
 	std::list< RockItemPtr > getItems( ) const;
 	std::list< RockAlterPtr > getAlters( ) const;
 	std::list< RockCasketPtr > getCaskets( ) const;
-	void pickUpItem( RockItemPtr item, int player_id );
+	bool pickUpItem( RockItemPtr item, int player_id );
 private:
 	void updateItem( );
 	void updateAlter( );
 	void updateCasket( );
 	void updatePopItem( );
 private:
+	StatusPtr _status;
 	std::list< RockItemPtr > _items;
 	std::list< RockAlterPtr > _alters;
 	std::list< RockCasketPtr > _caskets;
