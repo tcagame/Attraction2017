@@ -35,6 +35,7 @@ protected:
 	void setActCount( int count );
 private:
 	void updateDir( );
+	void updateMass( );
 private:
 	Vector _pos;
 	Vector _vec;

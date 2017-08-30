@@ -10,6 +10,7 @@ PTR( ViewerTitle );
 PTR( ViewerStatus );
 PTR( ViewerDebug );
 PTR( ViewerObject );
+PTR( Image );
 
 class ViewerLive : public Task {
 public:
@@ -28,5 +29,6 @@ private:
 	ViewerTitlePtr _viewer_title;
 	ViewerObjectPtr _viewer_object;
 	ViewerDebugConstPtr _viewer_debug;
+	ImagePtr _image_frame;
 };
 

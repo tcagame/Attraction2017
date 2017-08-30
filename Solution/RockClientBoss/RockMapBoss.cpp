@@ -2,6 +2,8 @@
 #include "RockMapBossDrawer.h"
 #include "RockFamily.h"
 #include "RockPlayer.h"
+#include "RockMilitatyBoss.h"
+#include "RockEnemyBossRock.h"
 
 const int WARP_RANGE = 75;
 
@@ -32,12 +34,14 @@ void RockMapBoss::update( ) {
 		return;
 	case STAGE_FIRE_TO_ROCK:
 		if ( isWarp( Vector( 1550, 0, -50 ) ) ) {
-			RockFamily::getTask( )->resetPos( Vector( 0, 0, 0 ) ); // rock
+			//STAGE_ROCK‚Ös‚­
+			RockFamily::getTask( )->resetPos( Vector( 0, 0, 0 ) );
+			RockMilitatyBoss::getTask( )->add( RockEnemyPtr( new RockEnemyBossRock( Vector( 300, 10, 0 ) ) ) );
 			break;
 		}
 		return;
 	case STAGE_ROCK:
-		if ( isWarp( Vector( 0, 0, 0 ) ) ) {
+		if ( isWarp( Vector( 600, 0, 0 ) ) ) {
 			RockFamily::getTask( )->resetPos( Vector( -700, 75, -25 ) ); // rock to tree
 			break;
 		}

@@ -5,11 +5,18 @@
 
 const int HP_GRAPH_HEIGHT = 16;
 const int HP_GRAPH_WIDTH = 8;
+const int BUSTUP_OX = 10;
+const int BUSTUP_OY = 10;
 
 ViewerStatus::ViewerStatus( ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
 	_status_flame = drawer->createImage( "UI/status_plate.png" );
 	_status_ui = drawer->createImage( "UI/ui.png" );
+
+	_image_bustup[ PLAYER_TAROSUKE ] = drawer->createImage( "UI/ui_bustup_tarosuke.png" );
+	_image_bustup[ PLAYER_TAROJIRO ] = drawer->createImage( "UI/ui_bustup_tarojiro.png" );
+	_image_bustup[ PLAYER_GARISUKE ] = drawer->createImage( "UI/ui_bustup_garisuke.png" );
+	_image_bustup[ PLAYER_TAROMI   ] = drawer->createImage( "UI/ui_bustup_taromi.png"   );
 }
 
 ViewerStatus::~ViewerStatus( ) {
@@ -21,9 +28,15 @@ void ViewerStatus::draw( PLAYER player, int sx, int sy ) const {
 
 	SynchronousDataPtr data(SynchronousData::getTask());
 
+	drawBustup( player, sx, sy );
 	drawPower(  data->getStatusPower( player ), sx, sy );
 	drawMoney(  data->getStatusMoney( player ), sx, sy );
 	drawVirtue( data->getStatusVirtue( player ), sx, sy );
+}
+
+void ViewerStatus::drawBustup( PLAYER player, int sx, int sy ) const {
+	_image_bustup[ player ]->setPos( sx + BUSTUP_OX, sy + BUSTUP_OY );
+	_image_bustup[ player ]->draw( );
 }
 
 void ViewerStatus::drawPower( int power, int sx, int sy ) const {

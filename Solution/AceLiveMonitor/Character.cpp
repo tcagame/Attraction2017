@@ -10,7 +10,6 @@ const int MAX_ACT_COUNT = 0xfffffff;
 
 Character::Character( const Vector& pos, const int chip_size, const int power, bool mass ) :
 _pos( pos ),
-_vec( Vector( ) ),
 _standing( false ),
 _chip_size( chip_size ),
 _act_count( 0 ),
@@ -28,106 +27,80 @@ Character::~Character( ) {
 void Character::update( ) {
 	act( );
 
-	_act_count++;
-	_act_count %= MAX_ACT_COUNT;
+	_act_count = ( _act_count + 1 ) % MAX_ACT_COUNT;
 	_standing = false;
-	if ( _mass ) {
-		_vec.y += GRAVITY;
+
+	updateMass( );
+	updateDir( );
+
+	_pos += _vec;
+
+}
+
+void Character::updateMass( ) {
+	if ( !_mass ) {
+		return;
 	}
+
+	_vec.y += GRAVITY;
+
 	if ( _vec.y > MAX_SPEED_Y ) {
 		_vec.y = MAX_SPEED_Y;
 	}
 	if ( _vec.y < -MAX_SPEED_Y ) {
 		_vec.y = -MAX_SPEED_Y;
 	}
-	if ( _mass ) {
-		if ( _area == AREA_STREET ) {
-			MapPtr map = World::getTask( )->getMap( AREA_STREET );
-			{//上下判定
-				//上
-				if ( _vec.y < 0 ) {
-					unsigned char obj = map->getObject( _pos + Vector( 0, _vec.y - _radius * 2 ) );
-					if ( obj == OBJECT_BLOCK ) {
-						_pos.y = ( ( int )( _pos.y + _vec.y - _radius * 2 ) / OBJECT_CHIP_SIZE + 1 ) * OBJECT_CHIP_SIZE - GRAVITY / 2 + _radius * 2;
-						_vec.y = 0;
-					}
-				}
-				//下
-				if ( _vec.y > 0 ) {
-					unsigned char obj = map->getObject( _pos + Vector( 0, _vec.y ) );
-					if ( obj == OBJECT_BLOCK ||
-						 obj == OBJECT_ONEWAY ) {
-						_standing = true;
-						_pos.y = ( ( int )( _pos.y + _vec.y ) / OBJECT_CHIP_SIZE ) * OBJECT_CHIP_SIZE - GRAVITY / 2;
-						_vec.y = 0;
-					}
-				}
-			}
-			{//左右判定
-				//左側
-				if ( _vec.x < 0 ) {
-					if ( map->getObject( _pos + Vector( _vec.x - _radius, 0 ) ) == OBJECT_BLOCK ) {
-						_pos.x = ( ( int )( _pos.x + _vec.x - _radius ) / OBJECT_CHIP_SIZE + 1 ) * OBJECT_CHIP_SIZE + _radius;
-						_vec.x = 0;
-						_dir = DIR_LEFT;
-					}
-				}
-				//右側
-				if ( _vec.x > 0 ) {
-					if ( map->getObject( _pos + Vector( _vec.x + _radius, 0 ) ) == OBJECT_BLOCK ) {
-						_pos.x = ( ( int )( _pos.x + _vec.x + _radius ) / OBJECT_CHIP_SIZE ) * OBJECT_CHIP_SIZE - _radius;
-						_vec.x = 0;
-						_dir = DIR_RIGHT;
-					}
-				}
-			}
-		} else {
-			WorldPtr world = World::getTask( );
-			MapPtr map = world->getMap( AREA_EVENT );
-			{//上下判定
-				if ( _vec.y > 0 ) {
-					if ( map->getObject( _pos + Vector( 0, _vec.y ) ) == OBJECT_BLOCK ) {
-						_standing = true;
-						_pos.y = ( ( int )( _pos.y + _vec.y ) / OBJECT_CHIP_SIZE ) * OBJECT_CHIP_SIZE - GRAVITY / 2;
-						_vec.y = 0;
-					}
-				}
-			}
-			{//左右判定
-				//左側
-				if ( _vec.x < 0 ) {
-					if ( map->getObject( _pos + Vector( _vec.x - _radius, 0 ) ) == OBJECT_BLOCK ) {
-						_pos.x = ( ( int )( _pos.x + _vec.x - _radius ) / OBJECT_CHIP_SIZE + 1 ) * OBJECT_CHIP_SIZE + _radius;
-						_vec.x = 0;
-						_dir = DIR_LEFT;
-					}
-				}
-				//右側
-				if ( _vec.x > 0 ) {
-					if ( map->getObject( _pos + Vector( _vec.x + _radius, 0 ) ) == OBJECT_BLOCK ) {
-						_pos.x = ( ( int )( _pos.x + _vec.x + _radius ) / OBJECT_CHIP_SIZE ) * OBJECT_CHIP_SIZE - _radius;
-						_vec.x = 0;
-						_dir = DIR_RIGHT;
-					}
-				}
-			}
+	MapPtr map = World::getTask( )->getMap( _area );
+	//上
+	if ( _vec.y < 0 ) {
+		unsigned char obj = map->getObject( _pos + Vector( 0, _vec.y - _radius * 2 ) );
+		if ( obj == OBJECT_BLOCK ) {
+			_pos.y = ( ( int )( _pos.y + _vec.y - _radius * 2 ) / OBJECT_CHIP_SIZE + 1 ) * OBJECT_CHIP_SIZE - GRAVITY / 2 + _radius * 2;
+			_vec.y = 0;
 		}
 	}
-	updateDir( );
-	_pos += _vec;
-
+	//下
+	if ( _vec.y > 0 ) {
+		unsigned char obj = map->getObject( _pos + Vector( 0, _vec.y ) );
+		if ( obj == OBJECT_BLOCK ||
+				obj == OBJECT_ONEWAY ) {
+			_standing = true;
+			_pos.y = ( ( int )( _pos.y + _vec.y ) / OBJECT_CHIP_SIZE ) * OBJECT_CHIP_SIZE - GRAVITY / 2;
+			_vec.y = 0;
+		}
+	}
+	//左側
+	if ( _vec.x < 0 ) {
+		if ( map->getObject( _pos + Vector( _vec.x - _radius, 0 ) ) == OBJECT_BLOCK ) {
+			_pos.x = ( ( int )( _pos.x + _vec.x - _radius ) / OBJECT_CHIP_SIZE + 1 ) * OBJECT_CHIP_SIZE + _radius;
+			_vec.x = 0;
+			_dir = DIR_LEFT;
+		}
+	}
+	//右側
+	if ( _vec.x > 0 ) {
+		if ( map->getObject( _pos + Vector( _vec.x + _radius, 0 ) ) == OBJECT_BLOCK ) {
+			_pos.x = ( ( int )( _pos.x + _vec.x + _radius ) / OBJECT_CHIP_SIZE ) * OBJECT_CHIP_SIZE - _radius;
+			_vec.x = 0;
+			_dir = DIR_RIGHT;
+		}
+	}
 }
 
 void Character::damage( int force ) {
+	// 即死にさせる
 	if ( force < 0 ) {
-		_power = 0;
-		_finished = true;
-		return;
+		force = _power;
 	}
 
+	// 攻撃力分減らす
 	_power -= force;
-	if ( _power <= 0 ) {
+	if ( _power < 0 ) {
 		_power = 0;
+	}
+
+	// 死んだか？
+	if ( _power <= 0 ) {
 		_finished = true;
 	}
 }

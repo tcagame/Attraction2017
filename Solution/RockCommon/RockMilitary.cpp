@@ -8,6 +8,7 @@
 #include "RockPop.h"
 #include "define.h"
 #include "Effect.h"
+#include "RockEnemyBoss.h"
 
 RockMilitaryPtr RockMilitary::getTask( ) {
 	return std::dynamic_pointer_cast< RockMilitary >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -51,7 +52,9 @@ void RockMilitary::updateEnemies( ) {
 			add( RockImpactPtr( new RockImpact( enemy->getPos( ) + Vector( 0, 30, 0 ) ) ) );
 			enemy->dropItem( );
 			enemy->reset( );
-			_pops.push_back( RockPopPtr( new RockPop( enemy ) ) );
+			if ( !std::dynamic_pointer_cast< RockEnemyBoss >( enemy ) ) {
+				_pops.push_back( RockPopPtr( new RockPop( enemy ) ) );
+			}
 			ite = _enemies.erase( ite );
 			continue;
 		}
