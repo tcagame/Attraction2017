@@ -159,6 +159,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AceLiveMain.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="EnemyArcherAttack.cpp" />
     <ClCompile Include="EnemyAttack.cpp" />
@@ -278,7 +279,6 @@
     <ClCompile Include="ShotPlayer.cpp" />
     <ClCompile Include="Storage.cpp" />
     <ClCompile Include="ViewerDebug.cpp" />
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="Military.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Shot.cpp" />
