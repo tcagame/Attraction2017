@@ -5,7 +5,6 @@
 #include "Family.h"
 #include "Viewer.h"
 #include "ViewerEvent.h"
-#include "MapEvent.h"
 #include "Military.h"
 #include "Enemy.h"
 #include "Storage.h"
@@ -387,7 +386,6 @@ void Player::actOnDead( ) {
 		if ( getArea( ) == AREA_EVENT ) {
 			//メインの画面中央上部に移動
 			setArea( AREA_STREET );
-			MapEvent::getTask( )->setEvent( EVENT_NONE );
 			World::getTask( )->setEvent( EVENT_NONE );
 			Military::getTask( )->createBoss( );
 			setPos( Vector( Family::getTask( )->getCameraPosX( ) + SCREEN_WIDTH / 2, chip_size ) );
@@ -449,13 +447,14 @@ int Player::getChargeCount( ) const {
 
 void Player::updateState( ) {
 	//イベント
-	MapPtr map = World::getTask( )->getMap( AREA_STREET );
-	MapEventPtr map_event( MapEvent::getTask( ) );
+	WorldPtr world = World::getTask( );
+	MapPtr map = world->getMap( AREA_STREET );
+	MapPtr map_event = world->getMap( AREA_EVENT );
 	OfficePtr office( Office::getTask( ) );
 	MilitaryPtr militaly( Military::getTask( ) );
 	FamilyPtr family( Family::getTask( ) );
 
-	EVENT event = map_event->getEvent( );
+	EVENT event = world->getEvent( );
 	if ( event == EVENT_NONE ) {
 		bool enter = true;
 		unsigned char obj = map->getObject( getPos( ) + getVec( ) );
@@ -487,7 +486,7 @@ void Player::updateState( ) {
 		}
 		//イベントに入るとき
 		if ( event != EVENT_NONE ) {
-			map_event->setEvent( event );
+			world->setEvent( event );
 			World::getTask( )->setEvent( event );
 			if ( event >= EVENT_SHOP ) {
 				office->popUpNPC( );
@@ -515,22 +514,19 @@ void Player::updateState( ) {
 		//一ページ目にいたらメインに戻る
 		if ( getPos( ).x < GRAPH_SIZE ) {
 			setArea( AREA_STREET );
-			map_event->setEvent( EVENT_NONE );
-			World::getTask( )->setEvent( event );
+			world->setEvent( EVENT_NONE );
 			militaly->eraseEventEnemy( );
 			Storage::getTask( )->eraseEventItem( );
 			setPos( Vector( family->getCameraPosX( ) + SCREEN_WIDTH / 2, 0 ) );
 			setVec( Vector( ) );
 		}
 		//ボスが倒れている場合 && アイテムが無い[退場]
-		MapEventPtr map_event( MapEvent::getTask( ) );
 		StoragePtr storage( Storage::getTask( ) );
 		if ( !Military::getTask( )->getBoss( ) &&
 			 !storage->isExistanceEventItem( ) &&
-			 map_event->getEvent( ) < EVENT_SHOP ) {
+			 world->getEvent( ) < EVENT_SHOP ) {
 			setArea( AREA_STREET );
-			map_event->setEvent( EVENT_NONE );
-			World::getTask( )->setEvent( event );
+			world->setEvent( EVENT_NONE );
 			militaly->eraseEventEnemy( );
 			setPos( Vector( family->getCameraPosX( ) + SCREEN_WIDTH / 2, 0 ) );
 			setVec( Vector( ) );

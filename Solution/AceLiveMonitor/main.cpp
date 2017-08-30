@@ -7,7 +7,6 @@
 #include "Armoury.h"
 #include "Viewer.h"
 #include "World.h"
-#include "MapEvent.h"
 #include "Military.h"
 #include "Office.h"
 #include "Storage.h"
@@ -34,7 +33,6 @@ void main( ) {
 	app->addTask( Keyboard::getTag( ), KeyboardPtr( new Keyboard( ) ) );
 	
 	app->addTask( World    ::getTag( ), WorldPtr    ( new World    ( ) ) );
-	app->addTask( MapEvent ::getTag( ), MapEventPtr ( new MapEvent ( ) ) );
 	app->addTask( Family   ::getTag( ), FamilyPtr   ( new Family   ( ) ) );
 	app->addTask( Armoury  ::getTag( ), ArmouryPtr  ( new Armoury  ( ) ) );
 	app->addTask( Magazine ::getTag( ), MagazinePtr ( new Magazine ( ) ) );

@@ -46,6 +46,10 @@ void World::setEvent( EVENT event ) {
 	_event = event;
 }
 
+EVENT World::getEvent( ) const{
+	return _event;
+}
+
 MapPtr World::getMap( AREA area ) const {
 	MapPtr map;
 

@@ -4,7 +4,6 @@
 #include "Player.h"
 #include "World.h"
 #include "Map.h"
-#include "MapEvent.h"
 
 const int MAX_SPEED_Y = 16;
 const int MAX_ACT_COUNT = 0xfffffff;
@@ -83,7 +82,8 @@ void Character::update( ) {
 				}
 			}
 		} else {
-			MapEventConstPtr map( MapEvent::getTask( ) );
+			WorldPtr world = World::getTask( );
+			MapPtr map = world->getMap( AREA_EVENT );
 			{//ã‰º”»’è
 				if ( _vec.y > 0 ) {
 					if ( map->getObject( _pos + Vector( 0, _vec.y ) ) == OBJECT_BLOCK ) {

@@ -19,6 +19,7 @@ public:
 	void initialize( );
 	void update( );
 	void setEvent( EVENT event );
+	EVENT getEvent( ) const;
 	MapPtr getMap( AREA area ) const;
 private:
 	EVENT _event;
