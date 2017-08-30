@@ -219,6 +219,16 @@ bool Command::excuteState( std::vector< std::string > command ) {
 				break;
 			}
 		}
+		// result‚É‘¼ƒvƒŒƒCƒ„[‚ª‚¢‚½‚ç“ü‚ç‚È‚¢
+		for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+			if ( i == player_num ) {
+				continue;
+			}
+			if ( _status->getPlayer( i ).area == STATE_RESULT ) {
+				return result;
+			}
+		}
+
 		if ( player_num >= 0 && player_num <= ROCK_PLAYER_NUM ) {
 			_status->getPlayer( player_num ).area = area;
 			result = true;
