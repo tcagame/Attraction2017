@@ -43,16 +43,19 @@ static const double BUBBLE_FOLLOW_RANGE = 60.0;
 static const Vector BUBBLE_FOOT = Vector( 0, 60, 0 );
 static const double BUBBLE_MOVE_SPEED = MOVE_SPEED * 0.9;
 static const int DEAD_ANIM_TIME = 150;
+static const int ENTRY_TIME = 2;
+static const int FLOAT_HEIGHT = 1;
 
 
 RockPlayer::RockPlayer( StatusPtr status, const Vector& pos, int id, RockAncestorsPtr ancestors ) :
 RockCharacter( pos, ( DOLL )( DOLL_TAROSUKE_WAIT + id * ROCK_PLAYER_MOTION_NUM ), RADIUS, HEIGHT ),
 _attack_count( 0 ),
 _effect_handle( -1 ),
-_ancestors( ancestors ) {
+_ancestors( ancestors ),
+_entry_count( 0 ) {
 	_id = id;
 	_status = status;
-	setAction( ACTION_WAIT );
+	setAction( ACTION_ENTRY );
 }
 
 
@@ -61,6 +64,9 @@ RockPlayer::~RockPlayer( ) {
 
 void RockPlayer::act( ) {
 	switch ( _action ) {
+	case ACTION_ENTRY:
+		actonEntry( );
+		break;
 	case ACTION_WAIT:
 		actOnWaiting( );
 		break;
@@ -106,6 +112,7 @@ void RockPlayer::setAction( ACTION action ) {
 	_action = action;
 	setActCount( 0 );
 	switch ( _action ) {
+	case ACTION_ENTRY:
 	case ACTION_WAIT:
 		setDoll( ( DOLL )( DOLL_TAROSUKE_WAIT + _id * ROCK_PLAYER_MOTION_NUM ) );
 		break;
@@ -132,6 +139,33 @@ void RockPlayer::setAction( ACTION action ) {
 
 bool RockPlayer::isActive( ) const {
 	return ( RockClientInfo::getTask( )->isActiveState( _status->getPlayer( _id ).area ) );
+}
+
+void RockPlayer::actonEntry( ) {
+	if ( _status->getPlayer( _id ).area == STATE_RESULT ) {
+		setMass( true );
+		setCol( true );
+		setAction( ACTION_WAIT );
+		return;
+	}
+
+	setMass( false );
+	setCol( false );
+	if ( _status->getPlayer( _id ).device_button ) {
+		_entry_count++;		
+	} else {
+		_entry_count = 0;
+	}
+
+	if ( _entry_count > ENTRY_TIME ) {
+		setMass( true );
+		setCol( true );
+		setAction( ACTION_WAIT );
+	}
+	int dir =  _id % 2 ? -1 : 1;
+	double height_vec = sin( PI2 / 180 * getActCount( ) ) * FLOAT_HEIGHT * dir;
+	double width_vec = sin( PI2 / 360 * getActCount( ) + 120 ) * FLOAT_HEIGHT * 2 * dir;
+	setVec( Vector( width_vec, height_vec, 0 ) );
 }
 
 void RockPlayer::actOnWaiting( ) {
@@ -404,6 +438,9 @@ ModelMV1Ptr RockPlayer::getModel( ) const {
 
 	model->setAnimTime( anim_time );
 	double rot = Vector( 0, 0, -1 ).angle( getDir( ) );
+	if ( isEntry( ) ) {
+		rot = Vector( 0, 0, -1 ).angle( Vector( 0, 0, -1 ) );
+	}
 	Vector axis = Vector( 0, 1, 0 );
 	if ( Vector( 0, 0, -1 ).cross( getDir( ) ).y < 0 ) {
 		axis = Vector( 0, -1, 0 );
@@ -418,6 +455,9 @@ void RockPlayer::damage( int force ) {
 }
 
 void RockPlayer::bound( ) {
+	if ( isEntry( ) ) {
+		return;
+	}
 	RockCharacter::bound( );
 	setAction( ACTION_JUMP );
 }
@@ -445,4 +485,9 @@ void RockPlayer::resetPos( const Vector& pos ) {
 bool RockPlayer::isDead( ) const {
 	return _action == ACTION_DEAD;
 }
+
+bool RockPlayer::isEntry( ) const {
+	return _action == ACTION_ENTRY;
+}
+
 

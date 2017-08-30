@@ -36,7 +36,7 @@ void main( ) {
 	app->addTask( RockArmoury::getTag( ), TaskPtr( new RockArmoury ) );
 	app->addTask( RockCamera::getTag( ), TaskPtr( new RockCameraResult ) );
 	app->addTask( MessageSender::getTag( ), TaskPtr( new MessageSender( message ) ) );
-	//app->addTask( RockTheater::getTag( ), TaskPtr( new RockTheaterResult( ) ) );
+	app->addTask( RockTheater::getTag( ), TaskPtr( new RockTheaterResult( ) ) );
 	app->addTask( RockViewer::getTag( ), TaskPtr( new RockViewer( status ) ) );
 	
 	std::vector< unsigned int > state = { };

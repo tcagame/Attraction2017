@@ -8,5 +8,7 @@ public:
 public:
 	void initialize( );
 	void update( );
+private:
+	bool _play;
 };
 

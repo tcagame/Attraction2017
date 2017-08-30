@@ -139,6 +139,14 @@ int RockCharacter::getHeight( ) const {
 	return _height;
 }
 
+void RockCharacter::setMass( bool mass ) {
+	_mass = mass;
+}
+
+void RockCharacter::setCol( bool col ) {
+	_col = col;
+}
+
 void RockCharacter::damage( int force ) {
 }
 

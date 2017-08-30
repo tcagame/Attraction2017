@@ -34,6 +34,8 @@ protected:
 	void setRadius( int radius );
 	DOLL getDoll( ) const;
 	void setDoll( DOLL doll );
+	void setMass( bool mass );
+	void setCol( bool col );
 private:
 	Vector _pos;
 	Vector _vec;

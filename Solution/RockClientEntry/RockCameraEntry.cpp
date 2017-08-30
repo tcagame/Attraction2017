@@ -4,7 +4,7 @@
 #include "RockFamily.h"
 
 const Vector INIT_POS = Vector( 0, 80, -180 );
-const Vector DIR = Vector( 0, 0.8, -1 ).normalize( );
+const Vector DIR = Vector( 0, 0.5, -1 ).normalize( );
 const double LENGTH = 300;
 
 RockCameraEntry::RockCameraEntry( ) :

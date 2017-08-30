@@ -2,6 +2,7 @@
 #include "Task.h"
 #include <string>
 #include "Image.h"
+#include <vector>
 
 PTR( RockViewer );
 PTR( Status );
@@ -34,5 +35,6 @@ private:
 	ImagePtr _status_flame;
 	ImagePtr _status_ui;
 	ImagePtr _status_num;
+	std::vector< ImagePtr > _breasts;
 };
 
