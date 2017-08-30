@@ -36,9 +36,11 @@ void main( ) {
 	app->addTask( RockFamily::getTag( ), TaskPtr( new RockFamily( status, Vector( 0, 10, 160 ) ) ) );
 	app->addTask( RockArmoury::getTag( ), TaskPtr( new RockArmoury ) );
 	app->addTask( RockCamera::getTag( ), TaskPtr( new RockCameraEntry ) );
-	app->addTask( RockClientInfo::getTag( ), TaskPtr( new RockClientInfo( STATE_ENTRY ) ) );
 	app->addTask( RockStudio::getTag( ), TaskPtr( new RockStudio( ) ) );
 	app->addTask( MessageSender::getTag( ), TaskPtr( new MessageSender( message ) ) );
+	std::vector< unsigned int > state = { };
+	state.push_back( STATE_ENTRY );
+	app->addTask( RockClientInfo::getTag( ), TaskPtr( new RockClientInfo( state ) ) );
 	
 	//通常描画orステータス描画
 	bool status_draw = false;

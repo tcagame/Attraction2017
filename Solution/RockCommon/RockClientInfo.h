@@ -1,6 +1,7 @@
 #pragma once
 #include "Task.h"
 #include <string>
+#include <vector>
 
 PTR( RockClientInfo );
 
@@ -9,12 +10,12 @@ public:
 	static std::string getTag( ) { return "ROCKCLIENTINFO"; };
 	static RockClientInfoPtr getTask( );
 public:
-	RockClientInfo( unsigned int client_id );
+	RockClientInfo( std::vector< unsigned int > client_id );
 	virtual ~RockClientInfo( );
 public:
 	void update( );
-	unsigned int getClientId( ) const;
+	bool isActiveState( unsigned int player_state ) const;
 public:
-	unsigned int _client_id;
+	std::vector< unsigned int > _client_id;
 };
 

@@ -94,9 +94,9 @@ void RockViewer::drawEnemy( ) const {
 
 void RockViewer::drawPlayer( ) const {
 	RockFamilyPtr family( RockFamily::getTask( ) );
-	unsigned int client_id = RockClientInfo::getTask( )->getClientId( );
+	RockClientInfoPtr info = RockClientInfo::getTask( );
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
-		if ( client_id != _status->getPlayer( i ).area ) {
+		if ( !info->isActiveState( _status->getPlayer( i ).area ) ) {
 			continue;
 		}
 		ModelMV1Ptr model = family->getPlayer( i )->getModel( );
@@ -106,9 +106,9 @@ void RockViewer::drawPlayer( ) const {
 
 void RockViewer::drawBubble( ) const {
 	RockFamilyPtr family( RockFamily::getTask( ) );
-	unsigned int client_id = RockClientInfo::getTask( )->getClientId( );
+	RockClientInfoPtr info = RockClientInfo::getTask( );
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
-		if ( client_id != _status->getPlayer( i ).area ) {
+		if ( !info->isActiveState( _status->getPlayer( i ).area ) ) {
 			continue;
 		}
 		RockPlayerPtr player = family->getPlayer( i );
@@ -127,10 +127,10 @@ void RockViewer::drawBubble( ) const {
 
 void RockViewer::drawAncestors( ) const {
 	RockFamilyPtr family( RockFamily::getTask( ) );
-	unsigned int client_id = RockClientInfo::getTask( )->getClientId( );
+	RockClientInfoPtr info = RockClientInfo::getTask( );
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		RockAncestorsPtr ancestors = family->getAncestors( i );
-		if ( client_id != _status->getPlayer( i ).area ||
+		if ( !info->isActiveState( _status->getPlayer( i ).area ) ||
 			 !ancestors->isActive( ) ) {
 			continue;
 		}
@@ -213,9 +213,9 @@ void RockViewer::drawCasket( ) const {
 
 void RockViewer::drawUI( ) const {
 	RockFamilyPtr family( RockFamily::getTask( ) );
-	unsigned int client_id = RockClientInfo::getTask( )->getClientId( );
+	RockClientInfoPtr info = RockClientInfo::getTask( );
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
-		if ( client_id != _status->getPlayer( i ).area ) {
+		if ( !info->isActiveState( _status->getPlayer( i ).area ) ) {
 			continue;
 		}
 		int sx = i * 320;

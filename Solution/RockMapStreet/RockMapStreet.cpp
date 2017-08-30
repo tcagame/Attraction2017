@@ -67,11 +67,17 @@ void RockMapStreet::updateStreet( ) {
 		{//ˆê’èˆÈã‚Ì‚¨‹à‚ðW‚ß‚é‚ÆASTAGE_TOKU‚ÖˆÚ“®
 			Status::Player status = _status->getPlayer( i );
 			if ( status.money >= TRANSITION_MONEY_NUM ) {
-				_state = STATE_TOKU;
-				RockStoragePtr storage = RockStorage::getTask( );
-				for ( int i = 0; i < 50; i++ ) {
-					int interval = 80;
-					storage->addItem( RockItemPtr( new RockItemToku( Vector( i * interval + interval / 2, 200, -500 - i * 5 ) ) ) );
+				if ( status.area == AREA_STREET_1 ) {
+					unsigned int state = AREA_STREET_2;
+					MessageSender::getTask( )->sendMessage( i, Message::COMMAND_STATE, &state );
+				}
+				if ( status.area == AREA_STREET_3 ) {
+					_state = STATE_TOKU;
+					RockStoragePtr storage = RockStorage::getTask( );
+					for ( int j = 0; j < 50; j++ ) {
+						int interval = 80;
+						storage->addItem( RockItemPtr( new RockItemToku( Vector( j * interval + interval / 2, 200, -500 - j * 5 ) ) ) );
+					}
 				}
 			}
 		}

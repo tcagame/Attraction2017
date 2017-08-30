@@ -36,6 +36,9 @@ void main( ) {
 	app->addTask( RockViewer::getTag( ), TaskPtr( new RockViewer( status ) ) );
 	app->addTask( RockStorage::getTag( ), TaskPtr( new RockStorage( status ) ) );
 	app->addTask( RockStudio::getTag( ), TaskPtr( new RockStudio( ) ) );
-	app->addTask( RockClientInfo::getTag( ), TaskPtr( new RockClientInfo( AREA_STREET_1 ) ) );
 	app->addTask( MessageSender::getTag( ), TaskPtr( new MessageSender( message ) ) );
+	std::vector< unsigned int > state = { };
+	state.push_back( AREA_STREET_1 );
+	state.push_back( AREA_STREET_3 );
+	app->addTask( RockClientInfo::getTag( ), TaskPtr( new RockClientInfo( state ) ) );
 }
