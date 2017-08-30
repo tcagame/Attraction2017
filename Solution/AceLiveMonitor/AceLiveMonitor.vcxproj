@@ -159,6 +159,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AceLiveMain.cpp" />
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="EnemyArcherAttack.cpp" />
     <ClCompile Include="EnemyAttack.cpp" />
@@ -181,8 +182,6 @@
     <ClCompile Include="ItemTree.cpp" />
     <ClCompile Include="Magazine.cpp" />
     <ClCompile Include="Map.cpp" />
-    <ClCompile Include="MapEvent.cpp" />
-    <ClCompile Include="MapStreet.cpp" />
     <ClCompile Include="Monmotaro.cpp" />
     <ClCompile Include="NPC.cpp" />
     <ClCompile Include="NPCAngel.cpp" />
@@ -280,12 +279,11 @@
     <ClCompile Include="ShotPlayer.cpp" />
     <ClCompile Include="Storage.cpp" />
     <ClCompile Include="ViewerDebug.cpp" />
-    <ClCompile Include="main.cpp" />
     <ClCompile Include="Military.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Shot.cpp" />
     <ClCompile Include="Armoury.cpp" />
-    <ClCompile Include="Viewer.cpp" />
+    <ClCompile Include="ViewerLive.cpp" />
     <ClCompile Include="ViewerTitle.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
@@ -312,8 +310,6 @@
     <ClInclude Include="ItemTree.h" />
     <ClInclude Include="Magazine.h" />
     <ClInclude Include="Map.h" />
-    <ClInclude Include="MapEvent.h" />
-    <ClInclude Include="MapStreet.h" />
     <ClInclude Include="Monmotaro.h" />
     <ClInclude Include="NPC.h" />
     <ClInclude Include="NPCAngel.h" />
@@ -415,7 +411,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Shot.h" />
     <ClInclude Include="Armoury.h" />
-    <ClInclude Include="Viewer.h" />
+    <ClInclude Include="ViewerLive.h" />
     <ClInclude Include="ViewerTitle.h" />
     <ClInclude Include="World.h" />
   </ItemGroup>

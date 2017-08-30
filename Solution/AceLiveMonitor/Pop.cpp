@@ -1,7 +1,8 @@
 #include "Pop.h"
 #include "ace_define.h"
 #include "Family.h"
-#include "MapStreet.h"
+#include "World.h"
+#include "Map.h"
 
 static const int POP_INTERVAL_COUNT = 600;
 static const int MAX_PAGE = SCREEN_WIDTH / GRAPH_SIZE;
@@ -16,10 +17,11 @@ Pop::~Pop( ) {
 }
 
 void Pop::update( ) {
+	MapPtr map = World::getTask( )->getMap( AREA_STREET );
 	//pos‚ðƒJƒƒ‰‚É‡‚í‚¹‚é
 	double camera_pos = Family::getTask( )->getCameraPosX( );
 	while ( _pos.x < camera_pos ) {
-		int width = MapStreet::getTask( )->getPageNum( ) * GRAPH_SIZE;
+		int width = map->getPageNum( ) * GRAPH_SIZE;
 		_pos.x += width;
 	}
 

@@ -9,8 +9,8 @@
 #include "Family.h"
 #include "Player.h"
 #include "Monmotaro.h"
-#include "MapStreet.h"
-#include "MapEvent.h"
+#include "World.h"
+#include "Map.h"
 #include "Server.h"
 
 ViewerDebug::ViewerDebug( ) {
@@ -127,7 +127,7 @@ void ViewerDebug::drawChip( ) const {
 	int camera_pos = family->getCameraPosX( );
 	DrawerPtr drawer( Drawer::getTask( ) );
 	{//main
-		MapStreetPtr map( MapStreet::getTask( ) );
+		MapPtr map = World::getTask( )->getMap( AREA_STREET );
 		//const int MAP_WIDTH = map->getPageNum( ) * PAGE_OBJECT_WIDTH_NUM * OBJECT_CHIP_SIZE;
 		//•\Ž¦‚·‚é‰¡‚Ì”
 		int width = 8 * PAGE_OBJECT_WIDTH_NUM;
@@ -158,8 +158,9 @@ void ViewerDebug::drawChip( ) const {
 	}
 	{//event
 		int width = 8 * PAGE_OBJECT_WIDTH_NUM;
-		MapEventPtr map( MapEvent::getTask( ) );
-		if ( map->getEvent( ) != EVENT_NONE ) {
+		WorldPtr world = World::getTask( );
+		MapPtr map = World::getTask( )->getMap( AREA_EVENT );
+		if ( world->getEvent( ) != EVENT_NONE ) {
 			for ( int i = 0; i < width; i++ ) {
 				for ( int j = 0; j < OBJECT_CHIP_HEIGHT_NUM; j++ ) {
 					int x = i * OBJECT_CHIP_SIZE;

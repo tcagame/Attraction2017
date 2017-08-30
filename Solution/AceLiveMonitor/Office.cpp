@@ -1,6 +1,5 @@
 #include "Office.h"
 #include "Application.h"
-#include "MapEvent.h"
 #include "NPCObaba.h"
 #include "NPCMiko.h"
 #include "NPCOtohime.h"
@@ -8,6 +7,7 @@
 #include "NPCMermaid.h"
 #include "NPCShaker.h"
 #include "NPC.h"
+#include "World.h"
 
 OfficePtr Office::getTask( ) {
 	return std::dynamic_pointer_cast< Office >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -22,7 +22,8 @@ Office::~Office( ) {
 }
 
 void Office::update( ) {
-	EVENT event = MapEvent::getTask( )->getEvent( );
+	WorldPtr world = World::getTask( );
+	EVENT event = world->getEvent( );
 	std::list< NPCPtr >::iterator ite = _npc.begin( );
 	while( ite != _npc.end( ) ) {
 		NPCPtr npc = (*ite);
@@ -41,7 +42,8 @@ void Office::update( ) {
 }
 
 void Office::popUpNPC( ) {
-	EVENT event = MapEvent::getTask( )->getEvent( );
+	WorldPtr world = World::getTask( );
+	EVENT event = world->getEvent( );
 	_npc.clear( );
 	switch ( event ) {
 	case EVENT_SHOP:

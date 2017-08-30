@@ -3,7 +3,7 @@
 #include <string>
 #include "smart_ptr.h"
 
-PTR( Viewer );
+PTR( ViewerLive );
 PTR( ViewerStreet );
 PTR( ViewerEvent );
 PTR( ViewerTitle );
@@ -11,13 +11,13 @@ PTR( ViewerStatus );
 PTR( ViewerDebug );
 PTR( ViewerObject );
 
-class Viewer : public Task {
+class ViewerLive : public Task {
 public:
-	static std::string getTag( ) { return "VIEWER"; };
-	static ViewerPtr getTask( );
+	static std::string getTag( ) { return "VIEWERLIVE"; };
+	static ViewerLivePtr getTask( );
 public:
-	Viewer( );
-	virtual ~Viewer( );
+	ViewerLive( );
+	virtual ~ViewerLive( );
 public:
 	void initialize( );
 	void update( );
@@ -26,9 +26,7 @@ private:
 	ViewerStatusPtr _viewer_status;
 	ViewerEventPtr _viewer_event;
 	ViewerTitlePtr _viewer_title;
-
-	ViewerDebugConstPtr _viewer_debug;
-
 	ViewerObjectPtr _viewer_object;
+	ViewerDebugConstPtr _viewer_debug;
 };
 
