@@ -43,7 +43,7 @@ static const double BUBBLE_FOLLOW_RANGE = 60.0;
 static const Vector BUBBLE_FOOT = Vector( 0, 60, 0 );
 static const double BUBBLE_MOVE_SPEED = MOVE_SPEED * 0.9;
 static const int DEAD_ANIM_TIME = 150;
-static const int ENTRY_TIME = 2;
+static const int ENTRY_TIME = 60;
 static const int FLOAT_HEIGHT = 1;
 
 
@@ -55,7 +55,7 @@ _ancestors( ancestors ),
 _entry_count( 0 ) {
 	_id = id;
 	_status = status;
-	setAction( ACTION_ENTRY );
+	setAction( ACTION_BUBBLE );
 }
 
 
@@ -64,7 +64,7 @@ RockPlayer::~RockPlayer( ) {
 
 void RockPlayer::act( ) {
 	switch ( _action ) {
-	case ACTION_ENTRY:
+	case ACTION_BUBBLE:
 		actonEntry( );
 		break;
 	case ACTION_WAIT:
@@ -112,7 +112,7 @@ void RockPlayer::setAction( ACTION action ) {
 	_action = action;
 	setActCount( 0 );
 	switch ( _action ) {
-	case ACTION_ENTRY:
+	case ACTION_BUBBLE:
 	case ACTION_WAIT:
 		setDoll( ( DOLL )( DOLL_TAROSUKE_WAIT + _id * ROCK_PLAYER_MOTION_NUM ) );
 		break;
@@ -160,7 +160,7 @@ void RockPlayer::actonEntry( ) {
 	if ( _entry_count > ENTRY_TIME ) {
 		setMass( true );
 		setCol( true );
-		setAction( ACTION_WAIT );
+		setAction( ACTION_JUMP );
 	}
 	int dir =  _id % 2 ? -1 : 1;
 	double height_vec = sin( PI2 / 180 * getActCount( ) ) * FLOAT_HEIGHT * dir;
@@ -487,7 +487,10 @@ bool RockPlayer::isDead( ) const {
 }
 
 bool RockPlayer::isEntry( ) const {
-	return _action == ACTION_ENTRY;
+	return _action == ACTION_BUBBLE;
 }
 
-
+void RockPlayer::resetBubble( ) {
+	_entry_count = 0;
+	setAction( ACTION_BUBBLE );
+}

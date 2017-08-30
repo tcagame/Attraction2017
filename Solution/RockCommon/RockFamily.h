@@ -27,6 +27,7 @@ public:
 	RockAncestorsPtr getAncestors( int id ) const;
 	Vector getCameraPos( ) const;
 private:
+	Vector _base_pos;
 	std::array< RockPlayerPtr, ROCK_PLAYER_NUM > _player;
 	std::array< RockBubblePtr, ROCK_PLAYER_NUM > _bubble;
 	std::array< RockAncestorsPtr, ROCK_PLAYER_NUM > _ancestors;

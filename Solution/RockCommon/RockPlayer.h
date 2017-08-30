@@ -15,6 +15,7 @@ public:
 	void damage( int force );
 	void back( );
 	void wish( );
+	void resetBubble( );
 	ModelMV1Ptr getModel( ) const;
 	void resetPos( const Vector& pos );
 	bool isDead( ) const;
@@ -23,7 +24,7 @@ protected:
 	void act( );
 private:
 	enum ACTION {
-		ACTION_ENTRY,
+		ACTION_BUBBLE,
 		ACTION_WAIT,
 		ACTION_JUMP,
 		ACTION_WALK,
