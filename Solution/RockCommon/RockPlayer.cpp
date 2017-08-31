@@ -65,7 +65,7 @@ RockPlayer::~RockPlayer( ) {
 void RockPlayer::act( ) {
 	switch ( _action ) {
 	case ACTION_BUBBLE:
-		actonEntry( );
+		actOnEntry( );
 		break;
 	case ACTION_WAIT:
 		actOnWaiting( );
@@ -91,6 +91,7 @@ void RockPlayer::act( ) {
 	}
 	actOnAttacking( );
 	updateEffect( );
+	updeteState( );
 	// ƒJƒƒ‰‚É“ü‚è‘±‚¯‚é
 	DrawerPtr drawer( Drawer::getTask( ) );
 	if ( !drawer->isInCamera( getPos( ) + getVec( ) ) ) {
@@ -106,6 +107,26 @@ void RockPlayer::updateEffect( ) {
 	EffectPtr effect( Effect::getTask( ) );
 	int size = ( ( _attack_count / CHARGE_PHASE_COUNT ) * 2 ) + 4;
 	effect->updateEffectTransform( _effect_handle, getPos( ) + EFFECT_ADJUST, size );
+}
+
+void RockPlayer::updeteState( ) {
+	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+		if ( _status->getPlayer( i ).money >= TRANSITION_MONEY_NUM ) {
+			if ( _status->getPlayer( i ).area == AREA_STREET_1 ) {
+				unsigned int state = AREA_STREET_2;
+				MessageSender::getTask( )->sendMessage( i, Message::COMMAND_STATE, &state );
+				continue;
+			}
+		}
+			
+		if ( _status->getPlayer( i ).toku >= TRANSITION_TOKU_NUM ) {
+			if ( _status->getPlayer( i ).area == AREA_STREET_3 ) {
+				unsigned int state = STATE_RESULT;
+				MessageSender::getTask( )->sendMessage( i, Message::COMMAND_STATE, &state );
+				continue;
+			}
+		}
+	}
 }
 
 void RockPlayer::setAction( ACTION action ) {
@@ -141,7 +162,7 @@ bool RockPlayer::isActive( ) const {
 	return ( RockClientInfo::getTask( )->isActiveState( _status->getPlayer( _id ).area ) );
 }
 
-void RockPlayer::actonEntry( ) {
+void RockPlayer::actOnEntry( ) {
 	if ( _status->getPlayer( _id ).area == STATE_RESULT ) {
 		setMass( true );
 		setCol( true );

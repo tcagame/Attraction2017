@@ -8,7 +8,7 @@
 #include "RockItemToku.h"
 #include "RockItemMoney.h"
 
-const int REMOVE_CAVE_TIME = 300;
+const int REMOVE_CAVE_TIME = 500;
 
 RockMapStreet::RockMapStreet( StatusPtr status ) :
 _time( 0 ),
@@ -22,7 +22,7 @@ void RockMapStreet::initialize( ) {
 	_drawer = RockMapStreetDrawerPtr( new RockMapStreetDrawer( STAGE_STREET ) );
 
 	{//street初期化
-		_state = STATE_STREET;
+		_stage = STAGE_STREET;
 		RockStoragePtr storage = RockStorage::getTask( );
 		int interval = 80;
 		for ( int i = 0; i < 50; i++ ) {
@@ -33,15 +33,12 @@ void RockMapStreet::initialize( ) {
 }
 
 void RockMapStreet::update( ) {
-	switch ( _state ) {
-	case STATE_STREET:
+	switch ( _stage ) {
+	case STAGE_STREET:
 		updateStreet( );
 		break;
-	case STATE_CAVE:
+	case STAGE_CAVE:
 		updateCave( );
-		break;
-	case STATE_TOKU:
-		updateToku( );
 		break;
 	}
 }
@@ -58,26 +55,19 @@ void RockMapStreet::updateStreet( ) {
 			double length = ( Vector( -200, 0, -500 ) - player->getPos( ) ).getLength( );
 			if ( length < 100 ) {
 				_drawer.reset( );
-				_state = STATE_CAVE;
-				_drawer = RockMapStreetDrawerPtr( new RockMapStreetDrawer( STAGE_CAVE ) );
+				_stage = STAGE_CAVE;
+				_drawer = RockMapStreetDrawerPtr( new RockMapStreetDrawer( _stage ) );
 				family->resetPos( Vector( 0, 10, 0 ) );
 			}
 		}
 
-		{//一定以上のお金を集めると、STAGE_TOKUへ移動
+		{//STREET3のプレイヤーがいれば徳アイテムをポップ
 			Status::Player status = _status->getPlayer( i );
-			if ( status.money >= TRANSITION_MONEY_NUM ) {
-				if ( status.area == AREA_STREET_1 ) {
-					unsigned int state = AREA_STREET_2;
-					MessageSender::getTask( )->sendMessage( i, Message::COMMAND_STATE, &state );
-				}
-				if ( status.area == AREA_STREET_3 ) {
-					_state = STATE_TOKU;
-					RockStoragePtr storage = RockStorage::getTask( );
-					for ( int j = 0; j < 50; j++ ) {
-						int interval = 80;
-						storage->addItem( RockItemPtr( new RockItemToku( Vector( j * interval + interval / 2, 200, -500 - j * 5 ) ) ) );
-					}
+			if ( status.area == AREA_STREET_3 ) {
+				RockStoragePtr storage = RockStorage::getTask( );
+				for ( int j = 0; j < 50; j++ ) {
+					int interval = 80;
+					storage->addItem( RockItemPtr( new RockItemToku( Vector( j * interval + interval / 2, 200, -500 - j * 5 ) ) ) );
 				}
 			}
 		}
@@ -95,25 +85,14 @@ void RockMapStreet::updateCave( ) {
 
 		if ( _time > REMOVE_CAVE_TIME ) {
 			_drawer.reset( );
-			_drawer = RockMapStreetDrawerPtr( new RockMapStreetDrawer( STAGE_STREET ) );
+			_stage = STAGE_STREET;
+			_drawer = RockMapStreetDrawerPtr( new RockMapStreetDrawer( _stage ) );
 			family->resetPos( Vector( 0, 30, -500 ) );
 			_time = 0;
-		}
-	}
-}
-
-void RockMapStreet::updateToku( ) {
-	RockFamilyPtr family = RockFamily::getTask( );
-	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
-		RockPlayerPtr player = family->getPlayer( i );
-		if ( !player->isActive( ) ) {
-			continue;
-		}
-		{//一定以上の徳を集めると、リザルトマップへ
-			Status::Player status = _status->getPlayer( i );
-			if ( status.toku >= TRANSITION_TOKU_NUM ) {
-				unsigned int state = STATE_RESULT;
-				MessageSender::getTask( )->sendMessage( i, Message::COMMAND_STATE, &state );
+			int interval = 80;
+			RockStoragePtr storage = RockStorage::getTask( );
+			for ( int i = 0; i < 50; i++ ) {
+				storage->addItem( RockItemPtr( new RockItemMoney( Vector( i * interval, 200, -500 - i * 5 ), 10000 ) ) );
 			}
 		}
 	}

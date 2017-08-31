@@ -5,8 +5,7 @@
 
 const int STREET_MODEL_NUM = 3;
 
-RockMapStreetDrawer::RockMapStreetDrawer( RockMapStreet::STAGE stage ) :
-_stage( stage ) {
+RockMapStreetDrawer::RockMapStreetDrawer( RockMapStreet::STAGE stage ) {
 	RockMapPtr map( RockMap::getTask( ) );
 	map->resetModels( );
 	switch( stage )	{
@@ -48,8 +47,4 @@ _stage( stage ) {
 }
 
 RockMapStreetDrawer::~RockMapStreetDrawer( ) {
-}
-
-RockMapStreet::STAGE RockMapStreetDrawer::getStage( ) const {
-	return _stage;
 }

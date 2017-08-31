@@ -35,7 +35,7 @@ private:
 	};
 private:
 	void setAction( ACTION action );
-	void actonEntry( );
+	void actOnEntry( );
 	void actOnWaiting( );
 	void actOnJumping( );
 	void actOnWalking( );
@@ -45,6 +45,7 @@ private:
 	void actOnDead( );
 	void actOnWish( );
 	void updateEffect( );
+	void updeteState( );
 private:
 	StatusPtr _status;
 	ACTION _action;
