@@ -9,9 +9,11 @@
 #include "RockItemMoney.h"
 
 const int REMOVE_CAVE_TIME = 500;
+const int DROP_TIMING = 1800;
 
 RockMapStreet::RockMapStreet( StatusPtr status ) :
 _time( 0 ),
+_drop_time( DROP_TIMING  ),
 _status( status ) {
 }
 
@@ -62,16 +64,19 @@ void RockMapStreet::updateStreet( ) {
 		}
 
 		{//STREET3のプレイヤーがいれば徳アイテムをポップ
-			Status::Player status = _status->getPlayer( i );
-			if ( status.area == AREA_STREET_3 ) {
-				RockStoragePtr storage = RockStorage::getTask( );
-				for ( int j = 0; j < 50; j++ ) {
-					int interval = 80;
-					storage->addItem( RockItemPtr( new RockItemToku( Vector( j * interval + interval / 2, 200, -500 - j * 5 ) ) ) );
+			if( !( _drop_time % DROP_TIMING ) ) {
+				Status::Player status = _status->getPlayer( i );
+				if ( status.area == AREA_STREET_3 ) {
+					RockStoragePtr storage = RockStorage::getTask( );
+					for ( int j = 0; j < 50; j++ ) {
+						int interval = 80;
+						storage->addItem( RockItemPtr( new RockItemToku( Vector( j * interval + interval / 2, 200, -500 - j * 5 ) ) ) );
+					}
 				}
 			}
 		}
 	}
+	_drop_time++;
 }
 
 void RockMapStreet::updateCave( ) {
