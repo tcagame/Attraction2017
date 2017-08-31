@@ -110,23 +110,22 @@ void RockPlayer::updateEffect( ) {
 }
 
 void RockPlayer::updeteState( ) {
-	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
-		if ( _status->getPlayer( i ).money >= TRANSITION_MONEY_NUM ) {
-			if ( _status->getPlayer( i ).area == AREA_STREET_1 ) {
-				unsigned int state = AREA_STREET_2;
-				MessageSender::getTask( )->sendMessage( i, Message::COMMAND_STATE, &state );
-				continue;
-			}
-		}
-			
-		if ( _status->getPlayer( i ).toku >= TRANSITION_TOKU_NUM ) {
-			if ( _status->getPlayer( i ).area == AREA_STREET_3 ) {
-				unsigned int state = STATE_RESULT;
-				MessageSender::getTask( )->sendMessage( i, Message::COMMAND_STATE, &state );
-				continue;
-			}
+	if ( _status->getPlayer( _id ).money >= TRANSITION_MONEY_NUM ) {
+		if ( _status->getPlayer( _id ).area == AREA_STREET_1 ) {
+			unsigned int state = AREA_STREET_2;
+			MessageSender::getTask( )->sendMessage( _id, Message::COMMAND_STATE, &state );
+			return;
 		}
 	}
+		
+	if ( _status->getPlayer( _id ).toku >= TRANSITION_TOKU_NUM ) {
+		if ( _status->getPlayer( _id ).area == AREA_STREET_3 ) {
+			unsigned int state = STATE_RESULT;
+			MessageSender::getTask( )->sendMessage( _id, Message::COMMAND_STATE, &state );
+			return;
+		}
+	}
+
 }
 
 void RockPlayer::setAction( ACTION action ) {

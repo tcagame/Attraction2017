@@ -256,7 +256,8 @@ void RockViewer::drawUI( ) const {
 			int num = _status->getPlayer( i ).money % (int)pow( 10.0, (double)j + 1 );
 			num /= (int)pow( 10.0, (double)j );
 			_status_num->setRect( MONEY_GRAPH_WIDTH * num, 0, MONEY_GRAPH_WIDTH, MONEY_GRAPH_HEIGHT );
-			_status_num->setPos( -j * MONEY_GRAPH_WIDTH + 275, MONEY_Y );
+			int player_status_pos = i * ( SCREEN_WIDTH / 4 );
+			_status_num->setPos( player_status_pos + -j * MONEY_GRAPH_WIDTH + 275, MONEY_Y );
 			_status_num->draw( );
 		}
 	}
