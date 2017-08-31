@@ -47,7 +47,8 @@ void RockStorage::updateItem( ) {
 		bool col = false;
 		for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 			RockPlayerPtr player = family->getPlayer( i );
-			if ( !player->isActive( ) ) {
+			if ( !player->isActive( ) ||
+				 player->isEntry( ) ) {
 				continue;
 			}
 			if ( item->isOverLapped( player ) ) {
