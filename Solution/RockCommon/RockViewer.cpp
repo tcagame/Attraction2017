@@ -29,6 +29,9 @@ const int HP_GRAPH_WIDTH = 8;
 const int MONEY_GRAPH_HEIGHT = 16;
 const int MONEY_GRAPH_WIDTH = 12;
 const int MONEY_Y = DRAW_UI_Y + 102;
+const int ITEM_GRAPH_SIZE = 64;
+const int ITEM_Y = DRAW_UI_Y + 158;
+const int ITEM_DRAW_SIZE = 24;
 
 RockViewerPtr RockViewer::getTask( ) {
 	return std::dynamic_pointer_cast< RockViewer >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -232,33 +235,73 @@ void RockViewer::drawUI( ) const {
 			_breasts[ i ]->draw( );
 			continue;
 		}
-		int sx = i * 320;
-		_status_flame->setPos( sx, DRAW_UI_Y );
+		int player_status_pos = i * ( SCREEN_WIDTH / 4 );
+		_status_flame->setPos( player_status_pos, DRAW_UI_Y );
 		_status_flame->draw( );
 
-		//(POWER)
-		int tw = HP_GRAPH_WIDTH * _status->getPlayer( i ).power;
-		if ( tw != 0 ) {
-			_status_ui->setRect( 0, 256, tw, HP_GRAPH_HEIGHT );
-			sx += 160;
-			int sy = DRAW_UI_Y + 50;
-			_status_ui->setPos( sx, sy );
+		{//(POWER)
+			int tw = HP_GRAPH_WIDTH * _status->getPlayer( i ).power;
+			if ( tw != 0 ) {
+				_status_ui->setRect( 0, 256, tw, HP_GRAPH_HEIGHT );
+				int sx = player_status_pos + 160;
+				int sy = DRAW_UI_Y + 50;
+				_status_ui->setPos( sx, sy );
+				_status_ui->draw( );
+			}
+		}
+		
+		{//(MONEY)
+			int money = _status->getPlayer( i ).money;
+			int digit = money == 0;
+			while( money > 0 ) {
+				digit++;
+				money /= 10;
+			}
+			for ( int j = 0; j < digit; j++ ) {
+				int num = _status->getPlayer( i ).money % (int)pow( 10.0, (double)j + 1 );
+				num /= (int)pow( 10.0, (double)j );
+				_status_num->setRect( MONEY_GRAPH_WIDTH * num, 0, MONEY_GRAPH_WIDTH, MONEY_GRAPH_HEIGHT );
+				_status_num->setPos( player_status_pos + -j * MONEY_GRAPH_WIDTH + 275, MONEY_Y );
+				_status_num->draw( );
+			}
+		}
+
+		{//(ITEM)
+			unsigned int item = _status->getPlayer( i ).item;
+			for ( int j = 0; j < MAX_ITEM_NUM; j++ ) {
+				unsigned int check = 1 << ( MAX_ITEM_NUM - j - 1 );
+				if ( item & check ) {
+					_status_ui->setRect( ITEM_GRAPH_SIZE * j, 320, ITEM_GRAPH_SIZE, ITEM_GRAPH_SIZE );
+					int sx = player_status_pos + 135 + ITEM_DRAW_SIZE * j;
+					int sy = ITEM_Y;
+					_status_ui->setPos( sx, sy, sx + ITEM_DRAW_SIZE, sy + ITEM_DRAW_SIZE );
+					_status_ui->draw( );
+				}
+			}
+		}
+
+		{// “¿•\Ž¦
+			int virtue = _status->getPlayer( i ).toku;
+		
+			int sx = player_status_pos + 260;
+			int sy = ITEM_Y + ITEM_DRAW_SIZE;
+			_status_ui->setRect( ITEM_GRAPH_SIZE * 7, 320, ITEM_GRAPH_SIZE, ITEM_GRAPH_SIZE );
+			_status_ui->setPos( sx, sy,  sx + ITEM_DRAW_SIZE, sy + ITEM_DRAW_SIZE );
 			_status_ui->draw( );
-		}
-		//(MONEY)
-		int money = _status->getPlayer( i ).money;
-		int digit = 0;
-		while( money > 0 ) {
-			digit++;
-			money /= 10;
-		}
-		for ( int j = 0; j < digit; j++ ) {
-			int num = _status->getPlayer( i ).money % (int)pow( 10.0, (double)j + 1 );
-			num /= (int)pow( 10.0, (double)j );
-			_status_num->setRect( MONEY_GRAPH_WIDTH * num, 0, MONEY_GRAPH_WIDTH, MONEY_GRAPH_HEIGHT );
-			int player_status_pos = i * ( SCREEN_WIDTH / 4 );
-			_status_num->setPos( player_status_pos + -j * MONEY_GRAPH_WIDTH + 275, MONEY_Y );
-			_status_num->draw( );
+			int digit = virtue == 0;
+			while( virtue > 0 ) {
+				digit++;
+				virtue /= 10;
+			}
+			sx += ITEM_DRAW_SIZE;
+			for ( int j = 0; j < digit; j++ ) {
+				int num = _status->getPlayer( i ).toku % (int)pow( 10.0, (double)j + 1 );
+				num /= (int)pow( 10.0, (double)j );
+				_status_num->setRect( MONEY_GRAPH_WIDTH * num, 0, MONEY_GRAPH_WIDTH, MONEY_GRAPH_HEIGHT );
+				_status_num->setPos( sx, sy );
+				_status_num->draw( );
+				sx += MONEY_GRAPH_WIDTH;
+			}
 		}
 	}
 }

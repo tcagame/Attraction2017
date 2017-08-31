@@ -14,9 +14,14 @@ const unsigned int STATE_BOSS		= 0b0000000000010000; //多分使わない
 const unsigned int STATE_RESULT		= 0b0000000000100000;
 const unsigned int STATE_TEST		= 0b0000000001000000;
 
-const unsigned int ITEM_ENHANCED_ATTACK	= 0b00000001;
-const unsigned int ITEM_ENHANCED_CHARGE	= 0b00000010;
-const unsigned int ITEM_TREE			= 0b00000100;
+const int MAX_ITEM_NUM = 7;
+const unsigned int ITEM_DANGO           = 0b00000001;//団子
+const unsigned int ITEM_HEART           = 0b00000010;//ハート
+const unsigned int ITEM_ENHANCED_ATTACK = 0b00000100;//攻撃強化
+const unsigned int ITEM_ENHANCED_CHARGE = 0b00001000;//溜強化
+const unsigned int ITEM_FIRE            = 0b00010000;//神器（火）
+const unsigned int ITEM_ROCK            = 0b00100000;//神器（岩）
+const unsigned int ITEM_TREE            = 0b01000000;//神器（木）
 
 const int ROCK_PLAYER_NUM = 4;
 const int ROCK_PLAYER_MOTION_NUM = 10;
