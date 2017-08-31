@@ -163,10 +163,12 @@ bool RockPlayer::isActive( ) const {
 
 void RockPlayer::actOnEntry( ) {
 	if ( _status->getPlayer( _id ).area == STATE_RESULT ) {
-		setMass( true );
-		setCol( true );
-		setAction( ACTION_WAIT );
-		return;
+		if ( isOnMapModel( ) ) {
+			setMass( true );
+			setCol( true );
+			setAction( ACTION_WAIT );
+			return;
+		}
 	}
 
 	setMass( false );
@@ -178,9 +180,11 @@ void RockPlayer::actOnEntry( ) {
 	}
 
 	if ( _entry_count > ENTRY_TIME ) {
-		setMass( true );
-		setCol( true );
-		setAction( ACTION_JUMP );
+		if ( isOnMapModel( ) ) {
+			setMass( true );
+			setCol( true );
+			setAction( ACTION_JUMP );
+		}
 	}
 	int dir =  _id % 2 ? -1 : 1;
 	double height_vec = sin( PI2 / 180 * getActCount( ) ) * FLOAT_HEIGHT * dir;
