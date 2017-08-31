@@ -35,15 +35,16 @@ void ChipDrawer::drawChip( int mx, int my, int gx, int gy, bool select ) const {
 		_image_choice_back->draw( );
 	}
 	int ground_num = _data->getGround( mx, my );
-	if ( ground_num > 0 ) { //地面
-		ImagePtr ground = _ground->getImage( ground_num - 1 );
+	ImagePtr ground = _ground->getImage( ground_num );
+	if ( ground ) {
 		ground->setPos( sx, sy );
 		ground->setRect( );
 		ground->draw( );
 	}
+
 	int structure_num = _data->getStructure( mx, my );
-	if ( structure_num > 0 ) { // ストラクチャー
-		ImagePtr structure = _structure->getImage( structure_num - 1 );
+	ImagePtr structure = _structure->getImage( structure_num );
+	if( structure ) {
 		int width = 0;
 		int height = 0;
 		structure->getImageSize( width, height );
@@ -51,6 +52,7 @@ void ChipDrawer::drawChip( int mx, int my, int gx, int gy, bool select ) const {
 		structure->setRect( );
 		structure->draw( );
 	}
+	
 
 	if ( select ) {// 選んでいるチップ表示
 		_image_choice_front->setPos( sx, 0 );

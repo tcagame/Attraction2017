@@ -3,7 +3,6 @@
 #include "Drawer.h"
 #include "ChipEditor.h"
 #include "Application.h"
-#include "LoadCSV.h"
 #include "Ground.h"
 #include "Structure.h"
 
@@ -34,11 +33,11 @@ const int STRUCTURE_Y = HEIGHT_Y;
 const int PAGE_ARROW_SIZE = 32;
 const int PAGE_ARROW_Y = FRAME_WINDOW_HEIGHT - FRAME_SIZE - PAGE_ARROW_SIZE - 5;
 const int PAGE_ARROW_DISTANCE_CENTER = 30;
-const int GROUND_WIDTH_NUM = 3;
-const int GROUND_HEIGHT_NUM = 2;
+const int GROUND_WIDTH_NUM = 6;
+const int GROUND_HEIGHT_NUM = 4;
 const int GROUND_SIZE = ( BG_WIDTH - 10 ) / GROUND_WIDTH_NUM;
-const int STRUCTURE_WIDTH_NUM = 3;
-const int STRUCTURE_HEIGHT_NUM = 2;
+const int STRUCTURE_WIDTH_NUM = 6;
+const int STRUCTURE_HEIGHT_NUM = 4;
 const int STRUCTURE_SIZE = ( BG_WIDTH - 10 ) / STRUCTURE_WIDTH_NUM;
 
 ChipMenu::ChipMenu( ImagePtr menu_image, ChipEditorPtr chip_editor, GroundConstPtr ground, StructureConstPtr structure ) :
@@ -254,14 +253,14 @@ void ChipMenu::draw( ) const {
 				int sy2 = sy1 + GROUND_SIZE;
 				for ( int j = 0; j < GROUND_WIDTH_NUM; j++ ) {
 					int x = j;
-					int idx = x + y * GROUND_WIDTH_NUM + add - 1;
+					int idx = x + y * GROUND_WIDTH_NUM + add;
 					if ( idx >= ground_size ) {
 						break;
 					}
-					if ( idx != -1 ) {
-						int tw = 0;
-						int th = 0;
-						ImagePtr ground = _ground->getImage( idx );
+					int tw = 0;
+					int th = 0;
+					ImagePtr ground = _ground->getImage( idx );
+					if ( ground ) {
 						ground->getImageSize( tw, th );
 						ground->setRect( 0, 0, tw, th );
 						ground->setPos( sx1, sy1, sx2, sy2 );
@@ -300,14 +299,14 @@ void ChipMenu::draw( ) const {
 				int sy2 = sy1 + STRUCTURE_SIZE;
 				for ( int j = 0; j < STRUCTURE_WIDTH_NUM; j++ ) {
 					int x = j;
-					int idx = x + y * STRUCTURE_WIDTH_NUM + add - 1;
+					int idx = x + y * STRUCTURE_WIDTH_NUM + add;
 					if ( idx >= structure_size ) {
 						break;
 					}
-					if ( idx != -1 ) {
-						int tw = 0;
-						int th = 0;
-						ImagePtr structure = _structure->getImage( idx );
+					int tw = 0;
+					int th = 0;
+					ImagePtr structure = _structure->getImage( idx );
+					if ( structure ) {
 						structure->getImageSize( tw, th );
 						structure->setRect( 0, 0, tw, th );
 						structure->setPos( sx1, sy1, sx2, sy2 );

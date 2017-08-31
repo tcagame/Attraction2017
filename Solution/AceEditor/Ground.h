@@ -1,6 +1,7 @@
 #pragma once
 #include "Image.h"
-#include <vector>
+#include "ace_define.h"
+#include <array>
 
 class Ground {
 public:
@@ -10,6 +11,6 @@ public:
 	ImagePtr getImage( int idx ) const;
 	int getSize( ) const;
 private:
-	std::vector< ImagePtr > _image;
+	std::array< ImagePtr, GROUND_LIST_NUM > _image;
 };
 

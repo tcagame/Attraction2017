@@ -1,20 +1,18 @@
 #include "Ground.h"
 #include "LoadCSV.h"
-#include "ace_define.h"
 #include "Drawer.h"
 
 
 Ground::Ground( ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
 	LoadCSV csv( "Resource/Ace/Editor/ground/ground_list", GROUND_LIST_NUM );
-	for ( int i = 0; i < csv.getSize( ); i++ ) {
+	const int num = ( int )csv.getSize( );
+	for ( int i = 0; i < num; i++ ) {
 		std::string path = csv.getData( i );
-		if ( path == "" ) {
-			continue;
+		if ( path != "" ) {
+			path = "ground/" + path;
+			_image[ i ] = drawer->createImage( path.c_str( ) );
 		}
-		path = "ground/" + path;
-		
-		_image.push_back( drawer->createImage( path.c_str( ) ) );
 	}
 }
 

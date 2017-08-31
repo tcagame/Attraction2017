@@ -14,7 +14,6 @@ public:
 	Vector getPos( ) const;
 	void update( );
 	virtual void damage( int force );
-	virtual Chip getChip( ) const { return Chip( ); };
 	bool isOverlapped( CharacterConstPtr target ) const;
 	double getRadius( ) const;
 	bool isFinished( ) const;

@@ -12,7 +12,7 @@ Data::Data( ) {
 	int max_chip = _page_num * PAGE_CHIP_WIDTH_NUM * MAP_HEIGHT;
 	_chips.resize( max_chip );
 	for ( int i = 0; i < max_chip; i++ ) {
-		_chips[ i ].ground = 1;
+		_chips[ i ].ground = 0;
 		_chips[ i ].structure = 0;
 		_chips[ i ].height = 0;
 	}
