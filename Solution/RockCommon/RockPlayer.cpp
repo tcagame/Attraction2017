@@ -163,10 +163,12 @@ bool RockPlayer::isActive( ) const {
 
 void RockPlayer::actOnEntry( ) {
 	if ( _status->getPlayer( _id ).area == STATE_RESULT ) {
-		setMass( true );
-		setCol( true );
-		setAction( ACTION_WAIT );
-		return;
+		if ( isOnMapModel( ) ) {
+			setMass( true );
+			setCol( true );
+			setAction( ACTION_WAIT );
+			return;
+		}
 	}
 
 	setMass( false );
@@ -178,9 +180,11 @@ void RockPlayer::actOnEntry( ) {
 	}
 
 	if ( _entry_count > ENTRY_TIME ) {
-		setMass( true );
-		setCol( true );
-		setAction( ACTION_JUMP );
+		if ( isOnMapModel( ) ) {
+			setMass( true );
+			setCol( true );
+			setAction( ACTION_JUMP );
+		}
 	}
 	int dir =  _id % 2 ? -1 : 1;
 	double height_vec = sin( PI2 / 180 * getActCount( ) ) * FLOAT_HEIGHT * dir;
@@ -280,7 +284,17 @@ void RockPlayer::actOnWalking( ) {
 	}
 
 	//ˆÚ“®
-	Vector vec = Vector( player.device_x, 0, player.device_y ).normalize( ) * MOVE_SPEED;
+	RockCameraPtr camera( RockCamera::getTask( ) );
+	Vector camera_dir = camera->getTarget( ) - camera->getPos( );
+	camera_dir.y = 0;
+	Vector axis( 0, -1, 0 );
+	if ( Vector( 0, 0, 1 ).cross( camera_dir ).y < 0 ) {
+		axis = Vector( 0, 1, 0 );
+	}
+	double angle = Vector( 0, 0, 1 ).angle( camera_dir );
+	Matrix rot = Matrix::makeTransformRotation( axis, angle );
+	Vector vec = Vector( player.device_x, 0, -player.device_y ).normalize( ) * MOVE_SPEED;
+	vec = rot.multiply( vec );
 	vec.y = getVec( ).y;
 	setVec( vec );
 }
