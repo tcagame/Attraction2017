@@ -1,6 +1,5 @@
 #include "Structure.h"
 #include "LoadCSV.h"
-#include "ace_define.h"
 #include "Drawer.h"
 
 Structure::Structure( ) {
@@ -8,12 +7,10 @@ Structure::Structure( ) {
 	LoadCSV csv( "Resource/Ace/Editor/structure/structure_list", STRUCTURE_LIST_NUM );
 	for ( int i = 0; i < csv.getSize( ); i++ ) {
 		std::string path = csv.getData( i );
-		if ( path == "" ) {
-			continue;
+		if ( path != "" ) {
+			path = "structure/" + path;
+			_image[ i ] = drawer->createImage( path.c_str( ) );
 		}
-		path = "structure/" + path;
-		
-		_image.push_back( drawer->createImage( path.c_str( ) ) );
 	}
 }
 
