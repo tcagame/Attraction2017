@@ -4,8 +4,9 @@
 
 static const int RANGE = 80;
 
-RockAlter::RockAlter( const Vector& pos ) :
+RockAlter::RockAlter( const Vector& pos, const Vector& dir ) :
 _pos( pos ),
+_dir( dir.normalize( ) ),
 _active( true ) {
 }
 
@@ -15,8 +16,11 @@ RockAlter::~RockAlter( ) {
 
 bool RockAlter::isInRange( const Vector& pos ) const {
 	bool result = false;
-	if ( ( pos - _pos ).getLength2( ) < RANGE * RANGE ) {
-		result = true;
+	Vector distance = pos - _pos;
+	if ( distance.angle( _dir ) < PI / 6 ) {
+		if ( distance.getLength2( ) < RANGE * RANGE ) {
+			result = true;
+		}
 	}
 	return result;
 }
@@ -34,7 +38,13 @@ ModelMV1Ptr RockAlter::getModel( ) const {
 	if ( !_active ) {
 		doll = DOLL_ALTER_AFTER;
 	}
+	double rot = Vector( 0, 0, -1 ).angle( _dir );
+	Vector axis = Vector( 0, 1, 0 );
+	if ( Vector( 0, 0, -1 ).cross( _dir ).y < 0 ) {
+		axis = Vector( 0, -1, 0 );
+	}
 	ModelMV1Ptr model = RockDollHouse::getTask( )->getModel( doll );
+	model->setRot( Matrix::makeTransformRotation( axis, rot ) );
 	model->setTrans( Matrix::makeTransformTranslation( _pos ) );
 	return model;
 }

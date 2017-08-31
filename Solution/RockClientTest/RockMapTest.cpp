@@ -32,6 +32,7 @@ RockMapTest::RockMapTest( ) {
 	storage->addItem( RockItemPtr( new RockItemToku( Vector( 200, 50, 0 ) ) ) );
 	storage->addItem( RockItemPtr( new RockItemToku( Vector( 100, 50, 0 ) ) ) );
 	storage->addItem( RockItemPtr( new RockItemToku( Vector( 0, 50, 0 ) ) ) );
+	storage->addAlter( RockAlterPtr( new RockAlter( Vector( 50, 0, 50 ), Vector( 0, 0, 0 ) ) ) );
 }
 
 

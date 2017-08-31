@@ -6,7 +6,7 @@ PTR( ModelMV1 );
 
 class RockAlter {
 public:
-	RockAlter( const Vector& pos );
+	RockAlter( const Vector& pos, const Vector& dir );
 	virtual ~RockAlter( );
 public:
 	bool isInRange( const Vector& pos ) const;
@@ -15,6 +15,7 @@ public:
 	ModelMV1Ptr getModel( ) const;
 private:
 	Vector _pos;
+	Vector _dir;
 	bool _active;
 };
 

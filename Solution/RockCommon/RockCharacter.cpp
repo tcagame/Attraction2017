@@ -40,7 +40,7 @@ void RockCharacter::update( ) {
 	if ( _col ) {
 		Vector vec = Vector( _vec.x, 0, _vec.z );
 		if ( vec.getLength2( ) > 0 ) {
-			if ( isOnMapModel( ) ) {
+			if ( !isOnMapModel( ) ) {
 				_vec.x = 0;
 				_vec.z = 0;
 			}
