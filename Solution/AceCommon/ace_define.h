@@ -63,24 +63,6 @@ enum EVENT {
 	MAX_EVENT,
 };
 
-struct Chip {
-	int sx1;
-	int sy1;
-	int sx2;
-	int sy2;
-	int tx;
-	int ty;
-	int size;
-	Chip( ) {
-		sx1 = 0;
-		sy1 = 0;
-		sx2 = 0;
-		sy2 = 0;
-		tx = 0;
-		ty = 0;
-		size = 0;
-	}
-};
 
 // Editor—p
 const int GRAPH_SIZE = 256;
