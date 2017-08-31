@@ -9,7 +9,7 @@
 #include "RockEnemy.h"
 
 const double BOUND_POWER = 1.0;
-const double STAND_RANGE = 100.0;
+const double STAND_RANGE = 1000.0;
 
 RockCharacter::RockCharacter( const Vector& pos, DOLL doll, int radius, int height, bool mass, bool head, bool col ) :
 _pos( pos ),
@@ -28,8 +28,6 @@ RockCharacter::~RockCharacter( ) {
 }
 
 void RockCharacter::update( ) {
-	std::vector< ModelMV1Ptr > col_models = RockMap::getTask( )->getColModels( );
-	int col_models_size = ( int )col_models.size( );
 	act( );
 	_act_count++;
 	_standing = false;
@@ -42,26 +40,15 @@ void RockCharacter::update( ) {
 	if ( _col ) {
 		Vector vec = Vector( _vec.x, 0, _vec.z );
 		if ( vec.getLength2( ) > 0 ) {
-			Vector central_pos = _pos + vec + Vector( 0, _radius, 0 );
-
-			for ( int i = 0; i < col_models_size; i++ ) {
-				//頭の位置であたる( pos1:中心、pos2:頭 )
-				if ( col_models[ i ]->isHitLine( central_pos, central_pos + Vector( 0, _radius, 0 ) ) ) {
-					_vec.x = 0;
-					_vec.z = 0;
-					break;
-				}
-				//足元がない( pos1:中心、pos2:結構下のほう )
-				Vector hit_pos = col_models[ i ]->getHitPos( central_pos, central_pos - Vector( 0, STAND_RANGE, 0 ) );
-				if ( hit_pos.isOrijin( ) ) {
-					_vec.x = 0;
-					_vec.z = 0;
-					break;
-				}
+			if ( isOnMapModel( ) ) {
+				_vec.x = 0;
+				_vec.z = 0;
 			}
-			
 		}
 	}
+
+	std::vector< ModelMV1Ptr > col_models = RockMap::getTask( )->getColModels( );
+	int col_models_size = ( int )col_models.size( );
 	if ( _col ) {//上下判定
 		Vector pos = _pos + Vector( 0, _radius, 0 );
 		Vector fpos = _pos + Vector( 0, _vec.y, 0 );
@@ -190,4 +177,28 @@ bool RockCharacter::isOverLapped( RockCharacterConstPtr target ) const {
 
 void RockCharacter::back( ) {
 	_pos -= _vec;
+}
+
+bool RockCharacter::isOnMapModel( ) const {
+	bool result = true;
+	std::vector< ModelMV1Ptr > col_models = RockMap::getTask( )->getColModels( );
+	int col_models_size = ( int )col_models.size( );
+
+	Vector vec = Vector( _vec.x, 0, _vec.z );
+	Vector central_pos = _pos + vec + Vector( 0, _radius, 0 );
+
+	for ( int i = 0; i < col_models_size; i++ ) {
+		//頭の位置であたる( pos1:中心、pos2:頭 )
+		if ( col_models[ i ]->isHitLine( central_pos, central_pos + Vector( 0, _radius, 0 ) ) ) {
+			result = false;
+			break;
+		}
+		//足元がない( pos1:中心、pos2:結構下のほう )
+		Vector hit_pos = col_models[ i ]->getHitPos( central_pos, central_pos - Vector( 0, STAND_RANGE, 0 ) );
+		if ( hit_pos.isOrijin( ) ) {
+			result = false;
+			break;
+		}
+	}	
+	return result;
 }

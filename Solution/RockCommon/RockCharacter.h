@@ -36,6 +36,7 @@ protected:
 	void setDoll( DOLL doll );
 	void setMass( bool mass );
 	void setCol( bool col );
+	bool isOnMapModel( ) const;
 private:
 	Vector _pos;
 	Vector _vec;
