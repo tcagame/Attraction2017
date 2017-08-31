@@ -26,16 +26,18 @@ const int TAG_Y = 0;
 const int BLOCK_SPRITE_SIZE = 16;
 const int BLOCK_X = 15;
 const int BLOCK_Y = 42;
-const int BLOCK_DRAW_SIZE = 64;
-const int BLOCK_WIDTH_NUM = 3;
+const int BLOCK_DRAW_SIZE = 48;
+const int BLOCK_WIDTH_NUM = 6;
 
-const int ENEMY_WIDTH_NUM = 5;
-const int ENEMY_HEIGHT_NUM = 3;
+const int ENEMY_WIDTH_NUM = 6;
+const int ENEMY_HEIGHT_NUM = 4;
+const int ENEMY_DRAW_SIZE = 48;
 
 const int EVENT_SPRITE_SIZE = 32;
-const int EVENT_DRAW_SIZE = 64;
-const int EVENT_WIDTH_NUM = 4;
-const int EVENT_HEIGHT_NUM = 2;
+const int EVENT_SPRITE_WIDTH_NUM = 4;
+const int EVENT_DRAW_SIZE = 48;
+const int EVENT_WIDTH_NUM = 6;
+const int EVENT_HEIGHT_NUM = 4;
 
 const int PAGE_ARROW_SIZE = 32;
 const int PAGE_ARROW_Y = FRAME_WINDOW_HEIGHT - FRAME_SIZE - PAGE_ARROW_SIZE - 5;
@@ -158,11 +160,11 @@ void ObjectMenu::update( ) {
 			{ //enemy‘I‘ð
 				int sx1 = ( int )_pos.x + BLOCK_X;
 				int sy1 = ( int )_pos.y + BLOCK_Y;
-				int sx2 = sx1 + NORMAL_CHAR_GRAPH_SIZE * ENEMY_WIDTH_NUM;
-				int sy2 = sy1 + NORMAL_CHAR_GRAPH_SIZE * ENEMY_HEIGHT_NUM;
+				int sx2 = sx1 + ENEMY_DRAW_SIZE * ENEMY_WIDTH_NUM;
+				int sy2 = sy1 + ENEMY_DRAW_SIZE * ENEMY_HEIGHT_NUM;
 				if ( sx1 < mouse_pos.x && sx2 > mouse_pos.x && sy1 < mouse_pos.y && sy2 > mouse_pos.y ) {
-					int x = ( int )( mouse_pos.x - sx1 ) / NORMAL_CHAR_GRAPH_SIZE;
-					int y = ( int )( mouse_pos.y - sy1 ) / NORMAL_CHAR_GRAPH_SIZE;
+					int x = ( int )( mouse_pos.x - sx1 ) / ENEMY_DRAW_SIZE;
+					int y = ( int )( mouse_pos.y - sy1 ) / ENEMY_DRAW_SIZE;
 					int enemy_idx = x + y * ENEMY_WIDTH_NUM + _page * ENEMY_WIDTH_NUM * ENEMY_HEIGHT_NUM;
 					unsigned char enemy = getEnemy( enemy_idx );
 					_object_editor->setObject( enemy );
@@ -191,6 +193,8 @@ void ObjectMenu::update( ) {
 unsigned char ObjectMenu::getObj( int idx ) const {
 	unsigned char result = OBJECT_NONE;
 	switch ( idx ) {
+	case 0:
+		result = OBJECT_NONE;
 	case 1:
 		result = OBJECT_BLOCK;
 		break;
@@ -198,7 +202,7 @@ unsigned char ObjectMenu::getObj( int idx ) const {
 		result = OBJECT_ONEWAY;
 		break;
 	default:
-		result = OBJECT_NONE;
+		result = _object_editor->getObject( );
 		break;
 	}
 	return result;
@@ -432,7 +436,7 @@ void ObjectMenu::draw( ) const {
 			int sx = ( int )_pos.x + BLOCK_X;
 			int sy = ( int )_pos.y + BLOCK_Y;
 			for ( int i = 0; i < BLOCK_WIDTH_NUM; i++, sx += BLOCK_DRAW_SIZE ) {
-				int tx = ( i % 3 ) * BLOCK_SPRITE_SIZE;
+				int tx = i * BLOCK_SPRITE_SIZE;
 				int ty = 0;
 				_block->setRect( tx, ty, BLOCK_SPRITE_SIZE, BLOCK_SPRITE_SIZE );
 				_block->setPos( sx, sy, sx + BLOCK_DRAW_SIZE, sy + BLOCK_DRAW_SIZE );
@@ -466,26 +470,26 @@ void ObjectMenu::draw( ) const {
 						break;
 					}
 					if ( idx != -1 ) {
-						int sx = ( int )_pos.x + BLOCK_X + j * NORMAL_CHAR_GRAPH_SIZE;
-						int sy = ( int )_pos.y + BLOCK_Y + i * NORMAL_CHAR_GRAPH_SIZE;
+						int sx = ( int )_pos.x + BLOCK_X + j * ENEMY_DRAW_SIZE;
+						int sy = ( int )_pos.y + BLOCK_Y + i * ENEMY_DRAW_SIZE;
 						if ( idx < 25 ) {
 							_enemy[ GRAPH_ENEMY_MIDIUM ]->setRect( enemies_rect[ idx ].tx, enemies_rect[ idx ].ty, NORMAL_CHAR_GRAPH_SIZE, NORMAL_CHAR_GRAPH_SIZE );
-							_enemy[ GRAPH_ENEMY_MIDIUM ]->setPos( sx, sy, sx + NORMAL_CHAR_GRAPH_SIZE, sy + NORMAL_CHAR_GRAPH_SIZE );
+							_enemy[ GRAPH_ENEMY_MIDIUM ]->setPos( sx, sy, sx + ENEMY_DRAW_SIZE, sy + ENEMY_DRAW_SIZE );
 							_enemy[ GRAPH_ENEMY_MIDIUM ]->draw( );
 						}
 						if ( 24 < idx && idx < 28 ) {
 							_enemy[ GRAPH_ENEMY_WIDE ]->setRect( enemies_rect[ idx ].tx, enemies_rect[ idx ].ty, NORMAL_CHAR_GRAPH_SIZE, NORMAL_CHAR_GRAPH_SIZE );
-							_enemy[ GRAPH_ENEMY_WIDE ]->setPos( sx, sy, sx + NORMAL_CHAR_GRAPH_SIZE, sy + NORMAL_CHAR_GRAPH_SIZE );
+							_enemy[ GRAPH_ENEMY_WIDE ]->setPos( sx, sy, sx + ENEMY_DRAW_SIZE, sy + ENEMY_DRAW_SIZE );
 							_enemy[ GRAPH_ENEMY_WIDE ]->draw( );
 						}
 						if ( 27 < idx && idx < 33 ) {
 							_enemy[ GRAPH_ENEMY_BIG ]->setRect( enemies_rect[ idx ].tx, enemies_rect[ idx ].ty, BIG_CHAR_GRAPH_SIZE, BIG_CHAR_GRAPH_SIZE );
-							_enemy[ GRAPH_ENEMY_BIG ]->setPos( sx, sy, sx + NORMAL_CHAR_GRAPH_SIZE, sy + NORMAL_CHAR_GRAPH_SIZE );
+							_enemy[ GRAPH_ENEMY_BIG ]->setPos( sx, sy, sx + ENEMY_DRAW_SIZE, sy + ENEMY_DRAW_SIZE );
 							_enemy[ GRAPH_ENEMY_BIG ]->draw( );
 						}
 						if ( 32 < idx && idx < 38 ) {
 							_enemy[ GRAPH_ENEMY_SMALL ]->setRect( enemies_rect[ idx ].tx, enemies_rect[ idx ].ty, SMALL_CHAR_GRAPH_SIZE, SMALL_CHAR_GRAPH_SIZE );
-							_enemy[ GRAPH_ENEMY_SMALL ]->setPos( sx, sy, sx + NORMAL_CHAR_GRAPH_SIZE, sy + NORMAL_CHAR_GRAPH_SIZE );
+							_enemy[ GRAPH_ENEMY_SMALL ]->setPos( sx, sy, sx + ENEMY_DRAW_SIZE, sy + ENEMY_DRAW_SIZE );
 							_enemy[ GRAPH_ENEMY_SMALL ]->draw( );
 						}
 					}
@@ -494,16 +498,14 @@ void ObjectMenu::draw( ) const {
 		}
 		break;
 		case TAG_EVENT:	
-			for ( int i = 0; i < EVENT_HEIGHT_NUM; i++ ) {
-				for ( int j = 0; j < EVENT_WIDTH_NUM; j++ ) {
-					int sx = ( int )_pos.x + BLOCK_X + j * EVENT_DRAW_SIZE;
-					int sy = ( int )_pos.y + BLOCK_Y + i * EVENT_DRAW_SIZE;
-					int tx = j * EVENT_SPRITE_SIZE;
-					int ty = i * EVENT_SPRITE_SIZE;
-					_event->setRect( tx, ty, EVENT_SPRITE_SIZE, EVENT_SPRITE_SIZE );
-					_event->setPos( sx, sy, sx + EVENT_DRAW_SIZE, sy + EVENT_DRAW_SIZE );
-					_event->draw( );
-				}
+			for ( int i = 0; i < EVENT_HEIGHT_NUM * EVENT_WIDTH_NUM; i++ ) {
+				int sx = ( int )_pos.x + BLOCK_X + ( i % EVENT_WIDTH_NUM ) * EVENT_DRAW_SIZE;
+				int sy = ( int )_pos.y + BLOCK_Y + ( i / EVENT_WIDTH_NUM ) * EVENT_DRAW_SIZE;
+				int tx = ( i % EVENT_SPRITE_WIDTH_NUM ) * EVENT_SPRITE_SIZE;
+				int ty = ( i / EVENT_SPRITE_WIDTH_NUM ) * EVENT_SPRITE_SIZE;
+				_event->setRect( tx, ty, EVENT_SPRITE_SIZE, EVENT_SPRITE_SIZE );
+				_event->setPos( sx, sy, sx + EVENT_DRAW_SIZE, sy + EVENT_DRAW_SIZE );
+				_event->draw( );
 			}
 		break;
 	}

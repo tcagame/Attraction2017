@@ -34,11 +34,11 @@ const int STRUCTURE_Y = HEIGHT_Y;
 const int PAGE_ARROW_SIZE = 32;
 const int PAGE_ARROW_Y = FRAME_WINDOW_HEIGHT - FRAME_SIZE - PAGE_ARROW_SIZE - 5;
 const int PAGE_ARROW_DISTANCE_CENTER = 30;
-const int GROUND_WIDTH_NUM = 3;
-const int GROUND_HEIGHT_NUM = 2;
+const int GROUND_WIDTH_NUM = 6;
+const int GROUND_HEIGHT_NUM = 4;
 const int GROUND_SIZE = ( BG_WIDTH - 10 ) / GROUND_WIDTH_NUM;
-const int STRUCTURE_WIDTH_NUM = 3;
-const int STRUCTURE_HEIGHT_NUM = 2;
+const int STRUCTURE_WIDTH_NUM = 6;
+const int STRUCTURE_HEIGHT_NUM = 4;
 const int STRUCTURE_SIZE = ( BG_WIDTH - 10 ) / STRUCTURE_WIDTH_NUM;
 
 ChipMenu::ChipMenu( ImagePtr menu_image, ChipEditorPtr chip_editor, GroundConstPtr ground, StructureConstPtr structure ) :
