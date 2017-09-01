@@ -3,9 +3,11 @@
 #include "RockItemMoney.h"
 #include "RockFamily.h"
 #include "RockPlayer.h"
+#include "RockDollHouse.h"
 
 const int HP = 20;
 const int MOVE_SPEED = 1;
+const double ANIM_SPEED = 0.9;
 const Vector SEARCH_RANGE( 10000, 10000, 10000 );
 
 RockEnemyCloud::RockEnemyCloud( const Vector& pos ) :
@@ -42,7 +44,11 @@ void RockEnemyCloud::act( ) {
 }
 
 double RockEnemyCloud::getAnimTime( ) const {
-	return 0;
+	ModelMV1Ptr model = RockDollHouse::getTask( )->getModel( getDoll( ) );
+	double anim_time = 0;
+	double end_time = model->getEndAnimTime( );	
+	anim_time = fmod( ( double )getActCount( ) * ANIM_SPEED, end_time );
+	return anim_time;
 }
 
 void RockEnemyCloud::dropItem( ) {

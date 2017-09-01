@@ -242,6 +242,9 @@ void RockViewer::drawUI( ) const {
 		{//(POWER)
 			int tw = HP_GRAPH_WIDTH * _status->getPlayer( i ).power;
 			if ( tw != 0 ) {
+				if( tw < 0 ) {
+					tw = 0;
+				}
 				_status_ui->setRect( 0, 256, tw, HP_GRAPH_HEIGHT );
 				int sx = player_status_pos + 160;
 				int sy = DRAW_UI_Y + 50;

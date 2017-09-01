@@ -410,6 +410,10 @@ void RockPlayer::actOnDead( ) {
 	if ( getActCount( ) < DEAD_ANIM_TIME ) {
 		return;
 	}
+	int HP = 10; 
+	MessageSenderPtr sender = MessageSender::getTask( );
+	sender->sendMessage( _id, Message::COMMAND_POWER, &HP );
+	setAction( ACTION_BUBBLE );
 	getApproachesVec( );
 }
 
