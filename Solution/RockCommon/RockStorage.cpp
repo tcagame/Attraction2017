@@ -148,15 +148,31 @@ bool RockStorage::pickUpItem( RockItemPtr item, int player_id ) {
 		}
 	}
 
-	{//神器岩
+	//神器岩
+	if ( !( _status->getPlayer( player_id ).item & ITEM_ROCK ) ) {
 		RockItemRockPtr rock = std::dynamic_pointer_cast< RockItemRock >( item );
 		if ( rock ) {
-			unsigned char item = ITEM_TREE;
-			unsigned int state = AREA_STREET_3;
+			unsigned char item = ITEM_ROCK;
 			sender->sendMessage( player_id, Message::COMMAND_ITEM, &item );
-			sender->sendMessage( player_id, Message::COMMAND_STATE, &state );
 		}
 	}
+//	//神器火
+//	if ( !( _status->getPlayer( player_id ).item & ITEM_FIRE ) ) {
+//		RockItemRockPtr fire = std::dynamic_pointer_cast< RockItemFire >( item );
+//		if ( fire ) {
+//			unsigned char item = ITEM_FIRE;
+//			sender->sendMessage( player_id, Message::COMMAND_ITEM, &item );
+//		}
+//	}
+//	//神器木
+//	if ( !( _status->getPlayer( player_id ).item & ITEM_TREE ) ) {
+//		RockItemRockPtr tree = std::dynamic_pointer_cast< RockItemTree >( item );
+//		if ( tree ) {
+//			unsigned char item = ITEM_TREE;
+//			sender->sendMessage( player_id, Message::COMMAND_ITEM, &item );
+//		}
+//	}
+
 	{//徳  
 		RockItemTokuPtr toku = std::dynamic_pointer_cast< RockItemToku >( item );
 		if ( toku ) {
