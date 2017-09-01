@@ -149,7 +149,9 @@ bool RockStorage::pickUpItem( RockItemPtr item, int player_id ) {
 	}
 
 	//_ŠíŠâ
-	if ( !( _status->getPlayer( player_id ).item & ITEM_ROCK ) ) {
+	if ( _status->getPlayer( player_id ).item & ITEM_ROCK ) {
+		result = false;
+	} else {
 		RockItemRockPtr rock = std::dynamic_pointer_cast< RockItemRock >( item );
 		if ( rock ) {
 			unsigned char item = ITEM_ROCK;
@@ -157,7 +159,9 @@ bool RockStorage::pickUpItem( RockItemPtr item, int player_id ) {
 		}
 	}
 //	//_Ší‰Î
-//	if ( !( _status->getPlayer( player_id ).item & ITEM_FIRE ) ) {
+//	if ( _status->getPlayer( player_id ).item & ITEM_FIRE ) {
+//		result = false;
+//	} else {
 //		RockItemRockPtr fire = std::dynamic_pointer_cast< RockItemFire >( item );
 //		if ( fire ) {
 //			unsigned char item = ITEM_FIRE;
@@ -165,7 +169,9 @@ bool RockStorage::pickUpItem( RockItemPtr item, int player_id ) {
 //		}
 //	}
 //	//_Ší–Ø
-//	if ( !( _status->getPlayer( player_id ).item & ITEM_TREE ) ) {
+//	if ( _status->getPlayer( player_id ).item & ITEM_TREE ) {
+//		result = false;
+//	} else {
 //		RockItemRockPtr tree = std::dynamic_pointer_cast< RockItemTree >( item );
 //		if ( tree ) {
 //			unsigned char item = ITEM_TREE;

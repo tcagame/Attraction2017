@@ -25,8 +25,10 @@ void RockMapBoss::initialize( ) {
 
 void RockMapBoss::update( ) {
 	RockFamilyPtr family( RockFamily::getTask( ) );
+	bool reset_stage[ ROCK_PLAYER_NUM ] = { false };
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		if ( !family->getPlayer( i )->isActive( ) ) {
+			reset_stage[ i ] = true;
 			continue;
 		}
 		Status::Player player = _status->getPlayer( i );
@@ -40,8 +42,18 @@ void RockMapBoss::update( ) {
 		}
 	}
 
-	//一定の位置に行くとマップ切り替え
 	STAGE now = _drawer->getStage( );
+	if ( reset_stage[ 0 ] &&
+		 reset_stage[ 1 ] &&
+		 reset_stage[ 2 ] &&
+		 reset_stage[ 3 ] &&
+		 now != STAGE_TREE_TO_FIRE ) {
+		_drawer.reset( );
+		_drawer = RockMapBossDrawerPtr( new RockMapBossDrawer( STAGE_TREE_TO_FIRE ) );
+		return;
+	}
+
+	//一定の位置に行くとマップ切り替え
 	switch ( now ) {
 	case STAGE_TREE_TO_FIRE:
 		if ( isWarp( Vector( 1550, 0, -50 ) ) ) {
