@@ -11,6 +11,7 @@
 #include "RockMilitaryResult.h"
 #include "RockCameraResult.h"
 #include "RockDollHouse.h"
+#include "RockStudio.h"
 #include "RockFamily.h"
 #include "RockClientInfo.h"
 #include "MessageSender.h"
@@ -35,6 +36,7 @@ void main( ) {
 	app->addTask( RockFamily::getTag( ), TaskPtr( new RockFamily( status, Vector( 0, 10, 160 ) ) ) );
 	app->addTask( RockArmoury::getTag( ), TaskPtr( new RockArmoury ) );
 	app->addTask( RockCamera::getTag( ), TaskPtr( new RockCameraResult ) );
+	app->addTask( RockStudio::getTag( ), TaskPtr( new RockStudio( ) ) );
 	app->addTask( MessageSender::getTag( ), TaskPtr( new MessageSender( message ) ) );
 	app->addTask( RockTheater::getTag( ), TaskPtr( new RockTheaterResult( ) ) );
 	app->addTask( RockViewer::getTag( ), TaskPtr( new RockViewer( status ) ) );
