@@ -35,7 +35,7 @@ void MessageSender::sendMessage( int player_id, Message::COMMAND command, void* 
 	case Message::COMMAND_ITEM:
 		message = "item " + std::to_string( player_id ) + " "; 
 		for ( int i = 0; i < 8; i++ ) {
-			int check = 1 << ( 7 - i );
+			unsigned char check = 1 << ( 7 - i );
 			if ( check & *( unsigned char* )value ) {
 				message += "1";
 			} else {
@@ -46,7 +46,7 @@ void MessageSender::sendMessage( int player_id, Message::COMMAND command, void* 
 	case Message::COMMAND_STATE:
 		message = "area " + std::to_string( player_id ) + " "; 
 		for ( int i = 0; i < 8; i++ ) {
-			unsigned int check = 1 << ( 7 - i );
+			unsigned char check = 1 << ( 7 - i );
 			if ( check & *( unsigned char* )value ) {
 				message += "1";
 			} else {
