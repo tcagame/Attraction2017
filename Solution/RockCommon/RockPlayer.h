@@ -46,13 +46,14 @@ private:
 	void actOnWish( );
 	void updateEffect( );
 	void updeteState( );
+	Vector getApproachesVec( );
 private:
 	StatusPtr _status;
 	ACTION _action;
 	int _id;
 	int _attack_count;
 	int _effect_handle;
-	int _entry_count;
+	int _bubble_count;
 	RockAncestorsPtr _ancestors;
 };
 
