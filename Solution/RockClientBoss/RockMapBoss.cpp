@@ -3,12 +3,14 @@
 #include "RockFamily.h"
 #include "RockPlayer.h"
 #include "RockMilitatyBoss.h"
-#include "RockEnemyBossRock.h"
 #include "RockStorage.h"
 #include "Status.h"
 #include "RockFamily.h"
 #include "RockPlayer.h"
 #include "MessageSender.h"
+#include "RockEnemyBossRock.h"
+#include "RockEnemyBossFire.h"
+#include "RockEnemyBossTree.h"
 
 const int WARP_RANGE = 75;
 
@@ -54,16 +56,20 @@ void RockMapBoss::update( ) {
 	}
 
 	//一定の位置に行くとマップ切り替え
+	RockMilitaryPtr military( RockMilitary::getTask( ) );
 	switch ( now ) {
 	case STAGE_TREE_TO_FIRE:
 		if ( isWarp( Vector( 1550, 0, -50 ) ) ) {
 			RockFamily::getTask( )->resetPos( Vector( 0, 0, 0 ) ); // room_fire
+			military->clean( );
+			military->add( RockEnemyPtr( new RockEnemyBossFire( Vector( 220, 10, 0 ) ) ) );
 			break;
 		}
 		return;
 	case STAGE_FIRE:
-		if ( isWarp( Vector( 240, 0, -25 ) ) ) {
+		if ( isWarp( Vector( 300, 0, -25 ) ) ) {
 			RockFamily::getTask( )->resetPos( Vector( -700, 75, -25 ) ); // fire to rock
+			military->clean( );
 			break;
 		}
 		return;
@@ -71,25 +77,30 @@ void RockMapBoss::update( ) {
 		if ( isWarp( Vector( 1550, 0, -50 ) ) ) {
 			//STAGE_ROCKへ行く
 			RockFamily::getTask( )->resetPos( Vector( 0, 0, 0 ) );
-			RockMilitatyBoss::getTask( )->add( RockEnemyPtr( new RockEnemyBossRock( Vector( 300, 10, 0 ) ) ) );
+			military->clean( );
+			military->add( RockEnemyPtr( new RockEnemyBossRock( Vector( 300, 10, 0 ) ) ) );
 			break;
 		}
 		return;
 	case STAGE_ROCK:
 		if ( isWarp( Vector( 600, 0, 0 ) ) ) {
 			RockFamily::getTask( )->resetPos( Vector( -700, 75, -25 ) ); // rock to tree
+			military->clean( );
 			break;
 		}
 		return;
 	case STAGE_ROCK_TO_TREE:
 		if ( isWarp( Vector( 1550, 0, -50 ) ) ) {
 			RockFamily::getTask( )->resetPos( Vector( 0, 0, 0 ) ); // tree
+			military->clean( );
+			military->add( RockEnemyPtr( new RockEnemyBossTree( Vector( 300, 10, 0 ) ) ) );
 			break;
 		}
 		return;
 	case STAGE_TREE:
 		if ( isWarp( Vector( 600, 0, 0 ) ) ) {
 			RockFamily::getTask( )->resetPos( Vector( -700, 75, -25 ) ); // tree to fire
+			military->clean( );
 			break;
 		}
 		return;

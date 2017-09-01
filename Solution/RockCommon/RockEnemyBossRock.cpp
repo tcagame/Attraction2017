@@ -26,5 +26,4 @@ void RockEnemyBossRock::dropItem( ) {
 	RockStoragePtr storage( RockStorage::getTask( ) );
 	storage->addDropItem( RockItemPtr( new RockItemRock( getPos( ) + Vector( 0, getRadius( ), 0 ) ) ) );
 	storage->addDropItem( RockItemPtr( new RockItemBubble( getPos( ) + Vector( 0, getRadius( ), 0 ) ) ) );
-	
 }

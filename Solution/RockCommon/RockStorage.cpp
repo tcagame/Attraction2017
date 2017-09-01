@@ -4,6 +4,8 @@
 #include "RockItemDango.h"
 #include "RockItemMoney.h"
 #include "RockItemRock.h"
+#include "RockItemTree.h"
+#include "RockItemFire.h"
 #include "RockItemToku.h"
 #include "RockFamily.h"
 #include "RockPlayer.h"
@@ -148,36 +150,40 @@ bool RockStorage::pickUpItem( RockItemPtr item, int player_id ) {
 		}
 	}
 
-	//神器岩
-	if ( _status->getPlayer( player_id ).item & ITEM_ROCK ) {
-		result = false;
-	} else {
+	{//神器岩
 		RockItemRockPtr rock = std::dynamic_pointer_cast< RockItemRock >( item );
 		if ( rock ) {
-			unsigned char item = ITEM_ROCK;
-			sender->sendMessage( player_id, Message::COMMAND_ITEM, &item );
+			if ( _status->getPlayer( player_id ).item & ITEM_ROCK ) {
+				result = false;
+			} else {
+				unsigned char item = ITEM_ROCK;
+				sender->sendMessage( player_id, Message::COMMAND_ITEM, &item );
+			}
 		}
 	}
-//	//神器火
-//	if ( _status->getPlayer( player_id ).item & ITEM_FIRE ) {
-//		result = false;
-//	} else {
-//		RockItemRockPtr fire = std::dynamic_pointer_cast< RockItemFire >( item );
-//		if ( fire ) {
-//			unsigned char item = ITEM_FIRE;
-//			sender->sendMessage( player_id, Message::COMMAND_ITEM, &item );
-//		}
-//	}
-//	//神器木
-//	if ( _status->getPlayer( player_id ).item & ITEM_TREE ) {
-//		result = false;
-//	} else {
-//		RockItemRockPtr tree = std::dynamic_pointer_cast< RockItemTree >( item );
-//		if ( tree ) {
-//			unsigned char item = ITEM_TREE;
-//			sender->sendMessage( player_id, Message::COMMAND_ITEM, &item );
-//		}
-//	}
+	{//神器火
+		RockItemFirePtr rock = std::dynamic_pointer_cast< RockItemFire >( item );
+		if ( rock ) {
+			if ( _status->getPlayer( player_id ).item & ITEM_FIRE ) {
+				result = false;
+			} else {
+				unsigned char item = ITEM_FIRE;
+				sender->sendMessage( player_id, Message::COMMAND_ITEM, &item );
+			}
+		}
+	}
+
+	{//神器木
+		RockItemTreePtr tree = std::dynamic_pointer_cast< RockItemTree >( item );
+		if ( tree ) {
+			if ( _status->getPlayer( player_id ).item & ITEM_TREE ) {
+				result = false;
+			} else {
+				unsigned char item = ITEM_TREE;
+				sender->sendMessage( player_id, Message::COMMAND_ITEM, &item );
+			}
+		}
+	}
 
 	{//徳  
 		RockItemTokuPtr toku = std::dynamic_pointer_cast< RockItemToku >( item );

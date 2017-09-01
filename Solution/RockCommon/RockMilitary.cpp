@@ -119,3 +119,9 @@ void RockMilitary::add( RockEnemyPtr enemy ) {
 void RockMilitary::add( RockImpactPtr impact ) {
 	_impacts.push_back( impact );
 }
+
+void RockMilitary::clean( ) {
+	_enemies = { };
+	_impacts = { };
+	_pops = { };
+}

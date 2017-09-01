@@ -22,6 +22,7 @@ public:
 	void add( RockEnemyPtr enemy );
 	std::list< RockEnemyPtr > getEnemyList( ) const;
 	std::list< RockImpactPtr > getImpactList( ) const;
+	void clean( );
 protected:
 	void add( RockImpactPtr impact );
 private:
