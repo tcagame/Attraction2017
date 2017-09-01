@@ -269,7 +269,7 @@ void RockViewer::drawUI( ) const {
 		{//(ITEM)
 			unsigned int item = _status->getPlayer( i ).item;
 			for ( int j = 0; j < MAX_ITEM_NUM; j++ ) {
-				unsigned int check = 1 << ( MAX_ITEM_NUM - j - 1 );
+				unsigned int check = 1 << j;
 				if ( item & check ) {
 					_status_ui->setRect( ITEM_GRAPH_SIZE * j, 320, ITEM_GRAPH_SIZE, ITEM_GRAPH_SIZE );
 					int sx = player_status_pos + 135 + ITEM_DRAW_SIZE * j;
