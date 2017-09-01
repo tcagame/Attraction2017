@@ -10,13 +10,13 @@
 
 
 RockMilitaryStreet::RockMilitaryStreet( ) {
-	add( RockEnemyPtr( new RockEnemyGhost( Vector( 230, 40, -400 ) ) ) );
-	add( RockEnemyPtr( new RockEnemyRedBard( Vector( 310, 60, -500 ) ) ) );
-	add( RockEnemyPtr( new RockEnemyWaterGhost( Vector( -10, 30, -400 ) ) ) );
-	add( RockEnemyPtr( new RockEnemyFaceAndHand( Vector( 750, 30, -600 ) ) ) );
-	add( RockEnemyPtr( new RockEnemyCloud( Vector( 690, 50, -500 ) ) ) );
-	add( RockEnemyPtr( new RockEnemyBat( Vector( 400, 90, -500 ) ) ) );
-	add( RockEnemyPtr( new RockEnemyKimono( Vector( -60, 50, -400 ) ) ) );
+	add( RockEnemyPtr( new RockEnemyGhost(       Vector(  500,  40, -500 ) ) ) );
+	add( RockEnemyPtr( new RockEnemyRedBard(     Vector(  800,  60, -520 ) ) ) );
+	add( RockEnemyPtr( new RockEnemyWaterGhost(  Vector( 1100,  60, -530 ) ) ) );
+	add( RockEnemyPtr( new RockEnemyFaceAndHand( Vector( 1400, 130, -540 ) ) ) );
+	add( RockEnemyPtr( new RockEnemyCloud(       Vector( 1700, 150, -550 ) ) ) );
+	add( RockEnemyPtr( new RockEnemyBat(         Vector( 2000, 190, -550 ) ) ) );
+	add( RockEnemyPtr( new RockEnemyKimono(      Vector( 2300, 150, -550 ) ) ) );
 }
 
 

@@ -26,9 +26,9 @@ void RockMapStreet::initialize( ) {
 	{//streetèâä˙âª
 		_stage = STAGE_STREET;
 		RockStoragePtr storage = RockStorage::getTask( );
-		int interval = 80;
-		for ( int i = 0; i < 50; i++ ) {
-			storage->addItem( RockItemPtr( new RockItemMoney( Vector( i * interval, 200, -500 - i * 5 ), 10000 ) ) );
+		int interval = 200;
+		for ( int i = 0; i < 30; i++ ) {
+			storage->addItem( RockItemPtr( new RockItemMoney( Vector( i * interval, 200, -500 - i * 10 ), 10000 ) ) );
 		}
 	}
 
@@ -69,9 +69,9 @@ void RockMapStreet::updateStreet( ) {
 			if ( status.area == AREA_STREET_3 ) {
 				_virtue_pop = true;
 				RockStoragePtr storage = RockStorage::getTask( );
-				for ( int j = 0; j < 50; j++ ) {
-					int interval = 80;
-					storage->addItem( RockItemPtr( new RockItemToku( Vector( j * interval + interval / 2, 200, -500 - j * 5 ) ) ) );
+				for ( int j = 0; j < 30; j++ ) {
+					int interval = 200;
+					storage->addItem( RockItemPtr( new RockItemToku( Vector( j * interval + interval / 2, 500, -500 - j * 10 ) ) ) );
 				}
 			}
 		}
@@ -96,7 +96,7 @@ void RockMapStreet::updateCave( ) {
 			int interval = 80;
 			RockStoragePtr storage = RockStorage::getTask( );
 			for ( int i = 0; i < 50; i++ ) {
-				storage->addItem( RockItemPtr( new RockItemMoney( Vector( i * interval, 200, -500 - i * 5 ), 10000 ) ) );
+				storage->addItem( RockItemPtr( new RockItemMoney( Vector( i * interval, 500, -500 - i * 10 ), 10000 ) ) );
 			}
 		}
 	}
