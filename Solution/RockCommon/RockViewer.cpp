@@ -228,7 +228,7 @@ void RockViewer::drawUI( ) const {
 			 _status->getPlayer( i ).area == STATE_RESULT ) {
 			continue;
 		}
-		if ( family->getPlayer( i )->isEntry( ) &&
+		if ( family->getPlayer( i )->isBubble( ) &&
 			 info->isActiveState( STATE_ENTRY ) ) {
 			_breasts[ i ]->setRect( 0, 0, 320, 360 );
 			_breasts[ i ]->setPos( i * ( SCREEN_WIDTH / 4 ), SCREEN_HEIGHT - 256, ( i + 1 ) * ( SCREEN_WIDTH / 4 ), SCREEN_HEIGHT );

@@ -19,7 +19,7 @@ public:
 	ModelMV1Ptr getModel( ) const;
 	void resetPos( const Vector& pos );
 	bool isDead( ) const;
-	bool isEntry( ) const;
+	bool isBubble( ) const;
 protected:
 	void act( );
 private:

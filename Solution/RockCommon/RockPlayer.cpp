@@ -472,7 +472,7 @@ ModelMV1Ptr RockPlayer::getModel( ) const {
 
 	model->setAnimTime( anim_time );
 	double rot = Vector( 0, 0, -1 ).angle( getDir( ) );
-	if ( isEntry( ) ) {
+	if ( isBubble( ) ) {
 		rot = Vector( 0, 0, -1 ).angle( Vector( 0, 0, -1 ) );
 	}
 	Vector axis = Vector( 0, 1, 0 );
@@ -489,7 +489,7 @@ void RockPlayer::damage( int force ) {
 }
 
 void RockPlayer::bound( ) {
-	if ( isEntry( ) ) {
+	if ( isBubble( ) ) {
 		return;
 	}
 	RockCharacter::bound( );
@@ -520,7 +520,7 @@ bool RockPlayer::isDead( ) const {
 	return _action == ACTION_DEAD;
 }
 
-bool RockPlayer::isEntry( ) const {
+bool RockPlayer::isBubble( ) const {
 	return _action == ACTION_BUBBLE;
 }
 

@@ -19,7 +19,7 @@ void RockBubble::update( ) {
 	RockPlayerPtr player = RockFamily::getTask( )->getPlayer( _id );
 	_active = false;
 	if ( player->isDead( ) ||
-		 player->isEntry( ) ) {
+		 player->isBubble( ) ) {
 		_active = true;
 		_pos = player->getPos( ) + FOOT;
 	}
