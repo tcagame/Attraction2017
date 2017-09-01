@@ -54,6 +54,9 @@ void MessageSender::sendMessage( int player_id, Message::COMMAND command, void* 
 			}
 		}
 		break;
+	case Message::COMMAND_CONTINUE:
+		message = "continue " + std::to_string( player_id );
+		break;
 	}
 
 	char* str = ( char* )_message->getPtr( );

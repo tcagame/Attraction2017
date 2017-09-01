@@ -8,6 +8,7 @@ class Status : public Data {
 public:
 
 	static const int PLAYER_NUM = 4;
+	static const int PLAYER_INIT_HP = 16;
 
 	struct Player {
 		char device_x;
@@ -31,7 +32,7 @@ public:
 			_player[ i ].toku = 0;
 			_player[ i ].item = 0b00000000;
 			_player[ i ].money = 0;
-			_player[ i ].power = 1;
+			_player[ i ].power = PLAYER_INIT_HP;
 		}
 	};
 

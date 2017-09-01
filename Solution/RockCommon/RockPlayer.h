@@ -35,7 +35,7 @@ private:
 	};
 private:
 	void setAction( ACTION action );
-	void actOnEntry( );
+	void actOnBubble( );
 	void actOnWaiting( );
 	void actOnJumping( );
 	void actOnWalking( );
@@ -46,6 +46,7 @@ private:
 	void actOnWish( );
 	void updateEffect( );
 	void updeteState( );
+	void sendDamage( );
 	Vector getApproachesVec( );
 private:
 	StatusPtr _status;
@@ -54,6 +55,8 @@ private:
 	int _attack_count;
 	int _effect_handle;
 	int _bubble_count;
+	int _damage;
+	int _damage_count;
 	RockAncestorsPtr _ancestors;
 };
 

@@ -35,6 +35,7 @@ static const int MAX_CHARGE_COUNT = CHARGE_PHASE_COUNT * 4 - 1;
 static const Vector EFFECT_ADJUST( 0, 15, 0 );
 
 //その他
+static const int DAMAGE_COUNT = 20;
 static const int MAX_WISH_COUNT = 100;
 static const int ENHANCED_POWER = 2;
 static const Vector SHOT_FOOT( 0, 35, 0 );//ショットの高さ
@@ -52,7 +53,9 @@ RockCharacter( pos, ( DOLL )( DOLL_TAROSUKE_WAIT + id * ROCK_PLAYER_MOTION_NUM )
 _attack_count( 0 ),
 _effect_handle( -1 ),
 _ancestors( ancestors ),
-_bubble_count( 0 ) {
+_bubble_count( 0 ),
+_damage( 0 ),
+_damage_count( DAMAGE_COUNT ) {
 	_id = id;
 	_status = status;
 	setAction( ACTION_BUBBLE );
@@ -65,7 +68,7 @@ RockPlayer::~RockPlayer( ) {
 void RockPlayer::act( ) {
 	switch ( _action ) {
 	case ACTION_BUBBLE:
-		actOnEntry( );
+		actOnBubble( );
 		break;
 	case ACTION_WAIT:
 		actOnWaiting( );
@@ -92,6 +95,7 @@ void RockPlayer::act( ) {
 	actOnAttacking( );
 	updateEffect( );
 	updeteState( );
+	sendDamage( );
 	// カメラに入り続ける
 	DrawerPtr drawer( Drawer::getTask( ) );
 	if ( !drawer->isInCamera( getPos( ) + getVec( ) ) ) {
@@ -101,6 +105,8 @@ void RockPlayer::act( ) {
 	while( !drawer->isInCamera( getPos( ) + getVec( ) ) ) {
 		setVec( getVec( ) + dir );
 	}
+
+	_damage_count++;
 }
 
 void RockPlayer::updateEffect( ) {
@@ -161,8 +167,10 @@ bool RockPlayer::isActive( ) const {
 	return ( RockClientInfo::getTask( )->isActiveState( _status->getPlayer( _id ).area ) );
 }
 
-void RockPlayer::actOnEntry( ) {
-	if ( _status->getPlayer( _id ).area == STATE_RESULT ) {
+void RockPlayer::actOnBubble( ) {
+	Status::Player status = _status->getPlayer( _id );
+	if ( status.area == STATE_RESULT ) {
+		//リザルトに入ったら泡に入らない
 		if ( isOnMapModel( ) ) {
 			setMass( true );
 			setCol( true );
@@ -170,10 +178,9 @@ void RockPlayer::actOnEntry( ) {
 			return;
 		}
 	}
-
 	setMass( false );
 	setCol( false );
-	if ( _status->getPlayer( _id ).device_button ) {
+	if ( status.device_button ) {
 		_bubble_count++;		
 	} else {
 		_bubble_count = 0;
@@ -181,9 +188,13 @@ void RockPlayer::actOnEntry( ) {
 
 	if ( _bubble_count > ENTRY_TIME ) {
 		if ( isOnMapModel( ) ) {
+			if ( status.power <= 0 ) {
+				MessageSender::getTask( )->sendMessage( _id, Message::COMMAND_CONTINUE, nullptr );
+			}
 			setMass( true );
 			setCol( true );
 			setAction( ACTION_JUMP );
+			return;
 		}
 	}
 	int dir =  _id % 2 ? -1 : 1;
@@ -410,9 +421,6 @@ void RockPlayer::actOnDead( ) {
 	if ( getActCount( ) < DEAD_ANIM_TIME ) {
 		return;
 	}
-	int HP = 10; 
-	MessageSenderPtr sender = MessageSender::getTask( );
-	sender->sendMessage( _id, Message::COMMAND_POWER, &HP );
 	setAction( ACTION_BUBBLE );
 	getApproachesVec( );
 }
@@ -506,7 +514,14 @@ ModelMV1Ptr RockPlayer::getModel( ) const {
 }
 
 void RockPlayer::damage( int force ) {
-	MessageSender::getTask( )->sendMessage( _id, Message::COMMAND_POWER, &force );
+	if ( isDead( ) ||
+		 isBubble( ) ) {
+		return;
+	}
+	if ( _damage_count > DAMAGE_COUNT ) {
+		_damage += force;
+		_damage_count = 0;
+	}
 }
 
 void RockPlayer::bound( ) {
@@ -548,4 +563,11 @@ bool RockPlayer::isBubble( ) const {
 void RockPlayer::resetBubble( ) {
 	_bubble_count = 0;
 	setAction( ACTION_BUBBLE );
+}
+
+void RockPlayer::sendDamage( ) {
+	if ( _damage != 0 ) {
+		MessageSender::getTask( )->sendMessage( _id, Message::COMMAND_POWER, &_damage );
+		_damage = 0;
+	}
 }
