@@ -5,10 +5,15 @@
 #include "RockMilitatyBoss.h"
 #include "RockEnemyBossRock.h"
 #include "RockStorage.h"
+#include "Status.h"
+#include "RockFamily.h"
+#include "RockPlayer.h"
+#include "MessageSender.h"
 
 const int WARP_RANGE = 75;
 
-RockMapBoss::RockMapBoss( ) {
+RockMapBoss::RockMapBoss( StatusPtr status ) :
+_status( status ) {
 }
 
 RockMapBoss::~RockMapBoss( ) {
@@ -19,6 +24,23 @@ void RockMapBoss::initialize( ) {
 }
 
 void RockMapBoss::update( ) {
+	RockFamilyPtr family( RockFamily::getTask( ) );
+	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+		if ( !family->getPlayer( i )->isActive( ) ) {
+			continue;
+		}
+		Status::Player player = _status->getPlayer( i );
+		unsigned char item = player.item;
+		//神器を持っていると、STREET_3へ移動
+		if ( ( item & ITEM_FIRE ) &&
+			 ( item & ITEM_ROCK ) &&
+			 ( item & ITEM_TREE ) ) {
+			unsigned char state = AREA_STREET_3;
+			MessageSender::getTask( )->sendMessage( i, Message::COMMAND_STATE, &state );
+		}
+	}
+
+	//一定の位置に行くとマップ切り替え
 	STAGE now = _drawer->getStage( );
 	switch ( now ) {
 	case STAGE_TREE_TO_FIRE:

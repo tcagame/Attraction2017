@@ -5,23 +5,23 @@ const int SCREEN_HEIGHT = ( SCREEN_WIDTH * 9 ) / 16;
 
 const int MESSAGE_COUNT = 10;
 
-const unsigned int STATE_NONE		= 0b0000000000000000;
-const unsigned int STATE_ENTRY		= 0b0000000000000001;
-const unsigned int AREA_STREET_1	= 0b0000000000000010;
-const unsigned int AREA_STREET_2	= 0b0000000000000100; //ボス戦
-const unsigned int AREA_STREET_3	= 0b0000000000001000;
-const unsigned int STATE_BOSS		= 0b0000000000010000; //多分使わない
-const unsigned int STATE_RESULT		= 0b0000000000100000;
-const unsigned int STATE_TEST		= 0b0000000001000000;
+const unsigned char STATE_NONE		= 0b00000000;
+const unsigned char STATE_ENTRY		= 0b00000001;
+const unsigned char AREA_STREET_1	= 0b00000010;
+const unsigned char AREA_STREET_2	= 0b00000100; //ボス戦
+const unsigned char AREA_STREET_3	= 0b00001000;
+const unsigned char STATE_BOSS		= 0b00010000; //多分使わない
+const unsigned char STATE_RESULT	= 0b00100000;
+const unsigned char STATE_TEST		= 0b01000000;
 
 const int MAX_ITEM_NUM = 7;
-const unsigned int ITEM_DANGO           = 0b00000001;//団子
-const unsigned int ITEM_HEART           = 0b00000010;//ハート
-const unsigned int ITEM_ENHANCED_ATTACK = 0b00000100;//攻撃強化
-const unsigned int ITEM_ENHANCED_CHARGE = 0b00001000;//溜強化
-const unsigned int ITEM_FIRE            = 0b00010000;//神器（火）
-const unsigned int ITEM_ROCK            = 0b00100000;//神器（岩）
-const unsigned int ITEM_TREE            = 0b01000000;//神器（木）
+const unsigned char ITEM_DANGO           = 0b00000001;//団子
+const unsigned char ITEM_HEART           = 0b00000010;//ハート
+const unsigned char ITEM_ENHANCED_ATTACK = 0b00000100;//攻撃強化
+const unsigned char ITEM_ENHANCED_CHARGE = 0b00001000;//溜強化
+const unsigned char ITEM_FIRE            = 0b00010000;//神器（火）
+const unsigned char ITEM_ROCK            = 0b00100000;//神器（岩）
+const unsigned char ITEM_TREE            = 0b01000000;//神器（木）
 
 const int ROCK_PLAYER_NUM = 4;
 const int ROCK_PLAYER_MOTION_NUM = 10;

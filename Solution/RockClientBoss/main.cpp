@@ -28,7 +28,7 @@ void main( ) {
 	app->addTask( Client::getTag( ), TaskPtr( new Client( status, message ) ) );
 	app->addTask( Effect::getTag( ), TaskPtr( new Effect( "Resource/Rock/effect" ) ) );
 
-	app->addTask( RockMap::getTag( ), TaskPtr( new RockMapBoss ) );
+	app->addTask( RockMap::getTag( ), TaskPtr( new RockMapBoss( status ) ) );
 	app->addTask( RockDollHouse::getTag( ), TaskPtr( new RockDollHouse ) );
 	app->addTask( RockFamily::getTag( ), TaskPtr( new RockFamily( status, Vector( -700, 75, -25 ) ) ) );
 	app->addTask( RockArmoury::getTag( ), TaskPtr( new RockArmoury( ) ) );

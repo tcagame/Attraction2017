@@ -152,9 +152,7 @@ bool RockStorage::pickUpItem( RockItemPtr item, int player_id ) {
 		RockItemRockPtr rock = std::dynamic_pointer_cast< RockItemRock >( item );
 		if ( rock ) {
 			unsigned char item = ITEM_TREE;
-			unsigned int state = AREA_STREET_3;
 			sender->sendMessage( player_id, Message::COMMAND_ITEM, &item );
-			sender->sendMessage( player_id, Message::COMMAND_STATE, &state );
 		}
 	}
 	{//“¿  

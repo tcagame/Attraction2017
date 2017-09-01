@@ -3,10 +3,11 @@
 #include "mathmatics.h"
 
 PTR( RockMapBossDrawer );
+PTR( Status );
 
 class RockMapBoss : public RockMap {
 public:
-	RockMapBoss( );
+	RockMapBoss( StatusPtr status );
 	virtual ~RockMapBoss( );
 public:
 	enum STAGE {
@@ -25,5 +26,6 @@ private:
 	bool isWarp( const Vector& pos );
 private:
 	RockMapBossDrawerPtr _drawer;
+	StatusPtr _status;
 };
 
