@@ -88,7 +88,7 @@ void RockMapBoss::update( ) {
 		}
 		return;
 	case STAGE_TREE:
-		if ( isWarp( Vector( 0, 0, 0 ) ) ) {
+		if ( isWarp( Vector( 600, 0, 0 ) ) ) {
 			RockFamily::getTask( )->resetPos( Vector( -700, 75, -25 ) ); // tree to fire
 			break;
 		}
