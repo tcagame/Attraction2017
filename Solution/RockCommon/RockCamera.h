@@ -14,12 +14,14 @@ public:
 	virtual ~RockCamera( );
 public:
 	void initialize( );
-	virtual void update( ) = 0;
+	void update( );
 	Vector getPos( ) const;
 	Vector getTarget( ) const;
 protected:
 	void setPos( const Vector& pos );
 	void setTarget( const Vector& target );
+private:
+	virtual void setCamera( ) = 0;
 private:
 	Vector _pos;
 	Vector _target;

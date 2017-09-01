@@ -5,7 +5,7 @@ class RockMapBossCamera : public RockCamera {
 public:
 	RockMapBossCamera( );
 	virtual ~RockMapBossCamera( );
-public:
-	void update( );
+private:
+	void setCamera( );
 };
 

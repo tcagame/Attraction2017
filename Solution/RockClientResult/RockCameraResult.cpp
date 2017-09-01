@@ -13,5 +13,5 @@ RockCameraResult::~RockCameraResult( ) {
 }
 
 
-void RockCameraResult::update( ) {
+void RockCameraResult::setCamera( ) {
 }

@@ -16,14 +16,14 @@ RockCameraEntry::~RockCameraEntry( ) {
 }
 
 
-void RockCameraEntry::update( ) {
-	DrawerPtr drawer( Drawer::getTask( ) );
+void RockCameraEntry::setCamera( ) {
 	Vector target = RockFamily::getTask( )->getCameraPos( );
 	if ( target.isOrijin( ) ) {
-		return;
+		setPos( INIT_POS );
+		setTarget( Vector( ) );
+	} else {
+		Vector pos = target + DIR * LENGTH;
+		setPos( pos );
+		setTarget( target );
 	}
-	Vector pos = target + DIR * LENGTH;
-	setPos( pos );
-	setTarget( target );
-	drawer->setCamera( pos, target );
 }

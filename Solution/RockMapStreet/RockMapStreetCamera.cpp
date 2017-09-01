@@ -18,14 +18,14 @@ RockCamera( INIT_POS, INIT_TARGET ) {
 RockMapStreetCamera::~RockMapStreetCamera( ) {
 }
 
-void RockMapStreetCamera::update( ) {
-	DrawerPtr drawer( Drawer::getTask( ) );
+void RockMapStreetCamera::setCamera( ) {
 	Vector target = RockFamily::getTask( )->getCameraPos( );
 	if ( target.isOrijin( ) ) {
-		return;
+		setPos( INIT_POS );
+		setTarget( INIT_TARGET );
+	} else {
+		Vector pos = target + DIR * LENGTH;
+		setPos( pos );
+		setTarget( target );
 	}
-	Vector pos = target + DIR * LENGTH;
-	setPos( pos );
-	setTarget( target );
-	drawer->setCamera( pos, target );
 }

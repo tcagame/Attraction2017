@@ -38,3 +38,9 @@ void RockCamera::setPos( const Vector& pos ) {
 void RockCamera::setTarget( const Vector& target ) {
 	_target = target;
 }
+
+void RockCamera::update ( ) {
+	setCamera( );
+	DrawerPtr drawer( Drawer::getTask( ) );
+	drawer->setCamera( _pos, _target );
+}

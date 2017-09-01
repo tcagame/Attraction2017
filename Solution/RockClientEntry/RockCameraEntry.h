@@ -6,7 +6,7 @@ class RockCameraEntry : public RockCamera {
 public:
 	RockCameraEntry( );
 	virtual ~RockCameraEntry( );
-public:
-	void update( );
+private:
+	void setCamera( );
 };
 
