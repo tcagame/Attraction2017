@@ -11,6 +11,7 @@ const std::string COMMAND_FIRST_WORD[ Message::MAX_COMMAND ] = {
 	"money",//MONEY
 	"item",//ITEM
 	"area",//AREA
+	"continue",//CONTINUE
 };
 
 const int STATE_NUM = 8;
@@ -77,6 +78,9 @@ void MessageReceiver::excute( std::vector< std::string > command ) {
 				break;
 			case Message::COMMAND_STATE:
 				excuteState( command );
+				break;
+			case Message::COMMAND_CONTINUE:
+				excuteContinue( command );
 				break;
 			}
 			break;//for•¶‚ð”²‚¯‚é
@@ -155,6 +159,18 @@ void MessageReceiver::excuteState( std::vector< std::string > command ) {
 
 		if ( player_num >= 0 && player_num <= ROCK_PLAYER_NUM ) {
 			_status->getPlayer( player_num ).area = area;
+		}
+	}
+}
+
+void MessageReceiver::excuteContinue( std::vector< std::string > command ) {
+	if ( command.size( ) == 2 ) {
+		int player_num = std::atoi( command[ 1 ].c_str( ) );
+		if ( player_num >= 0 && player_num <= ROCK_PLAYER_NUM ) {
+			if ( _status->getPlayer( player_num ).power <= 0 ) {
+				_status->getPlayer( player_num ).power = Status::PLAYER_INIT_HP;
+				_status->getPlayer( player_num ).continue_num++;
+			}
 		}
 	}
 }
