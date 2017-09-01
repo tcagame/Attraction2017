@@ -21,7 +21,7 @@ private:
 	void updateCave( );
 private:
 	int _time;
-	int _drop_time;
+	bool _virtue_pop;
 	RockMapStreetDrawerPtr _drawer;
 	StatusPtr _status;
 	STAGE _stage;
