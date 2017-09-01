@@ -1,8 +1,10 @@
 #include "RockEnemyWaterGhost.h"
 #include "RockStorage.h"
 #include "RockItemMoney.h"
+#include "RockDollHouse.h"
 
 const int HP = 20;
+const double ANIM_SPEED = 0.9;
 
 RockEnemyWaterGhost::RockEnemyWaterGhost( const Vector& pos ) :
 RockEnemy( pos, DOLL_WATERGHOST, HP, 1, 10, 10, true, true ) {
@@ -17,7 +19,11 @@ void RockEnemyWaterGhost::act( ) {
 }
 
 double RockEnemyWaterGhost::getAnimTime( ) const {
-	return 0;
+	ModelMV1Ptr model = RockDollHouse::getTask( )->getModel( getDoll( ) );
+	double anim_time = 0;
+	double end_time = model->getEndAnimTime( );	
+	anim_time = fmod( ( double )getActCount( ) * ANIM_SPEED, end_time );
+	return anim_time;
 }
 
 void RockEnemyWaterGhost::dropItem( ) {
