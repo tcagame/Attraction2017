@@ -100,6 +100,9 @@ void MessageReceiver::excutePower( std::vector< std::string > command ) {
 		int add = std::atoi( command[ 2 ].c_str( ) );
 		if ( player_num >= 0 && player_num <= ROCK_PLAYER_NUM ) {
 			_status->getPlayer( player_num ).power += add;
+			if ( _status->getPlayer( player_num ).power < 0 ) {
+				_status->getPlayer( player_num ).power = 0;
+			}
 		}
 	}
 }
