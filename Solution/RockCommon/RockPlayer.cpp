@@ -52,7 +52,7 @@ RockCharacter( pos, ( DOLL )( DOLL_TAROSUKE_WAIT + id * ROCK_PLAYER_MOTION_NUM )
 _attack_count( 0 ),
 _effect_handle( -1 ),
 _ancestors( ancestors ),
-_entry_count( 0 ) {
+_bubble_count( 0 ) {
 	_id = id;
 	_status = status;
 	setAction( ACTION_BUBBLE );
@@ -174,12 +174,12 @@ void RockPlayer::actOnEntry( ) {
 	setMass( false );
 	setCol( false );
 	if ( _status->getPlayer( _id ).device_button ) {
-		_entry_count++;		
+		_bubble_count++;		
 	} else {
-		_entry_count = 0;
+		_bubble_count = 0;
 	}
 
-	if ( _entry_count > ENTRY_TIME ) {
+	if ( _bubble_count > ENTRY_TIME ) {
 		if ( isOnMapModel( ) ) {
 			setMass( true );
 			setCol( true );
@@ -189,7 +189,7 @@ void RockPlayer::actOnEntry( ) {
 	int dir =  _id % 2 ? -1 : 1;
 	double height_vec = sin( PI2 / 180 * getActCount( ) ) * FLOAT_HEIGHT * dir;
 	double width_vec = sin( PI2 / 360 * getActCount( ) + 120 ) * FLOAT_HEIGHT * 2 * dir;
-	setVec( Vector( width_vec, height_vec, 0 ) );
+	setVec( getApproachesVec( ) + Vector( width_vec, height_vec, 0 ) );
 }
 
 void RockPlayer::actOnWaiting( ) {
@@ -400,6 +400,11 @@ void RockPlayer::actOnDead( ) {
 	if ( getActCount( ) < DEAD_ANIM_TIME ) {
 		return;
 	}
+	getApproachesVec( );
+}
+
+Vector RockPlayer::getApproachesVec( ) {
+	Vector result = Vector( );
 	RockFamilyPtr family = RockFamily::getTask( );
 	Vector near_distance = BUBBLE_SEARCH_RANGE;
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
@@ -408,7 +413,8 @@ void RockPlayer::actOnDead( ) {
 		}
 		RockPlayerPtr player = family->getPlayer( i );
 		if ( !player->isActive( ) ||
-			 player->isDead( ) ) {
+			 player->isDead( ) ||
+			 player->isBubble( ) ) {
 			continue;
 		}
 		Vector distance = player->getPos( ) + BUBBLE_FOOT - getPos( );
@@ -422,8 +428,9 @@ void RockPlayer::actOnDead( ) {
 		if ( vec.getLength2( ) > BUBBLE_MOVE_SPEED * BUBBLE_MOVE_SPEED ) {
 			vec = vec.normalize( ) * BUBBLE_MOVE_SPEED;
 		}
-		setVec( vec );
+		result = vec;
 	}
+	return result;
 }
 
 void RockPlayer::actOnWish( ) {
@@ -525,6 +532,6 @@ bool RockPlayer::isBubble( ) const {
 }
 
 void RockPlayer::resetBubble( ) {
-	_entry_count = 0;
+	_bubble_count = 0;
 	setAction( ACTION_BUBBLE );
 }
