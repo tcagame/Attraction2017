@@ -11,6 +11,7 @@ RockItemRock::~RockItemRock( ) {
 
 ModelMV1Ptr RockItemRock::getModel( ) const {
 	ModelMV1Ptr model = RockDollHouse::getTask( )->getModel( getDoll( ) );
-	model->setTrans( Matrix::makeTransformTranslation( getPos( ) ) );
+	Vector pos = getPos( ) + Vector( 0, 15, 0 );
+	model->setTrans( Matrix::makeTransformTranslation( pos ) );
 	return model;
 }
