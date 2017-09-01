@@ -247,40 +247,43 @@ bool Command::excuteState( std::vector< std::string > command ) {
 	bool result = false;
 	if ( command.size( ) == 3 ) {
 		unsigned int area = 0;
+		bool same = false;
 		for ( int i = 0; i < STATE_NUM; i++ ) {
 			if ( command[ 2 ] == AREA[ i ] ) {
+				same = true;
 				area |= 1 << ( i - 1 );
 				break;
 			}
 		}
-		
-		if ( command[ 1 ] == "all" ) {
-			if ( area == STATE_RESULT ) {
-				std::string message = "#ERROR# 全キャラをリザルトにはできません";
-				Log::getTask( )->addMessage( message );
-				return false;
-			}
-			for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
-				_status->getPlayer( i ).area = area;
-			}
-			result = true;
-		} else {
-			int player_num = std::atoi( command[ 1 ].c_str( ) );
-			// resultに他プレイヤーがいたら入らない
-			for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
-				if ( i == player_num ) {
-					continue;
-				}
-				if ( _status->getPlayer( i ).area == STATE_RESULT ) {
-					std::string message = "#ERROR# すでに他キャラがリザルトにいます";
+		if ( same ) {
+			if ( command[ 1 ] == "all" ) {
+				if ( area == STATE_RESULT ) {
+					std::string message = "#ERROR# 全キャラをリザルトにはできません";
 					Log::getTask( )->addMessage( message );
 					return false;
 				}
-			}
-
-			if ( player_num >= 0 && player_num <= ROCK_PLAYER_NUM ) {
-				_status->getPlayer( player_num ).area = area;
+				for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+					_status->getPlayer( i ).area = area;
+				}
 				result = true;
+			} else {
+				int player_num = std::atoi( command[ 1 ].c_str( ) );
+				// resultに他プレイヤーがいたら入らない
+				for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+					if ( i == player_num ) {
+						continue;
+					}
+					if ( _status->getPlayer( i ).area == STATE_RESULT ) {
+						std::string message = "#ERROR# すでに他キャラがリザルトにいます";
+						Log::getTask( )->addMessage( message );
+						return false;
+					}
+				}
+
+				if ( player_num >= 0 && player_num <= ROCK_PLAYER_NUM ) {
+					_status->getPlayer( player_num ).area = area;
+					result = true;
+				}
 			}
 		}
 	}

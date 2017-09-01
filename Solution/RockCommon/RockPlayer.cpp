@@ -112,7 +112,7 @@ void RockPlayer::updateEffect( ) {
 void RockPlayer::updeteState( ) {
 	if ( _status->getPlayer( _id ).money >= TRANSITION_MONEY_NUM ) {
 		if ( _status->getPlayer( _id ).area == AREA_STREET_1 ) {
-			unsigned int state = AREA_STREET_2;
+			unsigned char state = AREA_STREET_2;
 			MessageSender::getTask( )->sendMessage( _id, Message::COMMAND_STATE, &state );
 			return;
 		}
@@ -120,7 +120,7 @@ void RockPlayer::updeteState( ) {
 		
 	if ( _status->getPlayer( _id ).toku >= TRANSITION_TOKU_NUM ) {
 		if ( _status->getPlayer( _id ).area == AREA_STREET_3 ) {
-			unsigned int state = STATE_RESULT;
+			unsigned char state = STATE_RESULT;
 			MessageSender::getTask( )->sendMessage( _id, Message::COMMAND_STATE, &state );
 			return;
 		}
