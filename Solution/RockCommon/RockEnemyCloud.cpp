@@ -22,7 +22,7 @@ void RockEnemyCloud::act( ) {
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		RockPlayerPtr player = RockFamily::getTask( )->getPlayer( i );
 		_player_radius = player->getRadius( );
-		if ( !player->isActive( ) ) {
+		if ( !player->isActive( ) || player->isBubble( ) ) {
 			setVec( Vector( ) );
 			continue;
 		}

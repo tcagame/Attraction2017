@@ -85,6 +85,12 @@
     <ClCompile Include="RockEnemyBossFire.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="RockEnemyBat.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="RockEnemyKimono.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="define.h" />
@@ -172,6 +178,12 @@
       <Filter>Item</Filter>
     </ClInclude>
     <ClInclude Include="RockEnemyBossFire.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="RockEnemyBat.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="RockEnemyKimono.h">
       <Filter>Enemy</Filter>
     </ClInclude>
   </ItemGroup>

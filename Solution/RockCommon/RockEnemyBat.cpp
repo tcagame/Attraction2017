@@ -1,23 +1,25 @@
-#include "RockEnemyGhost.h"
+#include "RockEnemyBat.h"
 #include "RockStorage.h"
 #include "RockItemMoney.h"
-#include "RockPlayer.h"
 #include "RockFamily.h"
+#include "RockPlayer.h"
+#include "RockDollHouse.h"
 
-const int HP = 10;
+const int HP = 20;
 const int MOVE_SPEED = 1;
+static const double ANIM_SPEED = 0.9;
 const Vector SEARCH_RANGE( 10000, 10000, 10000 );
 
-RockEnemyGhost::RockEnemyGhost( const Vector& pos ) :
-RockEnemy( pos, DOLL_GHOST, HP, 1, 10, 10, false, false ),
+RockEnemyBat::RockEnemyBat( const Vector& pos ) :
+RockEnemy( pos, DOLL_BAT, HP, 1, 10, 10, false, true ),
 _player_radius( 0 ) {
 }
 
 
-RockEnemyGhost::~RockEnemyGhost( ) {
+RockEnemyBat::~RockEnemyBat( ) {
 }
 
-void RockEnemyGhost::act( ) {
+void RockEnemyBat::act( ) {
 	Vector near_distance = SEARCH_RANGE;
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		RockPlayerPtr player = RockFamily::getTask( )->getPlayer( i );
@@ -41,10 +43,14 @@ void RockEnemyGhost::act( ) {
 	}
 }
 
-double RockEnemyGhost::getAnimTime( ) const {
-	return 0;
+double RockEnemyBat::getAnimTime( ) const {
+	ModelMV1Ptr model = RockDollHouse::getTask( )->getModel( getDoll( ) );
+	double anim_time = 0;
+	double end_time = model->getEndAnimTime( );	
+	anim_time = fmod( ( double )getActCount( ) * ANIM_SPEED, end_time );
+	return anim_time;
 }
 
-void RockEnemyGhost::dropItem( ) {
-	RockStorage::getTask( )->addDropItem( RockItemPtr( new RockItemMoney( getPos( ) + Vector( 0, getRadius( ), 0 ), RockItemMoney::MONEY_VALUE_2 ) ) );
+void RockEnemyBat::dropItem( ) {
+	RockStorage::getTask( )->addDropItem( RockItemPtr( new RockItemMoney( getPos( ) + Vector( 0, getRadius( ), 0 ), RockItemMoney::MONEY_VALUE_3 ) ) );
 }

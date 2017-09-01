@@ -176,6 +176,7 @@
     <ClInclude Include="Message.h" />
     <ClInclude Include="MessageSender.h" />
     <ClInclude Include="RockBubble.h" />
+    <ClInclude Include="RockEnemyBat.h" />
     <ClInclude Include="RockEnemyBoss.h" />
     <ClInclude Include="RockEnemyBossFire.h" />
     <ClInclude Include="RockEnemyBossRock.h" />
@@ -191,6 +192,7 @@
     <ClInclude Include="RockEnemyCloud.h" />
     <ClInclude Include="RockEnemyFaceAndHand.h" />
     <ClInclude Include="RockEnemyGhost.h" />
+    <ClInclude Include="RockEnemyKimono.h" />
     <ClInclude Include="RockEnemyRedBard.h" />
     <ClInclude Include="RockEnemyWaterGhost.h" />
     <ClInclude Include="RockFamily.h" />
@@ -221,6 +223,7 @@
   <ItemGroup>
     <ClCompile Include="MessageSender.cpp" />
     <ClCompile Include="RockBubble.cpp" />
+    <ClCompile Include="RockEnemyBat.cpp" />
     <ClCompile Include="RockEnemyBoss.cpp" />
     <ClCompile Include="RockEnemyBossFire.cpp" />
     <ClCompile Include="RockEnemyBossRock.cpp" />
@@ -236,6 +239,7 @@
     <ClCompile Include="RockEnemyCloud.cpp" />
     <ClCompile Include="RockEnemyFaceAndHand.cpp" />
     <ClCompile Include="RockEnemyGhost.cpp" />
+    <ClCompile Include="RockEnemyKimono.cpp" />
     <ClCompile Include="RockEnemyRedBard.cpp" />
     <ClCompile Include="RockEnemyWaterGhost.cpp" />
     <ClCompile Include="RockFamily.cpp" />
