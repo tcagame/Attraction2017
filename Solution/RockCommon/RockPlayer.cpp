@@ -249,7 +249,17 @@ void RockPlayer::actOnJumping( ) {
 		return;
 	}
 	//ˆÚ“®
-	Vector vec = Vector( player.device_x, 0, player.device_y ).normalize( ) * MOVE_SPEED;
+	RockCameraPtr camera( RockCamera::getTask( ) );
+	Vector camera_dir = camera->getTarget( ) - camera->getPos( );
+	camera_dir.y = 0;
+	Vector axis( 0, -1, 0 );
+	if ( Vector( 0, 0, 1 ).cross( camera_dir ).y < 0 ) {
+		axis = Vector( 0, 1, 0 );
+	}
+	double angle = Vector( 0, 0, 1 ).angle( camera_dir );
+	Matrix rot = Matrix::makeTransformRotation( axis, angle );
+	Vector vec = Vector( player.device_x, 0, -player.device_y ).normalize( ) * MOVE_SPEED;
+	vec = rot.multiply( vec );
 	vec.y = getVec( ).y;
 	setVec( vec );
 }

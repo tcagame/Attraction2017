@@ -64,6 +64,10 @@ void RockDollHouse::initialize( ) {
 	_dolls[ DOLL_TOKU ]->load( "Resource/Rock/item/itm10/itm10.mv1" );
 	_dolls[ DOLL_SACRED_ROCK ]->load( "Resource/Rock/object/sacred/sacred_rock.mv1" );
 	_dolls[ DOLL_SACRED_ROCK ]->setScale( Matrix::makeTransformScaling( Vector( 2, 2, 2 ) ) );
+	_dolls[ DOLL_SACRED_FIRE ]->load( "Resource/Rock/object/sacred/sacred_fire.mv1" );
+	_dolls[ DOLL_SACRED_FIRE ]->setScale( Matrix::makeTransformScaling( Vector( 2, 2, 2 ) ) );
+	_dolls[ DOLL_SACRED_TREE ]->load( "Resource/Rock/object/sacred/sacred_tree.mv1" );
+	_dolls[ DOLL_SACRED_TREE ]->setScale( Matrix::makeTransformScaling( Vector( 2, 2, 2 ) ) );
 	_dolls[ DOLL_BUBBLE ]->load( "Resource/Rock/object/bubble/bubble.mv1" );
 
 	//obj
