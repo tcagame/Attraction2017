@@ -113,4 +113,5 @@ void ViewerConsole::drawUI( ) {
 	_image_bar_lower->draw( );
 
 	_viewer_status->draw( _player, 0, 8 );
+	_image_minimap->draw( );
 }
