@@ -40,7 +40,7 @@ void RockCharacter::update( ) {
 	if ( _col ) {
 		Vector vec = Vector( _vec.x, 0, _vec.z );
 		if ( vec.getLength2( ) > 0 ) {
-			if ( !isOnMapModel( ) ) {
+			if ( !isOnMapModel( Vector( _vec.x, 0, _vec.z ) ) ) {
 				_vec.x = 0;
 				_vec.z = 0;
 			}
@@ -179,12 +179,10 @@ void RockCharacter::back( ) {
 	_pos -= _vec;
 }
 
-bool RockCharacter::isOnMapModel( ) const {
+bool RockCharacter::isOnMapModel( const Vector& vec ) const {
 	bool result = true;
 	std::vector< ModelMV1Ptr > col_models = RockMap::getTask( )->getColModels( );
 	int col_models_size = ( int )col_models.size( );
-
-	Vector vec = Vector( _vec.x, 0, _vec.z );
 	Vector central_pos = _pos + vec + Vector( 0, _radius, 0 );
 
 	for ( int i = 0; i < col_models_size; i++ ) {
