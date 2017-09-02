@@ -436,7 +436,8 @@ Vector RockPlayer::getApproachesVec( ) {
 		RockPlayerPtr player = family->getPlayer( i );
 		if ( !player->isActive( ) ||
 			 player->isDead( ) ||
-			 player->isBubble( ) ) {
+			 player->isBubble( ) ||
+			 player->getVec( ) == Vector( ) ) {
 			continue;
 		}
 		Vector distance = player->getPos( ) + BUBBLE_FOOT - getPos( );
