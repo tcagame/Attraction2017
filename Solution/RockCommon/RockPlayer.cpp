@@ -55,6 +55,7 @@ _effect_handle( -1 ),
 _ancestors( ancestors ),
 _bubble_count( 0 ),
 _damage( 0 ),
+_continue( false ),
 _damage_count( DAMAGE_COUNT ) {
 	_id = id;
 	_status = status;
@@ -189,11 +190,16 @@ void RockPlayer::actOnBubble( ) {
 	if ( _bubble_count > ENTRY_TIME ) {
 		if ( isOnMapModel( ) ) {
 			if ( status.power <= 0 ) {
-				MessageSender::getTask( )->sendMessage( _id, Message::COMMAND_CONTINUE, nullptr );
+				if ( !_continue ) {
+					_continue = true;
+					MessageSender::getTask( )->sendMessage( _id, Message::COMMAND_CONTINUE, nullptr );
+				}
+			} else {
+				_continue = false;
+				setMass( true );
+				setCol( true );
+				setAction( ACTION_JUMP );
 			}
-			setMass( true );
-			setCol( true );
-			setAction( ACTION_JUMP );
 			return;
 		}
 	}
