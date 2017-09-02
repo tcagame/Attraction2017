@@ -3,6 +3,8 @@
 #include "RockItemMoney.h"
 #include "RockItemRock.h"
 #include "RockItemBubble.h"
+#include "RockFamily.h"
+#include "RockPlayer.h"
 
 const int HP = 50;
 
@@ -24,6 +26,15 @@ double RockEnemyBossRock::getAnimTime( ) const {
 
 void RockEnemyBossRock::dropItem( ) {
 	RockStoragePtr storage( RockStorage::getTask( ) );
-	storage->addDropItem( RockItemPtr( new RockItemRock( getPos( ) + Vector( 0, getRadius( ), 0 ) ) ) );
-	storage->addDropItem( RockItemPtr( new RockItemBubble( getPos( ) + Vector( 0, getRadius( ), 0 ) ) ) );
+	RockFamilyPtr family( RockFamily::getTask( ) );
+	int num = 0;
+	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+		if ( family->getPlayer( i )->isActive( ) ) {
+			num++;
+		}
+	}
+	for ( int i = 0; i < num; i++ ) {
+		storage->addDropItem( RockItemPtr( new RockItemRock( getPos( ) + Vector( i * 20, getRadius( ), 0 ) ) ) );
+		storage->addDropItem( RockItemPtr( new RockItemBubble( getPos( ) + Vector( i * 20, getRadius( ), 0 ) ) ) );
+	}
 }
