@@ -4,6 +4,7 @@
 #include "Application.h"
 #include "SynchronousData.h"
 #include "Device.h"
+#include "Sound.h"
 #include <assert.h>
 
 const int CAMERA_SCROLL_SPEED = 8;
@@ -55,6 +56,7 @@ void Family::update( ) {
 				 _player[ i ]->isOnHead( _player[ j ] ) ) {
 				_player[ i ]->bound( );
 			}
+			playSe( );
 		}
 		_player[ i ]->update( );
 		if ( _player[ i ]->getArea( ) != AREA_EVENT ) {
@@ -136,6 +138,18 @@ void Family::setSynchronousData( ) const {
 	}
 }
 
+void Family::playSe( ) {
+	SoundPtr sound = Sound::getTask( );
+	for ( int i = 0; i < MAX_PLAYER; i++ ) {
+		if ( _player[ i ]->getAction( ) == Player::ACTION_WALK &&
+			 !sound->isPlayingSE( "yokai_voice_15.wav" ) ) {
+			sound->playSE( "yokai_voice_15.wav" );
+			return;
+		}
+	}
+}
+
+
 void Family::updateSetDevice( ) {
 	DevicePtr device( Device::getTask( ) );
 	if ( !( _set_device < MAX_PLAYER ) ) {
@@ -174,4 +188,5 @@ bool Family::isSettingDevice( int device_id ) const {
 MonmotaroConstPtr Family::getMonmotaro( ) const {
 	return _monmo;
 }
+
 
