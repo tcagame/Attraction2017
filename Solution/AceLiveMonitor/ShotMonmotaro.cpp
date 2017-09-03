@@ -4,6 +4,7 @@
 static const int SHOT_SPEED = 10;
 static const int MAX_HEIGHT = 5;
 static const int WAVE_COUNT = 30;
+static const int VANISH_LENGTH = 320;
 
 ShotMonmotaro::ShotMonmotaro( const PLAYER player, const Vector& pos, DIR dir, int power ) :
 Shot( player, pos, dir, power ) {
@@ -21,6 +22,11 @@ void ShotMonmotaro::act( ) {
 	Vector vec( getVec( ) );
 	vec.y = sin( PI2 / WAVE_COUNT * getActCount( ) ) * ( MAX_HEIGHT / 2 );
 	setVec( vec );
+
+	double check_vec = getVec( ).x;
+	if ( getActCount( ) * check_vec > VANISH_LENGTH ) {
+		setFinished( );
+	}
 }
 
 void ShotMonmotaro::setSynchronousData( unsigned char type, int camera_pos ) const {
