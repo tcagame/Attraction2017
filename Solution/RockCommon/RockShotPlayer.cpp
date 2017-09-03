@@ -5,10 +5,11 @@
 #include "Effect.h"
 #include "RockStudio.h"
 
-const int MOVE_SPEED = 6;
-const double EFFECT_NORMAL_SIZE = 10.0;
-const double EFFECT_CHARGE_SIZE = 5.0;
-const int ACTIVE_COUNT = 150;
+static const int MOVE_SPEED = 6;
+static const double EFFECT_NORMAL_SIZE = 10.0;
+static const double EFFECT_CHARGE_SIZE = 5.0;
+static const int ACTIVE_COUNT = 120;
+static const int SHOT_MOVE_HEIGHT = 1;
 
 RockShotPlayer::RockShotPlayer( const int id, const Vector& pos, const Vector& dir, const int power ) :
 RockShot( pos, dir, power ),
@@ -45,8 +46,13 @@ void RockShotPlayer::act( ) {
 		angle *= -1;
 	}
 	Vector rotate = Vector( 0, angle, 0 );
-	Effect::getTask( )->updateEffectTransform( getEffectHandle( ), getPos( ), getSize( ), rotate );
-	if ( getActCount( ) > ACTIVE_COUNT ) {
+	EffectPtr effect = Effect::getTask( );
+	RockStudioPtr studio = RockStudio::getTask( );
+	effect->updateEffectTransform( getEffectHandle( ), getPos( ), getSize( ), rotate );
+	if ( getActCount( ) == ACTIVE_COUNT ) {
+		effect->stopEffect( getEffectHandle( ) );
+		setSize( EFFECT_NORMAL_SIZE );
+		setEffectHandle( effect->playEffect( studio->getEffectHandle( EFFECT_SHOT_BACK ) ) );
 		_back = true;
 	}
 	if ( _back ) {
@@ -58,7 +64,9 @@ void RockShotPlayer::actOutBack( ) {
 	RockPlayerPtr player = RockFamily::getTask( )->getPlayer( _target_id );
 	Vector diff = ( player->getPos( ) + Vector( 0, getRadius( ), 0 ) - getPos( ) );
 	if ( diff.getLength2( ) > MOVE_SPEED * MOVE_SPEED ) {
-		setVec( diff.normalize( ) * MOVE_SPEED );
+		Vector vec = diff.normalize( ) * MOVE_SPEED;
+		vec.y = sin( PI2 / 60 * getActCount( ) ) * SHOT_MOVE_HEIGHT;
+		setVec( vec );
 	} else {
 		Effect::getTask( )->stopEffect( getEffectHandle( ) );
 		setFinished( );

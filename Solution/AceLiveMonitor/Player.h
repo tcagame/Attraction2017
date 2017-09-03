@@ -56,7 +56,7 @@ private:
 private:
 	PLAYER _player;
 	ACTION _action;
-	int _id;
+	int _device_id;
 	int _money;
 	int _virtue;
 	int _over_charge_time;
