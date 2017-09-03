@@ -1,7 +1,7 @@
 #include "EnemyStone.h"
 #include "SynchronousData.h"
 
-static const int WAIT_ANIM_TIME = 5;
+static const int WAIT_ANIM_TIME = 2;
 static const int MOVE_SPEED = 5;
 static const int MAX_HP = 2;
 
@@ -27,7 +27,7 @@ void EnemyStone::act( ) {
 
 void EnemyStone::setSynchronousData( unsigned char type, int camera_pos ) const {
 	const int ANIM[ ] = {
-		48, 49, 50, 51, 52, 53, 54, 55
+		56, 57, 58, 59
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	

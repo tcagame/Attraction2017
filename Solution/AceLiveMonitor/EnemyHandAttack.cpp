@@ -21,7 +21,7 @@ void EnemyHandAttack::act( ) {
 
 void EnemyHandAttack::setSynchronousData( unsigned char type, int camera_pos ) const {
 	const int ANIM[ ] = {
-		56, 57, 58, 59, 60, 61, 62, 63
+		60, 61, 62, 63
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	Vector pos = getPos( );

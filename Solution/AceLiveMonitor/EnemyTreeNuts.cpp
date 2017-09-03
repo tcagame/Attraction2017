@@ -45,7 +45,7 @@ void EnemyTreeNuts::setSynchronousData( unsigned char type, int camera_pos ) con
 	switch ( _act ) {
 	case ACTION_FADE_IN:
 	{
-		const int ANIM[ ] = { 16, 17, 18, 19, 20, 21 };
+		const int ANIM[ ] = { 32, 33, 34, 35, 36, 37, 38, 39 };
 		int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 		int idx = getActCount( ) / WAIT_ANIM_TIME;
 		if ( idx >= anim_size ) {
@@ -56,7 +56,7 @@ void EnemyTreeNuts::setSynchronousData( unsigned char type, int camera_pos ) con
 		break;
 	case ACTION_MOVE:
 	{
-		const int ANIM[ ] = { 21, 22, 23, 22 };
+		const int ANIM[ ] = { 37, 38, 39, 38 };
 		int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 		data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
 	}

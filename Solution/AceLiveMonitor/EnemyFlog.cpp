@@ -1,8 +1,8 @@
 #include "EnemyFlog.h"
 #include "SynchronousData.h"
 
-const int WAIT_ANIM_TIME = 6;
-const int JUMP_TIME = WAIT_ANIM_TIME * 5;
+const int WAIT_ANIM_TIME = 5;
+const int JUMP_TIME = WAIT_ANIM_TIME * 6;
 const int MAX_HP = 2;
 const int JUMP_POWER = -5;
 const int MOVE_SPEED = 2;
@@ -31,7 +31,7 @@ void EnemyFlog::act( ) {
 
 void EnemyFlog::setSynchronousData( unsigned char type, int camera_pos ) const {
 	const int ANIM[ ] = {
-		8, 9, 10, 11, 12
+		24, 25, 26, 27, 28, 29
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	

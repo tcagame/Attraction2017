@@ -26,7 +26,7 @@ void EnemyBat::act( ) {
 
 void EnemyBat::setSynchronousData( unsigned char type, int camera_pos ) const {
 	const int ANIM[ ] = {
-		3, 4, 5, 6
+		0, 1, 2, 3, 4, 5, 6, 7
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	

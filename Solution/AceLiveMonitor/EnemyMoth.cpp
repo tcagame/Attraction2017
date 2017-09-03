@@ -29,7 +29,7 @@ void EnemyMoth::act( ) {
 }
 
 void EnemyMoth::setSynchronousData( unsigned char type, int camera_pos ) const {
-	int ANIM[ ] = { 40, 41 };
+	int ANIM[ ] = { 40, 41, 42, 43 };
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	
 	Vector pos = getPos( );

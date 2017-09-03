@@ -31,5 +31,5 @@ void EnemyArcherAttack::setSynchronousData( unsigned char type, int camera_pos )
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
-	data->addObject( area, type, 14, attribute, x, y );
+	data->addObject( area, type, 22, attribute, x, y );
 }

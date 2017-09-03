@@ -45,7 +45,7 @@ void EnemyEyeDaemon::act( ) {
 
 void EnemyEyeDaemon::setSynchronousData( unsigned char type, int camera_pos ) const {
 	const int ANIM[ ] = {
-		42, 43, 44, 45
+		48, 49, 50, 51, 52, 53, 54, 55
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	
