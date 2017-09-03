@@ -35,7 +35,6 @@ private:
 	void updateCameraPos( );
 	void updateSettingDevice( );
 	void setSynchronousData( ) const;
-	void playSe( );
 	bool isSettingDevice( int device_id ) const;
 private:
 	STATE _state[ MAX_PLAYER ];

@@ -68,7 +68,6 @@ void Family::update( ) {
 				 _player[ i ]->isOnHead( _player[ j ] ) ) {
 				_player[ i ]->bound( );
 			}
-			playSe( );
 		}
 
 		// プレイヤー更新
@@ -165,18 +164,6 @@ void Family::setSynchronousData( ) const {
 
 	}
 }
-
-void Family::playSe( ) {
-	SoundPtr sound = Sound::getTask( );
-	for ( int i = 0; i < MAX_PLAYER; i++ ) {
-		if ( _player[ i ]->getAction( ) == Player::ACTION_WALK &&
-			 !sound->isPlayingSE( "yokai_voice_15.wav" ) ) {
-			sound->playSE( "yokai_voice_15.wav" );
-			return;
-		}
-	}
-}
-
 
 void Family::updateSettingDevice( ) {
 	if ( !( _setting_device < MAX_PLAYER ) ) {

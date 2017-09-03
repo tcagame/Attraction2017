@@ -171,6 +171,10 @@ void Player::actOnWalking( ) {
 	if ( device->getDirX( _device_id ) > 50 ) {
 		vec.x = MOVE_SPEED;
 	}
+	SoundPtr sound = Sound::getTask( );
+	if ( !sound->isPlayingSE( "yokai_voice_15.wav" ) ) {
+		sound->playSE( "yokai_voice_15.wav" );
+	}
 	setVec( vec );
 }
 
@@ -385,7 +389,6 @@ void Player::actOnDead( ) {
 			setVec( Vector( 0, -GRAVITY ) );
 		}
 	}
-
 }
 
 void Player::actOnCall( ) {
@@ -409,11 +412,13 @@ void Player::damage( int force ) {
 	}
 
 	Character::damage( force );
-
+	SoundPtr sound = Sound::getTask( );
 	if ( isFinished( ) ) {
+		sound->playSE( "yokai_se_31.wav" );
 		setAction( ACTION_DAED );
 		setVec( Vector( ) );
 	} else {
+		sound->playSE( "yokai_voice_26.wav" );
 		setAction( ACTION_DAMEGE );
 		if ( getDir( ) == DIR_LEFT ) {
 			setVec( Vector( 4, 0 ) );
