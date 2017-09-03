@@ -1,7 +1,7 @@
 #include "ShotPlayer.h"
 #include "SynchronousData.h"
 
-static const int SHOT_SPEED = 10;
+static const int SHOT_SPEED = 15;
 static const int VANISH_LENGTH = 500;
 
 ShotPlayer::ShotPlayer( const PLAYER player, const Vector& pos, DIR dir, int power ) :

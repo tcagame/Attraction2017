@@ -32,6 +32,7 @@ static const int CHARGE_PHASE_COUNT = 25;
 static const int MAX_CHARGE_COUNT = CHARGE_PHASE_COUNT * 4 - 1;
 static const int BURST_TIME = 60;
 static const int MAX_HP = 16;
+static const int COOL_TIME = 8;
 //アニメーション
 static const int PLAYER_ANIM_WAIT_COUNT = 12;
 static const int PLAYER_ANIM_WIDTH_NUM = 10;
@@ -137,7 +138,8 @@ void Player::actOnWaiting( ) {
 		setAction( ACTION_WALK );
 		return;
 	}
-	if ( device->getPush( _id ) & BUTTON_A ) {
+	if ( device->getPush( _id ) & BUTTON_A &&
+		 getActCount( ) > COOL_TIME ) {
 		setAction( ACTION_ATTACK );
 		return;
 	}
@@ -262,7 +264,8 @@ void Player::actOnFloating( ) {
 	}
 
 	setVec( vec );
-	if ( device->getPush( _id ) & BUTTON_A ) {
+	if ( device->getPush( _id ) & BUTTON_A &&
+		 getActCount( ) > COOL_TIME ) {
 		setAction( ACTION_ATTACK );
 	}
 }
@@ -282,7 +285,8 @@ void Player::actOnCharge( ) {
 		setAction( ACTION_FLOAT );
 		return;
 	}
-	if ( device->getPush( _id ) & BUTTON_A ) {
+	if ( device->getPush( _id ) & BUTTON_A &&
+		 getActCount( ) > COOL_TIME ) {
 		setAction( ACTION_ATTACK );
 		return;
 	}
