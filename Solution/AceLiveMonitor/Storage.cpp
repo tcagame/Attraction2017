@@ -4,11 +4,11 @@
 #include "Family.h"
 #include "Player.h"
 #include "ItemMoney.h"
-#include "ItemToku.h"
+#include "ItemVirtue.h"
 #include "SynchronousData.h"
 
 PTR( ItemMoney );
-PTR( ItemToku );
+PTR( ItemVirtue );
 
 StoragePtr Storage::getTask( ) {
 	return std::dynamic_pointer_cast< Storage >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -41,7 +41,7 @@ void Storage::update( ) {
 		}
 		ite++;
 	}
-	//createToku( );
+	//createVirtue( );
 }
 
 void Storage::add( ItemPtr item ) {
@@ -83,16 +83,16 @@ PlayerPtr Storage::getOverLappedPlayer( ItemPtr item ) const {
 	return result;
 }
 
-void Storage::createToku( ) {
+void Storage::createVirtue( ) {
 	static int count = 0;
 	count++;
 	const int create_time = 60;
 	if ( !( count % create_time ) ) {
 		FamilyPtr family( Family::getTask( ) );
 		Vector pos = Vector( family->getCameraPosX( ) + ( rand( ) % SCREEN_WIDTH ), 100 );
-		ItemPtr toku( new ItemToku( pos ) );
-		toku->setArea( AREA_STREET );
-		add( toku );
+		ItemPtr virtue( new ItemVirtue( pos ) );
+		virtue->setArea( AREA_STREET );
+		add( virtue );
 	}
 }
 
@@ -120,8 +120,8 @@ void Storage::pickUpItem( ItemPtr item, PlayerPtr player ) {
 		}
 	}
 	{//“¿
-		ItemTokuPtr toku = std::dynamic_pointer_cast< ItemToku >( item );
-		if ( toku ) {
+		ItemVirtuePtr virtue = std::dynamic_pointer_cast< ItemVirtue >( item );
+		if ( virtue ) {
 			player->pickUpVirtue( );
 		}
 	}

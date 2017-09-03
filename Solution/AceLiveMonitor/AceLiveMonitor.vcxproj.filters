@@ -256,9 +256,6 @@
     <ClCompile Include="ItemMoney.cpp">
       <Filter>Item</Filter>
     </ClCompile>
-    <ClCompile Include="ItemToku.cpp">
-      <Filter>Item</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyHellFire.cpp">
       <Filter>Character\Enemy</Filter>
     </ClCompile>
@@ -384,6 +381,9 @@
     </ClCompile>
     <ClCompile Include="ViewerLive.cpp">
       <Filter>Viewer</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemVirtue.cpp">
+      <Filter>Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -642,9 +642,6 @@
     <ClInclude Include="ItemMoney.h">
       <Filter>Item</Filter>
     </ClInclude>
-    <ClInclude Include="ItemToku.h">
-      <Filter>Item</Filter>
-    </ClInclude>
     <ClInclude Include="EnemyHellFire.h">
       <Filter>Character\Enemy</Filter>
     </ClInclude>
@@ -767,6 +764,9 @@
     </ClInclude>
     <ClInclude Include="ViewerLive.h">
       <Filter>Viewer</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemVirtue.h">
+      <Filter>Item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
