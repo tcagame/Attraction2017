@@ -27,6 +27,7 @@ private:
 	void updateCameraPos( );
 	void updateSetDevice( );
 	void setSynchronousData( ) const;
+	void playSe( );
 	bool isSettingDevice( int device_id ) const;
 private:
 	int _set_device;
