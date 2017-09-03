@@ -7,6 +7,7 @@
 
 PTR( Family );
 PTR( Player );
+PTR( Monmotaro );
 
 class Family : public Task {
 public:
@@ -21,6 +22,7 @@ public:
 	PlayerConstPtr getPlayer( int player_id ) const;
 	PlayerPtr getPlayer( int player_id );
 	int getCameraPosX( ) const;
+	MonmotaroConstPtr getMonmotaro( ) const;
 private:
 	void updateCameraPos( );
 	void updateSetDevice( );
@@ -30,5 +32,6 @@ private:
 	int _set_device;
 	double _camera_pos_x;
 	std::array< PlayerPtr, MAX_PLAYER > _player;
+	MonmotaroPtr _monmo;
 };
 

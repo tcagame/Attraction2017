@@ -21,9 +21,9 @@ public:
 	void setArea( AREA area );
 	int getChipSize( ) const;
 	int getPower( ) const;
+	DIR getDir( ) const;
 protected:
 	void setDir( DIR dir );
-	DIR getDir( ) const;
 	void setVec( const Vector& vec );
 	void setPos( const Vector& pos );
 	bool isStanding( ) const;

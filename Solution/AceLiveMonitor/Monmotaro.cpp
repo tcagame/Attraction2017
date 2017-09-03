@@ -1,31 +1,32 @@
 #include "Monmotaro.h"
 #include "SynchronousData.h"
 #include "Family.h"
+#include "Player.h"
 #include "ShotMonmotaro.h"
 #include "Armoury.h"
 
 //ë¨ìx
-static const int ENTRY_SPEED = 5;
-static const int MAX_SPEED = 18;
-static const int MOVE_SPEED = 6;
+const int ENTRY_SPEED = 5;
+const int MAX_SPEED = 18;
+const int MOVE_SPEED = 6;
 
 //è¡Ç¶ÇÈéûä‘
-static const int FADE_OUT_TIME = 30 * 60;
+const int FADE_OUT_TIME = 30 * 60;
 
-static const int WAIT_ANIM_TIME = 3;
-static const int FADE_IN_OUT_TIME = WAIT_ANIM_TIME * 8;
-static const Vector LEAVE_POS[ 2 ] {
+//îOóÕ
+const int SHOT_POWER = 1;
+
+const int WAIT_ANIM_TIME = 3;
+const int FADE_IN_OUT_TIME = WAIT_ANIM_TIME * 8;
+const Vector LEAVE_POS[ 2 ] {
 	Vector(  32, -64 ),
 	Vector( -32, -64 )
 };
 
-Monmotaro::Monmotaro( const PLAYER player, const Vector& pos, const Target& target ) :
+Monmotaro::Monmotaro( const Vector& pos ) :
 Character( pos, NORMAL_CHAR_GRAPH_SIZE, 1, false ),
-_player( player ),
-_action( ACTION_ENTRY ),
-_target( target ) {
-	Vector vec = ( target.pos - pos ).normalize( ) * ENTRY_SPEED;
-	setVec( vec );
+_tracking( -1 ),
+_action( ACTION_HIDE ) {
 	setRadius( 36 );
 }
 
@@ -34,60 +35,95 @@ Monmotaro::~Monmotaro( ) {
 
 void Monmotaro::act( ) {
 	switch ( _action ) {
+	case ACTION_HIDE:
+		actOnHide( );
+		break;
 	case ACTION_ENTRY:
-		{
-			Vector vec = ( _target.pos - getPos( ) ).normalize( ) * ENTRY_SPEED;
-			setVec( vec );
-			if ( ( getPos( ) - _target.pos ).getLength( ) < getRadius( ) + _target.radius ) {
-				setDir( _target.dir );
-				setPos( _target.pos + LEAVE_POS[ _target.dir ] );
-				_action = ACTION_FADE_IN;
-				setVec( Vector( ) );
-				setActCount( 0 );
-			}
-		}
+		actOnEntry( );
 		break;
 	case ACTION_FADE_IN:
-		if ( getActCount( ) > FADE_IN_OUT_TIME ) {
-			_action = ACTION_MOVE;
-			setVec( Vector( ) );
-		}
+		actOnFadeIn( );
 		break;
 	case ACTION_MOVE:
-		{
-			Vector target_pos = _target.pos + LEAVE_POS[ _target.dir ];
-			Vector vec = ( target_pos - getPos( ) ).normalize( ) * MOVE_SPEED;
-			if ( vec.getLength2( ) > MAX_SPEED * MAX_SPEED ) {
-				vec = vec.normalize( ) * MAX_SPEED;
-			}
-			if ( vec.getLength2( ) > ( target_pos - getPos( ) ).getLength2( ) ) {
-				vec = ( target_pos - getPos( ) );
-			}
-			setVec( vec );
-			if ( getActCount( ) > FADE_OUT_TIME ) {
-				_action = ACTION_FADE_OUT;
-				setActCount( 0 );
-			}
-			if ( _target.attack ) {
-				for ( int i = 0; i < 2; i++ ) {
-					Vector pos( getPos( ) );
-					int chip_size = getChipSize( );
-					int random = rand( );
-					pos.x += random % ( chip_size / 2 ) * ( getDir( ) == DIR_RIGHT ? 1 : -1 );
-					pos.y += sin( PI2 / random * getActCount( ) ) * ( chip_size / 2 );
-					ShotMonmotaroPtr shot( ShotMonmotaroPtr( new ShotMonmotaro( _player, pos, getDir( ), 1 ) ) );
-					Armoury::getTask( )->add( shot );
-				}
-			}
-		}
+		actOnMove( );
 		break;
 	case ACTION_FADE_OUT:
-		if ( getActCount( ) > FADE_IN_OUT_TIME ) {
-			setFinished( );
-		}
+		actOnFadeOut( );
 		break;
 	}
 	setSynchronousData( );
+}
+
+void Monmotaro::actOnHide( ) {
+	FamilyPtr family( Family::getTask( ) );
+
+	setVec( Vector( ) );
+	setPos( Vector( family->getCameraPosX( ), 0 ) );
+
+	for ( int i = 0; i < MAX_PLAYER; i++ ) {
+		PlayerPtr player( family->getPlayer( i ) );
+		if ( player->getAction( ) == Player::ACTION_CALL ) {
+			_tracking = i;
+			setAction( ACTION_ENTRY );
+		}
+	}
+}
+
+void Monmotaro::actOnEntry( ) {
+	FamilyPtr family( Family::getTask( ) );
+	PlayerPtr player( family->getPlayer( _tracking ) );
+	Vector vec = ( player->getPos( ) - getPos( ) ).normalize( ) * ENTRY_SPEED;
+	setVec( vec );
+	if ( ( getPos( ) - player->getPos( ) ).getLength( ) < getRadius( ) + player->getRadius( ) ) {
+		DIR dir = player->getDir( );
+		setDir( dir );
+		setPos( player->getPos( ) + LEAVE_POS[ dir ] );
+		setAction( ACTION_FADE_IN );
+		setVec( Vector( ) );
+	}
+}
+
+void Monmotaro::actOnFadeIn( ) {
+	if ( getActCount( ) > FADE_IN_OUT_TIME ) {
+		setAction( ACTION_MOVE );
+		setVec( Vector( ) );
+	}
+}
+
+void Monmotaro::actOnMove( ) {
+	FamilyPtr family( Family::getTask( ) );
+	PlayerPtr player( family->getPlayer( _tracking ) );
+	DIR dir = player->getDir( );
+	Vector target_pos = player->getPos( ) + LEAVE_POS[ dir ];
+	Vector vec = ( target_pos - getPos( ) ).normalize( ) * MOVE_SPEED;
+	if ( vec.getLength2( ) > MAX_SPEED * MAX_SPEED ) {
+		vec = vec.normalize( ) * MAX_SPEED;
+	}
+	if ( vec.getLength2( ) > ( target_pos - getPos( ) ).getLength2( ) ) {
+		vec = ( target_pos - getPos( ) );
+	}
+	setVec( vec );
+	if ( getActCount( ) > FADE_OUT_TIME ) {
+		setAction( ACTION_FADE_OUT );
+		setActCount( 0 );
+	}
+	if ( player->getAction( ) == Player::ACTION_ATTACK ) {
+		for ( int i = 0; i < 2; i++ ) {
+			Vector pos( getPos( ) );
+			int chip_size = getChipSize( );
+			int random = rand( );
+			pos.x += random % ( chip_size / 2 ) * ( getDir( ) == DIR_RIGHT ? 1 : -1 );
+			pos.y += sin( PI2 / random * getActCount( ) ) * ( chip_size / 2 );
+			ShotMonmotaroPtr shot( ShotMonmotaroPtr( new ShotMonmotaro( ( PLAYER )_tracking, pos, getDir( ), SHOT_POWER ) ) );
+			Armoury::getTask( )->add( shot );
+		}
+	}
+}
+
+void Monmotaro::actOnFadeOut( ) {
+	if ( getActCount( ) > FADE_IN_OUT_TIME ) {
+		setAction( ACTION_HIDE );
+	}
 }
 
 void Monmotaro::damage( int force ) {
@@ -96,8 +132,9 @@ void Monmotaro::damage( int force ) {
 	}
 }
 
-void Monmotaro::setTarget( const Target& target ) {
-	_target = target;
+void Monmotaro::setAction( ACTION action ) {
+	_action = action;
+	setActCount( 0 );
 }
 
 Monmotaro::ACTION Monmotaro::getAction( ) const {
@@ -120,6 +157,8 @@ void Monmotaro::setSynchronousData( ) {
 	unsigned char type = SynchronousData::TYPE_MONMOTARO;
 	int pattern = 0;
 	switch ( _action ) {
+	case ACTION_HIDE:
+		return;
 	case ACTION_ENTRY:
 		{
 			const int ANIM[ ] = { 0, 1, 2, 1 };
@@ -154,6 +193,7 @@ void Monmotaro::setSynchronousData( ) {
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
-	pattern += ( _target.id * 16 * 2 );
+	pattern += ( _tracking * 16 * 2 );
 	data->addObject( area, type, pattern, attribute, x, y );
 }
+

@@ -45,11 +45,18 @@ void ViewerDebug::drawPlayer( ) const {
 		Vector pos( player->getPos( ) - Vector( 0, player->getChipSize( ) / 2 ) );
 		drawer->drawCircle( pos + Vector( add_sx, add_sy ), player->getRadius( ) );
 
-		MonmotaroConstPtr monmo = player->getMonmotaro( );
-		if ( monmo ) {
-			Vector monmo_pos( monmo->getPos( ) - Vector( 0, monmo->getChipSize( ) / 2 ) );
-			drawer->drawCircle( monmo_pos + Vector( add_sx, add_sy ), monmo->getRadius( ) );
-		}
+	}
+	
+	MonmotaroConstPtr monmo = family->getMonmotaro( );
+	int add_sx = - camera_pos;
+	int add_sy = VIEW_STREET_Y;
+	if ( monmo->getArea( ) == AREA_EVENT ) {
+		add_sx = 0;
+		add_sy = VIEW_EVENT_Y;
+	}
+	if ( monmo ) {
+		Vector monmo_pos( monmo->getPos( ) - Vector( 0, monmo->getChipSize( ) / 2 ) );
+		drawer->drawCircle( monmo_pos + Vector( add_sx, add_sy ), monmo->getRadius( ) );
 	}
 }
 

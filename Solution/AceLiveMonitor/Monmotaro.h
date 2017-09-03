@@ -4,39 +4,30 @@
 class Monmotaro : public Character {
 public:
 	enum ACTION {
+		ACTION_HIDE,
 		ACTION_ENTRY,
 		ACTION_FADE_IN,
 		ACTION_MOVE,
 		ACTION_ATTACK,
 		ACTION_FADE_OUT,
 	};
-	struct Target {
-		int id;
-		double radius;
-		bool attack;
-		Vector pos;
-		DIR dir;
-		Target( ) :
-			id ( 0 ),
-			radius( 0.0 ),
-			attack( false ),
-			pos( Vector( ) ),
-			dir( DIR_RIGHT ) {
-		}
-	};
 public:
-	Monmotaro( const PLAYER player, const Vector& pos, const Target& target );
+	Monmotaro( const Vector& pos );
 	virtual ~Monmotaro( );
 public:
-	void setTarget( const Target& target );
 	ACTION getAction( ) const;
 private:
 	void act( );
+	void actOnHide( );
+	void actOnEntry( );
+	void actOnFadeIn( );
+	void actOnMove( );
+	void actOnFadeOut( );
+	void setAction( ACTION action );
 	void damage( int force );
 	void setSynchronousData( );
 private:
-	PLAYER _player;
+	int _tracking;
 	ACTION _action;
-	Target _target;
 };
 

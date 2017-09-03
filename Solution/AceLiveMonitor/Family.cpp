@@ -1,5 +1,6 @@
 #include "Family.h"
 #include "Player.h"
+#include "Monmotaro.h"
 #include "Application.h"
 #include "SynchronousData.h"
 #include "Device.h"
@@ -33,6 +34,7 @@ void Family::initialize( ) {
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		_player[ i ] = PlayerPtr( new Player( ( PLAYER )i, INIT_PLAYER_POS[ i ] ) );
 	}
+	_monmo = MonmotaroPtr( new Monmotaro( Vector( ) ) );
 	double camera_pos = 0.0;
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		camera_pos += _player[ i ]->getPos( ).x;
@@ -62,6 +64,9 @@ void Family::update( ) {
 			}
 		}
 	}
+	
+	_monmo->update( );
+
 	if ( update_camera ) {
 		updateCameraPos( );
 	}
@@ -164,3 +169,9 @@ bool Family::isSettingDevice( int device_id ) const {
 	}
 	return result;
 }
+
+
+MonmotaroConstPtr Family::getMonmotaro( ) const {
+	return _monmo;
+}
+
