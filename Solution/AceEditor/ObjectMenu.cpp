@@ -195,6 +195,7 @@ unsigned char ObjectMenu::getObj( int idx ) const {
 	switch ( idx ) {
 	case 0:
 		result = OBJECT_NONE;
+		break;
 	case 1:
 		result = OBJECT_BLOCK;
 		break;
