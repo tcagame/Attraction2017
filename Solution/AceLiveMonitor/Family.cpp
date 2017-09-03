@@ -34,6 +34,8 @@ Family::~Family( ) {
 void Family::initialize( ) {
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		_player[ i ] = PlayerPtr( new Player( ( PLAYER )i, INIT_PLAYER_POS[ i ] ) );
+		//_state[ i ] = STATE_ENTRY;
+		_state[ i ] = STATE_PLAY; // とりあえず全キャラ登場
 	}
 	_monmo = MonmotaroPtr( new Monmotaro( Vector( ) ) );
 	double camera_pos = 0.0;
@@ -41,14 +43,24 @@ void Family::initialize( ) {
 		camera_pos += _player[ i ]->getPos( ).x;
 	}
 	_camera_pos_x = camera_pos * 0.25 - SCREEN_WIDTH / 2;
-	_set_device = 0;
+	_setting_device = 0;
 }
 
 void Family::update( ) {
+	// device
+	updateSettingDevice( );
+
 	bool update_camera = true;
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
+		if ( _state[ i ] != STATE_PLAY ) {
+			continue;
+		}
+
 		// playerの頭の上で跳ねる
 		for ( int j = 0; j < MAX_PLAYER; j++ ) {
+			if ( _state[ j ] != STATE_PLAY ) {
+				continue;
+			}
 			if ( i == j ) {
 				continue;
 			}
@@ -58,9 +70,12 @@ void Family::update( ) {
 			}
 			playSe( );
 		}
+
+		// プレイヤー更新
 		_player[ i ]->update( );
+		
+		//キャラクターが右端にいる場合、カメラのポジションを変えない
 		if ( _player[ i ]->getArea( ) != AREA_EVENT ) {
-			//キャラクターが右端にいる場合、カメラのポジションを変えない
 			if ( ( _camera_pos_x - SCREEN_WIDTH / 2 ) + SCROLL_BUFFER > _player[ i ]->getPos( ).x ) {
 				update_camera = false;
 			}
@@ -75,9 +90,6 @@ void Family::update( ) {
 
 	// 同期データ
 	setSynchronousData( );
-
-	// device
-	updateSetDevice( );
 }
 
 PlayerConstPtr Family::getPlayer( int player_id ) const {
@@ -134,7 +146,23 @@ void Family::setSynchronousData( ) const {
 
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		PlayerConstPtr player = getPlayer( i );
-		player->setSynchronousData( ( PLAYER )i, getCameraPosX( ) );
+
+		switch ( _state[ i ] ) {
+		case STATE_ENTRY:
+			data->setStatusState( ( PLAYER )i, SynchronousData::STATE_ENTRY ); 
+			break;
+		case STATE_CONTINUE:
+			data->setStatusState( ( PLAYER )i, SynchronousData::STATE_CONTINUE); 
+			break;
+		case STATE_PLAY:
+			if ( player->getArea( ) == AREA_STREET ) {
+				data->setStatusState( ( PLAYER )i, SynchronousData::STATE_PLAY_STREET ); 
+			} else {
+				data->setStatusState( ( PLAYER )i, SynchronousData::STATE_PLAY_EVENT );
+			}
+			player->setSynchronousData( ( PLAYER )i, getCameraPosX( ) );
+		}
+
 	}
 }
 
@@ -150,26 +178,27 @@ void Family::playSe( ) {
 }
 
 
-void Family::updateSetDevice( ) {
-	DevicePtr device( Device::getTask( ) );
-	if ( !( _set_device < MAX_PLAYER ) ) {
+void Family::updateSettingDevice( ) {
+	if ( !( _setting_device < MAX_PLAYER ) ) {
 		return;
 	}
 
+	DevicePtr device( Device::getTask( ) );
+
 	// デバイスが接続されていなかったら、キーボードで全プレイヤーを操作できるようにする
 	int device_num = device->getDeviceNum( );
-	if ( device_num < 1 ) {
+	if ( device_num == 0 ) {
 		for ( int i = 0; i < MAX_PLAYER; i++ ) {
 			_player[ i ]->setDeviceId( 0 );
 		}
-		_set_device = MAX_PLAYER;
+		_setting_device = MAX_PLAYER;
 	}
 
 	for ( int i = 0; i < device_num; i++ ) {
 		if ( device->getButton( i ) &&
 			 !isSettingDevice( i ) ) {
-			_player[ _set_device ]->setDeviceId( i );
-			_set_device++;
+			_player[ _setting_device ]->setDeviceId( i );
+			_setting_device++;
 		}
 	}
 }

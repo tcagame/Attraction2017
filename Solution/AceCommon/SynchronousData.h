@@ -11,6 +11,7 @@ class SynchronousData : public Data, public Task {
 public:
 	static const unsigned char STATE_NONE           = 0x00;
 	static const unsigned char STATE_ENTRY          = 0x01;
+	static const unsigned char STATE_CONTINUE       = 0x02;
 	static const unsigned char STATE_PLAY_STREET    = 0x10;
 	static const unsigned char STATE_PLAY_EVENT     = 0x11;
 	static const unsigned char ITEM_DANGO			= 0x01;

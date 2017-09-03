@@ -24,13 +24,22 @@ public:
 	int getCameraPosX( ) const;
 	MonmotaroConstPtr getMonmotaro( ) const;
 private:
+	enum STATE {
+		STATE_ENTRY,
+		STATE_PLAY,
+		STATE_CONTINUE
+	};
+
+
+private:
 	void updateCameraPos( );
-	void updateSetDevice( );
+	void updateSettingDevice( );
 	void setSynchronousData( ) const;
 	void playSe( );
 	bool isSettingDevice( int device_id ) const;
 private:
-	int _set_device;
+	STATE _state[ MAX_PLAYER ];
+	int _setting_device;
 	double _camera_pos_x;
 	std::array< PlayerPtr, MAX_PLAYER > _player;
 	MonmotaroPtr _monmo;

@@ -49,7 +49,7 @@ Player::Player( PLAYER player, Vector pos ) :
 Character( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ),
 _over_charge_time( -1 ),
 _player( player ),
-_id( -1 ),
+_device_id( -1 ),
 _money( 0 ),
 _virtue( 0 ),
 _charge_count( 0 ),
@@ -63,7 +63,7 @@ Player::~Player( ) {
 }
 
 void Player::act( ) {
-	if ( _id < 0 ) {
+	if ( _device_id < 0 ) {
 		actOnCamera( );
 		return;
 	}
@@ -120,20 +120,20 @@ void Player::actOnWaiting( ) {
 		return;
 	}
 	DevicePtr device( Device::getTask( ) );
-	if ( abs( device->getDirX( _id ) ) > 50 ) {
+	if ( abs( device->getDirX( _device_id ) ) > 50 ) {
 		setAction( ACTION_WALK );
 		return;
 	}
-	if ( device->getPush( _id ) & BUTTON_A &&
+	if ( device->getPush( _device_id ) & BUTTON_A &&
 		 getActCount( ) > COOL_TIME ) {
 		setAction( ACTION_ATTACK );
 		return;
 	}
-	if ( device->getDirY( _id ) > 0 ) {
+	if ( device->getDirY( _device_id ) > 0 ) {
 		setAction( ACTION_CHARGE );
 		return;
 	}
-	if ( isStanding( ) && device->getPush( _id ) & BUTTON_C ) {
+	if ( isStanding( ) && device->getPush( _device_id ) & BUTTON_C ) {
 		setAction( ACTION_FLOAT );
 		vec.y = JUMP_POWER;
 	}
@@ -152,23 +152,23 @@ void Player::actOnWalking( ) {
 		setAction( ACTION_FLOAT );
 		return;
 	}
-	if ( device->getDirX( _id ) * vec.x < 0 ) {
+	if ( device->getDirX( _device_id ) * vec.x < 0 ) {
 		setAction( ACTION_BRAKE );
 		return;
 	}
-	if ( device->getDirX( _id ) == 0 ) {
+	if ( device->getDirX( _device_id ) == 0 ) {
 		setAction( ACTION_WAIT );
 		return;
 	}
 
-	if ( isStanding( ) && device->getPush( _id ) & BUTTON_C ) {
+	if ( isStanding( ) && device->getPush( _device_id ) & BUTTON_C ) {
 		setAction( ACTION_FLOAT );
 		vec.y = JUMP_POWER;
 	}
-	if ( device->getDirX( _id ) < -50 ) {
+	if ( device->getDirX( _device_id ) < -50 ) {
 		vec.x = -MOVE_SPEED;
 	}
-	if ( device->getDirX( _id ) > 50 ) {
+	if ( device->getDirX( _device_id ) > 50 ) {
 		vec.x = MOVE_SPEED;
 	}
 	setVec( vec );
@@ -187,7 +187,7 @@ void Player::actOnBreaking( ) {
 	if ( device->getDirX( ) * vec.x > 0 ) {
 		setAction( ACTION_WALK );
 	}
-	if ( isStanding( ) && device->getPush( _id ) & BUTTON_C ) {
+	if ( isStanding( ) && device->getPush( _device_id ) & BUTTON_C ) {
 		vec.y = JUMP_POWER;
 		setAction( ACTION_FLOAT );
 	}
@@ -216,7 +216,7 @@ void Player::actOnFloating( ) {
 	DevicePtr device( Device::getTask( ) );
 	Vector vec = getVec( );
 	// ‹ó’†‚ÌˆÚ“®
-	int dir_x = device->getDirX( _id );
+	int dir_x = device->getDirX( _device_id );
 	//‰E‚ÉˆÚ“®‚µ‚Ä‚é‚Æ‚«
 	if ( vec.x >= 0 ) {
 		//“ü—Í•ûŒü‚ª‹t
@@ -250,7 +250,7 @@ void Player::actOnFloating( ) {
 	}
 
 	setVec( vec );
-	if ( device->getPush( _id ) & BUTTON_A &&
+	if ( device->getPush( _device_id ) & BUTTON_A &&
 		 getActCount( ) > COOL_TIME ) {
 		setAction( ACTION_ATTACK );
 	}
@@ -271,13 +271,13 @@ void Player::actOnCharge( ) {
 		setAction( ACTION_FLOAT );
 		return;
 	}
-	if ( device->getPush( _id ) & BUTTON_A &&
+	if ( device->getPush( _device_id ) & BUTTON_A &&
 		 getActCount( ) > COOL_TIME ) {
 		setAction( ACTION_ATTACK );
 		return;
 	}
-	if ( device->getDirY( _id ) <= 0 ) {
-		if ( device->getDirX( _id ) == 0 ) {
+	if ( device->getDirY( _device_id ) <= 0 ) {
+		if ( device->getDirX( _device_id ) == 0 ) {
 			setAction( ACTION_WAIT );
 			return;
 		} else {
@@ -285,7 +285,7 @@ void Player::actOnCharge( ) {
 			return;
 		}
 		Vector vec = getVec( );
-		if ( device->getPush( _id ) & BUTTON_C ) {
+		if ( device->getPush( _device_id ) & BUTTON_C ) {
 			vec.y = JUMP_POWER;
 			setVec( vec );
 			setAction( ACTION_FLOAT );
@@ -576,12 +576,6 @@ void Player::setAction( ACTION action ) {
 void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
 
-	// Status
-	if ( getArea( ) == AREA_STREET ) {
-		data->setStatusState( player, SynchronousData::STATE_PLAY_STREET );
-	} else {
-		data->setStatusState( player, SynchronousData::STATE_PLAY_EVENT );
-	}
 	data->setStatusX( player, ( int )getPos( ).x );
 	data->setStatusPower( player, getPower( ) );
 	data->setStatusMoney( player, getMoney( ) );
@@ -729,10 +723,9 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 }
 
 void Player::setDeviceId( int id ) {
-	assert( 0 <= id && id < MAX_PLAYER );
-	_id = id;
+	_device_id = id;
 }
 
 int Player::getDeviceId( ) const {
-	return _id;
+	return _device_id;
 }
