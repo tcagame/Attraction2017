@@ -22,7 +22,7 @@ public:
 	void eraseEventItem( );
 private:
 	PlayerPtr getOverLappedPlayer( ItemPtr item ) const;
-	void createToku( ); //debug—p
+	void createVirtue( ); //debug—p
 	void pickUpItem( ItemPtr item, PlayerPtr player );
 private:
 	std::list< ItemPtr > _items;

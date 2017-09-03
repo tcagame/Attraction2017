@@ -1,10 +1,10 @@
 #pragma once
 #include "Item.h"
 
-class ItemToku : public Item {
+class ItemVirtue : public Item {
 public:
-	ItemToku( Vector pos );
-	virtual ~ItemToku( );
+	ItemVirtue( Vector pos );
+	virtual ~ItemVirtue( );
 public:
 	void setSynchronousData( unsigned char type, int camera_pos ) const;
 protected:

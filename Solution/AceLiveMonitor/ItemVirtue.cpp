@@ -1,18 +1,18 @@
-#include "ItemToku.h"
+#include "ItemVirtue.h"
 #include "SynchronousData.h"
 
-ItemToku::ItemToku( Vector pos ) :
+ItemVirtue::ItemVirtue( Vector pos ) :
 Item( pos ) {
 }
 
 
-ItemToku::~ItemToku( ) {
+ItemVirtue::~ItemVirtue( ) {
 }
 
-void ItemToku::act( ) {
+void ItemVirtue::act( ) {
 }
 
-void ItemToku::setSynchronousData( unsigned char type, int camera_pos ) const {
+void ItemVirtue::setSynchronousData( unsigned char type, int camera_pos ) const {
 	Vector pos = getPos( );
 	int x = ( int )pos.x;
 	int y = ( int )pos.y;
