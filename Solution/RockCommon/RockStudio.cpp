@@ -18,6 +18,7 @@ void RockStudio::initialize( ) {
 	_effect[ EFFECT_SHOT ] = effect->loadEffect( "player_shot.efk" );
 	_effect[ EFFECT_CHARGE_SHOT ] = effect->loadEffect( "player_charge_shot.efk" );
 	_effect[ EFFECT_CHARGE ] = effect->loadEffect( "charge.efk" );
+	_effect[ EFFECT_SHOT_BACK ] = effect->loadEffect( "shot_back.efk" );
 	_effect[ EFFECT_ANCESTORS_SHOT ] = effect->loadEffect( "ancestors_shot.efk" );
 	_effect[ EFFECT_IMPACT ] = effect->loadEffect( "impact.efk" );
 }
