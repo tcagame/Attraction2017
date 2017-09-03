@@ -20,6 +20,7 @@ RockItem( pos, DOLL_NONE ) {
 		break;
 	default:
 		setDoll( DOLL_MONEY_1 );
+		value = MONEY_VALUE_1;
 		break;
 	}
 	_value = value;
