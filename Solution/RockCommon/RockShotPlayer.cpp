@@ -47,13 +47,9 @@ void RockShotPlayer::act( ) {
 	}
 	Vector rotate = Vector( 0, angle, 0 );
 	EffectPtr effect = Effect::getTask( );
-	RockStudioPtr studio = RockStudio::getTask( );
 	effect->updateEffectTransform( getEffectHandle( ), getPos( ), getSize( ), rotate );
 	if ( getActCount( ) == ACTIVE_COUNT ) {
-		effect->stopEffect( getEffectHandle( ) );
-		setSize( EFFECT_NORMAL_SIZE );
-		setEffectHandle( effect->playEffect( studio->getEffectHandle( EFFECT_SHOT_BACK ) ) );
-		_back = true;
+		setBack( );
 	}
 	if ( _back ) {
 		actOutBack( );
@@ -74,6 +70,11 @@ void RockShotPlayer::actOutBack( ) {
 }
 
 void RockShotPlayer::setBack( ) {
+	EffectPtr effect = Effect::getTask( );
+	RockStudioPtr studio = RockStudio::getTask( );
+	effect->stopEffect( getEffectHandle( ) );
+	setSize( EFFECT_NORMAL_SIZE );
+	setEffectHandle( effect->playEffect( studio->getEffectHandle( EFFECT_SHOT_BACK ) ) );
 	_back = true;
 	setPower( 0 );
 }
