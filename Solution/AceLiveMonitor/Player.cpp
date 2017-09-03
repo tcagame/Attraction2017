@@ -17,6 +17,7 @@
 #include "World.h"
 #include "Map.h"
 #include "Monmotaro.h"
+#include "Sound.h"
 #include <assert.h>
 
 //‰æ‘œƒTƒCƒY

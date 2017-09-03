@@ -8,7 +8,7 @@
 #include "RockMilitary.h"
 #include "RockEnemy.h"
 
-const double BOUND_POWER = 1.0;
+const double BOUND_POWER = 5.0;
 const double STAND_RANGE = 1000.0;
 
 RockCharacter::RockCharacter( const Vector& pos, DOLL doll, int radius, int height, bool mass, bool head, bool col ) :

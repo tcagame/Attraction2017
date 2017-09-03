@@ -2,6 +2,8 @@
 #include "Map.h"
 #include "SynchronousData.h"
 #include "Application.h"
+#include "Sound.h"
+
 
 static const char * FILENAME_STREET          = "Resource/Ace/Street/mapdata";
 static const char * FILENAME_EVENT_REDDAEMON = "Resource/Ace/Event/Reddaemon/mapdata";
@@ -28,6 +30,9 @@ _event( EVENT_NONE ) {
 	_map_event[ EVENT_RYUGU     ] = MapPtr( new Map( FILENAME_EVENT_RYUGU     ) );
 	_map_event[ EVENT_LAKE      ] = MapPtr( new Map( FILENAME_EVENT_LAKE      ) );
 	_map_event[ EVENT_GAMBLE    ] = MapPtr( new Map( FILENAME_EVENT_GAMBLE	  ) );
+
+	SoundPtr sound = Sound::getTask( );
+	sound->playBGM( "yokai_music_12.wav" );
 }
 
 World::~World( ) {

@@ -16,6 +16,8 @@
 #include "Server.h"
 #include "Sender.h"
 #include "Magazine.h"
+#include "Sound.h"
+
 
 void main( ) {
 	ApplicationPtr app( Application::getInstance( ) ); 
@@ -29,6 +31,7 @@ void main( ) {
 	app->addTask( SynchronousData::getTag( ), data );
 
 	app->addTask( Drawer  ::getTag( ), DrawerPtr( new Drawer( "Resource/Ace" ) ) );
+	app->addTask( Sound   ::getTag( ), SoundPtr( new Sound( "Resource/Sound" ) ) );
 	app->addTask( Device  ::getTag( ), DevicePtr( new Device( ) ) );
 	app->addTask( Keyboard::getTag( ), KeyboardPtr( new Keyboard( ) ) );
 	
