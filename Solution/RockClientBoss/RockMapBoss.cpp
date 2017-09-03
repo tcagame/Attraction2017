@@ -59,7 +59,7 @@ void RockMapBoss::update( ) {
 	RockMilitaryPtr military( RockMilitary::getTask( ) );
 	switch ( now ) {
 	case STAGE_TREE_TO_FIRE:
-		if ( isWarp( Vector( 1550, 0, -50 ) ) ) {
+		if ( isWarpToBoss( Vector( 1550, 0, -50 ) ) ) {
 			RockFamily::getTask( )->resetPos( Vector( 0, 0, 0 ) ); // room_fire
 			military->clean( );
 			military->add( RockEnemyPtr( new RockEnemyBossFire( Vector( 220, 10, 0 ) ) ) );
@@ -67,14 +67,14 @@ void RockMapBoss::update( ) {
 		}
 		return;
 	case STAGE_FIRE:
-		if ( isWarp( Vector( 300, 0, -25 ) ) ) {
+		if ( isWarpToStreet( STAGE_FIRE ) ) {
 			RockFamily::getTask( )->resetPos( Vector( -700, 75, -25 ) ); // fire to rock
 			military->clean( );
 			break;
 		}
 		return;
 	case STAGE_FIRE_TO_ROCK:
-		if ( isWarp( Vector( 1550, 0, -50 ) ) ) {
+		if ( isWarpToBoss( Vector( 1550, 0, -50 ) ) ) {
 			//STAGE_ROCK‚Ös‚­
 			RockFamily::getTask( )->resetPos( Vector( 0, 0, 0 ) );
 			military->clean( );
@@ -83,14 +83,14 @@ void RockMapBoss::update( ) {
 		}
 		return;
 	case STAGE_ROCK:
-		if ( isWarp( Vector( 600, 0, 0 ) ) ) {
+		if ( isWarpToStreet( STAGE_ROCK ) ) {
 			RockFamily::getTask( )->resetPos( Vector( -700, 75, -25 ) ); // rock to tree
 			military->clean( );
 			break;
 		}
 		return;
 	case STAGE_ROCK_TO_TREE:
-		if ( isWarp( Vector( 1550, 0, -50 ) ) ) {
+		if ( isWarpToBoss( Vector( 1550, 0, -50 ) ) ) {
 			RockFamily::getTask( )->resetPos( Vector( 0, 0, 0 ) ); // tree
 			military->clean( );
 			military->add( RockEnemyPtr( new RockEnemyBossTree( Vector( 300, 10, 0 ) ) ) );
@@ -98,7 +98,7 @@ void RockMapBoss::update( ) {
 		}
 		return;
 	case STAGE_TREE:
-		if ( isWarp( Vector( 600, 0, 0 ) ) ) {
+		if ( isWarpToStreet( STAGE_TREE ) ) {
 			RockFamily::getTask( )->resetPos( Vector( -700, 75, -25 ) ); // tree to fire
 			military->clean( );
 			break;
@@ -111,10 +111,13 @@ void RockMapBoss::update( ) {
 	_drawer = RockMapBossDrawerPtr( new RockMapBossDrawer( next ) );
 }
 
-bool RockMapBoss::isWarp( const Vector& pos ) {
+bool RockMapBoss::isWarpToBoss( const Vector& pos ) {
 	RockFamilyPtr family( RockFamily::getTask( ) );
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		RockPlayerPtr player( family->getPlayer( i ) );
+		if ( !player->isActive( ) ) {
+			continue;
+		}
 		Vector p_pos = player->getPos( );
 		Vector diff = p_pos - pos;
 		double radius = player->getRadius( );
@@ -123,4 +126,34 @@ bool RockMapBoss::isWarp( const Vector& pos ) {
 		}
 	}
 	return false;
+}
+
+bool RockMapBoss::isWarpToStreet( STAGE stage ) {
+	unsigned char sacred = 0;
+	switch ( stage ) {
+	case STAGE_FIRE:
+		sacred = ITEM_FIRE;
+		break;
+	case STAGE_ROCK:
+		sacred = ITEM_ROCK;
+		break;
+	case STAGE_TREE:
+		sacred = ITEM_TREE;
+		break;
+	default:
+		return false;
+		break;
+	}
+
+	RockFamilyPtr family( RockFamily::getTask( ) );
+	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+		RockPlayerPtr player( family->getPlayer( i ) );
+		if ( !player->isActive( ) ) {
+			continue;
+		}
+		if ( !( _status->getPlayer( i ).item & sacred ) ) {
+			return false;
+		}
+	}
+	return true;
 }

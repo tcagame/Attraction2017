@@ -23,7 +23,8 @@ public:
 	void update( );
 	void initialize( );
 private:
-	bool isWarp( const Vector& pos );
+	bool isWarpToBoss( const Vector& pos );
+	bool isWarpToStreet( STAGE stage );
 private:
 	RockMapBossDrawerPtr _drawer;
 	StatusPtr _status;
