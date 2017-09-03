@@ -31,8 +31,7 @@ _event( EVENT_NONE ) {
 	_map_event[ EVENT_LAKE      ] = MapPtr( new Map( FILENAME_EVENT_LAKE      ) );
 	_map_event[ EVENT_GAMBLE    ] = MapPtr( new Map( FILENAME_EVENT_GAMBLE	  ) );
 
-	SoundPtr sound = Sound::getTask( );
-	sound->playBGM( "yokai_music_12.wav" );
+	Sound::getTask( )->playBGM( "yokai_music_12.wav" );
 }
 
 World::~World( ) {
@@ -49,7 +48,36 @@ void World::update( ) {
 
 void World::setEvent( EVENT event ) {
 	_event = event;
+	playMapBgm( _event );
 }
+
+void World::playMapBgm( EVENT event ) {
+	SoundPtr sound = Sound::getTask( );
+	switch( _event ) {
+	case EVENT_NONE:
+		sound->playBGM( "yokai_music_12.wav" );
+		break;
+	case EVENT_REDDAEMON:
+	case EVENT_FIRE:
+	case EVENT_TREE:
+	case EVENT_ROCK:
+		sound->playBGM( "yokai_music_04.wav" );
+		break;
+	case EVENT_SHOP:
+		sound->playBGM( "yokai_music_07.wav" );
+		break;
+	case EVENT_GAMBLE:
+		sound->playBGM( "yokai_music_03.wav" );
+		break;
+	case EVENT_RYUGU:
+		sound->playBGM( "yokai_music_06.wav" );
+		break;
+	case EVENT_LAKE:
+		sound->playBGM( "yokai_music_06.wav" );
+		break;
+	}
+}
+
 
 EVENT World::getEvent( ) const{
 	return _event;
