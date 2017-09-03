@@ -9,6 +9,8 @@ PTR( SynchronousData );
 
 class SynchronousData : public Data, public Task {
 public:
+	static const unsigned char STATE_NONE           = 0x00;
+	static const unsigned char STATE_ENTRY          = 0x01;
 	static const unsigned char STATE_PLAY_STREET    = 0x10;
 	static const unsigned char STATE_PLAY_EVENT     = 0x11;
 	static const unsigned char ITEM_DANGO			= 0x01;
@@ -18,7 +20,6 @@ public:
 	static const unsigned char ITEM_WOOD			= 0x10;
 	static const unsigned char ITEM_FLAME			= 0x20;
 	static const unsigned char ITEM_MINERAL			= 0x40;
-	static const unsigned char AREA_EVENT			= 0x01;
 	static const unsigned char ATTRIBUTE_REVERSE	= 0x01;
 	static const unsigned char TYPE_TAROSUKE		= 0x10;
 	static const unsigned char TYPE_TAROJIRO		= 0x11;
