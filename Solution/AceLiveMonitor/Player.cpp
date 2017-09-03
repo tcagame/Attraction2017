@@ -12,11 +12,11 @@
 #include "SynchronousData.h"
 #include "Magazine.h"
 #include "Impact.h"
-#include "Monmotaro.h"
 #include "ShotPlayer.h"
 #include "Office.h"
 #include "World.h"
 #include "Map.h"
+#include "Monmotaro.h"
 #include <assert.h>
 
 //‰æ‘œƒTƒCƒY
@@ -53,7 +53,6 @@ _money( 0 ),
 _virtue( 0 ),
 _charge_count( 0 ),
 _unrivaled_count( MAX_UNRIVALED_COUNT ),
-_monmo( MonmotaroPtr( ) ),
 _action( ACTION_WAIT ) {
 	setRadius( 25 );
 	setDir( DIR_RIGHT );
@@ -106,20 +105,6 @@ void Player::act( ) {
 	actOnCamera( );
 	updateState( );
 	_unrivaled_count++;
-
-	if ( _monmo ) {
-		Monmotaro::Target target;
-		target.id  = _id;
-		target.radius = getRadius( );
-		target.attack = ( _action == ACTION_ATTACK );
-		target.pos = getPos( );
-		target.dir = getDir( );
-		_monmo->setTarget( target );
-		_monmo->update( );
-		if ( _monmo->isFinished( ) ) {
-			_monmo = MonmotaroPtr( );
-		}
-	}
 }
 
 void Player::actOnWaiting( ) {
@@ -403,12 +388,9 @@ void Player::actOnDead( ) {
 }
 
 void Player::actOnCall( ) {
-	if ( !_monmo ) {
-		setAction( ACTION_WAIT );
-		return;
-	}
-
-	if ( _monmo->getAction( ) == Monmotaro::ACTION_MOVE ) {
+	MonmotaroConstPtr monmo( Family::getTask( )->getMonmotaro( ) );
+	
+	if ( monmo->getAction( ) == Monmotaro::ACTION_MOVE ) {
 		setAction( ACTION_WAIT );
 	}
 }
@@ -503,13 +485,6 @@ void Player::updateState( ) {
 	}
 
 	if ( map->getObject( getPos( ) + getVec( ) ) == OBJECT_EVENT_CALL ) {
-		Monmotaro::Target target;
-		target.id  = _id;
-		target.radius = getRadius( );
-		target.attack = false;
-		target.pos = getPos( );
-		target.dir = getDir( );
-		_monmo = MonmotaroPtr( new Monmotaro( _player, Vector( family->getCameraPosX( ), 0 ), target ) );
 		setAction( ACTION_CALL );
 		setVec( Vector( ) );
 	}
@@ -759,8 +734,4 @@ void Player::setDeviceId( int id ) {
 
 int Player::getDeviceId( ) const {
 	return _id;
-}
-
-MonmotaroConstPtr Player::getMonmotaro( ) const {
-	return _monmo;
 }
