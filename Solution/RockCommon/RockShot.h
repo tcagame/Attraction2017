@@ -15,6 +15,7 @@ protected:
 	void setEffectHandle( int effect_handle );
 	double getSize( );
 	int getEffectHandle( );
+	void setPower( int power );
 private:
 	int _effect_handle;
 	int _power;

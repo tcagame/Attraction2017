@@ -67,4 +67,5 @@ void RockShotPlayer::actOutBack( ) {
 
 void RockShotPlayer::setBack( ) {
 	_back = true;
+	setPower( 0 );
 }

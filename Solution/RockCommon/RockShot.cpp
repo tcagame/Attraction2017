@@ -43,3 +43,6 @@ double RockShot::getSize( ) {
 int RockShot::getEffectHandle( ) { 
 	return _effect_handle;
 }
+void RockShot::setPower( int power ) {
+	_power = power;
+}
