@@ -10,6 +10,7 @@
 #include "Family.h"
 #include "Player.h"
 #include "EnemyGama.h"
+#include "Sound.h"
 
 PTR( EnemyGama );
 
@@ -45,6 +46,7 @@ void Armoury::updateEnemy( ) {
 		if ( hit_enemy ) {
 			if ( !hit_enemy->isFinished( ) ) {
 				//エネミーが倒れなかったらショットが当たった位置で爆発
+				Sound::getTask( )->playSE( "yokai_se_25.wav" );
 				Vector impact_pos = _shot_list[ i ]->getPos( );
 				impact_pos.y -= _shot_list[ i ]->getChipSize( ) / 2;
 				int impact_size = 16 * _shot_list[ i ]->getPower( );

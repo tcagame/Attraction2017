@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "ShotMonmotaro.h"
 #include "Armoury.h"
+#include "Sound.h"
 
 //‘¬“x
 const int ENTRY_SPEED = 5;
@@ -114,6 +115,7 @@ void Monmotaro::actOnMove( ) {
 			int random = rand( );
 			pos.x += random % ( chip_size / 2 ) * ( getDir( ) == DIR_RIGHT ? 1 : -1 );
 			pos.y += sin( PI2 / random * getActCount( ) ) * ( chip_size / 2 );
+			Sound::getTask( )->playSE( "yokai_se_27.wav" );
 			ShotMonmotaroPtr shot( ShotMonmotaroPtr( new ShotMonmotaro( ( PLAYER )_tracking, pos, getDir( ), SHOT_POWER ) ) );
 			Armoury::getTask( )->add( shot );
 		}

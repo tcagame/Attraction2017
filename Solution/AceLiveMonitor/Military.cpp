@@ -16,6 +16,8 @@
 #include "Magazine.h"
 #include "SynchronousData.h"
 #include "World.h"
+#include "Sound.h"
+
 
 PTR( Player );
 
@@ -53,6 +55,7 @@ void Military::update( ) {
 				
 				int impact_chip_size = enemy->getChipSize( ) * 2;
 				Magazine::getTask( )->add( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), AREA_STREET, impact_chip_size ) ) );
+				Sound::getTask( )->playSE( "yokai_se_26.wav" );
 				ite = _enemies.erase( ite );
 				continue;
 			}

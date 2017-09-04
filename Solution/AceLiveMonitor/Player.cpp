@@ -111,6 +111,7 @@ void Player::act( ) {
 void Player::actOnWaiting( ) {
 	//デバイスのスティック入力があった場合、action_walk
 	if ( !isStanding( ) ) {
+		Sound::getTask( )->playSE( "yokai_voice_17.wav" );
 		setAction( ACTION_FLOAT );
 		return;
 	}
@@ -134,6 +135,7 @@ void Player::actOnWaiting( ) {
 		return;
 	}
 	if ( isStanding( ) && device->getPush( _device_id ) & BUTTON_C ) {
+		Sound::getTask( )->playSE( "yokai_voice_17.wav" );
 		setAction( ACTION_FLOAT );
 		vec.y = JUMP_POWER;
 	}
@@ -149,6 +151,7 @@ void Player::actOnWalking( ) {
 	DevicePtr device( Device::getTask( ) );
 	Vector vec = getVec( );
 	if ( !isStanding( ) ) {
+		Sound::getTask( )->playSE( "yokai_voice_17.wav" );
 		setAction( ACTION_FLOAT );
 		return;
 	}
@@ -162,6 +165,7 @@ void Player::actOnWalking( ) {
 	}
 
 	if ( isStanding( ) && device->getPush( _device_id ) & BUTTON_C ) {
+		Sound::getTask( )->playSE( "yokai_voice_17.wav" );
 		setAction( ACTION_FLOAT );
 		vec.y = JUMP_POWER;
 	}
@@ -181,6 +185,7 @@ void Player::actOnWalking( ) {
 void Player::actOnBreaking( ) {
 	Vector vec = getVec( );
 	if ( !isStanding( ) ) {
+		Sound::getTask( )->playSE( "yokai_voice_17.wav" );
 		setAction( ACTION_FLOAT );
 		return;
 	}
@@ -193,6 +198,7 @@ void Player::actOnBreaking( ) {
 	}
 	if ( isStanding( ) && device->getPush( _device_id ) & BUTTON_C ) {
 		vec.y = JUMP_POWER;
+		Sound::getTask( )->playSE( "yokai_voice_17.wav" );
 		setAction( ACTION_FLOAT );
 	}
 	if ( vec.x < 0 ) {
@@ -262,6 +268,7 @@ void Player::actOnFloating( ) {
 
 void Player::actOnAttack( ) {
 	int power = ( _charge_count / CHARGE_PHASE_COUNT ) + 1;
+	Sound::getTask( )->playSE( "yokai_se_20.wav" );
 	ShotPlayerPtr shot( new ShotPlayer( _player, getPos( ), getDir( ), power ) );
 	shot->setArea( getArea( ) );
 	Armoury::getTask( )->add( shot );
@@ -272,6 +279,7 @@ void Player::actOnAttack( ) {
 void Player::actOnCharge( ) {
 	DevicePtr device( Device::getTask( ) );
 	if ( !isStanding( ) ) {
+		Sound::getTask( )->playSE( "yokai_voice_17.wav" );
 		setAction( ACTION_FLOAT );
 		return;
 	}
@@ -292,6 +300,7 @@ void Player::actOnCharge( ) {
 		if ( device->getPush( _device_id ) & BUTTON_C ) {
 			vec.y = JUMP_POWER;
 			setVec( vec );
+			Sound::getTask( )->playSE( "yokai_voice_17.wav" );
 			setAction( ACTION_FLOAT );
 			return;
 		}
@@ -491,6 +500,7 @@ void Player::updateState( ) {
 	}
 
 	if ( map->getObject( getPos( ) + getVec( ) ) == OBJECT_EVENT_CALL ) {
+		Sound::getTask( )->playSE( "yokai_voice_06.wav" );
 		setAction( ACTION_CALL );
 		setVec( Vector( ) );
 	}

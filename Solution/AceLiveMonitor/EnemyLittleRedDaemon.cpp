@@ -2,7 +2,7 @@
 #include "SynchronousData.h"
 
 static const int WAIT_ANIM_TIME = 6;
-static const int MAX_HP = 3;
+static const int MAX_HP = 1;
 
 EnemyLittleRedDaemon::EnemyLittleRedDaemon( const Vector& pos ):
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ) {
