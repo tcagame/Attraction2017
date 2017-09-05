@@ -38,6 +38,7 @@ Military::~Military( ) {
 void Military::update( ) {
 	FamilyPtr family( Family::getTask( ) );
 	StoragePtr storage( Storage::getTask( ) );
+	SoundPtr sound = Sound::getTask( );
 	int camera_pos = family->getCameraPosX( );
 	{//main
 		std::list< EnemyPtr >::const_iterator ite = _enemies.begin( );
@@ -55,7 +56,7 @@ void Military::update( ) {
 				
 				int impact_chip_size = enemy->getChipSize( ) * 2;
 				Magazine::getTask( )->add( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), AREA_STREET, impact_chip_size ) ) );
-				Sound::getTask( )->playSE( "yokai_se_26.wav" );
+				sound->playSE( "yokai_se_26.wav" );
 				ite = _enemies.erase( ite );
 				continue;
 			}
@@ -110,6 +111,7 @@ void Military::update( ) {
 			}
 			if ( _boss->isFinished( ) ) {
 				_boss->dropItem( );
+				sound->playSE( "yokai_voice_29.wav" );
 				int impact_chip_size = _boss->getChipSize( ) * 2;
 				Magazine::getTask( )->add( ImpactPtr( new Impact( _boss->getPos( ) + Vector( 0, _boss->getChipSize( ) / 2 ), AREA_EVENT, impact_chip_size ) ) );
 				_boss = EnemyBossPtr( );
@@ -129,7 +131,7 @@ void Military::update( ) {
 				}
 				int impact_chip_size = enemy->getChipSize( ) * 2;
 				Magazine::getTask( )->add( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), AREA_STREET, impact_chip_size ) ) );
-				Sound::getTask( )->playSE( "yokai_se_26.wav" );
+				sound->playSE( "yokai_se_26.wav" );
 				ite = _event_enemies.erase( ite );
 				continue;
 			}
