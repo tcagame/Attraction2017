@@ -106,6 +106,16 @@ void Player::act( ) {
 	actOnCamera( );
 	updateState( );
 	_unrivaled_count++;
+	SynchronousDataPtr data =SynchronousData::getTask( );
+	SoundPtr sound = Sound::getTask( );
+	if ( data->getStatusPower( _player ) <= 4 ) {
+		if( !sound->isPlayingSE( "yokai_se_02.wav" ) ) {
+			sound->playSE( "yokai_se_02.wav" );
+		}
+	}
+	if ( data->getStatusPower( _player ) == 0 ) {
+		sound->stopSE( "yokai_se_02.wav" );
+	}
 }
 
 void Player::actOnWaiting( ) {
