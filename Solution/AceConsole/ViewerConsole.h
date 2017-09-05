@@ -25,6 +25,7 @@ public:
 private:
 	void drawArea( );
 	void drawUI( );
+	void drawDevice( );
 	void drawAreaEvent( );
 	void drawAreaStreet( );
 private:
@@ -36,5 +37,6 @@ private:
 	ImagePtr _image_bar_upper;
 	ImagePtr _image_bar_lower;
 	ImagePtr _image_minimap;
+	ImagePtr _image_device;
 };
 

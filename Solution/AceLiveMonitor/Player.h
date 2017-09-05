@@ -8,6 +8,8 @@ PTR( Monmotaro );
 class Player : public Character {
 public:
 	enum ACTION {
+		ACTION_ENTRY,
+		ACTION_CONTINUE,
 		ACTION_WAIT,
 		ACTION_WALK,
 		ACTION_BRAKE,

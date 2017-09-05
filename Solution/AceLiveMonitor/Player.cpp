@@ -54,7 +54,7 @@ _money( 100 ),
 _virtue( 0 ),
 _charge_count( 0 ),
 _unrivaled_count( MAX_UNRIVALED_COUNT ),
-_action( ACTION_WAIT ) {
+_action( ACTION_ENTRY ) {
 	setRadius( 25 );
 	setDir( DIR_RIGHT );
 }
@@ -63,7 +63,7 @@ Player::~Player( ) {
 }
 
 bool Player::isExist( ) const {
-	return true;
+	return _action != ACTION_ENTRY && _action != ACTION_CONTINUE;
 }
 
 int Player::getDeviceId( ) const {
@@ -138,6 +138,8 @@ void Player::act( ) {
 	actOnCamera( );
 	updateState( );
 	_unrivaled_count++;
+
+
 	SynchronousDataPtr data =SynchronousData::getTask( );
 	SoundPtr sound = Sound::getTask( );
 	if ( data->getStatusPower( _player ) <= 4 ) {
@@ -479,7 +481,9 @@ void Player::damage( int force ) {
 	if ( Debug::getTask( )->isDebug( ) ) {
 		return;
 	}
-	if ( _action == ACTION_DAMEGE ||
+	if ( _action == ACTION_ENTRY ||
+		 _action == ACTION_CONTINUE ||
+		 _action == ACTION_DAMEGE ||
 		 _action == ACTION_BLOW_AWAY ||
 		 _action == ACTION_CALL ||
 		 _unrivaled_count < MAX_UNRIVALED_COUNT ||
@@ -663,11 +667,21 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
 	
 	data->setStatusDevice( _player, _device_id );
-
-	if ( getArea( ) == AREA_STREET ) {
-		data->setStatusState( _player, SynchronousData::STATE_PLAY_STREET ); 
-	} else {
-		data->setStatusState( _player, SynchronousData::STATE_PLAY_EVENT );
+	
+	switch ( _action ) {
+	case ACTION_ENTRY:
+		data->setStatusState( _player, SynchronousData::STATE_ENTRY ); 
+		break;
+	case ACTION_CONTINUE:
+		data->setStatusState( _player, SynchronousData::STATE_CONTINUE ); 
+		break;
+	default:
+		if ( getArea( ) == AREA_STREET ) {
+			data->setStatusState( _player, SynchronousData::STATE_PLAY_STREET ); 
+		} else {
+			data->setStatusState( _player, SynchronousData::STATE_PLAY_EVENT );
+		}
+		break;
 	}
 
 	data->setStatusX( player, ( int )getPos( ).x );

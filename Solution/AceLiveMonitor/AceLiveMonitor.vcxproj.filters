@@ -397,6 +397,12 @@
     <ClCompile Include="ShopItem.cpp">
       <Filter>Item</Filter>
     </ClCompile>
+    <ClCompile Include="ViewerEntry.cpp">
+      <Filter>Viewer</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewerProgress.cpp">
+      <Filter>Viewer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy.h">
@@ -791,6 +797,12 @@
     </ClInclude>
     <ClInclude Include="ShopItem.h">
       <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewerEntry.h">
+      <Filter>Viewer</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewerProgress.h">
+      <Filter>Viewer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

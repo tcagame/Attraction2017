@@ -3,8 +3,10 @@
 #include "Drawer.h"
 
 #include "ViewerStreet.h"
-#include "ViewerStatus.h"
 #include "ViewerEvent.h"
+#include "ViewerStatus.h"
+#include "ViewerEntry.h"
+#include "ViewerProgress.h"
 #include "ViewerTitle.h"
 #include "ViewerDebug.h"
 #include "Debug.h"
@@ -32,12 +34,14 @@ ViewerLive::~ViewerLive( ) {
 }
 
 void ViewerLive::initialize( ) {
-	_viewer_street = ViewerStreetPtr( new ViewerStreet );
-	_viewer_event  = ViewerEventPtr	( new ViewerEvent  );
-	_viewer_title  = ViewerTitlePtr ( new ViewerTitle  );
-	_viewer_status = ViewerStatusPtr( new ViewerStatus );
-	_viewer_debug  = ViewerDebugPtr( new ViewerDebug );
-	_viewer_object = ViewerObjectPtr( new ViewerObject );
+	_viewer_street   = ViewerStreetPtr  ( new ViewerStreet   );
+	_viewer_event    = ViewerEventPtr	( new ViewerEvent    );
+	_viewer_title    = ViewerTitlePtr   ( new ViewerTitle    );
+	_viewer_status   = ViewerStatusPtr  ( new ViewerStatus   );
+	_viewer_entry    = ViewerEntryPtr   ( new ViewerEntry    );
+	_viewer_progress = ViewerProgressPtr( new ViewerProgress );
+	_viewer_debug    = ViewerDebugPtr   ( new ViewerDebug    );
+	_viewer_object   = ViewerObjectPtr  ( new ViewerObject   );
 
 	DrawerPtr drawer = Drawer::getTask( );
 	
@@ -79,7 +83,18 @@ void ViewerLive::update( ) {
 	
 	// ステータス描画
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
-		_viewer_status->draw( ( PLAYER )i, i * VIEW_STATUS_WIDTH, VIEW_STATUS_Y );
+		PLAYER target = ( PLAYER )i;
+		_viewer_status->draw( target, i * VIEW_STATUS_WIDTH, VIEW_STATUS_Y );
+
+		switch ( data->getStatusState( target ) ) {
+		case SynchronousData::STATE_ENTRY:
+			_viewer_entry->draw( target );
+			_viewer_progress->draw( target );
+			break;
+		case SynchronousData::STATE_CONTINUE:
+			//_viewer_continue->draw( target );
+			break;
+		}
 
 		if ( data->getStatusDevice( ( PLAYER )i ) < 0 ) {
 			_image_device->setPos( i * 320 + 50, 600 );

@@ -41,26 +41,34 @@ void ViewerConsole::initialize( ) {
 	_image_minimap = drawer->createImage( "UI/ui_minimap.png" );
 	_image_minimap->setRect( 0, 0, 320, 208 );
 	_image_minimap->setPos( 320, 8 );
+	
+	_image_device = drawer->createImage( "UI/ui_device.png" );
+	int w, h;
+	_image_device->getImageSize( w, h );
+	_image_device->setPos( ( 640 - w ) / 2, ( 480 - h ) / 2 ); 
 }
 
 void ViewerConsole::update( ) {
 	ClientPtr client( Client::getTask( ) );
+	DrawerPtr drawer( Drawer::getTask( ) );
+	
+	// ステータス描画
+	//_viewer_status->draw( );
+	if ( Client::getTask( )->getPhase( ) != "PHASE_CONNECTING" ) {
+		Drawer::getTask( )->drawString( 0, 0, "NOT_CONNECTING" );
+		drawer->flip( );
+		return;
+	}
+
 	if ( !client->isRecievingUDP( ) ) {
 		return;
 	}
-	DrawerPtr drawer( Drawer::getTask( ) );
+
 	drawer->flip( );
 
 	drawArea( );
 	drawUI( );
-	
-	// ステータス描画
-	//_viewer_status->draw( );
-	if ( Client::getTask( )->getPhase( ) == "PHASE_CONNECTING" ) {
-		Drawer::getTask( )->drawString( 0, 0, "CONNECTING" );
-	} else {
-		Drawer::getTask( )->drawString( 0, 0, "NOT_CONNECTING" );
-	}
+	drawDevice( );
 }
 
 void ViewerConsole::drawArea( ) {
@@ -114,4 +122,12 @@ void ViewerConsole::drawUI( ) {
 
 	_viewer_status->draw( _player, 0, 8 );
 	_image_minimap->draw( );
+}
+
+void ViewerConsole::drawDevice( ) {
+	SynchronousDataPtr data( SynchronousData::getTask( ) );
+
+	if ( data->getStatusDevice( _player ) < 0 ) {
+		_image_device->draw( );
+	}
 }

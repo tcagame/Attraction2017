@@ -67,6 +67,9 @@ void Military::update( ) {
 			}
 			for ( int i = 0; i < MAX_PLAYER; i++ ) {
 				PlayerPtr player( family->getPlayer( i ) );
+				if ( player->isExist( ) ) {
+					continue;
+				}
 				if ( player->isOverlapped( enemy ) ) {
 					if ( player->isOnHead( enemy ) ) {
 						player->bound( );

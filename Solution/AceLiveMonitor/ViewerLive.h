@@ -8,6 +8,8 @@ PTR( ViewerStreet );
 PTR( ViewerEvent );
 PTR( ViewerTitle );
 PTR( ViewerStatus );
+PTR( ViewerEntry );
+PTR( ViewerProgress );
 PTR( ViewerDebug );
 PTR( ViewerObject );
 PTR( Image );
@@ -24,8 +26,10 @@ public:
 	void update( );
 private:
 	ViewerStreetPtr _viewer_street;
-	ViewerStatusPtr _viewer_status;
 	ViewerEventPtr _viewer_event;
+	ViewerStatusPtr _viewer_status;
+	ViewerEntryPtr _viewer_entry;
+	ViewerProgressPtr _viewer_progress;
 	ViewerTitlePtr _viewer_title;
 	ViewerObjectPtr _viewer_object;
 	ViewerDebugConstPtr _viewer_debug;
