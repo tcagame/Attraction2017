@@ -28,7 +28,7 @@ bool EnemyGama::isGuide( ) const {
 
 void EnemyGama::setSynchronousData( unsigned char type, int camera_pos ) const {
 	const int ANIM[ ] = {
-		60, 61, 62, 63, 62, 61
+		112, 113, 114, 115
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	int pattern = ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ];
