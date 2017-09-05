@@ -1,5 +1,6 @@
 #include "EnemyWind.h"
 #include "SynchronousData.h"
+#include "Sound.h"
 
 const int WAIT_ANIM_TIME = 5;
 const int GRAPH_WIDTH_NUM = 10;
@@ -58,6 +59,8 @@ void EnemyWind::act( ) {
 		setForce( 3 );
 	}
 	if ( !( getActCount( ) % ( WAIT_ANIM_TIME * 13 ) ) ) {
+		SoundPtr sound = Sound::getTask( );
+		sound->getTask( )->playSE( "yokai_voice_34.wav" );
 		_count = ( _count++ ) % MAX_DESTINATION_POS;
 	}
 }

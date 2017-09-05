@@ -20,7 +20,7 @@ void Impact::update( ) {
 }
 
 void Impact::setSynchronousData( int camera_pos ) const {
-	int ANIM[ ] = { 0, 1, 3, 4 };
+	int ANIM[ ] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14 };
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	int pattern = ( _anim_count * anim_size ) / MAX_ANIM_COUNT;
 	if ( pattern > anim_size - 1 ) {

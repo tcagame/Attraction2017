@@ -6,6 +6,9 @@
 #include "ItemMoney.h"
 #include "ItemVirtue.h"
 #include "SynchronousData.h"
+#include "ItemDango.h"
+#include "ItemEnhancedAttack.h"
+#include "ItemEnhancedCharge.h"
 
 PTR( ItemMoney );
 PTR( ItemVirtue );
@@ -35,9 +38,10 @@ void Storage::update( ) {
 		PlayerPtr hit_player = getOverLappedPlayer( item );
 		if ( hit_player ) {
 			//プレイヤーがアイテムと接触
-			pickUpItem( item, hit_player );
-			ite = _items.erase( ite );
-			continue;
+			if ( pickUpItem( item, hit_player ) ) {
+				ite = _items.erase( ite );
+				continue;
+			}
 		}
 		ite++;
 	}
@@ -112,11 +116,12 @@ void Storage::eraseEventItem( ) {
 	}
 }
 
-void Storage::pickUpItem( ItemPtr item, PlayerPtr player ) {
+bool Storage::pickUpItem( ItemPtr item, PlayerPtr player ) {
+	bool result = true;
 	{//お金
 		ItemMoneyPtr money = std::dynamic_pointer_cast< ItemMoney >( item );
 		if ( money ) {
-			player->pickUpMoney( money->getValue( ) );
+			player->addMoney( money->getValue( ) );
 		}
 	}
 	{//徳
@@ -124,5 +129,36 @@ void Storage::pickUpItem( ItemPtr item, PlayerPtr player ) {
 		if ( virtue ) {
 			player->pickUpVirtue( );
 		}
+	}
+	{//ショップアイテム
+		ShopItemPtr shop_item = std::dynamic_pointer_cast< ShopItem >( item );
+		if ( shop_item ) {
+			int price = shop_item->getPrice( );
+			if ( player->getMoney( ) >= price ) {
+				player->addMoney( -price );
+			} else {
+				//取得できない
+				result = false;
+			}
+		}
+	}
+	return result;
+}
+
+void Storage::createShopItem( ) {
+	{
+		ItemPtr item = ItemPtr( new ItemDango( Vector( 500, 0 ) ) );
+		item->setArea( AREA_EVENT );
+		_items.push_back( item );
+	}
+	{
+		ItemPtr item = ItemPtr( new ItemEnhancedAttack( Vector( 600, 0 ) ) );
+		item->setArea( AREA_EVENT );
+		_items.push_back( item );
+	}
+	{
+		ItemPtr item = ItemPtr( new ItemEnhancedCharge( Vector( 700, 0 ) ) );
+		item->setArea( AREA_EVENT );
+		_items.push_back( item );
 	}
 }

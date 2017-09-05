@@ -1,5 +1,6 @@
 #include "EnemyFlog.h"
 #include "SynchronousData.h"
+#include "Sound.h"
 
 const int WAIT_ANIM_TIME = 5;
 const int JUMP_TIME = WAIT_ANIM_TIME * 6;
@@ -17,7 +18,11 @@ EnemyFlog::~EnemyFlog( ) {
 }
 
 void EnemyFlog::act( ) {
+	SoundPtr sound = Sound::getTask( );
 	if ( isStanding( ) ) {
+		if ( !sound->isPlayingSE( "yokai_voice_05.wav" ) ) {
+			sound->playSE( "yokai_voice_05.wav" );
+		}
 		setVec( Vector( ) );
 	}
 	if ( isStanding( ) && !( ( getActCount( ) + WAIT_ANIM_TIME * 3 ) % JUMP_TIME ) ) {

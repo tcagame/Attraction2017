@@ -2,6 +2,7 @@
 #include "EnemyRedBirdAttack.h"
 #include "Military.h"
 #include "SynchronousData.h"
+#include "Sound.h"
 
 const int WAIT_ANIM_TIME = 5;
 const int ATTACK_TIME = 30;
@@ -11,6 +12,7 @@ const int MOVE_SPEED = -5;
 EnemyRedBird::EnemyRedBird( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP, false ) {
 	setRadius( 36 );
+	Sound::getTask( )->playSE( "yokai_voice_02.wav" );
 }
 
 
