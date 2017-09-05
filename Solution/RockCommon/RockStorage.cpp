@@ -117,6 +117,12 @@ void RockStorage::addDropItem( RockItemPtr item ) {
 	_items.push_back( item );
 }
 
+void RockStorage::addShopItem( RockItemPtr item ) {
+	item->setShopItem( true );
+	_items.push_back( item );
+}
+
+
 void RockStorage::addAlter( RockAlterPtr alter ) {
 	_alters.push_back( alter );
 }
@@ -162,8 +168,8 @@ bool RockStorage::pickUpItem( RockItemPtr item, int player_id ) {
 		}
 	}
 	{//ê_äÌâŒ
-		RockItemFirePtr rock = std::dynamic_pointer_cast< RockItemFire >( item );
-		if ( rock ) {
+		RockItemFirePtr fire = std::dynamic_pointer_cast< RockItemFire >( item );
+		if ( fire ) {
 			if ( _status->getPlayer( player_id ).item & ITEM_FIRE ) {
 				result = false;
 			} else {
@@ -194,6 +200,25 @@ bool RockStorage::pickUpItem( RockItemPtr item, int player_id ) {
 				sender->sendMessage( player_id, Message::COMMAND_TOKU, &virtue );
 			} else {
 				result = false;
+			}
+		}
+	}
+
+	{//ÇæÇÒÇ≤
+		RockItemDangoPtr dango = std::dynamic_pointer_cast< RockItemDango >( item );
+		if ( dango ) {
+			if ( dango->isShopItem( ) ) {
+				int price = dango->getPrice( );
+				if ( _status->getPlayer( player_id ).money >= price ) {
+					int value = -price;
+					sender->sendMessage( player_id, Message::COMMAND_MONEY, &value );
+				} else {
+					result = false;
+				}
+			}
+			if ( result ) {
+				unsigned char item = ITEM_DANGO;
+				sender->sendMessage( player_id, Message::COMMAND_ITEM, &item );
 			}
 		}
 	}
