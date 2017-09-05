@@ -110,8 +110,9 @@ void Player::act( ) {
 
 void Player::actOnWaiting( ) {
 	//デバイスのスティック入力があった場合、action_walk
+	SoundPtr sound = Sound::getTask( );
 	if ( !isStanding( ) ) {
-		Sound::getTask( )->playSE( "yokai_voice_17.wav" );
+		sound->playSE( "yokai_voice_17.wav" );
 		setAction( ACTION_FLOAT );
 		return;
 	}
@@ -132,10 +133,13 @@ void Player::actOnWaiting( ) {
 	}
 	if ( device->getDirY( _device_id ) > 0 ) {
 		setAction( ACTION_CHARGE );
+		sound->playSE( "yokai_se_21.wav", true );
 		return;
 	}
+	sound->stopSE( "yokai_se_21.wav" );
+	sound->stopSE( "yokai_se_22.wav" );
 	if ( isStanding( ) && device->getPush( _device_id ) & BUTTON_C ) {
-		Sound::getTask( )->playSE( "yokai_voice_17.wav" );
+		sound->playSE( "yokai_voice_17.wav" );
 		setAction( ACTION_FLOAT );
 		vec.y = JUMP_POWER;
 	}
@@ -278,13 +282,16 @@ void Player::actOnAttack( ) {
 
 void Player::actOnCharge( ) {
 	DevicePtr device( Device::getTask( ) );
+	SoundPtr sound = Sound::getTask( );
 	if ( !isStanding( ) ) {
-		Sound::getTask( )->playSE( "yokai_voice_17.wav" );
+		sound->playSE( "yokai_voice_17.wav" );
 		setAction( ACTION_FLOAT );
 		return;
 	}
 	if ( device->getPush( _device_id ) & BUTTON_A &&
 		 getActCount( ) > COOL_TIME ) {
+		sound->stopSE( "yokai_se_21.wav" );
+		sound->stopSE( "yokai_se_22.wav" );
 		setAction( ACTION_ATTACK );
 		return;
 	}
@@ -306,9 +313,16 @@ void Player::actOnCharge( ) {
 		}
 	}
 	_charge_count++;
+	if ( _charge_count > 75 ) {
+		sound->stopSE( "yokai_se_21.wav" );
+		if ( !sound->isPlayingSE( "yokai_se_22.wav" ) ) {
+			sound->playSE( "yokai_se_22.wav" );
+		}
+	}
 	if ( _charge_count > MAX_CHARGE_COUNT ) {
 		_charge_count = 0;
 		_over_charge_time = getActCount( );
+		sound->stopSE( "yokai_se_22.wav" );
 		setAction( ACTION_OVER_CHARGE );
 	}
 }

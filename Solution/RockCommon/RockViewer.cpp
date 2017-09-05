@@ -78,6 +78,12 @@ void RockViewer::update( ) {
 }
 
 void RockViewer::drawMap( ) const {
+	std::vector< ModelMV1Ptr > back_ground_models = RockMap::getTask( )->getBackGroundModels( );
+	int back_ground_size = ( int )back_ground_models.size( );
+	for ( int i = 0; i < back_ground_size; i++ ) {
+		back_ground_models[ i ]->draw( );
+	}
+
 	std::vector< ModelMV1Ptr > models = RockMap::getTask( )->getModels( );
 	int size = ( int )models.size( );
 	for ( int i = 0; i < size; i++ ) {

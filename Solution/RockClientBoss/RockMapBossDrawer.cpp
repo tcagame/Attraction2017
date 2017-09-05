@@ -18,7 +18,7 @@ _stage( stage ) {
 	case RockMapBoss::STAGE_FIRE_TO_ROCK:
 	case RockMapBoss::STAGE_ROCK_TO_TREE:
 	case RockMapBoss::STAGE_TREE_TO_FIRE:
-		loadStage( "bossToboss.mv1", "bossToboss_col.mv1" );
+		loadStage( "bossToboss.mv1", "bossToboss_col.mv1", "to_boss_street_bg.mv1" );
 		break;
 	}
 }
@@ -26,7 +26,7 @@ _stage( stage ) {
 RockMapBossDrawer::~RockMapBossDrawer( ) {
 }
 
-void RockMapBossDrawer::loadStage( const std::string map_filename, const std::string col_filename ) {
+void RockMapBossDrawer::loadStage( const std::string map_filename, const std::string col_filename, const std::string back_ground_filename ) {
 	RockMapPtr map( RockMap::getTask( ) );
 	map->resetModels( );
 	std::string map_path = DIRECTORY + map_filename;
@@ -39,6 +39,13 @@ void RockMapBossDrawer::loadStage( const std::string map_filename, const std::st
 	ModelMV1Ptr col_model = ModelMV1Ptr( new ModelMV1 );
 	col_model->load( col_path.c_str( ) );
 	map->addColModel( col_model );
+
+	if ( back_ground_filename.size( ) > 1 ) {
+		std::string back_ground_path = DIRECTORY + back_ground_filename;
+		ModelMV1Ptr back_ground_model = ModelMV1Ptr( new ModelMV1 );
+		back_ground_model->load( back_ground_path.c_str( ) );
+		map->addBackGroundModel( back_ground_model );
+	}
 }
 
 RockMapBoss::STAGE RockMapBossDrawer::getStage( ) const {
