@@ -6,34 +6,27 @@
 #include "RockStudio.h"
 
 static const int MOVE_SPEED = 6;
-static const double EFFECT_NORMAL_SIZE = 10.0;
-static const double EFFECT_CHARGE_SIZE = 5.0;
+static const double EFFECT_NORMAL_SIZE = 20.0;
+static const double EFFECT_CHARGE_SIZE = 15.0;
 static const int ACTIVE_COUNT = 120;
 static const int SHOT_MOVE_HEIGHT = 1;
 
-RockShotPlayer::RockShotPlayer( const int id, const Vector& pos, const Vector& dir, const int power ) :
+RockShotPlayer::RockShotPlayer( const int id, const Vector& pos, const Vector& dir, const int power, bool max_charge ) :
 RockShot( pos, dir, power ),
 _back( false ),
 _target_id( id ) {
-	setVec( dir * MOVE_SPEED );
 	EffectPtr effect = Effect::getTask( );
 	RockStudioPtr studio = RockStudio::getTask( );
-
-	if ( power == MAX_PLAYER_SHOT_POWER ) {
+	if ( max_charge ) {
 		setSize( EFFECT_CHARGE_SIZE );
 		setEffectHandle( effect->playEffect( studio->getEffectHandle( EFFECT_CHARGE_SHOT ) ) );
 	} else {
-		setSize( EFFECT_NORMAL_SIZE );
+		setSize( EFFECT_NORMAL_SIZE * ( ( double )power / MAX_PLAYER_SHOT_POWER ) );
 		setEffectHandle( effect->playEffect( studio->getEffectHandle( EFFECT_SHOT ) ) );
 	}
 
-
-	double angle = Vector( 0, 0, -1 ).angle( dir );
-	if ( Vector( 0, 0, -1 ).cross( dir ).y < 0 ) {
-		angle *= -1;
-	}
-	Vector rotate = Vector( 0, angle, 0 );
-	effect->updateEffectTransform( getEffectHandle( ), getPos( ), getSize( ), rotate );
+	setVec( dir * MOVE_SPEED );
+	act( );
 }
 
 
