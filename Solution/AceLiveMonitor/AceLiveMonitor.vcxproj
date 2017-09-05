@@ -168,6 +168,9 @@
     <ClCompile Include="EnemyShell.cpp" />
     <ClCompile Include="EnemyWaterGhost.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ItemDango.cpp" />
+    <ClCompile Include="ItemEnhancedAttack.cpp" />
+    <ClCompile Include="ItemEnhancedCharge.cpp" />
     <ClCompile Include="ItemFire.cpp" />
     <ClCompile Include="EnemyBat.cpp" />
     <ClCompile Include="EnemyEyeDaemon.cpp" />
@@ -275,6 +278,7 @@
     <ClCompile Include="PopWhiteMist.cpp" />
     <ClCompile Include="PopWind.cpp" />
     <ClCompile Include="Sender.cpp" />
+    <ClCompile Include="ShopItem.cpp" />
     <ClCompile Include="ShotMonmotaro.cpp" />
     <ClCompile Include="ShotPlayer.cpp" />
     <ClCompile Include="Storage.cpp" />
@@ -296,6 +300,9 @@
     <ClInclude Include="EnemyShell.h" />
     <ClInclude Include="EnemyWaterGhost.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemDango.h" />
+    <ClInclude Include="ItemEnhancedAttack.h" />
+    <ClInclude Include="ItemEnhancedCharge.h" />
     <ClInclude Include="ItemFire.h" />
     <ClInclude Include="EnemyBat.h" />
     <ClInclude Include="EnemyEyeDaemon.h" />
@@ -403,6 +410,7 @@
     <ClInclude Include="PopWhiteMist.h" />
     <ClInclude Include="PopWind.h" />
     <ClInclude Include="Sender.h" />
+    <ClInclude Include="ShopItem.h" />
     <ClInclude Include="ShotMonmotaro.h" />
     <ClInclude Include="ShotPlayer.h" />
     <ClInclude Include="Storage.h" />

@@ -20,6 +20,7 @@ public:
 	void initialize( );
 private:
 	void drawMap( ) const;
+	void drawCleannessMap( ) const;
 	void drawEnemy( ) const;
 	void drawPlayer( ) const;
 	void drawBubble( ) const;

@@ -50,7 +50,7 @@ Character( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ),
 _over_charge_time( -1 ),
 _player( player ),
 _device_id( -1 ),
-_money( 0 ),
+_money( 100 ),
 _virtue( 0 ),
 _charge_count( 0 ),
 _unrivaled_count( MAX_UNRIVALED_COUNT ),
@@ -415,6 +415,7 @@ void Player::actOnDead( ) {
 			setArea( AREA_STREET );
 			World::getTask( )->setEvent( EVENT_NONE );
 			Military::getTask( )->createBoss( );
+			Storage::getTask( )->eraseEventItem( );
 			setPos( Vector( Family::getTask( )->getCameraPosX( ) + SCREEN_WIDTH / 2, chip_size ) );
 			Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, chip_size / 2 ), getArea( ), chip_size * 2 ) ) );
 		}
@@ -478,6 +479,7 @@ void Player::updateState( ) {
 	OfficePtr office( Office::getTask( ) );
 	MilitaryPtr militaly( Military::getTask( ) );
 	FamilyPtr family( Family::getTask( ) );
+	StoragePtr storage( Storage::getTask( ) );
 
 	EVENT event = world->getEvent( );
 	if ( event == EVENT_NONE ) {
@@ -512,9 +514,12 @@ void Player::updateState( ) {
 		//ƒCƒxƒ“ƒg‚É“ü‚é‚Æ‚«
 		if ( event != EVENT_NONE ) {
 			world->setEvent( event );
-			World::getTask( )->setEvent( event );
+			storage->eraseEventItem( );
 			if ( event >= EVENT_SHOP ) {
 				office->popUpNPC( );
+			}
+			if ( event == EVENT_SHOP ) {
+				storage->createShopItem( );
 			}
 			militaly->createBoss( );
 			setArea( AREA_EVENT );
@@ -535,7 +540,7 @@ void Player::updateState( ) {
 			setArea( AREA_STREET );
 			world->setEvent( EVENT_NONE );
 			militaly->eraseEventEnemy( );
-			Storage::getTask( )->eraseEventItem( );
+			storage->eraseEventItem( );
 			setPos( Vector( family->getCameraPosX( ) + SCREEN_WIDTH / 2, 0 ) );
 			setVec( Vector( ) );
 		}
@@ -595,7 +600,7 @@ int Player::getMoney( ) const {
 	return _money;
 }
 
-void Player::pickUpMoney( int money ) {
+void Player::addMoney( int money ) {
 	_money += money;
 }
 

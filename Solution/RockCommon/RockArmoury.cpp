@@ -74,3 +74,7 @@ RockEnemyPtr RockArmoury::getOverLappedEnemy( RockShotPtr shot ) const {
 	}
 	return result;
 }
+
+void RockArmoury::clearShot( ) {
+	_shots.clear( );
+}
