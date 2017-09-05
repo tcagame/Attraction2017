@@ -27,11 +27,14 @@ private:
 	enum STATE {
 		STATE_ENTRY,
 		STATE_PLAY,
-		STATE_CONTINUE
+		STATE_CONTINUE,
+		STATE_DEVICE_SYNC,
+		STATE_DEVICE_WAIT,
 	};
 
 
 private:
+	void updatePlay( PLAYER taget );
 	void updateCameraPos( );
 	void updateSettingDevice( );
 	void setSynchronousData( ) const;
@@ -42,5 +45,6 @@ private:
 	double _camera_pos_x;
 	std::array< PlayerPtr, MAX_PLAYER > _player;
 	MonmotaroPtr _monmo;
+	bool _updating_camera;
 };
 
