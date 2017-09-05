@@ -11,6 +11,7 @@ PTR( RockItemRock );
 PTR( RockItemTree );
 PTR( RockItemFire );
 PTR( RockItemToku );
+PTR( RockItemDango );
 PTR( ModelMV1 );
 PTR( RockCasket );
 PTR( RockPopItem );
@@ -27,6 +28,7 @@ public:
 	void update( );
 	void addItem( RockItemPtr item );
 	void addDropItem( RockItemPtr item );
+	void addShopItem( RockItemPtr item );
 	void addAlter( RockAlterPtr object );
 	void addCasket( RockCasketPtr object );
 	std::list< RockItemPtr > getItems( ) const;

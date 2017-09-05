@@ -116,7 +116,11 @@ void MessageReceiver::excuteMoney( std::vector< std::string > command ) {
 		int player_num = std::atoi( command[ 1 ].c_str( ) );
 		int add = std::atoi( command[ 2 ].c_str( ) );
 		if ( player_num >= 0 && player_num <= ROCK_PLAYER_NUM ) {
-			_status->getPlayer( player_num ).money += add;
+			if ( ( int )_status->getPlayer( player_num ).money + add < 0 ) {
+				_status->getPlayer( player_num ).money = 0;
+			} else {
+				_status->getPlayer( player_num ).money += add;
+			}
 		}
 	}
 }

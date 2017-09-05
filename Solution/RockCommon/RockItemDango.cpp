@@ -1,8 +1,10 @@
 #include "RockItemDango.h"
 #include "RockDollHouse.h"
 
+const int PRICE = 10000;
+
 RockItemDango::RockItemDango( const Vector& pos ) :
-RockItem( pos, DOLL_DANGO ) {
+RockItem( pos, DOLL_DANGO, PRICE ) {
 }
 
 
