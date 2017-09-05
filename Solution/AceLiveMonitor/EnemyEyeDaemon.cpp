@@ -2,7 +2,7 @@
 #include "SynchronousData.h"
 
 static const int WAIT_ANIM_TIME = 5;
-static const int MAX_HP = 2;
+static const int MAX_HP = 1;
 const int MOVE_SPEED = 1;
 const int JUMP_COUNT = 6;
 
