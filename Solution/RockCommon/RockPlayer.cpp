@@ -30,6 +30,7 @@ static const int HEIGHT = 20;
 
 //チャージ時間
 static const int MAX_CHARGE_COUNT = 100;
+static const int INTERVAL_TIME = 10;
 //チャージエフェクト位置
 static const Vector EFFECT_ADJUST( 0, 15, 0 );
 
@@ -54,6 +55,7 @@ _effect_handle( -1 ),
 _ancestors( ancestors ),
 _bubble_count( 0 ),
 _damage( 0 ),
+_interval( 0 ),
 _continue( false ),
 _damage_count( DAMAGE_COUNT ) {
 	_id = id;
@@ -107,6 +109,7 @@ void RockPlayer::act( ) {
 	}
 
 	_damage_count++;
+	_interval++;
 }
 
 void RockPlayer::updateEffect( ) {
@@ -213,6 +216,7 @@ void RockPlayer::actOnWaiting( ) {
 	//死亡
 	if ( player.power <= 0 ) {
 		setAction( ACTION_DEAD );
+		setVec( Vector( ) );
 		return;
 	}
 	//ジャンプ
@@ -226,7 +230,8 @@ void RockPlayer::actOnWaiting( ) {
 		}
 	}
 	//攻撃
-	if ( player.device_button & BUTTON_A ) {
+	if ( player.device_button & BUTTON_A &&
+		 _interval > INTERVAL_TIME ) {
 		setAction( ACTION_CHARGE );
 		return;
 	}
@@ -253,11 +258,13 @@ void RockPlayer::actOnJumping( ) {
 	//死亡
 	if ( player.power <= 0 ) {
 		setAction( ACTION_DEAD );
+		setVec( Vector( ) );
 		return;
 	}
 	if ( isStanding( ) ) {
 	//攻撃
-		if ( player.device_button & BUTTON_A ) {
+		if ( player.device_button & BUTTON_A &&
+			 _interval > INTERVAL_TIME ) {
 			setAction( ACTION_CHARGE );
 		} else {
 			setAction( ACTION_WAIT );
@@ -285,6 +292,7 @@ void RockPlayer::actOnWalking( ) {
 	//死亡
 	if ( player.power <= 0 ) {
 		setAction( ACTION_DEAD );
+		setVec( Vector( ) );
 		return;
 	}
 	//ジャンプ
@@ -341,6 +349,7 @@ void RockPlayer::actOnAttacking( ) {
 		Effect::getTask( )->stopEffect( _effect_handle );
 		_attack_count = 0;
 		_effect_handle = -1;
+		_interval = 0;
 	}
 }
 
@@ -349,6 +358,7 @@ void RockPlayer::actOnCharging( ) {
 	//死亡
 	if ( player.power <= 0 ) {
 		setAction( ACTION_DEAD );
+		setVec( Vector( ) );
 		_attack_count = 0;
 		_effect_handle = -1;
 		return;
@@ -394,6 +404,7 @@ void RockPlayer::actOnBraking( ) {
 	//死亡
 	if ( player.power <= 0 ) {
 		setAction( ACTION_DEAD );
+		setVec( Vector( ) );
 		return;
 	}
 	//水平方向のベクトル
@@ -402,7 +413,8 @@ void RockPlayer::actOnBraking( ) {
 	vec.y = 0;
 	//ベクトルがない場合は待機かチャージに移行する
 	if ( vec.getLength( ) < 0.001 ) {
-		if ( player.device_button & BUTTON_A ) {
+		if ( player.device_button & BUTTON_A &&
+			 _interval > INTERVAL_TIME ) {
 			setAction( ACTION_CHARGE );
 		} else {
 			setAction( ACTION_WAIT );
