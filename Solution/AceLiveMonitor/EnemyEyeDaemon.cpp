@@ -1,5 +1,6 @@
 #include "EnemyEyeDaemon.h"
 #include "SynchronousData.h"
+#include "Sound.h"
 
 static const int WAIT_ANIM_TIME = 5;
 static const int MAX_HP = 1;
@@ -26,11 +27,13 @@ void EnemyEyeDaemon::act( ) {
 		}
 	}
 	if ( getActCount( ) % JUMP_COUNT == 0 && isStanding( ) ) {
+		Sound::getTask( )->playSE( "yokai_se_04.wav" );
 		Vector vec = getVec( );
 		vec.y -= 12;
 		setVec( vec );
 	}
 	if ( !_air_jump && getVec( ).y > 0 ) {
+		Sound::getTask( )->playSE( "yokai_se_04.wav" );
 		_air_jump = true;
 		Vector vec( getVec( ) );
 		vec.y -= 12;
