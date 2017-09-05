@@ -114,7 +114,17 @@ void Player::act( ) {
 		}
 	}
 	if ( data->getStatusPower( _player ) == 0 ) {
-		sound->stopSE( "yokai_se_02.wav" );
+		bool stop = true;
+		for ( int i = 0; i < MAX_PLAYER; i++ ) {
+			if ( data->getStatusPower( ( PLAYER ) i ) <= 4 && 
+				 _player != i &&
+				 data->getStatusPower( ( PLAYER ) i ) > 0 ) {
+				stop = false;
+			}
+		}
+		if ( stop ) {
+			sound->stopSE( "yokai_se_02.wav" );
+		}
 	}
 }
 
