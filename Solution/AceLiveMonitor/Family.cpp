@@ -34,19 +34,6 @@ Family::~Family( ) {
 void Family::initialize( ) {
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		_player[ i ] = PlayerPtr( new Player( ( PLAYER )i, INIT_PLAYER_POS[ i ] ) );
-		_state[ i ] = STATE_DEVICE_WAIT;
-	}
-	_state[ 0 ] = STATE_DEVICE_SYNC;
-	_setting_device = 0;
-
-	// デバイスが接続されていなかったら、キーボードで全プレイヤーを操作できるようにする
-	DevicePtr device = Device::getTask( );
-	if ( device->getDeviceNum( ) == 0 ) {
-		for ( int i = 0; i < MAX_PLAYER; i++ ) {
-			_player[ i ]->setDeviceId( 0 );
-			_state[ i ] = STATE_PLAY; // とりあえず全キャラ登場
-		}
-		_setting_device = MAX_PLAYER;
 	}
 	
 	_monmo = MonmotaroPtr( new Monmotaro( Vector( ) ) );
@@ -60,26 +47,10 @@ void Family::initialize( ) {
 void Family::update( ) {
 
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
-		switch ( _state[ i ] ) {
-		case STATE_DEVICE_WAIT:
-			break;
-		case STATE_DEVICE_SYNC:
-			break;
-		case STATE_ENTRY:
-			break;
-		case STATE_PLAY:
-			updatePlay( ( PLAYER )i );
-			break;
-		case STATE_CONTINUE:
-			break;
-		}
+		updatePlayer( ( PLAYER )i );
 	}
 	
 	updateCameraPos( );
-
-	// device
-	//updateSettingDevice( );
-	//updateCommon( );
 
 	_monmo->update( );
 
@@ -87,10 +58,13 @@ void Family::update( ) {
 	setSynchronousData( );
 }
 
-void Family::updatePlay( PLAYER target ) {
+void Family::updatePlayer( PLAYER target ) {
 	// プレイヤー更新
 	_player[ target ]->update( );
 	
+	if ( !_player[ target ]->isExist( ) ) {
+		return;
+	}
 	if ( _player[ target ]->getArea( ) == AREA_EVENT ) {
 		return;
 	}
@@ -102,7 +76,7 @@ void Family::updatePlay( PLAYER target ) {
 
 	// playerの頭の上で跳ねる
 	for ( int j = 0; j < MAX_PLAYER; j++ ) {
-		if ( _state[ j ] != STATE_PLAY ) {
+		if ( !_player[ j ]->isExist( ) ) {
 			continue;
 		}
 		if ( _player[ j ]->getArea( ) != AREA_STREET ) {
@@ -116,8 +90,6 @@ void Family::updatePlay( PLAYER target ) {
 			_player[ target ]->bound( );
 		}
 	}
-
-	
 }
 
 PlayerConstPtr Family::getPlayer( int player_id ) const {
@@ -180,52 +152,9 @@ void Family::setSynchronousData( ) const {
 
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		PlayerConstPtr player = getPlayer( i );
-
-		switch ( _state[ i ] ) {
-		case STATE_ENTRY:
-			data->setStatusState( ( PLAYER )i, SynchronousData::STATE_ENTRY ); 
-			break;
-		case STATE_CONTINUE:
-			data->setStatusState( ( PLAYER )i, SynchronousData::STATE_CONTINUE); 
-			break;
-		case STATE_PLAY:
-			if ( player->getArea( ) == AREA_STREET ) {
-				data->setStatusState( ( PLAYER )i, SynchronousData::STATE_PLAY_STREET ); 
-			} else {
-				data->setStatusState( ( PLAYER )i, SynchronousData::STATE_PLAY_EVENT );
-			}
-			player->setSynchronousData( ( PLAYER )i, getCameraPosX( ) );
-		}
-
+		player->setSynchronousData( ( PLAYER )i, getCameraPosX( ) );
 	}
 }
-
-void Family::updateSettingDevice( ) {
-	if ( !( _setting_device < MAX_PLAYER ) ) {
-		return;
-	}
-
-	DevicePtr device( Device::getTask( ) );
-	int device_num = device->getDeviceNum( );
-	for ( int i = 0; i < device_num; i++ ) {
-		if ( device->getButton( i ) &&
-			 !isSettingDevice( i ) ) {
-			_player[ _setting_device ]->setDeviceId( i );
-			_setting_device++;
-		}
-	}
-}
-
-bool Family::isSettingDevice( int device_id ) const {
-	bool result = false;
-	for ( int i = 0; i < MAX_PLAYER; i++ ) {
-		if ( _player[ i ]->getDeviceId( ) == device_id ) {
-			result = true;
-		}
-	}
-	return result;
-}
-
 
 MonmotaroConstPtr Family::getMonmotaro( ) const {
 	return _monmo;

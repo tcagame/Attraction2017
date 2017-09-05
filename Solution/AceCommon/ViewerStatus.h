@@ -16,7 +16,7 @@ private:
 	void drawMoney( int money, int sx, int sy ) const;
 	void drawVirtue( int virtue, int sx, int sy ) const;
 private:
-	ImagePtr _status_flame;
+	ImagePtr _image_frame;
 	ImagePtr _status_ui;
 	std::array< ImagePtr, MAX_PLAYER > _image_bustup;
 };

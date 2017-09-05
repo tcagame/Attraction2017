@@ -25,7 +25,7 @@ public:
 	virtual ~Player( );
 public:
 	void act( );
-	void setDeviceId( int id );
+	void updatetDevice( );
 	int getDeviceId( ) const;
 	void damage( int force );
 	ACTION getAction( ) const;
@@ -38,6 +38,7 @@ public:
 	void pickUpMoney( int money );
 	void pickUpVirtue( );
 	void setSynchronousData( PLAYER player, int camera_pos ) const;
+	bool isExist( ) const;
 private:
 	void actOnWaiting( );
 	void actOnWalking( );

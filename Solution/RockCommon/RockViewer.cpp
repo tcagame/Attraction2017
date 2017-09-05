@@ -48,7 +48,7 @@ RockViewer::~RockViewer( ) {
 
 void RockViewer::initialize( ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
-	_status_flame = drawer->createImage( "UI/status_plate.png" );
+	_image_frame = drawer->createImage( "UI/status_plate.png" );
 	_status_ui = drawer->createImage( "UI/ui.png" );
 	_status_num = drawer->createImage( "UI/ui_num.png" );
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {		
@@ -242,8 +242,8 @@ void RockViewer::drawUI( ) const {
 			continue;
 		}
 		int player_status_pos = i * ( SCREEN_WIDTH / 4 );
-		_status_flame->setPos( player_status_pos, DRAW_UI_Y );
-		_status_flame->draw( );
+		_image_frame->setPos( player_status_pos, DRAW_UI_Y );
+		_image_frame->draw( );
 
 		{//(POWER)
 			int tw = HP_GRAPH_WIDTH * _status->getPlayer( i ).power;

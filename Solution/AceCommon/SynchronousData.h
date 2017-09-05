@@ -65,6 +65,7 @@ public:
 	int getSize( );
 	void setEvent( EVENT event );
 	void setCameraX( int x );
+	void setStatusDevice( PLAYER player, int id );
 	void setStatusX( PLAYER player, int x );
 	void setStatusPower( PLAYER player, int power );
 	void setStatusMoney( PLAYER player, int money );
@@ -82,6 +83,7 @@ private:
 			long camera_x;
 			char event;
 			struct Status {
+				char          device;
 				long          x;
 				unsigned char power;
 				unsigned char money;

@@ -70,6 +70,10 @@ unsigned char SynchronousData::getStatusState( PLAYER player ) const {
 	return _data.status[ player ].state;
 }
 
+void SynchronousData::setStatusDevice( PLAYER player, int id ) {
+	_data.status[ player ].device = ( char )id;
+}
+
 void SynchronousData::setStatusX( PLAYER player, int x ) {
 	_data.status[ player ].x = ( long )x;
 }

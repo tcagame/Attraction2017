@@ -10,9 +10,8 @@ const int BUSTUP_OY = 10;
 
 ViewerStatus::ViewerStatus( ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
-	_status_flame = drawer->createImage( "UI/status_plate.png" );
+	_image_frame = drawer->createImage( "UI/status_plate.png" );
 	_status_ui = drawer->createImage( "UI/ui.png" );
-
 	_image_bustup[ PLAYER_TAROSUKE ] = drawer->createImage( "UI/ui_bustup_tarosuke.png" );
 	_image_bustup[ PLAYER_TAROJIRO ] = drawer->createImage( "UI/ui_bustup_tarojiro.png" );
 	_image_bustup[ PLAYER_GARISUKE ] = drawer->createImage( "UI/ui_bustup_garisuke.png" );
@@ -23,11 +22,11 @@ ViewerStatus::~ViewerStatus( ) {
 }
 
 void ViewerStatus::draw( PLAYER player, int sx, int sy ) const {
-	_status_flame->setPos( sx, sy );
-	_status_flame->draw( );
 
-	SynchronousDataPtr data(SynchronousData::getTask());
+	SynchronousDataPtr data( SynchronousData::getTask( ) );
 
+	_image_frame->setPos( sx, sy );
+	_image_frame->draw( );
 	drawBustup( player, sx, sy );
 	drawPower(  data->getStatusPower( player ), sx, sy );
 	drawMoney(  data->getStatusMoney( player ), sx, sy );

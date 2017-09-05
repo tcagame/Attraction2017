@@ -27,7 +27,6 @@ void ViewerDebug::draw( ) const {
 	drawShot( );
 	drawChip( );
 	drawConnect( );
-	drawDeviceId( );
 }
 
 void ViewerDebug::drawPlayer( ) const {
@@ -204,41 +203,5 @@ void ViewerDebug::drawConnect( ) const {
 	for ( int i = 0; i < Server::MAX_MACHINES; i++ ) {
 		drawer->drawString( sx, sy, "IP:%s", server->getMachineIPStr( i ).c_str( ) );
 		sy += 20;
-	}
-}
-
-void ViewerDebug::drawDeviceId( ) const {
-	DrawerPtr drawer( Drawer::getTask( ) );
-	FamilyPtr family( Family::getTask( ) );
-	int sx = 150;
-	int sy = 0;
-	const int MAX_DEVICE_NUM = 4;
-	const char * MESSAGE[ ] = {
-		"TAROSUKE",
-		"GARISUKE",
-		"TAROJIRO",
-		"TAROMI",
-		"STAND BY",
-		"NOT CONNECT"
-	};
-	for ( int i = 0; i < MAX_DEVICE_NUM; i++, sy += 20 ) {
-		bool not_setting = true;
-		for ( int j = 0; j < MAX_PLAYER; j++ ) {
-			int id = family->getPlayer( j )->getDeviceId( );
-			if ( id < 0 ) {
-				continue;
-			}
-			if ( i == id ) {
-				drawer->drawString( sx, sy, "devive%d %s", i, MESSAGE[ j ] );
-				not_setting = false;
-			}
-		}
-		if ( not_setting ) {
-			int massage_num = 4;
-			if ( i >= Device::getTask( )->getDeviceNum( ) ) {
-				massage_num++;
-			}
-			drawer->drawString( sx, sy, "devive%d %s", i, MESSAGE[ massage_num ] );
-		}
 	}
 }

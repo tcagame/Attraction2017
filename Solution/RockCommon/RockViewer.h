@@ -32,7 +32,7 @@ private:
 	void drawMovie( ) const;
 private:
 	StatusPtr _status;
-	ImagePtr _status_flame;
+	ImagePtr _image_frame;
 	ImagePtr _status_ui;
 	ImagePtr _status_num;
 	std::vector< ImagePtr > _breasts;

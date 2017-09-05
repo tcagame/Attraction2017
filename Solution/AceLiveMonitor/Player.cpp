@@ -62,47 +62,81 @@ _action( ACTION_WAIT ) {
 Player::~Player( ) {
 }
 
-void Player::act( ) {
+bool Player::isExist( ) const {
+	return true;
+}
+
+int Player::getDeviceId( ) const {
+	return _device_id;
+}
+
+void Player::updatetDevice( ) {
+	DevicePtr device = Device::getTask( );
 	if ( _device_id < 0 ) {
-		actOnCamera( );
-		return;
+		unsigned char button[ MAX_PLAYER ];
+		button[ PLAYER_TAROSUKE ] = BUTTON_C;
+		button[ PLAYER_TAROJIRO ] = BUTTON_D;
+		button[ PLAYER_GARISUKE ] = BUTTON_A;
+		button[ PLAYER_TAROMI   ] = BUTTON_B;
+
+		int num = device->getDeviceNum( );
+		if ( num == 0 ) {
+			num = 1;
+		}
+		for ( int i = 0; i < num; i++ ) {
+			if ( device->getButton( i ) == button[ _player ] ) {
+				_device_id = i;
+			}
+		}
+	} else {
+		if ( device->getDirY( ) < 0 &&
+			device->getButton( ) == BUTTON_E + BUTTON_F ) {
+			_device_id = -1;
+		}
+	}
+}
+
+void Player::act( ) {
+	updatetDevice( );
+
+	if ( _device_id >= 0 ) {
+		switch ( _action ) {
+		case ACTION_WAIT:
+			actOnWaiting( );
+			break;
+		case ACTION_WALK:
+			actOnWalking( );
+			break;
+		case ACTION_BRAKE:
+			actOnBreaking( );
+			break;
+		case ACTION_FLOAT:
+			actOnFloating( );
+			break;
+		case ACTION_ATTACK:
+			actOnAttack( );
+			break;
+		case ACTION_CHARGE:
+			actOnCharge( );
+			break;
+		case ACTION_OVER_CHARGE:
+			actOnOverCharge( );
+			break;
+		case ACTION_DAMEGE:
+			actOnDamege( );
+			break;
+		case ACTION_BLOW_AWAY:
+			actOnBlowAway( );
+			break;
+		case ACTION_DAED:
+			actOnDead( );
+			break;
+		case ACTION_CALL:
+			actOnCall( );
+			break;
+		}
 	}
 
-	switch ( _action ) {
-	case ACTION_WAIT:
-		actOnWaiting( );
-		break;
-	case ACTION_WALK:
-		actOnWalking( );
-		break;
-	case ACTION_BRAKE:
-		actOnBreaking( );
-		break;
-	case ACTION_FLOAT:
-		actOnFloating( );
-		break;
-	case ACTION_ATTACK:
-		actOnAttack( );
-		break;
-	case ACTION_CHARGE:
-		actOnCharge( );
-		break;
-	case ACTION_OVER_CHARGE:
-		actOnOverCharge( );
-		break;
-	case ACTION_DAMEGE:
-		actOnDamege( );
-		break;
-	case ACTION_BLOW_AWAY:
-		actOnBlowAway( );
-		break;
-	case ACTION_DAED:
-		actOnDead( );
-		break;
-	case ACTION_CALL:
-		actOnCall( );
-		break;
-	}
 	actOnCamera( );
 	updateState( );
 	_unrivaled_count++;
@@ -604,6 +638,14 @@ void Player::setAction( ACTION action ) {
 
 void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	
+	data->setStatusDevice( _player, _device_id );
+
+	if ( getArea( ) == AREA_STREET ) {
+		data->setStatusState( _player, SynchronousData::STATE_PLAY_STREET ); 
+	} else {
+		data->setStatusState( _player, SynchronousData::STATE_PLAY_EVENT );
+	}
 
 	data->setStatusX( player, ( int )getPos( ).x );
 	data->setStatusPower( player, getPower( ) );
@@ -749,12 +791,4 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		int time = ( getActCount( ) / 2 ) % 2;
 		data->addObject( area, SynchronousData::TYPE_SHOT, ANIM[ phase + time ], attribute, x, y );
 	}
-}
-
-void Player::setDeviceId( int id ) {
-	_device_id = id;
-}
-
-int Player::getDeviceId( ) const {
-	return _device_id;
 }
