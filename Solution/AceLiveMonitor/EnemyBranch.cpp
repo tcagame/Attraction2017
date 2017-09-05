@@ -4,7 +4,7 @@
 #include "SynchronousData.h"
 
 static const int WAIT_ANIM_TIME = 5;
-static const int ATTACK_TIME = WAIT_ANIM_TIME * 11;
+static const int ATTACK_TIME = WAIT_ANIM_TIME * 10;
 static const int MAX_HP = 3;
 
 EnemyBranch::EnemyBranch( const Vector& pos ) :
@@ -26,7 +26,7 @@ void EnemyBranch::act( ) {
 }
 
 void EnemyBranch::setSynchronousData( unsigned char type, int camera_pos ) const {
-	const int ANIM[ ] = { 68, 69, 70, 71, 72, 73, 74, 71, 70, 79, 68  };
+	const int ANIM[ ] = { 99, 100, 101, 102, 103, 104, 105, 101, 100, 99  };
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	Vector pos = getPos( );
 	int x = ( int )pos.x;

@@ -9,7 +9,7 @@ static const int ATTACK_TIME = 50;
 static const int MAX_HP = 12;
 
 EnemyBossMonsterTree::EnemyBossMonsterTree( const Vector& pos ) :
-EnemyBoss( pos, 256, MAX_HP ) {
+EnemyBoss( pos, 192, MAX_HP ) {
 	_branch = EnemyPtr( new EnemyBranch( getPos( ) + Vector( -70, -20 ) ) );
 	_branch->setArea( AREA_EVENT );
 	Military::getTask( )->popUpEventEnemy( _branch );
@@ -33,7 +33,7 @@ void EnemyBossMonsterTree::setSynchronousData( unsigned char type, int camera_po
 		area = AREA_STREET;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
-	data->addObject( area, type, 4, 0, x, y, getChipSize( ) );
+	data->addObject( area, type, 10, 0, x, y, getChipSize( ) );
 	
 }
 

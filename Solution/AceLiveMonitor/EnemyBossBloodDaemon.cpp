@@ -3,7 +3,7 @@
 #include "Storage.h"
 #include "SynchronousData.h"
 
-static const int WAIT_ANIM_TIME = 10;
+static const int WAIT_ANIM_TIME = 7;
 static const int MAX_HP = 12;
 
 EnemyBossBloodDaemon::EnemyBossBloodDaemon( const Vector& pos ) :
@@ -20,7 +20,8 @@ void EnemyBossBloodDaemon::act( ) {
 
 void EnemyBossBloodDaemon::setSynchronousData( unsigned char type, int camera_pos ) const {
 	const int ANIM[ ] = {
-		0, 1, 2, 3
+		48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63,
+		64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	

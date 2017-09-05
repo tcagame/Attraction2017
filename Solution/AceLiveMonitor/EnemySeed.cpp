@@ -21,7 +21,7 @@ void EnemySeed::act( ) {
 }
 
 void EnemySeed::setSynchronousData( unsigned char type, int camera_pos ) const {
-	int anim = 278;
+	int anim = 405;
 	if ( isStanding( ) ) {
 		anim++;
 	}

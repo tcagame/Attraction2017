@@ -14,7 +14,7 @@ EnemyLittleRedDaemon::~EnemyLittleRedDaemon( ) {
 
 void EnemyLittleRedDaemon::setSynchronousData( unsigned char type, int camera_pos ) const {
 	const int ANIM[ ] = {
-		84, 85, 86, 87, 88, 89
+		393, 394, 395, 396, 397
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	

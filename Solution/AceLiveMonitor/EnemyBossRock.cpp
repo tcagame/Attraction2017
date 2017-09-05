@@ -29,9 +29,9 @@ void EnemyBossRock::setSynchronousData( unsigned char type, int camera_pos ) con
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
 	//Šâ
-	data->addObject( area, type, 4, 0, x, y, getChipSize( ) );
+	data->addObject( area, type, 0, 0, x, y, getChipSize( ) );
 	//“ê
-	data->addObject( area, type, 7, 0, x, y, getChipSize( ) );
+	data->addObject( area, type, 2, 0, x, y, getChipSize( ) );
 
 	
 }

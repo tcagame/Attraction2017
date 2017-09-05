@@ -191,7 +191,7 @@ ViewerObject::Sprite ViewerObject::getSpriteEnemy( GRAPH graph, int x, int y, un
 ViewerObject::Sprite ViewerObject::getSpriteEnemyBoss( GRAPH graph, int x, int y, unsigned char attribute, int pattern, int size ) const {
 	Sprite sprite;
 	sprite.graph = graph;
-	int width_num = 1024 / size;
+	int width_num = 2048 / size;
 	sprite.tx = pattern % width_num * size;
 	sprite.ty = pattern / width_num * size;
 	sprite.tw = size;

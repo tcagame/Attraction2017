@@ -6,7 +6,7 @@
 static const int WAIT_ANIM_TIME = 10;
 static const int WAIT_POP_TIME = 30000;
 static const int MAX_HP = 12;
-static const int CHIP_SIZE = 256;
+static const int CHIP_SIZE = 192;
 
 EnemyBossRedDaemon::EnemyBossRedDaemon( const Vector& pos ) :
 EnemyBoss( pos, CHIP_SIZE, MAX_HP ) {
@@ -26,7 +26,7 @@ void EnemyBossRedDaemon::act( ) {
 
 void EnemyBossRedDaemon::setSynchronousData( unsigned char type, int camera_pos ) const {
 	const int ANIM[ ] = {
-		8, 9
+		40, 41
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	
@@ -45,7 +45,7 @@ void EnemyBossRedDaemon::setSynchronousData( unsigned char type, int camera_pos 
 	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], 0, x, y, chip_size );
 	//˜r
 	y -= ( int )( sin( ( double )getActCount( ) / PI * 1 ) * 40 ) - 20;
-	data->addObject( area, type, 10, 0, x, y, chip_size );
+	data->addObject( area, type, 42, 0, x, y, chip_size );
 	
 }
 
