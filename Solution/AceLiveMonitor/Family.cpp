@@ -34,61 +34,90 @@ Family::~Family( ) {
 void Family::initialize( ) {
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		_player[ i ] = PlayerPtr( new Player( ( PLAYER )i, INIT_PLAYER_POS[ i ] ) );
-		//_state[ i ] = STATE_ENTRY;
-		_state[ i ] = STATE_PLAY; // とりあえず全キャラ登場
+		_state[ i ] = STATE_DEVICE_WAIT;
 	}
+	_state[ 0 ] = STATE_DEVICE_SYNC;
+	_setting_device = 0;
+
+	// デバイスが接続されていなかったら、キーボードで全プレイヤーを操作できるようにする
+	DevicePtr device = Device::getTask( );
+	if ( device->getDeviceNum( ) == 0 ) {
+		for ( int i = 0; i < MAX_PLAYER; i++ ) {
+			_player[ i ]->setDeviceId( 0 );
+			_state[ i ] = STATE_PLAY; // とりあえず全キャラ登場
+		}
+		_setting_device = MAX_PLAYER;
+	}
+	
 	_monmo = MonmotaroPtr( new Monmotaro( Vector( ) ) );
 	double camera_pos = 0.0;
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		camera_pos += _player[ i ]->getPos( ).x;
 	}
 	_camera_pos_x = camera_pos * 0.25 - SCREEN_WIDTH / 2;
-	_setting_device = 0;
 }
 
 void Family::update( ) {
-	// device
-	updateSettingDevice( );
 
-	bool update_camera = true;
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
-		if ( _state[ i ] != STATE_PLAY ) {
-			continue;
-		}
-
-		// playerの頭の上で跳ねる
-		for ( int j = 0; j < MAX_PLAYER; j++ ) {
-			if ( _state[ j ] != STATE_PLAY ) {
-				continue;
-			}
-			if ( i == j ) {
-				continue;
-			}
-			if ( _player[ i ]->isOverlapped( _player[ j ] ) &&
-				 _player[ i ]->isOnHead( _player[ j ] ) ) {
-				_player[ i ]->bound( );
-			}
-		}
-
-		// プレイヤー更新
-		_player[ i ]->update( );
-		
-		//キャラクターが右端にいる場合、カメラのポジションを変えない
-		if ( _player[ i ]->getArea( ) != AREA_EVENT ) {
-			if ( ( _camera_pos_x - SCREEN_WIDTH / 2 ) + SCROLL_BUFFER > _player[ i ]->getPos( ).x ) {
-				update_camera = false;
-			}
+		switch ( _state[ i ] ) {
+		case STATE_DEVICE_WAIT:
+			break;
+		case STATE_DEVICE_SYNC:
+			break;
+		case STATE_ENTRY:
+			break;
+		case STATE_PLAY:
+			updatePlay( ( PLAYER )i );
+			break;
+		case STATE_CONTINUE:
+			break;
 		}
 	}
 	
-	_monmo->update( );
+	updateCameraPos( );
 
-	if ( update_camera ) {
-		updateCameraPos( );
-	}
+	// device
+	//updateSettingDevice( );
+	//updateCommon( );
+
+	_monmo->update( );
 
 	// 同期データ
 	setSynchronousData( );
+}
+
+void Family::updatePlay( PLAYER target ) {
+	// プレイヤー更新
+	_player[ target ]->update( );
+	
+	if ( _player[ target ]->getArea( ) == AREA_EVENT ) {
+		return;
+	}
+		
+	//キャラクターが右端にいる場合、カメラのポジションを変えない
+	if ( ( _camera_pos_x - SCREEN_WIDTH / 2 ) + SCROLL_BUFFER > _player[ target ]->getPos( ).x ) {
+		_updating_camera = false;
+	}
+
+	// playerの頭の上で跳ねる
+	for ( int j = 0; j < MAX_PLAYER; j++ ) {
+		if ( _state[ j ] != STATE_PLAY ) {
+			continue;
+		}
+		if ( _player[ j ]->getArea( ) != AREA_STREET ) {
+			continue;
+		}
+		if ( target == j ) {
+			continue;
+		}
+		if ( _player[ target ]->isOverlapped( _player[ j ] ) &&
+				_player[ target ]->isOnHead( _player[ j ] ) ) {
+			_player[ target ]->bound( );
+		}
+	}
+
+	
 }
 
 PlayerConstPtr Family::getPlayer( int player_id ) const {
@@ -104,6 +133,12 @@ PlayerPtr Family::getPlayer( int player_id ) {
 }
 
 void Family::updateCameraPos( ) {
+	bool updating = _updating_camera;
+	_updating_camera = true;
+	if ( !updating ) {
+		return;
+	}
+
 	double camera_pos = 0;
 	//プレイヤーの平均を出すための値
 	double pos_ratio = CAMERA_MAIN_RATIO;
@@ -171,16 +206,7 @@ void Family::updateSettingDevice( ) {
 	}
 
 	DevicePtr device( Device::getTask( ) );
-
-	// デバイスが接続されていなかったら、キーボードで全プレイヤーを操作できるようにする
 	int device_num = device->getDeviceNum( );
-	if ( device_num == 0 ) {
-		for ( int i = 0; i < MAX_PLAYER; i++ ) {
-			_player[ i ]->setDeviceId( 0 );
-		}
-		_setting_device = MAX_PLAYER;
-	}
-
 	for ( int i = 0; i < device_num; i++ ) {
 		if ( device->getButton( i ) &&
 			 !isSettingDevice( i ) ) {

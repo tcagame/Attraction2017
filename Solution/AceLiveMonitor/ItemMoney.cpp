@@ -1,5 +1,6 @@
 #include "ItemMoney.h"
 #include "SynchronousData.h"
+#include "Sound.h"
 
 const int WAIT_ANIM_TIME = 150;
 const int MAX_ANIM_NUM = 2;
@@ -46,6 +47,7 @@ void ItemMoney::setSynchronousData( unsigned char type, int camera_pos ) const {
 
 int ItemMoney::getValue( ) const {
 	int result = 0;
+	Sound::getTask( )->playSE( "yokai_voice_30.wav" );
 	switch ( _type ) {
 	case TYPE_PETTY:
 		result = 100;

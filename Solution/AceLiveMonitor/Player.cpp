@@ -137,6 +137,7 @@ void Player::actOnWaiting( ) {
 		return;
 	}
 	sound->stopSE( "yokai_se_21.wav" );
+	sound->stopSE( "yokai_se_22.wav" );
 	if ( isStanding( ) && device->getPush( _device_id ) & BUTTON_C ) {
 		sound->playSE( "yokai_voice_17.wav" );
 		setAction( ACTION_FLOAT );
@@ -290,6 +291,7 @@ void Player::actOnCharge( ) {
 	if ( device->getPush( _device_id ) & BUTTON_A &&
 		 getActCount( ) > COOL_TIME ) {
 		sound->stopSE( "yokai_se_21.wav" );
+		sound->stopSE( "yokai_se_22.wav" );
 		setAction( ACTION_ATTACK );
 		return;
 	}
@@ -311,10 +313,16 @@ void Player::actOnCharge( ) {
 		}
 	}
 	_charge_count++;
+	if ( _charge_count > 75 ) {
+		sound->stopSE( "yokai_se_21.wav" );
+		if ( !sound->isPlayingSE( "yokai_se_22.wav" ) ) {
+			sound->playSE( "yokai_se_22.wav" );
+		}
+	}
 	if ( _charge_count > MAX_CHARGE_COUNT ) {
 		_charge_count = 0;
 		_over_charge_time = getActCount( );
-		sound->stopSE( "yokai_se_21.wav" );
+		sound->stopSE( "yokai_se_22.wav" );
 		setAction( ACTION_OVER_CHARGE );
 	}
 }
