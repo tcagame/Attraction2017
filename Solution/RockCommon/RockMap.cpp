@@ -27,6 +27,10 @@ std::vector< ModelMV1Ptr > RockMap::getBackGroundModels( ) const {
 	return _back_ground_models;
 }
 
+std::vector< ModelMV1Ptr > RockMap::getCleannessModels( ) const {
+	return _cleanness_models;
+}
+
 void RockMap::addModel( ModelMV1Ptr model ) {
 	_models.push_back( model );
 }
@@ -39,8 +43,13 @@ void RockMap::addBackGroundModel( ModelMV1Ptr model ) {
 	_back_ground_models.push_back( model );
 }
 
+void RockMap::addCleannessModel( ModelMV1Ptr model ) {
+	_cleanness_models.push_back( model );
+}
+
 void RockMap::resetModels( ) {
 	_models.clear( );
 	_col_models.clear( );
 	_back_ground_models.clear( );
+	_cleanness_models.clear( );
 }
