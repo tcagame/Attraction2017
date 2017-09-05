@@ -57,6 +57,7 @@ private:
 	int _bubble_count;
 	int _damage;
 	int _damage_count;
+	int _interval;
 	bool _continue;
 	RockAncestorsPtr _ancestors;
 };

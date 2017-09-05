@@ -35,7 +35,7 @@ public:
 	void blowAway( );
 	int getMoney( ) const;
 	int getVirtue( ) const;
-	void pickUpMoney( int money );
+	void addMoney( int money );
 	void pickUpVirtue( );
 	void setSynchronousData( PLAYER player, int camera_pos ) const;
 	bool isExist( ) const;

@@ -4,20 +4,14 @@
     <ClCompile Include="MessageSender.cpp" />
     <ClCompile Include="RockAlter.cpp" />
     <ClCompile Include="RockAncestors.cpp" />
-    <ClCompile Include="RockArmoury.cpp" />
     <ClCompile Include="RockCamera.cpp" />
     <ClCompile Include="RockCharacter.cpp" />
     <ClCompile Include="RockClientInfo.cpp" />
     <ClCompile Include="RockDollHouse.cpp" />
-    <ClCompile Include="RockFamily.cpp" />
     <ClCompile Include="RockImpact.cpp" />
     <ClCompile Include="RockCasket.cpp" />
     <ClCompile Include="RockMap.cpp" />
-    <ClCompile Include="RockPlayer.cpp" />
     <ClCompile Include="RockPop.cpp" />
-    <ClCompile Include="RockShot.cpp" />
-    <ClCompile Include="RockShotAncestors.cpp" />
-    <ClCompile Include="RockShotPlayer.cpp" />
     <ClCompile Include="RockStudio.cpp" />
     <ClCompile Include="RockTheater.cpp" />
     <ClCompile Include="RockViewer.cpp" />
@@ -91,6 +85,24 @@
     <ClCompile Include="RockEnemyKimono.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="RockShot.cpp">
+      <Filter>Shot</Filter>
+    </ClCompile>
+    <ClCompile Include="RockShotAncestors.cpp">
+      <Filter>Shot</Filter>
+    </ClCompile>
+    <ClCompile Include="RockShotPlayer.cpp">
+      <Filter>Shot</Filter>
+    </ClCompile>
+    <ClCompile Include="RockArmoury.cpp">
+      <Filter>Shot</Filter>
+    </ClCompile>
+    <ClCompile Include="RockFamily.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="RockPlayer.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="define.h" />
@@ -98,20 +110,14 @@
     <ClInclude Include="MessageSender.h" />
     <ClInclude Include="RockAlter.h" />
     <ClInclude Include="RockAncestors.h" />
-    <ClInclude Include="RockArmoury.h" />
     <ClInclude Include="RockCamera.h" />
     <ClInclude Include="RockCharacter.h" />
     <ClInclude Include="RockClientInfo.h" />
     <ClInclude Include="RockDollHouse.h" />
-    <ClInclude Include="RockFamily.h" />
     <ClInclude Include="RockImpact.h" />
     <ClInclude Include="RockCasket.h" />
     <ClInclude Include="RockMap.h" />
-    <ClInclude Include="RockPlayer.h" />
     <ClInclude Include="RockPop.h" />
-    <ClInclude Include="RockShot.h" />
-    <ClInclude Include="RockShotAncestors.h" />
-    <ClInclude Include="RockShotPlayer.h" />
     <ClInclude Include="RockStudio.h" />
     <ClInclude Include="RockTheater.h" />
     <ClInclude Include="RockViewer.h" />
@@ -186,6 +192,24 @@
     <ClInclude Include="RockEnemyKimono.h">
       <Filter>Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="RockShot.h">
+      <Filter>Shot</Filter>
+    </ClInclude>
+    <ClInclude Include="RockShotAncestors.h">
+      <Filter>Shot</Filter>
+    </ClInclude>
+    <ClInclude Include="RockShotPlayer.h">
+      <Filter>Shot</Filter>
+    </ClInclude>
+    <ClInclude Include="RockArmoury.h">
+      <Filter>Shot</Filter>
+    </ClInclude>
+    <ClInclude Include="RockFamily.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="RockPlayer.h">
+      <Filter>Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Item">
@@ -193,6 +217,12 @@
     </Filter>
     <Filter Include="Enemy">
       <UniqueIdentifier>{62fdcfa1-95a2-4d66-9374-da5ca2107f0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shot">
+      <UniqueIdentifier>{502d28aa-ee7f-46df-9bf6-b64f93ad243c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Player">
+      <UniqueIdentifier>{4ac2bb36-b4c2-4430-8ce0-44763f41e895}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

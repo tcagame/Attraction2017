@@ -4,6 +4,7 @@
 #include "RockClientInfo.h"
 #include "RockAncestors.h"
 #include "RockBubble.h"
+#include "RockArmoury.h"
 #include <assert.h>
 
 RockFamilyPtr RockFamily::getTask( ) {
@@ -16,7 +17,7 @@ _base_pos( base_pos ) {
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		_ancestors[ i ]	= RockAncestorsPtr( new RockAncestors( i ) );
 		_bubble[ i ]	= RockBubblePtr( new RockBubble( i ) );
-		_player[ i ]	= RockPlayerPtr   ( new RockPlayer   ( status, Vector( i * 50, 75 ) + base_pos, i, _ancestors[ i ] ) );
+		_player[ i ]	= RockPlayerPtr( new RockPlayer( status, Vector( i * 50, 75 ) + base_pos, i, _ancestors[ i ] ) );
 	}
 }
 
@@ -93,5 +94,6 @@ void RockFamily::resetPos( const Vector& base_pos ) {
 			continue;
 		}
 		_player[ i ]->resetPos( Vector( i * 35, 1 ) + base_pos );
-	}	
+	}
+	RockArmoury::getTask( )->clearShot( );
 }

@@ -29,8 +29,8 @@ static const int RADIUS = 10;
 static const int HEIGHT = 20;
 
 //チャージ時間
-static const int CHARGE_PHASE_COUNT = 25;
-static const int MAX_CHARGE_COUNT = CHARGE_PHASE_COUNT * 4 - 1;
+static const int MAX_CHARGE_COUNT = 100;
+static const int INTERVAL_TIME = 10;
 //チャージエフェクト位置
 static const Vector EFFECT_ADJUST( 0, 15, 0 );
 
@@ -55,6 +55,7 @@ _effect_handle( -1 ),
 _ancestors( ancestors ),
 _bubble_count( 0 ),
 _damage( 0 ),
+_interval( 0 ),
 _continue( false ),
 _damage_count( DAMAGE_COUNT ) {
 	_id = id;
@@ -108,11 +109,12 @@ void RockPlayer::act( ) {
 	}
 
 	_damage_count++;
+	_interval++;
 }
 
 void RockPlayer::updateEffect( ) {
 	EffectPtr effect( Effect::getTask( ) );
-	int size = ( ( _attack_count / CHARGE_PHASE_COUNT ) * 2 ) + 4;
+	double size = _attack_count / ( MAX_CHARGE_COUNT / ( MAX_PLAYER_SHOT_POWER - 1 ) ) + 4.0;
 	effect->updateEffectTransform( _effect_handle, getPos( ) + EFFECT_ADJUST, size );
 }
 
@@ -214,6 +216,7 @@ void RockPlayer::actOnWaiting( ) {
 	//死亡
 	if ( player.power <= 0 ) {
 		setAction( ACTION_DEAD );
+		setVec( Vector( ) );
 		return;
 	}
 	//ジャンプ
@@ -227,7 +230,8 @@ void RockPlayer::actOnWaiting( ) {
 		}
 	}
 	//攻撃
-	if ( player.device_button & BUTTON_A ) {
+	if ( player.device_button & BUTTON_A &&
+		 _interval > INTERVAL_TIME ) {
 		setAction( ACTION_CHARGE );
 		return;
 	}
@@ -254,11 +258,13 @@ void RockPlayer::actOnJumping( ) {
 	//死亡
 	if ( player.power <= 0 ) {
 		setAction( ACTION_DEAD );
+		setVec( Vector( ) );
 		return;
 	}
 	if ( isStanding( ) ) {
 	//攻撃
-		if ( player.device_button & BUTTON_A ) {
+		if ( player.device_button & BUTTON_A &&
+			 _interval > INTERVAL_TIME ) {
 			setAction( ACTION_CHARGE );
 		} else {
 			setAction( ACTION_WAIT );
@@ -286,6 +292,7 @@ void RockPlayer::actOnWalking( ) {
 	//死亡
 	if ( player.power <= 0 ) {
 		setAction( ACTION_DEAD );
+		setVec( Vector( ) );
 		return;
 	}
 	//ジャンプ
@@ -331,16 +338,18 @@ void RockPlayer::actOnAttacking( ) {
 	// 攻撃ボタンが離されたら攻撃
 	if ( !( player.device_button & BUTTON_A ) &&
 		 _attack_count > 0 ) {
+		bool max_charge = ( MAX_CHARGE_COUNT == _attack_count );
 		int power = _attack_count / ( MAX_CHARGE_COUNT / ( MAX_PLAYER_SHOT_POWER - 1 ) ) + 1;
 		if ( player.item & ITEM_ENHANCED_ATTACK ) {
 			power *= ENHANCED_POWER;
 		}
-		RockShotPtr shot( new RockShotPlayer( _id, getPos( ) + SHOT_FOOT, getDir( ), power ) );
+		RockShotPtr shot( new RockShotPlayer( _id, getPos( ) + SHOT_FOOT, getDir( ), power, max_charge ) );
 		RockArmoury::getTask( )->addShot( shot );
 		setAction( ACTION_WAIT );
 		Effect::getTask( )->stopEffect( _effect_handle );
 		_attack_count = 0;
 		_effect_handle = -1;
+		_interval = 0;
 	}
 }
 
@@ -349,6 +358,7 @@ void RockPlayer::actOnCharging( ) {
 	//死亡
 	if ( player.power <= 0 ) {
 		setAction( ACTION_DEAD );
+		setVec( Vector( ) );
 		_attack_count = 0;
 		_effect_handle = -1;
 		return;
@@ -394,6 +404,7 @@ void RockPlayer::actOnBraking( ) {
 	//死亡
 	if ( player.power <= 0 ) {
 		setAction( ACTION_DEAD );
+		setVec( Vector( ) );
 		return;
 	}
 	//水平方向のベクトル
@@ -402,7 +413,8 @@ void RockPlayer::actOnBraking( ) {
 	vec.y = 0;
 	//ベクトルがない場合は待機かチャージに移行する
 	if ( vec.getLength( ) < 0.001 ) {
-		if ( player.device_button & BUTTON_A ) {
+		if ( player.device_button & BUTTON_A &&
+			 _interval > INTERVAL_TIME ) {
 			setAction( ACTION_CHARGE );
 		} else {
 			setAction( ACTION_WAIT );

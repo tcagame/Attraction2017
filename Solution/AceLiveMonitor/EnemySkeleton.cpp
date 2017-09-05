@@ -20,7 +20,7 @@ void EnemySkeleton::act( ) {
 
 void EnemySkeleton::setSynchronousData( unsigned char type, int camera_pos ) const {
 	const int ANIM[ ] = {
-		50, 51, 52, 53, 54, 55, 56, 57, 58, 59
+		96, 97, 98, 99, 100, 101, 102, 103, 104, 105
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	

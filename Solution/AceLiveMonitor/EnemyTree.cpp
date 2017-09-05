@@ -8,6 +8,7 @@ static const int CHIP_SIZE = 192;
 static const int ATTACK_TIME = 30;
 static const int MAX_GENERATE_NUM = 9;
 static const int MAX_HP = 6;
+
 static const Vector GENERATE_POS[ MAX_GENERATE_NUM ] = {
 	Vector( 6, 850 - 736 ),
 	Vector( 12, 875 - 736 ),
@@ -39,7 +40,7 @@ void EnemyTree::act( ) {
 
 void EnemyTree::setSynchronousData( unsigned char type, int camera_pos ) const {
 	const int ANIM[ ] = {
-		30, 31
+		36, 37
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	Vector pos = getPos( );

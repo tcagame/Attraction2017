@@ -2,7 +2,7 @@
 #include "SynchronousData.h"
 
 const int WAIT_ANIM_TIME = 5;
-const int GRAPH_WIDTH_NUM = 10;
+const int GRAPH_WIDTH_NUM = 16;
 const int MOVE_SPEED = 1;
 const int MAX_HP = 6;
 
@@ -27,7 +27,7 @@ void EnemyOnyudo::act( ) {
 
 void EnemyOnyudo::setSynchronousData( unsigned char type, int camera_pos ) const {
 	const int ANIM[ ] = {
-		10, 11, 12, 13, 14, 15, 16, 17
+		16, 17, 18, 19, 20, 21, 22, 23
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	

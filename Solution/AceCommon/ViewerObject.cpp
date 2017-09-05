@@ -231,14 +231,15 @@ ViewerObject::Sprite ViewerObject::getSpriteImpact( GRAPH graph, int x, int y, u
 ViewerObject::Sprite ViewerObject::getSpriteItem( GRAPH graph, int x, int y, unsigned char attribute, int pattern, int size ) const {
 	Sprite sprite;
 	sprite.graph = graph;
-	sprite.tx = pattern % ITEM_CHIP_WIDTH * ITEM_GRAPH_SIZE;
-	sprite.ty = pattern / ITEM_CHIP_WIDTH * ITEM_GRAPH_SIZE;
-	sprite.tw = ITEM_GRAPH_SIZE;
-	sprite.th = ITEM_GRAPH_SIZE;
-	
 	if ( size < 0 ) {
-		size = ITEM_GRAPH_SIZE;
+		size = 32;
 	}
+	int width_num = 256 / size;
+	sprite.tx = pattern % width_num * size;
+	sprite.ty = pattern / width_num * size;
+	sprite.tw = size;
+	sprite.th = size;
+	
 	sprite.sx1 = x - size / 2;
 	sprite.sy1 = y - size;
 	sprite.sx2 = sprite.sx1 + size;

@@ -67,14 +67,15 @@ void RockViewer::update( ) {
 	drawEnemy( );
 	drawPlayer( );
 	drawBubble( );
+	drawCleannessMap( );
 	drawAncestors( );
 	//drawShot( );
 	drawItem( );
 	drawAlter( );
 	drawCasket( );
+	Effect::getTask( )->drawEffect( );
 	drawUI( );
 	drawMovie( );
-	Effect::getTask( )->drawEffect( );
 }
 
 void RockViewer::drawMap( ) const {
@@ -85,6 +86,14 @@ void RockViewer::drawMap( ) const {
 	}
 
 	std::vector< ModelMV1Ptr > models = RockMap::getTask( )->getModels( );
+	int size = ( int )models.size( );
+	for ( int i = 0; i < size; i++ ) {
+		models[ i ]->draw( );
+	}
+}
+
+void RockViewer::drawCleannessMap( ) const {
+	std::vector< ModelMV1Ptr > models = RockMap::getTask( )->getCleannessModels( );
 	int size = ( int )models.size( );
 	for ( int i = 0; i < size; i++ ) {
 		models[ i ]->draw( );
@@ -292,25 +301,25 @@ void RockViewer::drawUI( ) const {
 		{// “¿•\Ž¦
 			int virtue = _status->getPlayer( i ).toku;
 		
-			int sx = player_status_pos + 260;
+			int sx = player_status_pos + 290;
 			int sy = ITEM_Y + ITEM_DRAW_SIZE;
-			_status_ui->setRect( ITEM_GRAPH_SIZE * 7, 320, ITEM_GRAPH_SIZE, ITEM_GRAPH_SIZE );
-			_status_ui->setPos( sx, sy,  sx + ITEM_DRAW_SIZE, sy + ITEM_DRAW_SIZE );
-			_status_ui->draw( );
 			int digit = virtue == 0;
 			while( virtue > 0 ) {
 				digit++;
 				virtue /= 10;
 			}
-			sx += ITEM_DRAW_SIZE;
 			for ( int j = 0; j < digit; j++ ) {
 				int num = _status->getPlayer( i ).toku % (int)pow( 10.0, (double)j + 1 );
 				num /= (int)pow( 10.0, (double)j );
 				_status_num->setRect( MONEY_GRAPH_WIDTH * num, 0, MONEY_GRAPH_WIDTH, MONEY_GRAPH_HEIGHT );
 				_status_num->setPos( sx, sy );
 				_status_num->draw( );
-				sx += MONEY_GRAPH_WIDTH;
+				sx -= MONEY_GRAPH_WIDTH;
 			}
+			sx -= ITEM_DRAW_SIZE;
+			_status_ui->setRect( ITEM_GRAPH_SIZE * 7, 320, ITEM_GRAPH_SIZE, ITEM_GRAPH_SIZE );
+			_status_ui->setPos( sx, sy,  sx + ITEM_DRAW_SIZE, sy + ITEM_DRAW_SIZE );
+			_status_ui->draw( );
 		}
 	}
 }
