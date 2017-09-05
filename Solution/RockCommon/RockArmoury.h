@@ -20,6 +20,7 @@ public:
 	void update( );
 	void addShot( RockShotPtr shot );
 	std::list< RockShotPtr > getShots( ) const;
+	void clearShot( );
 private:
 	RockEnemyPtr getOverLappedEnemy( RockShotPtr shot ) const;
 private:

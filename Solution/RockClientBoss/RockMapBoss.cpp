@@ -22,7 +22,7 @@ RockMapBoss::~RockMapBoss( ) {
 }
 
 void RockMapBoss::initialize( ) {
-	_drawer = RockMapBossDrawerPtr( new RockMapBossDrawer( STAGE_TREE_TO_FIRE ) );
+	_drawer = RockMapBossDrawerPtr( new RockMapBossDrawer( STAGE_FIRE_TO_ROCK ) );
 }
 
 void RockMapBoss::update( ) {

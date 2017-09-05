@@ -4,6 +4,7 @@
 #include "RockClientInfo.h"
 #include "RockAncestors.h"
 #include "RockBubble.h"
+#include "RockArmoury.h"
 #include <assert.h>
 
 RockFamilyPtr RockFamily::getTask( ) {
@@ -93,5 +94,6 @@ void RockFamily::resetPos( const Vector& base_pos ) {
 			continue;
 		}
 		_player[ i ]->resetPos( Vector( i * 35, 1 ) + base_pos );
-	}	
+	}
+	RockArmoury::getTask( )->clearShot( );
 }
