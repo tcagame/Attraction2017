@@ -12,7 +12,6 @@ const int SMALL_CHAR_GRAPH_SIZE = 32;
 const int NORMAL_CHAR_GRAPH_SIZE = 64;
 const int BIG_CHAR_GRAPH_SIZE = 128;
 const int IMPACT_GRAPH_SIZE = 128;
-const int ITEM_GRAPH_SIZE = 32;
 
 const int PLAYER_CHAR_GRAPH_FOOT = 7;
 const int PLAYER_CHAR_CHIP_WIDTH = 16;

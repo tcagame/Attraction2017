@@ -385,6 +385,18 @@
     <ClCompile Include="ItemVirtue.cpp">
       <Filter>Item</Filter>
     </ClCompile>
+    <ClCompile Include="ItemEnhancedAttack.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemEnhancedCharge.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemDango.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopItem.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy.h">
@@ -766,6 +778,18 @@
       <Filter>Viewer</Filter>
     </ClInclude>
     <ClInclude Include="ItemVirtue.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemEnhancedAttack.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemEnhancedCharge.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemDango.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopItem.h">
       <Filter>Item</Filter>
     </ClInclude>
   </ItemGroup>

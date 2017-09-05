@@ -237,8 +237,6 @@ EnemyPtr Military::getOverlappedEnemy( CharacterConstPtr character ) const {
 void Military::createBoss( ) {
 	WorldPtr world = World::getTask( );
 	EVENT event = world->getEvent( );
-
-	Storage::getTask( )->eraseEventItem( );
 	_event_enemies.clear( );
 	switch ( event ) {
 	case EVENT_REDDAEMON:
