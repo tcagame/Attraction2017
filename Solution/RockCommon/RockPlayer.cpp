@@ -29,8 +29,7 @@ static const int RADIUS = 10;
 static const int HEIGHT = 20;
 
 //チャージ時間
-static const int CHARGE_PHASE_COUNT = 25;
-static const int MAX_CHARGE_COUNT = CHARGE_PHASE_COUNT * 4 - 1;
+static const int MAX_CHARGE_COUNT = 100;
 //チャージエフェクト位置
 static const Vector EFFECT_ADJUST( 0, 15, 0 );
 
@@ -112,7 +111,7 @@ void RockPlayer::act( ) {
 
 void RockPlayer::updateEffect( ) {
 	EffectPtr effect( Effect::getTask( ) );
-	int size = ( ( _attack_count / CHARGE_PHASE_COUNT ) * 2 ) + 4;
+	double size = _attack_count / ( MAX_CHARGE_COUNT / ( MAX_PLAYER_SHOT_POWER - 1 ) ) + 4.0;
 	effect->updateEffectTransform( _effect_handle, getPos( ) + EFFECT_ADJUST, size );
 }
 
