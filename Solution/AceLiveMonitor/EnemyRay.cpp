@@ -20,7 +20,7 @@ void EnemyRay::act( ) {
 
 void EnemyRay::setSynchronousData( unsigned char type, int camera_pos ) const {
 	const int ANIM[ ] = {
-		40, 41, 42, 43, 44
+		80, 81, 82, 83, 84, 85
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	

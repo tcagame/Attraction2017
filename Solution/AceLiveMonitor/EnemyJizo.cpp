@@ -2,7 +2,7 @@
 #include "SynchronousData.h"
 
 const int WAIT_ANIM_TIME = 8;
-const int GRAPH_WIDTH_NUM = 10;
+const int GRAPH_WIDTH_NUM = 16;
 const int FADE_IN_TIME = WAIT_ANIM_TIME * 6;
 const int MAX_HP = 6;
 const int MOVE_SPEED = 1;
@@ -57,13 +57,15 @@ void EnemyJizo::setSynchronousData( unsigned char type, int camera_pos ) const {
 	switch ( _act ) {
 	case ACTION_FADE_IN:
 	{
-		const int ANIM[ ] = { 0, 1, 2, 3, 4, 5, 6 };
+		const int ANIM[ ] = { 0, 1, 2, 3, 4, 5, 6, 7 };
 		int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 		data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
 	}
 		break;
 	case ACTION_MOVE:
-		data->addObject( area, type, 7, attribute, x, y );
+		const int ANIM[ ] = { 7, 8, 9, 10 };
+		int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
+		data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
 		break;
 	}
 }

@@ -2,7 +2,7 @@
 #include "SynchronousData.h"
 #include "Sound.h"
 
-const int WAIT_ANIM_TIME = 5;
+const int WAIT_ANIM_TIME = 3;
 const int GRAPH_WIDTH_NUM = 10;
 const int MAX_HP = 6;
 const int MOVE_TIME = WAIT_ANIM_TIME * 17;
@@ -67,7 +67,7 @@ void EnemyWind::act( ) {
 
 void EnemyWind::setSynchronousData( unsigned char type, int camera_pos ) const {
 	const int ANIM[ ] = {
-		20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21
+		32, 33, 34, 35, 36, 37, 38, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 64, 65, 66, 67, 68, 69, 70, 71
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	
