@@ -84,13 +84,13 @@ void Player::updatetDevice( ) {
 			num = 1;
 		}
 		for ( int i = 0; i < num; i++ ) {
-			if ( device->getButton( i ) == button[ _player ] ) {
+			if ( device->getDirY( i ) < 0 && device->getButton( i ) == button[ _player ] ) {
 				_device_id = i;
 			}
 		}
 	} else {
-		if ( device->getDirY( ) < 0 &&
-			device->getButton( ) == BUTTON_E + BUTTON_F ) {
+		if ( device->getDirY( _device_id ) < 0 &&
+			device->getButton( _device_id ) == BUTTON_E + BUTTON_F ) {
 			_device_id = -1;
 		}
 	}
@@ -99,42 +99,40 @@ void Player::updatetDevice( ) {
 void Player::act( ) {
 	updatetDevice( );
 
-	if ( _device_id >= 0 ) {
-		switch ( _action ) {
-		case ACTION_WAIT:
-			actOnWaiting( );
-			break;
-		case ACTION_WALK:
-			actOnWalking( );
-			break;
-		case ACTION_BRAKE:
-			actOnBreaking( );
-			break;
-		case ACTION_FLOAT:
-			actOnFloating( );
-			break;
-		case ACTION_ATTACK:
-			actOnAttack( );
-			break;
-		case ACTION_CHARGE:
-			actOnCharge( );
-			break;
-		case ACTION_OVER_CHARGE:
-			actOnOverCharge( );
-			break;
-		case ACTION_DAMEGE:
-			actOnDamege( );
-			break;
-		case ACTION_BLOW_AWAY:
-			actOnBlowAway( );
-			break;
-		case ACTION_DAED:
-			actOnDead( );
-			break;
-		case ACTION_CALL:
-			actOnCall( );
-			break;
-		}
+	switch ( _action ) {
+	case ACTION_WAIT:
+		actOnWaiting( );
+		break;
+	case ACTION_WALK:
+		actOnWalking( );
+		break;
+	case ACTION_BRAKE:
+		actOnBreaking( );
+		break;
+	case ACTION_FLOAT:
+		actOnFloating( );
+		break;
+	case ACTION_ATTACK:
+		actOnAttack( );
+		break;
+	case ACTION_CHARGE:
+		actOnCharge( );
+		break;
+	case ACTION_OVER_CHARGE:
+		actOnOverCharge( );
+		break;
+	case ACTION_DAMEGE:
+		actOnDamege( );
+		break;
+	case ACTION_BLOW_AWAY:
+		actOnBlowAway( );
+		break;
+	case ACTION_DAED:
+		actOnDead( );
+		break;
+	case ACTION_CALL:
+		actOnCall( );
+		break;
 	}
 
 	actOnCamera( );

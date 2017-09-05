@@ -40,9 +40,12 @@ void ViewerLive::initialize( ) {
 	_viewer_object = ViewerObjectPtr( new ViewerObject );
 
 	DrawerPtr drawer = Drawer::getTask( );
+	
 	_image_frame = drawer->createImage( "UI/area_event_frame.png" );
 	_image_frame->setRect( 0, 0, 1280, 256 );
 	_image_frame->setPos( 0, 0 );
+
+	_image_device = drawer->createImage( "UI/ui_device.png" );
 }
 
 void ViewerLive::update( ) {
@@ -77,6 +80,11 @@ void ViewerLive::update( ) {
 	// ステータス描画
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		_viewer_status->draw( ( PLAYER )i, i * VIEW_STATUS_WIDTH, VIEW_STATUS_Y );
+
+		if ( data->getStatusDevice( ( PLAYER )i ) < 0 ) {
+			_image_device->setPos( i * 320 + 50, 600 );
+			_image_device->draw( );
+		}
 	}
 
 	// デバッグ

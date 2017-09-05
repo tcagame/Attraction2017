@@ -52,6 +52,7 @@ public:
 	int getStatusVirtue( PLAYER player ) const;
 	int getStatusRedo( PLAYER player ) const;
 	unsigned char getStatusState( PLAYER player ) const;
+	int getStatusDevice( PLAYER player ) const;
 	int getObjectNum( AREA area ) const;
 	int getObjectAX( int idx ) const;
 	int getObjectAY( int idx ) const;

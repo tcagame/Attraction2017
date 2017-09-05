@@ -30,5 +30,6 @@ private:
 	ViewerObjectPtr _viewer_object;
 	ViewerDebugConstPtr _viewer_debug;
 	ImagePtr _image_frame;
+	ImagePtr _image_device;
 };
 
