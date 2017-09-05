@@ -17,7 +17,7 @@ _base_pos( base_pos ) {
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		_ancestors[ i ]	= RockAncestorsPtr( new RockAncestors( i ) );
 		_bubble[ i ]	= RockBubblePtr( new RockBubble( i ) );
-		_player[ i ]	= RockPlayerPtr   ( new RockPlayer   ( status, Vector( i * 50, 75 ) + base_pos, i, _ancestors[ i ] ) );
+		_player[ i ]	= RockPlayerPtr( new RockPlayer( status, Vector( i * 50, 75 ) + base_pos, i, _ancestors[ i ] ) );
 	}
 }
 

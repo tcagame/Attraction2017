@@ -2,7 +2,6 @@
 #include "Drawer.h"
 #include "ace_define.h"
 #include "SynchronousData.h"
-#include "Sound.h"
 
 const int HP_GRAPH_HEIGHT = 16;
 const int HP_GRAPH_WIDTH = 8;

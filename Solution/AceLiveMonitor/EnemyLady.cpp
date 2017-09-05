@@ -21,7 +21,7 @@ void EnemyLady::act( ) {
 
 void EnemyLady::setSynchronousData( unsigned char type, int camera_pos ) const {
 	const int ANIM[ ] = {
-		45, 46, 47, 48, 49
+		86, 87, 88, 89, 90
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	
