@@ -38,9 +38,10 @@ void Storage::update( ) {
 		PlayerPtr hit_player = getOverLappedPlayer( item );
 		if ( hit_player ) {
 			//プレイヤーがアイテムと接触
-			pickUpItem( item, hit_player );
-			ite = _items.erase( ite );
-			continue;
+			if ( pickUpItem( item, hit_player ) ) {
+				ite = _items.erase( ite );
+				continue;
+			}
 		}
 		ite++;
 	}
@@ -115,7 +116,8 @@ void Storage::eraseEventItem( ) {
 	}
 }
 
-void Storage::pickUpItem( ItemPtr item, PlayerPtr player ) {
+bool Storage::pickUpItem( ItemPtr item, PlayerPtr player ) {
+	bool result = true;
 	{//お金
 		ItemMoneyPtr money = std::dynamic_pointer_cast< ItemMoney >( item );
 		if ( money ) {
@@ -136,9 +138,11 @@ void Storage::pickUpItem( ItemPtr item, PlayerPtr player ) {
 				player->addMoney( -price );
 			} else {
 				//取得できない
+				result = false;
 			}
 		}
 	}
+	return result;
 }
 
 void Storage::createShopItem( ) {
