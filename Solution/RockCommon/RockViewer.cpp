@@ -73,9 +73,9 @@ void RockViewer::update( ) {
 	drawItem( );
 	drawAlter( );
 	drawCasket( );
+	Effect::getTask( )->drawEffect( );
 	drawUI( );
 	drawMovie( );
-	Effect::getTask( )->drawEffect( );
 }
 
 void RockViewer::drawMap( ) const {
