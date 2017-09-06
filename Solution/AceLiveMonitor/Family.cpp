@@ -111,20 +111,20 @@ void Family::updateCameraPos( ) {
 		return;
 	}
 
-	double camera_pos = 0;
+	double total = 0;
 	//プレイヤーの平均を出すための値
-	double pos_ratio = CAMERA_MAIN_RATIO;
+	int num = 0;
 	//プレイヤーの位置の合計を出す
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		if ( _player[ i ]->getArea( ) == AREA_EVENT ) {
-			pos_ratio = CAMERA_EVENT_RATIO;
-			continue;
+			total += _camera_pos_x + SCREEN_WIDTH / 2;
+		} else {
+			total += _player[ i ]->getPos( ).x;
 		}
-		camera_pos += _player[ i ]->getPos( ).x;
 	}
 
 	//平均を計算
-	camera_pos = camera_pos * pos_ratio - SCREEN_WIDTH / 2;
+	double camera_pos = total / MAX_PLAYER - SCREEN_WIDTH / 2;
 
 	//左に行く場合抜ける
 	if ( _camera_pos_x - camera_pos > 0 ) {

@@ -54,7 +54,8 @@ _money( 100 ),
 _virtue( 0 ),
 _charge_count( 0 ),
 _unrivaled_count( MAX_UNRIVALED_COUNT ),
-_action( ACTION_ENTRY ) {
+_action( ACTION_ENTRY ),
+_progress_count( 0 ) {
 	setRadius( 25 );
 	setDir( DIR_RIGHT );
 }
@@ -63,7 +64,12 @@ Player::~Player( ) {
 }
 
 bool Player::isExist( ) const {
-	return _action != ACTION_ENTRY && _action != ACTION_CONTINUE;
+	return
+		_action != ACTION_ENTRY &&
+		_action != ACTION_CONTINUE &&
+		_action != ACTION_CALL &&
+		_action != ACTION_DAMEGE &&
+		_action != ACTION_BLOW_AWAY;
 }
 
 int Player::getDeviceId( ) const {
@@ -100,6 +106,16 @@ void Player::act( ) {
 	updatetDevice( );
 
 	switch ( _action ) {
+	case ACTION_ENTRY:
+		actOnEntry( );
+		break;
+	case ACTION_CONTINUE:
+		{
+			Vector pos = getPos( );
+			pos.x = Family::getTask( )->getCameraPosX( ) + SCREEN_WIDTH / 2;
+			setPos( pos );
+		}
+		break;
 	case ACTION_WAIT:
 		actOnWaiting( );
 		break;
@@ -159,6 +175,46 @@ void Player::act( ) {
 		if ( stop ) {
 			sound->stopSE( "yokai_se_02.wav" );
 		}
+	}
+}
+
+void Player::actOnEntry( ) {
+	adjustToCamera( );
+	updateProgress( );
+
+	if ( _progress_count >= 100 ) {
+		// çƒìoèÍÇÃÇΩÇﬂÇ…èâä˙âª
+		appear( );
+		// ÉAÉCÉeÉÄèâä˙âª
+		for ( int i = 0; i < MAX_ITEM; i++ ) {
+			_item[ i ] = false;
+		}
+		_virtue = 0;
+	}
+}
+
+void Player::appear( ) {
+	_action = ACTION_FLOAT;
+	setPower( MAX_HP );
+	_unrivaled_count = 0;
+}
+
+void Player::adjustToCamera( ) {
+	Vector pos = getPos( );
+	pos.x = Family::getTask( )->getCameraPosX( ) + SCREEN_WIDTH / 2;
+	pos.y = -100;
+	setPos( pos );
+}
+
+void Player::updateProgress( ) {
+	DevicePtr device = Device::getTask( );
+	if ( device->getButton( _device_id ) ) {
+		_progress_count += 2;
+		if ( _progress_count > 100 ) {
+			_progress_count = 100;
+		}
+	} else {
+		_progress_count = 0;
 	}
 }
 
@@ -481,11 +537,7 @@ void Player::damage( int force ) {
 	if ( Debug::getTask( )->isDebug( ) ) {
 		return;
 	}
-	if ( _action == ACTION_ENTRY ||
-		 _action == ACTION_CONTINUE ||
-		 _action == ACTION_DAMEGE ||
-		 _action == ACTION_BLOW_AWAY ||
-		 _action == ACTION_CALL ||
+	if ( !isExist( ) ||
 		 _unrivaled_count < MAX_UNRIVALED_COUNT ||
 		 isFinished( ) ) {
 		return;
@@ -632,7 +684,9 @@ void Player::bound( ) {
 }
 
 void Player::blowAway( ) {
-	if ( _action == ACTION_CALL ) {
+	if ( _action == ACTION_CALL ||
+		 _action == ACTION_ENTRY ||
+		 _action == ACTION_CONTINUE ) {
 		return;
 	}
 
@@ -670,10 +724,12 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 	
 	switch ( _action ) {
 	case ACTION_ENTRY:
-		data->setStatusState( _player, SynchronousData::STATE_ENTRY ); 
+		data->setStatusState( _player, SynchronousData::STATE_ENTRY );
+		data->setStatusProgress( _player, _progress_count );
 		break;
 	case ACTION_CONTINUE:
 		data->setStatusState( _player, SynchronousData::STATE_CONTINUE ); 
+		data->setStatusProgress( _player, _progress_count );
 		break;
 	default:
 		if ( getArea( ) == AREA_STREET ) {
@@ -688,6 +744,19 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 	data->setStatusPower( player, getPower( ) );
 	data->setStatusMoney( player, getMoney( ) );
 	data->setStatusVirtue( player, getVirtue( ) );
+
+	unsigned char CONV[ MAX_ITEM ] = {
+		SynchronousData::ITEM_DANGO,			
+		SynchronousData::ITEM_HEART,			
+		SynchronousData::ITEM_HYPERTROPHY,		
+		SynchronousData::ITEM_SHORTENING,		
+		SynchronousData::ITEM_WOOD,			
+		SynchronousData::ITEM_FLAME,			
+		SynchronousData::ITEM_MINERAL,
+	};
+	for ( int i = 0; i < MAX_ITEM; i++ ) {
+		data->setInProssessionOfStatusItem( _player, CONV[ i ], _item[ i ] );
+	}
 
 	// Object
 	if ( _unrivaled_count < MAX_UNRIVALED_COUNT ) {
@@ -714,6 +783,9 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 
 	int pattern = 0;
 	switch ( _action ) {
+	case ACTION_ENTRY:
+	case ACTION_CONTINUE:
+		return;
 	case ACTION_WAIT:
 		{
 			const int ANIM[ ] = {

@@ -45,6 +45,7 @@ public:
 public:
 	EVENT getEvent( ) const;
 	int getCameraX( ) const;
+	int getStatusProgress( PLAYER player ) const;
 	int getStatusX( PLAYER player ) const;
 	int getStatusPower( PLAYER player ) const;
 	int getStatusMoney( PLAYER player ) const;
@@ -67,6 +68,7 @@ public:
 	void setEvent( EVENT event );
 	void setCameraX( int x );
 	void setStatusDevice( PLAYER player, int id );
+	void setStatusProgress( PLAYER player, int count );
 	void setStatusX( PLAYER player, int x );
 	void setStatusPower( PLAYER player, int power );
 	void setStatusMoney( PLAYER player, int money );
@@ -85,6 +87,7 @@ private:
 			char event;
 			struct Status {
 				char          device;
+				char          progress;
 				long          x;
 				unsigned char power;
 				unsigned char money;

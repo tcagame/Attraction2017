@@ -26,6 +26,7 @@ protected:
 	void setDir( DIR dir );
 	void setVec( const Vector& vec );
 	void setPos( const Vector& pos );
+	void setPower( int power );
 	bool isStanding( ) const;
 	virtual void act( ) = 0;
 	int getActCount( ) const;

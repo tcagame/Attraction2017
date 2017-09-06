@@ -15,13 +15,31 @@ ViewerProgress::~ViewerProgress( ) {
 void ViewerProgress::draw( PLAYER target ) {
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
 
-	int n = 100;//data->getStatusProgress( );
-
 	int sx = target * 320;
 	int sy = 256 + 256;
 
-	_image_frame->setPos( sx + 10, sy + 50 );
+	sx += 10;
+	sy += 50;
+
+	_image_frame->setPos( sx, sy );
 	_image_frame->draw( );
-	_image_bar->setPos( sx + 10, sy + 50 );
-	_image_bar->draw( );
+	
+	int n = data->getStatusProgress( target );
+	if ( n > 0 ) {
+		const int HEAD = 10;
+		const int OX = 87;
+		const int OY = 42;
+		_image_bar->setRect( 0, 0, HEAD, 20 );
+		_image_bar->setPos( sx + OX, sy + OY );
+		_image_bar->draw( );
+
+		int width = ( 144 - HEAD * 2 ) * n / 100;
+		_image_bar->setRect( HEAD, 0, width, 20 );
+		_image_bar->setPos( sx + OX + HEAD, sy + OY );
+		_image_bar->draw( );
+
+		_image_bar->setRect( HEAD + ( 144 - HEAD * 2 ), 0, HEAD, 20 );
+		_image_bar->setPos( sx + OX + HEAD + width, sy + OY );
+		_image_bar->draw( );
+	}
 }

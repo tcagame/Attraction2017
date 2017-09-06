@@ -134,6 +134,10 @@ int Character::getPower( ) const {
 	return _power;
 }
 
+void Character::setPower( int power ) {
+	_power = power;
+}
+
 bool Character::isStanding( ) const {
 	return _standing;
 }

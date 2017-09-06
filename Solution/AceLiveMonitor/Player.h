@@ -1,6 +1,7 @@
 #pragma once
 #include "mathmatics.h"
 #include "Character.h"
+#include <array>
 
 PTR( Enemy );
 PTR( Monmotaro );
@@ -42,6 +43,7 @@ public:
 	void setSynchronousData( PLAYER player, int camera_pos ) const;
 	bool isExist( ) const;
 private:
+	void actOnEntry( );
 	void actOnWaiting( );
 	void actOnWalking( );
 	void actOnBreaking( );
@@ -56,6 +58,20 @@ private:
 	void actOnCall( );
 	void updateState( );
 	void setAction( ACTION action );
+	void adjustToCamera( );
+	void updateProgress( );
+	void appear( );
+private:
+	enum ITEM {
+		ITEM_DANGO,
+		ITEM_HEART,
+		ITEM_HYPERTROPHY,
+		ITEM_SHORTENING,
+		ITEM_WOOD,
+		ITEM_FLAME,
+		ITEM_MINERAL,
+		MAX_ITEM,
+	};
 private:
 	PLAYER _player;
 	ACTION _action;
@@ -65,5 +81,7 @@ private:
 	int _over_charge_time;
 	int _charge_count;
 	int _unrivaled_count;
+	int _progress_count;
+	std::array< bool, MAX_ITEM > _item;
 };
 
