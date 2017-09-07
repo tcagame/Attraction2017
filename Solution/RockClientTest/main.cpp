@@ -20,6 +20,7 @@
 #include "RockStorage.h"
 #include "RockTheaterTest.h"
 #include "RockStudio.h"
+#include "RockShadow.h"
 
 void main( ) {
 
@@ -39,6 +40,7 @@ void main( ) {
 	app->addTask( RockCamera::getTag( ), TaskPtr( new RockCameraTest ) );
 	app->addTask( MessageSender::getTag( ), TaskPtr( new MessageSender( message ) ) );
 	//app->addTask( RockTheater::getTag( ), TaskPtr( new RockTheaterTest( ) ) );
+	app->addTask( RockShadow::getTag( ), TaskPtr( new RockShadow( ) ) );
 	app->addTask( RockStudio::getTag( ), TaskPtr( new RockStudio( ) ) );
 
 	std::vector< unsigned int > state = { };
