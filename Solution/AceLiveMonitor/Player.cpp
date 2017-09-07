@@ -525,7 +525,6 @@ void Player::damage( int force ) {
 	Character::damage( force );
 	SoundPtr sound = Sound::getTask( );
 	if ( isFinished( ) ) {
-		sound->playSE( "yokai_se_31.wav" );
 		setAction( ACTION_DAED );
 		setVec( Vector( ) );
 	} else {

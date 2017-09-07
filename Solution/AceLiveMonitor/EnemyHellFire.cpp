@@ -5,7 +5,7 @@
 static const int HP = 3;
 static const double MOVE_SPEED = 3;
 static const double ACCEL = 0.5;
-static const int WAIT_ANIM_TIME = 5;
+static const int WAIT_ANIM_TIME = 4;
 
 EnemyHellFire::EnemyHellFire( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, HP, false ) {
@@ -26,8 +26,8 @@ void EnemyHellFire::act( ) {
 
 void EnemyHellFire::setSynchronousData( unsigned char type, int camera_pos ) const {
 	const int ANIM[ ] = {
-		320, 321, 322, 323, 324, 325, 326, 327, 328, 329,
-		330, 331, 332, 333, 334, 335, 336, 337, 338, 339,
+		360, 361, 362, 363, 364, 365, 366, 367, 368, 369,
+		370, 371, 372, 373, 374, 375, 376, 377, 378, 379,
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	

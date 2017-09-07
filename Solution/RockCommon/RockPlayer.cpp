@@ -600,6 +600,7 @@ void RockPlayer::resetBubble( ) {
 
 void RockPlayer::sendDamage( ) {
 	if ( _damage != 0 ) {
+		Sound::getTask( )->playSE( "yokai_voice_26.wav" );
 		MessageSender::getTask( )->sendMessage( _id, Message::COMMAND_POWER, &_damage );
 		_damage = 0;
 	}

@@ -45,14 +45,14 @@ void EnemyFaceAndHand::setSynchronousData( unsigned char type, int camera_pos ) 
 	switch ( _act ) {
 	case ACTION_FADE_IN:
 	{
-		const int ANIM[ ] = { 180, 181 };
+		const int ANIM[ ] = { 200, 201, 202 };
 		int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 		data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
 	}
 		break;
 	case ACTION_MOVE:
 	{
-		const int ANIM[ ] = { 182, 183, 184, 185, 184, 183 };
+		const int ANIM[ ] = { 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214 };
 		int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 		data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
 	}

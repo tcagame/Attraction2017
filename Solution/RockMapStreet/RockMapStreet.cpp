@@ -9,6 +9,7 @@
 #include "RockItemMoney.h"
 #include "RockOffice.h"
 #include "EventTurtle.h"
+#include "RockCharacter.h"
 
 const int REMOVE_CAVE_TIME = 500;
 const int DROP_TIMING = 1800;
@@ -45,6 +46,9 @@ void RockMapStreet::update( ) {
 	case STAGE_CAVE:
 		updateCave( );
 		break;
+	case STAGE_RYUGU:
+		updateRyugu( );
+		break;
 	}
 }
 
@@ -78,6 +82,21 @@ void RockMapStreet::updateStreet( ) {
 				}
 			}
 		}
+		//ãTÇ…èÊÇÈÇ∆ó≥ã{èÈÇ÷à⁄ìÆ
+		{
+			RockOfficePtr office = RockOffice::getTask( );
+			std::list< RockEventCharacterPtr > eve_chara = office->getEventCharacters( );
+			std::list< RockEventCharacterPtr >::iterator ite = eve_chara.begin( );
+			EventTurtlePtr turtle = std::dynamic_pointer_cast< EventTurtle >( *ite );
+			for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+				if ( turtle->isRaid( )  ) {
+					_drawer.reset( );
+					_stage = STAGE_RYUGU;
+					_drawer = RockMapStreetDrawerPtr( new RockMapStreetDrawer( _stage ) );
+					family->resetPos( Vector( 0, 10, 0 ) );
+				}
+			}
+		}
 	}
 }
 
@@ -101,6 +120,16 @@ void RockMapStreet::updateCave( ) {
 			for ( int i = 0; i < 50; i++ ) {
 				storage->addItem( RockItemPtr( new RockItemMoney( Vector( i * interval, 500, -500 - i * 10 ), 10000 ) ) );
 			}
+		}
+	}
+}
+
+void RockMapStreet::updateRyugu( ) {
+	RockFamilyPtr family = RockFamily::getTask( );
+	for( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+		RockPlayerPtr player = family->getPlayer( i );
+		if( player->isActive( ) ) {
+			continue;
 		}
 	}
 }

@@ -3,7 +3,7 @@
 
 class RockImpact {
 public:
-	RockImpact( const Vector& pos, double size = 5.0 );
+	RockImpact( const Vector& pos, double size = 1.0 );
 	virtual ~RockImpact( );
 public:
 	void update( );
