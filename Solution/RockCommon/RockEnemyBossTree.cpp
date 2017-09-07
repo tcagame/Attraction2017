@@ -25,15 +25,7 @@ double RockEnemyBossTree::getAnimTime( ) const {
 
 void RockEnemyBossTree::dropItem( ) {
 	RockStoragePtr storage( RockStorage::getTask( ) );
-	RockFamilyPtr family( RockFamily::getTask( ) );
-	int num = 0;
-	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
-		if ( family->getPlayer( i )->isActive( ) ) {
-			num++;
-		}
-	}
-	for ( int i = 0; i < num; i++ ) {
-		storage->addDropItem( RockItemPtr( new RockItemTree( getPos( ) + Vector( i * 20, getRadius( ), 0 ) ) ) );
-		storage->addDropItem( RockItemPtr( new RockItemBubble( getPos( ) + Vector( i * 20, getRadius( ), 0 ) ) ) );
-	}
+	
+	storage->addDropItem( RockItemPtr( new RockItemTree( getPos( ) + Vector( 20, getRadius( ), 0 ) ) ) );
+	storage->addDropItem( RockItemPtr( new RockItemBubble( getPos( ) + Vector( 20, getRadius( ), 0 ) ) ) );
 }

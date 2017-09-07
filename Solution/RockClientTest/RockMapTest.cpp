@@ -30,6 +30,10 @@ RockMapTest::RockMapTest( ) {
 	obj06->setScale( Matrix::makeTransformScaling( Vector( 5, 1, 5 ) ) );
 	addModel( obj06 );
 
+	ModelMV1Ptr obj01 = ModelMV1Ptr(new ModelMV1);
+	obj01->load("Resource/Rock/object/obj01/obj01.mv1");
+	addModel(obj01);
+
 	RockStoragePtr storage( RockStorage::getTask( ) );
 	//アイテム
 	storage->addItem( RockItemPtr( new RockItemToku( Vector( 200, 50, 0 ) ) ) );
@@ -37,7 +41,7 @@ RockMapTest::RockMapTest( ) {
 	storage->addItem( RockItemPtr( new RockItemRock( Vector( 0, 50, 0 ) ) ) );
 	//ショップアイテム
 	storage->addShopItem( RockItemPtr( new RockItemDango( Vector( -50, 50, 0 ) ) ) );
-	storage->addAlter( RockAlterPtr( new RockAlter( Vector( 50, 0, 50 ), Vector( 0, 0, 0 ) ) ) );
+	storage->addAlter( RockAlterPtr( new RockAlter( Vector( 50, 0, 50 ), Vector( 50, 50, 50 ) ) ) );
 }
 
 

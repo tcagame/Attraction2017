@@ -14,6 +14,7 @@
 #include "RockCasket.h"
 #include "RockPopItem.h"
 #include "Status.h"
+#include "Sound.h"
 
 RockStoragePtr RockStorage::getTask( ) {
 	return std::dynamic_pointer_cast< RockStorage >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -55,6 +56,7 @@ void RockStorage::updateItem( ) {
 			}
 			if ( item->isOverLapped( player ) ) {
 				if ( pickUpItem( item, i ) ) {
+					Sound::getTask( )->playSE( "yokai_voice_30.wav" );
 					col = true;
 					break;//forï∂Çî≤ÇØÇÈ
 				} else {
@@ -159,22 +161,30 @@ bool RockStorage::pickUpItem( RockItemPtr item, int player_id ) {
 	{//ê_äÌä‚
 		RockItemRockPtr rock = std::dynamic_pointer_cast< RockItemRock >( item );
 		if ( rock ) {
-			if ( _status->getPlayer( player_id ).item & ITEM_ROCK ) {
-				result = false;
-			} else {
-				unsigned char item = ITEM_ROCK;
-				sender->sendMessage( player_id, Message::COMMAND_ITEM, &item );
+			for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+				if ( _status->getPlayer( i ).area == AREA_STREET_2 ) {
+					if ( _status->getPlayer( i ).item & ITEM_ROCK ) {
+						result = false;
+					} else {
+						unsigned char item = ITEM_ROCK;
+						sender->sendMessage( i, Message::COMMAND_ITEM, &item );
+					}
+				}
 			}
 		}
 	}
 	{//ê_äÌâŒ
 		RockItemFirePtr fire = std::dynamic_pointer_cast< RockItemFire >( item );
 		if ( fire ) {
-			if ( _status->getPlayer( player_id ).item & ITEM_FIRE ) {
-				result = false;
-			} else {
-				unsigned char item = ITEM_FIRE;
-				sender->sendMessage( player_id, Message::COMMAND_ITEM, &item );
+			for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+				if ( _status->getPlayer( i ).area == AREA_STREET_2 ) {
+					if ( _status->getPlayer( i ).item & ITEM_FIRE ) {
+						result = false;
+					} else {
+						unsigned char item = ITEM_FIRE;
+						sender->sendMessage( i, Message::COMMAND_ITEM, &item );
+					}
+				}
 			}
 		}
 	}
@@ -182,11 +192,15 @@ bool RockStorage::pickUpItem( RockItemPtr item, int player_id ) {
 	{//ê_äÌñÿ
 		RockItemTreePtr tree = std::dynamic_pointer_cast< RockItemTree >( item );
 		if ( tree ) {
-			if ( _status->getPlayer( player_id ).item & ITEM_TREE ) {
-				result = false;
-			} else {
-				unsigned char item = ITEM_TREE;
-				sender->sendMessage( player_id, Message::COMMAND_ITEM, &item );
+			for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+				if ( _status->getPlayer( i ).area == AREA_STREET_2 ) {
+					if ( _status->getPlayer( i ).item & ITEM_TREE ) {
+						result = false;
+					} else {
+						unsigned char item = ITEM_TREE;
+						sender->sendMessage( i, Message::COMMAND_ITEM, &item );
+					}
+				}
 			}
 		}
 	}
@@ -209,7 +223,7 @@ bool RockStorage::pickUpItem( RockItemPtr item, int player_id ) {
 		if ( dango ) {
 			if ( dango->isShopItem( ) ) {
 				int price = dango->getPrice( );
-				if ( _status->getPlayer( player_id ).money >= price ) {
+				if ( (int)_status->getPlayer( player_id ).money >= price ) {
 					int value = -price;
 					sender->sendMessage( player_id, Message::COMMAND_MONEY, &value );
 				} else {

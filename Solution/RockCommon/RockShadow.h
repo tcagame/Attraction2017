@@ -16,9 +16,11 @@ public:
 	virtual ~RockShadow( );
 public:
 	void update( );
-	void set( const Vector& pos, const double scale );
+	void set( const Vector& pos, const double scale, const bool adjust );
 	std::list< ModelMDLPtr > getShadows( ) const;
 	void clear( );
+private:
+	Vector getAdjustPos( const Vector& pos );
 private:
 	std::list< ModelMDLPtr > _models;
 };

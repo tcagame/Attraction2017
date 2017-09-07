@@ -3,7 +3,6 @@
   <ItemGroup>
     <ClCompile Include="MessageSender.cpp" />
     <ClCompile Include="RockAlter.cpp" />
-    <ClCompile Include="RockAncestors.cpp" />
     <ClCompile Include="RockCamera.cpp" />
     <ClCompile Include="RockCharacter.cpp" />
     <ClCompile Include="RockClientInfo.cpp" />
@@ -113,13 +112,15 @@
       <Filter>Event</Filter>
     </ClCompile>
     <ClCompile Include="RockShadow.cpp" />
+    <ClCompile Include="RockAncestors.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="define.h" />
     <ClInclude Include="Message.h" />
     <ClInclude Include="MessageSender.h" />
     <ClInclude Include="RockAlter.h" />
-    <ClInclude Include="RockAncestors.h" />
     <ClInclude Include="RockCamera.h" />
     <ClInclude Include="RockCharacter.h" />
     <ClInclude Include="RockClientInfo.h" />
@@ -230,6 +231,9 @@
       <Filter>Event</Filter>
     </ClInclude>
     <ClInclude Include="RockShadow.h" />
+    <ClInclude Include="RockAncestors.h">
+      <Filter>Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Item">
