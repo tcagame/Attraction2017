@@ -19,6 +19,7 @@
 #include "MessageSender.h"
 #include "sound.h"
 #include "RockOffice.h"
+#include "RockShadow.h"
 
 void main( ) {
 
@@ -41,6 +42,7 @@ void main( ) {
 	app->addTask( RockStorage::getTag( ), TaskPtr( new RockStorage( status ) ) );
 	app->addTask( RockOffice::getTag( ), TaskPtr( new RockOffice( ) ) );
 	app->addTask( RockStudio::getTag( ), TaskPtr( new RockStudio( ) ) );
+	app->addTask( RockShadow::getTag( ), TaskPtr( new RockShadow( ) ) );
 	app->addTask( MessageSender::getTag( ), TaskPtr( new MessageSender( message ) ) );
 	std::vector< unsigned int > state = { };
 	state.push_back( AREA_STREET_1 );

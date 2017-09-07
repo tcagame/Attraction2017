@@ -4,7 +4,7 @@
 #include "ModelMV1.h"
 #include "RockMap.h"
 
-const int FALL_POWER = -10;
+const int FALL_POWER = -30;
 const std::string GRAPH_PATH = "Resource/Rock/shadow/shadow.png";
 
 RockShadowPtr RockShadow::getTask( ) {
