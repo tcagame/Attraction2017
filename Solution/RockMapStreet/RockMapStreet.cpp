@@ -33,7 +33,7 @@ void RockMapStreet::initialize( ) {
 		for ( int i = 0; i < 30; i++ ) {
 			storage->addItem( RockItemPtr( new RockItemMoney( Vector( i * interval, 200, -500 - i * 10 ), 10000 ) ) );
 		}
-		RockOffice::getTask( )->add( RockEventCharacterPtr( new EventTurtle( Vector( 3610, 350, -210 ) ) ) );
+		RockOffice::getTask( )->add( RockEventCharacterPtr( new EventTurtle( Vector( 3610, 320, -210 ) ) ) );
 	}
 
 }
@@ -89,7 +89,8 @@ void RockMapStreet::updateStreet( ) {
 			std::list< RockEventCharacterPtr >::iterator ite = eve_chara.begin( );
 			EventTurtlePtr turtle = std::dynamic_pointer_cast< EventTurtle >( *ite );
 			for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
-				if ( turtle->isRaid( )  ) {
+				RockCharacterPtr player = RockFamily::getTask( )->getPlayer( i );
+				if ( turtle->isOnHead( player )  ) {
 					_drawer.reset( );
 					_stage = STAGE_RYUGU;
 					_drawer = RockMapStreetDrawerPtr( new RockMapStreetDrawer( _stage ) );

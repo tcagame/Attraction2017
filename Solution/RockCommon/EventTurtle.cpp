@@ -4,7 +4,7 @@
 #include "RockPlayer.h"
 
 const int HEIGHT = 32;
-const int RADIUS = 32;
+const int RADIUS = 128;
 const double ANIM_SPEED = 0.9;
 
 EventTurtle::EventTurtle( const Vector& pos ) :
@@ -24,14 +24,4 @@ double EventTurtle::getAnimTime( ) const {
 }
 
 void  EventTurtle::act( ) {
-}
-
-bool EventTurtle::isRaid( ) {
-	return false;
-	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
-		RockCharacterPtr player = RockFamily::getTask( )->getPlayer( i );
-		if ( isOnHead( player ) ) {
-			return true;
-		}
-	}
 }
