@@ -52,7 +52,7 @@ const int MOTION_OFFSET[Player::MAX_ACTION] = {
 	0,   // ACTION_WAIT,
 	32,  // ACTION_WALK,
 	1,  // ACTION_BRAKE,
-	50,  // ACTION_FLOAT,
+	48,  // ACTION_FLOAT,
 	0,   // ACTION_ATTACK,
 	64,  // ACTION_CHARGE,
 	72,  // ACTION_OVER_CHARGE,
@@ -69,7 +69,7 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		17, // ACTION_WAIT,
 		16, // ACTION_WALK,
 		1 , // ACTION_BRAKE,
-		9 , // ACTION_FLOAT,
+		11 , // ACTION_FLOAT,
 		1 , // ACTION_ATTACK,
 		9 , // ACTION_CHARGE,
 		7 , // ACTION_OVER_CHARGE,
@@ -84,7 +84,7 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		21, // ACTION_WAIT,
 		12, // ACTION_WALK,
 		1 , // ACTION_BRAKE,
-		9 , // ACTION_FLOAT,
+		11 , // ACTION_FLOAT,
 		1 , // ACTION_ATTACK,
 		9 , // ACTION_CHARGE,
 		6 , // ACTION_OVER_CHARGE,
@@ -99,7 +99,7 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		16, // ACTION_WAIT,
 		16, // ACTION_WALK,
 		1 , // ACTION_BRAKE,
-		9 , // ACTION_FLOAT,
+		11 , // ACTION_FLOAT,
 		1 , // ACTION_ATTACK,
 		9 , // ACTION_CHARGE,
 		7 , // ACTION_OVER_CHARGE,
@@ -114,7 +114,7 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		16, // ACTION_WAIT,
 		16, // ACTION_WALK,
 		1 , // ACTION_BRAKE,
-		1 , // ACTION_FLOAT,
+		11 , // ACTION_FLOAT,
 		1 , // ACTION_ATTACK,
 		9 , // ACTION_CHARGE,
 		7 , // ACTION_OVER_CHARGE,
@@ -843,7 +843,6 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 	int num = MOTION_NUM[ _player ][ _action ];
 	int motion = 0;
 	switch ( _action ) {
-	case ACTION_FLOAT:
 	case ACTION_BRAKE:
 	case ACTION_DAMEGE:
 	case ACTION_BLOW_AWAY:
@@ -853,6 +852,9 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		return;
 	case ACTION_WALK:
 		motion = ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT / 3;
+		break;
+	case ACTION_FLOAT:
+		motion = getActCount( ) / PLAYER_ANIM_WAIT_COUNT;
 		break;
 	case ACTION_WAIT:
 	case ACTION_OVER_CHARGE:
@@ -867,11 +869,7 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 			100, 101, 102, 103, 104, 105, 106, 107
 		};
 		int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-		int anim = getActCount( ) / PLAYER_ANIM_WAIT_COUNT;
-
-		if ( _player != 3 ) {
-			anim_num = anim_num - 1;
-		}
+		int anim = getActCount( ) / PLAYER_ANIM_WAIT_COUNT + 5;
 
 		if ( anim >= anim_num ) {
 			anim = anim_num - 1;
