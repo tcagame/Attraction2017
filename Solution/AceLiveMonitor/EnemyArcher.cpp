@@ -6,8 +6,8 @@
 const int WAIT_ANIM_TIME = 5;
 const int MAX_HP = 0;
 const int MOVE_SPEED = -2;
-const int MOVE_TIME = WAIT_ANIM_TIME * 12;
-const int ANIM_LOOP_TIME = WAIT_ANIM_TIME * 21;
+const int MOVE_TIME = WAIT_ANIM_TIME * 9;
+const int ANIM_LOOP_TIME = WAIT_ANIM_TIME * 18;
 const int SHOT_TIMING = ( MOVE_TIME + WAIT_ANIM_TIME * 5 ) - 2;
 
 EnemyArcher::EnemyArcher( const Vector& pos ) :
@@ -21,7 +21,7 @@ EnemyArcher::~EnemyArcher( ) {
 
 void EnemyArcher::act( ) {
 	setVec( Vector( MOVE_SPEED, getVec( ).y ) );
-	if ( ( getActCount( ) % ANIM_LOOP_TIME ) >= MOVE_TIME ) {
+	if ( ( getActCount( ) % ( ANIM_LOOP_TIME - 2 ) ) >= MOVE_TIME ) {
 		setVec( Vector( ) );
 	}
 	if ( ( getActCount( ) % ANIM_LOOP_TIME ) == SHOT_TIMING ) {
@@ -30,7 +30,7 @@ void EnemyArcher::act( ) {
 }
 
 void EnemyArcher::setSynchronousData( unsigned char type, int camera_pos ) const {
-	int ANIM[ ] = { /*move*/ 260, 261, 262, 261, 260, 261, 262, 261, 260, 261, 262, 261, /*shot*/ 263, 264, 265, 266, 267, 268, 269, 270, 271 };
+	int ANIM[ ] = { /*move*/ 300, 301, 302, 303, 304, 305, 306, 307, 308, /*shot*/ 309, 310, 311, 312, 313, 314, 315, 316, 317 };
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	
 	Vector pos = getPos( );
