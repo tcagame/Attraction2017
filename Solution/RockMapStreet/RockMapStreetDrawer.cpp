@@ -44,6 +44,18 @@ RockMapStreetDrawer::RockMapStreetDrawer( RockMapStreet::STAGE stage ) {
 		map->addColModel( boss_col_model );
 	}
 		break;
+	case RockMapStreet::STAGE_RYUGU:
+	{
+		ModelMV1Ptr ryugu_model = ModelMV1Ptr( new ModelMV1 );
+		ryugu_model->load( "Resource/Rock/map/street1/map10.mv1" );
+		ryugu_model->draw( );
+		map->addModel( ryugu_model );
+		ModelMV1Ptr ryugu_col_model = ModelMV1Ptr( new ModelMV1 );
+		ryugu_col_model->load( "Resource/Rock/map/street1/map10_CL.mv1" );
+		ryugu_col_model->draw( );
+		map->addColModel( ryugu_col_model );
+	}
+		break;
 	default:
 		assert( stage == RockMapStreet::STAGE_STREET && stage == RockMapStreet::STAGE_CAVE );
 	break;

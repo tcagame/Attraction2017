@@ -42,6 +42,9 @@ void RockMapStreet::update( ) {
 	case STAGE_CAVE:
 		updateCave( );
 		break;
+	case STAGE_RYUGU:
+		updateRyugu( );
+		break;
 	}
 }
 
@@ -75,6 +78,9 @@ void RockMapStreet::updateStreet( ) {
 				}
 			}
 		}
+		//ãTÇ…èÊÇÈÇ∆ó≥ã{èÈÇ÷à⁄ìÆ
+		{
+		}
 	}
 }
 
@@ -98,6 +104,16 @@ void RockMapStreet::updateCave( ) {
 			for ( int i = 0; i < 50; i++ ) {
 				storage->addItem( RockItemPtr( new RockItemMoney( Vector( i * interval, 500, -500 - i * 10 ), 10000 ) ) );
 			}
+		}
+	}
+}
+
+void RockMapStreet::updateRyugu( ) {
+	RockFamilyPtr family = RockFamily::getTask( );
+	for( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+		RockPlayerPtr player = family->getPlayer( i );
+		if( player->isActive( ) ) {
+			continue;
 		}
 	}
 }
