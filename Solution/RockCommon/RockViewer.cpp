@@ -32,6 +32,10 @@ const int MONEY_Y = DRAW_UI_Y + 102;
 const int ITEM_GRAPH_SIZE = 64;
 const int ITEM_Y = DRAW_UI_Y + 158;
 const int ITEM_DRAW_SIZE = 24;
+const int CONTINUE_GRAPH_SIZE = 32;
+const int CONTINUE_Y = DRAW_UI_Y + 126;
+const int CONTINUE_DRAW_SIZE = CONTINUE_GRAPH_SIZE / 2;
+const int CONTINUE_X_NUM = 13;
 
 RockViewerPtr RockViewer::getTask( ) {
 	return std::dynamic_pointer_cast< RockViewer >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -51,6 +55,8 @@ void RockViewer::initialize( ) {
 	_image_frame = drawer->createImage( "UI/status_plate.png" );
 	_status_ui = drawer->createImage( "UI/ui.png" );
 	_status_num = drawer->createImage( "UI/ui_num.png" );
+	_dummy_ui = drawer->createImage( "UI/item.png" );
+
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {		
 		char filename[ 256 ];
 		sprintf_s( filename, "UI/breast%d.png", i + 1 );
@@ -320,6 +326,16 @@ void RockViewer::drawUI( ) const {
 			_status_ui->setRect( ITEM_GRAPH_SIZE * 7, 320, ITEM_GRAPH_SIZE, ITEM_GRAPH_SIZE );
 			_status_ui->setPos( sx, sy,  sx + ITEM_DRAW_SIZE, sy + ITEM_DRAW_SIZE );
 			_status_ui->draw( );
+		}
+		{//コンティニュー
+			unsigned int continue_num = _status->getPlayer( i ).continue_num;
+			for ( int j = 0; j < (int)continue_num; j++ ) {
+				_dummy_ui->setRect( CONTINUE_GRAPH_SIZE * 2, CONTINUE_GRAPH_SIZE * 4, CONTINUE_GRAPH_SIZE, CONTINUE_GRAPH_SIZE );
+				int sx = player_status_pos + 105 - ( CONTINUE_DRAW_SIZE / 2 ) * ( j % CONTINUE_X_NUM );
+				int sy = CONTINUE_Y - ( j / CONTINUE_X_NUM ) * CONTINUE_DRAW_SIZE;
+				_dummy_ui->setPos( sx, sy, sx + CONTINUE_DRAW_SIZE, sy + CONTINUE_DRAW_SIZE );
+				_dummy_ui->draw( );
+			}
 		}
 	}
 }
