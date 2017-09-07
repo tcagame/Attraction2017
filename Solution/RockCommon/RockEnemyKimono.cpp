@@ -52,5 +52,5 @@ double RockEnemyKimono::getAnimTime( ) const {
 }
 
 void RockEnemyKimono::dropItem( ) {
-	RockStorage::getTask( )->addDropItem( RockItemPtr( new RockItemMoney( getPos( ) + Vector( 0, getRadius( ), 0 ), RockItemMoney::MONEY_VALUE_3 ) ) );
+	RockStorage::getTask( )->addDropItem( RockItemPtr( new RockItemMoney( getPos( ) + Vector( 0, getRadius( ), 0 ), RockItemMoney::MONEY_VALUE_5 ) ) );
 }

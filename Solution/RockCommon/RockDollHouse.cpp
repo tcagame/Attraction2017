@@ -60,9 +60,13 @@ void RockDollHouse::initialize( ) {
 	//item
 	_dolls[ DOLL_DANGO	 ]->load( "Resource/Rock/item/itm01/itm01.mv1" );
 	_dolls[ DOLL_MONEY_1 ]->load( "Resource/Rock/item/itm04/itm04.mv1" );
-	_dolls[ DOLL_MONEY_2 ]->load( "Resource/Rock/item/itm06/itm06.mv1" );
-	_dolls[ DOLL_MONEY_3 ]->load( "Resource/Rock/item/itm07/itm07.mv1" );
-	_dolls[ DOLL_MONEY_4 ]->load( "Resource/Rock/item/itm08/itm08.mv1" );
+	_dolls[ DOLL_MONEY_2 ]->load( "Resource/Rock/item/itm05/itm05.mv1" );
+	_dolls[ DOLL_MONEY_3 ]->load( "Resource/Rock/item/itm06/itm06.mv1" );
+	_dolls[ DOLL_MONEY_4 ]->load( "Resource/Rock/item/itm07/itm07.mv1" );
+	_dolls[ DOLL_MONEY_5 ]->load( "Resource/Rock/item/itm08/itm08.mv1" );
+	_dolls[ DOLL_MONEY_6 ]->load( "Resource/Rock/item/itm09/itm09.mv1" );
+
+
 	_dolls[ DOLL_TOKU ]->load( "Resource/Rock/item/itm10/itm10.mv1" );
 	_dolls[ DOLL_SACRED_ROCK ]->load( "Resource/Rock/object/sacred/sacred_rock.mv1" );
 	_dolls[ DOLL_SACRED_ROCK ]->setScale( Matrix::makeTransformScaling( Vector( 2, 2, 2 ) ) );
