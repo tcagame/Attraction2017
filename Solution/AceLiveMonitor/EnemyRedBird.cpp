@@ -4,7 +4,7 @@
 #include "SynchronousData.h"
 #include "Sound.h"
 
-const int WAIT_ANIM_TIME = 5;
+const int WAIT_ANIM_TIME = 4;
 const int ATTACK_TIME = 30;
 const int MAX_HP = 3;
 const int MOVE_SPEED = -5;
@@ -29,7 +29,7 @@ void EnemyRedBird::act( ) {
 
 void EnemyRedBird::setSynchronousData( unsigned char type, int camera_pos ) const {
 	const int ANIM[ ] = {
-		280, 281, 282, 283, 284, 285, 286, 287, 288, 289
+		320, 321, 322, 323, 324, 325, 326, 327, 328, 329
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	

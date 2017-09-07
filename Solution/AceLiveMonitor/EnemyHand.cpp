@@ -27,7 +27,7 @@ void EnemyHand::act( ) {
 
 void EnemyHand::setSynchronousData( unsigned char type, int camera_pos ) const {
 	const int ANIM[ ] = {
-		40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 42, 41, 40
+		40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	

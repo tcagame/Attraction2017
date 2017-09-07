@@ -2,7 +2,7 @@
 #include "ace_define.h"
 #include "SynchronousData.h"
 
-const int WAIT_ANIM_TIME = 5;
+const int WAIT_ANIM_TIME = 4;
 const int MAX_HP = 3;
 const int MOVE_RANGE = 10;
 const double MOVE_SPEED = 0.5;
@@ -32,7 +32,7 @@ void EnemyNoFace::act( ) {
 
 void EnemyNoFace::setSynchronousData( unsigned char type, int camera_pos ) const {
 	const int ANIM[ ] = {
-		220, 221, 222, 223, 224, 225, 226, 227, 226, 227, 226, 225, 224, 223, 222, 221
+		260, 261, 262, 263, 264, 265, 266, 267, 268, 269
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	

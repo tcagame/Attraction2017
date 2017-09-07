@@ -26,7 +26,7 @@ void EnemyBlueMonk::act( ) {
 
 void EnemyBlueMonk::setSynchronousData( unsigned char type, int camera_pos ) const {
 	const int ANIM[ ] = {
-		187, 188, 189, 190, 191, 192
+		220, 221, 222, 223, 224, 225, 226
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	

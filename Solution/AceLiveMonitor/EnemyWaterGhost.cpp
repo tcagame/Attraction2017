@@ -17,7 +17,7 @@ void EnemyWaterGhost::act( ) {
 }
 
 void EnemyWaterGhost::setSynchronousData( unsigned char type, int camera_pos ) const {
-	const int ANIM[ ] = { 300, 301, 302, 303, 304, 305, 306, 307, 308, 309, 310, 311, 312, 313 };
+	const int ANIM[ ] = { 340, 341, 342, 343, 344, 345, 346, 347, 348, 349, 350, 351, 352, 353, 354 };
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	
 	Vector pos = getPos( );
