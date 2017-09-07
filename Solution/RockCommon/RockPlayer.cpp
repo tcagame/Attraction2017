@@ -345,9 +345,13 @@ void RockPlayer::actOnWalking( ) {
 
 void RockPlayer::actOnAttacking( ) {	
 	Status::Player player = _status->getPlayer( _id );
+	SoundPtr sound = Sound::getTask( );
 	// UŒ‚ƒ{ƒ^ƒ“‚ª—£‚³‚ê‚½‚çUŒ‚
 	if ( !( player.device_button & BUTTON_A ) &&
 		 _attack_count > 0 ) {
+		sound->stopSE( "yokai_se_21.wav" );
+		sound->stopSE( "yokai_se_22.wav" );
+		sound->playSE( "yokai_se_20.wav" );
 		bool max_charge = ( MAX_CHARGE_COUNT == _attack_count );
 		int power = _attack_count / ( MAX_CHARGE_COUNT / ( MAX_PLAYER_SHOT_POWER - 1 ) ) + 1;
 		if ( player.item & ITEM_ENHANCED_ATTACK ) {
@@ -409,6 +413,15 @@ void RockPlayer::actOnCharging( ) {
 		setVec( vec );
 		return;
 	}
+	if ( !sound->isPlayingSE( "yokai_se_21.wav" ) ) {
+		sound->playSE( "yokai_se_21.wav" );
+	}
+	if ( _attack_count > MAX_CHARGE_COUNT / 2 && sound->isPlayingSE( "yokai_se_21.wav" ) ) {
+		sound->stopSE( "yokai_se_21.wav" );
+		if ( !sound->isPlayingSE( "yokai_se_22.wav" ) ) { 
+			sound->playSE( "yokai_se_22.wav" );
+		}
+	} 
 }
 
 void RockPlayer::actOnBraking( ) {

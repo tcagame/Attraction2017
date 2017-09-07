@@ -14,6 +14,7 @@
 #include "RockCasket.h"
 #include "RockPopItem.h"
 #include "Status.h"
+#include "Sound.h"
 
 RockStoragePtr RockStorage::getTask( ) {
 	return std::dynamic_pointer_cast< RockStorage >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -55,6 +56,7 @@ void RockStorage::updateItem( ) {
 			}
 			if ( item->isOverLapped( player ) ) {
 				if ( pickUpItem( item, i ) ) {
+					Sound::getTask( )->playSE( "yokai_voice_30.wav" );
 					col = true;
 					break;//for•¶‚ð”²‚¯‚é
 				} else {

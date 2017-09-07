@@ -8,6 +8,7 @@
 #include <list>
 #include "Effect.h"
 #include "RockShotPlayer.h"
+#include "Sound.h"
 
 RockArmouryPtr RockArmoury::getTask( ) {
 	return std::dynamic_pointer_cast< RockArmoury >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -38,6 +39,7 @@ void RockArmoury::update( ) {
 		shot->update( );
 		RockEnemyPtr enemy = getOverLappedEnemy( shot );
 		if ( enemy ) {
+			Sound::getTask( )->playSE( "yokai_se_25.wav" );
 			enemy->damage( shot->getPower( ) );
 			RockShotPlayerPtr player_shot = std::dynamic_pointer_cast< RockShotPlayer >( shot );
 			if ( player_shot ) {
