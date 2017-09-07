@@ -22,6 +22,8 @@
 #include "Movie.h"
 #include "RockTheater.h"
 #include "RockBubble.h"
+#include "RockOffice.h"
+#include "RockEventCharacter.h"
 
 const int DRAW_UI_Y = 512;
 const int HP_GRAPH_HEIGHT = 16;
@@ -69,6 +71,7 @@ void RockViewer::update( ) {
 	drawBubble( );
 	drawCleannessMap( );
 	drawAncestors( );
+	drawEventCharacter( );
 	//drawShot( );
 	drawItem( );
 	drawAlter( );
@@ -163,7 +166,27 @@ void RockViewer::drawAncestors( ) const {
 	}
 }
 
+void RockViewer::drawEventCharacter( ) const {
+	RockOfficePtr office( RockOffice::getTask( ) );
 
+	if ( !office ) {
+		return;
+	}
+
+	std::list< RockEventCharacterPtr > event_characters = office->getEventCharacters( );
+	std::list< RockEventCharacterPtr >::const_iterator ite = event_characters.begin( );
+	while ( ite != event_characters.end( ) ) {
+		RockEventCharacterPtr chara = *ite;
+		if ( !chara ) {
+			ite++;
+			continue;
+		}
+
+		ModelMV1Ptr model = chara->getModel( );
+		model->draw( );
+		ite++;
+	}
+}
 
 void RockViewer::drawShot( ) const {
 	DrawerPtr drawer( Drawer::getTask( ) );

@@ -17,6 +17,7 @@
 #include "RockStorage.h"
 #include "RockStudio.h"
 #include "MessageSender.h"
+#include "RockOffice.h"
 
 void main( ) {
 
@@ -35,6 +36,7 @@ void main( ) {
 	app->addTask( RockArmoury::getTag( ), TaskPtr( new RockArmoury( ) ) );
 	app->addTask( RockViewer::getTag( ), TaskPtr( new RockViewer( status ) ) );
 	app->addTask( RockStorage::getTag( ), TaskPtr( new RockStorage( status ) ) );
+	app->addTask( RockOffice::getTag( ), TaskPtr( new RockOffice( ) ) );
 	app->addTask( RockStudio::getTag( ), TaskPtr( new RockStudio( ) ) );
 	app->addTask( MessageSender::getTag( ), TaskPtr( new MessageSender( message ) ) );
 	std::vector< unsigned int > state = { };
