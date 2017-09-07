@@ -35,7 +35,7 @@ static const int BURST_TIME = 60;
 static const int MAX_HP = 16;
 static const int COOL_TIME = 8;
 //アニメーション
-static const int PLAYER_ANIM_WAIT_COUNT = 12;
+static const int PLAYER_ANIM_WAIT_COUNT = 4;
 static const int PLAYER_ANIM_WIDTH_NUM = 10;
 static const int PLAYER_FLASH_WAIT_TIME = 2;
 //カウント
@@ -44,6 +44,86 @@ static const int MAX_BACK_COUNT = 6;
 static const int MAX_UNRIVALED_COUNT = 45;
 static const int MAX_DEAD_ACTCOUNT = 120;
 static const int MAX_IMPACT_COUNT = 30;
+
+// モーションテーブル
+const int MOTION_OFFSET[Player::MAX_ACTION] = {
+	0,   // ACTION_ENTRY,
+	0,   // ACTION_CONTINUE,
+	0,   // ACTION_WAIT,
+	32,  // ACTION_WALK,
+	1,  // ACTION_BRAKE,
+	50,  // ACTION_FLOAT,
+	0,   // ACTION_ATTACK,
+	64,  // ACTION_CHARGE,
+	72,  // ACTION_OVER_CHARGE,
+	81,  // ACTION_DAMEGE,
+	50,  // ACTION_BLOW_AWAY,
+	80,  // ACTION_DAED,
+	112, // ACTION_CALL,
+};
+
+const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
+	{ // たろすけ
+		0 , // ACTION_ENTRY,
+		0 , // ACTION_CONTINUE,
+		17, // ACTION_WAIT,
+		16, // ACTION_WALK,
+		1 , // ACTION_BRAKE,
+		9 , // ACTION_FLOAT,
+		1 , // ACTION_ATTACK,
+		9 , // ACTION_CHARGE,
+		7 , // ACTION_OVER_CHARGE,
+		1 , // ACTION_DAMEGE,
+		1 , // ACTION_BLOW_AWAY,
+		27, // ACTION_DAED,
+		18, // ACTION_CALL,
+	},
+	{ // たろじろー
+		0 , // ACTION_ENTRY,
+		0 , // ACTION_CONTINUE,
+		21, // ACTION_WAIT,
+		12, // ACTION_WALK,
+		1 , // ACTION_BRAKE,
+		9 , // ACTION_FLOAT,
+		1 , // ACTION_ATTACK,
+		9 , // ACTION_CHARGE,
+		6 , // ACTION_OVER_CHARGE,
+		1 , // ACTION_DAMEGE,
+		1 , // ACTION_BLOW_AWAY,
+		27, // ACTION_DAED,
+		18, // ACTION_CALL,
+	},
+	{ // ガりすけ
+		0 , // ACTION_ENTRY,
+		0 , // ACTION_CONTINUE,
+		16, // ACTION_WAIT,
+		16, // ACTION_WALK,
+		1 , // ACTION_BRAKE,
+		9 , // ACTION_FLOAT,
+		1 , // ACTION_ATTACK,
+		9 , // ACTION_CHARGE,
+		7 , // ACTION_OVER_CHARGE,
+		1 , // ACTION_DAMEGE,
+		1 , // ACTION_BLOW_AWAY,
+		27, // ACTION_DAED,
+		12, // ACTION_CALL,
+	},
+	{ // たろみ
+		0 , // ACTION_ENTRY,
+		0 , // ACTION_CONTINUE,
+		16, // ACTION_WAIT,
+		16, // ACTION_WALK,
+		1 , // ACTION_BRAKE,
+		1 , // ACTION_FLOAT,
+		1 , // ACTION_ATTACK,
+		9 , // ACTION_CHARGE,
+		7 , // ACTION_OVER_CHARGE,
+		1 , // ACTION_DAMEGE,
+		1 , // ACTION_BLOW_AWAY,
+		28, // ACTION_DAED,
+		12, // ACTION_CALL,
+	}
+};
 
 Player::Player( PLAYER player, Vector pos ) :
 Character( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ),
@@ -759,109 +839,52 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		x -= camera_pos;
 	}
 
-	int pattern = 0;
+	int off = MOTION_OFFSET[ _action ];
+	int num = MOTION_NUM[ _player ][ _action ];
+	int motion = 0;
 	switch ( _action ) {
+	case ACTION_FLOAT:
+	case ACTION_BRAKE:
+	case ACTION_DAMEGE:
+	case ACTION_BLOW_AWAY:
+		break;
 	case ACTION_ENTRY:
 	case ACTION_CONTINUE:
 		return;
-	case ACTION_WAIT:
-		{
-			const int ANIM[ ] = {
-				0,
-			};
-			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-			pattern = ANIM[ ( getActCount( ) / PLAYER_ANIM_WAIT_COUNT ) % anim_num ];
-		}
-		break;
 	case ACTION_WALK:
-		{
-			const int ANIM[ ] = {
-				0, 1, 2, 1, 0, 3, 4, 3
-			};
-			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-			pattern = ANIM[ ( ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT ) % anim_num ];
-		}
+		motion = ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT / 3;
 		break;
-	case ACTION_BRAKE:
-		{
-			const int ANIM[ ] = {
-				6,
-			};
-			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-			pattern = ANIM[ ( ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT ) % anim_num ];
-		}
-		break;
-	case ACTION_FLOAT:
-		{
-			const int ANIM[ ] = {
-				5,
-			};
-			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-			pattern = ANIM[ ( ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT ) % anim_num ];
-		}
-		break;
-	case ACTION_CHARGE:
-		{
-			const int ANIM[ ] = {
-				48, 49, 50, 51, 52, 53, 54
-			};
-			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-			pattern = ANIM[ ( _charge_count / ( CHARGE_PHASE_COUNT / 2 ) ) % anim_num ];
-		}
-		break;
+	case ACTION_WAIT:
 	case ACTION_OVER_CHARGE:
-		{
-			const int ANIM[ ] = {
-				48, 49
-			};
-			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-			pattern = ANIM[ ( getActCount( ) / PLAYER_ANIM_WAIT_COUNT ) % anim_num ];
-		}
-		break;
-	case ACTION_DAMEGE:
-		{
-			const int ANIM[ ] = {
-				96
-			};
-			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-			pattern = ANIM[ ( getActCount( ) / PLAYER_ANIM_WAIT_COUNT ) % anim_num ];
-		}
-		break;
-	case ACTION_BLOW_AWAY:
-		{
-			const int ANIM[ ] = {
-				5,
-			};
-			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-			pattern = ANIM[ ( ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT ) % anim_num ];
-		}
+	case ACTION_CALL:
+		motion = getActCount( ) / PLAYER_ANIM_WAIT_COUNT / 2;
 		break;
 	case ACTION_DAED:
-		{
-			const int ANIM[ ] = {
-				96, 97, 98, 99, 100, 101, 102, 103, 104
-			};
-			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-			int anim = getActCount( ) / PLAYER_ANIM_WAIT_COUNT;
-			if ( anim >= anim_num ) {
-				anim = anim_num - 1;
-			}
-			pattern = ANIM[ anim ];
+	{
+		const int ANIM[ ] = {
+			80, 81, 82, 83, 84, 85, 86, 87, 88, 89,
+			90, 91, 92, 93, 94, 95, 96, 97, 98, 99,
+			100, 101, 102, 103, 104, 105, 106, 107
+		};
+		int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
+		int anim = getActCount( ) / PLAYER_ANIM_WAIT_COUNT;
+
+		if ( _player != 3 ) {
+			anim_num = anim_num - 1;
 		}
-		break;
-	case ACTION_CALL:
-		{
-			const int ANIM[ ] = {
-				64, 65, 66, 67, 68, 69, 70, 71
-			};
-			int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-			int anim = getActCount( ) / PLAYER_ANIM_WAIT_COUNT;
-			anim %= anim_num;
-			pattern = ANIM[ anim ];
+
+		if ( anim >= anim_num ) {
+			anim = anim_num - 1;
 		}
+		motion = ANIM[ anim ];
+	}
+	break;
+	case ACTION_CHARGE:
+		motion = _charge_count / ( CHARGE_PHASE_COUNT / 3 );
 		break;
 	}
 
+	int pattern = off + motion % num;
 
 	unsigned char attribute = 0;
 	if ( getDir( ) == DIR_RIGHT ) {
@@ -871,7 +894,7 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 	data->addObject( area, type, pattern, attribute, x, y );
 	if ( _charge_count > 0 ) {
 		const int ANIM[ ] = {
-			2, 3, 4, 5, 6, 7, 8, 9, 10, 11
+			0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11
 		};
 		int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 		int phase = ( _charge_count / CHARGE_PHASE_COUNT ) * 2;

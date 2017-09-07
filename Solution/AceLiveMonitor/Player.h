@@ -22,6 +22,7 @@ public:
 		ACTION_BLOW_AWAY,
 		ACTION_DAED,
 		ACTION_CALL,
+		MAX_ACTION,
 	};
 public:
 	Player( PLAYER player, Vector pos );
