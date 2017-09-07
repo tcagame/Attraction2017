@@ -32,7 +32,7 @@ void EnemyGrayMist::act( ) {
 
 void EnemyGrayMist::setSynchronousData( unsigned char type, int camera_pos ) const {
 	const int ANIM[ ] = {
-		151, 152, 153, 154, 155, 156, 155, 154, 153, 152
+		170, 171, 172, 173, 174, 175, 176, 177, 178, 179
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	

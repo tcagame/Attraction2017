@@ -17,7 +17,7 @@ void EnemyShell::act( ) {
 }
 
 void EnemyShell::setSynchronousData( unsigned char type, int camera_pos ) const {
-	const int ANIM[ ] = { 166, 167, 168, 169, 170, 171, 172, 173 };
+	const int ANIM[ ] = { 189, 190, 191, 192, 193, 194, 195, 196, 197 };
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	
 	Vector pos = getPos( );

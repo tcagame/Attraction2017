@@ -24,7 +24,7 @@ void EnemySwampZombieA::act( ) {
 
 void EnemySwampZombieA::setSynchronousData( unsigned char type, int camera_pos ) const {
 	const int ANIM[ ] = {
-		80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91
+		80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	

@@ -31,7 +31,7 @@ void EnemyNoNeckGhost::act( ) {
 
 void EnemyNoNeckGhost::setSynchronousData( unsigned char type, int camera_pos ) const {
 	const int ANIM[ ] = {
-		200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210
+		240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	

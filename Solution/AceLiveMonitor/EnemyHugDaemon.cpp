@@ -36,7 +36,7 @@ void EnemyHugDaemon::act( ) {
 
 void EnemyHugDaemon::setSynchronousData( unsigned char type, int camera_pos ) const {
 	const int ANIM[ ] = {
-		193, 194, 195, 194
+		227, 228, 229, 230, 231, 232, 233, 234, 235, 236
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	

@@ -49,7 +49,7 @@ void EnemyShishimai::act( ) {
 
 void EnemyShishimai::setSynchronousData( unsigned char type, int camera_pos ) const {
 	const int ANIM[ ] = {
-		240, 241, 242, 243, 244, 245, 246, 247
+		280, 281, 282, 283, 284, 285, 286, 287, 288
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	
