@@ -25,6 +25,7 @@ private:
 	void drawPlayer( ) const;
 	void drawBubble( ) const;
 	void drawAncestors( ) const;
+	void drawEventCharacter( ) const;
 	void drawShot( ) const;// debug
 	void drawItem( ) const; 
 	void drawAlter( ) const;
@@ -36,6 +37,7 @@ private:
 	ImagePtr _image_frame;
 	ImagePtr _status_ui;
 	ImagePtr _status_num;
+	ImagePtr _dummy_ui;
 	std::vector< ImagePtr > _breasts;
 };
 
