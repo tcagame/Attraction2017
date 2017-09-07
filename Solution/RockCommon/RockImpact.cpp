@@ -11,7 +11,7 @@ _size( size ),
 _count( 0 ),
 _finished( false ) {
 	int handle = Effect::getTask( )->playEffect( RockStudio::getTask( )->getEffectHandle( EFFECT_IMPACT ) );
-	Effect::getTask( )->updateEffectTransform( handle, pos, 3.0 );
+	Effect::getTask( )->updateEffectTransform( handle, pos, _size );
 }
 
 
