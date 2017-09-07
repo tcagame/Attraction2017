@@ -28,7 +28,6 @@ private:
 	void drawDevice( );
 	void drawAreaEvent( );
 	void drawAreaStreet( );
-	void playSe( );
 private:
 	const PLAYER _player;
 	ViewerObjectPtr _viewer_object;

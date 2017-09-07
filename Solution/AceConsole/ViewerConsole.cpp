@@ -7,7 +7,6 @@
 #include "ViewerStatus.h"
 #include "SynchronousData.h"
 #include "Client.h"
-#include "Sound.h"
 
 const int AREA_SX  = 0;
 const int AREA_SY  = 480 - 256;
@@ -67,9 +66,6 @@ void ViewerConsole::update( ) {
 
 
 	drawer->flip( );
-
-	
-	playSe( );
 
 	drawArea( );
 	drawUI( );
@@ -134,28 +130,5 @@ void ViewerConsole::drawDevice( ) {
 
 	if ( data->getStatusDevice( _player ) < 0 ) {
 		_image_device->draw( );
-	}
-}
-
-void ViewerConsole::playSe( ) {
-	SynchronousDataPtr data =SynchronousData::getTask( );
-	SoundPtr sound = Sound::getTask( );
-	if ( data->getStatusPower( _player ) <= 4 ) {
-		if( !sound->isPlayingSE( "yokai_se_02.wav" ) ) {
-			sound->playSE( "yokai_se_02.wav" );
-		}
-	}
-	if ( data->getStatusPower( _player ) == 0 ) {
-		bool stop = true;
-		for ( int i = 0; i < MAX_PLAYER; i++ ) {
-			if ( data->getStatusPower( ( PLAYER ) i ) <= 4 && 
-				 _player != i &&
-				 data->getStatusPower( ( PLAYER ) i ) > 0 ) {
-				stop = false;
-			}
-		}
-		if ( stop ) {
-			sound->stopSE( "yokai_se_02.wav" );
-		}
 	}
 }
