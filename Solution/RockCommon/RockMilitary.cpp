@@ -73,6 +73,16 @@ void RockMilitary::updateEnemies( ) {
 				}
 			}
 		}
+		//エネミーとの当たり判定
+		for ( std::list< RockEnemyPtr >::iterator i = _enemies.begin( ); i != _enemies.end( ); i++ ) {
+			if ( ite == i ) {
+				continue;
+			}
+			RockEnemyPtr enemy_temp = *i;
+			if ( enemy_temp->isOverLapped( enemy ) ) {
+				enemy->back( );
+			}
+		}
 		ite++;
 	}
 }
