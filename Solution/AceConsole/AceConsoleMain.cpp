@@ -5,6 +5,7 @@
 #include "Keyboard.h"
 #include "ViewerConsole.h"
 #include "ace_define.h"
+#include "Sound.h"
 
 extern PLAYER getPlayer( );
 void main( ) {
@@ -18,6 +19,7 @@ void main( ) {
 	app->addTask( Client::getTag( ), client );
 
 	app->addTask( Drawer  ::getTag( )	  , DrawerPtr	    ( new Drawer( "Resource/Ace" ) ) );
+	app->addTask( Sound   ::getTag( )     , SoundPtr        ( new Sound ( "Resource/Sound" ) ) );
 	app->addTask( Keyboard::getTag( )	  , KeyboardPtr	    ( new Keyboard( ) ) );
 	app->addTask( ViewerConsole::getTag( ), ViewerConsolePtr( new ViewerConsole( getPlayer( ) ) ) );
 }
