@@ -6,7 +6,7 @@
 #include "RockEnemyFaceAndHand.h"
 #include "RockEnemyCloud.h"
 #include "RockEnemyBat.h"
-
+#include "RockEnemyKimono.h"
 
 
 RockMilitaryTest::RockMilitaryTest( ) {
@@ -17,6 +17,8 @@ RockMilitaryTest::RockMilitaryTest( ) {
 	//add( RockEnemyPtr( new RockEnemyFaceAndHand( Vector( -50, 50, 50 ) ) ) );
 	add( RockEnemyPtr( new RockEnemyCloud( Vector( -50, 50, 50 ) ) ) );
 	//add( RockEnemyPtr( new RockEnemyBat( Vector( -50, 50, 50 ) ) ) );
+	add( RockEnemyPtr( new RockEnemyKimono( Vector( 50, 50, 50 ) ) ) );
+
 }
 
 
