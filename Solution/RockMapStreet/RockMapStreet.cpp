@@ -9,6 +9,7 @@
 #include "RockItemMoney.h"
 #include "RockOffice.h"
 #include "EventTurtle.h"
+#include "RockCharacter.h"
 
 const int REMOVE_CAVE_TIME = 500;
 const int DROP_TIMING = 1800;
@@ -83,6 +84,18 @@ void RockMapStreet::updateStreet( ) {
 		}
 		//ãTÇ…èÊÇÈÇ∆ó≥ã{èÈÇ÷à⁄ìÆ
 		{
+			RockOfficePtr office = RockOffice::getTask( );
+			std::list< RockEventCharacterPtr > eve_chara = office->getEventCharacters( );
+			std::list< RockEventCharacterPtr >::iterator ite = eve_chara.begin( );
+			EventTurtlePtr turtle = std::dynamic_pointer_cast< EventTurtle >( *ite );
+			for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+				if ( turtle->isRaid( )  ) {
+					_drawer.reset( );
+					_stage = STAGE_RYUGU;
+					_drawer = RockMapStreetDrawerPtr( new RockMapStreetDrawer( _stage ) );
+					family->resetPos( Vector( 0, 10, 0 ) );
+				}
+			}
 		}
 	}
 }
