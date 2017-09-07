@@ -12,6 +12,7 @@ public:
 	enum STAGE {
 		STAGE_STREET,
 		STAGE_CAVE,
+		STAGE_RYUGU,
 	};
 public:
 	void update( );
@@ -19,6 +20,7 @@ public:
 private:
 	void updateStreet( );
 	void updateCave( );
+	void updateRyugu( );
 private:
 	int _time;
 	bool _virtue_pop;

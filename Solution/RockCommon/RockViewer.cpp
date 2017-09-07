@@ -24,6 +24,8 @@
 #include "RockBubble.h"
 #include "RockOffice.h"
 #include "RockEventCharacter.h"
+#include "RockShadow.h"
+#include "ModelMDL.h"
 
 const int DRAW_UI_Y = 512;
 const int HP_GRAPH_HEIGHT = 16;
@@ -72,6 +74,7 @@ void RockViewer::update( ) {
 	drawer->waitForSync( );
 	drawer->flip( );
 	drawMap( );
+	drawShadow( );
 	drawEnemy( );
 	drawPlayer( );
 	drawBubble( );
@@ -247,7 +250,6 @@ void RockViewer::drawAlter( ) const {
 }
 
 void RockViewer::drawCasket( ) const {
-	DrawerPtr drawer( Drawer::getTask( ) );
 	RockStoragePtr storage( RockStorage::getTask( ) );
 	std::list< RockCasketPtr > casket = storage->getCaskets( );
 	std::list< RockCasketPtr >::const_iterator ite = casket.begin( );
@@ -263,6 +265,24 @@ void RockViewer::drawCasket( ) const {
 	}
 }
 
+void  RockViewer::drawShadow( ) const {
+	RockShadowPtr shadow( RockShadow::getTask( ) );
+	if ( !shadow ) {
+		return;
+	}
+	std::list< ModelMDLPtr > shadows = shadow->getShadows( );
+	std::list< ModelMDLPtr >::const_iterator ite = shadows.begin( );
+	while ( ite != shadows.end( ) ) {
+		ModelMDLPtr model = *ite;
+		if ( !model ) {
+			ite++;
+			continue;
+		}
+		model->draw( );
+		ite++;
+	}
+	shadow->clear( );
+}
 
 void RockViewer::drawUI( ) const {
 	RockFamilyPtr family( RockFamily::getTask( ) );

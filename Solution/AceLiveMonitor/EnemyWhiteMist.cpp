@@ -31,7 +31,7 @@ void EnemyWhiteMist::act( ) {
 
 void EnemyWhiteMist::setSynchronousData( unsigned char type, int camera_pos ) const {
 	const int ANIM[ ] = {
-		145, 146, 147, 148, 149, 150, 149, 148, 147, 146
+		160, 161, 162, 163, 164, 165, 166, 167, 168, 169
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	

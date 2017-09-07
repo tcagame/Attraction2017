@@ -30,6 +30,7 @@ private:
 	void drawItem( ) const; 
 	void drawAlter( ) const;
 	void drawCasket( ) const;
+	void drawShadow( ) const;
 	void drawUI( ) const;
 	void drawMovie( ) const;
 private:

@@ -112,6 +112,7 @@
     <ClCompile Include="RockEventCharacter.cpp">
       <Filter>Event</Filter>
     </ClCompile>
+    <ClCompile Include="RockShadow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="define.h" />
@@ -228,6 +229,7 @@
     <ClInclude Include="RockEventCharacter.h">
       <Filter>Event</Filter>
     </ClInclude>
+    <ClInclude Include="RockShadow.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Item">

@@ -7,6 +7,7 @@
 #include "RockPlayer.h"
 #include "RockMilitary.h"
 #include "RockEnemy.h"
+#include "RockShadow.h"
 
 const double BOUND_POWER = 5.0;
 const double STAND_RANGE = 1000.0;
@@ -68,6 +69,7 @@ void RockCharacter::update( ) {
 		}
 	}
 	_pos += _vec;
+	RockShadow::getTask( )->set( getPos( ), getRadius( ) );
 }
 
 void RockCharacter::setVec( const Vector& vec ) {

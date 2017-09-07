@@ -29,7 +29,8 @@ void EnemyCrocoSnake::act( ) {
 
 void EnemyCrocoSnake::setSynchronousData( unsigned char type, int camera_pos ) const {
 	const int ANIM[ ] = {
-		160, 161, 162, 163, 164, 165, 164, 163, 162, 161
+		180, 181, 182, 183, 184, 185, 186, 187, 188
+
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	
