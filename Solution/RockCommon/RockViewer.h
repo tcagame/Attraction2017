@@ -37,6 +37,7 @@ private:
 	ImagePtr _image_frame;
 	ImagePtr _status_ui;
 	ImagePtr _status_num;
+	ImagePtr _dummy_ui;
 	std::vector< ImagePtr > _breasts;
 };
 
