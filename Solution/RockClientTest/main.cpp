@@ -20,6 +20,7 @@
 #include "RockStorage.h"
 #include "RockTheaterTest.h"
 #include "RockStudio.h"
+#include "Sound.h"
 
 void main( ) {
 
@@ -29,6 +30,7 @@ void main( ) {
 	app->setWindowSize( SCREEN_WIDTH, SCREEN_HEIGHT );
 	app->addTask( Drawer::getTag( ), TaskPtr( new Drawer( "Resource/Rock" ) ) );
 	app->addTask( Effect::getTag( ), TaskPtr( new Effect( "Resource/Rock/effect" ) ) );
+	app->addTask( Sound::getTag( ), TaskPtr( new Sound ( "Resource/Sound" ) ) );
 	app->addTask( Client::getTag( ), TaskPtr( new Client( status, message ) ) );
 	app->addTask( RockStorage::getTag( ), TaskPtr( new RockStorage( status ) ) );
 	app->addTask( RockMap::getTag( ), TaskPtr( new RockMapTest ) );
