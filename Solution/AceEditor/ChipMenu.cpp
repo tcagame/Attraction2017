@@ -53,6 +53,8 @@ _structure( structure ) {
 	_ground_page_num = ( ground->getSize( ) - 1 ) / ( GROUND_HEIGHT_NUM * GROUND_WIDTH_NUM );
 	_structure_page_num = ( structure->getSize( ) - 1 ) / ( STRUCTURE_HEIGHT_NUM * STRUCTURE_WIDTH_NUM );
 
+	DrawerPtr drawer = Drawer::getTask( );
+	_image_height = drawer->createImage( "Menu/height.png" );
 }
 
 ChipMenu::~ChipMenu( ) {
@@ -152,10 +154,11 @@ void ChipMenu::update( ) {
 			{
 				int sx1 = ( int )_pos.x + HEIGHT_X;
 				int sy1 = ( int )_pos.y + HEIGHT_Y;
-				int sx2 = sx1 + NUMBER_CHIP_SIZE * 10;
-				int sy2 = sy1 + NUMBER_CHIP_SIZE;
+				int sx2 = sx1 + NUMBER_CHIP_SIZE * 8;
+				int sy2 = sy1 + NUMBER_CHIP_SIZE * 4;
 				if ( sx1 < mouse_pos.x && sx2 > mouse_pos.x && sy1 < mouse_pos.y && sy2 > mouse_pos.y ) {
 					int height = ( ( int )mouse_pos.x - sx1 ) / NUMBER_CHIP_SIZE;
+					height += ( ( int )mouse_pos.y - sy1 ) / NUMBER_CHIP_SIZE* 8;
 					_chip_editor->setMode( ChipEditor::MODE_HEIGHT, height );
 				}
 				break;
@@ -321,7 +324,7 @@ void ChipMenu::draw( ) const {
 	case TAG_HEIGHT:
 		{
 			int sx = ( int )_pos.x + HEIGHT_X;
-			int sy = ( int )_pos.y + HEIGHT_Y;
+			int sy = ( int )_pos.y + HEIGHT_Y;/*
 			for ( int i = 0; i < 10; i++ ) {
 				int tx = ( i % 8 ) * NUMBER_CHIP_SIZE;
 				int ty = ( i / 8 ) * NUMBER_CHIP_SIZE;
@@ -329,7 +332,9 @@ void ChipMenu::draw( ) const {
 				_image->setRect( tx, ty, NUMBER_CHIP_SIZE, NUMBER_CHIP_SIZE );
 				_image->draw( );
 				sx += NUMBER_CHIP_SIZE;
-			}
+			}*/
+			_image_height->setPos( sx, sy );
+			_image_height->draw( );
 		}
 		break;
 	}
