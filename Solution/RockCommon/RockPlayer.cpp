@@ -220,6 +220,7 @@ void RockPlayer::actOnWaiting( ) {
 	//Ž€–S
 	if ( player.power <= 0 ) {
 		setAction( ACTION_DEAD );
+		sound->playSE( "yokai_se_31.wav" );
 		setVec( Vector( ) );
 		return;
 	}
@@ -263,6 +264,7 @@ void RockPlayer::actOnJumping( ) {
 	//Ž€–S
 	if ( player.power <= 0 ) {
 		setAction( ACTION_DEAD );
+		Sound::getTask( )->playSE( "yokai_se_31.wav" );
 		setVec( Vector( ) );
 		return;
 	}
@@ -298,6 +300,7 @@ void RockPlayer::actOnWalking( ) {
 	//Ž€–S
 	if ( player.power <= 0 ) {
 		setAction( ACTION_DEAD );
+		sound->playSE( "yokai_se_31.wav" );
 		setVec( Vector( ) );
 		return;
 	}
@@ -373,6 +376,7 @@ void RockPlayer::actOnCharging( ) {
 	//Ž€–S
 	if ( player.power <= 0 ) {
 		setAction( ACTION_DEAD );
+		sound->playSE( "yokai_se_31.wav" );
 		setVec( Vector( ) );
 		_attack_count = 0;
 		_effect_handle = -1;
@@ -429,6 +433,7 @@ void RockPlayer::actOnBraking( ) {
 	//Ž€–S
 	if ( player.power <= 0 ) {
 		setAction( ACTION_DEAD );
+		Sound::getTask( )->playSE( "yokai_se_31.wav" );
 		setVec( Vector( ) );
 		return;
 	}
@@ -590,6 +595,7 @@ void RockPlayer::wish( ) {
 		return;
 	}
 	setAction( ACTION_WISH );
+	Sound::getTask( )->playSE( "yokai_voice_06.wav" );
 	setVec( Vector( ) );
 	_ancestors->pop( );
 }

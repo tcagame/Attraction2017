@@ -17,7 +17,7 @@ RockMilitaryTest::RockMilitaryTest( ) {
 	//add( RockEnemyPtr( new RockEnemyFaceAndHand( Vector( -50, 50, 50 ) ) ) );
 	//add( RockEnemyPtr( new RockEnemyCloud( Vector( -50, 50, 50 ) ) ) );
 	//add( RockEnemyPtr( new RockEnemyBat( Vector( -50, 50, -50 ) ) ) );
-	add( RockEnemyPtr( new RockEnemyKimono( Vector( 50, 50, 50 ) ) ) );
+	//add( RockEnemyPtr( new RockEnemyKimono( Vector( 50, 50, 50 ) ) ) );
 
 }
 

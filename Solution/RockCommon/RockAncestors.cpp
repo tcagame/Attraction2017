@@ -4,6 +4,7 @@
 #include "RockDollHouse.h"
 #include "RockArmoury.h"
 #include "RockShotAncestors.h"
+#include "Sound.h"
 
 static const int EXISTANCE_TIME = 2000;
 static const double POP_Y = 1000;
@@ -102,6 +103,7 @@ void RockAncestors::actOnFollow( ) {
 
 	//ˆê’èŽžŠÔ‚²‚Æ‚ÉƒVƒ‡ƒbƒg‚ð‘Å‚Â
 	if ( getActCount( ) % SHOT_INTERVAL == 0 ) {
+		Sound::getTask( )->playSE( "yokai_se_27.wav" );
 		RockArmouryPtr armoury = RockArmoury::getTask( );
 		Vector dir = getDir( );
 		Vector pos = getPos( ) + SHOT_FOOT;

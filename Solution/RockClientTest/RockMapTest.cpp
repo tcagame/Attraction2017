@@ -37,7 +37,7 @@ RockMapTest::RockMapTest( ) {
 	storage->addItem( RockItemPtr( new RockItemRock( Vector( 0, 50, 0 ) ) ) );
 	//ショップアイテム
 	storage->addShopItem( RockItemPtr( new RockItemDango( Vector( -50, 50, 0 ) ) ) );
-	storage->addAlter( RockAlterPtr( new RockAlter( Vector( 50, 0, 50 ), Vector( 0, 0, 0 ) ) ) );
+	storage->addAlter( RockAlterPtr( new RockAlter( Vector( 50, 0, 50 ), Vector( 50, 50, 50 ) ) ) );
 }
 
 
