@@ -16,6 +16,7 @@
 #include "RockDollHouse.h"
 #include "RockStudio.h"
 #include "MessageSender.h"
+#include "Sound.h"
 
 void main( ) {
 
@@ -27,6 +28,7 @@ void main( ) {
 	app->addTask( Drawer::getTag( ), TaskPtr( new Drawer( "Resource/Rock" ) ) );
 	app->addTask( Client::getTag( ), TaskPtr( new Client( status, message ) ) );
 	app->addTask( Effect::getTag( ), TaskPtr( new Effect( "Resource/Rock/effect" ) ) );
+	app->addTask( Sound::getTag( ), TaskPtr( new Sound ( "Resource/Sound" ) ) );
 
 	app->addTask( RockMap::getTag( ), TaskPtr( new RockMapBoss( status ) ) );
 	app->addTask( RockDollHouse::getTag( ), TaskPtr( new RockDollHouse ) );

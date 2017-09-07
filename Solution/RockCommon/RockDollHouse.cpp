@@ -70,13 +70,16 @@ void RockDollHouse::initialize( ) {
 	_dolls[ DOLL_SACRED_FIRE ]->setScale( Matrix::makeTransformScaling( Vector( 2, 2, 2 ) ) );
 	_dolls[ DOLL_SACRED_TREE ]->load( "Resource/Rock/object/sacred/sacred_tree.mv1" );
 	_dolls[ DOLL_SACRED_TREE ]->setScale( Matrix::makeTransformScaling( Vector( 2, 2, 2 ) ) );
-	_dolls[ DOLL_BUBBLE ]->load( "Resource/Rock/object/bubble/bubble.mv1" );
+	_dolls[ DOLL_BUBBLE ]->load( "Resource/Rock/object/bubble/obj11.mv1" );
 
 	//obj
 	_dolls[ DOLL_ALTER_BEFORE	]->load( "Resource/Rock/object/obj04/obj04.mv1" );
 	_dolls[ DOLL_ALTER_AFTER	]->load( "Resource/Rock/object/obj05/obj05.mv1" );
 	_dolls[ DOLL_CASKET	]->load( "Resource/Rock/object/obj01/obj01.mv1" );
 	_dolls[ DOLL_CASKET ]->setScale( Matrix::makeTransformScaling( Vector( 10, 10, 10 ) ) );
+
+	//event char
+	_dolls[ DOLL_TURTLE ]->load( "Resource/Rock/event_chara/chr07.mv1" );
 }
 
 ModelMV1Ptr RockDollHouse::getModel( DOLL id ) const {

@@ -7,6 +7,8 @@
 #include "RockStorage.h"
 #include "RockItemToku.h"
 #include "RockItemMoney.h"
+#include "RockOffice.h"
+#include "EventTurtle.h"
 
 const int REMOVE_CAVE_TIME = 500;
 const int DROP_TIMING = 1800;
@@ -30,6 +32,7 @@ void RockMapStreet::initialize( ) {
 		for ( int i = 0; i < 30; i++ ) {
 			storage->addItem( RockItemPtr( new RockItemMoney( Vector( i * interval, 200, -500 - i * 10 ), 10000 ) ) );
 		}
+		RockOffice::getTask( )->add( RockEventCharacterPtr( new EventTurtle( Vector( 3610, 350, -210 ) ) ) );
 	}
 
 }

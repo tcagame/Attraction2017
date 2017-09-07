@@ -25,10 +25,12 @@ private:
 	void drawPlayer( ) const;
 	void drawBubble( ) const;
 	void drawAncestors( ) const;
+	void drawEventCharacter( ) const;
 	void drawShot( ) const;// debug
 	void drawItem( ) const; 
 	void drawAlter( ) const;
 	void drawCasket( ) const;
+	void drawShadow( ) const;
 	void drawUI( ) const;
 	void drawMovie( ) const;
 private:

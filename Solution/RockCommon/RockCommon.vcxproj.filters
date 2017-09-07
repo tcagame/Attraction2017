@@ -103,6 +103,16 @@
     <ClCompile Include="RockPlayer.cpp">
       <Filter>Player</Filter>
     </ClCompile>
+    <ClCompile Include="EventTurtle.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
+    <ClCompile Include="RockOffice.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
+    <ClCompile Include="RockEventCharacter.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
+    <ClCompile Include="RockShadow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="define.h" />
@@ -210,6 +220,16 @@
     <ClInclude Include="RockPlayer.h">
       <Filter>Player</Filter>
     </ClInclude>
+    <ClInclude Include="EventTurtle.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="RockOffice.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="RockEventCharacter.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="RockShadow.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Item">
@@ -223,6 +243,9 @@
     </Filter>
     <Filter Include="Player">
       <UniqueIdentifier>{4ac2bb36-b4c2-4430-8ce0-44763f41e895}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Event">
+      <UniqueIdentifier>{1040fa5f-79b8-4914-bf2f-120186d2f970}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

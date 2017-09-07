@@ -34,6 +34,7 @@ private:
 	int _structure_page_num;
 	int _page;
 	ImagePtr _image;
+	ImagePtr _image_height;
 	GroundConstPtr _ground;
 	StructureConstPtr _structure;
 };
