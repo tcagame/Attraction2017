@@ -30,6 +30,10 @@ RockMapTest::RockMapTest( ) {
 	obj06->setScale( Matrix::makeTransformScaling( Vector( 5, 1, 5 ) ) );
 	addModel( obj06 );
 
+	ModelMV1Ptr obj01 = ModelMV1Ptr(new ModelMV1);
+	obj01->load("Resource/Rock/object/obj01/obj01.mv1");
+	addModel(obj01);
+
 	RockStoragePtr storage( RockStorage::getTask( ) );
 	//ƒAƒCƒeƒ€
 	storage->addItem( RockItemPtr( new RockItemToku( Vector( 200, 50, 0 ) ) ) );
