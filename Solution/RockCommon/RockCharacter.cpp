@@ -11,6 +11,7 @@
 
 const double BOUND_POWER = 5.0;
 const double STAND_RANGE = 1000.0;
+const double DRAW_SHADOW_RANGE = 500.0;
 
 RockCharacter::RockCharacter( const Vector& pos, DOLL doll, int radius, int height, bool mass, bool head, bool col, bool shadow ) :
 _pos( pos ),
@@ -70,7 +71,9 @@ void RockCharacter::update( ) {
 		}
 	}
 	_pos += _vec;
-	if ( _shadow ) {
+	Vector diff = RockFamily::getTask( )->getCameraPos( ) - _pos;
+	if ( _shadow && 
+		 diff.getLength2( ) < DRAW_SHADOW_RANGE * DRAW_SHADOW_RANGE ) {
 		RockShadowPtr shadow = RockShadow::getTask( );
 		if( shadow ){
 			shadow->set( getPos( ), getRadius( ), !_standing );
