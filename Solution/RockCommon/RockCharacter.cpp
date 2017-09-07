@@ -69,7 +69,10 @@ void RockCharacter::update( ) {
 		}
 	}
 	_pos += _vec;
-	RockShadow::getTask( )->set( getPos( ), getRadius( ) );
+	RockShadowPtr shadow = RockShadow::getTask( );
+	if( shadow ){
+		shadow->set( getPos( ), getRadius( ) );
+	}
 }
 
 void RockCharacter::setVec( const Vector& vec ) {

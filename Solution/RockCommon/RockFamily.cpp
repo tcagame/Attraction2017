@@ -29,12 +29,14 @@ void RockFamily::initialize( ) {
 }
 
 void RockFamily::update( ) {
+	Vector active_pos = _base_pos;
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		if ( !_player[ i ]->isActive( ) ) {
-			_player[ i ]->resetPos( Vector( i * 50, 75 ) + _base_pos );
+			_player[ i ]->resetPos( Vector( i * 50, 75 ) + active_pos );
 			_player[ i ]->resetBubble( );
 			continue;
 		}
+		active_pos = _player[ i ]->getPos( );
 		//player
 		_player[ i ]->update( );
 		for ( int j = 0; j < ROCK_PLAYER_NUM; j++ ) {
