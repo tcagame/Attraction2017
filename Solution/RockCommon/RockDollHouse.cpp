@@ -50,7 +50,7 @@ void RockDollHouse::initialize( ) {
 	//enemy
 	_dolls[ DOLL_GHOST		]->load( "Resource/Rock/enemy/enm05_yurei/enm05_a01.mv1" );
 	_dolls[ DOLL_REDBARD	]->load( "Resource/Rock/enemy/enm02_bird/enm02_a01.mv1" );
-	_dolls[ DOLL_WATERGHOST ]->load( "Resource/Rock/enemy/enm17_mizunoyokai/enm17_a01.mv1" );
+	_dolls[ DOLL_WATERGHOST ]->load( "Resource/Rock/enemy/enm17_mizunoyokai/enm17_a02.mv1" );
 	_dolls[ DOLL_CLOUD ]->load( "Resource/Rock/enemy/enm06_cloud/enm06_a01.mv1" );
 	_dolls[ DOLL_FACE_AND_HAND ]->load( "Resource/Rock/enemy/enm03_face_and_hand/enm03_a01_face_and_hand.mv1" );
 	_dolls[ DOLL_BOSS_ROCK		]->load( "Resource/Rock/enemy/enm22_rock/scenes/enm22_rock.mv1" );
