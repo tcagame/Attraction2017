@@ -70,7 +70,7 @@ void RockDollHouse::initialize( ) {
 	_dolls[ DOLL_SACRED_FIRE ]->setScale( Matrix::makeTransformScaling( Vector( 2, 2, 2 ) ) );
 	_dolls[ DOLL_SACRED_TREE ]->load( "Resource/Rock/object/sacred/sacred_tree.mv1" );
 	_dolls[ DOLL_SACRED_TREE ]->setScale( Matrix::makeTransformScaling( Vector( 2, 2, 2 ) ) );
-	_dolls[ DOLL_BUBBLE ]->load( "Resource/Rock/object/bubble/bubble.mv1" );
+	_dolls[ DOLL_BUBBLE ]->load( "Resource/Rock/object/bubble/obj11.mv1" );
 
 	//obj
 	_dolls[ DOLL_ALTER_BEFORE	]->load( "Resource/Rock/object/obj04/obj04.mv1" );

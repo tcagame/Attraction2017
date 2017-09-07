@@ -64,6 +64,7 @@ void ViewerConsole::update( ) {
 		return;
 	}
 
+
 	drawer->flip( );
 
 	drawArea( );

@@ -36,6 +36,6 @@ ModelMV1Ptr RockBubble::getModel( ) const {
 	time = ( time++ ) % ( int )model->getEndAnimTime( );
 	model->setAnimTime( ( double )time );
 	model->setTrans( Matrix::makeTransformTranslation( _pos ) );
-	model->setScale( Matrix::makeTransformScaling( Vector( 1, 1, 1 ) * MODEL_SIZE ) );
+	model->setScale( Matrix::makeTransformScaling( Vector( 3, 3, 3 ) * MODEL_SIZE ) );
 	return model;
 }

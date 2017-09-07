@@ -2,6 +2,7 @@
 #include "Drawer.h"
 #include "ace_define.h"
 #include "SynchronousData.h"
+#include "Sound.h"
 
 const int HP_GRAPH_HEIGHT = 16;
 const int HP_GRAPH_WIDTH = 8;
@@ -31,6 +32,7 @@ void ViewerStatus::draw( PLAYER player, int sx, int sy ) const {
 	drawPower(  data->getStatusPower( player ), sx, sy );
 	drawMoney(  data->getStatusMoney( player ), sx, sy );
 	drawVirtue( data->getStatusVirtue( player ), sx, sy );
+	playSe( player );
 }
 
 void ViewerStatus::drawBustup( PLAYER player, int sx, int sy ) const {
@@ -59,4 +61,27 @@ void ViewerStatus::drawVirtue( int virtue, int sx, int sy ) const {
 	sy += 180;
 	DrawerPtr drawer( Drawer::getTask( ) );
 	drawer->drawString( sx, sy, "%2d", virtue);
+}
+
+void ViewerStatus::playSe( PLAYER player ) const{
+	SynchronousDataPtr data =SynchronousData::getTask( );
+	SoundPtr sound = Sound::getTask( );
+	if ( data->getStatusPower( player ) <= 4 ) {
+		if( !sound->isPlayingSE( "yokai_se_02.wav" ) ) {
+			sound->playSE( "yokai_se_02.wav" );
+		}
+	}
+	if ( data->getStatusPower( player ) == 0 ) {
+		bool stop = true;
+		for ( int i = 0; i < MAX_PLAYER; i++ ) {
+			if ( data->getStatusPower( ( PLAYER ) i ) <= 4 && 
+				 player != i &&
+				 data->getStatusPower( ( PLAYER ) i ) > 0 ) {
+				stop = false;
+			}
+		}
+		if ( stop ) {
+			sound->stopSE( "yokai_se_02.wav" );
+		}
+	}
 }
