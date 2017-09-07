@@ -16,6 +16,7 @@
 #include "Effect.h"
 #include "RockShotPlayer.h"
 #include "RockStudio.h"
+#include "Sound.h"
 
 
 //ˆÚ“®
@@ -23,7 +24,7 @@ static const double JUMP_POWER = 6.0;
 static const double MOVE_SPEED = 6.0;
 static const double BRAKE_SPEED = 0.5;
 //ƒAƒjƒ[ƒVƒ‡ƒ“
-static const double ANIM_SPEED = 0.5;
+static const double ANIM_SPEED = 1.0;
 
 static const int RADIUS = 10;
 static const int HEIGHT = 20;
@@ -172,6 +173,7 @@ bool RockPlayer::isActive( ) const {
 
 void RockPlayer::actOnBubble( ) {
 	Status::Player status = _status->getPlayer( _id );
+	SoundPtr sound = Sound::getTask( );
 	if ( status.area == STATE_RESULT ) {
 		//ƒŠƒUƒ‹ƒg‚É“ü‚Á‚½‚ç–A‚É“ü‚ç‚È‚¢
 		if ( isOnMapModel( ) ) {
@@ -201,6 +203,7 @@ void RockPlayer::actOnBubble( ) {
 				setMass( true );
 				setCol( true );
 				setAction( ACTION_JUMP );
+				sound->playSE( "yokai_voice_17.wav" );
 			}
 			return;
 		}
@@ -213,6 +216,7 @@ void RockPlayer::actOnBubble( ) {
 
 void RockPlayer::actOnWaiting( ) {
 	Status::Player player = _status->getPlayer( _id );
+	SoundPtr sound = Sound::getTask( );
 	//Ž€–S
 	if ( player.power <= 0 ) {
 		setAction( ACTION_DEAD );
@@ -223,6 +227,7 @@ void RockPlayer::actOnWaiting( ) {
 	if ( isStanding( ) ) {
 		if ( player.device_button & BUTTON_C ) {
 			setAction( ACTION_JUMP );
+			sound->playSE( "yokai_voice_17.wav" );
 			Vector vec = getVec( );
 			vec.y = JUMP_POWER;
 			setVec( vec );
@@ -289,6 +294,7 @@ void RockPlayer::actOnJumping( ) {
 
 void RockPlayer::actOnWalking( ) {
 	Status::Player player = _status->getPlayer( _id );
+	SoundPtr sound = Sound::getTask( );
 	//Ž€–S
 	if ( player.power <= 0 ) {
 		setAction( ACTION_DEAD );
@@ -299,6 +305,7 @@ void RockPlayer::actOnWalking( ) {
 	if ( isStanding( ) ) {
 		if ( player.device_button & BUTTON_C ) {
 			setAction( ACTION_JUMP );
+			sound->playSE( "yokai_voice_17.wav" );
 			Vector vec = getVec( );
 			vec.y = JUMP_POWER;
 			setVec( vec );
@@ -331,6 +338,9 @@ void RockPlayer::actOnWalking( ) {
 	vec = rot.multiply( vec );
 	vec.y = getVec( ).y;
 	setVec( vec );
+	if ( !sound->isPlayingSE( "yokai_voice_15.wav" ) ) {
+		sound->playSE( "yokai_voice_15.wav" );
+	}
 }
 
 void RockPlayer::actOnAttacking( ) {	
@@ -355,6 +365,7 @@ void RockPlayer::actOnAttacking( ) {
 
 void RockPlayer::actOnCharging( ) {
 	Status::Player player = _status->getPlayer( _id );
+	SoundPtr sound = Sound::getTask( );
 	//Ž€–S
 	if ( player.power <= 0 ) {
 		setAction( ACTION_DEAD );
@@ -392,6 +403,7 @@ void RockPlayer::actOnCharging( ) {
 	}
 	if ( player.device_button & BUTTON_C ) {
 		setAction( ACTION_JUMP );
+		sound->playSE( "yokai_voice_17.wav" );
 		Vector vec( getVec( ) );
 		vec.y = JUMP_POWER;
 		setVec( vec );
@@ -544,11 +556,13 @@ void RockPlayer::damage( int force ) {
 }
 
 void RockPlayer::bound( ) {
+	SoundPtr sound = Sound::getTask( );
 	if ( isBubble( ) ) {
 		return;
 	}
 	RockCharacter::bound( );
 	setAction( ACTION_JUMP );
+	sound->playSE( "yokai_voice_17.wav" );
 }
 
 

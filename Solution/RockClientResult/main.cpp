@@ -19,6 +19,7 @@
 #include "Effect.h"
 #include "RockStorage.h"
 #include "RockTheaterResult.h"
+#include "Sound.h"
 
 void main( ) {
 
@@ -29,6 +30,8 @@ void main( ) {
 	app->addTask( Drawer::getTag( ), TaskPtr( new Drawer( "Resource/Rock" ) ) );
 	app->addTask( Effect::getTag( ), TaskPtr( new Effect( "Resource/Rock/effect" ) ) );
 	app->addTask( Client::getTag( ), TaskPtr( new Client( status, message ) ) );
+	app->addTask( Sound::getTag( ), TaskPtr( new Sound ( "Resource/Sound" ) ) );
+
 	app->addTask( RockStorage::getTag( ), TaskPtr( new RockStorage( status ) ) );
 	app->addTask( RockMap::getTag( ), TaskPtr( new RockMapResult ) );
 	app->addTask( RockMilitary::getTag( ), TaskPtr( new RockMilitaryResult ) );
