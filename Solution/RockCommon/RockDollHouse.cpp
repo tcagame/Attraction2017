@@ -50,12 +50,12 @@ void RockDollHouse::initialize( ) {
 	//enemy
 	_dolls[ DOLL_GHOST		]->load( "Resource/Rock/enemy/enm05_yurei/enm05_a01.mv1" );
 	_dolls[ DOLL_REDBARD	]->load( "Resource/Rock/enemy/enm02_bird/enm02_a01.mv1" );
-	_dolls[ DOLL_WATERGHOST ]->load( "Resource/Rock/enemy/enm17_mizunoyokai/enm17_a01.mv1" );
+	_dolls[ DOLL_WATERGHOST ]->load( "Resource/Rock/enemy/enm17_mizunoyokai/enm17_a02.mv1" );
 	_dolls[ DOLL_CLOUD ]->load( "Resource/Rock/enemy/enm06_cloud/enm06_a01.mv1" );
 	_dolls[ DOLL_FACE_AND_HAND ]->load( "Resource/Rock/enemy/enm03_face_and_hand/enm03_a01_face_and_hand.mv1" );
 	_dolls[ DOLL_BOSS_ROCK		]->load( "Resource/Rock/enemy/enm22_rock/scenes/enm22_rock.mv1" );
-	_dolls[ DOLL_BAT ]->load( "Resource/Rock/enemy/enm09_Babitto/enm09.mv1" );
-	_dolls[ DOLL_KIMONO		]->load( "Resource/Rock/enemy/enm07_Kimono-no-Yokai/enm07.mv1" );
+	_dolls[ DOLL_BAT ]->load( "Resource/Rock/enemy/enm09_Babitto/enm09_a01.mv1" );
+	_dolls[ DOLL_KIMONO		]->load( "Resource/Rock/enemy/enm07_Kimono-no-Yokai/enm07_a01.mv1" );
 
 	//item
 	_dolls[ DOLL_DANGO	 ]->load( "Resource/Rock/item/itm01/itm01.mv1" );
@@ -77,6 +77,9 @@ void RockDollHouse::initialize( ) {
 	_dolls[ DOLL_ALTER_AFTER	]->load( "Resource/Rock/object/obj05/obj05.mv1" );
 	_dolls[ DOLL_CASKET	]->load( "Resource/Rock/object/obj01/obj01.mv1" );
 	_dolls[ DOLL_CASKET ]->setScale( Matrix::makeTransformScaling( Vector( 10, 10, 10 ) ) );
+
+	//event char
+	_dolls[ DOLL_TURTLE ]->load( "Resource/Rock/event_chara/chr07.mv1" );
 }
 
 ModelMV1Ptr RockDollHouse::getModel( DOLL id ) const {
