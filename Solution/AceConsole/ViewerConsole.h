@@ -3,6 +3,7 @@
 #include "Task.h"
 #include "smart_ptr.h"
 #include "ace_define.h"
+#include <array>
 #include <string>
 
 PTR( ViewerConsole );
@@ -28,6 +29,7 @@ private:
 	void drawDevice( );
 	void drawAreaEvent( );
 	void drawAreaStreet( );
+	void playSe( );
 private:
 	const PLAYER _player;
 	ViewerObjectPtr _viewer_object;
@@ -38,5 +40,6 @@ private:
 	ImagePtr _image_bar_lower;
 	ImagePtr _image_minimap;
 	ImagePtr _image_device;
+	std::array< bool, MAX_PLAYER > _dead_se;
 };
 
