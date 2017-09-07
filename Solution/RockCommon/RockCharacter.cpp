@@ -12,7 +12,7 @@
 const double BOUND_POWER = 5.0;
 const double STAND_RANGE = 1000.0;
 
-RockCharacter::RockCharacter( const Vector& pos, DOLL doll, int radius, int height, bool mass, bool head, bool col ) :
+RockCharacter::RockCharacter( const Vector& pos, DOLL doll, int radius, int height, bool mass, bool head, bool col, bool shadow ) :
 _pos( pos ),
 _mass( mass ),
 _act_count( 0 ),
@@ -21,6 +21,7 @@ _radius( radius ),
 _height( height ),
 _head( head ),
 _col( col ),
+_shadow( shadow ),
 _dir( Vector( 0, 0, -1 ) ) {
 }
 
@@ -69,7 +70,9 @@ void RockCharacter::update( ) {
 		}
 	}
 	_pos += _vec;
-	RockShadow::getTask( )->set( getPos( ), getRadius( ) );
+	if ( _shadow ) {
+		RockShadow::getTask( )->set( getPos( ), getRadius( ), !_standing );
+	}
 }
 
 void RockCharacter::setVec( const Vector& vec ) {
