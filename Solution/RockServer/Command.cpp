@@ -182,6 +182,9 @@ bool Command::excutePower( std::vector< std::string > command ) {
 	bool result = false;
 	if ( command.size( ) == 3 ) {
 		int power = std::atoi( command[ 2 ].c_str( ) );
+		if ( power > MAX_POWER ) {
+			power = MAX_POWER;
+		}
 		if ( command[ 1 ] == "all" ) {
 			for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 				_status->getPlayer( i ).power = power;

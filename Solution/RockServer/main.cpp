@@ -12,6 +12,8 @@
 #include "Message.h"
 #include "Status.h"
 #include "MessageReceiver.h"
+#include "Speaker.h"
+#include "Sound.h"
 
 void main( ) {
 	MessagePtr message( new Message );
@@ -20,8 +22,10 @@ void main( ) {
 	ApplicationPtr app( Application::getInstance( ) );
 	app->setWindowSize( SCREEN_WIDTH, SCREEN_HEIGHT );
 	app->addTask( Drawer::getTag( )			, TaskPtr( new Drawer( "Resource" ) ) );
+	app->addTask( Sound::getTag( )			, TaskPtr( new Sound( "Resource/Sound" ) ) );
 	app->addTask( Keyboard::getTag( )		, TaskPtr( new Keyboard ) );
 	app->addTask( Device::getTag( )			, TaskPtr( new Device ) );
+	app->addTask( Speaker::getTag( )        , TaskPtr( new Speaker( status ) ) );
 	app->addTask( Command::getTag( )		, TaskPtr( new Command( status ) ) );
 	app->addTask( Log::getTag( )			, TaskPtr( new Log ) );
 	app->addTask( StatusSender::getTag( )	, TaskPtr( new StatusSender( status ) ) );

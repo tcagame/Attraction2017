@@ -28,6 +28,7 @@ const int ROCK_PLAYER_MOTION_NUM = 10;
 const double GRAVITY = -0.4;
 const int COLLISION_RANGE = 20;
 const int MAX_PLAYER_SHOT_POWER = 4;
+const int MAX_POWER = 16;
 
 //‘JˆÚŒn
 const int TRANSITION_TOKU_NUM = 10;

@@ -38,6 +38,7 @@ static const int COOL_TIME = 8;
 static const int PLAYER_ANIM_WAIT_COUNT = 4;
 static const int PLAYER_ANIM_WIDTH_NUM = 10;
 static const int PLAYER_FLASH_WAIT_TIME = 2;
+static const int DEAD_ANIM_NUM = 28;
 //カウント
 static const int MAX_DAMEGE_COUNT = 20;
 static const int MAX_BACK_COUNT = 6;
@@ -55,10 +56,10 @@ const int MOTION_OFFSET[Player::MAX_ACTION] = {
 	48,  // ACTION_FLOAT,
 	0,   // ACTION_ATTACK,
 	64,  // ACTION_CHARGE,
-	72,  // ACTION_OVER_CHARGE,
+	73,  // ACTION_OVER_CHARGE,
 	81,  // ACTION_DAMEGE,
 	50,  // ACTION_BLOW_AWAY,
-	80,  // ACTION_DAED,
+	80,  // ACTION_DEAD,
 	112, // ACTION_CALL,
 };
 
@@ -75,7 +76,7 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		7 , // ACTION_OVER_CHARGE,
 		1 , // ACTION_DAMEGE,
 		1 , // ACTION_BLOW_AWAY,
-		27, // ACTION_DAED,
+		27, // ACTION_DEAD,
 		18, // ACTION_CALL,
 	},
 	{ // たろじろー
@@ -90,7 +91,7 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		6 , // ACTION_OVER_CHARGE,
 		1 , // ACTION_DAMEGE,
 		1 , // ACTION_BLOW_AWAY,
-		27, // ACTION_DAED,
+		27, // ACTION_DEAD,
 		18, // ACTION_CALL,
 	},
 	{ // ガりすけ
@@ -105,7 +106,7 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		7 , // ACTION_OVER_CHARGE,
 		1 , // ACTION_DAMEGE,
 		1 , // ACTION_BLOW_AWAY,
-		27, // ACTION_DAED,
+		27, // ACTION_DEAD,
 		12, // ACTION_CALL,
 	},
 	{ // たろみ
@@ -120,7 +121,7 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		7 , // ACTION_OVER_CHARGE,
 		1 , // ACTION_DAMEGE,
 		1 , // ACTION_BLOW_AWAY,
-		28, // ACTION_DAED,
+		28, // ACTION_DEAD,
 		12, // ACTION_CALL,
 	}
 };
@@ -223,7 +224,7 @@ void Player::act( ) {
 	case ACTION_BLOW_AWAY:
 		actOnBlowAway( );
 		break;
-	case ACTION_DAED:
+	case ACTION_DEAD:
 		actOnDead( );
 		break;
 	case ACTION_CALL:
@@ -605,7 +606,7 @@ void Player::damage( int force ) {
 	Character::damage( force );
 	SoundPtr sound = Sound::getTask( );
 	if ( isFinished( ) ) {
-		setAction( ACTION_DAED );
+		setAction( ACTION_DEAD );
 		setVec( Vector( ) );
 	} else {
 		sound->playSE( "yokai_voice_26.wav" );
@@ -749,7 +750,7 @@ void Player::blowAway( ) {
 	}
 
 	if ( !Debug::getTask( )->isDebug( ) &&
-		 _action != ACTION_DAED ) {
+		 _action != ACTION_DEAD ) {
 		setAction( ACTION_BLOW_AWAY );
 	}
 }
@@ -842,6 +843,8 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 	int off = MOTION_OFFSET[ _action ];
 	int num = MOTION_NUM[ _player ][ _action ];
 	int motion = 0;
+	int action = 0;
+	int pattern = 0;
 	switch ( _action ) {
 	case ACTION_BRAKE:
 	case ACTION_DAMEGE:
@@ -851,38 +854,49 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 	case ACTION_CONTINUE:
 		return;
 	case ACTION_WALK:
-		motion = ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT / 3;
+		motion = ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT / 4;
 		break;
 	case ACTION_FLOAT:
 		motion = getActCount( ) / PLAYER_ANIM_WAIT_COUNT;
 		break;
 	case ACTION_WAIT:
-	case ACTION_OVER_CHARGE:
 	case ACTION_CALL:
 		motion = getActCount( ) / PLAYER_ANIM_WAIT_COUNT / 2;
 		break;
-	case ACTION_DAED:
+	case ACTION_OVER_CHARGE:
 	{
 		const int ANIM[ ] = {
-			80, 81, 82, 83, 84, 85, 86, 87, 88, 89,
-			90, 91, 92, 93, 94, 95, 96, 97, 98, 99,
-			100, 101, 102, 103, 104, 105, 106, 107
+			73, 74, 75, 76, 77, 78, 79
 		};
-		int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-		int anim = getActCount( ) / PLAYER_ANIM_WAIT_COUNT + 5;
-
-		if ( anim >= anim_num ) {
-			anim = anim_num - 1;
+		int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
+		if ( player == PLAYER_TAROJIRO ) {
+			anim_size = anim_size - 1;
 		}
-		motion = ANIM[ anim ];
+		action = ANIM[ getActCount( ) / ( PLAYER_ANIM_WAIT_COUNT + 2 ) % anim_size ];
 	}
-	break;
+	case ACTION_DEAD:
+	{
+		int anim = getActCount( ) / PLAYER_ANIM_WAIT_COUNT;
+		if ( anim >= DEAD_ANIM_NUM ) {
+			anim = DEAD_ANIM_NUM - 1;
+		}
+
+		if ( player != PLAYER_TAROMI ) {
+			anim = anim - 1;
+		}
+		motion = anim;
+		break;
+	}
 	case ACTION_CHARGE:
-		motion = _charge_count / ( CHARGE_PHASE_COUNT / 3 );
+		motion = _charge_count / ( CHARGE_PHASE_COUNT / 2 );
 		break;
 	}
 
-	int pattern = off + motion % num;
+	if ( _action == ACTION_OVER_CHARGE ) {
+		pattern = action;
+	} else {
+		pattern = off + motion % num;
+	}
 
 	unsigned char attribute = 0;
 	if ( getDir( ) == DIR_RIGHT ) {
