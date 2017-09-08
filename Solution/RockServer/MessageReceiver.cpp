@@ -107,6 +107,9 @@ void MessageReceiver::excutePower( std::vector< std::string > command ) {
 			if ( _status->getPlayer( player_num ).power < 0 ) {
 				_status->getPlayer( player_num ).power = 0;
 			}
+			if ( _status->getPlayer( player_num ).power > MAX_POWER ) {
+				_status->getPlayer( player_num ).power = MAX_POWER;
+			}
 		}
 	}
 }
@@ -172,7 +175,7 @@ void MessageReceiver::excuteContinue( std::vector< std::string > command ) {
 		int player_num = std::atoi( command[ 1 ].c_str( ) );
 		if ( player_num >= 0 && player_num <= ROCK_PLAYER_NUM ) {
 			if ( _status->getPlayer( player_num ).power <= 0 ) {
-				_status->getPlayer( player_num ).power = Status::PLAYER_INIT_HP;
+				_status->getPlayer( player_num ).power = MAX_POWER;
 				_status->getPlayer( player_num ).continue_num++;
 			}
 		}
