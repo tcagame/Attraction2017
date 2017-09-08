@@ -843,6 +843,8 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 	int off = MOTION_OFFSET[ _action ];
 	int num = MOTION_NUM[ _player ][ _action ];
 	int motion = 0;
+	int action = 0;
+	int pattern = 0;
 	switch ( _action ) {
 	case ACTION_BRAKE:
 	case ACTION_DAMEGE:
@@ -863,8 +865,14 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		break;
 	case ACTION_OVER_CHARGE:
 	{
-		motion = getActCount( ) / PLAYER_ANIM_WAIT_COUNT / 2;
-		break;
+		const int ANIM[ ] = {
+			73, 74, 75, 76, 77, 78, 79
+		};
+		int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
+		if ( player == PLAYER_TAROJIRO ) {
+			anim_size = anim_size - 1;
+		}
+		action = ANIM[ getActCount( ) / ( PLAYER_ANIM_WAIT_COUNT + 2 ) % anim_size ];
 	}
 	case ACTION_DAED:
 	{
@@ -884,7 +892,11 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		break;
 	}
 
-	int pattern = off + motion % num;
+	if ( _action == ACTION_OVER_CHARGE ) {
+		pattern = action;
+	} else {
+		pattern = off + motion % num;
+	}
 
 	unsigned char attribute = 0;
 	if ( getDir( ) == DIR_RIGHT ) {
