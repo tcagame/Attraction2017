@@ -190,8 +190,15 @@ void MessageReceiver::updateFamily( ) {
 			if ( status.item & ITEM_DANGO ) {
 				status.power = MAX_POWER / 2;
 				status.item &= ~ITEM_DANGO;
+				_status->getPlayer( i ) = status;
+				break;
+			}
+			if ( status.item & ITEM_HEART ) {
+				status.power = MAX_POWER;
+				status.item &= ~ITEM_HEART;
+				_status->getPlayer( i ) = status;
+				break;
 			}
 		}
-		_status->getPlayer( i ) = status;
 	}
 }
