@@ -856,7 +856,7 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		break;
 	case ACTION_DEAD:
 	{
-		int anim = getActCount( ) / ( PLAYER_ANIM_WAIT_COUNT / 3 );
+		int anim = getActCount( ) / ( PLAYER_ANIM_WAIT_COUNT / 2 );
 		if ( anim >= num ) {
 			anim = num - 1;
 		}
@@ -864,8 +864,15 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		break;
 	}
 	case ACTION_CHARGE:
-		motion = _charge_count / ( CHARGE_PHASE_COUNT / 2 );
+	{
+		int anim = _charge_count / ( CHARGE_PHASE_COUNT / 6 );
+		if ( anim >= num ) {
+			anim = num - 1;
+		}
+		motion = anim;
 		break;
+	}
+
 	}
 
 	pattern = off + motion % num;
