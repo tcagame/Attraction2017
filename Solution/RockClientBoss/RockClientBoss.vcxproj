@@ -170,13 +170,11 @@
     <ClCompile Include="RockMapBoss.cpp" />
     <ClCompile Include="RockMapBossCamera.cpp" />
     <ClCompile Include="RockMapBossDrawer.cpp" />
-    <ClCompile Include="RockMilitatyBoss.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RockMapBoss.h" />
     <ClInclude Include="RockMapBossCamera.h" />
     <ClInclude Include="RockMapBossDrawer.h" />
-    <ClInclude Include="RockMilitatyBoss.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -34,3 +34,7 @@ void RockOffice::add( RockEventCharacterPtr chara ) {
 std::list< RockEventCharacterPtr > RockOffice::getEventCharacters( ) const {
 	return _event_chara_list;
 }
+
+void RockOffice::clean( ) {
+	_event_chara_list = { };
+}

@@ -161,7 +161,6 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RockCameraTest.cpp" />
     <ClCompile Include="RockMapTest.cpp" />
-    <ClCompile Include="RockMilitaryTest.cpp" />
     <ClCompile Include="RockTheaterTest.cpp" />
     <ClCompile Include="StatusDrawer.cpp" />
   </ItemGroup>
@@ -176,7 +175,6 @@
   <ItemGroup>
     <ClInclude Include="RockCameraTest.h" />
     <ClInclude Include="RockMapTest.h" />
-    <ClInclude Include="RockMilitaryTest.h" />
     <ClInclude Include="RockTheaterTest.h" />
     <ClInclude Include="StatusDrawer.h" />
   </ItemGroup>

@@ -53,10 +53,12 @@ void RockFamily::update( ) {
 				}
 			}
 		}
-		//ancestor
-		_ancestors[ i ]->update( );
 		//bubble
 		_bubble[ i ]->update( );
+		//ancestor
+		if ( _ancestors[ i ]->isActive( ) ) {
+			_ancestors[ i ]->update( );
+		}
 	}
 }
 

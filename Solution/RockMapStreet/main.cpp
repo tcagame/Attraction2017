@@ -7,7 +7,7 @@
 #include "Message.h"
 #include "RockViewer.h"
 #include "RockMapStreet.h"
-#include "RockMilitaryStreet.h"
+#include "RockMilitary.h"
 #include "RockMapStreetCamera.h"
 #include "RockDollHouse.h"
 #include "RockFamily.h"
@@ -33,7 +33,7 @@ void main( ) {
 	app->addTask( Sound::getTag( ), TaskPtr( new Sound ( "Resource/Sound" ) ) );
 
 	app->addTask( RockMap::getTag( ), TaskPtr( new RockMapStreet( status ) ) );
-	app->addTask( RockMilitary::getTag( ), TaskPtr( new RockMilitaryStreet ) );
+	app->addTask( RockMilitary::getTag( ), TaskPtr( new RockMilitary ) );
 	app->addTask( RockDollHouse::getTag( ), TaskPtr( new RockDollHouse ) );
 	app->addTask( RockFamily::getTag( ), TaskPtr( new RockFamily( status, Vector( 0, 30, -500 ) ) ) );
 	app->addTask( RockMapStreetCamera::getTag( ), TaskPtr( new RockMapStreetCamera ) );

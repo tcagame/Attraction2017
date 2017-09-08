@@ -161,13 +161,11 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RockCameraEntry.cpp" />
     <ClCompile Include="RockMapEntry.cpp" />
-    <ClCompile Include="RockMilitaryEntry.cpp" />
     <ClCompile Include="StatusDrawer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RockCameraEntry.h" />
     <ClInclude Include="RockMapEntry.h" />
-    <ClInclude Include="RockMilitaryEntry.h" />
     <ClInclude Include="StatusDrawer.h" />
   </ItemGroup>
   <ItemGroup>

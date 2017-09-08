@@ -3,13 +3,11 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RockMapStreetCamera.cpp" />
-    <ClCompile Include="RockMilitaryStreet.cpp" />
     <ClCompile Include="RockMapStreet.cpp" />
     <ClCompile Include="RockMapStreetDrawer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RockMapStreetCamera.h" />
-    <ClInclude Include="RockMilitaryStreet.h" />
     <ClInclude Include="RockMapStreet.h" />
     <ClInclude Include="RockMapStreetDrawer.h" />
   </ItemGroup>

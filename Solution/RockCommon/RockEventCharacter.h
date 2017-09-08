@@ -9,6 +9,6 @@ public:
 	void damage( int force );
 	ModelMV1Ptr getModel( ) const;
 private:
-	virtual double getAnimTime( ) const;
+	virtual double getAnimTime( ) const { return 0; };
 };
 

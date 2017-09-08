@@ -4,14 +4,12 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="StatusDrawer.cpp" />
     <ClCompile Include="RockMapTest.cpp" />
-    <ClCompile Include="RockMilitaryTest.cpp" />
     <ClCompile Include="RockCameraTest.cpp" />
     <ClCompile Include="RockTheaterTest.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StatusDrawer.h" />
     <ClInclude Include="RockMapTest.h" />
-    <ClInclude Include="RockMilitaryTest.h" />
     <ClInclude Include="RockCameraTest.h" />
     <ClInclude Include="RockTheaterTest.h" />
   </ItemGroup>

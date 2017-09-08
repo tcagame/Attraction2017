@@ -15,6 +15,7 @@ public:
 	virtual ~RockOffice( );
 public:
 	void update( );
+	void clean( );
 	void add( RockEventCharacterPtr chara );
 	std::list< RockEventCharacterPtr > getEventCharacters( ) const;
 private:

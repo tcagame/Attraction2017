@@ -1,15 +1,27 @@
 #include "RockMapStreet.h"
-#include "RockFamily.h"
-#include "RockPlayer.h"
 #include "RockMapStreetDrawer.h"
+#include "RockCamera.h"
 #include "Status.h"
 #include "MessageSender.h"
+//Player
+#include "RockFamily.h"
+#include "RockPlayer.h"
+//Item
 #include "RockStorage.h"
 #include "RockItemToku.h"
 #include "RockItemMoney.h"
+//EventChara
 #include "RockOffice.h"
 #include "EventTurtle.h"
-#include "RockCharacter.h"
+//Enemy
+#include "RockMilitary.h"
+#include "RockEnemyGhost.h"
+#include "RockEnemyRedBard.h"
+#include "RockEnemyWaterGhost.h"
+#include "RockEnemyFaceAndHand.h"
+#include "RockEnemyBat.h"
+#include "RockEnemyKimono.h"
+#include "RockEnemyCloud.h"
 
 const int REMOVE_CAVE_TIME = 500;
 const int DROP_TIMING = 1800;
@@ -24,18 +36,7 @@ RockMapStreet::~RockMapStreet( ) {
 }
 
 void RockMapStreet::initialize( ) {
-	_drawer = RockMapStreetDrawerPtr( new RockMapStreetDrawer( STAGE_STREET ) );
-
-	{//street初期化
-		_stage = STAGE_STREET;
-		RockStoragePtr storage = RockStorage::getTask( );
-		int interval = 200;
-		for ( int i = 0; i < 30; i++ ) {
-			storage->addItem( RockItemPtr( new RockItemMoney( Vector( i * interval, 200, -500 - i * 10 ), 10000 ) ) );
-		}
-		RockOffice::getTask( )->add( RockEventCharacterPtr( new EventTurtle( Vector( 3610, 320, -210 ) ) ) );
-	}
-
+	loadStage( STAGE_STREET );
 }
 
 void RockMapStreet::update( ) {
@@ -63,12 +64,29 @@ void RockMapStreet::updateStreet( ) {
 		{//鳥居へ行くとSTAGE_CAVEへ移動
 			double length = ( Vector( -200, 0, -500 ) - player->getPos( ) ).getLength( );
 			if ( length < 100 ) {
-				_drawer.reset( );
-				_stage = STAGE_CAVE;
-				_drawer = RockMapStreetDrawerPtr( new RockMapStreetDrawer( _stage ) );
-				family->resetPos( Vector( 0, 10, 0 ) );
+				loadStage( STAGE_CAVE );
 			}
 		}
+		{//亀に乗ると竜宮城へ移動
+			RockOfficePtr office = RockOffice::getTask( );
+			std::list< RockEventCharacterPtr > eve_chara = office->getEventCharacters( );
+			std::list< RockEventCharacterPtr >::iterator ite = eve_chara.begin( );
+			while ( ite != eve_chara.end( ) ) {
+				EventTurtlePtr turtle = std::dynamic_pointer_cast< EventTurtle >( *ite );
+				if ( !turtle ) {
+					ite++;
+					continue;
+				}
+				if ( player->isOverLapped( turtle ) ) {
+					if ( player->isOnHead( turtle ) ) {
+						loadStage( STAGE_RYUGU );
+						break;//whileを抜ける
+					}
+				}
+				ite++;
+			}
+		}
+
 
 		//STREET3のプレイヤーがいれば徳アイテムをポップ
 		if ( !_virtue_pop ) {
@@ -79,22 +97,6 @@ void RockMapStreet::updateStreet( ) {
 				for ( int j = 0; j < 30; j++ ) {
 					int interval = 200;
 					storage->addItem( RockItemPtr( new RockItemToku( Vector( j * interval + interval / 2, 500, -500 - j * 10 ) ) ) );
-				}
-			}
-		}
-		//亀に乗ると竜宮城へ移動
-		{
-			RockOfficePtr office = RockOffice::getTask( );
-			std::list< RockEventCharacterPtr > eve_chara = office->getEventCharacters( );
-			std::list< RockEventCharacterPtr >::iterator ite = eve_chara.begin( );
-			EventTurtlePtr turtle = std::dynamic_pointer_cast< EventTurtle >( *ite );
-			for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
-				RockCharacterPtr player = RockFamily::getTask( )->getPlayer( i );
-				if ( turtle->isOnHead( player )  ) {
-					_drawer.reset( );
-					_stage = STAGE_RYUGU;
-					_drawer = RockMapStreetDrawerPtr( new RockMapStreetDrawer( _stage ) );
-					family->resetPos( Vector( 0, 10, 0 ) );
 				}
 			}
 		}
@@ -111,16 +113,8 @@ void RockMapStreet::updateCave( ) {
 		}
 
 		if ( _time > REMOVE_CAVE_TIME ) {
-			_drawer.reset( );
-			_stage = STAGE_STREET;
-			_drawer = RockMapStreetDrawerPtr( new RockMapStreetDrawer( _stage ) );
-			family->resetPos( Vector( 0, 30, -500 ) );
+			loadStage( STAGE_STREET );
 			_time = 0;
-			int interval = 80;
-			RockStoragePtr storage = RockStorage::getTask( );
-			for ( int i = 0; i < 50; i++ ) {
-				storage->addItem( RockItemPtr( new RockItemMoney( Vector( i * interval, 500, -500 - i * 10 ), 10000 ) ) );
-			}
 		}
 	}
 }
@@ -129,8 +123,120 @@ void RockMapStreet::updateRyugu( ) {
 	RockFamilyPtr family = RockFamily::getTask( );
 	for( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		RockPlayerPtr player = family->getPlayer( i );
-		if( player->isActive( ) ) {
+		if( !player->isActive( ) ) {
 			continue;
 		}
+		{//亀に乗るとSTREET1へ移動
+			RockOfficePtr office = RockOffice::getTask( );
+			std::list< RockEventCharacterPtr > eve_chara = office->getEventCharacters( );
+			std::list< RockEventCharacterPtr >::iterator ite = eve_chara.begin( );
+			while ( ite != eve_chara.end( ) ) {
+				EventTurtlePtr turtle = std::dynamic_pointer_cast< EventTurtle >( *ite );
+				if ( !turtle ) {
+					ite++;
+					continue;
+				}
+				if ( player->isOverLapped( turtle ) ) {
+					if ( player->isOnHead( turtle ) ) {
+						loadStage( STAGE_STREET );
+						break;//whileを抜ける
+					}
+				}
+				ite++;
+			}
+		}
+	}
+}
+
+RockMapStreet::STAGE RockMapStreet::getStage( ) const {
+	return _stage;
+}
+
+void RockMapStreet::loadStage( STAGE next ) {
+	genarateEnemies( next );
+	genarateEventCharacters( next );
+	genarateStorage( next );
+	resetFamilyPos( next );
+	_drawer.reset( new RockMapStreetDrawer( next ) );
+	_stage = next;
+}
+
+
+
+void RockMapStreet::genarateEnemies( STAGE next ) {
+	RockMilitaryPtr military = RockMilitary::getTask( );
+	military->clean( );
+	switch ( next ) {
+	case STAGE_STREET:
+		military->add( RockEnemyPtr( new RockEnemyGhost(       Vector(  500,  40, -500 ) ) ) );
+		military->add( RockEnemyPtr( new RockEnemyRedBard(     Vector(  800,  60, -520 ) ) ) );
+		military->add( RockEnemyPtr( new RockEnemyWaterGhost(  Vector( 1100,  60, -530 ) ) ) );
+		military->add( RockEnemyPtr( new RockEnemyFaceAndHand( Vector( 1400, 130, -540 ) ) ) );
+		military->add( RockEnemyPtr( new RockEnemyCloud(       Vector( 1700, 150, -550 ) ) ) );
+		military->add( RockEnemyPtr( new RockEnemyBat(         Vector( 2000, 190, -550 ) ) ) );
+		military->add( RockEnemyPtr( new RockEnemyKimono(      Vector( 2300, 150, -550 ) ) ) );
+		break;
+	case STAGE_CAVE:
+		break;
+	case STAGE_RYUGU:
+		break;
+	}
+}
+
+void RockMapStreet::genarateStorage( STAGE next ) {
+	RockStoragePtr storage = RockStorage::getTask( );
+	storage->clean( );
+	switch ( next ) {
+	case STAGE_STREET:
+	{
+		const int INTERVAL = 200;
+		for ( int i = 0; i < 30; i++ ) {
+			storage->addItem( RockItemPtr( new RockItemMoney( Vector( i * INTERVAL, 200, -500 - i * 10 ), 10000 ) ) );
+		}
+	}
+		break;
+	case STAGE_CAVE:
+		break;
+	case STAGE_RYUGU:
+		break;
+	}
+}
+
+void RockMapStreet::genarateEventCharacters( STAGE next ) {
+	RockOfficePtr office = RockOffice::getTask( );
+	office->clean( );
+	switch ( next ) {
+	case STAGE_STREET:
+		if ( _stage != STAGE_RYUGU ) {
+			office->add( RockEventCharacterPtr( new EventTurtle( Vector( 3610, 320, -210 ) ) ) );
+		}
+		break;
+	case STAGE_CAVE:
+		break;
+	case STAGE_RYUGU:
+		office->add( RockEventCharacterPtr( new EventTurtle( Vector( 900, 30, 0 ) ) ) );
+		break;
+	}
+}
+
+void RockMapStreet::resetFamilyPos( STAGE next ) {
+	RockFamilyPtr family = RockFamily::getTask( );
+	switch ( next ) {
+	case STAGE_STREET:
+		if ( _stage == STAGE_RYUGU ) {
+			//亀の位置に戻る
+			family->resetPos( Vector( 3610, 320, -210 ) );
+		}
+		if ( _stage != STAGE_RYUGU ) {
+			//初期位置
+			family->resetPos( Vector( 0, 10, -500 ) );
+		}
+		break;
+	case STAGE_CAVE:
+		family->resetPos( Vector( 0, 10, 0 ) );
+		break;
+	case STAGE_RYUGU:
+		family->resetPos( Vector( 800, 5, 0 ) );
+		break;
 	}
 }

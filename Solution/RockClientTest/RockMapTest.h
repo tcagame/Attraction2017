@@ -11,6 +11,7 @@ public:
 public:
 	void update( );
 private:
+	void genarateEnemies( );
 	bool isNext( const Vector& pos ) const;
 };
 

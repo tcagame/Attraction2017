@@ -169,13 +169,11 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="RockCameraResult.cpp" />
     <ClCompile Include="RockMapResult.cpp" />
-    <ClCompile Include="RockMilitaryResult.cpp" />
     <ClCompile Include="RockTheaterResult.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="RockCameraResult.h" />
     <ClInclude Include="RockMapResult.h" />
-    <ClInclude Include="RockMilitaryResult.h" />
     <ClInclude Include="RockTheaterResult.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

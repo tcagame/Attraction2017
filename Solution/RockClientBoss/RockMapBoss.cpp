@@ -2,7 +2,7 @@
 #include "RockMapBossDrawer.h"
 #include "RockFamily.h"
 #include "RockPlayer.h"
-#include "RockMilitatyBoss.h"
+#include "RockMilitary.h"
 #include "RockStorage.h"
 #include "Status.h"
 #include "RockFamily.h"

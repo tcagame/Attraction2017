@@ -9,7 +9,7 @@
 #include "Message.h"
 #include "RockViewer.h"
 #include "RockMapEntry.h"
-#include "RockMilitaryEntry.h"
+#include "RockMilitary.h"
 #include "RockCameraEntry.h"
 #include "RockDollHouse.h"
 #include "RockFamily.h"
@@ -34,7 +34,7 @@ void main( ) {
 
 	app->addTask( RockStorage::getTag( ), TaskPtr( new RockStorage( status ) ) );
 	app->addTask( RockMap::getTag( ), TaskPtr( new RockMapEntry ) );
-	app->addTask( RockMilitary::getTag( ), TaskPtr( new RockMilitaryEntry ) );
+	app->addTask( RockMilitary::getTag( ), TaskPtr( new RockMilitary ) );
 	app->addTask( RockDollHouse::getTag( ), TaskPtr( new RockDollHouse ) );
 	app->addTask( RockFamily::getTag( ), TaskPtr( new RockFamily( status, Vector( 0, 10, 160 ) ) ) );
 	app->addTask( RockArmoury::getTag( ), TaskPtr( new RockArmoury ) );

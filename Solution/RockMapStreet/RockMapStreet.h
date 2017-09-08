@@ -14,14 +14,21 @@ public:
 		STAGE_STREET,
 		STAGE_CAVE,
 		STAGE_RYUGU,
+		MAX_STAGE
 	};
 public:
 	void update( );
 	void initialize( );
+	STAGE getStage( ) const;
 private:
 	void updateStreet( );
 	void updateCave( );
 	void updateRyugu( );
+	void loadStage( STAGE next );
+	void genarateEnemies( STAGE next );
+	void genarateStorage( STAGE next );
+	void genarateEventCharacters( STAGE next );
+	void resetFamilyPos( STAGE next );
 private:
 	int _time;
 	bool _virtue_pop;

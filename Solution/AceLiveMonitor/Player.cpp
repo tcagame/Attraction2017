@@ -59,7 +59,7 @@ const int MOTION_OFFSET[Player::MAX_ACTION] = {
 	73,  // ACTION_OVER_CHARGE,
 	81,  // ACTION_DAMEGE,
 	50,  // ACTION_BLOW_AWAY,
-	80,  // ACTION_DAED,
+	80,  // ACTION_DEAD,
 	112, // ACTION_CALL,
 };
 
@@ -76,7 +76,7 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		7 , // ACTION_OVER_CHARGE,
 		1 , // ACTION_DAMEGE,
 		1 , // ACTION_BLOW_AWAY,
-		27, // ACTION_DAED,
+		27, // ACTION_DEAD,
 		18, // ACTION_CALL,
 	},
 	{ // たろじろー
@@ -91,7 +91,7 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		6 , // ACTION_OVER_CHARGE,
 		1 , // ACTION_DAMEGE,
 		1 , // ACTION_BLOW_AWAY,
-		27, // ACTION_DAED,
+		27, // ACTION_DEAD,
 		18, // ACTION_CALL,
 	},
 	{ // ガりすけ
@@ -106,7 +106,7 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		7 , // ACTION_OVER_CHARGE,
 		1 , // ACTION_DAMEGE,
 		1 , // ACTION_BLOW_AWAY,
-		27, // ACTION_DAED,
+		27, // ACTION_DEAD,
 		12, // ACTION_CALL,
 	},
 	{ // たろみ
@@ -121,7 +121,7 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		7 , // ACTION_OVER_CHARGE,
 		1 , // ACTION_DAMEGE,
 		1 , // ACTION_BLOW_AWAY,
-		28, // ACTION_DAED,
+		28, // ACTION_DEAD,
 		12, // ACTION_CALL,
 	}
 };
@@ -224,7 +224,7 @@ void Player::act( ) {
 	case ACTION_BLOW_AWAY:
 		actOnBlowAway( );
 		break;
-	case ACTION_DAED:
+	case ACTION_DEAD:
 		actOnDead( );
 		break;
 	case ACTION_CALL:
@@ -561,27 +561,13 @@ void Player::actOnBlowAway( ) {
 
 void Player::actOnDead( ) {
 	int act_count = getActCount( );
-	int chip_size = getChipSize( );
 	AREA area = getArea( );
-	if ( act_count == MAX_DEAD_ACTCOUNT ) {
-		if ( area == AREA_EVENT ) {
-			//イベントで倒れたら、爆発する
-			Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, chip_size / 2 ), area, chip_size * 2 ) ) );
-		}
-	}
-	if ( act_count > MAX_DEAD_ACTCOUNT + MAX_IMPACT_COUNT ) {
-		if ( getArea( ) == AREA_EVENT ) {
-			//メインの画面中央上部に移動
-			setArea( AREA_STREET );
-			World::getTask( )->setEvent( EVENT_NONE );
-			Military::getTask( )->createBoss( );
-			Storage::getTask( )->eraseEventItem( );
-			setPos( Vector( Family::getTask( )->getCameraPosX( ) + SCREEN_WIDTH / 2, chip_size ) );
-			Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, chip_size / 2 ), getArea( ), chip_size * 2 ) ) );
-		}
-		if ( act_count < MAX_DEAD_ACTCOUNT + MAX_IMPACT_COUNT * 2 ) {
-			setVec( Vector( 0, -GRAVITY ) );
-		}
+	if ( act_count >= MOTION_NUM[ _player ][ ACTION_DEAD ] ) {
+		// 爆発する
+		int chip_size = getChipSize( );
+		Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, chip_size / 2 ), area, chip_size * 2 ) ) );
+		// コンティニューへ
+		setAction(ACTION_CONTINUE);
 	}
 }
 
@@ -606,7 +592,7 @@ void Player::damage( int force ) {
 	Character::damage( force );
 	SoundPtr sound = Sound::getTask( );
 	if ( isFinished( ) ) {
-		setAction( ACTION_DAED );
+		setAction( ACTION_DEAD );
 		setVec( Vector( ) );
 	} else {
 		sound->playSE( "yokai_voice_26.wav" );
@@ -743,14 +729,7 @@ void Player::bound( ) {
 }
 
 void Player::blowAway( ) {
-	if ( _action == ACTION_CALL ||
-		 _action == ACTION_ENTRY ||
-		 _action == ACTION_CONTINUE ) {
-		return;
-	}
-
-	if ( !Debug::getTask( )->isDebug( ) &&
-		 _action != ACTION_DAED ) {
+	if ( !isExist( ) ) {
 		setAction( ACTION_BLOW_AWAY );
 	}
 }
@@ -843,6 +822,8 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 	int off = MOTION_OFFSET[ _action ];
 	int num = MOTION_NUM[ _player ][ _action ];
 	int motion = 0;
+	int action = 0;
+	int pattern = 0;
 	switch ( _action ) {
 	case ACTION_BRAKE:
 	case ACTION_DAMEGE:
@@ -863,10 +844,16 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		break;
 	case ACTION_OVER_CHARGE:
 	{
-		motion = getActCount( ) / PLAYER_ANIM_WAIT_COUNT / 2;
-		break;
+		const int ANIM[ ] = {
+			73, 74, 75, 76, 77, 78, 79
+		};
+		int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
+		if ( player == PLAYER_TAROJIRO ) {
+			anim_size = anim_size - 1;
+		}
+		action = ANIM[ getActCount( ) / ( PLAYER_ANIM_WAIT_COUNT + 2 ) % anim_size ];
 	}
-	case ACTION_DAED:
+	case ACTION_DEAD:
 	{
 		int anim = getActCount( ) / PLAYER_ANIM_WAIT_COUNT;
 		if ( anim >= DEAD_ANIM_NUM ) {
@@ -884,7 +871,11 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		break;
 	}
 
-	int pattern = off + motion % num;
+	if ( _action == ACTION_OVER_CHARGE ) {
+		pattern = action;
+	} else {
+		pattern = off + motion % num;
+	}
 
 	unsigned char attribute = 0;
 	if ( getDir( ) == DIR_RIGHT ) {
