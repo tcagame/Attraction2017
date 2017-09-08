@@ -2,6 +2,13 @@
 #include "ModelMV1.h"
 
 RockMapResult::RockMapResult( ) {
+}
+
+
+RockMapResult::~RockMapResult( ) {
+}
+
+void RockMapResult::initialize( ) {
 	ModelMV1Ptr map01 = ModelMV1Ptr( new ModelMV1 );
 	map01->load( "Resource/Rock/map/test/map01.mv1" );
 	addModel( map01 );
@@ -13,9 +20,6 @@ RockMapResult::RockMapResult( ) {
 	addColModel( col01 );
 }
 
-
-RockMapResult::~RockMapResult( ) {
-}
 
 void RockMapResult::update( ) {
 }

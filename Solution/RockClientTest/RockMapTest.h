@@ -9,6 +9,7 @@ public:
 	RockMapTest( );
 	virtual ~RockMapTest( );
 public:
+	void initialize( );
 	void update( );
 private:
 	void genarateEnemies( );

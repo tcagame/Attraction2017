@@ -10,6 +10,13 @@ const Vector ENTRY_POS = Vector( 200, 0, 270 );
 const double ENTRY_RADIUS = 40;
 
 RockMapEntry::RockMapEntry( ) {
+}
+
+
+RockMapEntry::~RockMapEntry( ) {
+}
+
+void RockMapEntry::initialize( ) {
 	ModelMV1Ptr map01 = ModelMV1Ptr( new ModelMV1 );
 	map01->load( "Resource/Rock/map/entry/map01.mv1" );
 	addModel( map01 );
@@ -21,9 +28,6 @@ RockMapEntry::RockMapEntry( ) {
 	addColModel( col01 );
 }
 
-
-RockMapEntry::~RockMapEntry( ) {
-}
 
 void RockMapEntry::update( ) {
 	RockFamilyPtr family = RockFamily::getTask( );

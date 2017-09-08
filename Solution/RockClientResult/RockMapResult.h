@@ -9,6 +9,7 @@ public:
 	RockMapResult( );
 	virtual ~RockMapResult( );
 public:
+	void initialize( );
 	void update( );
 };
 

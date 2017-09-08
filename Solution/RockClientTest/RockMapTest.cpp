@@ -27,6 +27,13 @@ const Vector ENTRY_POS = Vector( 200, 0, 270 );
 const double ENTRY_RADIUS = 40;
 
 RockMapTest::RockMapTest( ) {
+}
+
+
+RockMapTest::~RockMapTest( ) {
+}
+
+void RockMapTest::initialize( ) {
 	ModelMV1Ptr map01 = ModelMV1Ptr( new ModelMV1 );
 	map01->load( "Resource/Rock/map/test/map01.mv1" );
 	addModel( map01 );
@@ -53,13 +60,9 @@ RockMapTest::RockMapTest( ) {
 	storage->addItem( RockItemPtr( new RockItemRock( Vector( 0, 50, 0 ) ) ) );
 	//ショップアイテム
 	storage->addShopItem( RockItemPtr( new RockItemDango( Vector( -50, 50, 0 ) ) ) );
+	//祭壇
 	storage->addAlter( RockAlterPtr( new RockAlter( Vector( 50, 0, 50 ), Vector( 50, 50, 50 ) ) ) );
-	//絵ねミー
 	genarateEnemies( );
-}
-
-
-RockMapTest::~RockMapTest( ) {
 }
 
 void RockMapTest::update( ) {
@@ -89,12 +92,12 @@ bool RockMapTest::isNext( const Vector& pos ) const {
 
 void RockMapTest::genarateEnemies( ) {
 	RockMilitaryPtr military = RockMilitary::getTask( );
-	//military->add( RockEnemyPtr( new RockEnemyGhost( Vector( 0, 40, 0 ) ) ) );
-	military->add( RockEnemyPtr( new RockEnemyRedBard( Vector( 10, 30, 10 ) ) ) );
-	//military->add( RockEnemyPtr( new RockEnemyWaterGhost( Vector( -10, 30, 30 ) ) ) );
-	//military->add( RockEnemyPtr( new RockEnemyBossRock( Vector( -50, 50, 50 ) ) ) );
-	//military->add( RockEnemyPtr( new RockEnemyFaceAndHand( Vector( -50, 50, 50 ) ) ) );
-	//military->add( RockEnemyPtr( new RockEnemyCloud( Vector( -50, 50, 50 ) ) ) );
-	//military->add( RockEnemyPtr( new RockEnemyBat( Vector( -50, 50, -50 ) ) ) );
-	//military->add( RockEnemyPtr( new RockEnemyKimono( Vector( 50, 50, 50 ) ) ) );
+	///military->add( RockEnemyPtr( new RockEnemyGhost( Vector( 0, 40, 0 ) ) ) );
+	///military->add( RockEnemyPtr( new RockEnemyRedBard( Vector( 10, 30, 10 ) ) ) );
+	///military->add( RockEnemyPtr( new RockEnemyWaterGhost( Vector( -10, 30, 30 ) ) ) );
+	///military->add( RockEnemyPtr( new RockEnemyBossRock( Vector( -50, 50, 50 ) ) ) );
+	///military->add( RockEnemyPtr( new RockEnemyFaceAndHand( Vector( -50, 50, 50 ) ) ) );
+	///military->add( RockEnemyPtr( new RockEnemyCloud( Vector( -50, 50, 50 ) ) ) );
+	///military->add( RockEnemyPtr( new RockEnemyBat( Vector( -50, 50, -50 ) ) ) );
+	///military->add( RockEnemyPtr( new RockEnemyKimono( Vector( 50, 50, 50 ) ) ) );
 }

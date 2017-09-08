@@ -7,10 +7,16 @@
 #include "Sound.h"
 
 static const int EXISTANCE_TIME = 2000;
-static const double POP_Y = 1000;
-static const double FOLLOW_RANGE = 70;
-static const double FOLLOW_Y = 40;
-static const double MOVE_SPEED = 30;
+//pop
+static const Vector POP_POS( 0, 500, -500 );//プレイヤーの向きにあわせる( zが奥行き )
+static const Vector TARGET( 0, 40, 100 );//プレイヤーの向きにあわせる( zが奥行き )
+//追従
+static const double FOLLOW_RANGE = 50;
+static const double FOLLOW_Y = 30;
+//移動
+static const double MAX_MOVE_SPEED = 7.77;
+static const double ACCEL = 1.2;
+//しょっと
 static const int SHOT_INTERVAL = 50;
 static const int SHOT_POWER = 3;
 static const double SHOT_ANGLE = PI / 6;
@@ -52,8 +58,16 @@ void RockAncestors::pop( ) {
 	_action = ACTION_FADEIN;
 	RockPlayerPtr player = RockFamily::getTask( )->getPlayer( _player_id );
 	Vector player_pos = player->getPos( );
-	Vector pop_pos = player_pos - player->getDir( ).normalize( ) * FOLLOW_RANGE;
-	pop_pos.y = player_pos.y + POP_Y;
+	Vector player_dir = player->getDir( );
+	double angle = Vector( 0, 0, -1 ).angle( player_dir );
+	Vector axis = Vector( 0, 0, -1 ).cross( player_dir );
+	if ( axis.y > 0 ) {
+		axis = Vector( 0, -1, 0 );
+	} else {
+		axis = Vector( 0, 1, 0 );
+	}
+	Vector pop_relative_pos = Matrix::makeTransformRotation( axis, angle ).multiply( POP_POS );
+	Vector pop_pos = player_pos + pop_relative_pos;
 	setPos( pop_pos );
 }
 
@@ -61,21 +75,31 @@ void RockAncestors::actOnAbsent( ) {
 }
 
 void RockAncestors::actOnFadeIn( ) {
+	//プレイヤーの後ろを目指す
 	RockPlayerPtr player = RockFamily::getTask( )->getPlayer( _player_id );
 	Vector player_pos = player->getPos( );
-	Vector pos = getPos( );
-	Vector target = player_pos - player->getDir( ).normalize( ) * FOLLOW_RANGE;
-	target.y = player_pos.y + FOLLOW_Y;
-	Vector distance = target - pos;
-	if ( distance.getLength2( ) < 1 ) {
-		setVec( distance );
+	Vector player_dir = player->getDir( );
+	double angle = Vector( 0, 0, -1 ).angle( player_dir );
+	Vector axis = Vector( 0, 0, -1 ).cross( player_dir );
+	if ( axis.y > 0 ) {
+		axis = Vector( 0, -1, 0 );
+	} else {
+		axis = Vector( 0, 1, 0 );
+	}
+
+	Vector relative_target = Matrix::makeTransformRotation( axis, angle ).multiply( TARGET );
+	Vector target = player_pos + relative_target;
+
+	Vector distance = target - getPos( );
+	if ( distance.getLength2( ) < 30 ) {
 		_action = ACTION_FOLLOW;
 		return;
 	}
-	Vector vec = distance;
-	if ( distance.getLength2( ) > MOVE_SPEED * MOVE_SPEED ) {
-		vec = vec.normalize( ) * MOVE_SPEED;
+	Vector vec = getVec( ) + distance.normalize( ) * ACCEL;
+	if ( vec.getLength2( ) > MAX_MOVE_SPEED * MAX_MOVE_SPEED ) {
+		vec = vec.normalize( ) * MAX_MOVE_SPEED;
 	}
+	
 	setVec( vec );
 }
 
@@ -94,9 +118,16 @@ void RockAncestors::actOnFollow( ) {
 		//範囲外にいたら範囲に入ろうとする
 		Vector target = player_pos - distance.normalize( ) * FOLLOW_RANGE;
 		target.y = player_pos.y + FOLLOW_Y;
-		vec = target - pos;
-		if ( vec.getLength2( ) > MOVE_SPEED * MOVE_SPEED ) {
-			vec = vec.normalize( ) * MOVE_SPEED * MOVE_SPEED;
+		vec = getVec( ) + ( target - pos ).normalize( ) * ACCEL;
+		if ( vec.getLength2( ) > MAX_MOVE_SPEED * MAX_MOVE_SPEED ) {
+			vec = vec.normalize( ) * MAX_MOVE_SPEED;
+		}
+	} else {
+		vec = getVec( );
+		if ( vec.getLength2( ) > ACCEL * ACCEL ) {
+			vec = vec - vec.normalize( ) * ( ACCEL * 0.5 );
+		} else {
+			vec = Vector( );
 		}
 	}
 
@@ -105,7 +136,7 @@ void RockAncestors::actOnFollow( ) {
 	if ( getActCount( ) % SHOT_INTERVAL == 0 ) {
 		Sound::getTask( )->playSE( "yokai_se_27.wav" );
 		RockArmouryPtr armoury = RockArmoury::getTask( );
-		Vector dir = getDir( );
+		Vector dir = player->getDir( );
 		Vector pos = getPos( ) + SHOT_FOOT;
 		Matrix left_rot = Matrix::makeTransformRotation( Vector( 0, 1, 0 ), SHOT_ANGLE );
 		Matrix right_rot = Matrix::makeTransformRotation( Vector( 0, -1, 0 ), SHOT_ANGLE );
@@ -117,21 +148,21 @@ void RockAncestors::actOnFollow( ) {
 }
 
 void RockAncestors::actOnFadeOut( ) {
-	if ( getPos( ).y > RockFamily::getTask( )->getPlayer( _player_id )->getPos( ).y + POP_Y ) {
+	if ( getPos( ).y > RockFamily::getTask( )->getPlayer( _player_id )->getPos( ).y + POP_POS.y ) {
 		setVec( Vector( ) );
 		_action = ACTION_ABSENT;
 		return;
 	}
-	setVec( Vector( 0, MOVE_SPEED, 0 ) );
+	setVec( Vector( 0, MAX_MOVE_SPEED, 0 ) );
 }
 
 
 ModelMV1Ptr RockAncestors::getModel( ) const {
 	ModelMV1Ptr model = RockDollHouse::getTask( )->getModel( getDoll( ) );
-	
-	double rot = Vector( 0, 0, -1 ).angle( getDir( ) );
+	Vector dir = RockFamily::getTask( )->getPlayer( _player_id )->getDir( );
+	double rot = Vector( 0, 0, -1 ).angle( dir );
 	Vector axis = Vector( 0, 1, 0 );
-	if ( Vector( 0, 0, -1 ).cross( getDir( ) ).y < 0 ) {
+	if ( Vector( 0, 0, -1 ).cross( dir ).y < 0 ) {
 		axis = Vector( 0, -1, 0 );
 	}
 	model->setRot( Matrix::makeTransformRotation( axis, rot ) );
