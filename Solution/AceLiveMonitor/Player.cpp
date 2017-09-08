@@ -58,7 +58,7 @@ const int MOTION_OFFSET[Player::MAX_ACTION] = {
 	72,  // ACTION_OVER_CHARGE,
 	81,  // ACTION_DAMEGE,
 	50,  // ACTION_BLOW_AWAY,
-	80,  // ACTION_DAED,
+	80,  // ACTION_DEAD,
 	112, // ACTION_CALL,
 };
 
@@ -75,7 +75,7 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		7 , // ACTION_OVER_CHARGE,
 		1 , // ACTION_DAMEGE,
 		1 , // ACTION_BLOW_AWAY,
-		27, // ACTION_DAED,
+		27, // ACTION_DEAD,
 		18, // ACTION_CALL,
 	},
 	{ // ‚½‚ë‚¶‚ë[
@@ -90,7 +90,7 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		6 , // ACTION_OVER_CHARGE,
 		1 , // ACTION_DAMEGE,
 		1 , // ACTION_BLOW_AWAY,
-		27, // ACTION_DAED,
+		27, // ACTION_DEAD,
 		18, // ACTION_CALL,
 	},
 	{ // ƒK‚è‚·‚¯
@@ -105,7 +105,7 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		7 , // ACTION_OVER_CHARGE,
 		1 , // ACTION_DAMEGE,
 		1 , // ACTION_BLOW_AWAY,
-		27, // ACTION_DAED,
+		27, // ACTION_DEAD,
 		12, // ACTION_CALL,
 	},
 	{ // ‚½‚ë‚Ý
@@ -120,7 +120,7 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		7 , // ACTION_OVER_CHARGE,
 		1 , // ACTION_DAMEGE,
 		1 , // ACTION_BLOW_AWAY,
-		28, // ACTION_DAED,
+		28, // ACTION_DEAD,
 		12, // ACTION_CALL,
 	}
 };
@@ -223,7 +223,7 @@ void Player::act( ) {
 	case ACTION_BLOW_AWAY:
 		actOnBlowAway( );
 		break;
-	case ACTION_DAED:
+	case ACTION_DEAD:
 		actOnDead( );
 		break;
 	case ACTION_CALL:
@@ -605,7 +605,7 @@ void Player::damage( int force ) {
 	Character::damage( force );
 	SoundPtr sound = Sound::getTask( );
 	if ( isFinished( ) ) {
-		setAction( ACTION_DAED );
+		setAction( ACTION_DEAD );
 		setVec( Vector( ) );
 	} else {
 		sound->playSE( "yokai_voice_26.wav" );
@@ -749,7 +749,7 @@ void Player::blowAway( ) {
 	}
 
 	if ( !Debug::getTask( )->isDebug( ) &&
-		 _action != ACTION_DAED ) {
+		 _action != ACTION_DEAD ) {
 		setAction( ACTION_BLOW_AWAY );
 	}
 }
@@ -861,7 +861,7 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 	case ACTION_CALL:
 		motion = getActCount( ) / PLAYER_ANIM_WAIT_COUNT / 2;
 		break;
-	case ACTION_DAED:
+	case ACTION_DEAD:
 	{
 		int dead_anim_num = 28;
 		int anim = getActCount( ) / PLAYER_ANIM_WAIT_COUNT;
