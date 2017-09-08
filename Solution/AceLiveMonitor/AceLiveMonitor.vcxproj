@@ -287,7 +287,6 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Shot.cpp" />
     <ClCompile Include="Armoury.cpp" />
-    <ClCompile Include="ViewerEntry.cpp" />
     <ClCompile Include="ViewerLive.cpp" />
     <ClCompile Include="ViewerTitle.cpp" />
     <ClCompile Include="ViewerProgress.cpp" />
@@ -421,7 +420,6 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Shot.h" />
     <ClInclude Include="Armoury.h" />
-    <ClInclude Include="ViewerEntry.h" />
     <ClInclude Include="ViewerLive.h" />
     <ClInclude Include="ViewerTitle.h" />
     <ClInclude Include="ViewerProgress.h" />

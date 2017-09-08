@@ -25,7 +25,7 @@ private:
 	void excuteItem( std::vector< std::string > command );
 	void excuteState( std::vector< std::string > command );
 	void excuteContinue( std::vector< std::string > command );
-	unsigned int getArea( std::string str );
+	void updateFamily( );
 private:
 	StatusPtr _status;
 	MessagePtr _message;

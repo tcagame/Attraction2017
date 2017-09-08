@@ -33,7 +33,7 @@ void MessageSender::sendMessage( int player_id, Message::COMMAND command, void* 
 		message = "power " + std::to_string( player_id ) + " " + std::to_string( *( int* )value ); 
 		break;
 	case Message::COMMAND_ITEM:
-		message = "item " + std::to_string( player_id ) + " "; 
+		message = "item " + std::to_string( player_id ) + " ";
 		for ( int i = 0; i < 8; i++ ) {
 			unsigned char check = 1 << ( 7 - i );
 			if ( check & *( unsigned char* )value ) {

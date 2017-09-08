@@ -5,7 +5,6 @@
 #include "ViewerStreet.h"
 #include "ViewerEvent.h"
 #include "ViewerStatus.h"
-#include "ViewerEntry.h"
 #include "ViewerProgress.h"
 #include "ViewerTitle.h"
 #include "ViewerDebug.h"
@@ -38,7 +37,6 @@ void ViewerLive::initialize( ) {
 	_viewer_event    = ViewerEventPtr	( new ViewerEvent    );
 	_viewer_title    = ViewerTitlePtr   ( new ViewerTitle    );
 	_viewer_status   = ViewerStatusPtr  ( new ViewerStatus   );
-	_viewer_entry    = ViewerEntryPtr   ( new ViewerEntry    );
 	_viewer_progress = ViewerProgressPtr( new ViewerProgress );
 	_viewer_debug    = ViewerDebugPtr   ( new ViewerDebug    );
 	_viewer_object   = ViewerObjectPtr  ( new ViewerObject   );
@@ -48,6 +46,9 @@ void ViewerLive::initialize( ) {
 	_image_frame = drawer->createImage( "UI/area_event_frame.png" );
 	_image_frame->setRect( 0, 0, 1280, 256 );
 	_image_frame->setPos( 0, 0 );
+	
+	_image_cover_entry    = drawer->createImage( "UI/ui_cover_entry.png" );
+	_image_cover_continue = drawer->createImage( "UI/ui_cover_continue.png" );
 
 	_image_device = drawer->createImage( "UI/ui_device.png" );
 }
@@ -88,11 +89,14 @@ void ViewerLive::update( ) {
 
 		switch ( data->getStatusState( target ) ) {
 		case SynchronousData::STATE_ENTRY:
-			_viewer_entry->draw( target );
+			_image_cover_entry->setPos( i * VIEW_STATUS_WIDTH, VIEW_STATUS_Y );
+			_image_cover_entry->draw( );
 			_viewer_progress->draw( target );
 			break;
 		case SynchronousData::STATE_CONTINUE:
-			//_viewer_continue->draw( target );
+			_image_cover_continue->setPos( i * VIEW_STATUS_WIDTH, VIEW_STATUS_Y );
+			_image_cover_continue->draw( );
+			_viewer_progress->draw( target );
 			break;
 		}
 

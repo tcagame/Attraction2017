@@ -38,7 +38,6 @@ static const int COOL_TIME = 8;
 static const int PLAYER_ANIM_WAIT_COUNT = 4;
 static const int PLAYER_ANIM_WIDTH_NUM = 10;
 static const int PLAYER_FLASH_WAIT_TIME = 2;
-static const int DEAD_ANIM_NUM = 28;
 //カウント
 static const int MAX_DAMEGE_COUNT = 20;
 static const int MAX_BACK_COUNT = 6;
@@ -121,7 +120,7 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		7 , // ACTION_OVER_CHARGE,
 		1 , // ACTION_DAMEGE,
 		1 , // ACTION_BLOW_AWAY,
-		28, // ACTION_DEAD,
+		32, // ACTION_DEAD,
 		12, // ACTION_CALL,
 	}
 };
@@ -176,8 +175,11 @@ void Player::updatetDevice( ) {
 			}
 		}
 	} else {
+		if ( device->getButton( _device_id ) == BUTTON_B + BUTTON_C + BUTTON_D ) {
+			setAction( ACTION_ENTRY );
+		}
 		if ( device->getDirY( _device_id ) < 0 &&
-			device->getButton( _device_id ) == BUTTON_E + BUTTON_F ) {
+			device->getPush( _device_id ) == BUTTON_E + BUTTON_F ) {
 			_device_id = -1;
 		}
 	}
@@ -191,11 +193,7 @@ void Player::act( ) {
 		actOnEntry( );
 		break;
 	case ACTION_CONTINUE:
-		{
-			Vector pos = getPos( );
-			pos.x = Family::getTask( )->getCameraPosX( ) + SCREEN_WIDTH / 2;
-			setPos( pos );
-		}
+		actOnContinue();
 		break;
 	case ACTION_WAIT:
 		actOnWaiting( );
@@ -253,9 +251,20 @@ void Player::actOnEntry( ) {
 	}
 }
 
+void Player::actOnContinue() {
+	adjustToCamera( );
+	updateProgress( );
+
+	if ( _progress_count >= 100 ) {
+		// 再登場のために初期化
+		appear();
+	}
+}
+
 void Player::appear( ) {
 	_action = ACTION_FLOAT;
 	setPower( MAX_HP );
+	setArea( AREA_STREET );
 	_unrivaled_count = 0;
 }
 
@@ -560,28 +569,15 @@ void Player::actOnBlowAway( ) {
 }
 
 void Player::actOnDead( ) {
+	_unrivaled_count = MAX_UNRIVALED_COUNT;
 	int act_count = getActCount( );
-	int chip_size = getChipSize( );
 	AREA area = getArea( );
-	if ( act_count == MAX_DEAD_ACTCOUNT ) {
-		if ( area == AREA_EVENT ) {
-			//イベントで倒れたら、爆発する
-			Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, chip_size / 2 ), area, chip_size * 2 ) ) );
-		}
-	}
-	if ( act_count > MAX_DEAD_ACTCOUNT + MAX_IMPACT_COUNT ) {
-		if ( getArea( ) == AREA_EVENT ) {
-			//メインの画面中央上部に移動
-			setArea( AREA_STREET );
-			World::getTask( )->setEvent( EVENT_NONE );
-			Military::getTask( )->createBoss( );
-			Storage::getTask( )->eraseEventItem( );
-			setPos( Vector( Family::getTask( )->getCameraPosX( ) + SCREEN_WIDTH / 2, chip_size ) );
-			Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, chip_size / 2 ), getArea( ), chip_size * 2 ) ) );
-		}
-		if ( act_count < MAX_DEAD_ACTCOUNT + MAX_IMPACT_COUNT * 2 ) {
-			setVec( Vector( 0, -GRAVITY ) );
-		}
+	if ( act_count > MAX_DEAD_ACTCOUNT ) {
+		// 爆発する
+		int chip_size = getChipSize( );
+		Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, chip_size / 2 ), area, chip_size * 2 ) ) );
+		// コンティニューへ
+		setAction(ACTION_CONTINUE);
 	}
 }
 
@@ -743,14 +739,7 @@ void Player::bound( ) {
 }
 
 void Player::blowAway( ) {
-	if ( _action == ACTION_CALL ||
-		 _action == ACTION_ENTRY ||
-		 _action == ACTION_CONTINUE ) {
-		return;
-	}
-
-	if ( !Debug::getTask( )->isDebug( ) &&
-		 _action != ACTION_DEAD ) {
+	if ( !isExist( ) ) {
 		setAction( ACTION_BLOW_AWAY );
 	}
 }
@@ -774,6 +763,7 @@ void Player::pickUpVirtue( ) {
 void Player::setAction( ACTION action ) {
 	_action = action;
 	setActCount( 0 );
+	_progress_count = 0;
 }
 
 void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
@@ -843,7 +833,6 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 	int off = MOTION_OFFSET[ _action ];
 	int num = MOTION_NUM[ _player ][ _action ];
 	int motion = 0;
-	int action = 0;
 	int pattern = 0;
 	switch ( _action ) {
 	case ACTION_BRAKE:
@@ -864,39 +853,33 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		motion = getActCount( ) / PLAYER_ANIM_WAIT_COUNT / 2;
 		break;
 	case ACTION_OVER_CHARGE:
-	{
-		const int ANIM[ ] = {
-			73, 74, 75, 76, 77, 78, 79
-		};
-		int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 		if ( player == PLAYER_TAROJIRO ) {
-			anim_size = anim_size - 1;
+			num = num - 1;
 		}
-		action = ANIM[ getActCount( ) / ( PLAYER_ANIM_WAIT_COUNT + 2 ) % anim_size ];
-	}
+		motion = getActCount( ) / PLAYER_ANIM_WAIT_COUNT;
+		break;
 	case ACTION_DEAD:
 	{
-		int anim = getActCount( ) / PLAYER_ANIM_WAIT_COUNT;
-		if ( anim >= DEAD_ANIM_NUM ) {
-			anim = DEAD_ANIM_NUM - 1;
-		}
-
-		if ( player != PLAYER_TAROMI ) {
-			anim = anim - 1;
+		int anim = getActCount( ) / ( PLAYER_ANIM_WAIT_COUNT / 2 );
+		if ( anim >= num ) {
+			anim = num - 1;
 		}
 		motion = anim;
 		break;
 	}
 	case ACTION_CHARGE:
-		motion = _charge_count / ( CHARGE_PHASE_COUNT / 2 );
+	{
+		int anim = _charge_count / ( CHARGE_PHASE_COUNT / 6 );
+		if ( anim >= num ) {
+			anim = num - 1;
+		}
+		motion = anim;
 		break;
 	}
 
-	if ( _action == ACTION_OVER_CHARGE ) {
-		pattern = action;
-	} else {
-		pattern = off + motion % num;
 	}
+
+	pattern = off + motion % num;
 
 	unsigned char attribute = 0;
 	if ( getDir( ) == DIR_RIGHT ) {
