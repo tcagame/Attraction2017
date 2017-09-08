@@ -561,27 +561,13 @@ void Player::actOnBlowAway( ) {
 
 void Player::actOnDead( ) {
 	int act_count = getActCount( );
-	int chip_size = getChipSize( );
 	AREA area = getArea( );
-	if ( act_count == MAX_DEAD_ACTCOUNT ) {
-		if ( area == AREA_EVENT ) {
-			//イベントで倒れたら、爆発する
-			Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, chip_size / 2 ), area, chip_size * 2 ) ) );
-		}
-	}
-	if ( act_count > MAX_DEAD_ACTCOUNT + MAX_IMPACT_COUNT ) {
-		if ( getArea( ) == AREA_EVENT ) {
-			//メインの画面中央上部に移動
-			setArea( AREA_STREET );
-			World::getTask( )->setEvent( EVENT_NONE );
-			Military::getTask( )->createBoss( );
-			Storage::getTask( )->eraseEventItem( );
-			setPos( Vector( Family::getTask( )->getCameraPosX( ) + SCREEN_WIDTH / 2, chip_size ) );
-			Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, chip_size / 2 ), getArea( ), chip_size * 2 ) ) );
-		}
-		if ( act_count < MAX_DEAD_ACTCOUNT + MAX_IMPACT_COUNT * 2 ) {
-			setVec( Vector( 0, -GRAVITY ) );
-		}
+	if ( act_count >= MOTION_NUM[ _player ][ ACTION_DEAD ] ) {
+		// 爆発する
+		int chip_size = getChipSize( );
+		Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, chip_size / 2 ), area, chip_size * 2 ) ) );
+		// コンティニューへ
+		setAction(ACTION_CONTINUE);
 	}
 }
 
@@ -743,14 +729,7 @@ void Player::bound( ) {
 }
 
 void Player::blowAway( ) {
-	if ( _action == ACTION_CALL ||
-		 _action == ACTION_ENTRY ||
-		 _action == ACTION_CONTINUE ) {
-		return;
-	}
-
-	if ( !Debug::getTask( )->isDebug( ) &&
-		 _action != ACTION_DEAD ) {
+	if ( !isExist( ) ) {
 		setAction( ACTION_BLOW_AWAY );
 	}
 }
