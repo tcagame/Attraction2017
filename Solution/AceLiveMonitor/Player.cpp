@@ -863,20 +863,18 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		break;
 	case ACTION_DAED:
 	{
-		const int ANIM[ ] = {
-			80, 81, 82, 83, 84, 85, 86, 87, 88, 89,
-			90, 91, 92, 93, 94, 95, 96, 97, 98, 99,
-			100, 101, 102, 103, 104, 105, 106, 107
-		};
-		int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-		int anim = getActCount( ) / PLAYER_ANIM_WAIT_COUNT + 5;
-
-		if ( anim >= anim_num ) {
-			anim = anim_num - 1;
+		int dead_anim_num = 28;
+		int anim = getActCount( ) / PLAYER_ANIM_WAIT_COUNT;
+		if ( anim >= dead_anim_num ) {
+			anim = dead_anim_num - 1;
 		}
-		motion = ANIM[ anim ];
+
+		if ( player != PLAYER_TAROMI ) { // ‚½‚ë‚Ý‚Ì‚Ý28
+			anim = anim - 1;
+		}
+		motion = anim;
+		break;
 	}
-	break;
 	case ACTION_CHARGE:
 		motion = _charge_count / ( CHARGE_PHASE_COUNT / 3 );
 		break;
