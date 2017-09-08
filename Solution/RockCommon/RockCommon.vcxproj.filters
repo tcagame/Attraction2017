@@ -54,9 +54,6 @@
     <ClCompile Include="RockEnemyWaterGhost.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="RockBubble.cpp">
-      <Filter>Item</Filter>
-    </ClCompile>
     <ClCompile Include="RockMilitary.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
@@ -113,6 +110,12 @@
     </ClCompile>
     <ClCompile Include="RockShadow.cpp" />
     <ClCompile Include="RockAncestors.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="RockItemEnhancePower.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
+    <ClCompile Include="RockBubble.cpp">
       <Filter>Player</Filter>
     </ClCompile>
   </ItemGroup>
@@ -173,9 +176,6 @@
     <ClInclude Include="RockEnemyWaterGhost.h">
       <Filter>Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="RockBubble.h">
-      <Filter>Item</Filter>
-    </ClInclude>
     <ClInclude Include="RockMilitary.h">
       <Filter>Enemy</Filter>
     </ClInclude>
@@ -232,6 +232,12 @@
     </ClInclude>
     <ClInclude Include="RockShadow.h" />
     <ClInclude Include="RockAncestors.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="RockItemEnhancePower.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="RockBubble.h">
       <Filter>Player</Filter>
     </ClInclude>
   </ItemGroup>

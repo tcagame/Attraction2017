@@ -12,6 +12,7 @@
 #include "RockItemRock.h"
 #include "RockItemToku.h"
 #include "RockItemDango.h"
+#include "RockItemEnhancePower.h"
 //Enemy
 #include "RockMilitary.h"
 #include "RockEnemyGhost.h"
@@ -48,13 +49,13 @@ RockMapTest::RockMapTest( ) {
 
 	RockStoragePtr storage( RockStorage::getTask( ) );
 	//アイテム
-	storage->addItem( RockItemPtr( new RockItemToku( Vector( 200, 50, 0 ) ) ) );
+	storage->addShopItem( RockItemPtr( new RockItemEnhancePower( Vector( 200, 50, 0 ) ) ) );
 	storage->addItem( RockItemPtr( new RockItemToku( Vector( 100, 50, 0 ) ) ) );
 	storage->addItem( RockItemPtr( new RockItemRock( Vector( 0, 50, 0 ) ) ) );
 	//ショップアイテム
 	storage->addShopItem( RockItemPtr( new RockItemDango( Vector( -50, 50, 0 ) ) ) );
 	storage->addAlter( RockAlterPtr( new RockAlter( Vector( 50, 0, 50 ), Vector( 50, 50, 50 ) ) ) );
-	//絵ねミー
+	//エネミー
 	genarateEnemies( );
 }
 

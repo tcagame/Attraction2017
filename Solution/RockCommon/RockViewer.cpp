@@ -13,6 +13,7 @@
 #include "RockArmoury.h"
 #include "RockStorage.h"
 #include "RockItem.h"
+#include "RockItemBubble.h"
 #include "RockShot.h"
 #include "RockImpact.h"
 #include "RockCasket.h"
@@ -77,14 +78,14 @@ void RockViewer::update( ) {
 	drawShadow( );
 	drawEnemy( );
 	drawPlayer( );
-	drawBubble( );
-	drawCleannessMap( );
 	drawAncestors( );
 	drawEventCharacter( );
 	//drawShot( );
 	drawItem( );
 	drawAlter( );
 	drawCasket( );
+	drawCleannessMap( );
+	drawBubbles( );
 	Effect::getTask( )->drawEffect( );
 	drawUI( );
 	drawMovie( );
@@ -140,7 +141,8 @@ void RockViewer::drawPlayer( ) const {
 	}
 }
 
-void RockViewer::drawBubble( ) const {
+void RockViewer::drawBubbles( ) const {
+	//player
 	RockFamilyPtr family( RockFamily::getTask( ) );
 	RockClientInfoPtr info = RockClientInfo::getTask( );
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
@@ -157,6 +159,21 @@ void RockViewer::drawBubble( ) const {
 			ModelMV1Ptr model = bubble->getModel( );
 			model->draw( );
 		}
+	}
+
+	//item
+	RockStoragePtr storage( RockStorage::getTask( ) );
+	std::list< RockItemBubblePtr > items = storage->getBubbles( );
+	std::list< RockItemBubblePtr >::const_iterator ite = items.begin( );
+	while ( ite != items.end( ) ) {
+		RockItemBubblePtr item = *ite;
+		if ( !item ) {
+			ite++;
+			continue;
+		}
+		ModelMV1Ptr model = item->getModel( );
+		model->draw( );
+		ite++;
 	}
 }
 
@@ -216,7 +233,6 @@ void RockViewer::drawShot( ) const {
 }
 
 void RockViewer::drawItem( ) const {
-	DrawerPtr drawer( Drawer::getTask( ) );
 	RockStoragePtr storage( RockStorage::getTask( ) );
 	std::list< RockItemPtr > items = storage->getItems( );
 	std::list< RockItemPtr >::const_iterator ite = items.begin( );

@@ -2,7 +2,6 @@
 #include "RockStorage.h"
 #include "RockItemMoney.h"
 #include "RockItemRock.h"
-#include "RockItemBubble.h"
 #include "RockFamily.h"
 #include "RockPlayer.h"
 
@@ -28,5 +27,4 @@ void RockEnemyBossRock::dropItem( ) {
 	RockStoragePtr storage( RockStorage::getTask( ) );
 	
 	storage->addDropItem( RockItemPtr( new RockItemRock( getPos( ) + Vector( 20, getRadius( ), 0 ) ) ) );
-	storage->addDropItem( RockItemPtr( new RockItemBubble( getPos( ) + Vector( 20, getRadius( ), 0 ) ) ) );
 }

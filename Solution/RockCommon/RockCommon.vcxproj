@@ -203,6 +203,7 @@
     <ClInclude Include="RockCasket.h" />
     <ClInclude Include="RockItemBubble.h" />
     <ClInclude Include="RockItemDango.h" />
+    <ClInclude Include="RockItemEnhancePower.h" />
     <ClInclude Include="RockItemFire.h" />
     <ClInclude Include="RockItemMoney.h" />
     <ClInclude Include="RockItemRock.h" />
@@ -254,6 +255,7 @@
     <ClCompile Include="RockCasket.cpp" />
     <ClCompile Include="RockItemBubble.cpp" />
     <ClCompile Include="RockItemDango.cpp" />
+    <ClCompile Include="RockItemEnhancePower.cpp" />
     <ClCompile Include="RockItemFire.cpp" />
     <ClCompile Include="RockItemMoney.cpp" />
     <ClCompile Include="RockItemRock.cpp" />

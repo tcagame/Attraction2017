@@ -23,7 +23,7 @@ private:
 	void drawCleannessMap( ) const;
 	void drawEnemy( ) const;
 	void drawPlayer( ) const;
-	void drawBubble( ) const;
+	void drawBubbles( ) const;
 	void drawAncestors( ) const;
 	void drawEventCharacter( ) const;
 	void drawShot( ) const;// debug

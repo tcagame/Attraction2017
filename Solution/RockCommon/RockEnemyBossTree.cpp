@@ -1,7 +1,6 @@
 #include "RockEnemyBossTree.h"
 #include "RockStorage.h"
 #include "RockitemTree.h"
-#include "RockItemBubble.h"
 #include "RockFamily.h"
 #include "RockPlayer.h"
 
@@ -27,5 +26,4 @@ void RockEnemyBossTree::dropItem( ) {
 	RockStoragePtr storage( RockStorage::getTask( ) );
 	
 	storage->addDropItem( RockItemPtr( new RockItemTree( getPos( ) + Vector( 20, getRadius( ), 0 ) ) ) );
-	storage->addDropItem( RockItemPtr( new RockItemBubble( getPos( ) + Vector( 20, getRadius( ), 0 ) ) ) );
 }

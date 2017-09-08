@@ -34,8 +34,8 @@ void main( ) {
 	app->addTask( Sound::getTag( ), TaskPtr( new Sound ( "Resource/Sound" ) ) );
 	app->addTask( Client::getTag( ), TaskPtr( new Client( status, message ) ) );
 	app->addTask( RockStorage::getTag( ), TaskPtr( new RockStorage( status ) ) );
-	app->addTask( RockMap::getTag( ), TaskPtr( new RockMapTest ) );
 	app->addTask( RockMilitary::getTag( ), TaskPtr( new RockMilitary ) );
+	app->addTask( RockMap::getTag( ), TaskPtr( new RockMapTest ) );
 	app->addTask( RockDollHouse::getTag( ), TaskPtr( new RockDollHouse ) );
 	app->addTask( RockFamily::getTag( ), TaskPtr( new RockFamily( status, Vector( 0, 10, 160 ) ) ) );
 	app->addTask( RockArmoury::getTag( ), TaskPtr( new RockArmoury ) );

@@ -3,14 +3,13 @@
 
 PTR( RockItemBubble );
 
-class RockItemFire : public RockItem {
+class RockItemEnhancePower : public RockItem {
 public:
-	RockItemFire( const Vector& pos );
-	virtual ~RockItemFire( );
+	RockItemEnhancePower( const Vector& pos );
+	virtual ~RockItemEnhancePower( );
 public:
 	void eraseBubble( );
 	ModelMV1Ptr getModel( ) const;
-private:
 	RockItemBubblePtr _bubble;
 };
 

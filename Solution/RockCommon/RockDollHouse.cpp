@@ -74,6 +74,7 @@ void RockDollHouse::initialize( ) {
 	_dolls[ DOLL_SACRED_FIRE ]->setScale( Matrix::makeTransformScaling( Vector( 2, 2, 2 ) ) );
 	_dolls[ DOLL_SACRED_TREE ]->load( "Resource/Rock/object/sacred/sacred_tree.mv1" );
 	_dolls[ DOLL_SACRED_TREE ]->setScale( Matrix::makeTransformScaling( Vector( 2, 2, 2 ) ) );
+	_dolls[ DOLL_ENHANCE_POWER ]->load( "Resource/Rock/item/itm02/itm02.mv1" );
 	_dolls[ DOLL_BUBBLE ]->load( "Resource/Rock/object/bubble/obj11.mv1" );
 
 	//obj

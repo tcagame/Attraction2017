@@ -7,11 +7,13 @@
 #include "RockItemTree.h"
 #include "RockItemFire.h"
 #include "RockItemToku.h"
+#include "RockItemEnhancePower.h"
 #include "RockFamily.h"
 #include "RockPlayer.h"
 #include "MessageSender.h"
 #include "RockAlter.h"
 #include "RockCasket.h"
+#include "RockItemBubble.h"
 #include "RockPopItem.h"
 #include "Status.h"
 #include "Sound.h"
@@ -34,6 +36,7 @@ void RockStorage::update( ) {
 	updateAlter( );
 	updateCasket( );
 	updatePopItem( );
+	updateBubble( );
 }
 
 
@@ -56,7 +59,6 @@ void RockStorage::updateItem( ) {
 			}
 			if ( item->isOverLapped( player ) ) {
 				if ( pickUpItem( item, i ) ) {
-					Sound::getTask( )->playSE( "yokai_voice_30.wav" );
 					col = true;
 					break;//forï∂Çî≤ÇØÇÈ
 				} else {
@@ -133,6 +135,11 @@ void RockStorage::addCasket( RockCasketPtr casket ) {
 	_caskets.push_back( casket );
 }
 
+void RockStorage::addBubble( RockItemBubblePtr bubble ) {
+	bubble->setFinished( false );
+	_bubbles.push_back( bubble );
+}
+
 std::list< RockItemPtr > RockStorage::getItems( ) const {
 	return _items;
 }
@@ -145,7 +152,9 @@ std::list< RockCasketPtr > RockStorage::getCaskets( ) const {
 	return _caskets;
 }
 
-
+std::list< RockItemBubblePtr > RockStorage::getBubbles( ) const {
+	return _bubbles;
+}
 
 bool RockStorage::pickUpItem( RockItemPtr item, int player_id ) {
 	MessageSenderPtr sender = MessageSender::getTask( );
@@ -153,6 +162,7 @@ bool RockStorage::pickUpItem( RockItemPtr item, int player_id ) {
 	{//Ç®ã‡
 		RockItemMoneyPtr money = std::dynamic_pointer_cast< RockItemMoney >( item );
 		if ( money ) {
+			Sound::getTask( )->playSE( "yokai_voice_30.wav" );
 			int value = money->getValue( );
 			sender->sendMessage( player_id, Message::COMMAND_MONEY, &value );
 		}
@@ -168,6 +178,7 @@ bool RockStorage::pickUpItem( RockItemPtr item, int player_id ) {
 					} else {
 						unsigned char item = ITEM_ROCK;
 						sender->sendMessage( i, Message::COMMAND_ITEM, &item );
+						rock->eraseBubble( );
 					}
 				}
 			}
@@ -183,6 +194,7 @@ bool RockStorage::pickUpItem( RockItemPtr item, int player_id ) {
 					} else {
 						unsigned char item = ITEM_FIRE;
 						sender->sendMessage( i, Message::COMMAND_ITEM, &item );
+						fire->eraseBubble( );
 					}
 				}
 			}
@@ -199,6 +211,7 @@ bool RockStorage::pickUpItem( RockItemPtr item, int player_id ) {
 					} else {
 						unsigned char item = ITEM_TREE;
 						sender->sendMessage( i, Message::COMMAND_ITEM, &item );
+						tree->eraseBubble( );
 					}
 				}
 			}
@@ -236,6 +249,25 @@ bool RockStorage::pickUpItem( RockItemPtr item, int player_id ) {
 			}
 		}
 	}
+	{//çUåÇóÕã≠âª
+		RockItemEnhancePowerPtr enhance_power = std::dynamic_pointer_cast< RockItemEnhancePower >( item );
+		if ( enhance_power ) {
+			if ( enhance_power->isShopItem( ) ) {
+				int price = enhance_power->getPrice( );
+				if ( (int)_status->getPlayer( player_id ).money >= price ) {
+					int value = -price;
+					sender->sendMessage( player_id, Message::COMMAND_MONEY, &value );
+					enhance_power->eraseBubble( );
+				} else {
+					result = false;
+				}
+			}
+			if ( result ) {
+				unsigned char item = ITEM_ENHANCED_ATTACK;
+				sender->sendMessage( player_id, Message::COMMAND_ITEM, &item );
+			}
+		}
+	}
 	return result;
 }
 
@@ -255,6 +287,26 @@ void RockStorage::updatePopItem( ) {
 		ite++;
 	}
 }
+
+void RockStorage::updateBubble( ) {
+	std::list< RockItemBubblePtr >::iterator ite = _bubbles.begin( );
+	while ( ite != _bubbles.end( ) ) {
+		RockItemBubblePtr bubble = *ite;
+		if ( !bubble ) {
+			ite++;
+			continue;
+		}
+		if ( bubble->isFinished( ) ) {
+			if ( bubble->isRepop( ) ) {
+				_pop_items.push_back( RockPopItemPtr( new RockPopItem( bubble, true ) ) );
+			}
+			ite = _bubbles.erase( ite );
+			continue;
+		}
+		ite++;
+	}
+}
+
 
 void RockStorage::clean( ) {
 	_items = { };
