@@ -38,7 +38,6 @@ static const int COOL_TIME = 8;
 static const int PLAYER_ANIM_WAIT_COUNT = 4;
 static const int PLAYER_ANIM_WIDTH_NUM = 10;
 static const int PLAYER_FLASH_WAIT_TIME = 2;
-static const int DEAD_ANIM_NUM = 28;
 //ƒJƒEƒ“ƒg
 static const int MAX_DAMEGE_COUNT = 20;
 static const int MAX_BACK_COUNT = 6;
@@ -121,7 +120,7 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		7 , // ACTION_OVER_CHARGE,
 		1 , // ACTION_DAMEGE,
 		1 , // ACTION_BLOW_AWAY,
-		28, // ACTION_DEAD,
+		32, // ACTION_DEAD,
 		12, // ACTION_CALL,
 	}
 };
@@ -822,7 +821,6 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 	int off = MOTION_OFFSET[ _action ];
 	int num = MOTION_NUM[ _player ][ _action ];
 	int motion = 0;
-	int action = 0;
 	int pattern = 0;
 	switch ( _action ) {
 	case ACTION_BRAKE:
@@ -844,24 +842,16 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		break;
 	case ACTION_OVER_CHARGE:
 	{
-		const int ANIM[ ] = {
-			73, 74, 75, 76, 77, 78, 79
-		};
-		int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 		if ( player == PLAYER_TAROJIRO ) {
-			anim_size = anim_size - 1;
+			num = num - 1;
 		}
-		action = ANIM[ getActCount( ) / ( PLAYER_ANIM_WAIT_COUNT + 2 ) % anim_size ];
+		motion = getActCount( ) / ( PLAYER_ANIM_WAIT_COUNT + 2 );
 	}
 	case ACTION_DEAD:
 	{
-		int anim = getActCount( ) / PLAYER_ANIM_WAIT_COUNT;
-		if ( anim >= DEAD_ANIM_NUM ) {
-			anim = DEAD_ANIM_NUM - 1;
-		}
-
-		if ( player != PLAYER_TAROMI ) {
-			anim = anim - 1;
+		int anim = getActCount( ) / ( PLAYER_ANIM_WAIT_COUNT / 3 );
+		if ( anim >= num ) {
+			anim = num - 1;
 		}
 		motion = anim;
 		break;
@@ -871,11 +861,7 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		break;
 	}
 
-	if ( _action == ACTION_OVER_CHARGE ) {
-		pattern = action;
-	} else {
-		pattern = off + motion % num;
-	}
+	pattern = off + motion % num;
 
 	unsigned char attribute = 0;
 	if ( getDir( ) == DIR_RIGHT ) {
