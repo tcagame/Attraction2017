@@ -28,12 +28,13 @@ private:
 	ViewerStreetPtr _viewer_street;
 	ViewerEventPtr _viewer_event;
 	ViewerStatusPtr _viewer_status;
-	ViewerEntryPtr _viewer_entry;
 	ViewerProgressPtr _viewer_progress;
 	ViewerTitlePtr _viewer_title;
 	ViewerObjectPtr _viewer_object;
 	ViewerDebugConstPtr _viewer_debug;
 	ImagePtr _image_frame;
+	ImagePtr _image_cover_entry;
+	ImagePtr _image_cover_continue;
 	ImagePtr _image_device;
 };
 

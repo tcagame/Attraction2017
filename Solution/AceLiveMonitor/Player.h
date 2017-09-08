@@ -45,6 +45,7 @@ public:
 	bool isExist( ) const;
 private:
 	void actOnEntry( );
+	void actOnContinue( );
 	void actOnWaiting( );
 	void actOnWalking( );
 	void actOnBreaking( );

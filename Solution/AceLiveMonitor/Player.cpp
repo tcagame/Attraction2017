@@ -191,11 +191,7 @@ void Player::act( ) {
 		actOnEntry( );
 		break;
 	case ACTION_CONTINUE:
-		{
-			Vector pos = getPos( );
-			pos.x = Family::getTask( )->getCameraPosX( ) + SCREEN_WIDTH / 2;
-			setPos( pos );
-		}
+		actOnContinue();
 		break;
 	case ACTION_WAIT:
 		actOnWaiting( );
@@ -253,9 +249,20 @@ void Player::actOnEntry( ) {
 	}
 }
 
+void Player::actOnContinue() {
+	adjustToCamera( );
+	updateProgress( );
+
+	if ( _progress_count >= 100 ) {
+		// Ä“oê‚Ì‚½‚ß‚É‰Šú‰»
+		appear();
+	}
+}
+
 void Player::appear( ) {
 	_action = ACTION_FLOAT;
 	setPower( MAX_HP );
+	setArea( AREA_STREET );
 	_unrivaled_count = 0;
 }
 
@@ -560,9 +567,10 @@ void Player::actOnBlowAway( ) {
 }
 
 void Player::actOnDead( ) {
+	_unrivaled_count = MAX_UNRIVALED_COUNT;
 	int act_count = getActCount( );
 	AREA area = getArea( );
-	if ( act_count >= MOTION_NUM[ _player ][ ACTION_DEAD ] ) {
+	if ( act_count > MAX_DEAD_ACTCOUNT ) {
 		// ”š”­‚·‚é
 		int chip_size = getChipSize( );
 		Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, chip_size / 2 ), area, chip_size * 2 ) ) );
