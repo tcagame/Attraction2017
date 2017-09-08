@@ -14,8 +14,8 @@ static const Vector TARGET( 0, 40, 100 );//プレイヤーの向きにあわせる( zが奥行き
 static const double FOLLOW_RANGE = 50;
 static const double FOLLOW_Y = 30;
 //移動
-static const double MAX_MOVE_SPEED = 7.77;
-static const double ACCEL = 1.2;
+static const double MAX_MOVE_SPEED = 5.55;
+static const double ACCEL = 1.11;
 //しょっと
 static const int SHOT_INTERVAL = 50;
 static const int SHOT_POWER = 3;
@@ -114,22 +114,21 @@ void RockAncestors::actOnFollow( ) {
 	Vector distance = player_pos - pos;
 	distance.y = 0;
 	Vector vec = Vector( );
-	if ( distance.getLength2( ) > FOLLOW_RANGE * FOLLOW_RANGE ) {
-		//範囲外にいたら範囲に入ろうとする
-		Vector target = player_pos - distance.normalize( ) * FOLLOW_RANGE;
-		target.y = player_pos.y + FOLLOW_Y;
-		vec = getVec( ) + ( target - pos ).normalize( ) * ACCEL;
-		if ( vec.getLength2( ) > MAX_MOVE_SPEED * MAX_MOVE_SPEED ) {
-			vec = vec.normalize( ) * MAX_MOVE_SPEED;
-		}
+	Vector target = player_pos - distance.normalize( ) * FOLLOW_RANGE;
+	target.y = FOLLOW_Y;
+	Vector jfjfjfjfjfjfjfjf = target - pos;
+	if ( jfjfjfjfjfjfjfjf.getLength2( ) > ACCEL * ACCEL ) {
+		vec = getVec( ) + jfjfjfjfjfjfjfjf.normalize( ) * ACCEL;
 	} else {
-		vec = getVec( );
-		if ( vec.getLength2( ) > ACCEL * ACCEL ) {
-			vec = vec - vec.normalize( ) * ( ACCEL * 0.5 );
-		} else {
-			vec = Vector( );
-		}
+		vec = jfjfjfjfjfjfjfjf;
 	}
+	if ( vec.getLength2( ) > MAX_MOVE_SPEED * MAX_MOVE_SPEED ) {
+		vec = vec.normalize( ) * MAX_MOVE_SPEED;
+	}
+	if ( vec.angle( jfjfjfjfjfjfjfjf ) > PI / 2 ) {
+		vec -= vec.normalize( ) * ACCEL;
+	}
+	setVec( vec );
 
 
 	//一定時間ごとにショットを打つ
@@ -144,7 +143,6 @@ void RockAncestors::actOnFollow( ) {
 		armoury->addShot( RockShotPtr( new RockShotAncestors( _player_id, pos, left_rot.multiply( dir )	, SHOT_POWER ) ) );
 		armoury->addShot( RockShotPtr( new RockShotAncestors( _player_id, pos, right_rot.multiply( dir ), SHOT_POWER ) ) );
 	}
-	setVec( vec );
 }
 
 void RockAncestors::actOnFadeOut( ) {
