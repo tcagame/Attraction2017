@@ -7,6 +7,7 @@
     <ClCompile Include="StatusSender.cpp" />
     <ClCompile Include="TableDrawer.cpp" />
     <ClCompile Include="MessageReceiver.cpp" />
+    <ClCompile Include="Speaker.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Command.h" />
@@ -14,5 +15,6 @@
     <ClInclude Include="StatusSender.h" />
     <ClInclude Include="TableDrawer.h" />
     <ClInclude Include="MessageReceiver.h" />
+    <ClInclude Include="Speaker.h" />
   </ItemGroup>
 </Project>
