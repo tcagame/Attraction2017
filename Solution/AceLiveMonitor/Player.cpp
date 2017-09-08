@@ -841,12 +841,11 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		motion = getActCount( ) / PLAYER_ANIM_WAIT_COUNT / 2;
 		break;
 	case ACTION_OVER_CHARGE:
-	{
 		if ( player == PLAYER_TAROJIRO ) {
 			num = num - 1;
 		}
-		motion = getActCount( ) / ( PLAYER_ANIM_WAIT_COUNT + 2 );
-	}
+		motion = getActCount( ) / PLAYER_ANIM_WAIT_COUNT;
+		break;
 	case ACTION_DEAD:
 	{
 		int anim = getActCount( ) / ( PLAYER_ANIM_WAIT_COUNT / 3 );
