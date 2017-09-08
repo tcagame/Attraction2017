@@ -111,21 +111,21 @@ void RockAncestors::actOnFollow( ) {
 	RockPlayerPtr player = RockFamily::getTask( )->getPlayer( _player_id );
 	Vector player_pos = player->getPos( );
 	Vector pos = getPos( );
-	Vector distance = player_pos - pos;
-	distance.y = 0;
+	Vector distance_to_player = player_pos - pos;
+	distance_to_player.y = 0;
 	Vector vec = Vector( );
-	Vector target = player_pos - distance.normalize( ) * FOLLOW_RANGE;
+	Vector target = player_pos - distance_to_player.normalize( ) * FOLLOW_RANGE;
 	target.y = FOLLOW_Y;
-	Vector jfjfjfjfjfjfjfjf = target - pos;
-	if ( jfjfjfjfjfjfjfjf.getLength2( ) > ACCEL * ACCEL ) {
-		vec = getVec( ) + jfjfjfjfjfjfjfjf.normalize( ) * ACCEL;
+	Vector distance_to_target = target - pos;
+	if ( distance_to_target.getLength2( ) > ACCEL * ACCEL ) {
+		vec = getVec( ) + distance_to_target.normalize( ) * ACCEL;
 	} else {
-		vec = jfjfjfjfjfjfjfjf;
+		vec = distance_to_target;
 	}
 	if ( vec.getLength2( ) > MAX_MOVE_SPEED * MAX_MOVE_SPEED ) {
 		vec = vec.normalize( ) * MAX_MOVE_SPEED;
 	}
-	if ( vec.angle( jfjfjfjfjfjfjfjf ) > PI / 2 ) {
+	if ( vec.angle( distance_to_target ) > PI / 2 ) {
 		vec -= vec.normalize( ) * ACCEL;
 	}
 	setVec( vec );
