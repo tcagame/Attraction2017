@@ -27,7 +27,3 @@ ModelMV1Ptr RockEventCharacter::getModel( ) const {
 	model->setTrans( Matrix::makeTransformTranslation( getPos( ) ) );
 	return model;
 }
-
-double RockEventCharacter::getAnimTime( ) const {
-	return 0;
-}

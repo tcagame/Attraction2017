@@ -3,8 +3,8 @@
 #include "RockFamily.h"
 #include "RockPlayer.h"
 
-const int HEIGHT = 32;
-const int RADIUS = 128;
+const int HEIGHT = 16;
+const int RADIUS = 64;
 const double ANIM_SPEED = 0.9;
 
 EventTurtle::EventTurtle( const Vector& pos ) :
