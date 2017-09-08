@@ -219,9 +219,7 @@ void RockPlayer::actOnWaiting( ) {
 	SoundPtr sound = Sound::getTask( );
 	//死亡
 	if ( player.power <= 0 ) {
-		setAction( ACTION_DEAD );
-		sound->playSE( "yokai_se_31.wav" );
-		setVec( Vector( ) );
+		actOnKilled( );
 		return;
 	}
 	//ジャンプ
@@ -263,9 +261,7 @@ void RockPlayer::actOnJumping( ) {
 	Status::Player player = _status->getPlayer( _id );
 	//死亡
 	if ( player.power <= 0 ) {
-		setAction( ACTION_DEAD );
-		Sound::getTask( )->playSE( "yokai_se_31.wav" );
-		setVec( Vector( ) );
+		actOnKilled( );
 		return;
 	}
 	if ( isStanding( ) ) {
@@ -299,9 +295,7 @@ void RockPlayer::actOnWalking( ) {
 	SoundPtr sound = Sound::getTask( );
 	//死亡
 	if ( player.power <= 0 ) {
-		setAction( ACTION_DEAD );
-		sound->playSE( "yokai_se_31.wav" );
-		setVec( Vector( ) );
+		actOnKilled( );
 		return;
 	}
 	//ジャンプ
@@ -375,11 +369,7 @@ void RockPlayer::actOnCharging( ) {
 	SoundPtr sound = Sound::getTask( );
 	//死亡
 	if ( player.power <= 0 ) {
-		setAction( ACTION_DEAD );
-		sound->playSE( "yokai_se_31.wav" );
-		setVec( Vector( ) );
-		_attack_count = 0;
-		_effect_handle = -1;
+		actOnKilled( );
 		return;
 	}
 	// ジャンプ中であればチャージしない
@@ -432,9 +422,7 @@ void RockPlayer::actOnBraking( ) {
 	Status::Player player = _status->getPlayer( _id );
 	//死亡
 	if ( player.power <= 0 ) {
-		setAction( ACTION_DEAD );
-		Sound::getTask( )->playSE( "yokai_se_31.wav" );
-		setVec( Vector( ) );
+		actOnKilled( );
 		return;
 	}
 	//水平方向のベクトル
@@ -624,3 +612,12 @@ void RockPlayer::sendDamage( ) {
 		_damage = 0;
 	}
 }
+
+void RockPlayer::actOnKilled( ) {
+	setAction( ACTION_DEAD );
+	Sound::getTask( )->playSE( "yokai_se_31.wav" );
+	setVec( Vector( ) );
+	_attack_count = 0;
+	_effect_handle = -1;
+}
+
