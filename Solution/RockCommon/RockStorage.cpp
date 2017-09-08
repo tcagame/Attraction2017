@@ -90,8 +90,9 @@ void RockStorage::updateAlter( ) {
 			for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 				RockPlayerPtr player = family->getPlayer( i );
 				if ( alter->isInRange( player->getPos( ) ) ) {
-					alter->setActive( false );
-					player->wish( );
+					if ( player->wish( ) ) {
+						alter->setActive( false );
+					}
 				}
 			}
 		}

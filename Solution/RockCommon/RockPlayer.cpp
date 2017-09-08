@@ -577,15 +577,16 @@ void RockPlayer::back( ) {
 	setPos( getPos( ) - Vector( vec.x, 0, vec.z ) );
 }
 
-void RockPlayer::wish( ) {
+bool RockPlayer::wish( ) {
 	if ( !isStanding( ) ||
 		 _action == ACTION_WISH ) {
-		return;
+		return false;
 	}
 	setAction( ACTION_WISH );
 	Sound::getTask( )->playSE( "yokai_voice_06.wav" );
 	setVec( Vector( ) );
 	_ancestors->pop( );
+	return true;
 }
 
 void RockPlayer::resetPos( const Vector& pos ) {

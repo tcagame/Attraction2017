@@ -175,8 +175,11 @@ void Player::updatetDevice( ) {
 			}
 		}
 	} else {
+		if ( device->getButton( _device_id ) == BUTTON_B + BUTTON_C + BUTTON_D ) {
+			setAction( ACTION_ENTRY );
+		}
 		if ( device->getDirY( _device_id ) < 0 &&
-			device->getButton( _device_id ) == BUTTON_E + BUTTON_F ) {
+			device->getPush( _device_id ) == BUTTON_E + BUTTON_F ) {
 			_device_id = -1;
 		}
 	}
@@ -760,6 +763,7 @@ void Player::pickUpVirtue( ) {
 void Player::setAction( ACTION action ) {
 	_action = action;
 	setActCount( 0 );
+	_progress_count = 0;
 }
 
 void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
@@ -856,7 +860,7 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		break;
 	case ACTION_DEAD:
 	{
-		int anim = getActCount( ) / ( PLAYER_ANIM_WAIT_COUNT / 3 );
+		int anim = getActCount( ) / ( PLAYER_ANIM_WAIT_COUNT / 2 );
 		if ( anim >= num ) {
 			anim = num - 1;
 		}
@@ -864,8 +868,15 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		break;
 	}
 	case ACTION_CHARGE:
-		motion = _charge_count / ( CHARGE_PHASE_COUNT / 2 );
+	{
+		int anim = _charge_count / ( CHARGE_PHASE_COUNT / 6 );
+		if ( anim >= num ) {
+			anim = num - 1;
+		}
+		motion = anim;
 		break;
+	}
+
 	}
 
 	pattern = off + motion % num;

@@ -14,7 +14,7 @@ public:
 	void bound( );
 	void damage( int force );
 	void back( );
-	void wish( );
+	bool wish( );
 	void resetBubble( );
 	ModelMV1Ptr getModel( ) const;
 	void resetPos( const Vector& pos );
