@@ -4,7 +4,7 @@
 #include "RockDollHouse.h"
 
 const double MODEL_SIZE = 1.0;
-const Vector FOOT = Vector( 0, -10, 0 );
+const Vector FOOT = Vector( 0, 10, 0 );
 
 
 RockBubble::RockBubble( int id ) :
