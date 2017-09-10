@@ -47,6 +47,7 @@ private:
 	int _radius;
 	int _height;
 	int _act_count;
+	int _shadow_index;
 	bool _head;
 	bool _col;
 	bool _shadow;

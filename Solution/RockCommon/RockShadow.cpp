@@ -4,7 +4,7 @@
 #include "ModelMV1.h"
 #include "RockMap.h"
 
-const int FALL_POWER = -30;
+const int FALL_POWER = -200;
 const std::string GRAPH_PATH = "Resource/Rock/shadow/shadow.png";
 
 RockShadowPtr RockShadow::getTask( ) {
@@ -21,8 +21,23 @@ RockShadow::~RockShadow( ) {
 void RockShadow::update( ) {
 }
 
-void RockShadow::set( const Vector& pos, const double scale, const bool adjust ) {
-	Vector ground_pos = adjust ? getAdjustPos( pos ) : pos;
+int RockShadow::create( const Vector& pos, const double scale ) {
+	ModelMDLPtr shadow = ModelMDLPtr( new ModelMDL );	
+	createShadow( shadow, pos, scale );
+	shadow->setTexture( GRAPH_PATH.c_str( ) );
+	shadow->setTrans( true );
+	_models.push_back( shadow );
+	return ( int )_models.size( ) - 1;
+}
+
+void RockShadow::set( const int idx, const Vector& pos, const double scale ) {	
+	ModelMDLPtr shadow = _models[ idx ];
+	shadow->reset( );
+	createShadow( shadow, pos, scale );
+}
+
+void RockShadow::createShadow( ModelMDLPtr model, const Vector& pos, const double scale ) {
+	Vector ground_pos = getAdjustPos( pos );
 	ModelMDL::VERTEX vertex[ 4 ];
 	vertex[ 0 ].pos = ground_pos + Vector( -( scale / 2 ), 0, -( scale / 2 ) );
 	vertex[ 1 ].pos = ground_pos + Vector(  ( scale / 2 ), 0, -( scale / 2 ) );
@@ -38,25 +53,17 @@ void RockShadow::set( const Vector& pos, const double scale, const bool adjust )
 	vertex[ 3 ].u = 1;
 	vertex[ 3 ].v = 1;
 
-	ModelMDLPtr shadow = ModelMDLPtr( new ModelMDL );
-	shadow->alloc( 2 );
-	shadow->set( 0, vertex[ 0 ] );
-	shadow->set( 1, vertex[ 1 ] );
-	shadow->set( 2, vertex[ 2 ] );
-	shadow->set( 3, vertex[ 1 ] );
-	shadow->set( 4, vertex[ 3 ] );
-	shadow->set( 5, vertex[ 2 ] );
-	shadow->setTexture( GRAPH_PATH.c_str( ) );
-	shadow->setTrans( true );
-	_models.push_back( shadow );
+	model->alloc( 2 );
+	model->set( 0, vertex[ 0 ] );
+	model->set( 1, vertex[ 1 ] );
+	model->set( 2, vertex[ 2 ] );
+	model->set( 3, vertex[ 1 ] );
+	model->set( 4, vertex[ 3 ] );
+	model->set( 5, vertex[ 2 ] );
 }
 
-std::list< ModelMDLPtr > RockShadow::getShadows( ) const {
+std::vector< ModelMDLPtr > RockShadow::getShadows( ) const {
 	return _models;
-}
-
-void RockShadow::clear( ) {
-	_models.clear( );
 }
 
 Vector RockShadow::getAdjustPos( const Vector& pos ) {
@@ -64,15 +71,10 @@ Vector RockShadow::getAdjustPos( const Vector& pos ) {
 	std::vector< ModelMV1Ptr > col_models = RockMap::getTask( )->getColModels( );
 	int size = ( int )col_models.size( );
 	for ( int i = 0; i < size; i++ ) {
-		while ( result.y > -100 ) {
-			Vector fpos = result + Vector( 0, FALL_POWER, 0 );
-			Vector hit_pos = col_models[ i ]->getHitPos( result, fpos );
-			if ( !hit_pos.isOrijin( ) ) {
-				result.y = hit_pos.y - result.y;
-				break;
-			} else {
-				result.y += FALL_POWER;
-			}
+		Vector fpos = result + Vector( 0, FALL_POWER, 0 );
+		Vector hit_pos = col_models[ i ]->getHitPos( result, fpos );
+		if ( !hit_pos.isOrijin( ) ) {
+			result.y = hit_pos.y;
 		}
 	}
 	return result;
