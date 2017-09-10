@@ -66,7 +66,7 @@ bool Data::isFront( int mx, int my ) const {
 void Data::setHeight( int mx, int my, int height ) {
 	mx %= _page_num * PAGE_CHIP_WIDTH_NUM;
 	unsigned char bit = ( FRONT_BIT & getChip( mx, my ).height );
-	getChip( mx, my ).height = height & bit;
+	getChip( mx, my ).height = height | bit;
 }
 
 void Data::setStructure( int mx, int my, int num )  {
