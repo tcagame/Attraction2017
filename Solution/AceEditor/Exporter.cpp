@@ -37,6 +37,7 @@ void Exporter::start( ) {
 bool Exporter::update( ) {
 
 	DrawerPtr drawer( Drawer::getTask( ) );
+	const int MAX_WIDTH_NUM = _max * PAGE_CHIP_WIDTH_NUM;
 	{//back
 		_image_export_back->clear( );
 		drawer->setImageTarget( _image_export_back );
@@ -44,13 +45,11 @@ bool Exporter::update( ) {
 		_chip_drawer->drawBg( 0, _now * PAGE_CHIP_WIDTH_NUM );
 		
 		for( int i = 0; i < MAP_HEIGHT; i++ ) {
-			for ( int j = 0; j <= PAGE_CHIP_WIDTH_NUM; j++ ) {
-				int gx = j;
+			for ( int j = 0; j < PAGE_CHIP_WIDTH_NUM * 3; j++ ) {
+				int gx = j - PAGE_CHIP_WIDTH_NUM;
 				int gy = i;
 				int mx = _now * PAGE_CHIP_WIDTH_NUM + gx;
-				if ( mx >= _max * PAGE_CHIP_WIDTH_NUM ) {
-					mx -= _max * PAGE_CHIP_WIDTH_NUM;
-				}
+				mx = ( mx + MAX_WIDTH_NUM ) % MAX_WIDTH_NUM;
 				int my = gy;
 				if ( !_data->isFront( mx, my ) ) {
 					_chip_drawer->drawChip( mx, my, gx, gy );
@@ -66,13 +65,11 @@ bool Exporter::update( ) {
 		_image_export_front->clear( );
 		drawer->setImageTarget( _image_export_front );
 		for ( int i = 0; i < MAP_HEIGHT; i++ ) {
-			for ( int j = 0; j <= PAGE_CHIP_WIDTH_NUM; j++ ) {
-				int gx = j;
+			for ( int j = 0; j < PAGE_CHIP_WIDTH_NUM * 3; j++ ) {
+				int gx = j - PAGE_CHIP_WIDTH_NUM;
 				int gy = i;
 				int mx = _now * PAGE_CHIP_WIDTH_NUM + gx;
-				if ( mx >= _max * PAGE_CHIP_WIDTH_NUM ) {
-					mx -= _max * PAGE_CHIP_WIDTH_NUM;
-				}
+				mx = ( mx + MAX_WIDTH_NUM ) % MAX_WIDTH_NUM;
 				int my = gy;
 				if ( _data->isFront( mx, my ) ) {
 					_chip_drawer->drawChip( mx, my, gx, gy );
