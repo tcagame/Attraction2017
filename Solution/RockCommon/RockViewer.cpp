@@ -286,8 +286,8 @@ void  RockViewer::drawShadow( ) const {
 	if ( !shadow ) {
 		return;
 	}
-	std::list< ModelMDLPtr > shadows = shadow->getShadows( );
-	std::list< ModelMDLPtr >::const_iterator ite = shadows.begin( );
+	std::vector< ModelMDLPtr > shadows = shadow->getShadows( );
+	std::vector< ModelMDLPtr >::const_iterator ite = shadows.begin( );
 	while ( ite != shadows.end( ) ) {
 		ModelMDLPtr model = *ite;
 		if ( !model ) {
@@ -297,7 +297,6 @@ void  RockViewer::drawShadow( ) const {
 		model->draw( );
 		ite++;
 	}
-	shadow->clear( );
 }
 
 void RockViewer::drawUI( ) const {
