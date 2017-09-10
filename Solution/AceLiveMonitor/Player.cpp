@@ -320,12 +320,13 @@ void Player::actOnWaiting( ) {
 	}
 	sound->stopSE( "yokai_se_21.wav" );
 	sound->stopSE( "yokai_se_22.wav" );
-	if ( isStanding( ) && device->getPush( _device_id ) & BUTTON_C ) {
+	if ( device->getPush( _device_id ) & BUTTON_C ) {
 		sound->playSE( "yokai_voice_17.wav" );
-		setAction( ACTION_FLOAT );
 		vec.y = JUMP_POWER;
+		setVec( vec );
+		setAction( ACTION_FLOAT );
+		return;
 	}
-	setVec( vec );
 	_charge_count -= 2;
 	if ( _charge_count < 0 ) {
 		_charge_count = 0;
@@ -354,8 +355,9 @@ void Player::actOnWalking( ) {
 
 	if ( device->getPush( _device_id ) & BUTTON_C ) {
 		Sound::getTask( )->playSE( "yokai_voice_17.wav" );
-		setAction( ACTION_FLOAT );
 		vec.y = JUMP_POWER;
+		setVec( vec );
+		setAction( ACTION_FLOAT );
 		return;
 	}
 
