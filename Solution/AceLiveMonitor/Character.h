@@ -31,7 +31,7 @@ protected:
 	virtual void act( ) = 0;
 	int getActCount( ) const;
 	void setRadius( int radius );
-	void setFinished( );
+	void setFinished( bool finished = true );
 	void setActCount( int count );
 private:
 	void updateDir( );

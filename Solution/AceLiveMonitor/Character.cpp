@@ -186,8 +186,8 @@ double Character::getRadius( ) const {
 	return _radius;
 }
 
-void Character::setFinished( ) {
-	_finished = true;
+void Character::setFinished( bool finished ) {
+	_finished = finished;
 }
 
 void Character::setActCount( int count ) {
