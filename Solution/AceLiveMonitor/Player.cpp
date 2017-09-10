@@ -193,7 +193,7 @@ void Player::act( ) {
 		actOnEntry( );
 		break;
 	case ACTION_CONTINUE:
-		actOnContinue( );
+		actOnContinue();
 		break;
 	case ACTION_WAIT:
 		actOnWaiting( );
@@ -257,7 +257,7 @@ void Player::actOnContinue() {
 
 	if ( _progress_count >= 100 ) {
 		// 再登場のために初期化
-		appear( );
+		appear();
 	}
 }
 
@@ -265,7 +265,6 @@ void Player::appear( ) {
 	_action = ACTION_FLOAT;
 	setPower( MAX_HP );
 	setArea( AREA_STREET );
-	setFinished( false );
 	_unrivaled_count = 0;
 }
 
@@ -367,8 +366,15 @@ void Player::actOnWalking( ) {
 	if ( device->getDirX( _device_id ) > 50 ) {
 		vec.x = MOVE_SPEED;
 	}
-	if ( !sound->isPlayingSE( "yokai_voice_15.wav" ) ) {
-		sound->playSE( "yokai_voice_15.wav" );
+	MapPtr map = World::getTask( )->getMap( getArea( ) );
+	if ( map->getObject( getPos( ) ) == OBJECT_WATER ) {
+		if ( !sound->isPlayingSE( "yokai_voice_14.wav" ) ) {
+			sound->playSE( "yokai_voice_14.wav" );
+		}
+	} else {
+		if ( !sound->isPlayingSE( "yokai_voice_15.wav" ) ) {
+			sound->playSE( "yokai_voice_15.wav" );
+		}
 	}
 	setVec( vec );
 }
@@ -592,7 +598,7 @@ void Player::actOnDead( ) {
 		int chip_size = getChipSize( );
 		Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, chip_size / 2 ), area, chip_size * 2 ) ) );
 		// コンティニューへ
-		setAction( ACTION_CONTINUE );
+		setAction(ACTION_CONTINUE);
 	}
 }
 
@@ -754,7 +760,7 @@ void Player::bound( ) {
 }
 
 void Player::blowAway( ) {
-	if ( isExist( ) ) {
+	if ( !isExist( ) ) {
 		setAction( ACTION_BLOW_AWAY );
 	}
 }

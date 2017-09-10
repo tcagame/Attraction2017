@@ -6,7 +6,7 @@
 
 RockItemRock::RockItemRock( const Vector& pos ) :
 RockItem( pos, DOLL_SACRED_ROCK ) {
-	_bubble = RockItemBubblePtr( new RockItemBubble( getPos( ) - Vector( 0, 30, 0 ) ) );
+	_bubble = RockItemBubblePtr( new RockItemBubble( getPos( ) ) );
 	RockStorage::getTask( )->addBubble( _bubble );
 }
 
