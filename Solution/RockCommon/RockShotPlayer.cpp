@@ -5,7 +5,7 @@
 #include "Effect.h"
 #include "RockStudio.h"
 
-static const int MOVE_SPEED = 6;
+static const int MOVE_SPEED = 9;
 static const double EFFECT_NORMAL_SIZE = 20.0;
 static const double EFFECT_CHARGE_SIZE = 15.0;
 static const int ACTIVE_COUNT = 120;
