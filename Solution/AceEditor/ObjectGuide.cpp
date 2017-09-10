@@ -21,8 +21,6 @@ void ObjectGuide::update( ) {
 void ObjectGuide::draw( ) const {
 	DrawerPtr drawer( Drawer::getTask( ) );
 	const int TEX_SIZE = 16;
-	const int COVER_SIZE = DISP_CHIP_HEIGHT - MAP_COVER_HEIGHT;
-	const int CHIP_HEIGHT_NUM = (int)( ( ( DISP_CHIP_HEIGHT - COVER_SIZE ) / 2.0 ) + 0.5 );
 	for ( int i = 0; i < DISP_WIDTH / OBJECT_CHIP_SIZE; i++ ) {
 		for ( int j = 0; j < PREVIEW_HEIGHT / OBJECT_CHIP_SIZE; j++ ) {
 			int sx = ( i * OBJECT_CHIP_SIZE ) + PREVIEW_X;

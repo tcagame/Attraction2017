@@ -19,7 +19,7 @@ const std::string EDITOR_PATH = "Resource/Ace/Editor/";
 
 ChipPreview::ChipPreview( DataConstPtr data, ChipCursorConstPtr chip_cursor, ChipEditorConstPtr chip_editor, ChipDrawerConstPtr chip_drawer ) :
 _data( data ),
-_covor( true ),
+_cover( true ),
 _chip_cursor( chip_cursor ),
 _chip_editor( chip_editor ),
 _chip_drawer( chip_drawer ) {
@@ -35,7 +35,7 @@ ChipPreview::~ChipPreview( ) {
 void ChipPreview::update( ) {
 	KeyboardPtr key( Keyboard::getTask( ) );
 	if ( key->isPushKey( "SPACE" ) ) {
-		_covor = !_covor;
+		_cover = !_cover;
 	}
 }
 
@@ -75,8 +75,8 @@ void ChipPreview::drawChip( ) const {
 			int gy = i;
 			int mx = ( gx + scroll_x ) % ( _data->getPageNum( ) * PAGE_CHIP_WIDTH_NUM );
 			int my = gy;
-			if ( !_covor && my >= MAP_COVER_HEIGHT ) {
-				break;
+			if ( !_cover && _data->isFront( mx, my ) ) {
+				continue;
 			}
 			bool select = false;
 			for ( int k = 0; k < check_num; k++ ) {

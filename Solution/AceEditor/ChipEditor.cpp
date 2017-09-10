@@ -59,7 +59,12 @@ void ChipEditor::updateMode( ) {
 		getReplacePos( mx, my, true );
 		_data->copy( mx, my );
 	}
-
+	if ( key->isPushKey( "F" ) ) {
+		if ( _mode != MODE_FRONT_BIT ) {
+			_before_mode = _mode;
+		}
+		_mode = MODE_FRONT_BIT;
+	}
 }
 
 void ChipEditor::getReplacePos( std::vector< int >& x, std::vector< int >& y, bool mx_my ) const {
@@ -135,6 +140,11 @@ void ChipEditor::editChip( ) {
 		if ( _mode == MODE_COPY ) {
 			_data->paste( mx, my );
 			_click_active = false;
+		}
+		if ( _mode == MODE_FRONT_BIT ) {
+			if ( mx[ 0 ] >= 0 && my[ 0 ] >= 0 ) {
+				_data->setFrontHeight( mx[ 0 ], my[ 0 ] );
+			}
 		}
 	}
 	

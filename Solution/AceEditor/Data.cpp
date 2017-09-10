@@ -6,6 +6,7 @@
 
 std::string EXTENSION_ALL  = ".map";
 std::string EXTENSION_PAGE = ".page";
+const unsigned char FRONT_BIT = 0x80;
 
 Data::Data( ) {
 	_page_num = 4;
@@ -40,12 +41,32 @@ int Data::getStructure( int mx, int my ) const {
 }
 
 int Data::getHeight( int mx, int my ) const {
-	return getChip( mx, my ).height;
+	return getChip( mx, my ).height & ~FRONT_BIT;
 }
+
+void Data::setFrontHeight( int mx, int front_height ) {
+	mx %= _page_num * PAGE_CHIP_WIDTH_NUM;
+	// back
+	for ( int i = 0; i < front_height; i++ ) {
+		getChip( mx, i ).height &= ~FRONT_BIT;
+	}
+
+	// front
+	for ( int i = front_height; i < MAP_HEIGHT; i++ ) {
+		getChip( mx, i ).height |= FRONT_BIT;
+	}
+}
+
+bool Data::isFront( int mx, int my ) const {
+	mx %= _page_num * PAGE_CHIP_WIDTH_NUM;
+	return ( getChip( mx, my ).height & FRONT_BIT ) != 0;
+}
+
 
 void Data::setHeight( int mx, int my, int height ) {
 	mx %= _page_num * PAGE_CHIP_WIDTH_NUM;
-	getChip( mx, my ).height = height;
+	unsigned char bit = ( FRONT_BIT & getChip( mx, my ).height );
+	getChip( mx, my ).height = height & bit;
 }
 
 void Data::setStructure( int mx, int my, int num )  {

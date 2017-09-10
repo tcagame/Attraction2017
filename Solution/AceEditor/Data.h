@@ -26,11 +26,13 @@ public:
 	void loadBg( std::string directory, std::string filename, int page );
 	void copy( std::vector< int >& mx, std::vector< int >& my );
 	void paste( std::vector< int >& mx, std::vector< int >& my );
+	void setFrontHeight( int mx, int front_height );
+	bool isFront( int mx, int my ) const;
 private:
 	struct Chip {
 		unsigned char ground;
 		unsigned char structure;
-		unsigned char height;
+		unsigned char height; // 上ビットにこっそりfrontフラグとして使う
 	};
 private:
 	const Chip& getChip( int mx, int my ) const;
