@@ -314,12 +314,9 @@ void Player::actOnWaiting( ) {
 		MapPtr map = World::getTask( )->getMap( getArea( ) );
 		if ( map->getObject( getPos( ) ) != OBJECT_WATER ) {
 			setAction( ACTION_CHARGE );
-			sound->playSE( "yokai_se_21.wav", true );
 			return;
 		}
 	}
-	sound->stopSE( "yokai_se_21.wav" );
-	sound->stopSE( "yokai_se_22.wav" );
 	if ( device->getPush( _device_id ) & BUTTON_C ) {
 		sound->playSE( "yokai_voice_17.wav" );
 		vec.y = JUMP_POWER;
@@ -472,8 +469,11 @@ void Player::actOnAttack( ) {
 void Player::actOnCharge( ) {
 	DevicePtr device( Device::getTask( ) );
 	SoundPtr sound = Sound::getTask( );
+	sound->playSE( "yokai_se_21.wav", true );
 	if ( !isStanding( ) ) {
 		sound->playSE( "yokai_voice_17.wav" );
+		sound->stopSE( "yokai_se_21.wav" );
+		sound->stopSE( "yokai_se_22.wav" );
 		setAction( ACTION_FLOAT );
 		return;
 	}
@@ -486,9 +486,13 @@ void Player::actOnCharge( ) {
 	}
 	if ( device->getDirY( _device_id ) <= 0 ) {
 		if ( device->getDirX( _device_id ) == 0 ) {
+			sound->stopSE( "yokai_se_21.wav" );
+			sound->stopSE( "yokai_se_22.wav" );
 			setAction( ACTION_WAIT );
 			return;
 		} else {
+			sound->stopSE( "yokai_se_21.wav" );
+			sound->stopSE( "yokai_se_22.wav" );
 			setAction( ACTION_WALK );
 			return;
 		}
@@ -505,7 +509,7 @@ void Player::actOnCharge( ) {
 	if ( _charge_count > 75 ) {
 		sound->stopSE( "yokai_se_21.wav" );
 		if ( !sound->isPlayingSE( "yokai_se_22.wav" ) ) {
-			sound->playSE( "yokai_se_22.wav" );
+			sound->playSE( "yokai_se_22.wav", true );
 		}
 	}
 	if ( _charge_count > MAX_CHARGE_COUNT ) {
