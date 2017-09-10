@@ -268,6 +268,11 @@ bool Command::excuteState( std::vector< std::string > command ) {
 				Log::getTask( )->addMessage( message );
 				return false;
 			}
+			if ( area == STATE_ENTRY ) {
+				for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+					_status->resetPlayer( i );
+				}
+			}
 			for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 				_status->getPlayer( i ).area = area;
 			}
@@ -289,6 +294,9 @@ bool Command::excuteState( std::vector< std::string > command ) {
 			}
 
 			if ( player_num >= 0 && player_num <= ROCK_PLAYER_NUM ) {
+				if ( area == STATE_ENTRY ) {
+					_status->resetPlayer( player_num );
+				}
 				_status->getPlayer( player_num ).area = area;
 				result = true;
 			}
