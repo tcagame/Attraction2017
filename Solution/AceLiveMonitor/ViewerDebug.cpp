@@ -154,6 +154,11 @@ void ViewerDebug::drawChip( ) const {
 					_block->setPos( x, y + VIEW_STREET_Y );
 					_block->draw( );
 				}
+				if ( obj == OBJECT_WATER ) {
+					_block->setRect( 32, 16, OBJECT_CHIP_SIZE, OBJECT_CHIP_SIZE );
+					_block->setPos( x, y + VIEW_STREET_Y );
+					_block->draw( );
+				}
 				if ( obj >= OBJECT_EVENT_REDDAEMON ) {
 					_block->setRect( 32, 0, OBJECT_CHIP_SIZE, OBJECT_CHIP_SIZE );
 					_block->setPos( x, y + VIEW_STREET_Y );
@@ -184,6 +189,12 @@ void ViewerDebug::drawChip( ) const {
 						_block->setPos( x, y + VIEW_EVENT_Y );
 						_block->draw( );
 					}
+					if ( obj == OBJECT_WATER ) {
+						_block->setRect( 32, 16, OBJECT_CHIP_SIZE, OBJECT_CHIP_SIZE );
+						_block->setPos( x, y + VIEW_EVENT_Y );
+						_block->draw( );
+					}
+					//イベントブロックの場合(ここにはありえない)
 					if ( obj >= OBJECT_EVENT_REDDAEMON ) {
 						_block->setRect( 32, 0, OBJECT_CHIP_SIZE, OBJECT_CHIP_SIZE );
 						_block->setPos( x, y + VIEW_EVENT_Y );

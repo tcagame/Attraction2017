@@ -136,6 +136,7 @@ const unsigned char OBJECT_ENEMY_END = 0x7F;
 //block
 const unsigned char OBJECT_BLOCK  = 0x80;
 const unsigned char OBJECT_ONEWAY = 0x81;
+const unsigned char OBJECT_WATER  = 0x82;
 //event
 const unsigned char OBJECT_EVENT_REDDAEMON = 0xC0;
 const unsigned char OBJECT_EVENT_FIRE	= 0xC1;

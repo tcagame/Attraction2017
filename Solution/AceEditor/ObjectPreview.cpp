@@ -229,6 +229,11 @@ void ObjectPreview::draw( ) const {
 				_block->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE, PREVIEW_Y + j * OBJECT_CHIP_SIZE );
 				_block->draw( );
 			}
+			if ( _data->getObject( ox, oy ) == OBJECT_WATER ) {
+				_block->setRect( 32, 16, OBJECT_CHIP_SIZE, OBJECT_CHIP_SIZE );
+				_block->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE, PREVIEW_Y + j * OBJECT_CHIP_SIZE );
+				_block->draw( );
+			}
 
 			//event
 			if ( _data->getObject( ox, oy ) == OBJECT_EVENT_REDDAEMON ) {

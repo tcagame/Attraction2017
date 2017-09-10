@@ -202,6 +202,9 @@ unsigned char ObjectMenu::getObj( int idx ) const {
 	case 2:
 		result = OBJECT_ONEWAY;
 		break;
+	case 3:
+		result = OBJECT_WATER;
+		break;
 	default:
 		result = _object_editor->getObject( );
 		break;

@@ -55,6 +55,11 @@ void ObjectGuide::draw( ) const {
 				tx = 16 * 2;
 				ty = 0;
 			}
+			//水
+			if ( obj == OBJECT_WATER ) {
+				tx = 16 * 3;
+				ty = 0;
+			}
 			//エネミー配置ブロック
 			if ( obj >= OBJECT_PURPLE_ZOMBIE &&
 				 obj < OBJECT_ENEMY_END ) {

@@ -62,8 +62,7 @@ void Character::updateMass( ) {
 	//‰º
 	if ( _vec.y > 0 ) {
 		unsigned char obj = map->getObject( _pos + Vector( 0, _vec.y ) );
-		if ( obj == OBJECT_BLOCK ||
-				obj == OBJECT_ONEWAY ) {
+		if ( obj == OBJECT_BLOCK || obj == OBJECT_ONEWAY ) {
 			_standing = true;
 			_pos.y = ( ( int )( _pos.y + _vec.y ) / OBJECT_CHIP_SIZE ) * OBJECT_CHIP_SIZE - GRAVITY / 2;
 			_vec.y = 0;

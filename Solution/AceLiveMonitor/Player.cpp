@@ -311,9 +311,12 @@ void Player::actOnWaiting( ) {
 		return;
 	}
 	if ( device->getDirY( _device_id ) > 0 ) {
-		setAction( ACTION_CHARGE );
-		sound->playSE( "yokai_se_21.wav", true );
-		return;
+		MapPtr map = World::getTask( )->getMap( getArea( ) );
+		if ( map->getObject( getPos( ) ) != OBJECT_WATER ) {
+			setAction( ACTION_CHARGE );
+			sound->playSE( "yokai_se_21.wav", true );
+			return;
+		}
 	}
 	sound->stopSE( "yokai_se_21.wav" );
 	sound->stopSE( "yokai_se_22.wav" );
@@ -332,12 +335,14 @@ void Player::actOnWaiting( ) {
 void Player::actOnWalking( ) {
 	//スティックの入力が無い場合action_wait
 	DevicePtr device( Device::getTask( ) );
-	Vector vec = getVec( );
+
+	// 遷移
 	if ( !isStanding( ) ) {
 		Sound::getTask( )->playSE( "yokai_voice_17.wav" );
 		setAction( ACTION_FLOAT );
 		return;
 	}
+	Vector vec = getVec( );
 	if ( device->getDirX( _device_id ) * vec.x < 0 ) {
 		setAction( ACTION_BRAKE );
 		return;
@@ -347,20 +352,19 @@ void Player::actOnWalking( ) {
 		return;
 	}
 
-	if ( isStanding( ) && device->getPush( _device_id ) & BUTTON_C ) {
+	if ( device->getPush( _device_id ) & BUTTON_C ) {
 		Sound::getTask( )->playSE( "yokai_voice_17.wav" );
 		setAction( ACTION_FLOAT );
 		vec.y = JUMP_POWER;
+		return;
 	}
+
+	// 歩く処理
 	if ( device->getDirX( _device_id ) < -50 ) {
 		vec.x = -MOVE_SPEED;
 	}
 	if ( device->getDirX( _device_id ) > 50 ) {
 		vec.x = MOVE_SPEED;
-	}
-	SoundPtr sound = Sound::getTask( );
-	if ( !sound->isPlayingSE( "yokai_voice_15.wav" ) ) {
-		sound->playSE( "yokai_voice_15.wav" );
 	}
 	setVec( vec );
 }
@@ -830,6 +834,8 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		x -= camera_pos;
 	}
 
+	// 水の上にいるか？
+	MapPtr map = World::getTask( )->getMap( getArea( ) );
 	int off = MOTION_OFFSET[ _action ];
 	int num = MOTION_NUM[ _player ][ _action ];
 	int motion = 0;
@@ -859,27 +865,30 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		motion = getActCount( ) / PLAYER_ANIM_WAIT_COUNT;
 		break;
 	case ACTION_DEAD:
-	{
-		int anim = getActCount( ) / ( PLAYER_ANIM_WAIT_COUNT / 2 );
-		if ( anim >= num ) {
-			anim = num - 1;
+		{
+			int anim = getActCount( ) / ( PLAYER_ANIM_WAIT_COUNT / 2 );
+			if ( anim >= num ) {
+				anim = num - 1;
+			}
+			motion = anim;
+			break;
 		}
-		motion = anim;
-		break;
-	}
 	case ACTION_CHARGE:
-	{
-		int anim = _charge_count / ( CHARGE_PHASE_COUNT / 6 );
-		if ( anim >= num ) {
-			anim = num - 1;
+		{
+			int anim = _charge_count / ( CHARGE_PHASE_COUNT / 6 );
+			if ( anim >= num ) {
+				anim = num - 1;
+			}
+			motion = anim;
+			break;
 		}
-		motion = anim;
-		break;
-	}
 
 	}
-
 	pattern = off + motion % num;
+
+	if ( isStanding() && map->getObject( getPos( ) ) == OBJECT_WATER ) {
+		pattern += 16 * 9;
+	}
 
 	unsigned char attribute = 0;
 	if ( getDir( ) == DIR_RIGHT ) {

@@ -90,5 +90,8 @@ void Information::drawObjectMode( ) const {
 		case OBJECT_ONEWAY:
 			drawer->drawString( VIEW_CHIP_MODE_POS_X, VIEW_CHIP_MODE_POS_Y, "上方侵入ブロック配置" );
 			break;
+		case OBJECT_WATER:
+			drawer->drawString( VIEW_CHIP_MODE_POS_X, VIEW_CHIP_MODE_POS_Y, "ウォーターブロック配置" );
+			break;
 	}
 }
