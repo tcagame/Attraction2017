@@ -55,6 +55,15 @@ public:
 		return sizeof( _player );
 	};
 
+	void resetPlayer( int idx ) {
+		_player[ idx ].area = STATE_NONE;
+		_player[ idx ].continue_num = 0;
+		_player[ idx ].toku = 0;
+		_player[ idx ].item = 0b00000000;
+		_player[ idx ].money = 0;
+		_player[ idx ].power = PLAYER_INIT_HP;
+	};
+
 private:
 #	pragma pack( 1 )
 		Player _player[ PLAYER_NUM ];
