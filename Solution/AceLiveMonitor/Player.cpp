@@ -336,10 +336,11 @@ void Player::actOnWaiting( ) {
 void Player::actOnWalking( ) {
 	//スティックの入力が無い場合action_wait
 	DevicePtr device( Device::getTask( ) );
+	SoundPtr sound = Sound::getTask( );
 
 	// 遷移
 	if ( !isStanding( ) ) {
-		Sound::getTask( )->playSE( "yokai_voice_17.wav" );
+		sound->playSE( "yokai_voice_17.wav" );
 		setAction( ACTION_FLOAT );
 		return;
 	}
@@ -354,7 +355,7 @@ void Player::actOnWalking( ) {
 	}
 
 	if ( device->getPush( _device_id ) & BUTTON_C ) {
-		Sound::getTask( )->playSE( "yokai_voice_17.wav" );
+		sound->playSE( "yokai_voice_17.wav" );
 		vec.y = JUMP_POWER;
 		setVec( vec );
 		setAction( ACTION_FLOAT );
@@ -367,6 +368,9 @@ void Player::actOnWalking( ) {
 	}
 	if ( device->getDirX( _device_id ) > 50 ) {
 		vec.x = MOVE_SPEED;
+	}
+	if ( !sound->isPlayingSE( "yokai_voice_15.wav" ) ) {
+		sound->playSE( "yokai_voice_15.wav" );
 	}
 	setVec( vec );
 }
