@@ -7,7 +7,6 @@
 #include "Data.h"
 #include "Background.h"
 
-const int BACK_HEIGHT_NUM = DISP_CHIP_HEIGHT - MAP_COVER_HEIGHT;
 const int BASE_X = -CHIP_WIDTH / 2;
 const int BASE_Y = -CHIP_HEIGHT / 2;
 

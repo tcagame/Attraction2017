@@ -22,7 +22,7 @@ public:
 	void drawBg( ) const;
 	void drawChip( ) const;
 private:
-	bool _covor;
+	bool _cover;
 	DataConstPtr _data;
 	ChipCursorConstPtr _chip_cursor;
 	ChipEditorConstPtr _chip_editor;

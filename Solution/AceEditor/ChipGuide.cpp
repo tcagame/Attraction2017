@@ -62,8 +62,8 @@ void ChipGuide::draw( ) const {
 			if ( now_page == ( ( gx + adjust ) / PAGE_CHIP_WIDTH_NUM ) % _data->getPageNum( ) ) {
 				ty = 48;
 			}
-			// たろすけが歩ける
-			if ( gy >= MAP_COVER_HEIGHT ) {
+			// front
+			if ( _data->isFront( mx, my ) ) {
 				ty = 32;
 			}
 			// 選択チップ

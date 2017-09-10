@@ -66,6 +66,9 @@ void Information::drawChipMode( ) const {
 		case ChipEditor::MODE_COPY:
 			drawer->drawString( VIEW_CHIP_MODE_POS_X, VIEW_CHIP_MODE_POS_Y, "コピー中" );
 			break;
+		case ChipEditor::MODE_FRONT_BIT:
+			drawer->drawString( VIEW_CHIP_MODE_POS_X, VIEW_CHIP_MODE_POS_Y, "フロントビット編集" );
+			break;
 	}
 
 	if ( _chip_cursor->isOnChip( ) ) {
