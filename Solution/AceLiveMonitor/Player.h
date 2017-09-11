@@ -63,6 +63,7 @@ private:
 	void adjustToCamera( );
 	void updateProgress( );
 	void appear( );
+	void updateShowMoney( );
 private:
 	enum ITEM {
 		ITEM_DANGO,
@@ -79,6 +80,7 @@ private:
 	ACTION _action;
 	int _device_id;
 	int _money;
+	int _show_money;
 	int _virtue;
 	int _over_charge_time;
 	int _charge_count;

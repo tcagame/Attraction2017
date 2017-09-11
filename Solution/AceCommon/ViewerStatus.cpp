@@ -12,6 +12,13 @@ const int NAME_OX = 145;
 const int NAME_OY = 5;
 const int POWER_OX = 166;
 const int POWER_OY = 78;
+const int ITEM_OX = 0;
+const int ITEM_OY = 162;
+const int ITEM_PITCH = 33;
+const int VIRTUE_OX = 230;
+const int VIRTUE_OY = ITEM_OY;
+const int MONEY_OX = 280;
+const int MONEY_OY = 127;
 
 ViewerStatus::ViewerStatus( ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
@@ -48,6 +55,19 @@ ViewerStatus::ViewerStatus( ) {
 	_image_power[ 13 ] = image_power_bit06;
 	_image_power[ 14 ] = image_power_bit06;
 	_image_power[ 15 ] = image_power_bit06;
+	
+	_image_item[ 0 ] = drawer->createImage( "UI/ui_item_dango.png" );
+	_image_item[ 1 ] = drawer->createImage( "UI/ui_item_heart.png" );
+	_image_item[ 2 ] = drawer->createImage( "UI/ui_item_hypertrophy.png" );
+	_image_item[ 3 ] = drawer->createImage( "UI/ui_item_shortening.png" );
+	_image_item[ 4 ] = drawer->createImage( "UI/ui_item_wood.png" );
+	_image_item[ 5 ] = drawer->createImage( "UI/ui_item_flame.png" );
+	_image_item[ 6 ] = drawer->createImage( "UI/ui_item_mineral.png" );
+
+	_image_virtue = drawer->createImage( "UI/ui_item_virtue.png" );
+	_image_virtue_number = drawer->createImage( "UI/ui_virtue_number.png" );
+
+	_image_money_number = drawer->createImage( "UI/ui_money_number.png" );
 }
 
 ViewerStatus::~ViewerStatus( ) {
@@ -61,6 +81,8 @@ void ViewerStatus::draw( PLAYER player, int sx, int sy ) const {
 	_image_frame->draw( );
 	drawBustup( player, sx, sy );
 	drawPower( data->getStatusPower( player ), sx, sy );
+	drawMoney( data->getStatusMoney( player ), sx, sy );
+	drawItem( player, sx, sy );
 	drawVirtue( data->getStatusVirtue( player ), sx, sy );
 }
 
@@ -71,6 +93,19 @@ void ViewerStatus::drawPower( int power, int sx, int sy ) const {
 	}
 }
 
+void ViewerStatus::drawMoney( int money, int sx, int sy ) const {
+	money *= 100;
+	int pos = 0;
+	do {
+		int n = money % 10;
+		_image_money_number->setRect( n * 10, 0, 10, 12 );
+		_image_money_number->setPos( sx + MONEY_OX - pos * 10, sy + MONEY_OY );
+		_image_money_number->draw( );
+		money /= 10;
+		pos++;
+	} while ( money > 0 );
+}
+
 void ViewerStatus::drawBustup( PLAYER player, int sx, int sy ) const {
 	_image_bustup[ player ]->setPos( sx + BUSTUP_OX, sy + BUSTUP_OY );
 	_image_bustup[ player ]->draw( );
@@ -78,9 +113,35 @@ void ViewerStatus::drawBustup( PLAYER player, int sx, int sy ) const {
 	_image_name[ player ]->draw( );
 }
 
+void ViewerStatus::drawItem( PLAYER player, int sx, int sy ) const {
+	std::array< bool, 8 > item;
+	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	item[ 0 ] = data->isInProssessionOfStatusItem( player, SynchronousData::ITEM_DANGO );
+	item[ 1 ] = data->isInProssessionOfStatusItem( player, SynchronousData::ITEM_HEART );
+	item[ 2 ] = data->isInProssessionOfStatusItem( player, SynchronousData::ITEM_HYPERTROPHY );
+	item[ 3 ] = data->isInProssessionOfStatusItem( player, SynchronousData::ITEM_SHORTENING );
+	item[ 4 ] = data->isInProssessionOfStatusItem( player, SynchronousData::ITEM_WOOD );
+	item[ 5 ] = data->isInProssessionOfStatusItem( player, SynchronousData::ITEM_FLAME );
+	item[ 6 ] = data->isInProssessionOfStatusItem( player, SynchronousData::ITEM_MINERAL );
+
+	for ( int i = 0; i < 7; i++ ) {
+		if ( !item[ i ] ) {
+			continue;
+		}
+		_image_item[ i ]->setPos( sx + ITEM_OX + i * ITEM_PITCH + ( i == 0 ) * 12, sy + ITEM_OY );
+		_image_item[ i ]->draw( );
+	}
+}
+
 void ViewerStatus::drawVirtue( int virtue, int sx, int sy ) const {
-	sx += 280;
-	sy += 180;
-	DrawerPtr drawer( Drawer::getTask( ) );
-	drawer->drawString( sx, sy, "%2d", virtue);
+	if ( virtue == 0 ) {
+		return;
+	}
+	
+	_image_virtue->setPos( sx + VIRTUE_OX, sy + VIRTUE_OY );
+	_image_virtue->draw( );
+
+	_image_virtue_number->setRect( virtue * 32, 0, 32, 32 );
+	_image_virtue_number->setPos( sx + VIRTUE_OX + 40, sy + VIRTUE_OY );
+	_image_virtue_number->draw( );
 }

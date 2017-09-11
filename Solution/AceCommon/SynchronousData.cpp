@@ -8,6 +8,10 @@ SynchronousDataPtr SynchronousData::getTask( ) {
 
 SynchronousData::SynchronousData( ) {
 	resetObject( );
+
+	for ( int i = 0; i < MAX_PLAYER; i++ ) {
+		_data.status[ i ].items = 0;
+	}
 }
 
 
@@ -97,7 +101,7 @@ void SynchronousData::setStatusPower( PLAYER player, int power ) {
 
 void SynchronousData::setStatusMoney( PLAYER player, int money ) {
 	assert( money >= 0 );
-	_data.status[ player ].money = ( unsigned char )money;
+	_data.status[ player ].money = ( unsigned long )money;
 }
 
 void SynchronousData::setInProssessionOfStatusItem( PLAYER player, unsigned char item, bool possession ) {

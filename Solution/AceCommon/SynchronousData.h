@@ -90,7 +90,7 @@ private:
 				char          progress;
 				long          x;
 				unsigned char power;
-				unsigned char money;
+				unsigned long money;
 				unsigned char items;
 				unsigned char virtue;
 				unsigned char redo;

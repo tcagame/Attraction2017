@@ -130,7 +130,8 @@ Character( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ),
 _over_charge_time( -1 ),
 _player( player ),
 _device_id( -1 ),
-_money( 100 ),
+_money( 0 ),
+_show_money( 0 ),
 _virtue( 0 ),
 _charge_count( 0 ),
 _unrivaled_count( MAX_UNRIVALED_COUNT ),
@@ -138,6 +139,10 @@ _action( ACTION_ENTRY ),
 _progress_count( 0 ) {
 	setRadius( 25 );
 	setDir( DIR_RIGHT );
+
+	for ( int i = 0; i < MAX_ITEM; i++ ) {
+		_item[ i ] = false;
+	}
 }
 
 Player::~Player( ) {
@@ -234,6 +239,20 @@ void Player::act( ) {
 	updateState( );
 	_unrivaled_count++;
 
+	updateShowMoney( );
+}
+
+void Player::updateShowMoney( ) {
+	if ( _money == _show_money ) {
+		return;
+	}
+
+	int d = ( _money - _show_money ) / 9;
+	if ( d != 0 ) {
+		_show_money += d;
+	} else {
+		_show_money = _money;
+	}
 }
 
 void Player::actOnEntry( ) {
@@ -245,9 +264,10 @@ void Player::actOnEntry( ) {
 		appear( );
 		// アイテム初期化
 		for ( int i = 0; i < MAX_ITEM; i++ ) {
-			_item[ i ] = false;
+			_item[ i ] = true;
 		}
-		_virtue = 0;
+		_virtue = 9;
+		_money = 98765;
 	}
 }
 
@@ -814,6 +834,7 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 	data->setStatusPower( player, getPower( ) );
 	data->setStatusMoney( player, getMoney( ) );
 	data->setStatusVirtue( player, getVirtue( ) );
+	data->setStatusMoney( player, _show_money );
 
 	unsigned char CONV[ MAX_ITEM ] = {
 		SynchronousData::ITEM_DANGO,			
@@ -851,7 +872,6 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		x -= camera_pos;
 	}
 
-	// 水の上にいるか？
 	MapPtr map = World::getTask( )->getMap( getArea( ) );
 	int off = MOTION_OFFSET[ _action ];
 	int num = MOTION_NUM[ _player ][ _action ];
