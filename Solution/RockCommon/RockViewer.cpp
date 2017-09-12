@@ -406,5 +406,6 @@ void RockViewer::drawMovie( ) const {
 	MoviePtr movie = theater->getMovie( );
 	if ( movie->isPlay( ) ) {
 		movie->draw( );
+		theater->getImage( )->draw( );
 	}
 }

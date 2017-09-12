@@ -33,3 +33,11 @@ void RockTheater::setMovie( MoviePtr movie ) {
 MoviePtr RockTheater::getMovie( ) const {
 	return _movie;
 }
+
+void RockTheater::setImage( ImagePtr image ) {
+	_image = image;
+}
+
+ImagePtr RockTheater::getImage( ) const {
+	return _image;
+}
