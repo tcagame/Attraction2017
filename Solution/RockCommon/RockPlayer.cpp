@@ -123,15 +123,15 @@ void RockPlayer::updeteState( ) {
 	if ( _status->getPlayer( _id ).money >= TRANSITION_MONEY_NUM ) {
 		if ( _status->getPlayer( _id ).area == AREA_STREET_1 ) {
 			unsigned char state = AREA_STREET_2;
-			MessageSender::getTask( )->sendMessage( _id, Message::COMMAND_STATE, &state );
+			MessageSender::getTask( )->sendMessage( _id, Message::COMMAND_AREA, &state );
 			return;
 		}
 	}
 		
 	if ( _status->getPlayer( _id ).toku >= TRANSITION_TOKU_NUM ) {
 		if ( _status->getPlayer( _id ).area == AREA_STREET_3 ) {
-			unsigned char state = STATE_RESULT;
-			MessageSender::getTask( )->sendMessage( _id, Message::COMMAND_STATE, &state );
+			unsigned char state = AREA_RESULT;
+			MessageSender::getTask( )->sendMessage( _id, Message::COMMAND_AREA, &state );
 			return;
 		}
 	}
@@ -174,8 +174,9 @@ bool RockPlayer::isActive( ) const {
 void RockPlayer::actOnBubble( ) {
 	Status::Player status = _status->getPlayer( _id );
 	SoundPtr sound = Sound::getTask( );
-	if ( status.area == STATE_RESULT ) {
-		//リザルトに入ったら泡に入らない
+	if ( status.area == AREA_RESULT ||
+		 status.area == AREA_ENTRY ) {
+		//参加受付状態ではないまたはリザルトに入ったら泡に入らない
 		if ( isOnMapModel( ) ) {
 			setMass( true );
 			setCol( true );
@@ -204,6 +205,10 @@ void RockPlayer::actOnBubble( ) {
 				setCol( true );
 				setAction( ACTION_JUMP );
 				sound->playSE( "yokai_voice_17.wav" );
+			}
+			if ( status.area & AREA_WAIT ) {
+				unsigned char area = AREA_ENTRY;
+				MessageSender::getTask( )->sendMessage( _id, Message::COMMAND_AREA, &area );
 			}
 			return;
 		}

@@ -299,11 +299,11 @@ void RockViewer::drawUI( ) const {
 	RockClientInfoPtr info = RockClientInfo::getTask( );
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		if ( !info->isActiveState( _status->getPlayer( i ).area ) ||
-			 _status->getPlayer( i ).area == STATE_RESULT ) {
+			 _status->getPlayer( i ).area == AREA_RESULT ) {
 			continue;
 		}
 		if ( family->getPlayer( i )->isBubble( ) &&
-			 info->isActiveState( STATE_ENTRY ) ) {
+			 info->isActiveState( AREA_ENTRY ) ) {
 			_breasts[ i ]->setRect( 0, 0, 320, 360 );
 			_breasts[ i ]->setPos( i * ( SCREEN_WIDTH / 4 ), SCREEN_HEIGHT - 256, ( i + 1 ) * ( SCREEN_WIDTH / 4 ), SCREEN_HEIGHT );
 			_breasts[ i ]->draw( );

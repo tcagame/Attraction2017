@@ -43,7 +43,7 @@ void MessageSender::sendMessage( int player_id, Message::COMMAND command, void* 
 			}
 		}
 		break;
-	case Message::COMMAND_STATE:
+	case Message::COMMAND_AREA:
 		message = "area " + std::to_string( player_id ) + " "; 
 		for ( int i = 0; i < 8; i++ ) {
 			unsigned char check = 1 << ( 7 - i );

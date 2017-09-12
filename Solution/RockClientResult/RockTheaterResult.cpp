@@ -65,16 +65,15 @@ void RockTheaterResult::createImage( ) {
 		int sx = 0;
 		int sy = 0;
 		switch ( player.area ) {
-		case STATE_ENTRY:
-			if ( RockFamily::getTask( )->getPlayer( i )->isBubble( ) ) {
-				sx = i * ( SCREEN_WIDTH / 4 );
-				sy = 0;
-				_images[ 5 ]->setPos( sx + 100, sy, sx + ( SCREEN_WIDTH / 4 ), sy + 100 );
-				_draw_image->drawSpriteToGraph( _images[ 5 ] );
-			} else {
-				sx = i * 100;
-				sy = 100;
-			}
+		case AREA_WAIT:
+			sx = i * ( SCREEN_WIDTH / 4 );
+			sy = 0;
+			_images[ 5 ]->setPos( sx + 100, sy, sx + ( SCREEN_WIDTH / 4 ), sy + 100 );
+			_draw_image->drawSpriteToGraph( _images[ 5 ] );
+			break;
+		case AREA_ENTRY:
+			sx = i * 100;
+			sy = 100;
 			break;
 		case AREA_STREET_1:
 		case AREA_STREET_3:
@@ -85,6 +84,8 @@ void RockTheaterResult::createImage( ) {
 			sx = i * 100 + ONE_MONITOR_WIDTH * 2;
 			sy = 100;
 			break;
+		default:
+			continue;
 		}
 		_images[ i + 1 ]->setPos( sx, sy, sx + 100, sy + 100 );
 		_draw_image->drawSpriteToGraph( _images[ i + 1 ] );

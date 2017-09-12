@@ -77,7 +77,7 @@ void RockMapTest::update( ) {
 		Vector pos = player->getPos( );
 		if ( isNext( pos ) ) {
 			unsigned int area = AREA_STREET_1;
-			MessageSender::getTask( )->sendMessage( i, Message::COMMAND_STATE, &area );
+			MessageSender::getTask( )->sendMessage( i, Message::COMMAND_AREA, &area );
 		}
 	}
 }

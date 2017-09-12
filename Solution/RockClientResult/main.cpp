@@ -45,6 +45,6 @@ void main( ) {
 	app->addTask( RockViewer::getTag( ), TaskPtr( new RockViewer( status ) ) );
 	
 	std::vector< unsigned char > state = { };
-	state.push_back( STATE_RESULT );
+	state.push_back( AREA_RESULT );
 	app->addTask( RockClientInfo::getTag( ), TaskPtr( new RockClientInfo( state ) ) );
 }

@@ -77,7 +77,7 @@ void MessageReceiver::excute( std::vector< std::string > command ) {
 			case Message::COMMAND_ITEM:
 				excuteItem( command );
 				break;
-			case Message::COMMAND_STATE:
+			case Message::COMMAND_AREA:
 				excuteState( command );
 				break;
 			case Message::COMMAND_CONTINUE:
@@ -156,12 +156,12 @@ void MessageReceiver::excuteState( std::vector< std::string > command ) {
 			check /= 10;
 		}
 		// resultÇ…ëºÉvÉåÉCÉÑÅ[Ç™Ç¢ÇΩÇÁì¸ÇÁÇ»Ç¢
-		if ( area == STATE_RESULT ) {
+		if ( area == AREA_RESULT ) {
 			for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 				if ( i == player_num ) {
 					continue;
 				}
-				if ( _status->getPlayer( i ).area == STATE_RESULT ) {
+				if ( _status->getPlayer( i ).area == AREA_RESULT ) {
 					return;
 				}
 			}

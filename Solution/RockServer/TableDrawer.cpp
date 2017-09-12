@@ -47,8 +47,8 @@ const int BOX_WIDTH[ TableDrawer::MAX_TAG ] {
 };
 const char* NAME[ Status::PLAYER_NUM ] = {
 	"TAROSUKE",
-	"TAROJIRO",
 	"GARISUKE",
+	"TAROJIRO",
 	"TAROMI"
 };
 
@@ -176,10 +176,13 @@ void TableDrawer::drawState( ) const {
 		sy += BOX_HEIGHT;
 		std::string area = "\0";
 		switch ( _status->getPlayer( i ).area ) {
-		case STATE_NONE:
+		case AREA_NONE:
 			area = "NONE";
 			break;
-		case STATE_ENTRY:
+		case AREA_WAIT:
+			area = "WAIT";
+			break;
+		case AREA_ENTRY:
 			area = "ENTRY";
 			break;
 		case AREA_STREET_1:
@@ -191,13 +194,10 @@ void TableDrawer::drawState( ) const {
 		case AREA_STREET_3:
 			area = "street3";
 			break;
-		case STATE_BOSS:
-			area = "BOSS";
-			break;
-		case STATE_RESULT:
+		case AREA_RESULT:
 			area = "RESULT";
 			break;
-		case STATE_TEST:
+		case AREA_TEST:
 			area = "TEST";
 			break;
 		}

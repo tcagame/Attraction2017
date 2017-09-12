@@ -20,7 +20,7 @@ public:
 		COMMAND_POWER,
 		COMMAND_MONEY,
 		COMMAND_ITEM,
-		COMMAND_STATE,
+		COMMAND_AREA,
 		MAX_COMMAND
 	};
 public:
@@ -38,7 +38,7 @@ private:
 	bool excutePower( std::vector< std::string > command );
 	bool excuteMoney( std::vector< std::string > command );
 	bool excuteItem( std::vector< std::string > command );
-	bool excuteState( std::vector< std::string > command );
+	bool excuteArea( std::vector< std::string > command );
 	std::vector< std::string > getSpritCommand( ) const;
 private:
 	std::string _command;
