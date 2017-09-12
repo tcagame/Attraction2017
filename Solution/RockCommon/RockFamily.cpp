@@ -77,9 +77,8 @@ void RockFamily::updateAncestors( ) {
 }
 void RockFamily::updateBubble( ) {
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
-		if ( _bubble[ i ]->isActive( ) ) {
-			_bubble[ i ]->update( );
-		}
+		//Bubble‚ÍactiveŠÖŒW‚È‚µ‚Éí‚Éupdate
+		_bubble[ i ]->update( );
 	}
 }
 

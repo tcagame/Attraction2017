@@ -10,12 +10,12 @@ public:
 	static std::string getTag( ) { return "ROCKCLIENTINFO"; };
 	static RockClientInfoPtr getTask( );
 public:
-	RockClientInfo( std::vector< unsigned int > client_id );
+	RockClientInfo( std::vector< unsigned char > client_id );
 	virtual ~RockClientInfo( );
 public:
 	void update( );
-	bool isActiveState( unsigned int player_state ) const;
+	bool isActiveState( unsigned char player_state ) const;
 public:
-	std::vector< unsigned int > _client_id;
+	std::vector< unsigned char > _client_id;
 };
 

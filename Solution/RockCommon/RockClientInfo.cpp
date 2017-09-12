@@ -6,7 +6,7 @@ RockClientInfoPtr RockClientInfo::getTask( ) {
 }
 
 
-RockClientInfo::RockClientInfo( std::vector< unsigned int > client_id ) :
+RockClientInfo::RockClientInfo( std::vector< unsigned char > client_id ) :
 _client_id( client_id ) {
 }
 
@@ -17,7 +17,7 @@ RockClientInfo::~RockClientInfo( ) {
 void RockClientInfo::update( ) {
 }
 
-bool RockClientInfo::isActiveState( unsigned int player_state ) const {
+bool RockClientInfo::isActiveState( unsigned char player_state ) const {
 	bool result = false;
 	int size = ( int )_client_id.size( );
 	for ( int i = 0; i < size; i++ ) {
