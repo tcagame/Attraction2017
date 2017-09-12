@@ -29,6 +29,7 @@ private:
 	void genarateStorage( STAGE next );
 	void genarateEventCharacters( STAGE next );
 	void resetFamilyPos( STAGE next );
+	bool isInActivePlayer( );
 private:
 	int _time;
 	bool _virtue_pop;

@@ -59,7 +59,7 @@ void RockViewer::initialize( ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
 	_image_frame = drawer->createImage( "UI/status_plate.png" );
 	_status_ui = drawer->createImage( "UI/ui.png" );
-	_status_num = drawer->createImage( "UI/ui_num.png" );
+	_status_num = drawer->createImage( "UI/ui_number.png" );
 	_dummy_ui = drawer->createImage( "UI/item.png" );
 
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {		

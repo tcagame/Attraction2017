@@ -51,6 +51,10 @@ void RockMapStreet::update( ) {
 		updateRyugu( );
 		break;
 	}
+	if ( !isInActivePlayer( ) &&
+		 _stage != STAGE_STREET ) {
+		loadStage( STAGE_STREET );
+	}
 }
 
 void RockMapStreet::updateStreet( ) {
@@ -239,4 +243,15 @@ void RockMapStreet::resetFamilyPos( STAGE next ) {
 		family->resetPos( Vector( 800, 5, 0 ) );
 		break;
 	}
+}
+
+bool RockMapStreet::isInActivePlayer( ) {
+	RockFamilyPtr family = RockFamily::getTask( );
+	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+		if ( family->getPlayer( i )->isActive( ) ) {
+			return true;
+		}
+	}
+
+	return false;
 }
