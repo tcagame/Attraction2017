@@ -400,6 +400,9 @@
     <ClCompile Include="ViewerProgress.cpp">
       <Filter>Viewer</Filter>
     </ClCompile>
+    <ClCompile Include="ShotReflect.cpp">
+      <Filter>Shot\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy.h">
@@ -797,6 +800,9 @@
     </ClInclude>
     <ClInclude Include="ViewerProgress.h">
       <Filter>Viewer</Filter>
+    </ClInclude>
+    <ClInclude Include="ShotReflect.h">
+      <Filter>Shot\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

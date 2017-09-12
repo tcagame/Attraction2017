@@ -26,10 +26,6 @@ Armoury::~Armoury( ) {
 }
 
 void Armoury::update( ) {
-	updateEnemy( );
-}
-
-void Armoury::updateEnemy( ) {
 	MilitaryPtr militari( Military::getTask( ) );
 	int camera_pos = Family::getTask( )->getCameraPosX( );
 	for ( int i = 0; i < MAX_SHOT_NUM; i ++ ) {
@@ -52,7 +48,7 @@ void Armoury::updateEnemy( ) {
 				impact_pos.y -= _shot_list[ i ]->getChipSize( ) / 2;
 				int impact_size = 16 * _shot_list[ i ]->getPower( );
 				Magazine::getTask( )->add( ImpactPtr( new Impact( impact_pos, _shot_list[ i ]->getArea( ), impact_size ) ) );
-				_shot_list[ i ] = ShotPtr( );
+				_shot_list[ i ]->erase( );
 			}
 		}
 	}

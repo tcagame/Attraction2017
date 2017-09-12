@@ -7,7 +7,7 @@ static const int WAVE_COUNT = 30;
 static const int VANISH_LENGTH = 320;
 
 ShotMonmotaro::ShotMonmotaro( const PLAYER player, const Vector& pos, DIR dir, int power ) :
-Shot( player, pos, dir, power ) {
+Shot( pos, power ) {
 	Vector vec( SHOT_SPEED, 0 );
 	if ( dir == DIR_LEFT ) {
 		vec.x *= -1;
@@ -43,7 +43,7 @@ void ShotMonmotaro::setSynchronousData( unsigned char type, int camera_pos ) con
 		area = AREA_STREET;
 	}
 	unsigned char attribute = 0;
-	if ( getDir( ) == DIR_RIGHT ) {
+	if ( getVec( ).x >= 0 ) {
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );

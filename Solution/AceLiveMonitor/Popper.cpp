@@ -60,6 +60,9 @@ void Popper::initialize( ) {
 	for ( int mx = 0; mx < map->getPageNum( ) * PAGE_OBJECT_WIDTH_NUM; mx++ ) {
 		for ( int my = 0; my < OBJECT_CHIP_HEIGHT_NUM; my++ ) {
 			unsigned char object = map->getObject( mx, my );
+			if ( my == 10 && ( mx % 40 ) == 0 ) {
+				object = OBJECT_PURPLE_ZOMBIE;
+			}
 			int x = mx * OBJECT_CHIP_SIZE;
 			int y = my * OBJECT_CHIP_SIZE;
 			switch ( object ) {

@@ -281,6 +281,7 @@
     <ClCompile Include="ShopItem.cpp" />
     <ClCompile Include="ShotMonmotaro.cpp" />
     <ClCompile Include="ShotPlayer.cpp" />
+    <ClCompile Include="ShotReflect.cpp" />
     <ClCompile Include="Storage.cpp" />
     <ClCompile Include="ViewerDebug.cpp" />
     <ClCompile Include="Military.cpp" />
@@ -414,6 +415,7 @@
     <ClInclude Include="ShopItem.h" />
     <ClInclude Include="ShotMonmotaro.h" />
     <ClInclude Include="ShotPlayer.h" />
+    <ClInclude Include="ShotReflect.h" />
     <ClInclude Include="Storage.h" />
     <ClInclude Include="ViewerDebug.h" />
     <ClInclude Include="Military.h" />

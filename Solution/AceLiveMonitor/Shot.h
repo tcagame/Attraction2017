@@ -4,13 +4,12 @@
 
 class Shot : public Character {
 public:
-	Shot( const PLAYER player, const Vector& pos, DIR dir, int power );
+	Shot( const Vector& pos, int power );
 	virtual ~Shot( );
 public:
-	DIR getDir( ) const;
 	int getPower( ) const;
-	PLAYER getPlayer( ) const;
 	virtual void setSynchronousData( unsigned char type, int camera_pos ) const = 0;
+	virtual void erase( );
 protected:
 	void setPower( int power );
 	Vector getOriginPos( ) const;
@@ -18,7 +17,5 @@ private:
 	int _power;
 	Vector _pos;
 	Vector _origin_pos;
-	DIR _dir;
-	PLAYER _player;
 };
 

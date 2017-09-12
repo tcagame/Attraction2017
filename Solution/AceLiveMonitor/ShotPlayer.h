@@ -5,8 +5,12 @@ class ShotPlayer : public Shot {
 public:
 	ShotPlayer( const PLAYER player, const Vector& pos, DIR dir, int power );
 	virtual ~ShotPlayer( );
+public:
+	void erase( );
 protected:
 	void act( );
 	void setSynchronousData( unsigned char type, int camera_pos ) const;
+private:
+	PLAYER _player;
 };
 

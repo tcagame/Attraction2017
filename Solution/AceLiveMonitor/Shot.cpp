@@ -2,21 +2,15 @@
 
 static const int MAX_HP = 3;
 
-Shot::Shot( const PLAYER player, const Vector& pos, DIR dir, int power ) :
+Shot::Shot( const Vector& pos, int power ) :
 Character( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP, false ),
-_dir( dir ),
 _pos( pos ),
 _origin_pos( pos ),
-_power( power ),
-_player( player ) {
+_power( power ) {
 	setRadius( 20 );
 }
 
 Shot::~Shot( ) {
-}
-
-DIR Shot::getDir( ) const {
-	return _dir;
 }
 
 int Shot::getPower( ) const {
@@ -31,6 +25,6 @@ Vector Shot::getOriginPos( ) const {
 	return _origin_pos;
 }
 
-PLAYER Shot::getPlayer( ) const {
-	return _player;
+void Shot::erase( ) {
+	setFinished( );
 }

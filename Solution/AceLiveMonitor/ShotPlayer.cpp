@@ -1,11 +1,14 @@
 #include "ShotPlayer.h"
 #include "SynchronousData.h"
+#include "Armoury.h"
+#include "ShotReflect.h"
 
 static const int SHOT_SPEED = 15;
 static const int VANISH_LENGTH = 320;
 
 ShotPlayer::ShotPlayer( const PLAYER player, const Vector& pos, DIR dir, int power ) :
-Shot( player, pos, dir, power ) {
+Shot( pos, power ),
+_player( player ) {
 	Vector vec = Vector( SHOT_SPEED, 0 );
 	if ( dir == DIR_LEFT ) {
 		vec.x *= -1;
@@ -18,8 +21,14 @@ ShotPlayer::~ShotPlayer( ) {
 
 void ShotPlayer::act( ) {
 	if ( getActCount( ) * getVec( ).getLength( ) > VANISH_LENGTH ) {
-		setFinished( );
+		erase( );
 	}
+}
+
+void ShotPlayer::erase( ) {
+	// ’µ‚Ë•Ô‚è’e‚ð¶¬
+	Armoury::getTask( )->add( ShotPtr( new ShotReflect( _player, getPos( ) ) ) );
+	setFinished( );
 }
 
 void ShotPlayer::setSynchronousData( unsigned char type, int camera_pos ) const {
@@ -36,7 +45,7 @@ void ShotPlayer::setSynchronousData( unsigned char type, int camera_pos ) const 
 		area = AREA_STREET;
 	}
 	unsigned char attribute = 0;
-	if ( getDir( ) == DIR_RIGHT ) {
+	if ( getVec( ).x >= 0 ) {
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
