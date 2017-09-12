@@ -2,8 +2,8 @@
 #include "Family.h"
 #include "SynchronousData.h"
 
-static const int WAIT_ANIM_TIME = 5;
-static const int FADE_IN_TIME = WAIT_ANIM_TIME * 2;
+static const int WAIT_ANIM_TIME = 3;
+static const int FADE_IN_TIME = WAIT_ANIM_TIME * 10;
 static const int MAX_HP = 3;
 static const int MOVE_SPEED = -3;
 static const double ASCEND_SPEED = -0.1;
@@ -13,7 +13,7 @@ Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP, false ),
 _act( ACTION_FADE_IN ),
 _ascend_speed( 0 ) {
 	setRadius( 36 );
-	setVec( Vector ( MOVE_SPEED, MOVE_SPEED / 2 ) );
+	setVec( Vector( ) );
 }
 
 EnemyGhost::~EnemyGhost( ) {
@@ -22,9 +22,12 @@ EnemyGhost::~EnemyGhost( ) {
 void EnemyGhost::act( ) {
 	switch ( _act ) {
 	case ACTION_FADE_IN:
+	{
 		if ( getActCount( ) > FADE_IN_TIME ) {
 			_act = ACTION_MOVE;
+			setVec( Vector ( MOVE_SPEED, MOVE_SPEED / 2 ) );
 		}
+	}
 		break;
 	case ACTION_MOVE:
 	{
@@ -46,14 +49,14 @@ void EnemyGhost::setSynchronousData( unsigned char type, int camera_pos ) const 
 	switch ( _act ) {
 	case ACTION_FADE_IN:
 	{
-		const int ANIM[ ] = { 228, 229, 230, 231, 232, 233 };
+		const int ANIM[ ] = { 380, 381, 382, 383, 384, 385, 386, 387, 388, 389, 390 };
 		int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 		anim = ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ];
 	}
 		break;
 	case ACTION_MOVE:
 	{
-		const int ANIM[ ] = { 234, 235, 236, 237, 238 };
+		const int ANIM[ ] = { 391, 392, 393, 394, 395 };
 		int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 		anim = ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ];
 	}
