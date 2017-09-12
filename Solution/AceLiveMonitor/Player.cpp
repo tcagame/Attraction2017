@@ -264,7 +264,7 @@ void Player::actOnEntry( ) {
 		appear( );
 		// ƒAƒCƒeƒ€‰Šú‰»
 		for ( int i = 0; i < MAX_ITEM; i++ ) {
-			_item[ i ] = true;
+			_item[ i ] = false;
 		}
 		_virtue = 9;
 		_money = 98765;
@@ -484,9 +484,12 @@ void Player::actOnFloating( ) {
 }
 
 void Player::actOnAttack( ) {
-	int power = ( _charge_count / CHARGE_PHASE_COUNT ) + 1;
+	int level = ( _charge_count / CHARGE_PHASE_COUNT ) + 1;
+	if ( _item[ ITEM_HYPERTROPHY ] ) {
+		level++;
+	}
 	Sound::getTask( )->playSE( "yokai_se_20.wav" );
-	ShotPlayerPtr shot( new ShotPlayer( _player, getPos( ), getDir( ), power ) );
+	ShotPlayerPtr shot( new ShotPlayer( _player, getPos( ), getDir( ), level ) );
 	shot->setArea( getArea( ) );
 	Armoury::getTask( )->add( shot );
 	setAction( ACTION_WAIT );

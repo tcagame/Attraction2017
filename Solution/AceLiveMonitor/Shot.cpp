@@ -17,10 +17,6 @@ int Shot::getPower( ) const {
 	return _power;
 }
 
-void Shot::setPower( int power ) {
-	_power = power;
-}
-
 Vector Shot::getOriginPos( ) const {
 	return _origin_pos;
 }

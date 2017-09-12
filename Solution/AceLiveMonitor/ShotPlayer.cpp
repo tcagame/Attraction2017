@@ -6,8 +6,9 @@
 static const int SHOT_SPEED = 15;
 static const int VANISH_LENGTH = 320;
 
-ShotPlayer::ShotPlayer( const PLAYER player, const Vector& pos, DIR dir, int power ) :
-Shot( pos, power ),
+ShotPlayer::ShotPlayer( const PLAYER player, const Vector& pos, DIR dir, int level ) :
+Shot( pos, ( int )( pow( 2, level - 1 ) + 1 ) ),
+_level( level ), 
 _player( player ) {
 	Vector vec = Vector( SHOT_SPEED, 0 );
 	if ( dir == DIR_LEFT ) {
@@ -32,7 +33,7 @@ void ShotPlayer::erase( ) {
 }
 
 void ShotPlayer::setSynchronousData( unsigned char type, int camera_pos ) const {
-	int ANIM[ ] = { 16, 17, 18, 19, 20, 21, 22, 23 };
+	int ANIM[ ] = { 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 };
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	
 	Vector pos = getPos( );
@@ -49,5 +50,5 @@ void ShotPlayer::setSynchronousData( unsigned char type, int camera_pos ) const 
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
-	data->addObject( area, type, ANIM[ ( getPower( ) - 1 ) * 2 + ( getActCount( ) % 2 ) ], attribute, x, y );
+	data->addObject( area, type, ANIM[ ( _level - 1 ) * 2 + ( getActCount( ) % 2 ) ], attribute, x, y );
 }

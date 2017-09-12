@@ -4,7 +4,7 @@
 
 static const int WAIT_ANIM_TIME = 5;
 static const int MOVE_SPEED = 4;
-static const int MAX_HP = 3;
+static const int MAX_HP = 8;
 
 EnemyPurpleZombie::EnemyPurpleZombie( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ),
