@@ -66,7 +66,10 @@ void ViewerLive::update( ) {
 	// Main•`‰æ
 	_viewer_street->draw( ViewerStreet::LAYER_BACK, MAIN_SX, MAIN_SY, camera_pos );
 	_viewer_object->draw( AREA_STREET, MAIN_SX, MAIN_SY );
-	_viewer_street->draw( ViewerStreet::LAYER_FRONT, MAIN_SX, MAIN_SY, camera_pos );
+	
+	if ( !Debug::getTask( )->isDebug( ) ) {
+		_viewer_street->draw( ViewerStreet::LAYER_FRONT, MAIN_SX, MAIN_SY, camera_pos );
+	}
 
 	// ƒCƒxƒ“ƒg•`‰æ
 	EVENT event = data->getEvent( );

@@ -184,7 +184,7 @@ void Player::updatetDevice( ) {
 			setAction( ACTION_ENTRY );
 		}
 		if ( device->getDirY( _device_id ) < 0 &&
-			device->getPush( _device_id ) == BUTTON_E + BUTTON_F ) {
+			device->getButton( _device_id ) == BUTTON_E + BUTTON_F ) {
 			_device_id = -1;
 		}
 	}

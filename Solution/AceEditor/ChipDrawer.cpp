@@ -26,7 +26,7 @@ ChipDrawer::~ChipDrawer( ) {
 
 void ChipDrawer::drawChip( int mx, int my, int gx, int gy, bool select ) const {
 	int sy = BASE_Y + gy * CHIP_HEIGHT / 2;
-	sy -= CHIP_HEIGHT * _data->getHeight( mx, my );	//高さ
+	sy -= CHIP_HEIGHT / 2 * _data->getHeight( mx, my );	//高さ
 	int sx = BASE_X + gx  * CHIP_WIDTH;
 	sx += ( my % 2 ) * CHIP_WIDTH / 2;	//横にずらす
 	if ( select ) { // 選んでいるチップ表示
