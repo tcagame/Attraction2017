@@ -45,6 +45,8 @@ static const int MAX_UNRIVALED_COUNT = 45;
 static const int MAX_DEAD_ACTCOUNT = 120;
 static const int MAX_IMPACT_COUNT = 30;
 
+static const int HEAL_DANGO = 6;
+
 // モーションテーブル
 const int MOTION_OFFSET[Player::MAX_ACTION] = {
 	0,   // ACTION_ENTRY,
@@ -161,6 +163,11 @@ int Player::getDeviceId( ) const {
 	return _device_id;
 }
 
+void Player::setProgressType( unsigned char type ) {
+	_progress_type = type;
+	_progress_count = 0;
+}
+
 void Player::updatetDevice( ) {
 	DevicePtr device = Device::getTask( );
 	if ( _device_id < 0 ) {
@@ -240,6 +247,7 @@ void Player::act( ) {
 	_unrivaled_count++;
 
 	updateShowMoney( );
+	updateProgressEffect( );
 }
 
 void Player::updateShowMoney( ) {
@@ -255,9 +263,21 @@ void Player::updateShowMoney( ) {
 	}
 }
 
+void Player::updateProgressEffect( ) {
+	if ( _action == ACTION_ENTRY ||
+		 _action == ACTION_CONTINUE ) {
+		return;
+	}
+
+	_progress_count++;
+	if ( _progress_count >= 100 ) {
+		_progress_type = SynchronousData::PROGRESS_NONE;
+	}
+}
+
 void Player::actOnEntry( ) {
 	adjustToCamera( );
-	updateProgress( );
+	updateProgressBar( );
 
 	if ( _progress_count >= 100 ) {
 		// 再登場のために初期化
@@ -273,7 +293,7 @@ void Player::actOnEntry( ) {
 
 void Player::actOnContinue() {
 	adjustToCamera( );
-	updateProgress( );
+	updateProgressBar( );
 
 	if ( _progress_count >= 100 ) {
 		// 再登場のために初期化
@@ -295,7 +315,7 @@ void Player::adjustToCamera( ) {
 	setPos( pos );
 }
 
-void Player::updateProgress( ) {
+void Player::updateProgressBar( ) {
 	DevicePtr device = Device::getTask( );
 	if ( device->getButton( _device_id ) ) {
 		_progress_count += 2;
@@ -624,7 +644,6 @@ void Player::actOnDead( ) {
 		int chip_size = getChipSize( );
 		Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, chip_size / 2 ), area, chip_size * 2 ) ) );
 		// コンティニューへ
-		setFinished( false );
 		setAction(ACTION_CONTINUE);
 	}
 }
@@ -642,18 +661,32 @@ void Player::damage( int force ) {
 		return;
 	}
 	if ( !isExist( ) ||
-		 _unrivaled_count < MAX_UNRIVALED_COUNT ||
-		 isFinished( ) ) {
+		 _unrivaled_count < MAX_UNRIVALED_COUNT ) {
 		return;
 	}
 
-	Character::damage( force );
 	SoundPtr sound = Sound::getTask( );
-	if ( isFinished( ) ) {
-		setAction( ACTION_DEAD );
-		setVec( Vector( ) );
+	sound->playSE( "yokai_voice_26.wav" );
+
+	Character::damage( force );
+
+	if ( getPower( ) <= 0 ) {
+		if ( _item[ ITEM_DANGO ] ) {
+			// 団子を使用
+			_item[ ITEM_DANGO ] = false;
+			setProgressType( SynchronousData::PROGRESS_ITEM_DANGO );
+			setPower( HEAL_DANGO );
+		} else if ( _item[ ITEM_HEART ] ) {
+			// ハートを使用
+			_item[ ITEM_HEART ] = false;
+			setProgressType( SynchronousData::PROGRESS_ITEM_HEART );
+			setPower( MAX_HP );
+		} else {
+			// 死んだ
+			setAction( ACTION_DEAD );
+			setVec( Vector( ) );
+		}
 	} else {
-		sound->playSE( "yokai_voice_26.wav" );
 		setAction( ACTION_DAMEGE );
 		if ( getDir( ) == DIR_LEFT ) {
 			setVec( Vector( 4, 0 ) );
@@ -822,11 +855,11 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 	switch ( _action ) {
 	case ACTION_ENTRY:
 		data->setStatusState( _player, SynchronousData::STATE_ENTRY );
-		data->setStatusProgress( _player, _progress_count );
+		data->setStatusProgress( _player, SynchronousData::PROGRESS_BAR, _progress_count );
 		break;
 	case ACTION_CONTINUE:
 		data->setStatusState( _player, SynchronousData::STATE_CONTINUE ); 
-		data->setStatusProgress( _player, _progress_count );
+		data->setStatusProgress( _player, SynchronousData::PROGRESS_BAR, _progress_count );
 		break;
 	default:
 		if ( getArea( ) == AREA_STREET ) {
@@ -834,6 +867,8 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		} else {
 			data->setStatusState( _player, SynchronousData::STATE_PLAY_EVENT );
 		}
+
+		data->setStatusProgress( _player, _progress_type, _progress_count );
 		break;
 	}
 

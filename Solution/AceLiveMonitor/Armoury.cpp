@@ -41,7 +41,7 @@ void Armoury::update( ) {
 		EnemyPtr hit_enemy = militari->getOverlappedEnemy( _shot_list[ i ] );
 		if ( hit_enemy ) {
 			hit_enemy->damage( _shot_list[ i ]->getPower( ) );
-			if ( !hit_enemy->isFinished( ) ) {
+			if ( hit_enemy->getPower( ) > 0 ) {
 				//エネミーが倒れなかったらショットが当たった位置で爆発
 				Sound::getTask( )->playSE( "yokai_se_25.wav" );
 				Vector impact_pos = _shot_list[ i ]->getPos( );

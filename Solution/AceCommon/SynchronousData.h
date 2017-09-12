@@ -35,6 +35,16 @@ public:
 	static const unsigned char TYPE_IMPACT			= 0x26;
 	static const unsigned char TYPE_ITEM			= 0x27;
 	static const unsigned char TYPE_NPC 			= 0x28;
+	static const unsigned char PROGRESS_NONE             = 0x00;
+	static const unsigned char PROGRESS_BAR              = 0x01;
+	static const unsigned char PROGRESS_ITEM_DANGO       = 0x02;
+	static const unsigned char PROGRESS_ITEM_HEART	     = 0x03;
+	static const unsigned char PROGRESS_ITEM_HYPERTROPHY = 0x04;	
+	static const unsigned char PROGRESS_ITEM_SHORTENING	 = 0x05;
+	static const unsigned char PROGRESS_ITEM_WOOD	     = 0x06;
+	static const unsigned char PROGRESS_ITEM_FLAME	     = 0x07;
+	static const unsigned char PROGRESS_ITEM_MINERAL     = 0x08;	
+	static const unsigned char PROGRESS_ITEM_VIRTUE      = 0x09;
 public:
 	static std::string getTag( ) { return "SYNCHRONOUSDATA"; };
 	static SynchronousDataPtr getTask( );
@@ -45,7 +55,8 @@ public:
 public:
 	EVENT getEvent( ) const;
 	int getCameraX( ) const;
-	int getStatusProgress( PLAYER player ) const;
+	unsigned char getStatusProgressType( PLAYER player ) const;
+	int getStatusProgressCount( PLAYER player ) const;
 	int getStatusX( PLAYER player ) const;
 	int getStatusPower( PLAYER player ) const;
 	int getStatusMoney( PLAYER player ) const;
@@ -68,7 +79,7 @@ public:
 	void setEvent( EVENT event );
 	void setCameraX( int x );
 	void setStatusDevice( PLAYER player, int id );
-	void setStatusProgress( PLAYER player, int count );
+	void setStatusProgress( PLAYER player, unsigned char type, int count );
 	void setStatusX( PLAYER player, int x );
 	void setStatusPower( PLAYER player, int power );
 	void setStatusMoney( PLAYER player, int money );
@@ -87,7 +98,8 @@ private:
 			char event;
 			struct Status {
 				char          device;
-				char          progress;
+				unsigned char progress_type;
+				char          progress_count;
 				long          x;
 				unsigned char power;
 				unsigned long money;

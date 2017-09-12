@@ -16,7 +16,6 @@ public:
 	virtual void damage( int force );
 	bool isOverlapped( CharacterConstPtr target ) const;
 	double getRadius( ) const;
-	bool isFinished( ) const;
 	AREA getArea( ) const;
 	void setArea( AREA area );
 	int getChipSize( ) const;
@@ -31,7 +30,6 @@ protected:
 	virtual void act( ) = 0;
 	int getActCount( ) const;
 	void setRadius( int radius );
-	void setFinished( bool finished = true );
 	void setActCount( int count );
 private:
 	void updateDir( );
@@ -44,7 +42,6 @@ private:
 	int _act_count;
 	bool _mass;
 	bool _standing;
-	bool _finished;
 	double _radius;
 	DIR _dir;
 	AREA _area;

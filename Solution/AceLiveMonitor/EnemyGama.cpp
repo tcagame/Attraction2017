@@ -18,7 +18,7 @@ EnemyGama::~EnemyGama( ) {
 
 void EnemyGama::act( ) {
 	if ( _guide && getActCount( ) > GUIDE_TIME ) {
-		setFinished( );
+		damage( -1 );
 	}
 }
 

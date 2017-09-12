@@ -9,7 +9,7 @@ PTR( ViewerEvent );
 PTR( ViewerTitle );
 PTR( ViewerStatus );
 PTR( ViewerEntry );
-PTR( ViewerProgress );
+PTR( ViewerProgressBar );
 PTR( ViewerDebug );
 PTR( ViewerObject );
 PTR( Image );
@@ -28,7 +28,7 @@ private:
 	ViewerStreetPtr _viewer_street;
 	ViewerEventPtr _viewer_event;
 	ViewerStatusPtr _viewer_status;
-	ViewerProgressPtr _viewer_progress;
+	ViewerProgressBarPtr _viewer_progress;
 	ViewerTitlePtr _viewer_title;
 	ViewerObjectPtr _viewer_object;
 	ViewerDebugConstPtr _viewer_debug;

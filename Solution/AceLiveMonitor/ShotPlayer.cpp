@@ -29,7 +29,7 @@ void ShotPlayer::act( ) {
 void ShotPlayer::erase( ) {
 	// ’µ‚Ë•Ô‚è’e‚ð¶¬
 	Armoury::getTask( )->add( ShotPtr( new ShotReflect( _player, getPos( ) ) ) );
-	setFinished( );
+	Shot::erase( );
 }
 
 void ShotPlayer::setSynchronousData( unsigned char type, int camera_pos ) const {

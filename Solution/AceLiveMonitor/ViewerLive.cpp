@@ -5,7 +5,7 @@
 #include "ViewerStreet.h"
 #include "ViewerEvent.h"
 #include "ViewerStatus.h"
-#include "ViewerProgress.h"
+#include "ViewerProgressBar.h"
 #include "ViewerTitle.h"
 #include "ViewerDebug.h"
 #include "Debug.h"
@@ -33,13 +33,13 @@ ViewerLive::~ViewerLive( ) {
 }
 
 void ViewerLive::initialize( ) {
-	_viewer_street   = ViewerStreetPtr  ( new ViewerStreet   );
-	_viewer_event    = ViewerEventPtr	( new ViewerEvent    );
-	_viewer_title    = ViewerTitlePtr   ( new ViewerTitle    );
-	_viewer_status   = ViewerStatusPtr  ( new ViewerStatus   );
-	_viewer_progress = ViewerProgressPtr( new ViewerProgress );
-	_viewer_debug    = ViewerDebugPtr   ( new ViewerDebug    );
-	_viewer_object   = ViewerObjectPtr  ( new ViewerObject   );
+	_viewer_street   = ViewerStreetPtr     ( new ViewerStreet   );
+	_viewer_event    = ViewerEventPtr	   ( new ViewerEvent    );
+	_viewer_title    = ViewerTitlePtr      ( new ViewerTitle    );
+	_viewer_status   = ViewerStatusPtr     ( new ViewerStatus   );
+	_viewer_progress = ViewerProgressBarPtr( new ViewerProgressBar );
+	_viewer_debug    = ViewerDebugPtr      ( new ViewerDebug    );
+	_viewer_object   = ViewerObjectPtr     ( new ViewerObject   );
 
 	DrawerPtr drawer = Drawer::getTask( );
 	

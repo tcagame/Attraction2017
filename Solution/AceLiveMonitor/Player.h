@@ -44,6 +44,17 @@ public:
 	void setSynchronousData( PLAYER player, int camera_pos ) const;
 	bool isExist( ) const;
 private:
+	enum ITEM {
+		ITEM_DANGO,
+		ITEM_HEART,
+		ITEM_HYPERTROPHY,
+		ITEM_SHORTENING,
+		ITEM_WOOD,
+		ITEM_FLAME,
+		ITEM_MINERAL,
+		MAX_ITEM,
+	};
+private:
 	void actOnEntry( );
 	void actOnContinue( );
 	void actOnWaiting( );
@@ -61,20 +72,11 @@ private:
 	void updateState( );
 	void setAction( ACTION action );
 	void adjustToCamera( );
-	void updateProgress( );
+	void updateProgressBar( );
+	void updateProgressEffect( );
 	void appear( );
 	void updateShowMoney( );
-private:
-	enum ITEM {
-		ITEM_DANGO,
-		ITEM_HEART,
-		ITEM_HYPERTROPHY,
-		ITEM_SHORTENING,
-		ITEM_WOOD,
-		ITEM_FLAME,
-		ITEM_MINERAL,
-		MAX_ITEM,
-	};
+	void setProgressType( unsigned char type );
 private:
 	PLAYER _player;
 	ACTION _action;
@@ -85,6 +87,7 @@ private:
 	int _over_charge_time;
 	int _charge_count;
 	int _unrivaled_count;
+	unsigned char _progress_type;
 	int _progress_count;
 	std::array< bool, MAX_ITEM > _item;
 };

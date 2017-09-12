@@ -66,8 +66,9 @@ ViewerStatus::ViewerStatus( ) {
 
 	_image_virtue = drawer->createImage( "UI/ui_item_virtue.png" );
 	_image_virtue_number = drawer->createImage( "UI/ui_virtue_number.png" );
-
 	_image_money_number = drawer->createImage( "UI/ui_money_number.png" );
+
+	_image_item_effect = drawer->createImage( "Effect/impact.png" );
 }
 
 ViewerStatus::~ViewerStatus( ) {
@@ -124,12 +125,39 @@ void ViewerStatus::drawItem( PLAYER player, int sx, int sy ) const {
 	item[ 5 ] = data->isInProssessionOfStatusItem( player, SynchronousData::ITEM_FLAME );
 	item[ 6 ] = data->isInProssessionOfStatusItem( player, SynchronousData::ITEM_MINERAL );
 
+	int target = -1;
+	switch ( data->getStatusProgressType( player ) ) {
+	case SynchronousData::PROGRESS_ITEM_DANGO      : target = 0; break;
+	case SynchronousData::PROGRESS_ITEM_HEART      : target = 1; break;
+	case SynchronousData::PROGRESS_ITEM_HYPERTROPHY: target = 2; break;
+	case SynchronousData::PROGRESS_ITEM_SHORTENING : target = 3; break;
+	case SynchronousData::PROGRESS_ITEM_WOOD       : target = 4; break;
+	case SynchronousData::PROGRESS_ITEM_FLAME      : target = 5; break;
+	case SynchronousData::PROGRESS_ITEM_MINERAL    : target = 6; break;
+	}
+
+	int target_sx;
+	int target_sy;
 	for ( int i = 0; i < 7; i++ ) {
 		if ( !item[ i ] ) {
 			continue;
 		}
-		_image_item[ i ]->setPos( sx + ITEM_OX + i * ITEM_PITCH + ( i == 0 ) * 12, sy + ITEM_OY );
+		int x = sx + ITEM_OX + i * ITEM_PITCH + ( i == 0 ) * 12;
+		int y = sy + ITEM_OY;
+		_image_item[ i ]->setPos( x, y );
 		_image_item[ i ]->draw( );
+		if ( i == target ) {
+			target_sx = x - 16;
+			target_sy = y - 16;
+		}
+	}
+
+	int count = data->getStatusProgressCount( player );
+	if ( target >= 0 && count < 100 ) {
+		int n = count * 13 / 100;
+		_image_item_effect->setRect( n % 4 * 128, n / 4 * 128, 128, 128 );
+		_image_item_effect->setPos( target_sx, target_sy, target_sx + 64, target_sy + 64 );
+		_image_item_effect->draw( );
 	}
 }
 

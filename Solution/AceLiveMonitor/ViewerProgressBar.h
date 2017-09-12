@@ -5,10 +5,10 @@
 
 PTR( Image );
 
-class ViewerProgress {
+class ViewerProgressBar {
 public:
-	ViewerProgress();
-	virtual ~ViewerProgress();
+	ViewerProgressBar();
+	virtual ~ViewerProgressBar();
 public:
 	void draw( PLAYER target );
 private:

@@ -397,11 +397,11 @@
     <ClCompile Include="ShopItem.cpp">
       <Filter>Item</Filter>
     </ClCompile>
-    <ClCompile Include="ViewerProgress.cpp">
-      <Filter>Viewer</Filter>
-    </ClCompile>
     <ClCompile Include="ShotReflect.cpp">
       <Filter>Shot\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="ViewerProgressBar.cpp">
+      <Filter>Viewer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -798,11 +798,11 @@
     <ClInclude Include="ShopItem.h">
       <Filter>Item</Filter>
     </ClInclude>
-    <ClInclude Include="ViewerProgress.h">
-      <Filter>Viewer</Filter>
-    </ClInclude>
     <ClInclude Include="ShotReflect.h">
       <Filter>Shot\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewerProgressBar.h">
+      <Filter>Viewer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

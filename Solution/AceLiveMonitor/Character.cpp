@@ -16,7 +16,6 @@ _act_count( 0 ),
 _power( power ),
 _mass( mass ),
 _radius( chip_size / 2 ),
-_finished( false ),
 _area( AREA_STREET ) {
 }
 
@@ -97,11 +96,6 @@ void Character::damage( int force ) {
 	if ( _power < 0 ) {
 		_power = 0;
 	}
-
-	// Ž€‚ñ‚¾‚©H
-	if ( _power <= 0 ) {
-		_finished = true;
-	}
 }
 
 
@@ -141,10 +135,6 @@ bool Character::isStanding( ) const {
 	return _standing;
 }
 
-bool Character::isFinished( ) const {
-	return _finished;
-}
-
 AREA Character::getArea( ) const {
 	return _area;
 }
@@ -167,8 +157,7 @@ int Character::getChipSize( ) const {
 }
 
 bool Character::isOverlapped( CharacterConstPtr target ) const {
-	if ( _area != target->getArea( ) ||
-		 _finished ) {
+	if ( _area != target->getArea( ) || _power <= 0 ) {
 		return false;
 	}
 	Vector self = _pos + Vector( 0, getChipSize( ) / 2 );
@@ -184,10 +173,6 @@ void Character::setRadius( int radius ) {
 
 double Character::getRadius( ) const {
 	return _radius;
-}
-
-void Character::setFinished( bool finished ) {
-	_finished = finished;
 }
 
 void Character::setActCount( int count ) {

@@ -25,7 +25,7 @@ void ShotMonmotaro::act( ) {
 
 	double check_vec = getVec( ).x;
 	if ( getActCount( ) * check_vec > VANISH_LENGTH ) {
-		setFinished( );
+		damage( -1 );
 	}
 }
 

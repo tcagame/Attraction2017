@@ -46,8 +46,12 @@ void SynchronousData::setCameraX( int x ) {
 	_data.camera_x = ( long )x; 
 }
 
-int SynchronousData::getStatusProgress( PLAYER player ) const {
-	return _data.status[ player ].progress;
+int SynchronousData::getStatusProgressCount( PLAYER player ) const {
+	return _data.status[ player ].progress_count;
+}
+
+unsigned char SynchronousData::getStatusProgressType( PLAYER player ) const {
+	return _data.status[ player ].progress_type;
 }
 
 int SynchronousData::getStatusX( PLAYER player ) const {
@@ -86,8 +90,12 @@ void SynchronousData::setStatusDevice( PLAYER player, int id ) {
 	_data.status[ player ].device = ( char )id;
 }
 
-void SynchronousData::setStatusProgress( PLAYER player, int count ) {
-	_data.status[ player ].progress = ( char )count;
+void SynchronousData::setStatusProgress( PLAYER player, unsigned char type, int count ) {
+	if ( count >= 0 ) {
+		type = PROGRESS_NONE;
+	}
+	_data.status[ player ].progress_type = type;
+	_data.status[ player ].progress_count = ( char )count;
 }
 
 void SynchronousData::setStatusX( PLAYER player, int x ) {

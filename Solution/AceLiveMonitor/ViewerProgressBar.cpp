@@ -1,23 +1,23 @@
-#include "ViewerProgress.h"
+#include "ViewerProgressBar.h"
 #include "SynchronousData.h"
 #include "Drawer.h"
 #include "Image.h"
 
-ViewerProgress::ViewerProgress( ) {
+ViewerProgressBar::ViewerProgressBar( ) {
 	DrawerPtr drawer = Drawer::getTask( );
 	_image_bar   = drawer->createImage( "UI/ui_progress_bar.png" );;
 }
 
-ViewerProgress::~ViewerProgress( ) {
+ViewerProgressBar::~ViewerProgressBar( ) {
 }
 
-void ViewerProgress::draw( PLAYER target ) {
+void ViewerProgressBar::draw( PLAYER target ) {
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
 
 	int sx = target * 320;
 	int sy = 256 + 256;
 
-	int n = data->getStatusProgress( target );
+	int n = data->getStatusProgressCount( target );
 	if ( n > 0 ) {
 		const int HEAD = 10;
 		const int OX = 87;

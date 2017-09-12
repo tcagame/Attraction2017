@@ -25,5 +25,6 @@ private:
 	ImagePtr _image_virtue;
 	ImagePtr _image_virtue_number;
 	ImagePtr _image_money_number;
+	ImagePtr _image_item_effect;
 };
 

@@ -6,7 +6,8 @@ Shot::Shot( const Vector& pos, int power ) :
 Character( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP, false ),
 _pos( pos ),
 _origin_pos( pos ),
-_power( power ) {
+_power( power ),
+_finished( false ) {
 	setRadius( 20 );
 }
 
@@ -22,5 +23,9 @@ Vector Shot::getOriginPos( ) const {
 }
 
 void Shot::erase( ) {
-	setFinished( );
+	_finished = true;
+}
+
+bool Shot::isFinished( ) const {
+	return _finished;
 }

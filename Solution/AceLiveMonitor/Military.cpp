@@ -48,7 +48,7 @@ void Military::update( ) {
 				ite++;
 				continue;
 			}
-			if ( enemy->isFinished( ) ) {
+			if ( enemy->getPower( ) <= 0 ) {
 				//エネミーが倒れた場合、倒れた位置で爆発する
 				if ( !std::dynamic_pointer_cast< EnemyAttack >( enemy ) ) {
 					dropMoney( enemy );
@@ -112,7 +112,7 @@ void Military::update( ) {
 					}
 				}
 			}
-			if ( _boss->isFinished( ) ) {
+			if ( _boss->getPower( ) <= 0 ) {
 				_boss->dropItem( );
 				sound->playSE( "yokai_voice_29.wav" );
 				int impact_chip_size = _boss->getChipSize( ) * 2;
@@ -127,7 +127,7 @@ void Military::update( ) {
 				ite++;
 				continue;
 			}
-			if ( enemy->isFinished( ) ) {
+			if ( enemy->getPower( ) <= 0 ) {
 				//エネミーが倒れた場合、倒れた位置で爆発する
 				if ( !std::dynamic_pointer_cast< EnemyAttack >( enemy ) ) {
 					dropMoney( enemy );
