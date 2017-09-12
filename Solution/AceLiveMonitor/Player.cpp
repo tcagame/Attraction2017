@@ -618,6 +618,7 @@ void Player::actOnDead( ) {
 		int chip_size = getChipSize( );
 		Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, chip_size / 2 ), area, chip_size * 2 ) ) );
 		// コンティニューへ
+		setFinished( false );
 		setAction(ACTION_CONTINUE);
 	}
 }
@@ -780,7 +781,7 @@ void Player::bound( ) {
 }
 
 void Player::blowAway( ) {
-	if ( !isExist( ) ) {
+	if ( isExist( ) ) {
 		setAction( ACTION_BLOW_AWAY );
 	}
 }
