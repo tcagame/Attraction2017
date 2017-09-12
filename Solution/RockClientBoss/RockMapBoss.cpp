@@ -39,8 +39,8 @@ void RockMapBoss::update( ) {
 		if ( ( item & ITEM_FIRE ) &&
 			 ( item & ITEM_ROCK ) &&
 			 ( item & ITEM_TREE ) ) {
-			unsigned char state = AREA_STREET_3;
-			MessageSender::getTask( )->sendMessage( i, Message::COMMAND_STATE, &state );
+			unsigned char area = AREA_STREET_3;
+			MessageSender::getTask( )->sendMessage( i, Message::COMMAND_AREA, &area );
 		}
 	}
 

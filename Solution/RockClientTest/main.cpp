@@ -46,7 +46,7 @@ void main( ) {
 	app->addTask( RockStudio::getTag( ), TaskPtr( new RockStudio( ) ) );
 
 	std::vector< unsigned char > state = { };
-	state.push_back( STATE_TEST );
+	state.push_back( AREA_TEST );
 	app->addTask( RockClientInfo::getTag( ), TaskPtr( new RockClientInfo( state ) ) );
 	
 	//通常描画orステータス描画

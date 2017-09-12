@@ -5,14 +5,14 @@ const int SCREEN_HEIGHT = ( SCREEN_WIDTH * 9 ) / 16;
 
 const int MESSAGE_COUNT = 10;
 
-const unsigned char STATE_NONE		= 0b00000000;
-const unsigned char STATE_ENTRY		= 0b00000001;
-const unsigned char AREA_STREET_1	= 0b00000010;
-const unsigned char AREA_STREET_2	= 0b00000100; //ボス戦
-const unsigned char AREA_STREET_3	= 0b00001000;
-const unsigned char STATE_BOSS		= 0b00010000; //多分使わない
-const unsigned char STATE_RESULT	= 0b00100000;
-const unsigned char STATE_TEST		= 0b01000000;
+const unsigned char AREA_NONE		= 0b00000000;
+const unsigned char AREA_WAIT       = 0b00000001;
+const unsigned char AREA_ENTRY		= 0b00000010;
+const unsigned char AREA_STREET_1	= 0b00000100;
+const unsigned char AREA_STREET_2	= 0b00001000; //ボス戦
+const unsigned char AREA_STREET_3	= 0b00010000;
+const unsigned char AREA_RESULT		= 0b00100000;
+const unsigned char AREA_TEST		= 0b01000000;
 
 const int MAX_ITEM_NUM = 7;
 const unsigned char ITEM_DANGO           = 0b00000001;//団子
