@@ -91,7 +91,7 @@ void SynchronousData::setStatusDevice( PLAYER player, int id ) {
 }
 
 void SynchronousData::setStatusProgress( PLAYER player, unsigned char type, int count ) {
-	if ( count >= 0 ) {
+	if ( count >= 100 ) {
 		type = PROGRESS_NONE;
 	}
 	_data.status[ player ].progress_type = type;

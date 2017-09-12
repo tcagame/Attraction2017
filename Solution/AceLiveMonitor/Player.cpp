@@ -269,7 +269,7 @@ void Player::updateProgressEffect( ) {
 		return;
 	}
 
-	_progress_count++;
+	_progress_count += 3;
 	if ( _progress_count >= 100 ) {
 		_progress_type = SynchronousData::PROGRESS_NONE;
 	}
@@ -610,16 +610,30 @@ void Player::actOnCamera( ) {
 
 void Player::actOnDamege( ) {
 	int act_count = getActCount( );
-	if ( act_count >= MAX_DAMEGE_COUNT ) {
-		setAction( ACTION_WAIT );
-		return;
-	}
 	if ( act_count > MAX_BACK_COUNT ) {
 		setVec( Vector( 0, getVec( ).y ) );
 	}
 	if ( act_count > MAX_DAMEGE_COUNT / 2 ) {
 		//ひるみ中でも移動できるようにする
 		setAction( ACTION_WAIT );
+		// HPがなくなったら
+		if ( getPower( ) <= 0 ) {
+			if ( _item[ ITEM_DANGO ] ) {
+				// 団子を使用
+				_item[ ITEM_DANGO ] = false;
+				setProgressType( SynchronousData::PROGRESS_ITEM_DANGO );
+				setPower( HEAL_DANGO );
+			} else if ( _item[ ITEM_HEART ] ) {
+				// ハートを使用
+				_item[ ITEM_HEART ] = false;
+				setProgressType( SynchronousData::PROGRESS_ITEM_HEART );
+				setPower( MAX_HP );
+			} else {
+				// 死んだ
+				setAction( ACTION_DEAD );
+				setVec( Vector( ) );
+			}
+		}
 	}
 }
 
@@ -670,30 +684,13 @@ void Player::damage( int force ) {
 
 	Character::damage( force );
 
-	if ( getPower( ) <= 0 ) {
-		if ( _item[ ITEM_DANGO ] ) {
-			// 団子を使用
-			_item[ ITEM_DANGO ] = false;
-			setProgressType( SynchronousData::PROGRESS_ITEM_DANGO );
-			setPower( HEAL_DANGO );
-		} else if ( _item[ ITEM_HEART ] ) {
-			// ハートを使用
-			_item[ ITEM_HEART ] = false;
-			setProgressType( SynchronousData::PROGRESS_ITEM_HEART );
-			setPower( MAX_HP );
-		} else {
-			// 死んだ
-			setAction( ACTION_DEAD );
-			setVec( Vector( ) );
-		}
+	setAction( ACTION_DAMEGE );
+	if ( getDir( ) == DIR_LEFT ) {
+		setVec( Vector( 4, 0 ) );
 	} else {
-		setAction( ACTION_DAMEGE );
-		if ( getDir( ) == DIR_LEFT ) {
-			setVec( Vector( 4, 0 ) );
-		} else {
-			setVec( Vector( -4, 0 ) );
-		}
+		setVec( Vector( -4, 0 ) );
 	}
+
 	_unrivaled_count = 0;
 }
 
