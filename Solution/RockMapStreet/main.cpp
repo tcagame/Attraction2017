@@ -44,7 +44,7 @@ void main( ) {
 	app->addTask( RockStudio::getTag( ), TaskPtr( new RockStudio( ) ) );
 	app->addTask( RockShadow::getTag( ), TaskPtr( new RockShadow( ) ) );
 	app->addTask( MessageSender::getTag( ), TaskPtr( new MessageSender( message ) ) );
-	std::vector< unsigned int > state = { };
+	std::vector< unsigned char > state = { };
 	state.push_back( AREA_STREET_1 );
 	state.push_back( AREA_STREET_3 );
 	app->addTask( RockClientInfo::getTag( ), TaskPtr( new RockClientInfo( state ) ) );

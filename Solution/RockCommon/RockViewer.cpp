@@ -149,11 +149,6 @@ void RockViewer::drawBubbles( ) const {
 		if ( !info->isActiveState( _status->getPlayer( i ).area ) ) {
 			continue;
 		}
-		RockPlayerPtr player = family->getPlayer( i );
-		if ( !player->isActive( ) ) {
-			continue;
-		}
-
 		RockBubblePtr bubble = family->getBubble( i );
 		if ( bubble->isActive( ) ) {
 			ModelMV1Ptr model = bubble->getModel( );

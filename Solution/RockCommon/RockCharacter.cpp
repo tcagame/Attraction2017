@@ -216,3 +216,10 @@ bool RockCharacter::isOnMapModel( const Vector& vec ) const {
 	}	
 	return result;
 }
+
+void RockCharacter::adjustPosForOverLapped( RockCharacterPtr target ) {
+	Vector target_pos = target->getPos( );
+	Vector distance = target_pos - _pos;
+	Vector pos = target_pos - distance.normalize( ) * ( target->getRadius( ) + _radius );
+	_pos = Vector( pos.x, _pos.y, pos.z );
+}

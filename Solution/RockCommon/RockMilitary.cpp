@@ -62,28 +62,13 @@ void RockMilitary::updateEnemies( ) {
 		}
 
 		enemy->update( );
-		//playerとの当たり判定
-		for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
-			RockPlayerPtr player = family->getPlayer( i );
-			if ( player->isActive( ) && player->isOverLapped( enemy ) ) {
-				if ( player->isOnHead( enemy ) ) {
-					player->bound( );
-				} else {
-					int force = -enemy->getForce( );
-					player->damage( force );
-					player->back( );
-				}
-			}
+		RockPlayerPtr overlapped_player = family->getOverLappedPlayer( enemy );
+		if ( overlapped_player ) {
+			enemy->adjustPosForOverLapped( overlapped_player );
 		}
-		//エネミーとの当たり判定
-		for ( std::list< RockEnemyPtr >::iterator i = _enemies.begin( ); i != _enemies.end( ); i++ ) {
-			if ( ite == i ) {
-				continue;
-			}
-			RockEnemyPtr enemy_temp = *i;
-			if ( enemy_temp->isOverLapped( enemy ) ) {
-				enemy->back( );
-			}
+		RockEnemyPtr overlapped_enemy = getOverLappedEnemy( enemy );
+		if ( overlapped_enemy ) {
+			enemy->adjustPosForOverLapped( overlapped_enemy );
 		}
 		ite++;
 	}
@@ -136,4 +121,23 @@ void RockMilitary::clean( ) {
 	_enemies = { };
 	_impacts = { };
 	_pops = { };
+}
+
+
+RockEnemyPtr RockMilitary::getOverLappedEnemy( RockCharacterPtr target ) const {
+	RockEnemyPtr result = RockEnemyPtr( );
+	std::list< RockEnemyPtr >::const_iterator ite = _enemies.begin( );
+	while ( ite != _enemies.end( ) ) {
+		RockEnemyPtr other = (*ite);
+		if ( !other || other == target ) {
+			ite++;
+			continue;
+		}
+		if ( other->isOverLapped( target ) ) {
+			result = other;
+			break;
+		}
+		ite++;
+	}
+	return result;
 }

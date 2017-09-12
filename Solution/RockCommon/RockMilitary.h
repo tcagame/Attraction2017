@@ -5,6 +5,7 @@
 #include <list>
 
 PTR( RockMilitary );
+PTR( RockCharacter );
 PTR( RockEnemy );
 PTR( RockImpact );
 PTR( RockPop );
@@ -24,6 +25,7 @@ public:
 	std::list< RockImpactPtr > getImpactList( ) const;
 	void clean( );
 	virtual void createEnemies( ) { };
+	RockEnemyPtr getOverLappedEnemy( RockCharacterPtr target ) const;
 protected:
 	void add( RockImpactPtr impact );
 private:

@@ -5,6 +5,8 @@
 #include "RockAncestors.h"
 #include "RockBubble.h"
 #include "RockArmoury.h"
+#include "RockMilitary.h"
+#include "RockEnemy.h"
 #include <assert.h>
 
 RockFamilyPtr RockFamily::getTask( ) {
@@ -29,36 +31,54 @@ void RockFamily::initialize( ) {
 }
 
 void RockFamily::update( ) {
-	Vector active_pos = _base_pos;
+	updatePlayer( );
+	updateBubble( );
+	updateAncestors( );
+}
+
+void RockFamily::updatePlayer( ) {
+	RockMilitaryPtr military( RockMilitary::getTask( ) );
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		if ( !_player[ i ]->isActive( ) ) {
-			_player[ i ]->resetPos( Vector( i * 50, 75 ) + active_pos );
+			_player[ i ]->resetPos( Vector( i * 50, 75 ) + _base_pos );
 			_player[ i ]->resetBubble( );
 			continue;
 		}
-		active_pos = _player[ i ]->getPos( );
-		//player
 		_player[ i ]->update( );
-		for ( int j = 0; j < ROCK_PLAYER_NUM; j++ ) {
-			if ( i == j ) {
-				continue;
-			}
-			if ( _player[ j ]->isActive( ) ) {
-				if ( _player[ i ]->isOverLapped( _player[ j ] ) ) {
-					if ( _player[ i ]->isOnHead( _player[ j ] ) ) {
-						_player[ i ]->bound( );
-					} else {
-						_player[ i ]->back( );
-					}
-				}
+
+		//player-player
+		RockPlayerPtr overlapped_player = getOverLappedPlayer( _player[ i ] );
+		if ( overlapped_player ) {
+			if ( _player[ i ]->isOnHead( overlapped_player ) ) {
+				_player[ i ]->bound( );
+			} else {
+				_player[ i ]->adjustPosForOverLapped( overlapped_player );
 			}
 		}
-		//bubble
-		_bubble[ i ]->update( );
-		//ancestor
+		//player_enemy
+		RockEnemyPtr overlapped_enemy = military->getOverLappedEnemy( _player[ i ] );
+		if ( overlapped_enemy ) {
+			if ( _player[ i ]->isOnHead( overlapped_enemy ) ) {
+				_player[ i ]->bound( );
+			} else {
+				int force = -overlapped_enemy->getForce( );
+				_player[ i ]->damage( force );
+				_player[ i ]->adjustPosForOverLapped( overlapped_enemy );
+			}
+		}
+	}
+}
+void RockFamily::updateAncestors( ) {
+	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		if ( _ancestors[ i ]->isActive( ) ) {
 			_ancestors[ i ]->update( );
 		}
+	}
+}
+void RockFamily::updateBubble( ) {
+	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+		//Bubble‚ÍactiveŠÖŒW‚È‚µ‚Éí‚Éupdate
+		_bubble[ i ]->update( );
 	}
 }
 
@@ -100,4 +120,22 @@ void RockFamily::resetPos( const Vector& base_pos ) {
 		_player[ i ]->resetPos( Vector( i * 35, 1 ) + base_pos );
 	}
 	RockArmoury::getTask( )->clearShot( );
+}
+
+
+RockPlayerPtr RockFamily::getOverLappedPlayer( RockCharacterPtr target ) const {
+	RockPlayerPtr result = RockPlayerPtr( );
+	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+		if ( target == _player[ i ] ) {
+			continue;
+		}
+		if ( !_player[ i ]->isActive( ) ) {
+			continue;
+		}
+		if ( _player[ i ]->isOverLapped( target ) ) {
+			result = _player[ i ];
+			break;
+		}
+	}
+	return result;
 }

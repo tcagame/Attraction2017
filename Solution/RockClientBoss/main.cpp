@@ -40,7 +40,7 @@ void main( ) {
 	app->addTask( RockStudio::getTag( ), TaskPtr( new RockStudio( ) ) );
 	app->addTask( RockMapBossCamera::getTag( ), TaskPtr( new RockMapBossCamera ) );
 	app->addTask( MessageSender::getTag( ), TaskPtr( new MessageSender( message ) ) );
-	std::vector< unsigned int > state = { };
+	std::vector< unsigned char > state = { };
 	state.push_back( AREA_STREET_2 );
 	app->addTask( RockClientInfo::getTag( ), TaskPtr( new RockClientInfo( state ) ) );
 }

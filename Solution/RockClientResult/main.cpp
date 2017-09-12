@@ -44,7 +44,7 @@ void main( ) {
 	app->addTask( RockTheater::getTag( ), TaskPtr( new RockTheaterResult( status ) ) );
 	app->addTask( RockViewer::getTag( ), TaskPtr( new RockViewer( status ) ) );
 	
-	std::vector< unsigned int > state = { };
+	std::vector< unsigned char > state = { };
 	state.push_back( STATE_RESULT );
 	app->addTask( RockClientInfo::getTag( ), TaskPtr( new RockClientInfo( state ) ) );
 }
