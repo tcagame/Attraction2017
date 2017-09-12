@@ -27,7 +27,7 @@ public:
 			_player[ i ].device_x = 0;
 			_player[ i ].device_y = 0;
 			_player[ i ].device_button = 0b00000000;
-			_player[ i ].area = STATE_NONE;
+			_player[ i ].area = AREA_NONE;
 			_player[ i ].continue_num = 0;
 			_player[ i ].toku = 0;
 			_player[ i ].item = 0b00000000;
@@ -56,7 +56,7 @@ public:
 	};
 
 	void resetPlayer( int idx ) {
-		_player[ idx ].area = STATE_NONE;
+		_player[ idx ].area = AREA_NONE;
 		_player[ idx ].continue_num = 0;
 		_player[ idx ].toku = 0;
 		_player[ idx ].item = 0b00000000;

@@ -41,10 +41,10 @@ void main( ) {
 	app->addTask( RockCamera::getTag( ), TaskPtr( new RockCameraResult ) );
 	app->addTask( RockStudio::getTag( ), TaskPtr( new RockStudio( ) ) );
 	app->addTask( MessageSender::getTag( ), TaskPtr( new MessageSender( message ) ) );
-	app->addTask( RockTheater::getTag( ), TaskPtr( new RockTheaterResult( ) ) );
+	app->addTask( RockTheater::getTag( ), TaskPtr( new RockTheaterResult( status ) ) );
 	app->addTask( RockViewer::getTag( ), TaskPtr( new RockViewer( status ) ) );
 	
 	std::vector< unsigned char > state = { };
-	state.push_back( STATE_RESULT );
+	state.push_back( AREA_RESULT );
 	app->addTask( RockClientInfo::getTag( ), TaskPtr( new RockClientInfo( state ) ) );
 }

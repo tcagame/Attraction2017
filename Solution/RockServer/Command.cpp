@@ -24,12 +24,12 @@ const std::string COMMAND_FIRST_WORD[ Command::MAX_COMMAND ] = {
 };
 const int STATE_NUM = 8;
 const std::string AREA[ STATE_NUM ] = {
-	"none",	
+	"none",
+	"wait",
 	"entry",
 	"street1",
 	"street2",
 	"street3",
-	"boss",
 	"result",
 	"test"
 };
@@ -114,8 +114,8 @@ void Command::excute( ) {
 					message = "[SUCCESS] " + _command;
 				}
 				break;
-			case COMMAND_STATE:
-				if ( excuteState( command ) ) {
+			case COMMAND_AREA:
+				if ( excuteArea( command ) ) {
 					message = "[SUCCESS] " + _command;
 				}
 				break;
@@ -246,7 +246,7 @@ bool Command::excuteItem( std::vector< std::string > command ) {
 	return result;
 }
 
-bool Command::excuteState( std::vector< std::string > command ) {
+bool Command::excuteArea( std::vector< std::string > command ) {
 	bool result = false;
 	if ( command.size( ) == 3 ) {
 		unsigned int area = 0;
@@ -263,12 +263,12 @@ bool Command::excuteState( std::vector< std::string > command ) {
 			Log::getTask( )->addMessage( message );
 		}
 		if ( command[ 1 ] == "all" ) {
-			if ( area == STATE_RESULT ) {
+			if ( area == AREA_RESULT ) {
 				std::string message = "#ERROR# 全キャラをリザルトにはできません";
 				Log::getTask( )->addMessage( message );
 				return false;
 			}
-			if ( area == STATE_ENTRY ) {
+			if ( area == AREA_ENTRY ) {
 				for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 					_status->resetPlayer( i );
 				}
@@ -280,12 +280,12 @@ bool Command::excuteState( std::vector< std::string > command ) {
 		} else {
 			int player_num = std::atoi( command[ 1 ].c_str( ) );
 			// resultに他プレイヤーがいたら入らない
-			if ( area == STATE_RESULT ) {
+			if ( area == AREA_RESULT ) {
 				for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 					if ( i == player_num ) {
 						continue;
 					}
-					if ( _status->getPlayer( i ).area == STATE_RESULT ) {
+					if ( _status->getPlayer( i ).area == AREA_RESULT ) {
 						std::string message = "#ERROR# すでに他キャラがリザルトにいます";
 						Log::getTask( )->addMessage( message );
 						return false;
@@ -294,7 +294,7 @@ bool Command::excuteState( std::vector< std::string > command ) {
 			}
 
 			if ( player_num >= 0 && player_num <= ROCK_PLAYER_NUM ) {
-				if ( area == STATE_ENTRY ) {
+				if ( area == AREA_ENTRY ) {
 					_status->resetPlayer( player_num );
 				}
 				_status->getPlayer( player_num ).area = area;
@@ -305,9 +305,6 @@ bool Command::excuteState( std::vector< std::string > command ) {
 	}
 	return result;
 }
-
-
-
 
 std::vector< std::string > Command::getSpritCommand( ) const {
 	std::vector< std::string > result = { };

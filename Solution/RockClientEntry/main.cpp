@@ -42,7 +42,8 @@ void main( ) {
 	app->addTask( RockStudio::getTag( ), TaskPtr( new RockStudio( ) ) );
 	app->addTask( MessageSender::getTag( ), TaskPtr( new MessageSender( message ) ) );
 	std::vector< unsigned char > state = { };
-	state.push_back( STATE_ENTRY );
+	state.push_back( AREA_WAIT );
+	state.push_back( AREA_ENTRY );
 	app->addTask( RockClientInfo::getTag( ), TaskPtr( new RockClientInfo( state ) ) );
 	
 	//通常描画orステータス描画
