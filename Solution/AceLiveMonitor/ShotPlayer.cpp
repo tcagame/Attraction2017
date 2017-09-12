@@ -33,7 +33,7 @@ void ShotPlayer::erase( ) {
 }
 
 void ShotPlayer::setSynchronousData( unsigned char type, int camera_pos ) const {
-	int ANIM[ ] = { 16, 17, 18, 19, 20, 21, 22, 23, 24, 25 };
+	int ANIM[ ] = { 16, 17, 18, 19, 20, 21, 22, 23, 14, 15 };
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	
 	Vector pos = getPos( );

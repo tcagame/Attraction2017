@@ -264,7 +264,7 @@ void Player::actOnEntry( ) {
 		appear( );
 		// ƒAƒCƒeƒ€‰Šú‰»
 		for ( int i = 0; i < MAX_ITEM; i++ ) {
-			_item[ i ] = false;
+			_item[ i ] = true;
 		}
 		_virtue = 9;
 		_money = 98765;
@@ -536,6 +536,9 @@ void Player::actOnCharge( ) {
 		}
 	}
 	_charge_count++;
+	if ( _item[ ITEM_SHORTENING ] ) {
+		_charge_count++;
+	}
 	if ( _charge_count > 75 ) {
 		sound->stopSE( "yokai_se_21.wav" );
 		if ( !sound->isPlayingSE( "yokai_se_22.wav" ) ) {
@@ -555,7 +558,7 @@ void Player::actOnOverCharge( ) {
 		setAction( ACTION_WAIT );
 		return;
 	}
-
+	
 	if ( getActCount( ) - _over_charge_time > BURST_TIME ) {
 		setAction( ACTION_WAIT );
 		_over_charge_time = -1;
