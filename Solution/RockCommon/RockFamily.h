@@ -7,6 +7,7 @@
 
 PTR( RockFamily );
 PTR( RockPlayer );
+PTR( RockCharacter );
 PTR( RockAncestors );
 PTR( Status );
 PTR( RockBubble );
@@ -26,6 +27,11 @@ public:
 	RockBubblePtr getBubble( int id ) const;
 	RockAncestorsPtr getAncestors( int id ) const;
 	Vector getCameraPos( ) const;
+	RockPlayerPtr getOverLappedPlayer( RockCharacterPtr target ) const;
+private:
+	void updatePlayer( );
+	void updateAncestors( );
+	void updateBubble( );
 private:
 	Vector _base_pos;
 	std::array< RockPlayerPtr, ROCK_PLAYER_NUM > _player;
