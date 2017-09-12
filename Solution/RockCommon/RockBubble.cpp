@@ -4,8 +4,6 @@
 #include "RockDollHouse.h"
 
 const double MODEL_SIZE = 1.0;
-const Vector FOOT = Vector( 0, 10, 0 );
-
 
 RockBubble::RockBubble( int id ) :
 _id( id ) {
@@ -22,7 +20,7 @@ void RockBubble::update( ) {
 		if ( player->isDead( ) ||
 			 player->isBubble( ) ) {
 			_active = true;
-			_pos = player->getPos( ) + FOOT;
+			_pos = player->getPos( );
 		}
 	}
 }
