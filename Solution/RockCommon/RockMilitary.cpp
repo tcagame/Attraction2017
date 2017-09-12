@@ -65,13 +65,6 @@ void RockMilitary::updateEnemies( ) {
 		RockPlayerPtr overlapped_player = family->getOverLappedPlayer( enemy );
 		if ( overlapped_player ) {
 			enemy->adjustPosForOverLapped( overlapped_player );
-			//if ( overlapped_player->isOnHead( enemy ) ) {
-			//	overlapped_player->bound( );
-			//} else {
-			//	int force = -enemy->getForce( );
-			//	overlapped_player->damage( force );
-			//	
-			//}
 		}
 		RockEnemyPtr overlapped_enemy = getOverLappedEnemy( enemy );
 		if ( overlapped_enemy ) {
