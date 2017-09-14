@@ -26,7 +26,15 @@ public:
 private:
 	void updatePlayer( PLAYER taget );
 	void updateCameraPos( );
+	void updateEvent( );
 	void setSynchronousData( ) const;
+	void onEventReddaemon( PLAYER target );
+	void onEventFlame( PLAYER target );
+	void onEventWood( PLAYER target );
+	void onEventMineral( PLAYER target );
+	void onEventShop( PLAYER target );
+	void onEventRyugu( PLAYER target );
+	void onEventLake( PLAYER target );
 private:
 	double _camera_pos_x;
 	std::array< PlayerPtr, MAX_PLAYER > _player;

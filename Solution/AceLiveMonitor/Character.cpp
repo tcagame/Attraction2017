@@ -78,7 +78,7 @@ void Character::updateMass( ) {
 	//‰E‘¤
 	if ( _vec.x > 0 ) {
 		if ( map->getObject( _pos + Vector( _vec.x, 0 ) ) == OBJECT_BLOCK ) {
-			_pos.x = ( ( int )( _pos.x + _vec.x ) / OBJECT_CHIP_SIZE ) * OBJECT_CHIP_SIZE;
+			_pos.x = ( ( int )( _pos.x + _vec.x ) / OBJECT_CHIP_SIZE ) * OBJECT_CHIP_SIZE - 1;
 			_vec.x = 0;
 			_dir = DIR_RIGHT;
 		}

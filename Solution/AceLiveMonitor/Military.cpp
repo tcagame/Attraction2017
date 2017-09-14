@@ -248,13 +248,13 @@ void Military::createBoss( ) {
 	case EVENT_REDDAEMON:
 		_boss = EnemyBossPtr( new EnemyBossRedDaemon( Vector( 800, 200 ) ) );
 		break;
-	case EVENT_FIRE:
+	case EVENT_FLAME:
 		_boss = EnemyBossPtr( new EnemyBossBloodDaemon( Vector( 800, 200 ) ) );
 		break;
-	case EVENT_TREE:
+	case EVENT_WOOD:
 		_boss = EnemyBossPtr( new EnemyBossMonsterTree( Vector( 800, 225 ) ) );
 		break;
-	case EVENT_ROCK:
+	case EVENT_MINERAL:
 		_boss = EnemyBossPtr( new EnemyBossRock( Vector( 800, 225 ) ) );
 		break;
 	default:

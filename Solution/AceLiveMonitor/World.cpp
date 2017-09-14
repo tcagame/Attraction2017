@@ -23,9 +23,9 @@ World::World( ) :
 _event( EVENT_NONE ) {
 	_map_street = MapPtr( new Map( FILENAME_STREET ) );
 	_map_event[ EVENT_REDDAEMON ] = MapPtr( new Map( FILENAME_EVENT_REDDAEMON ) );
-	_map_event[ EVENT_FIRE      ] = MapPtr( new Map( FILENAME_EVENT_FIRE      ) );
-	_map_event[ EVENT_TREE      ] = MapPtr( new Map( FILENAME_EVENT_TREE      ) );
-	_map_event[ EVENT_ROCK      ] = MapPtr( new Map( FILENAME_EVENT_ROCK      ) );
+	_map_event[ EVENT_FLAME      ] = MapPtr( new Map( FILENAME_EVENT_FIRE      ) );
+	_map_event[ EVENT_WOOD      ] = MapPtr( new Map( FILENAME_EVENT_TREE      ) );
+	_map_event[ EVENT_MINERAL      ] = MapPtr( new Map( FILENAME_EVENT_ROCK      ) );
 	_map_event[ EVENT_SHOP      ] = MapPtr( new Map( FILENAME_EVENT_SHOP      ) );
 	_map_event[ EVENT_RYUGU     ] = MapPtr( new Map( FILENAME_EVENT_RYUGU     ) );
 	_map_event[ EVENT_LAKE      ] = MapPtr( new Map( FILENAME_EVENT_LAKE      ) );
@@ -58,9 +58,9 @@ void World::playMapBgm( EVENT event ) {
 		sound->playBGM( "yokai_music_12.wav" );
 		break;
 	case EVENT_REDDAEMON:
-	case EVENT_FIRE:
-	case EVENT_TREE:
-	case EVENT_ROCK:
+	case EVENT_FLAME:
+	case EVENT_WOOD:
+	case EVENT_MINERAL:
 		sound->playBGM( "yokai_music_04.wav" );
 		break;
 	case EVENT_SHOP:
