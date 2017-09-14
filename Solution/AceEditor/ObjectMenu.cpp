@@ -367,6 +367,9 @@ unsigned char ObjectMenu::getEvent( int idx ) const {
 	case 7:
 		result = OBJECT_EVENT_CALL;
 		break;
+	case 8:
+		result = OBJECT_EVENT_GAMBLE;
+		break;
 	default:
 		result = OBJECT_NONE;
 		break;
