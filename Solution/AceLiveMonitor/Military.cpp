@@ -113,7 +113,7 @@ void Military::update( ) {
 				}
 			}
 			if ( _boss->getPower( ) <= 0 ) {
-				_boss->dropItem( );
+				_boss->dropItem( );//落ちるのではなく配られる
 				sound->playSE( "yokai_voice_29.wav" );
 				int impact_chip_size = _boss->getChipSize( ) * 2;
 				Magazine::getTask( )->add( ImpactPtr( new Impact( _boss->getPos( ) + Vector( 0, _boss->getChipSize( ) / 2 ), AREA_EVENT, impact_chip_size ) ) );
@@ -129,9 +129,6 @@ void Military::update( ) {
 			}
 			if ( enemy->getPower( ) <= 0 ) {
 				//エネミーが倒れた場合、倒れた位置で爆発する
-				if ( !std::dynamic_pointer_cast< EnemyAttack >( enemy ) ) {
-					dropMoney( enemy );
-				}
 				int impact_chip_size = enemy->getChipSize( ) * 2;
 				Magazine::getTask( )->add( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), AREA_STREET, impact_chip_size ) ) );
 				sound->playSE( "yokai_se_26.wav" );
