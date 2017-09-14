@@ -3,7 +3,7 @@
 
 PTR( RockMapStreetDrawer );
 PTR( Status );
-PTR( EventTurtle );
+PTR( RockEventTurtle );
 
 class RockMapStreet : public RockMap {
 public:

@@ -1,4 +1,4 @@
-#include "EventTurtle.h"
+#include "RockEventTurtle.h"
 #include "RockDollHouse.h"
 #include "RockFamily.h"
 #include "RockPlayer.h"
@@ -7,15 +7,15 @@ const int HEIGHT = 16;
 const int RADIUS = 64;
 const double ANIM_SPEED = 0.9;
 
-EventTurtle::EventTurtle( const Vector& pos ) :
+RockEventTurtle::RockEventTurtle( const Vector& pos ) :
 RockEventCharacter( pos, DOLL_TURTLE, RADIUS, HEIGHT, false ) {
 }
 
 
-EventTurtle::~EventTurtle( ) {
+RockEventTurtle::~RockEventTurtle( ) {
 }
 
-double EventTurtle::getAnimTime( ) const {
+double RockEventTurtle::getAnimTime( ) const {
 	ModelMV1Ptr model = RockDollHouse::getTask( )->getModel( getDoll( ) );
 	double anim_time = 0;
 	double end_time = model->getEndAnimTime( );	
@@ -23,5 +23,5 @@ double EventTurtle::getAnimTime( ) const {
 	return anim_time;
 }
 
-void  EventTurtle::act( ) {
+void RockEventTurtle::act( ) {
 }

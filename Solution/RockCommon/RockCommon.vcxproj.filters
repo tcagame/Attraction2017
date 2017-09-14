@@ -99,9 +99,6 @@
     <ClCompile Include="RockPlayer.cpp">
       <Filter>Player</Filter>
     </ClCompile>
-    <ClCompile Include="EventTurtle.cpp">
-      <Filter>Event</Filter>
-    </ClCompile>
     <ClCompile Include="RockOffice.cpp">
       <Filter>Event</Filter>
     </ClCompile>
@@ -117,6 +114,12 @@
     </ClCompile>
     <ClCompile Include="RockBubble.cpp">
       <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="RockEventMiko.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
+    <ClCompile Include="RockEventTurtle.cpp">
+      <Filter>Event</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -221,9 +224,6 @@
     <ClInclude Include="RockPlayer.h">
       <Filter>Player</Filter>
     </ClInclude>
-    <ClInclude Include="EventTurtle.h">
-      <Filter>Event</Filter>
-    </ClInclude>
     <ClInclude Include="RockOffice.h">
       <Filter>Event</Filter>
     </ClInclude>
@@ -239,6 +239,12 @@
     </ClInclude>
     <ClInclude Include="RockBubble.h">
       <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="RockEventMiko.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="RockEventTurtle.h">
+      <Filter>Event</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
