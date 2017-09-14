@@ -35,10 +35,13 @@ private:
 	void drawMovie( ) const;
 private:
 	StatusPtr _status;
-	ImagePtr _image_frame;
-	ImagePtr _status_ui;
-	ImagePtr _status_num;
 	ImagePtr _dummy_ui;
 	std::vector< ImagePtr > _breasts;
+	std::vector< ImagePtr > _image_frame;
+	std::vector< ImagePtr > _power;
+	std::vector< ImagePtr > _items;
+	ImagePtr _virtue;
+	ImagePtr _money_num;
+	ImagePtr _virtue_num;
 };
 

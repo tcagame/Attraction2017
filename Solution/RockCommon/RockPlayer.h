@@ -48,6 +48,7 @@ private:
 	void updateEffect( );
 	void updeteState( );
 	void sendDamage( );
+	void move( );
 	Vector getApproachesVec( );
 private:
 	StatusPtr _status;
