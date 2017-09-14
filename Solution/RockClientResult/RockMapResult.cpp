@@ -15,7 +15,6 @@ void RockMapResult::initialize( ) {
 	
 	ModelMV1Ptr col01 = ModelMV1Ptr( new ModelMV1 );
 	col01->load( "Resource/Rock/map/result/map11_01.mv1" );
-	col01->setTrans( Matrix::makeTransformTranslation( Vector( 0, 10, 0 ) ) );
 	col01->draw( );
 	addColModel( col01 );
 
