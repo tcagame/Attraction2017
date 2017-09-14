@@ -4,6 +4,8 @@
 #include "Application.h"
 #include "SynchronousData.h"
 #include "Device.h"
+#include "World.h"
+#include "Map.h"
 #include "Sound.h"
 #include <assert.h>
 
@@ -51,6 +53,7 @@ void Family::update( ) {
 	}
 	
 	updateCameraPos( );
+	updateEvent( );
 
 	_monmo->update( );
 
@@ -160,4 +163,152 @@ MonmotaroConstPtr Family::getMonmotaro( ) const {
 	return _monmo;
 }
 
+void Family::updateEvent( ) {
+	for ( int i = 0; i < MAX_PLAYER; i++ ) {
+		PLAYER target = ( PLAYER )i;
+		EVENT event = _player[ target ]->getOnEvent( );
+		switch ( event ) {
+		case EVENT_REDDAEMON:
+			onEventReddaemon( target );
+			break;
+		case EVENT_FLAME:
+			onEventFlame( target );
+			break;
+		case EVENT_WOOD:
+			onEventWood( target );
+			break;
+		case EVENT_MINERAL:
+			onEventMineral( target );
+			break;
+		case EVENT_SHOP:
+			onEventShop( target );
+			break;
+		case EVENT_RYUGU:
+			onEventRyugu( target );
+			break;
+		case EVENT_LAKE:
+			onEventLake( target );
+			break;
+		}
+	}
+}
 
+
+void Family::onEventReddaemon( PLAYER target ) {
+}
+
+void Family::onEventFlame( PLAYER target ) {
+}
+
+void Family::onEventWood( PLAYER target ) {
+}
+
+void Family::onEventMineral( PLAYER target ) {
+}
+
+void Family::onEventShop( PLAYER target ) {
+	World::getTask( )->setEvent( EVENT_SHOP );
+	_player[ target ] ->enterEvent( );
+}
+
+void Family::onEventRyugu( PLAYER target ) {
+}
+
+void Family::onEventLake( PLAYER target ) {
+}
+
+/*
+// 仮でインクルードをここで宣言
+#include "World.h"
+#include "Map.h"
+#include "Office.h"
+#include "Military.h"
+#include "Storage.h"
+
+void Family::updateEvent( ) {
+	//イベント
+	WorldPtr world = World::getTask( );
+	MapPtr map = world->getMap( AREA_STREET );
+	MapPtr map_event = world->getMap( AREA_EVENT );
+	OfficePtr office( Office::getTask( ) );
+	MilitaryPtr militaly( Military::getTask( ) );
+	FamilyPtr family( Family::getTask( ) );
+	StoragePtr storage( Storage::getTask( ) );
+
+	EVENT event = world->getEvent( );
+	for ( int i = 0; i < MAX_PLAYER; i++ ) {
+		if ( event == EVENT_NONE ) {
+			bool enter = true;
+			unsigned char obj = map->getObject( _player[ i ]->getPos( ) + _player[ i ]->getVec( ) );
+			switch ( obj ) {
+			case OBJECT_EVENT_REDDAEMON:
+				event = EVENT_REDDAEMON;
+				break;
+			case OBJECT_EVENT_FLAME:
+				event = EVENT_FLAME;
+				break;
+			case OBJECT_EVENT_WOOD:
+				event = EVENT_WOOD;
+				break;
+			case OBJECT_EVENT_MINERAL:
+				event = EVENT_MINERAL;
+				break;
+			case OBJECT_EVENT_SHOP:
+				event = EVENT_SHOP;
+				break;
+			case OBJECT_EVENT_RYUGU:
+				event = EVENT_RYUGU;
+				break;
+			case OBJECT_EVENT_LAKE:
+				event = EVENT_LAKE;
+				break;
+			default:
+				enter = false;
+				break;
+			}
+			//イベントに入るとき
+			if ( event != EVENT_NONE ) {
+				world->setEvent( event );
+				storage->eraseEventItem( );
+				if ( event >= EVENT_SHOP ) {
+					office->popUpNPC( );
+				}
+				if ( event == EVENT_SHOP ) {
+					storage->createShopItem( );
+				}
+				militaly->createBoss( );
+				_player[ i ] ->enterEvent( );
+			}
+		}
+
+		if ( map->getObject( _player[ i ]->getPos( ) + _player[ i ]->getVec( ) ) == OBJECT_EVENT_CALL ) {
+			Sound::getTask( )->playSE( "yokai_voice_06.wav" );
+			_player[ i ]->setAction( ACTION_CALL );
+			_player[ i ]->setVec( Vector( ) );
+		}
+
+		if ( _player[ i ]->getArea( ) == AREA_EVENT ) {
+			//一ページ目にいたらメインに戻る
+			if ( _player[ i ]->getPos( ).x < GRAPH_SIZE ) {
+				_player[ i ]->setArea( AREA_STREET );
+				world->setEvent( EVENT_NONE );
+				militaly->eraseEventEnemy( );
+				storage->eraseEventItem( );
+				_player[ i ]->setPos( Vector( family->getCameraPosX( ) + SCREEN_WIDTH / 2, 0 ) );
+				_player[ i ]->setVec( Vector( ) );
+			}
+			//ボスが倒れている場合 && アイテムが無い[退場]
+			StoragePtr storage( Storage::getTask( ) );
+			if ( !Military::getTask( )->getBoss( ) &&
+				 !storage->isExistanceEventItem( ) &&
+				 world->getEvent( ) < EVENT_SHOP ) {
+				_player[ i ]->setArea( AREA_STREET );
+				world->setEvent( EVENT_NONE );
+				militaly->eraseEventEnemy( );
+				_player[ i ]->setPos( Vector( family->getCameraPosX( ) + SCREEN_WIDTH / 2, 0 ) );
+				_player[ i ]->setVec( Vector( ) );
+			}
+		}
+	}
+}
+*/

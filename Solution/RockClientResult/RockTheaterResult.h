@@ -3,6 +3,7 @@
 #include <vector>
 
 PTR( Status );
+PTR( ImageTarget );
 
 class RockTheaterResult : public RockTheater {
 public:
@@ -16,7 +17,7 @@ private:
 private:
 	bool _play;
 	std::vector< ImagePtr > _images;
-	ImagePtr _draw_image;
+	ImageTargetPtr _draw_image;
 	StatusPtr _status;
 };
 

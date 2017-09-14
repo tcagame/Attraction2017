@@ -43,6 +43,8 @@ public:
 	void pickUpVirtue( );
 	void setSynchronousData( PLAYER player, int camera_pos ) const;
 	bool isExist( ) const;
+	void enterEvent( );
+	EVENT getOnEvent( ) const;
 private:
 	enum ITEM {
 		ITEM_DANGO,
@@ -69,7 +71,6 @@ private:
 	void actOnBlowAway( );
 	void actOnDead( );
 	void actOnCall( );
-	void updateState( );
 	void setAction( ACTION action );
 	void adjustToCamera( );
 	void updateProgressBar( );
