@@ -11,6 +11,8 @@
 #include "RockEnemyBoss.h"
 #include "Sound.h"
 
+PTR( RockEnemyBoss );
+
 RockMilitaryPtr RockMilitary::getTask( ) {
 	return std::dynamic_pointer_cast< RockMilitary >( Application::getInstance( )->getTask( getTag( ) ) );
 }
@@ -62,9 +64,13 @@ void RockMilitary::updateEnemies( ) {
 		}
 
 		enemy->update( );
+		
 		RockPlayerPtr overlapped_player = family->getOverLappedPlayer( enemy );
 		if ( overlapped_player ) {
-			enemy->adjustPosForOverLapped( overlapped_player );
+			RockEnemyBossPtr boss = std::dynamic_pointer_cast< RockEnemyBoss >( enemy );
+			if ( !boss ) {
+				enemy->adjustPosForOverLapped( overlapped_player );
+			}
 		}
 		RockEnemyPtr overlapped_enemy = getOverLappedEnemy( enemy );
 		if ( overlapped_enemy ) {
