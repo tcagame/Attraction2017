@@ -3,7 +3,7 @@
 
 static const int WAIT_ANIM_TIME = 5;
 static const int MOVE_SPEED = 2;
-static const int MAX_HP = 0;
+static const int MAX_HP = 4;
 
 EnemyBlueMonk::EnemyBlueMonk( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ),

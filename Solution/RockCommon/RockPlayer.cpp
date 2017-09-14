@@ -251,7 +251,7 @@ void RockPlayer::actOnWaiting( ) {
 			setAction( ACTION_WALK );
 		} else {
 			move( );
-		}
+		} 
 		return;
 	}
 
@@ -260,8 +260,8 @@ void RockPlayer::actOnWaiting( ) {
 	//水平方向のベクトル
 	Vector vec = getVec( );
 	vec.y = 0;
-	//ベクトルがない場合待機に移行する
-	if ( vec.getLength( ) == 0 ) {
+	//移動条件以外でベクトルがある場合待機に移行する
+	if ( vec.getLength( ) > 0 ) {
 		setAction( ACTION_BRAKE );
 		return;
 	}
