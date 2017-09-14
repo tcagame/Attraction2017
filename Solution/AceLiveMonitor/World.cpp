@@ -6,6 +6,7 @@
 #include "Family.h"
 #include "Player.h"
 
+#include "EventNone.h"
 #include "EventReddaemon.h"
 #include "EventFlame.h"
 #include "EventWood.h"
@@ -33,6 +34,7 @@ WorldPtr World::getTask( ) {
 }
 
 World::World( ) {
+	setEvent( EVENT_NONE );
 	_map_street = MapPtr( new Map( FILENAME_STREET ) );
 	_map_event[ EVENT_REDDAEMON ] = MapPtr( new Map( FILENAME_EVENT_REDDAEMON ) );
 	_map_event[ EVENT_FLAME     ] = MapPtr( new Map( FILENAME_EVENT_FIRE      ) );
@@ -56,7 +58,8 @@ void World::initialize( ) {
 void World::setEvent( EVENT type ) {
 	switch ( type ) {
 	case EVENT_NONE:
-		_event.reset( );
+		_event.reset( new EventNone( ) );
+		break;
 	case EVENT_REDDAEMON:
 		_event.reset( new EventReddaemon( ) );
 		break;

@@ -173,6 +173,7 @@
     <ClCompile Include="EventGamble.cpp" />
     <ClCompile Include="EventLake.cpp" />
     <ClCompile Include="EventMineral.cpp" />
+    <ClCompile Include="EventNone.cpp" />
     <ClCompile Include="EventReddaemon.cpp" />
     <ClCompile Include="EventRyugu.cpp" />
     <ClCompile Include="EventShop.cpp" />
@@ -317,6 +318,7 @@
     <ClInclude Include="EventGamble.h" />
     <ClInclude Include="EventLake.h" />
     <ClInclude Include="EventMineral.h" />
+    <ClInclude Include="EventNone.h" />
     <ClInclude Include="EventReddaemon.h" />
     <ClInclude Include="EventRyugu.h" />
     <ClInclude Include="EventShop.h" />
