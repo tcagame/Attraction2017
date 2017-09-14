@@ -240,7 +240,7 @@ EnemyPtr Military::getOverlappedEnemy( CharacterConstPtr character ) const {
 	return result;
 }
 
-void Military::createBoss( ) {
+void Military::createEventEnemy( ) {
 	WorldPtr world = World::getTask( );
 	EVENT event = world->getEvent( );
 	_event_enemies.clear( );

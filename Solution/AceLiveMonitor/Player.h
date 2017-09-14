@@ -44,6 +44,7 @@ public:
 	void setSynchronousData( PLAYER player, int camera_pos ) const;
 	bool isExist( ) const;
 	void enterEvent( );
+	void leaveEvent( );
 	EVENT getOnEvent( ) const;
 private:
 	enum ITEM {
