@@ -70,8 +70,8 @@ void RockViewer::initialize( ) {
 	}
 	
 	_image_frame.push_back( drawer->createImage( "UI/tarosuke_status_window.png" ) );
-	_image_frame.push_back( drawer->createImage( "UI/tarojiro_status_window.png" ) );
 	_image_frame.push_back( drawer->createImage( "UI/garisuke_status_window.png" ) );
+	_image_frame.push_back( drawer->createImage( "UI/tarojiro_status_window.png" ) );
 	_image_frame.push_back( drawer->createImage( "UI/taromi_status_window.png" ) );
 	//POWER
 	_power.push_back( drawer->createImage( "UI/ui_power_bit01.png" ) );
