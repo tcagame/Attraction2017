@@ -22,7 +22,7 @@ RockMapBoss::~RockMapBoss( ) {
 }
 
 void RockMapBoss::initialize( ) {
-	_drawer = RockMapBossDrawerPtr( new RockMapBossDrawer( STAGE_FIRE_TO_ROCK ) );
+	_drawer = RockMapBossDrawerPtr( new RockMapBossDrawer( STAGE_ROCK ) );
 }
 
 void RockMapBoss::update( ) {
@@ -157,3 +157,8 @@ bool RockMapBoss::isWarpToStreet( STAGE stage ) {
 	}
 	return true;
 }
+
+RockMapBoss::STAGE RockMapBoss::getStage( ) const {
+	return _drawer->getStage( );
+}
+

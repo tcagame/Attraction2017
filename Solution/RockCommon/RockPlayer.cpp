@@ -304,6 +304,7 @@ void RockPlayer::actOnWalking( ) {
 			sound->playSE( "yokai_voice_17.wav" );
 			Vector vec = getVec( );
 			vec.y = JUMP_POWER;
+
 			setVec( vec );
 			return;
 		}
@@ -321,7 +322,22 @@ void RockPlayer::actOnWalking( ) {
 	}
 
 	//ˆÚ“®
+
+	RockCameraPtr camera( RockCamera::getTask( ) );
+	Vector camera_dir = camera->getTarget( ) - camera->getPos( );
+	camera_dir.y = 0;
+	Vector axis( 0, -1, 0 );
+	if ( Vector( 0, 0, 1 ).cross( camera_dir ).y < 0 ) {
+		axis = Vector( 0, 1, 0 );
+	}
+	double angle = Vector( 0, 0, 1 ).angle( camera_dir );
+	Matrix rot = Matrix::makeTransformRotation( axis, angle );
+	Vector vec = Vector( player.device_x, 0, -player.device_y ).normalize( ) * MOVE_SPEED;
+	vec = rot.multiply( vec );
+	vec.y = getVec( ).y;
+	setVec( vec );
 	move( );
+
 	if ( !sound->isPlayingSE( "yokai_voice_15.wav" ) ) {
 		sound->playSE( "yokai_voice_15.wav" );
 	}
