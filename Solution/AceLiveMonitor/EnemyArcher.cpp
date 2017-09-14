@@ -4,7 +4,7 @@
 #include "SynchronousData.h"
 
 const int WAIT_ANIM_TIME = 5;
-const int MAX_HP = 0;
+const int MAX_HP = 5;
 const int MOVE_SPEED = -2;
 const int MOVE_TIME = WAIT_ANIM_TIME * 9;
 const int ANIM_LOOP_TIME = WAIT_ANIM_TIME * 18;
