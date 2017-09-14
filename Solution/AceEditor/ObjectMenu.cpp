@@ -347,13 +347,13 @@ unsigned char ObjectMenu::getEvent( int idx ) const {
 		result = OBJECT_EVENT_REDDAEMON;
 		break;
 	case 1:
-		result = OBJECT_EVENT_FIRE;
+		result = OBJECT_EVENT_FLAME;
 		break;
 	case 2:
-		result = OBJECT_EVENT_TREE;
+		result = OBJECT_EVENT_WOOD;
 		break;
 	case 3:
-		result = OBJECT_EVENT_ROCK;
+		result = OBJECT_EVENT_MINERAL;
 		break;
 	case 4:
 		result = OBJECT_EVENT_SHOP;

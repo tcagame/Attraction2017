@@ -241,17 +241,17 @@ void ObjectPreview::draw( ) const {
 				_event->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE - OBJECT_CHIP_SIZE / 2, PREVIEW_Y + j * OBJECT_CHIP_SIZE - OBJECT_CHIP_SIZE );
 				_event->draw( );
 			}
-			if ( _data->getObject( ox, oy ) == OBJECT_EVENT_FIRE ) {
+			if ( _data->getObject( ox, oy ) == OBJECT_EVENT_FLAME ) {
 				_event->setRect( 32, 0, 32, 32 );
 				_event->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE - OBJECT_CHIP_SIZE / 2, PREVIEW_Y + j * OBJECT_CHIP_SIZE - OBJECT_CHIP_SIZE );
 				_event->draw( );
 			}
-			if ( _data->getObject( ox, oy ) == OBJECT_EVENT_TREE ) {
+			if ( _data->getObject( ox, oy ) == OBJECT_EVENT_WOOD ) {
 				_event->setRect( 64, 0, 32, 32 );
 				_event->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE - OBJECT_CHIP_SIZE / 2, PREVIEW_Y + j * OBJECT_CHIP_SIZE - OBJECT_CHIP_SIZE );
 				_event->draw( );
 			}
-			if ( _data->getObject( ox, oy ) == OBJECT_EVENT_ROCK ) {
+			if ( _data->getObject( ox, oy ) == OBJECT_EVENT_MINERAL ) {
 				_event->setRect( 96, 0, 32, 32 );
 				_event->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE - OBJECT_CHIP_SIZE / 2, PREVIEW_Y + j * OBJECT_CHIP_SIZE - OBJECT_CHIP_SIZE );
 				_event->draw( );
