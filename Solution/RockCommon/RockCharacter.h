@@ -20,7 +20,7 @@ public:
 	bool isHead( ) const;
 	bool isOnHead( RockCharacterConstPtr target ) const;
 	bool isOverLapped( RockCharacterConstPtr target ) const;
-	void back( );
+	virtual void back( );
 	void adjustPosForOverLapped( RockCharacterPtr target );
 	virtual void bound( );
 	virtual ModelMV1Ptr getModel( ) const { return ModelMV1Ptr( ); };
