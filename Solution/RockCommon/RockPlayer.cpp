@@ -310,6 +310,7 @@ void RockPlayer::actOnWalking( ) {
 			sound->playSE( "yokai_voice_17.wav" );
 			Vector vec = getVec( );
 			vec.y = JUMP_POWER;
+
 			setVec( vec );
 			return;
 		}
@@ -338,7 +339,7 @@ void RockPlayer::actOnWalking( ) {
 	Matrix rot = Matrix::makeTransformRotation( axis, angle );
 	Vector vec = Vector( player.device_x, 0, -player.device_y ).normalize( ) * MOVE_SPEED;
 	vec = rot.multiply( vec );
-	vec.y = getVec( ).y;
+	vec.y = 0;
 	setVec( vec );
 	if ( !sound->isPlayingSE( "yokai_voice_15.wav" ) ) {
 		sound->playSE( "yokai_voice_15.wav" );

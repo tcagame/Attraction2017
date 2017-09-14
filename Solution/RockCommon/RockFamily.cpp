@@ -40,8 +40,8 @@ void RockFamily::updatePlayer( ) {
 	RockMilitaryPtr military( RockMilitary::getTask( ) );
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		if ( !_player[ i ]->isActive( ) ) {
-			_player[ i ]->resetPos( Vector( i * 50, 75 ) + _base_pos );
-			_player[ i ]->resetBubble( );
+			//_player[ i ]->resetPos( Vector( i * 50, 75 ) + _base_pos );
+			//_player[ i ]->resetBubble( );
 			continue;
 		}
 		_player[ i ]->update( );

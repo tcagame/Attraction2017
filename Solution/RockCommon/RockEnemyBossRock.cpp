@@ -9,6 +9,7 @@ const int HP = 50;
 
 RockEnemyBossRock::RockEnemyBossRock( const Vector& pos ) :
 RockEnemyBoss( pos, DOLL_BOSS_ROCK, HP, 1, 10, 10, true, true ) {
+	setDir( Vector( -1, 0, 0 ) );
 }
 
 

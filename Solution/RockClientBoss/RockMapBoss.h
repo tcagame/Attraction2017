@@ -22,6 +22,7 @@ public:
 public:
 	void update( );
 	void initialize( );
+	STAGE getStage( ) const;
 private:
 	bool isWarpToBoss( const Vector& pos );
 	bool isWarpToStreet( STAGE stage );

@@ -17,6 +17,7 @@ ModelMV1Ptr RockItemTree::getModel( ) const {
 	ModelMV1Ptr model = RockDollHouse::getTask( )->getModel( getDoll( ) );
 	Vector pos = getPos( ) + Vector( 0, 15, 0 );
 	model->setTrans( Matrix::makeTransformTranslation( pos ) );
+	model->setRot( Matrix::makeTransformRotation( Vector( 0, -1, 0 ), PI / 2 ) );
 	return model;
 }
 
