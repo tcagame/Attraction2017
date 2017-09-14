@@ -29,6 +29,9 @@ ViewerEvent::ViewerEvent( ) {
 		//LAKE
 		sprintf_s( buf, "Event/lake/back_%003d.png", i );
 		_images[ EVENT_LAKE * EVENT_PAGE_NUM + i ] = drawer->createImage( buf );
+		//CALL
+		sprintf_s( buf, "Event/call/back_%003d.png", i );
+		_images[ EVENT_CALL * EVENT_PAGE_NUM + i ] = drawer->createImage( buf );
 		//GAMBLE
 		sprintf_s( buf, "Event/gamble/back_%003d.png", i );
 		_images[ EVENT_GAMBLE * EVENT_PAGE_NUM + i ] = drawer->createImage( buf );

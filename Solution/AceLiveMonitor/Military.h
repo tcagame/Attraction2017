@@ -23,7 +23,7 @@ public:
 	const std::list< EnemyPtr > getEventEnemyList( ) const;
 	void popUp( EnemyPtr enemy );
 	void popUpEventEnemy( EnemyPtr enemy );
-	void createBoss( );
+	void createEventEnemy( );
 	void eraseEventEnemy( );
 	EnemyPtr getBoss( ) const;
 	EnemyPtr getHellFire( ) const;

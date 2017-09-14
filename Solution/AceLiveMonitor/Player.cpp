@@ -902,6 +902,12 @@ void Player::enterEvent( ) {
 	setVec( Vector( ) );
 }
 
+void Player::leaveEvent( ) {
+	setArea( AREA_STREET );
+	setPos( Vector( Family::getTask( )->getCameraPosX( ) + SCREEN_WIDTH / 2, 0 ) );
+	setVec( Vector( ) );
+}
+
 EVENT Player::getOnEvent( ) const {
 	if ( !isStanding( ) ||
 		 getArea( ) == AREA_EVENT ||

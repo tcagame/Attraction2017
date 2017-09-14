@@ -403,6 +403,36 @@
     <ClCompile Include="ViewerProgressBar.cpp">
       <Filter>Viewer</Filter>
     </ClCompile>
+    <ClCompile Include="Event.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
+    <ClCompile Include="EventCall.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
+    <ClCompile Include="EventFlame.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
+    <ClCompile Include="EventGamble.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
+    <ClCompile Include="EventLake.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
+    <ClCompile Include="EventMineral.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
+    <ClCompile Include="EventReddaemon.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
+    <ClCompile Include="EventRyugu.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
+    <ClCompile Include="EventShop.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
+    <ClCompile Include="EventWood.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy.h">
@@ -804,6 +834,36 @@
     <ClInclude Include="ViewerProgressBar.h">
       <Filter>Viewer</Filter>
     </ClInclude>
+    <ClInclude Include="Event.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="EventCall.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="EventFlame.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="EventGamble.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="EventLake.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="EventMineral.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="EventReddaemon.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="EventRyugu.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="EventShop.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="EventWood.h">
+      <Filter>Event</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">
@@ -847,6 +907,9 @@
     </Filter>
     <Filter Include="Map">
       <UniqueIdentifier>{ef7bfeff-736b-4045-92ee-f366049380ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Event">
+      <UniqueIdentifier>{936d5c50-167e-470a-b42c-7637bdd7d230}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
