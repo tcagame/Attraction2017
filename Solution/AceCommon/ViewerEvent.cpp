@@ -13,13 +13,13 @@ ViewerEvent::ViewerEvent( ) {
 
 		//FIRE
 		sprintf_s( buf, "Event/fire/back_%003d.png", i );
-		_images[ EVENT_FIRE * EVENT_PAGE_NUM + i ] = drawer->createImage( buf );
+		_images[ EVENT_FLAME * EVENT_PAGE_NUM + i ] = drawer->createImage( buf );
 		//TREE
 		sprintf_s( buf, "Event/tree/back_%003d.png", i );
-		_images[ EVENT_TREE * EVENT_PAGE_NUM + i ] = drawer->createImage( buf );
+		_images[ EVENT_WOOD * EVENT_PAGE_NUM + i ] = drawer->createImage( buf );
 		//ROCK
 		sprintf_s( buf, "Event/rock/back_%003d.png", i );
-		_images[ EVENT_ROCK * EVENT_PAGE_NUM + i ] = drawer->createImage( buf );
+		_images[ EVENT_MINERAL * EVENT_PAGE_NUM + i ] = drawer->createImage( buf );
 		//SHOP
 		sprintf_s( buf, "Event/shop/back_%003d.png", i );
 		_images[ EVENT_SHOP * EVENT_PAGE_NUM + i ] = drawer->createImage( buf );

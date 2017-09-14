@@ -23,7 +23,6 @@ _height( height ),
 _head( head ),
 _col( col ),
 _shadow( shadow ),
-_shadow_index ( -1 ),
 _dir( Vector( 0, 0, -1 ) ) {
 }
 
@@ -77,11 +76,7 @@ void RockCharacter::update( ) {
 		 diff.getLength2( ) < DRAW_SHADOW_RANGE * DRAW_SHADOW_RANGE ) {
 		RockShadowPtr shadow = RockShadow::getTask( );
 		if( shadow ){
-			if ( _shadow_index == -1 ) {
-				_shadow_index = RockShadow::getTask( )->create( getPos( ), getRadius( ) );
-			} else {
-				shadow->set( _shadow_index, getPos( ), getRadius( ) );
-			}
+			shadow->set( getPos( ), getRadius( ) );
 		}
 	}
 }
@@ -92,6 +87,10 @@ void RockCharacter::setVec( const Vector& vec ) {
 
 void RockCharacter::setPos( const Vector& pos ) {
 	_pos = pos;
+}
+
+void RockCharacter::setDir( const Vector& dir ) {
+	_dir = dir;
 }
 
 Vector RockCharacter::getVec( ) const {

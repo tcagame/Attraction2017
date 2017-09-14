@@ -52,12 +52,13 @@ enum AREA {
 enum EVENT {
 	EVENT_NONE,
 	EVENT_REDDAEMON,
-	EVENT_FIRE,
-	EVENT_TREE,
-	EVENT_ROCK,
+	EVENT_FLAME,
+	EVENT_WOOD,
+	EVENT_MINERAL,
 	EVENT_SHOP,
 	EVENT_RYUGU,
 	EVENT_LAKE,
+	EVENT_CALL,
 	EVENT_GAMBLE,
 	MAX_EVENT,
 };
@@ -138,10 +139,11 @@ const unsigned char OBJECT_ONEWAY = 0x81;
 const unsigned char OBJECT_WATER  = 0x82;
 //event
 const unsigned char OBJECT_EVENT_REDDAEMON = 0xC0;
-const unsigned char OBJECT_EVENT_FIRE	= 0xC1;
-const unsigned char OBJECT_EVENT_TREE	= 0xC2;
-const unsigned char OBJECT_EVENT_ROCK	= 0xC3;
-const unsigned char OBJECT_EVENT_SHOP	= 0xC4;
-const unsigned char OBJECT_EVENT_LAKE	= 0xC5;
-const unsigned char OBJECT_EVENT_RYUGU	= 0xC6;
-const unsigned char OBJECT_EVENT_CALL	= 0xC7;
+const unsigned char OBJECT_EVENT_FLAME	   = 0xC1;
+const unsigned char OBJECT_EVENT_WOOD	   = 0xC2;
+const unsigned char OBJECT_EVENT_MINERAL   = 0xC3;
+const unsigned char OBJECT_EVENT_SHOP	   = 0xC4;
+const unsigned char OBJECT_EVENT_LAKE	   = 0xC5;
+const unsigned char OBJECT_EVENT_RYUGU	   = 0xC6;
+const unsigned char OBJECT_EVENT_CALL	   = 0xC7;
+const unsigned char OBJECT_EVENT_GAMBLE    = 0xC8;

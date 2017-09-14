@@ -243,7 +243,6 @@ void Player::act( ) {
 	}
 
 	actOnCamera( );
-	updateState( );
 	_unrivaled_count++;
 
 	updateShowMoney( );
@@ -284,7 +283,7 @@ void Player::actOnEntry( ) {
 		appear( );
 		// アイテム初期化
 		for ( int i = 0; i < MAX_ITEM; i++ ) {
-			_item[ i ] = true;
+			_item[ i ] = false;
 		}
 		_virtue = 9;
 		_money = 98765;
@@ -702,92 +701,6 @@ int Player::getChargeCount( ) const {
 	return _charge_count;
 }
 
-void Player::updateState( ) {
-	//イベント
-	WorldPtr world = World::getTask( );
-	MapPtr map = world->getMap( AREA_STREET );
-	MapPtr map_event = world->getMap( AREA_EVENT );
-	OfficePtr office( Office::getTask( ) );
-	MilitaryPtr militaly( Military::getTask( ) );
-	FamilyPtr family( Family::getTask( ) );
-	StoragePtr storage( Storage::getTask( ) );
-
-	EVENT event = world->getEvent( );
-	if ( event == EVENT_NONE ) {
-		bool enter = true;
-		unsigned char obj = map->getObject( getPos( ) + getVec( ) );
-		switch ( obj ) {
-		case OBJECT_EVENT_REDDAEMON:
-			event = EVENT_REDDAEMON;
-			break;
-		case OBJECT_EVENT_FIRE:
-			event = EVENT_FIRE;
-			break;
-		case OBJECT_EVENT_TREE:
-			event = EVENT_TREE;
-			break;
-		case OBJECT_EVENT_ROCK:
-			event = EVENT_ROCK;
-			break;
-		case OBJECT_EVENT_SHOP:
-			event = EVENT_SHOP;
-			break;
-		case OBJECT_EVENT_RYUGU:
-			event = EVENT_RYUGU;
-			break;
-		case OBJECT_EVENT_LAKE:
-			event = EVENT_LAKE;
-			break;
-		default:
-			enter = false;
-			break;
-		}
-		//イベントに入るとき
-		if ( event != EVENT_NONE ) {
-			world->setEvent( event );
-			storage->eraseEventItem( );
-			if ( event >= EVENT_SHOP ) {
-				office->popUpNPC( );
-			}
-			if ( event == EVENT_SHOP ) {
-				storage->createShopItem( );
-			}
-			militaly->createBoss( );
-			setArea( AREA_EVENT );
-			setPos( Vector( GRAPH_SIZE * 3 / 2, 0 ) );
-			setVec( Vector( ) );
-		}
-	}
-
-	if ( map->getObject( getPos( ) + getVec( ) ) == OBJECT_EVENT_CALL ) {
-		Sound::getTask( )->playSE( "yokai_voice_06.wav" );
-		setAction( ACTION_CALL );
-		setVec( Vector( ) );
-	}
-
-	if ( getArea( ) == AREA_EVENT ) {
-		//一ページ目にいたらメインに戻る
-		if ( getPos( ).x < GRAPH_SIZE ) {
-			setArea( AREA_STREET );
-			world->setEvent( EVENT_NONE );
-			militaly->eraseEventEnemy( );
-			storage->eraseEventItem( );
-			setPos( Vector( family->getCameraPosX( ) + SCREEN_WIDTH / 2, 0 ) );
-			setVec( Vector( ) );
-		}
-		//ボスが倒れている場合 && アイテムが無い[退場]
-		StoragePtr storage( Storage::getTask( ) );
-		if ( !Military::getTask( )->getBoss( ) &&
-			 !storage->isExistanceEventItem( ) &&
-			 world->getEvent( ) < EVENT_SHOP ) {
-			setArea( AREA_STREET );
-			world->setEvent( EVENT_NONE );
-			militaly->eraseEventEnemy( );
-			setPos( Vector( family->getCameraPosX( ) + SCREEN_WIDTH / 2, 0 ) );
-			setVec( Vector( ) );
-		}
-	}
-}
 
 bool Player::isOnHead( CharacterPtr target ) const {
 	if ( _action != ACTION_FLOAT ) {
@@ -981,4 +894,52 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		int time = ( getActCount( ) / 2 ) % 2;
 		data->addObject( area, SynchronousData::TYPE_SHOT, ANIM[ phase + time ], attribute, x, y );
 	}
+}
+
+void Player::enterEvent( ) {
+	setArea( AREA_EVENT );
+	setPos( Vector( GRAPH_SIZE * 3 / 2, 0 ) );
+	setVec( Vector( ) );
+}
+
+EVENT Player::getOnEvent( ) const {
+	if ( !isStanding( ) ||
+		 getArea( ) == AREA_EVENT ||
+		 !isExist( ) ) {
+		return EVENT_NONE;
+	}
+
+	MapPtr map = World::getTask( )->getMap( AREA_STREET );
+	unsigned char obj = map->getObject( getPos( ) );
+	EVENT event = EVENT_NONE;
+	switch ( obj ) {
+	case OBJECT_EVENT_REDDAEMON:
+		event = EVENT_REDDAEMON;
+		break;
+	case OBJECT_EVENT_FLAME:
+		event = EVENT_FLAME;
+		break;
+	case OBJECT_EVENT_WOOD:
+		event = EVENT_WOOD;
+		break;
+	case OBJECT_EVENT_MINERAL:
+		event = EVENT_MINERAL;
+		break;
+	case OBJECT_EVENT_SHOP:
+		event = EVENT_SHOP;
+		break;
+	case OBJECT_EVENT_LAKE:
+		event = EVENT_LAKE;
+		break;
+	case OBJECT_EVENT_RYUGU:
+		event = EVENT_RYUGU;
+		break;
+	case OBJECT_EVENT_CALL:
+		event = EVENT_CALL;
+		break;
+	case OBJECT_EVENT_GAMBLE:
+		event = EVENT_GAMBLE;
+		break;
+	}
+	return event;
 }

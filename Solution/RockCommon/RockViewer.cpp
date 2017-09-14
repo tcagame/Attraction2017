@@ -306,17 +306,12 @@ void  RockViewer::drawShadow( ) const {
 	if ( !shadow ) {
 		return;
 	}
-	std::vector< ModelMDLPtr > shadows = shadow->getShadows( );
-	std::vector< ModelMDLPtr >::const_iterator ite = shadows.begin( );
-	while ( ite != shadows.end( ) ) {
-		ModelMDLPtr model = *ite;
-		if ( !model ) {
-			ite++;
-			continue;
-		}
+	int size = shadow->getSetNum( );
+	for ( int i = 0; i < size; i++ ) {
+		ModelMDLPtr model = shadow->getModel( i );
 		model->draw( );
-		ite++;
 	}
+	shadow->reset( );
 }
 
 void RockViewer::drawUI( ) const {

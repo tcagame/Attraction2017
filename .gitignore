@@ -20,3 +20,5 @@
 Solution/MapExport/
 *.user
 *.wav
+*.res
+*.aps

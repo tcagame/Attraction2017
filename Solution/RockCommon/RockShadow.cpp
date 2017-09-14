@@ -11,7 +11,13 @@ RockShadowPtr RockShadow::getTask( ) {
 	return  std::dynamic_pointer_cast< RockShadow >( Application::getInstance( )->getTask( getTag( ) ) );
 }
 
-RockShadow::RockShadow( ) {
+RockShadow::RockShadow( ) :
+_set_num( 0 ) {
+	for ( int i = 0; i < MAX_SHADOW_NUM; i++ ) {
+		_models[ i ] = ModelMDLPtr( new ModelMDL );
+		_models[ i ]->setTexture( GRAPH_PATH.c_str( ) );
+		_models[ i ]->setTrans( true );
+	}
 }
 
 
@@ -21,19 +27,18 @@ RockShadow::~RockShadow( ) {
 void RockShadow::update( ) {
 }
 
-int RockShadow::create( const Vector& pos, const double scale ) {
-	ModelMDLPtr shadow = ModelMDLPtr( new ModelMDL );	
-	createShadow( shadow, pos, scale );
-	shadow->setTexture( GRAPH_PATH.c_str( ) );
-	shadow->setTrans( true );
-	_models.push_back( shadow );
-	return ( int )_models.size( ) - 1;
+void RockShadow::reset( ) {
+	_set_num = 0;
 }
 
-void RockShadow::set( const int idx, const Vector& pos, const double scale ) {	
-	ModelMDLPtr shadow = _models[ idx ];
+void RockShadow::set( const Vector& pos, const double scale ) {
+	if ( _set_num >= MAX_SHADOW_NUM ) {
+		return;
+	}
+	ModelMDLPtr shadow = _models[ _set_num ];
 	shadow->reset( );
 	createShadow( shadow, pos, scale );
+	_set_num++;
 }
 
 void RockShadow::createShadow( ModelMDLPtr model, const Vector& pos, const double scale ) {
@@ -62,8 +67,12 @@ void RockShadow::createShadow( ModelMDLPtr model, const Vector& pos, const doubl
 	model->set( 5, vertex[ 2 ] );
 }
 
-std::vector< ModelMDLPtr > RockShadow::getShadows( ) const {
-	return _models;
+int RockShadow::getSetNum( ) const {
+	return _set_num;
+}
+
+ModelMDLPtr RockShadow::getModel( int idx ) const {
+	return _models[ idx ];
 }
 
 Vector RockShadow::getAdjustPos( const Vector& pos ) {

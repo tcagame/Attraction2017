@@ -1,7 +1,7 @@
 #pragma once
 #include "Task.h"
 #include <string>
-#include <vector>
+#include <array>
 #include "mathmatics.h"
 
 PTR( RockShadow );
@@ -16,13 +16,17 @@ public:
 	virtual ~RockShadow( );
 public:
 	void update( );
-	int create( const Vector& pos, const double scale );
-	void set( const int idx, const Vector& pos, const double scale );
-	std::vector< ModelMDLPtr > getShadows( ) const;
+	void reset( );
+	void set( const Vector& pos, const double scale );
+	int getSetNum( ) const;
+	ModelMDLPtr getModel( int idx ) const;
+private:
+	static const int MAX_SHADOW_NUM = 100;
 private:
 	void createShadow( ModelMDLPtr model, const Vector& pos, const double scale );
 	Vector getAdjustPos( const Vector& pos );
 private:
-	std::vector< ModelMDLPtr > _models;
+	std::array< ModelMDLPtr, MAX_SHADOW_NUM > _models;
+	int _set_num;
 };
 

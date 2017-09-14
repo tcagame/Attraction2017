@@ -147,17 +147,17 @@ bool Storage::pickUpItem( ItemPtr item, PlayerPtr player ) {
 
 void Storage::createShopItem( ) {
 	{
-		ItemPtr item = ItemPtr( new ItemDango( Vector( 500, 0 ) ) );
+		ItemPtr item = ShopItemPtr( new ItemDango( Vector( 500, 0 ) ) );
 		item->setArea( AREA_EVENT );
 		_items.push_back( item );
 	}
 	{
-		ItemPtr item = ItemPtr( new ItemEnhancedAttack( Vector( 600, 0 ) ) );
+		ItemPtr item = ShopItemPtr( new ItemEnhancedAttack( Vector( 600, 0 ) ) );
 		item->setArea( AREA_EVENT );
 		_items.push_back( item );
 	}
 	{
-		ItemPtr item = ItemPtr( new ItemEnhancedCharge( Vector( 700, 0 ) ) );
+		ItemPtr item = ShopItemPtr( new ItemEnhancedCharge( Vector( 700, 0 ) ) );
 		item->setArea( AREA_EVENT );
 		_items.push_back( item );
 	}

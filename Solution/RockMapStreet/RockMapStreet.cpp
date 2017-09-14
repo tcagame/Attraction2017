@@ -12,7 +12,9 @@
 #include "RockItemMoney.h"
 //EventChara
 #include "RockOffice.h"
-#include "EventTurtle.h"
+#include "RockEventTurtle.h"
+#include "RockEventMiko.h"
+#include "RockEventOtohime.h"
 //Enemy
 #include "RockMilitary.h"
 #include "RockEnemyGhost.h"
@@ -76,7 +78,7 @@ void RockMapStreet::updateStreet( ) {
 			std::list< RockEventCharacterPtr > eve_chara = office->getEventCharacters( );
 			std::list< RockEventCharacterPtr >::iterator ite = eve_chara.begin( );
 			while ( ite != eve_chara.end( ) ) {
-				EventTurtlePtr turtle = std::dynamic_pointer_cast< EventTurtle >( *ite );
+				RockEventTurtlePtr turtle = std::dynamic_pointer_cast< RockEventTurtle >( *ite );
 				if ( !turtle ) {
 					ite++;
 					continue;
@@ -135,7 +137,7 @@ void RockMapStreet::updateRyugu( ) {
 			std::list< RockEventCharacterPtr > eve_chara = office->getEventCharacters( );
 			std::list< RockEventCharacterPtr >::iterator ite = eve_chara.begin( );
 			while ( ite != eve_chara.end( ) ) {
-				EventTurtlePtr turtle = std::dynamic_pointer_cast< EventTurtle >( *ite );
+				RockEventTurtlePtr turtle = std::dynamic_pointer_cast< RockEventTurtle >( *ite );
 				if ( !turtle ) {
 					ite++;
 					continue;
@@ -172,13 +174,13 @@ void RockMapStreet::genarateEnemies( STAGE next ) {
 	military->clean( );
 	switch ( next ) {
 	case STAGE_STREET:
-		military->add( RockEnemyPtr( new RockEnemyGhost(       Vector(  500,  40, -500 ) ) ) );
-		military->add( RockEnemyPtr( new RockEnemyRedBard(     Vector(  800,  60, -520 ) ) ) );
-		military->add( RockEnemyPtr( new RockEnemyWaterGhost(  Vector( 1100,  60, -530 ) ) ) );
+		military->add( RockEnemyPtr( new RockEnemyGhost      ( Vector(  500,  40, -500 ) ) ) );
+		military->add( RockEnemyPtr( new RockEnemyRedBard    ( Vector(  800,  60, -520 ) ) ) );
+		military->add( RockEnemyPtr( new RockEnemyWaterGhost ( Vector( 1100,  60, -530 ) ) ) );
 		military->add( RockEnemyPtr( new RockEnemyFaceAndHand( Vector( 1400, 130, -540 ) ) ) );
-		military->add( RockEnemyPtr( new RockEnemyCloud(       Vector( 1700, 150, -550 ) ) ) );
-		military->add( RockEnemyPtr( new RockEnemyBat(         Vector( 2000, 190, -550 ) ) ) );
-		military->add( RockEnemyPtr( new RockEnemyKimono(      Vector( 2300, 150, -550 ) ) ) );
+		military->add( RockEnemyPtr( new RockEnemyCloud      ( Vector( 1700, 150, -550 ) ) ) );
+		military->add( RockEnemyPtr( new RockEnemyBat        ( Vector( 2000, 190, -550 ) ) ) );
+		military->add( RockEnemyPtr( new RockEnemyKimono     ( Vector( 2300, 150, -550 ) ) ) );
 		break;
 	case STAGE_CAVE:
 		break;
@@ -212,13 +214,16 @@ void RockMapStreet::genarateEventCharacters( STAGE next ) {
 	switch ( next ) {
 	case STAGE_STREET:
 		if ( _stage != STAGE_RYUGU ) {
-			office->add( RockEventCharacterPtr( new EventTurtle( Vector( 3610, 320, -210 ) ) ) );
+			//—³‹{‚©‚ç–ß‚Á‚Ä‚­‚é‚Æ‚«‚Í‹T‚ðo‚³‚È‚¢B
+			office->add( RockEventCharacterPtr( new RockEventTurtle( Vector( 3610, 320, -210 ) ) ) );
 		}
+		office->add( RockEventCharacterPtr( new RockEventMiko( Vector( 3910, 320, -310 ) ) ) );
 		break;
 	case STAGE_CAVE:
 		break;
 	case STAGE_RYUGU:
-		office->add( RockEventCharacterPtr( new EventTurtle( Vector( 900, 30, 0 ) ) ) );
+		office->add( RockEventCharacterPtr( new RockEventTurtle( Vector( 900, 30, 0 ) ) ) );
+		office->add( RockEventCharacterPtr( new RockEventOtohime( Vector( -350, 30, 0 ) ) ) );
 		break;
 	}
 }
