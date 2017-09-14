@@ -4,7 +4,7 @@
 
 EventReddaemon::EventReddaemon( ) :
 Event( EVENT_REDDAEMON ) {
-	Military::getTask( )->createEventEnemy( );
+	Military::getTask( )->createEventEnemy( EVENT_REDDAEMON );
 }
 
 

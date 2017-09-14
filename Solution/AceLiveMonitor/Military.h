@@ -2,6 +2,7 @@
 #include "Task.h"
 #include <string>
 #include <list>
+#include "ace_define.h"
 
 PTR( Military );
 PTR( Enemy );
@@ -23,7 +24,7 @@ public:
 	const std::list< EnemyPtr > getEventEnemyList( ) const;
 	void popUp( EnemyPtr enemy );
 	void popUpEventEnemy( EnemyPtr enemy );
-	void createEventEnemy( );
+	void createEventEnemy( EVENT type );
 	void eraseEventEnemy( );
 	EnemyPtr getBoss( ) const;
 	EnemyPtr getHellFire( ) const;

@@ -4,6 +4,8 @@
 #include "ItemTree.h"
 #include "Storage.h"
 #include "SynchronousData.h"
+#include "Family.h"
+#include "Player.h"
 
 static const int ATTACK_TIME = 50;
 static const int MAX_HP = 12;
@@ -38,7 +40,11 @@ void EnemyBossMonsterTree::setSynchronousData( unsigned char type, int camera_po
 }
 
 void EnemyBossMonsterTree:: dropItem( ) {
-	ItemPtr item = ItemPtr( new ItemTree( getPos( ) ) );
-	item->setArea( AREA_EVENT );
-	Storage::getTask( )->add( item );
+	FamilyPtr family( Family::getTask( ) );
+	for ( int i = 0; i < MAX_PLAYER; i++ ) {
+		PlayerPtr player = family->getPlayer( i );
+		if ( player->getArea( ) == AREA_EVENT ) {
+			player->pickUpItem( Player::ITEM_WOOD );
+		}
+	}
 }

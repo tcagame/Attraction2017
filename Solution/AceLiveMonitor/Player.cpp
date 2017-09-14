@@ -949,3 +949,8 @@ EVENT Player::getOnEvent( ) const {
 	}
 	return event;
 }
+
+
+void Player::pickUpItem( ITEM item ) {
+	_item[ item ] = true;
+}

@@ -4,7 +4,7 @@
 
 EventFlame::EventFlame( ) :
 Event( EVENT_FLAME ) {
-	Military::getTask( )->createEventEnemy( );
+	Military::getTask( )->createEventEnemy( EVENT_FLAME );
 }
 
 

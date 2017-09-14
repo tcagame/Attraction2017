@@ -24,6 +24,16 @@ public:
 		ACTION_CALL,
 		MAX_ACTION,
 	};
+	enum ITEM {
+		ITEM_DANGO,
+		ITEM_HEART,
+		ITEM_HYPERTROPHY,
+		ITEM_SHORTENING,
+		ITEM_WOOD,
+		ITEM_FLAME,
+		ITEM_MINERAL,
+		MAX_ITEM,
+	};
 public:
 	Player( PLAYER player, Vector pos );
 	virtual ~Player( );
@@ -46,17 +56,7 @@ public:
 	void enterEvent( );
 	void leaveEvent( );
 	EVENT getOnEvent( ) const;
-private:
-	enum ITEM {
-		ITEM_DANGO,
-		ITEM_HEART,
-		ITEM_HYPERTROPHY,
-		ITEM_SHORTENING,
-		ITEM_WOOD,
-		ITEM_FLAME,
-		ITEM_MINERAL,
-		MAX_ITEM,
-	};
+	void pickUpItem( ITEM item );
 private:
 	void actOnEntry( );
 	void actOnContinue( );

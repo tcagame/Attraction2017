@@ -34,7 +34,6 @@ WorldPtr World::getTask( ) {
 }
 
 World::World( ) {
-	setEvent( EVENT_NONE );
 	_map_street = MapPtr( new Map( FILENAME_STREET ) );
 	_map_event[ EVENT_REDDAEMON ] = MapPtr( new Map( FILENAME_EVENT_REDDAEMON ) );
 	_map_event[ EVENT_FLAME     ] = MapPtr( new Map( FILENAME_EVENT_FIRE      ) );
@@ -53,6 +52,7 @@ World::~World( ) {
 }
 
 void World::initialize( ) {
+	setEvent( EVENT_NONE );
 }
 
 void World::setEvent( EVENT type ) {
@@ -272,6 +272,9 @@ void World::onEventCall( PlayerPtr player ) {
 		setEvent( EVENT_CALL );
 	}
 	player->enterEvent( );
+	//Sound::getTask( )->playSE( "yokai_voice_06.wav" );
+	//player->setAction( ACTION_CALL );
+	//player->setVec( Vector( ) );
 }
 
 void World::onEventGamble( PlayerPtr player ) {
@@ -285,35 +288,13 @@ void World::onEventGamble( PlayerPtr player ) {
 }
 
 /*
-			if ( event != EVENT_NONE ) {
-				world->setEvent( event );
-				storage->eraseEventItem( );
-				if ( event >= EVENT_SHOP ) {
-					office->popUpNPC( );
-				}
-				if ( event == EVENT_SHOP ) {
-					storage->createShopItem( );
-				}
-				militaly->createBoss( );
-				_player[ i ] ->enterEvent( );
-			}
 		}
 
 		if ( map->getObject( _player[ i ]->getPos( ) + _player[ i ]->getVec( ) ) == OBJECT_EVENT_CALL ) {
-			Sound::getTask( )->playSE( "yokai_voice_06.wav" );
-			_player[ i ]->setAction( ACTION_CALL );
-			_player[ i ]->setVec( Vector( ) );
 		}
 
 		if ( _player[ i ]->getArea( ) == AREA_EVENT ) {
 			//一ページ目にいたらメインに戻る
-			if ( _player[ i ]->getPos( ).x < GRAPH_SIZE ) {
-				_player[ i ]->setArea( AREA_STREET );
-				world->setEvent( EVENT_NONE );
-				militaly->eraseEventEnemy( );
-				storage->eraseEventItem( );
-				_player[ i ]->setPos( Vector( family->getCameraPosX( ) + SCREEN_WIDTH / 2, 0 ) );
-				_player[ i ]->setVec( Vector( ) );
 			}
 			//ボスが倒れている場合 && アイテムが無い[退場]
 			StoragePtr storage( Storage::getTask( ) );

@@ -2,6 +2,8 @@
 #include "ItemRock.h"
 #include "Storage.h"
 #include "SynchronousData.h"
+#include "Family.h"
+#include "Player.h"
 
 static const int MAX_HP = 12;
 
@@ -37,8 +39,12 @@ void EnemyBossRock::setSynchronousData( unsigned char type, int camera_pos ) con
 }
 
 void EnemyBossRock::dropItem( ) {
-	ItemPtr item = ItemPtr( new ItemRock( getPos( ) ) );
-	item->setArea( AREA_EVENT );
-	Storage::getTask( )->add( item );
+	FamilyPtr family( Family::getTask( ) );
+	for ( int i = 0; i < MAX_PLAYER; i++ ) {
+		PlayerPtr player = family->getPlayer( i );
+		if ( player->getArea( ) == AREA_EVENT ) {
+			player->pickUpItem( Player::ITEM_MINERAL );
+		}
+	}
 }
 

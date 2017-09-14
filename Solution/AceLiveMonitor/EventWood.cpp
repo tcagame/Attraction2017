@@ -4,7 +4,7 @@
 
 EventWood::EventWood( ) :
 Event( EVENT_WOOD ) {
-	Military::getTask( )->createEventEnemy( );
+	Military::getTask( )->createEventEnemy( EVENT_WOOD );
 }
 
 

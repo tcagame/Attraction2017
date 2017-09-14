@@ -4,7 +4,7 @@
 
 EventMineral::EventMineral( ) :
 Event( EVENT_MINERAL ) {
-	Military::getTask( )->createEventEnemy( );
+	Military::getTask( )->createEventEnemy( EVENT_MINERAL );
 }
 
 

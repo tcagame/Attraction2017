@@ -3,6 +3,7 @@
 #include "smart_ptr.h"
 #include <string>
 #include <list>
+#include "ace_define.h"
 
 PTR( Office );
 PTR( NPC );
@@ -16,7 +17,8 @@ public:
 	virtual ~Office( );
 public:
 	void update( );
-	void popUpNPC( );
+	void popUpNPC( EVENT type );
+	void eraseNPC( );
 	std::list< NPCPtr > getNPC( ) const;
 private:
 	std::list< NPCPtr > _npc;

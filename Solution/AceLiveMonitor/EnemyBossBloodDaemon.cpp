@@ -2,6 +2,8 @@
 #include "ItemFire.h"
 #include "Storage.h"
 #include "SynchronousData.h"
+#include "Family.h"
+#include "Player.h"
 
 static const int WAIT_ANIM_TIME = 7;
 static const int MAX_HP = 12;
@@ -40,7 +42,11 @@ void EnemyBossBloodDaemon::setSynchronousData( unsigned char type, int camera_po
 }
 
 void EnemyBossBloodDaemon::dropItem( ) {
-	ItemPtr item = ItemPtr( new ItemFire( getPos( ) ) );
-	item->setArea( AREA_EVENT );
-	Storage::getTask( )->add( item );
+	FamilyPtr family( Family::getTask( ) );
+	for ( int i = 0; i < MAX_PLAYER; i++ ) {
+		PlayerPtr player = family->getPlayer( i );
+		if ( player->getArea( ) == AREA_EVENT ) {
+			player->pickUpItem( Player::ITEM_FLAME );
+		}
+	}
 }

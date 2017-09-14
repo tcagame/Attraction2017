@@ -41,11 +41,8 @@ void Office::update( ) {
 	}
 }
 
-void Office::popUpNPC( ) {
-	WorldPtr world = World::getTask( );
-	EVENT event = world->getEvent( );
-	_npc.clear( );
-	switch ( event ) {
+void Office::popUpNPC( EVENT type ) {
+	switch ( type ) {
 	case EVENT_SHOP:
 		_npc.push_back( NPCPtr( new NPCObaba( Vector( 800, 225 ) ) ) );
 		break;
@@ -69,6 +66,11 @@ void Office::popUpNPC( ) {
 		break;
 	}
 }
+
+void Office::eraseNPC( ) {
+	_npc = { };
+}
+
 
 std::list< NPCPtr > Office::getNPC( ) const {
 	return _npc;
