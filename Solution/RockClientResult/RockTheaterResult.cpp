@@ -2,7 +2,7 @@
 #include "Drawer.h"
 #include "RockFamily.h"
 #include "RockPlayer.h"
-#include "Image.h"
+#include "ImageTarget.h"
 #include "Status.h"
 
 const int MONITOR_Y = 256;
@@ -34,8 +34,8 @@ void RockTheaterResult::initialize( ) {
 		_images[ i ]->getImageSize( width, height );
 		_images[ i ]->setRect( 0, 0, width, height );
 	}
-	_draw_image = ImagePtr( new Image( ) );
-	_draw_image->createGraph( SCREEN_WIDTH, INFO_HEIGHT );
+	_draw_image = ImageTargetPtr( new ImageTarget( ) );
+	_draw_image->create( SCREEN_WIDTH, INFO_HEIGHT );
 	setMovie( movie );
 	playMovie( );
 	createImage( );
@@ -58,7 +58,8 @@ void RockTheaterResult::update( ) {
 }
 
 void RockTheaterResult::createImage( ) {
-	_draw_image->clearToGraph( );
+	_draw_image->clear( );
+	Drawer::getTask( )->setImageTarget( _draw_image );
 
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		Status::Player player = _status->getPlayer( i );
@@ -69,7 +70,7 @@ void RockTheaterResult::createImage( ) {
 			sx = i * ( SCREEN_WIDTH / 4 );
 			sy = 0;
 			_images[ 5 ]->setPos( sx + 100, sy, sx + ( SCREEN_WIDTH / 4 ), sy + 100 );
-			_draw_image->drawSpriteToGraph( _images[ 5 ] );
+			_images[ 5 ]->draw( );
 			break;
 		case AREA_ENTRY:
 			sx = i * 100;
@@ -88,11 +89,13 @@ void RockTheaterResult::createImage( ) {
 			continue;
 		}
 		_images[ i + 1 ]->setPos( sx, sy, sx + 100, sy + 100 );
-		_draw_image->drawSpriteToGraph( _images[ i + 1 ] );
+		_images[ i + 1 ]->draw( );
 	}
 
 	_images[ 0 ]->setPos( 0, INFO_HEIGHT - 256 );
-	_draw_image->drawSpriteToGraph( _images[ 0 ] );
+	_images[ 0 ]->draw( );
+	
+	Drawer::getTask( )->setImageTarget( ImageTargetPtr( ) );
 
 	_draw_image->setPos( 0, 256 );
 	setImage( _draw_image );
