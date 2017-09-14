@@ -433,6 +433,7 @@
     <ClCompile Include="EventWood.cpp">
       <Filter>Event</Filter>
     </ClCompile>
+    <ClCompile Include="EventNone.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy.h">
@@ -864,6 +865,7 @@
     <ClInclude Include="EventWood.h">
       <Filter>Event</Filter>
     </ClInclude>
+    <ClInclude Include="EventNone.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">
