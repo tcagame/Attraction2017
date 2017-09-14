@@ -220,5 +220,9 @@ void RockCharacter::adjustPosForOverLapped( RockCharacterPtr target ) {
 	Vector target_pos = target->getPos( );
 	Vector distance = target_pos - _pos;
 	Vector pos = target_pos - distance.normalize( ) * ( target->getRadius( ) + _radius );
-	_pos = Vector( pos.x, _pos.y, pos.z );
+	Vector vec = pos - _pos;
+	vec.y = 0;
+	if( isOnMapModel( vec ) ) {
+		_pos = _pos + vec;
+	}
 }
