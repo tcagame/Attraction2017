@@ -625,5 +625,4 @@ void RockPlayer::move( ) {
 	vec = rot.multiply( vec );
 	vec.y = getVec( ).y;
 	setVec( vec );
-	Drawer::getTask()->drawString( 0, 0, "はしっていますーーーーーーーーーーー！！" );
 }
