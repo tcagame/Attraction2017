@@ -121,6 +121,9 @@
     <ClCompile Include="RockEventTurtle.cpp">
       <Filter>Event</Filter>
     </ClCompile>
+    <ClCompile Include="RockEventOtohime.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="define.h" />
@@ -244,6 +247,9 @@
       <Filter>Event</Filter>
     </ClInclude>
     <ClInclude Include="RockEventTurtle.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="RockEventOtohime.h">
       <Filter>Event</Filter>
     </ClInclude>
   </ItemGroup>

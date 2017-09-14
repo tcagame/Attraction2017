@@ -94,6 +94,10 @@ void RockCharacter::setPos( const Vector& pos ) {
 	_pos = pos;
 }
 
+void RockCharacter::setDir( const Vector& dir ) {
+	_dir = dir;
+}
+
 Vector RockCharacter::getVec( ) const {
 	return _vec;
 }

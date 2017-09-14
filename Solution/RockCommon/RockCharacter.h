@@ -28,6 +28,7 @@ protected:
 	virtual void act( ) = 0;
 	void setVec( const Vector& vec );
 	void setPos( const Vector& pos );
+	void setDir( const Vector& dir );
 	Vector getVec( ) const;
 	bool isStanding( ) const;
 	void setActCount( int count );
