@@ -24,7 +24,7 @@ void RockShot::setFinished( ) {
 	_finished = true;
 }
 
-int RockShot::getPower( ) {
+int RockShot::getPower( ) const {
 	return _power;
 }
 
@@ -40,7 +40,7 @@ double RockShot::getSize( ) {
 	return _size;
 }
 
-int RockShot::getEffectHandle( ) { 
+int RockShot::getEffectHandle( ) const { 
 	return _effect_handle;
 }
 void RockShot::setPower( int power ) {
