@@ -1,4 +1,4 @@
-#include "RockEnemyFaceAndHand.h"
+#include "RockEnemyChivil.h"
 #include "RockStorage.h"
 #include "RockItemMoney.h"
 #include "RockFamily.h"
@@ -11,16 +11,16 @@ const double MAX_SPEED = 1.5;
 const double ANIM_SPEED = 0.9;
 const Vector SEARCH_RANGE( 10000, 10000, 10000 );
 
-RockEnemyFaceAndHand::RockEnemyFaceAndHand( const Vector& pos ) :
+RockEnemyChivil::RockEnemyChivil( const Vector& pos ) :
 RockEnemy( pos, DOLL_FACE_AND_HAND, HP, 1, 10, 10, false, true ),
 _player_radius( 0 ) {
 }
 
 
-RockEnemyFaceAndHand::~RockEnemyFaceAndHand( ) {
+RockEnemyChivil::~RockEnemyChivil( ) {
 }
 
-void RockEnemyFaceAndHand::act( ) {
+void RockEnemyChivil::act( ) {
 	Vector near_distance = SEARCH_RANGE;
 	bool wait = true;
 	for (int i = 0; i < ROCK_PLAYER_NUM; i++) {
@@ -47,7 +47,7 @@ void RockEnemyFaceAndHand::act( ) {
 	}
 }
 
-double RockEnemyFaceAndHand::getAnimTime( ) const {
+double RockEnemyChivil::getAnimTime( ) const {
 	ModelMV1Ptr model = RockDollHouse::getTask( )->getModel( getDoll( ) );
 	double anim_time = 0;
 	double end_time = model->getEndAnimTime( );	
@@ -55,6 +55,6 @@ double RockEnemyFaceAndHand::getAnimTime( ) const {
 	return anim_time;
 }
 
-void RockEnemyFaceAndHand::dropItem( ) {
+void RockEnemyChivil::dropItem( ) {
 	RockStorage::getTask( )->addDropItem( RockItemPtr( new RockItemMoney( getPos( ) + Vector( 0, getRadius( ), 0 ), RockItemMoney::MONEY_VALUE_3 ) ) );
 }

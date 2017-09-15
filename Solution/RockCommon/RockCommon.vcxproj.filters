@@ -124,6 +124,27 @@
     <ClCompile Include="RockEventOtohime.cpp">
       <Filter>Event</Filter>
     </ClCompile>
+    <ClCompile Include="RockEnemyChivil.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="RockEnemyLittleRedDaemon.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="RockEnemyMoth.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="RockEnemySkeleton.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="RockEnemySmallFrog.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="RockEnemyStone.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="RockEnemyStoneFace.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="define.h" />
@@ -251,6 +272,27 @@
     </ClInclude>
     <ClInclude Include="RockEventOtohime.h">
       <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="RockEnemyStoneFace.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="RockEnemyChivil.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="RockEnemyLittleRedDaemon.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="RockEnemyMoth.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="RockEnemySkeleton.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="RockEnemySmallFrog.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="RockEnemyStone.h">
+      <Filter>Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

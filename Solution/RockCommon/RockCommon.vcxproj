@@ -173,6 +173,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="define.h" />
+    <ClInclude Include="RockEnemyChivil.h" />
+    <ClInclude Include="RockEnemyLittleRedDaemon.h" />
+    <ClInclude Include="RockEnemyMoth.h" />
+    <ClInclude Include="RockEnemySkeleton.h" />
+    <ClInclude Include="RockEnemySmallFrog.h" />
+    <ClInclude Include="RockEnemyStone.h" />
+    <ClInclude Include="RockEnemyStoneFace.h" />
     <ClInclude Include="RockEventCharacter.h" />
     <ClInclude Include="RockEventOtohime.h" />
     <ClInclude Include="RockEventTurtle.h" />
@@ -228,6 +235,13 @@
     <ClInclude Include="Status.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="RockEnemyChivil.cpp" />
+    <ClCompile Include="RockEnemyLittleRedDaemon.cpp" />
+    <ClCompile Include="RockEnemyMoth.cpp" />
+    <ClCompile Include="RockEnemySkeleton.cpp" />
+    <ClCompile Include="RockEnemySmallFrog.cpp" />
+    <ClCompile Include="RockEnemyStone.cpp" />
+    <ClCompile Include="RockEnemyStoneFace.cpp" />
     <ClCompile Include="RockEventCharacter.cpp" />
     <ClCompile Include="RockEventOtohime.cpp" />
     <ClCompile Include="RockEventTurtle.cpp" />
