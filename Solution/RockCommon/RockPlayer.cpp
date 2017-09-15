@@ -400,7 +400,6 @@ void RockPlayer::actOnCharging( ) {
 	if ( player.device_x != 0 ||
 		player.device_y != 0 ) {
 		setAction( ACTION_WALK );
-
 		return;
 	}
 	if ( player.device_button & BUTTON_C ) {
@@ -441,6 +440,12 @@ void RockPlayer::actOnBraking( ) {
 		} else {
 			setAction( ACTION_WAIT );
 		}
+		return;
+	}
+	//ˆÚ“®“ü—Í‚ª‚ ‚Á‚½‚çwark‚ÉˆÚs
+	if ( player.device_x != 0 ||
+		player.device_y != 0 ) {
+		setAction( ACTION_WALK );
 		return;
 	}
 
