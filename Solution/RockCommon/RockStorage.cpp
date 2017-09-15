@@ -111,6 +111,8 @@ void RockStorage::updateCasket( ) {
 				//‘¬“x’á‰º
 				overlapped_player->speedDown( );
 			}
+			ite = _caskets.erase( ite );
+			continue;
 		}
 		ite++;
 	}

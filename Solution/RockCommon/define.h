@@ -32,7 +32,7 @@ const int MAX_POWER = 16;
 
 //‘JˆÚŒn
 const int TRANSITION_TOKU_NUM = 10;
-const int TRANSITION_MONEY_NUM = 50000;
+const int TRANSITION_MONEY_NUM = 500000;
 
 enum DOLL {
 	//Player

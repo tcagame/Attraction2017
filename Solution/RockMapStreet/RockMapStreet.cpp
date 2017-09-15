@@ -197,7 +197,6 @@ void RockMapStreet::genarateStorage( STAGE next ) {
 	storage->clean( );
 	switch ( next ) {
 	case STAGE_STREET:
-		storage->addCasket( RockCasketPtr( new RockCasket( Vector( 200, 30, -600 ) ) ) );
 	{
 		const int INTERVAL = 200;
 		for ( int i = 0; i < 30; i++ ) {
@@ -208,6 +207,7 @@ void RockMapStreet::genarateStorage( STAGE next ) {
 	case STAGE_CAVE:
 		break;
 	case STAGE_RYUGU:
+		storage->addCasket( RockCasketPtr( new RockCasket( Vector( -360, 30, 0 ) ) ) );
 		break;
 	}
 }

@@ -113,7 +113,9 @@ void RockPlayer::act( ) {
 	}
 
 	if ( _speed_down ) {
-		setVec( getVec( ) * 0.5 );
+		Vector vec = getVec( ) * 0.5;
+		vec.y = getVec( ).y;
+		setVec( vec );
 	}
 	_damage_count++;
 	_interval++;
