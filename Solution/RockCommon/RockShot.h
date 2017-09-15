@@ -9,12 +9,12 @@ public:
 	double getAnimTime( ) const { return 0; };
 	bool isFinished( ) const;
 	void setFinished( );
-	int getPower( );
+	int getPower( ) const;
+	int getEffectHandle( ) const;
 protected:
 	void setSize( double size );
 	void setEffectHandle( int effect_handle );
 	double getSize( );
-	int getEffectHandle( );
 	void setPower( int power );
 private:
 	int _effect_handle;

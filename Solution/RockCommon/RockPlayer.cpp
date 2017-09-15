@@ -45,7 +45,7 @@ static const double BUBBLE_FOLLOW_RANGE = 60.0;
 static const Vector BUBBLE_FOOT = Vector( 0, 60, 0 );
 static const double BUBBLE_MOVE_SPEED = MOVE_SPEED * 0.9;
 static const int DEAD_ANIM_TIME = 150;
-static const int ENTRY_TIME = 60;
+static const int ENTRY_TIME = 30;
 static const int FLOAT_HEIGHT = 1;
 
 
@@ -229,7 +229,7 @@ void RockPlayer::actOnWaiting( ) {
 	}
 	if ( player.area == AREA_WAIT ) {
 		setAction( ACTION_BUBBLE );
-		setPos( getPos( ) + Vector( 0, BUBBLE_FOLLOW_RANGE, 0 ) );
+		setPos( getPos( ) + BUBBLE_FOOT );
 		return;
 	}
 	//ジャンプ
@@ -282,7 +282,7 @@ void RockPlayer::actOnJumping( ) {
 	}
 	if ( player.area == AREA_WAIT ) {
 		setAction( ACTION_BUBBLE );
-		setPos( getPos( ) + Vector( 0, BUBBLE_FOLLOW_RANGE, 0 ) );
+		setPos( getPos( ) + BUBBLE_FOOT );
 		return;
 	}
 	if ( isStanding( ) ) {
@@ -309,7 +309,7 @@ void RockPlayer::actOnWalking( ) {
 	}
 	if ( player.area == AREA_WAIT ) {
 		setAction( ACTION_BUBBLE );
-		setPos( getPos( ) + Vector( 0, BUBBLE_FOLLOW_RANGE, 0 ) );
+		setPos( getPos( ) + BUBBLE_FOOT );
 		return;
 	}
 	//ジャンプ
@@ -392,7 +392,7 @@ void RockPlayer::actOnCharging( ) {
 	}
 	if ( player.area == AREA_WAIT ) {
 		setAction( ACTION_BUBBLE );
-		setPos( getPos( ) + Vector( 0, BUBBLE_FOLLOW_RANGE, 0 ) );
+		setPos( getPos( ) + BUBBLE_FOOT );
 		return;
 	}
 	// ジャンプ中であればチャージしない
@@ -450,7 +450,7 @@ void RockPlayer::actOnBraking( ) {
 	}
 	if ( player.area == AREA_WAIT ) {
 		setAction( ACTION_BUBBLE );
-		setPos( getPos( ) + Vector( 0, BUBBLE_FOLLOW_RANGE, 0 ) );
+		setPos( getPos( ) + BUBBLE_FOOT );
 		return;
 	}
 	//水平方向のベクトル
@@ -592,6 +592,7 @@ void RockPlayer::damage( int force ) {
 	if ( _damage_count > DAMAGE_COUNT ) {
 		_damage += force;
 		_damage_count = 0;
+		_attack_count = 0;
 	}
 }
 
@@ -672,3 +673,8 @@ void RockPlayer::move( ) {
 	vec.y = getVec( ).y;
 	setVec( vec );
 }
+
+void RockPlayer::setAdmissionPos( const Vector& camera_pos ) {
+	setPos( camera_pos + BUBBLE_FOOT );
+}
+

@@ -20,6 +20,7 @@ public:
 	void resetPos( const Vector& pos );
 	bool isDead( ) const;
 	bool isBubble( ) const;
+	void setAdmissionPos( const Vector& camera_pos );
 protected:
 	void act( );
 private:

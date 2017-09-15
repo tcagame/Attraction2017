@@ -21,7 +21,7 @@ void Speaker::update( ) {
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		if ( _status->getPlayer( i ).area == AREA_RESULT ) {
 			if ( _normal_bgm ) {
-				sound->playBGM( "yokai_music_01.wav" );
+				sound->playBGM( "yokai_music_08.wav" );
 				_normal_bgm = false;
 				return;
 			}

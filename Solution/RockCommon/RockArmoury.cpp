@@ -33,6 +33,7 @@ void RockArmoury::update( ) {
 			continue;
 		}
 		if ( shot->isFinished( ) ) {
+			Effect::getTask( )->stopEffect( shot->getEffectHandle( ) );
 			ite = _shots.erase( ite );
 			continue;
 		}
