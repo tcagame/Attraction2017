@@ -32,7 +32,9 @@ private:
 	void updatePlayer( );
 	void updateAncestors( );
 	void updateBubble( );
+	Vector getBeforeCameraPos( ) const;
 private:
+	std::array< bool, ROCK_PLAYER_NUM > _before_active;
 	Vector _base_pos;
 	std::array< RockPlayerPtr, ROCK_PLAYER_NUM > _player;
 	std::array< RockBubblePtr, ROCK_PLAYER_NUM > _bubble;
