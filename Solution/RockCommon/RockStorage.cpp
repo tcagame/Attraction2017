@@ -100,7 +100,7 @@ void RockStorage::updateCasket( ) {
 			ite++;
 			continue;
 		}
-		
+		casket->update( );
 		RockPlayerPtr overlapped_player = family->getOverLappedPlayer( casket );
 		if ( overlapped_player ) {
 			if ( casket->getOpenResult( ) == RockCasket::RESULT_SUCCESS ) {

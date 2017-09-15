@@ -207,7 +207,7 @@ void RockMapStreet::genarateStorage( STAGE next ) {
 	case STAGE_CAVE:
 		break;
 	case STAGE_RYUGU:
-		storage->addCasket( RockCasketPtr( new RockCasket( Vector( -360, 30, 0 ) ) ) );
+		storage->addCasket( RockCasketPtr( new RockCasket( Vector( -360, 400, 0 ) ) ) );
 		break;
 	}
 }

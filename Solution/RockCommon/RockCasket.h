@@ -14,5 +14,7 @@ public:
 	RESULT getOpenResult( ) const;
 protected:
 	void act( );
+private:
+	double _rot;
 };
 
