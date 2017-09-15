@@ -227,6 +227,11 @@ void RockPlayer::actOnWaiting( ) {
 		actOnKilled( );
 		return;
 	}
+	if ( player.area == AREA_WAIT ) {
+		setAction( ACTION_BUBBLE );
+		setPos( getPos( ) + Vector( 0, BUBBLE_FOLLOW_RANGE, 0 ) );
+		return;
+	}
 	//ジャンプ
 	if ( isStanding( ) ) {
 		if ( player.device_button & BUTTON_C ) {
@@ -275,6 +280,11 @@ void RockPlayer::actOnJumping( ) {
 		actOnKilled( );
 		return;
 	}
+	if ( player.area == AREA_WAIT ) {
+		setAction( ACTION_BUBBLE );
+		setPos( getPos( ) + Vector( 0, BUBBLE_FOLLOW_RANGE, 0 ) );
+		return;
+	}
 	if ( isStanding( ) ) {
 	//攻撃
 		if ( player.device_button & BUTTON_A &&
@@ -295,6 +305,11 @@ void RockPlayer::actOnWalking( ) {
 	//死亡
 	if ( player.power <= 0 ) {
 		actOnKilled( );
+		return;
+	}
+	if ( player.area == AREA_WAIT ) {
+		setAction( ACTION_BUBBLE );
+		setPos( getPos( ) + Vector( 0, BUBBLE_FOLLOW_RANGE, 0 ) );
 		return;
 	}
 	//ジャンプ
@@ -375,6 +390,11 @@ void RockPlayer::actOnCharging( ) {
 		actOnKilled( );
 		return;
 	}
+	if ( player.area == AREA_WAIT ) {
+		setAction( ACTION_BUBBLE );
+		setPos( getPos( ) + Vector( 0, BUBBLE_FOLLOW_RANGE, 0 ) );
+		return;
+	}
 	// ジャンプ中であればチャージしない
 	if ( !isStanding( ) ) {
 		setAction( ACTION_WAIT );
@@ -426,6 +446,11 @@ void RockPlayer::actOnBraking( ) {
 	//死亡
 	if ( player.power <= 0 ) {
 		actOnKilled( );
+		return;
+	}
+	if ( player.area == AREA_WAIT ) {
+		setAction( ACTION_BUBBLE );
+		setPos( getPos( ) + Vector( 0, BUBBLE_FOLLOW_RANGE, 0 ) );
 		return;
 	}
 	//水平方向のベクトル
