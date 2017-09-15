@@ -157,6 +157,9 @@ Vector RockFamily::getBeforeCameraPos( ) const {
 	}
 	if ( num > 0 ) {
 		result *= ( 1.0 / ( double )num );
+	} else {
+		result = Vector( 50, 75 ) + _base_pos;
 	}
+
 	return result;
 }

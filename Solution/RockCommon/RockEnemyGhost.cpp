@@ -6,7 +6,8 @@
 #include "RockDollHouse.h"
 
 const int HP = 10;
-const int MOVE_SPEED = 1;
+const double ACCEL = 0.1;
+const double MAX_SPEED = 2.2;
 const double ANIM_SPEED = 0.9;
 const Vector SEARCH_RANGE( 10000, 10000, 10000 );
 
@@ -21,25 +22,28 @@ RockEnemyGhost::~RockEnemyGhost( ) {
 
 void RockEnemyGhost::act( ) {
 	Vector near_distance = SEARCH_RANGE;
-	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
-		RockPlayerPtr player = RockFamily::getTask( )->getPlayer( i );
-		_player_radius = player->getRadius( );
-		if ( !player->isActive( ) || player->isBubble( ) ) {
-			setVec( Vector( ) );
+	bool wait = true;
+	for (int i = 0; i < ROCK_PLAYER_NUM; i++) {
+		RockPlayerPtr player = RockFamily::getTask()->getPlayer(i);
+		if (!player->isActive() || player->isBubble()) {
 			continue;
 		}
-		Vector distance = player->getPos( ) - getPos( );
-		if ( near_distance.getLength( ) > distance.getLength( ) ) {
+		wait = false;
+		Vector distance = player->getPos() - getPos();
+		if (near_distance.getLength() > distance.getLength()) {
 			near_distance = distance;
 		}
 	}
-	if ( near_distance != SEARCH_RANGE ) {
-		Vector dir = near_distance.normalize( );	
-		Vector vec = dir * MOVE_SPEED;
-		setVec( vec );
-		if ( near_distance.getLength( ) < MOVE_SPEED + ( getRadius( ) + _player_radius ) - 1 ) {
-			setVec( Vector( ) );
+	if (near_distance != SEARCH_RANGE) {
+		Vector dir = near_distance.normalize();
+		Vector vec = getVec() + dir * ACCEL;
+		if (vec.getLength2() > MAX_SPEED * MAX_SPEED) {
+			vec = vec.normalize() * MAX_SPEED;
 		}
+		setVec(vec);
+	}
+	if (wait) {
+		setVec(Vector());
 	}
 }
 
