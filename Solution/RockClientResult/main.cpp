@@ -36,7 +36,7 @@ void main( ) {
 	app->addTask( RockMap::getTag( ), TaskPtr( new RockMapResult ) );
 	app->addTask( RockMilitary::getTag( ), TaskPtr( new RockMilitary ) );
 	app->addTask( RockDollHouse::getTag( ), TaskPtr( new RockDollHouse ) );
-	app->addTask( RockFamily::getTag( ), TaskPtr( new RockFamily( status, Vector( 0, 10, 160 ) ) ) );
+	app->addTask( RockFamily::getTag( ), TaskPtr( new RockFamily( status, Vector( 0, 30, 160 ) ) ) );
 	app->addTask( RockArmoury::getTag( ), TaskPtr( new RockArmoury ) );
 	app->addTask( RockCamera::getTag( ), TaskPtr( new RockCameraResult ) );
 	app->addTask( RockStudio::getTag( ), TaskPtr( new RockStudio( ) ) );
