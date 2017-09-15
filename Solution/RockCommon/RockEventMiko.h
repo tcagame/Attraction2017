@@ -5,7 +5,7 @@ public:
 	RockEventMiko( const Vector& pos );
 	virtual ~RockEventMiko( );
 protected:
-	void act( ) { };
+	void act( );
 	double getAnimTime( ) const { return 0; };
 };
 
