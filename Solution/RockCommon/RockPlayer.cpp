@@ -32,8 +32,9 @@ static const int HEIGHT = 20;
 //チャージ時間
 static const int MAX_CHARGE_COUNT = 100;
 static const int INTERVAL_TIME = 10;
-//チャージエフェクト位置
-static const Vector EFFECT_ADJUST( 0, 15, 0 );
+//エフェクト位置
+static const Vector CHARGE_EFFECT_ADJUST( 0, 15, 0 );
+static const Vector SPEED_DOWN_EFFECT_ADJUST( 0, 15, 0 );
 
 //その他
 static const int DAMAGE_COUNT = 20;
@@ -52,12 +53,14 @@ static const int FLOAT_HEIGHT = 1;
 RockPlayer::RockPlayer( StatusPtr status, const Vector& pos, int id, RockAncestorsPtr ancestors ) :
 RockCharacter( pos, ( DOLL )( DOLL_TAROSUKE_WAIT + id * ROCK_PLAYER_MOTION_NUM ), RADIUS, HEIGHT ),
 _attack_count( 0 ),
-_effect_handle( -1 ),
+_charge_effect_handle( -1 ),
+_speed_down_effect_handle( -1 ),
 _ancestors( ancestors ),
 _bubble_count( 0 ),
 _damage( 0 ),
 _interval( 0 ),
 _continue( false ),
+_speed_down( false ),
 _damage_count( DAMAGE_COUNT ) {
 	_id = id;
 	_status = status;
@@ -109,14 +112,23 @@ void RockPlayer::act( ) {
 		setVec( getVec( ) + dir );
 	}
 
+	if ( _speed_down ) {
+		Vector vec = getVec( ) * 0.5;
+		vec.y = getVec( ).y;
+		setVec( vec );
+	}
 	_damage_count++;
 	_interval++;
+
 }
 
 void RockPlayer::updateEffect( ) {
 	EffectPtr effect( Effect::getTask( ) );
 	double size = _attack_count / ( MAX_CHARGE_COUNT / ( MAX_PLAYER_SHOT_POWER - 1 ) ) + 4.0;
-	effect->updateEffectTransform( _effect_handle, getPos( ) + EFFECT_ADJUST, size );
+	effect->updateEffectTransform( _charge_effect_handle, getPos( ) + CHARGE_EFFECT_ADJUST, size );
+	if ( _speed_down ) {
+		Effect::getTask( )->updateEffectTransform( _speed_down_effect_handle, getPos( ) + SPEED_DOWN_EFFECT_ADJUST );
+	}
 }
 
 void RockPlayer::updeteState( ) {
@@ -375,9 +387,9 @@ void RockPlayer::actOnAttacking( ) {
 		RockShotPtr shot( new RockShotPlayer( _id, getPos( ) + SHOT_FOOT, getDir( ), power, max_charge ) );
 		RockArmoury::getTask( )->addShot( shot );
 		setAction( ACTION_WAIT );
-		Effect::getTask( )->stopEffect( _effect_handle );
+		Effect::getTask( )->stopEffect( _charge_effect_handle );
 		_attack_count = 0;
-		_effect_handle = -1;
+		_charge_effect_handle = -1;
 		_interval = 0;
 	}
 }
@@ -403,8 +415,8 @@ void RockPlayer::actOnCharging( ) {
 
 	if ( _attack_count == 0 ) {
 		EffectPtr effect( Effect::getTask( ) );
-		_effect_handle = effect->playEffect( RockStudio::getTask( )->getEffectHandle( EFFECT_CHARGE ) );
-		effect->updateEffectTransform( _effect_handle, getPos( ) + EFFECT_ADJUST );
+		_charge_effect_handle = effect->playEffect( RockStudio::getTask( )->getEffectHandle( EFFECT_CHARGE ) );
+		effect->updateEffectTransform( _charge_effect_handle, getPos( ) + CHARGE_EFFECT_ADJUST );
 	}
 	
 	if ( player.item & ITEM_ENHANCED_CHARGE ) {
@@ -654,7 +666,10 @@ void RockPlayer::actOnKilled( ) {
 	Sound::getTask( )->playSE( "yokai_se_31.wav" );
 	setVec( Vector( ) );
 	_attack_count = 0;
-	_effect_handle = -1;
+	_charge_effect_handle = -1;
+	Effect::getTask( )->stopEffect( _speed_down_effect_handle );
+	_speed_down_effect_handle = -1;
+	_speed_down = false;
 }
 
 void RockPlayer::move( ) {
@@ -678,3 +693,11 @@ void RockPlayer::setAdmissionPos( const Vector& camera_pos ) {
 	setPos( camera_pos + BUBBLE_FOOT );
 }
 
+int RockPlayer::getId( ) const {
+	return _id;
+}
+
+void RockPlayer::speedDown( ) {
+	_speed_down = true;
+	_speed_down_effect_handle = Effect::getTask( )->playEffect( RockStudio::getTask( )->getEffectHandle( EFFECT_SPEED_DOWN ) );
+}

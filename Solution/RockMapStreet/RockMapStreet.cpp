@@ -10,6 +10,9 @@
 #include "RockStorage.h"
 #include "RockItemToku.h"
 #include "RockItemMoney.h"
+//EventObj
+#include "RockAlter.h"
+#include "RockCasket.h"
 //EventChara
 #include "RockOffice.h"
 #include "RockEventTurtle.h"
@@ -177,10 +180,10 @@ void RockMapStreet::genarateEnemies( STAGE next ) {
 		military->add( RockEnemyPtr( new RockEnemyGhost      ( Vector(  500,  40, -500 ) ) ) );
 		military->add( RockEnemyPtr( new RockEnemyRedBard    ( Vector(  800,  60, -520 ) ) ) );
 		military->add( RockEnemyPtr( new RockEnemyWaterGhost ( Vector( 1100,  60, -530 ) ) ) );
-		military->add( RockEnemyPtr( new RockEnemyFaceAndHand( Vector( 1400, 130, -540 ) ) ) );
-		military->add( RockEnemyPtr( new RockEnemyCloud      ( Vector( 1700, 150, -550 ) ) ) );
-		military->add( RockEnemyPtr( new RockEnemyBat        ( Vector( 2000, 190, -550 ) ) ) );
-		military->add( RockEnemyPtr( new RockEnemyKimono     ( Vector( 2300, 150, -550 ) ) ) );
+		military->add( RockEnemyPtr( new RockEnemyFaceAndHand( Vector( 1400, 130, -600 ) ) ) );
+		military->add( RockEnemyPtr( new RockEnemyCloud      ( Vector( 1700, 150, -600 ) ) ) );
+		military->add( RockEnemyPtr( new RockEnemyBat        ( Vector( 2000, 190, -600 ) ) ) );
+		military->add( RockEnemyPtr( new RockEnemyKimono     ( Vector( 2300, 200, -600 ) ) ) );
 		break;
 	case STAGE_CAVE:
 		break;
@@ -204,6 +207,7 @@ void RockMapStreet::genarateStorage( STAGE next ) {
 	case STAGE_CAVE:
 		break;
 	case STAGE_RYUGU:
+		storage->addCasket( RockCasketPtr( new RockCasket( Vector( -360, 400, 0 ) ) ) );
 		break;
 	}
 }

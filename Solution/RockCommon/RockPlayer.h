@@ -21,6 +21,8 @@ public:
 	bool isDead( ) const;
 	bool isBubble( ) const;
 	void setAdmissionPos( const Vector& camera_pos );
+	int getId( ) const;
+	void speedDown( );
 protected:
 	void act( );
 private:
@@ -56,12 +58,14 @@ private:
 	ACTION _action;
 	int _id;
 	int _attack_count;
-	int _effect_handle;
 	int _bubble_count;
 	int _damage;
 	int _damage_count;
 	int _interval;
+	int _charge_effect_handle;
+	int _speed_down_effect_handle;
 	bool _continue;
+	bool _speed_down;
 	RockAncestorsPtr _ancestors;
 };
 

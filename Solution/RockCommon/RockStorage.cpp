@@ -51,19 +51,10 @@ void RockStorage::updateItem( ) {
 		}
 		item->update( );
 		bool col = false;
-		for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
-			RockPlayerPtr player = family->getPlayer( i );
-			if ( !player->isActive( ) ||
-				 player->isBubble( ) ) {
-				continue;
-			}
-			if ( item->isOverLapped( player ) ) {
-				if ( pickUpItem( item, i ) ) {
-					col = true;
-					break;//for•¶‚ð”²‚¯‚é
-				} else {
-					continue;
-				}
+		RockPlayerPtr overlapped_player = family->getOverLappedPlayer( item );
+		if ( overlapped_player ) {
+			if ( pickUpItem( item, overlapped_player->getId( ) ) ) {
+				col = true;
 			}
 		}
 		if ( col ) {
@@ -107,6 +98,20 @@ void RockStorage::updateCasket( ) {
 		RockCasketPtr casket = *ite;
 		if ( !casket ) {
 			ite++;
+			continue;
+		}
+		casket->update( );
+		RockPlayerPtr overlapped_player = family->getOverLappedPlayer( casket );
+		if ( overlapped_player ) {
+			if ( casket->getOpenResult( ) == RockCasket::RESULT_SUCCESS ) {
+				//‚¨‹à‚ðŽè‚É“ü‚ê‚é
+				int value = 50000;
+				MessageSender::getTask( )->sendMessage( overlapped_player->getId( ), Message::COMMAND_MONEY, &value );
+			} else {
+				//‘¬“x’á‰º
+				overlapped_player->speedDown( );
+			}
+			ite = _caskets.erase( ite );
 			continue;
 		}
 		ite++;
