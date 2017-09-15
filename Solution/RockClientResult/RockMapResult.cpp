@@ -1,13 +1,8 @@
 #include "RockMapResult.h"
 #include "ModelMV1.h"
 #include "Effect.h"
-#include "Drawer.h"
-#include "Image.h"
-#include "define.h"
-#include "Status.h"
 
-RockMapResult::RockMapResult( StatusPtr status ) :
-_status( status ) {
+RockMapResult::RockMapResult( ) {
 }
 
 
@@ -45,47 +40,8 @@ void RockMapResult::initialize( ) {
 	int handle = effect->loadEffect( "butta.efk" );
 	effect->playEffect( handle );
 	effect->updateEffectTransform( handle, Vector( 500, 250, 0 ) );
-
-	DrawerPtr drawer = Drawer::getTask( );
-	_end_image.push_back( drawer->createImage( "result/heaven_frame.png" ) );
-	_end_image.push_back( drawer->createImage( "result/human_frame.png" ) );
-	_end_image.push_back( drawer->createImage( "result/damn_frame.png" ) );
-	_end_image.push_back( drawer->createImage( "result/hungry_frame.png" ) );
-	_end_image.push_back( drawer->createImage( "result/hell_frame.png" ) );
 }
-
 
 void RockMapResult::update( ) {
-	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
-		Status::Player player = _status->getPlayer( i );
-		if ( player.area == AREA_RESULT ) {
-			switch ( player.continue_num ) {
-			case 0:
-				drawEnding( i, ENDING_HEAVEN );
-				break;
-			case 1:
-			case 2:
-				drawEnding( i, ENDING_HUMAN );
-				break;
-			case 3:
-			case 4:
-				drawEnding( i, ENDING_BRUET );
-				break;
-			case 5:
-			case 6:
-				drawEnding( i, ENDING_BRAD );
-				break;
-			default:
-				drawEnding( i, ENDING_HELL );
-				break;
-			}
-		}
-	}
-}
 
-void RockMapResult::drawEnding( int player, ENDING ending ) {
-	//int idx = ending + player * 5;
-	//int idx = ending;
-	//_end_image[ idx ]->setPos( 0, 0 );
-	//_end_image[ idx ]->draw( );
 }

@@ -4,13 +4,25 @@
 #include "RockPlayer.h"
 #include "ImageTarget.h"
 #include "Status.h"
+#include "MessageSender.h"
 
 const int MONITOR_Y = 256;
 const int ONE_MONITOR_WIDTH = SCREEN_WIDTH / 3;
 const int INFO_HEIGHT = SCREEN_HEIGHT - 256;
+const int ENDING_WIDTH = 640;
+const int ENDING_HEIGHT = 480;
+const int ENDING_SCREEN_X = SCREEN_WIDTH / 2 - ENDING_WIDTH / 2;
+const int ENDING_SCREEN_Y = SCREEN_HEIGHT / 2 - ENDING_HEIGHT / 2;
+const int SHOWN_RANGE = 100;
+const int EXIT_TIME = 6000;
 
 RockTheaterResult::RockTheaterResult( StatusPtr status ) :
 _play( true ),
+_ending_index( 0 ),
+_ending_time( 0 ),
+_offset_y( 500 ),
+_ending_vy( 0 ),
+_shown( false ),
 _status( status ) {
 }
 
@@ -28,6 +40,15 @@ void RockTheaterResult::initialize( ) {
 	_images.push_back( drawer->createImage( "UI/breast4.png" ) );
 	_images.push_back( drawer->createImage( "result/ui_cover_entry.png" ) );
 
+	_end_image.push_back( drawer->createImage( "result/heaven_frame.png" ) );
+	_end_image.push_back( drawer->createImage( "result/human_frame.png" ) );
+	_end_image.push_back( drawer->createImage( "result/damn_frame.png" ) );
+	_end_image.push_back( drawer->createImage( "result/hungry_frame.png" ) );
+	_end_image.push_back( drawer->createImage( "result/hell_frame.png" ) );
+
+	for ( int i = 0; i < _end_image.size( ); i++ ) {
+		_end_image[ i ]->setPos( ENDING_SCREEN_X, ENDING_SCREEN_Y );
+	}
 	for ( int i = 0; i < ( int )_images.size( ); i++ ) {
 		int width = 0;
 		int height = 0;
@@ -36,6 +57,7 @@ void RockTheaterResult::initialize( ) {
 	}
 	_draw_image = ImageTargetPtr( new ImageTarget( ) );
 	_draw_image->create( SCREEN_WIDTH, INFO_HEIGHT );
+	_draw_image->setPos( 0, 256 );
 	setMovie( movie );
 	playMovie( );
 	createImage( );
@@ -43,17 +65,34 @@ void RockTheaterResult::initialize( ) {
 
 void RockTheaterResult::update( ) {
 	RockFamilyPtr family( RockFamily::getTask( ) );
+
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		RockPlayerPtr player = family->getPlayer( i );
 		if( player->isActive( ) ) {
 			stopMovie( );
 			_play = false;
+			setImage( ImagePtr( ) );
+			if ( !_shown ) {
+				_shown = isShown( player->getPos( ) );
+			}
+			if ( _shown ) {
+				createEndingImage( );
+				updateEnding( );
+				if ( _status->getPlayer( i ).device_button ) {
+					exitClient( i );
+				}
+			}
+			if ( _ending_time > EXIT_TIME ) {
+				exitClient( i );
+			}
 			return;
 		}
 	}
 	if ( !_play ) {
 		playMovie( );
 	}
+	_ending_time = 0;
+	_shown = false;
 	createImage( );
 }
 
@@ -97,7 +136,69 @@ void RockTheaterResult::createImage( ) {
 	
 	Drawer::getTask( )->setImageTarget( ImageTargetPtr( ) );
 
-	_draw_image->setPos( 0, 256 );
 	setImage( _draw_image );
 }
- 
+
+void RockTheaterResult::createEndingImage( ) {
+	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+		Status::Player player = _status->getPlayer( i );
+		if ( player.area == AREA_RESULT ) {
+			switch ( player.continue_num ) {
+			case 0:
+				//_ending_index = ENDING_HEAVEN * i * 5;
+				_ending_index = ENDING_HEAVEN;
+				break;
+			case 1:
+			case 2:
+				//_ending_index = ENDING_HUMAN * i * 5;
+				_ending_index = ENDING_HUMAN;
+				break;
+			case 3:
+			case 4:
+				//_ending_index = ENDING_BRUET * i * 5;
+				_ending_index = ENDING_BRUET;
+				break;
+			case 5:
+			case 6:
+				//_ending_index = ENDING_BRAD * i * 5;
+				_ending_index = ENDING_BRAD;
+				break;
+			default:
+				//_ending_index = ENDING_HELL * i * 5;
+				_ending_index = ENDING_HELL;
+				break;
+			}
+		}
+	}
+
+	setImage( _end_image[ _ending_index ] );
+}
+
+void RockTheaterResult::updateEnding( ) {
+	_ending_time++;
+
+	_ending_vy--;
+	_offset_y += _ending_vy;
+	if ( _offset_y < 60 ) {
+		_offset_y = 60;
+		_ending_vy = -_ending_vy * 3 / 5;
+	}
+
+	int sx = ENDING_SCREEN_X;
+	int sy = ENDING_SCREEN_Y - _offset_y;
+	_end_image[ _ending_index ]->setPos( sx, sy );
+}
+
+bool RockTheaterResult::isShown( const Vector& pos ) {
+	Vector shown_pos( 270, 140, 20 );
+	Vector distance = pos - shown_pos;
+	if ( distance.getLength2( ) < SHOWN_RANGE * SHOWN_RANGE ) {
+		return true;
+	}
+	return false;
+}
+
+void RockTheaterResult::exitClient( int player ) {
+	unsigned char area = AREA_WAIT;
+	MessageSender::getTask( )->sendMessage( player, Message::COMMAND_AREA, &area );
+}

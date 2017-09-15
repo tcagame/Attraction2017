@@ -113,7 +113,7 @@ void RockViewer::update( ) {
 	drawBubbles( );
 	Effect::getTask( )->drawEffect( );
 	drawUI( );
-	drawMovie( );
+	drawResult( );
 }
 
 void RockViewer::drawMap( ) const {
@@ -411,7 +411,7 @@ void RockViewer::drawUI( ) const {
 	}
 }
 
-void RockViewer::drawMovie( ) const {
+void RockViewer::drawResult( ) const {
 	RockTheaterPtr theater = RockTheater::getTask( );
 	if ( !theater ) {
 		return;
@@ -419,6 +419,9 @@ void RockViewer::drawMovie( ) const {
 	MoviePtr movie = theater->getMovie( );
 	if ( movie->isPlay( ) ) {
 		movie->draw( );
-		theater->getImage( )->draw( );
+	} 
+	ImagePtr image = theater->getImage( );
+	if ( image ) {
+		image->draw( );
 	}
 }

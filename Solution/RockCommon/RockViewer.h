@@ -32,7 +32,7 @@ private:
 	void drawCasket( ) const;
 	void drawShadow( ) const;
 	void drawUI( ) const;
-	void drawMovie( ) const;
+	void drawResult( ) const;
 private:
 	StatusPtr _status;
 	ImagePtr _dummy_ui;
