@@ -65,6 +65,7 @@ void RockFamily::updatePlayer( ) {
 		if ( overlapped_enemy ) {
 			if ( _player[ i ]->isOnHead( overlapped_enemy ) ) {
 				_player[ i ]->bound( );
+				overlapped_enemy->kickDown( );
 			} else {
 				int force = -overlapped_enemy->getForce( );
 				_player[ i ]->damage( force );
@@ -156,6 +157,9 @@ Vector RockFamily::getBeforeCameraPos( ) const {
 	}
 	if ( num > 0 ) {
 		result *= ( 1.0 / ( double )num );
+	} else {
+		result = Vector( 50, 75 ) + _base_pos;
 	}
+
 	return result;
 }
