@@ -10,7 +10,5 @@ public:
 	void dropItem( );
 protected:
 	void act( );
-private:
-	int _player_radius;
 };
 

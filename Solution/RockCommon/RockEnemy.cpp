@@ -1,6 +1,9 @@
 #include "RockEnemy.h"
 #include "RockPlayer.h"
 #include "RockDollHouse.h"
+#include "RockMap.h"
+
+const double KICK_POWER = -5.0;
 
 RockEnemy::RockEnemy( const Vector& pos, DOLL doll, int hp, int force, int radius, int height, bool mass, bool head ) :
 RockCharacter( pos, doll, radius, height, mass, head ),
@@ -54,4 +57,8 @@ ModelMV1Ptr RockEnemy::getModel( ) const {
 	model->setRot( Matrix::makeTransformRotation( axis, rot ) );
 	model->setTrans( Matrix::makeTransformTranslation( getPos( ) ) );
 	return model;
+}
+
+void RockEnemy::kickDown( ) {
+	setVec( Vector( 0, KICK_POWER, 0 ) );
 }

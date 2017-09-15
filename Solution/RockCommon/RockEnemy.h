@@ -14,6 +14,7 @@ public:
 	ModelMV1Ptr getModel( ) const;
 	virtual double getAnimTime( ) const = 0;
 	virtual void dropItem( ) { };
+	void kickDown( );
 private:
 	int _force;
 	int _hp;

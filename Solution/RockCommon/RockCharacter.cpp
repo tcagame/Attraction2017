@@ -66,7 +66,7 @@ void RockCharacter::update( ) {
 	}
 	{//Œü‚¢‚Ä‚é•ûŒü‚ðo‚·
 		Vector vec = Vector( _vec.x, 0, _vec.z );
-		if ( vec.getLength2( ) > 0.5 ) {
+		if ( vec.getLength2( ) > 0.1 ) {
 			_dir = vec.normalize( );
 		}
 	}
@@ -219,7 +219,7 @@ bool RockCharacter::isOnMapModel( const Vector& vec ) const {
 void RockCharacter::adjustPosForOverLapped( RockCharacterPtr target ) {
 	Vector target_pos = target->getPos( );
 	Vector distance = target_pos - _pos;
-	Vector pos = target_pos - distance.normalize( ) * ( target->getRadius( ) + _radius );
+	Vector pos = target_pos - distance.normalize( ) * ( target->getRadius( ) + _radius - 1 );
 	Vector vec = pos - _pos;
 	vec.y = 0;
 	if( isOnMapModel( vec ) ) {
