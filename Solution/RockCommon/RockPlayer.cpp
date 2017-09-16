@@ -438,6 +438,8 @@ void RockPlayer::actOnCharging( ) {
 		_charge_effect_handle = -1;
 		setAction( ACTION_BURST );
 		setVec( Vector( ) );
+		sound->stopSE( "yokai_se_21.wav" );
+		sound->stopSE( "yokai_se_22.wav" );
 		return;
 	}
 
