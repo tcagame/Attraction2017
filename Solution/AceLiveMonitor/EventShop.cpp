@@ -15,3 +15,16 @@ EventShop::~EventShop( ) {
 void EventShop::update( ) {
 }
 
+
+
+bool EventShop::isFinished( ) const {
+	return true;
+}
+
+bool EventShop::isJoining( ) const {
+	return false;
+}
+
+void EventShop::join( PLAYER target ) {
+
+}

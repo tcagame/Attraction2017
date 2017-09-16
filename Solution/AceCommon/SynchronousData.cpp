@@ -139,7 +139,7 @@ void SynchronousData::setStatusState( PLAYER player, unsigned char area ) {
 void SynchronousData::resetObject( ) {
 	_data.idx[ AREA_STREET ] = 0;
 	_data.idx[ AREA_EVENT ] = OBJECT_NUM - 1;
-	_data.event = ( char )EVENT_TITLE;
+	_data.event = ( char )EVENT_NONE;
 	_data.camera_x = 0;
 }
 

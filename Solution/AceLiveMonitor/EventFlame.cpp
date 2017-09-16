@@ -14,3 +14,15 @@ EventFlame::~EventFlame( ) {
 
 void EventFlame::update( ) {
 }
+
+bool EventFlame::isFinished( ) const {
+	return true;
+}
+
+bool EventFlame::isJoining( ) const {
+	return false;
+}
+
+void EventFlame::join( PLAYER target ) {
+
+}

@@ -105,7 +105,7 @@ void ViewerConsole::drawAreaEvent( ) {
 
 	// ƒCƒxƒ“ƒg•`‰æ
 	EVENT event = data->getEvent( );
-	if ( event == EVENT_TITLE ) {
+	if ( event == EVENT_NONE ) {
 		return;
 	}
 

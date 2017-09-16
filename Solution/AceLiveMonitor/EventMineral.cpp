@@ -14,3 +14,16 @@ EventMineral::~EventMineral( ) {
 
 void EventMineral::update( ) {
 }
+
+
+bool EventMineral::isFinished( ) const {
+	return true;
+}
+
+bool EventMineral::isJoining( ) const {
+	return false;
+}
+
+void EventMineral::join( PLAYER target ) {
+
+}

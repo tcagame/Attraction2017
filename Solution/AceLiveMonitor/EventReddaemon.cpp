@@ -15,6 +15,18 @@ EventReddaemon::~EventReddaemon( ) {
 void EventReddaemon::update( ) {
 }
 
+
+bool EventReddaemon::isFinished( ) const {
+	return true;
+}
+
+bool EventReddaemon::isJoining( ) const {
+	return false;
+}
+
+void EventReddaemon::join( PLAYER target ) {
+
+}
 /*
 void Military::updateBoss( ) {
 	if ( !_boss ) {

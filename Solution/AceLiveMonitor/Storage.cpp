@@ -36,7 +36,7 @@ void Storage::update( ) {
 			continue;
 		}
 		if ( item->getArea( ) == AREA_EVENT &&
-			 event_type == EVENT_TITLE ) {
+			 event_type == EVENT_NONE ) {
 			ite = _items.erase( ite );
 			continue;
 		}

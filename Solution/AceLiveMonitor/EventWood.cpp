@@ -15,3 +15,14 @@ EventWood::~EventWood( ) {
 void EventWood::update( ) {
 }
 
+bool EventWood::isFinished( ) const {
+	return true;
+}
+
+bool EventWood::isJoining( ) const {
+	return false;
+}
+
+void EventWood::join( PLAYER target ) {
+
+}

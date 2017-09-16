@@ -81,7 +81,7 @@ void ViewerDebug::drawChip( ) {
 		int width = 8 * PAGE_OBJECT_WIDTH_NUM;
 		WorldPtr world = World::getTask( );
 		MapPtr map = World::getTask( )->getMap( AREA_EVENT );
-		if ( world->getEvent( ) != EVENT_TITLE ) {
+		if ( world->getEvent( ) != EVENT_NONE ) {
 			for ( int i = 0; i < width; i++ ) {
 				for ( int j = 0; j < OBJECT_CHIP_HEIGHT_NUM; j++ ) {
 					int x = i * OBJECT_CHIP_SIZE;

@@ -24,7 +24,7 @@ Office::~Office( ) {
 void Office::update( ) {
 	WorldPtr world = World::getTask( );
 	EVENT event = world->getEvent( );
-	if( event == EVENT_TITLE ) {
+	if( event == EVENT_NONE ) {
 		_npc = { };
 		return;
 	}

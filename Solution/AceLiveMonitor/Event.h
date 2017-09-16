@@ -6,9 +6,11 @@ public:
 	Event( EVENT type );
 	virtual ~Event( );
 public:
-	virtual void update( ) = 0;
 	EVENT getType( ) const;
-	void reset( );
+	virtual void update( ) = 0;
+	virtual bool isFinished( ) const = 0;
+	virtual bool isJoining( ) const = 0;
+	virtual void join( PLAYER target ) = 0;
 private:
 	EVENT _type;
 };

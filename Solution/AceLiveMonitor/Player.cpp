@@ -912,12 +912,12 @@ EVENT Player::getOnEvent( ) const {
 	if ( !isStanding( ) ||
 		 getArea( ) == AREA_EVENT ||
 		 !isExist( ) ) {
-		return EVENT_TITLE;
+		return EVENT_NONE;
 	}
 
 	MapPtr map = World::getTask( )->getMap( AREA_STREET );
 	unsigned char obj = map->getObject( getPos( ) );
-	EVENT event = EVENT_TITLE;
+	EVENT event = EVENT_NONE;
 	switch ( obj ) {
 	case OBJECT_EVENT_REDDAEMON:
 		event = EVENT_REDDAEMON;
