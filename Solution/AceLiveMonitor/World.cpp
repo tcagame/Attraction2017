@@ -45,7 +45,6 @@ World::World( ) {
 	_map_event[ EVENT_CALL      ] = MapPtr( new Map( FILENAME_EVENT_GAMBLE	  ) );
 	_map_event[ EVENT_GAMBLE    ] = MapPtr( new Map( FILENAME_EVENT_GAMBLE	  ) );
 
-	Sound::getTask( )->playBGM( "yokai_music_12.wav" );
 }
 
 World::~World( ) {
@@ -95,7 +94,9 @@ void World::playMapBgm( EVENT type ) {
 	SoundPtr sound = Sound::getTask( );
 	switch( type ) {
 	case EVENT_NONE:
-		sound->playBGM( "yokai_music_12.wav" );
+		if ( !sound->isPlayingBGM( ) ) {
+			sound->playBGM( "yokai_music_12.wav" );
+		}
 		break;
 	case EVENT_REDDAEMON:
 	case EVENT_FLAME:
@@ -116,6 +117,7 @@ void World::playMapBgm( EVENT type ) {
 		sound->playBGM( "yokai_music_06.wav" );
 		break;
 	case EVENT_CALL:
+		sound->playBGM( "yokai_music_13.wav", false );
 		break;
 	}
 }
@@ -145,6 +147,10 @@ void World::update( ) {
 	// 同期データにイベント情報を設定
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
 	data->setEvent( _event->getType( ) );
+
+	if ( !Sound::getTask( )->isPlayingBGM( ) ) {
+		Sound::getTask( )->playBGM( "yokai_music_12.wav" );
+	}
 }
 
 void World::updateEvent( ) {
