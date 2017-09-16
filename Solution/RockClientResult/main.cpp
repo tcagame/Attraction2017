@@ -20,6 +20,7 @@
 #include "RockStorage.h"
 #include "RockTheaterResult.h"
 #include "Sound.h"
+#include "RockShadow.h"
 
 void main( ) {
 
@@ -40,6 +41,7 @@ void main( ) {
 	app->addTask( RockArmoury::getTag( ), TaskPtr( new RockArmoury ) );
 	app->addTask( RockCamera::getTag( ), TaskPtr( new RockCameraResult ) );
 	app->addTask( RockStudio::getTag( ), TaskPtr( new RockStudio( ) ) );
+	app->addTask( RockShadow::getTag( ), TaskPtr( new RockShadow( ) ) );
 	app->addTask( MessageSender::getTag( ), TaskPtr( new MessageSender( message ) ) );
 	app->addTask( RockTheater::getTag( ), TaskPtr( new RockTheaterResult( status ) ) );
 	app->addTask( RockViewer::getTag( ), TaskPtr( new RockViewer( status ) ) );

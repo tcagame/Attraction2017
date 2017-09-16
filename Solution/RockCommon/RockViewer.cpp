@@ -27,6 +27,7 @@
 #include "RockEventCharacter.h"
 #include "RockShadow.h"
 #include "ModelMDL.h"
+#include "RockDebug.h"
 
 const int DRAW_UI_Y = 512;
 const int HP_GRAPH_HEIGHT = 16;
@@ -112,6 +113,7 @@ void RockViewer::update( ) {
 	drawCleannessMap( );
 	drawBubbles( );
 	Effect::getTask( )->drawEffect( );
+	drawDebug( );
 	drawUI( );
 	drawResult( );
 }
@@ -423,5 +425,134 @@ void RockViewer::drawResult( ) const {
 	ImagePtr image = theater->getImage( );
 	if ( image ) {
 		image->draw( );
+	}
+}
+
+void RockViewer::drawDebug( ) const {
+	RockDebugPtr debug = RockDebug::getTask( );
+	if ( !debug ) {
+		return;
+	}
+	if ( !debug->isDebug( ) ) {
+		return;
+	}
+	DrawerPtr drawer = Drawer::getTask( );
+
+	{//player
+		RockFamilyPtr family = RockFamily::getTask( );
+		for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+			RockPlayerPtr player = family->getPlayer( i );
+			if ( !player->isActive( ) ) {
+				continue;
+			}
+			Vector pos = player->getPos( ) + Vector( 0, player->getHeight( ), 0 );
+			drawer->drawSphere( pos, player->getOverlappedRadius( ) );
+			RockAncestorsPtr ancestors = family->getAncestors( i );
+			if ( ancestors->isActive( ) ) {
+				Vector anc_pos = ancestors->getPos( ) + Vector( 0, ancestors->getHeight( ), 0 );
+				drawer->drawSphere( anc_pos, ancestors->getOverlappedRadius( ) );
+			}
+		}
+	}
+
+	{//shot
+		RockArmouryPtr armoury = RockArmoury::getTask( );
+		std::list< RockShotPtr > shots = armoury->getShots( );
+		std::list< RockShotPtr >::const_iterator ite = shots.begin( );
+		while ( ite != shots.end( ) ) {
+			RockShotPtr shot = *ite;
+			if ( !shot ) {
+				ite++;
+				continue;
+			}
+
+			Vector pos = shot->getPos( ) + Vector( 0, shot->getHeight( ), 0 );
+			drawer->drawSphere( pos, shot->getOverlappedRadius( ) );
+			ite++;
+		}
+	}
+
+	{//enemy
+		RockMilitaryPtr military = RockMilitary::getTask( );
+		std::list< RockEnemyPtr > enemies = military->getEnemyList( );
+		std::list< RockEnemyPtr >::const_iterator ite = enemies.begin( );
+		while ( ite != enemies.end( ) ) {
+			RockEnemyPtr enemy = *ite;
+			if ( !enemy ) {
+				ite++;
+				continue;
+			}
+
+			Vector pos = enemy->getPos( ) + Vector( 0, enemy->getHeight( ), 0 );
+			drawer->drawSphere( pos, enemy->getOverlappedRadius( ) );
+			ite++;
+		}
+	}
+
+	{//event
+		RockOfficePtr office = RockOffice::getTask( );
+		if ( office ) {
+			std::list< RockEventCharacterPtr > characters = office->getEventCharacters( );
+			std::list< RockEventCharacterPtr >::const_iterator ite = characters.begin( );
+			while ( ite != characters.end( ) ) {
+				RockEventCharacterPtr chara = *ite;
+				if ( !chara ) {
+					ite++;
+					continue;
+				}
+
+				Vector pos = chara->getPos( ) + Vector( 0, chara->getHeight( ), 0 );
+				drawer->drawSphere( pos, chara->getOverlappedRadius( ) );
+				ite++;
+			}
+		}
+	}
+
+	{//item
+		RockStoragePtr storage = RockStorage::getTask( );
+		{
+			std::list< RockItemPtr > items = storage->getItems( );
+			std::list< RockItemPtr >::const_iterator ite = items.begin( );
+			while ( ite != items.end( ) ) {
+				RockItemPtr item = *ite;
+				if ( !item ) {
+					ite++;
+					continue;
+				}
+
+				Vector pos = item->getPos( ) + Vector( 0, item->getHeight( ), 0 );
+				drawer->drawSphere( pos, item->getOverlappedRadius( ) );
+				ite++;
+			}
+		}
+		{//alter
+			std::list< RockAlterPtr > alters = storage->getAlters( );
+			std::list< RockAlterPtr >::const_iterator ite = alters.begin( );
+			while ( ite != alters.end( ) ) {
+				RockAlterPtr alter = *ite;
+				if ( !alter ) {
+					ite++;
+					continue;
+				}
+
+				drawer->drawSphere( alter->getPos( ), RockAlter::RANGE );
+				ite++;
+			}
+		}
+		{// casket
+			std::list< RockCasketPtr > caskets = storage->getCaskets( );
+			std::list< RockCasketPtr >::const_iterator ite = caskets.begin( );
+			while ( ite != caskets.end( ) ) {
+				RockCasketPtr casket = *ite;
+				if ( !casket ) {
+					ite++;
+					continue;
+				}
+
+				Vector pos = casket->getPos( ) + Vector( 0, casket->getHeight( ), 0 );
+				drawer->drawSphere( pos, casket->getOverlappedRadius( ) );
+				ite++;
+			}
+		}
 	}
 }

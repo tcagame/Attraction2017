@@ -33,6 +33,7 @@ private:
 	void drawShadow( ) const;
 	void drawUI( ) const;
 	void drawResult( ) const;
+	void drawDebug( ) const;
 private:
 	StatusPtr _status;
 	ImagePtr _dummy_ui;

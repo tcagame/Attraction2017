@@ -145,6 +145,7 @@
     <ClCompile Include="RockEnemyStoneFace.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="RockDebug.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="define.h" />
@@ -294,6 +295,7 @@
     <ClInclude Include="RockEnemyStone.h">
       <Filter>Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="RockDebug.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Item">

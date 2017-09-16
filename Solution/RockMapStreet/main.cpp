@@ -20,6 +20,10 @@
 #include "sound.h"
 #include "RockOffice.h"
 #include "RockShadow.h"
+#if _DEBUG
+#include "Keyboard.h"
+#include "RockDebug.h"
+#endif
 
 void main( ) {
 
@@ -43,6 +47,10 @@ void main( ) {
 	app->addTask( RockOffice::getTag( ), TaskPtr( new RockOffice( ) ) );
 	app->addTask( RockStudio::getTag( ), TaskPtr( new RockStudio( ) ) );
 	app->addTask( RockShadow::getTag( ), TaskPtr( new RockShadow( ) ) );
+#if _DEBUG
+	app->addTask( Keyboard::getTag( ), TaskPtr( new Keyboard( ) ) );
+	app->addTask( RockDebug::getTag( ), TaskPtr( new RockDebug( ) ) );
+#endif
 	app->addTask( MessageSender::getTag( ), TaskPtr( new MessageSender( message ) ) );
 	std::vector< unsigned char > state = { };
 	state.push_back( AREA_STREET_1 );

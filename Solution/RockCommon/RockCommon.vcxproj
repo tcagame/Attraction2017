@@ -173,6 +173,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="define.h" />
+    <ClInclude Include="RockDebug.h" />
     <ClInclude Include="RockEnemyChivil.h" />
     <ClInclude Include="RockEnemyLittleRedDaemon.h" />
     <ClInclude Include="RockEnemyMoth.h" />
@@ -235,6 +236,7 @@
     <ClInclude Include="Status.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="RockDebug.cpp" />
     <ClCompile Include="RockEnemyChivil.cpp" />
     <ClCompile Include="RockEnemyLittleRedDaemon.cpp" />
     <ClCompile Include="RockEnemyMoth.cpp" />

@@ -22,6 +22,8 @@
 #include "RockStudio.h"
 #include "RockShadow.h"
 #include "Sound.h"
+#include "Keyboard.h"
+#include "RockDebug.h"
 
 void main( ) {
 
@@ -44,6 +46,8 @@ void main( ) {
 	//app->addTask( RockTheater::getTag( ), TaskPtr( new RockTheaterTest( ) ) );
 	app->addTask( RockShadow::getTag( ), TaskPtr( new RockShadow( ) ) );
 	app->addTask( RockStudio::getTag( ), TaskPtr( new RockStudio( ) ) );
+	app->addTask( Keyboard::getTag( ), TaskPtr( new Keyboard ) );
+	app->addTask( RockDebug::getTag( ), TaskPtr( new RockDebug ) );
 
 	std::vector< unsigned char > state = { };
 	state.push_back( AREA_TEST );

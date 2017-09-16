@@ -13,6 +13,9 @@ public:
 	bool isActive( ) const;
 	void setActive( bool active );
 	ModelMV1Ptr getModel( ) const;
+	Vector getPos( ) const;
+public:
+	static const int RANGE = 80;
 private:
 	Vector _pos;
 	Vector _dir;

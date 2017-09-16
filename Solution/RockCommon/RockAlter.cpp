@@ -2,12 +2,14 @@
 #include "RockDollHouse.h"
 #include "ModelMV1.h"
 
-static const int RANGE = 80;
-
 RockAlter::RockAlter( const Vector& pos, const Vector& dir ) :
 _pos( pos ),
-_dir( dir.normalize( ) ),
 _active( true ) {
+	if ( dir == Vector( ) ) {
+		_dir = Vector( 0, 0, -1 );
+	} else {
+		_dir = dir;
+	}
 }
 
 
@@ -47,4 +49,8 @@ ModelMV1Ptr RockAlter::getModel( ) const {
 	model->setRot( Matrix::makeTransformRotation( axis, rot ) );
 	model->setTrans( Matrix::makeTransformTranslation( _pos ) );
 	return model;
+}
+
+Vector RockAlter::getPos( ) const {
+	return _pos;
 }
