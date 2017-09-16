@@ -5,11 +5,13 @@
 #include "RockAlter.h"
 #include "RockCasket.h"
 #include "RockStorage.h"
+#include "Status.h"
 
 const Vector ENTRY_POS = Vector( 200, 0, 270 );
 const double ENTRY_RADIUS = 40;
 
-RockMapEntry::RockMapEntry( ) {
+RockMapEntry::RockMapEntry( StatusPtr status ) :
+_status( status ) {
 }
 
 
@@ -37,7 +39,8 @@ void RockMapEntry::update( ) {
 			continue;
 		}
 		Vector pos = player->getPos( );
-		if ( isNext( pos ) ) {
+		if ( isNext( pos ) &&
+			 _status->getPlayer( i ).area != AREA_WAIT ) {
 			unsigned int area = AREA_STREET_1;
 			MessageSender::getTask( )->sendMessage( i, Message::COMMAND_AREA, &area );
 		}
