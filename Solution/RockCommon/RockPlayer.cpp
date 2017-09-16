@@ -32,6 +32,7 @@ static const int HEIGHT = 20;
 //チャージ時間
 static const int MAX_CHARGE_COUNT = 100;
 static const int INTERVAL_TIME = 10;
+static const int BURST_TIME = 60;
 //エフェクト位置
 static const Vector CHARGE_EFFECT_ADJUST( 0, 15, 0 );
 static const Vector SPEED_DOWN_EFFECT_ADJUST( 0, 15, 0 );
@@ -90,6 +91,9 @@ void RockPlayer::act( ) {
 		break;
 	case ACTION_CHARGE:
 		actOnCharging( );
+		break;
+	case ACTION_BURST:
+		actOnBurst( );
 		break;
 	case ACTION_DEAD:
 		actOnDead( );
@@ -169,6 +173,9 @@ void RockPlayer::setAction( ACTION action ) {
 		break;
 	case ACTION_CHARGE:
 		setDoll( ( DOLL )( DOLL_TAROSUKE_CHARGE + _id * ROCK_PLAYER_MOTION_NUM ) );
+		break;
+	case ACTION_BURST:
+		setDoll( ( DOLL )( DOLL_TAROSUKE_BURST + _id * ROCK_PLAYER_MOTION_NUM ) );
 		break;
 	case ACTION_WISH:
 		setDoll( ( DOLL )( DOLL_TAROSUKE_WISH + _id * ROCK_PLAYER_MOTION_NUM ) );
@@ -409,7 +416,7 @@ void RockPlayer::actOnCharging( ) {
 	}
 	// ジャンプ中であればチャージしない
 	if ( !isStanding( ) ) {
-		setAction( ACTION_WAIT );
+		setAction( ACTION_JUMP );
 		return;
 	}
 
@@ -424,8 +431,16 @@ void RockPlayer::actOnCharging( ) {
 	} else {
 		_attack_count++;
 	}
+
 	if ( _attack_count > MAX_CHARGE_COUNT ) {
-		_attack_count = MAX_CHARGE_COUNT;
+		_attack_count = 0;
+		Effect::getTask( )->stopEffect( _charge_effect_handle );
+		_charge_effect_handle = -1;
+		setAction( ACTION_BURST );
+		setVec( Vector( ) );
+		sound->stopSE( "yokai_se_21.wav" );
+		sound->stopSE( "yokai_se_22.wav" );
+		return;
 	}
 
 	//攻撃中の移動
@@ -451,6 +466,12 @@ void RockPlayer::actOnCharging( ) {
 			sound->playSE( "yokai_se_22.wav" );
 		}
 	} 
+}
+
+void RockPlayer::actOnBurst( ) {
+	if ( getActCount( ) > BURST_TIME ) {
+		setAction( ACTION_WAIT );
+	}
 }
 
 void RockPlayer::actOnBraking( ) {
@@ -574,6 +595,7 @@ ModelMV1Ptr RockPlayer::getModel( ) const {
 	case ACTION_CHARGE:
 		anim_time = ( double )getActCount( ) * ANIM_SPEED;
 		break;
+	case ACTION_BURST:
 	case ACTION_WISH:
 		anim_time = fmod( ( double )getActCount( ) * ANIM_SPEED, end_time );
 		break;
