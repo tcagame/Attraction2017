@@ -12,7 +12,7 @@ Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ) {
 EnemyLittleRedDaemon::~EnemyLittleRedDaemon( ) {
 }
 
-void EnemyLittleRedDaemon::setSynchronousData( unsigned char type, int camera_pos ) const {
+void EnemyLittleRedDaemon::setSynchronousData( int camera_pos ) const {
 	const int ANIM[ ] = {
 		393, 394, 395, 396, 397
 	};

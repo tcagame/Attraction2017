@@ -1,5 +1,8 @@
 #pragma once
 #include "Event.h"
+#include "smart_ptr.h"
+
+PTR( EnemyBoss );
 
 class EventMineral : public Event {
 public:
@@ -7,5 +10,7 @@ public:
 	virtual ~EventMineral( );
 public:
 	void update( );
+private:
+	EnemyBossPtr _boss;
 };
 

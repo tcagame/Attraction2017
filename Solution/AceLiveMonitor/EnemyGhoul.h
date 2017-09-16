@@ -6,7 +6,7 @@ public:
 	EnemyGhoul( const Vector& pos );
 	virtual ~EnemyGhoul( );
 public:
-	void setSynchronousData( unsigned char type, int camera_pos ) const;
+	void setSynchronousData( int camera_pos ) const;
 protected:
 	void act( );
 private:

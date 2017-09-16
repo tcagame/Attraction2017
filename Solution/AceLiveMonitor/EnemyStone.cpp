@@ -9,7 +9,7 @@ EnemyStone::EnemyStone( const Vector& pos ) :
 Enemy( pos, SMALL_CHAR_GRAPH_SIZE, MAX_HP ),
 _before_pos( Vector( ) ),
 _vec( Vector( -MOVE_SPEED, 2 ) ) {
-	setRadius( 16 );
+	setOverlappedRadius( 16 );
 	setVec( _vec );
 }
 
@@ -25,7 +25,7 @@ void EnemyStone::act( ) {
 	_before_pos = getPos( );
 }
 
-void EnemyStone::setSynchronousData( unsigned char type, int camera_pos ) const {
+void EnemyStone::setSynchronousData( int camera_pos ) const {
 	const int ANIM[ ] = {
 		56, 57, 58, 59
 	};
@@ -45,6 +45,7 @@ void EnemyStone::setSynchronousData( unsigned char type, int camera_pos ) const 
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	unsigned char type = getType( );
 	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
 }
 

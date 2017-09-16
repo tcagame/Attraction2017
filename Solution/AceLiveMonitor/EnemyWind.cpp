@@ -24,7 +24,7 @@ Vector DESTINATION_POS[ MAX_DESTINATION_POS ] = {
 EnemyWind::EnemyWind( const Vector& pos ) :
 Enemy( pos, BIG_CHAR_GRAPH_SIZE, MAX_HP, false ),
 _count( 0 ) {
-	setRadius( 32 );
+	setOverlappedRadius( 32 );
 	DESTINATION_POS[ 0 ].y = pos.y;
 	for ( int i = 0; i < MAX_DESTINATION_POS; i++ ) {
 		DESTINATION_POS[ i ].x += pos.x;
@@ -65,7 +65,7 @@ void EnemyWind::act( ) {
 	}
 }
 
-void EnemyWind::setSynchronousData( unsigned char type, int camera_pos ) const {
+void EnemyWind::setSynchronousData( int camera_pos ) const {
 	const int ANIM[ ] = {
 		32, 33, 34, 35, 36, 37, 38, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 64, 65, 66, 67, 68, 69, 70, 71
 	};
@@ -85,6 +85,7 @@ void EnemyWind::setSynchronousData( unsigned char type, int camera_pos ) const {
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	unsigned char type = getType( );
 	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
 }
 

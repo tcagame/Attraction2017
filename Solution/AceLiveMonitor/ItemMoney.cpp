@@ -17,7 +17,7 @@ ItemMoney::~ItemMoney( ) {
 void ItemMoney::act( ) {
 }
 
-void ItemMoney::setSynchronousData( unsigned char type, int camera_pos ) const {
+void ItemMoney::setSynchronousData( int camera_pos ) const {
 	Vector pos = getPos( );
 	int x = ( int )pos.x;
 	int y = ( int )pos.y;
@@ -42,7 +42,7 @@ void ItemMoney::setSynchronousData( unsigned char type, int camera_pos ) const {
 		break;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
-	data->addObject( area, type, pattern, attribute, x, y );
+	data->addObject( area, SynchronousData::TYPE_ITEM, pattern, attribute, x, y );
 }
 
 int ItemMoney::getValue( ) const {

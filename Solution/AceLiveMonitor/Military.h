@@ -3,6 +3,7 @@
 #include <string>
 #include <list>
 #include "ace_define.h"
+#include "ViewerDebug.h"
 
 PTR( Military );
 PTR( Enemy );
@@ -21,19 +22,16 @@ public:
 	void update( );
 	EnemyPtr getOverlappedEnemy( CharacterConstPtr character ) const;
 	const std::list< EnemyPtr > getEnemyList( ) const;
-	const std::list< EnemyPtr > getEventEnemyList( ) const;
 	void popUp( EnemyPtr enemy );
-	void popUpEventEnemy( EnemyPtr enemy );
-	void createEventEnemy( EVENT type );
+	void pushDebugData( ViewerDebug::Data& data ) const;
 	void eraseEventEnemy( );
-	EnemyPtr getBoss( ) const;
 	EnemyPtr getHellFire( ) const;
 private:
+	void updateEnemy( );
+	void updateHellFire( );
 	void dropMoney( EnemyConstPtr enemy );
 private:
 	std::list< EnemyPtr > _enemies;
-	std::list< EnemyPtr > _event_enemies;
 	EnemyPtr _hell_fire;
-	EnemyBossPtr _boss;
 };
 

@@ -29,7 +29,7 @@ void ShotMonmotaro::act( ) {
 	}
 }
 
-void ShotMonmotaro::setSynchronousData( unsigned char type, int camera_pos ) const {
+void ShotMonmotaro::setSynchronousData( int camera_pos ) const {
 	int ANIM[ ] = { 24 };
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	
@@ -47,5 +47,5 @@ void ShotMonmotaro::setSynchronousData( unsigned char type, int camera_pos ) con
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
-	data->addObject( area, type, ANIM[ getActCount( ) % anim_size ], attribute, x, y );
+	data->addObject( area, SynchronousData::TYPE_SHOT, ANIM[ getActCount( ) % anim_size ], attribute, x, y );
 }

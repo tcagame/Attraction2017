@@ -7,6 +7,6 @@ public:
 	virtual ~ShotMonmotaro( );
 protected:
 	void act( );
-	void setSynchronousData( unsigned char type, int camera_pos ) const;
+	void setSynchronousData( int camera_pos ) const;
 };
 

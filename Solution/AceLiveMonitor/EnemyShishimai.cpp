@@ -13,7 +13,7 @@ EnemyShishimai::EnemyShishimai( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ),
 _origin_pos( pos ),
 _attack( false ) {
-	setRadius( 36 );
+	setOverlappedRadius( 36 );
 	setVec( Vector( MOVE_SPEED, 0 ) );
 }
 
@@ -47,7 +47,7 @@ void EnemyShishimai::act( ) {
 	}
 }
 
-void EnemyShishimai::setSynchronousData( unsigned char type, int camera_pos ) const {
+void EnemyShishimai::setSynchronousData( int camera_pos ) const {
 	const int ANIM[ ] = {
 		280, 281, 282, 283, 284, 285, 286, 287, 288
 	};
@@ -67,5 +67,6 @@ void EnemyShishimai::setSynchronousData( unsigned char type, int camera_pos ) co
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	unsigned char type = getType( );
 	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
 }

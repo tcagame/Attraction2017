@@ -9,6 +9,7 @@
 #include "ItemDango.h"
 #include "ItemEnhancedAttack.h"
 #include "ItemEnhancedCharge.h"
+#include "World.h"
 
 PTR( ItemMoney );
 PTR( ItemVirtue );
@@ -27,14 +28,20 @@ Storage::~Storage( ) {
 void Storage::update( ) {
 	int camera_pos = Family::getTask( )->getCameraPosX( );
 	std::list< ItemPtr >::iterator ite = _items.begin( );
+	EVENT event_type = World::getTask( )->getEvent( );
 	while ( ite != _items.end( ) ) {
 		ItemPtr item = *ite;
 		if ( !item ) {
 			ite++;
 			continue;
 		}
+		if ( item->getArea( ) == AREA_EVENT &&
+			 event_type == EVENT_TITLE ) {
+			ite = _items.erase( ite );
+			continue;
+		}
 		item->update( );
-		item->setSynchronousData( SynchronousData::TYPE_ITEM, camera_pos );
+		item->setSynchronousData( camera_pos );
 		PlayerPtr hit_player = getOverLappedPlayer( item );
 		if ( hit_player ) {
 			//プレイヤーがアイテムと接触
@@ -100,22 +107,6 @@ void Storage::createVirtue( ) {
 	}
 }
 
-void Storage::eraseEventItem( ) {
-	std::list< ItemPtr >::iterator ite = _items.begin( );
-	while ( ite != _items.end( ) ) {
-		ItemPtr item = *ite;
-		if ( !item ) {
-			ite++;
-			continue;
-		}
-		if ( item->getArea( ) == AREA_EVENT ) {
-			ite = _items.erase( ite );
-			continue;
-		}
-		ite++;
-	}
-}
-
 bool Storage::pickUpItem( ItemPtr item, PlayerPtr player ) {
 	bool result = true;
 	{//お金
@@ -160,5 +151,21 @@ void Storage::createShopItem( ) {
 		ItemPtr item = ShopItemPtr( new ItemEnhancedCharge( Vector( 700, 0 ) ) );
 		item->setArea( AREA_EVENT );
 		_items.push_back( item );
+	}
+}
+
+void Storage::eraseEventItem( ) {
+	std::list< ItemPtr >::iterator ite = _items.begin( );
+	while ( ite != _items.end( ) ) {
+		ItemPtr item = *ite;
+		if ( !item ) {
+			ite++;
+			continue;
+		}
+		if ( item->getArea( ) == AREA_EVENT ) {
+			ite = _items.erase( ite );
+			continue;
+		}
+		ite++;
 	}
 }

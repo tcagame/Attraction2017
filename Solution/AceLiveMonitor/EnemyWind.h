@@ -6,7 +6,7 @@ public:
 	EnemyWind( const Vector& pos );
 	virtual ~EnemyWind( );
 public:
-	void setSynchronousData( unsigned char type, int camera_pos ) const;
+	void setSynchronousData( int camera_pos ) const;
 protected:
 	void act( );
 	void damage( int force );

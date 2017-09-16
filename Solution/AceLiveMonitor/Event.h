@@ -8,6 +8,7 @@ public:
 public:
 	virtual void update( ) = 0;
 	EVENT getType( ) const;
+	void reset( );
 private:
 	EVENT _type;
 };

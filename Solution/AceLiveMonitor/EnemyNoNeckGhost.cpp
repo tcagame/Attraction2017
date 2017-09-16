@@ -10,7 +10,7 @@ EnemyNoNeckGhost::EnemyNoNeckGhost( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP, false ),
 _vy( 0 ),
 _dir( 1 ) {
-	setRadius( 36 );
+	setOverlappedRadius( 36 );
 }
 
 
@@ -29,7 +29,7 @@ void EnemyNoNeckGhost::act( ) {
 	}
 }
 
-void EnemyNoNeckGhost::setSynchronousData( unsigned char type, int camera_pos ) const {
+void EnemyNoNeckGhost::setSynchronousData( int camera_pos ) const {
 	const int ANIM[ ] = {
 		240, 241, 242, 243, 244, 245, 246, 247, 248, 249, 250, 251, 252, 253
 	};
@@ -49,5 +49,6 @@ void EnemyNoNeckGhost::setSynchronousData( unsigned char type, int camera_pos ) 
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	unsigned char type = getType( );
 	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
 }

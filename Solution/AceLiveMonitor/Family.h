@@ -4,6 +4,7 @@
 #include "smart_ptr.h"
 #include "ace_define.h"
 #include <array>
+#include "ViewerDebug.h"
 
 PTR( Family );
 PTR( Player );
@@ -24,6 +25,7 @@ public:
 	int getCameraPosX( ) const;
 	MonmotaroConstPtr getMonmotaro( ) const;
 	bool isExistOnEvent( ) const;
+	void pushDebugData( ViewerDebug::Data& data ) const;
 private:
 	void updatePlayer( PLAYER taget );
 	void updateCameraPos( );

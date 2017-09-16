@@ -8,7 +8,7 @@ public:
 	virtual ~Shot( );
 public:
 	int getPower( ) const;
-	virtual void setSynchronousData( unsigned char type, int camera_pos ) const = 0;
+	virtual void setSynchronousData( int camera_pos ) const = 0;
 	virtual void erase( );
 	bool isFinished( ) const;
 protected:

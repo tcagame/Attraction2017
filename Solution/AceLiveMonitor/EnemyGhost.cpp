@@ -12,7 +12,7 @@ EnemyGhost::EnemyGhost( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP, false ),
 _act( ACTION_FADE_IN ),
 _ascend_speed( 0 ) {
-	setRadius( 36 );
+	setOverlappedRadius( 36 );
 	setVec( Vector( ) );
 }
 
@@ -44,7 +44,7 @@ void EnemyGhost::act( ) {
 	}
 }
 
-void EnemyGhost::setSynchronousData( unsigned char type, int camera_pos ) const {
+void EnemyGhost::setSynchronousData( int camera_pos ) const {
 	int anim = 0;
 	switch ( _act ) {
 	case ACTION_FADE_IN:
@@ -77,5 +77,6 @@ void EnemyGhost::setSynchronousData( unsigned char type, int camera_pos ) const 
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	unsigned char type = getType( );
 	data->addObject( area, type, anim, attribute, x, y );
 }

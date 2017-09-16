@@ -13,7 +13,7 @@ const int SHOT_TIMING = ( MOVE_TIME + WAIT_ANIM_TIME * 5 ) - 2;
 EnemyArcher::EnemyArcher( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ),
 _act( ACTION_MOVE ) {
-	setRadius( 36 );
+	setOverlappedRadius( 36 );
 }
 
 EnemyArcher::~EnemyArcher( ) {
@@ -29,7 +29,7 @@ void EnemyArcher::act( ) {
 	}
 }
 
-void EnemyArcher::setSynchronousData( unsigned char type, int camera_pos ) const {
+void EnemyArcher::setSynchronousData( int camera_pos ) const {
 	int ANIM[ ] = { /*move*/ 300, 301, 302, 303, 304, 305, 306, 307, 308, /*shot*/ 309, 310, 311, 312, 313, 314, 315, 316, 317 };
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	
@@ -47,6 +47,7 @@ void EnemyArcher::setSynchronousData( unsigned char type, int camera_pos ) const
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	unsigned char type = getType( );
 	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
 }
 

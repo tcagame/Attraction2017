@@ -11,7 +11,7 @@ EnemyJizo::EnemyJizo( const Vector& pos ) :
 Enemy( pos, BIG_CHAR_GRAPH_SIZE, MAX_HP ),
 _act( ACTION_FADE_IN ),
 _before_pos( pos ) {
-	setRadius( 48 );
+	setOverlappedRadius( 48 );
 }
 
 
@@ -39,7 +39,7 @@ void EnemyJizo::act( ) {
 		}
 }
 
-void EnemyJizo::setSynchronousData( unsigned char type, int camera_pos ) const {
+void EnemyJizo::setSynchronousData( int camera_pos ) const {
 	Vector pos = getPos( );
 	int x = ( int )pos.x;
 	int y = ( int )pos.y;
@@ -54,6 +54,7 @@ void EnemyJizo::setSynchronousData( unsigned char type, int camera_pos ) const {
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	unsigned char type = getType( );
 	switch ( _act ) {
 	case ACTION_FADE_IN:
 	{

@@ -21,114 +21,24 @@ ViewerDebug::ViewerDebug( ) {
 ViewerDebug::~ViewerDebug( ) {
 }
 
-void ViewerDebug::draw( ) const {
-	drawPlayer( );
-	drawEnemy( );
-	drawShot( );
+void ViewerDebug::draw( ) {
+	FamilyPtr family = Family::getTask( );
+	family->pushDebugData( _data );
+
+	MilitaryPtr military = Military::getTask( );
+	military->pushDebugData( _data );
+
+	ArmouryPtr armoury = Armoury::getTask( );
+	armoury->pushDebugData( _data );
+
+	pushMessageConnect( );
+
 	drawChip( );
-	drawConnect( );
+	drawCircle( );
+	drawMessage( );
 }
 
-void ViewerDebug::drawPlayer( ) const {
-	FamilyPtr family( Family::getTask( ) );
-	int camera_pos = family->getCameraPosX( );
-	DrawerPtr drawer( Drawer::getTask( ) );
-	for ( int i = 0; i < MAX_PLAYER; i++ ) {
-		PlayerConstPtr player = family->getPlayer( i );
-		int add_sx = - camera_pos;
-		int add_sy = VIEW_STREET_Y;
-		if ( player->getArea( ) == AREA_EVENT ) {
-			add_sx = 0;
-			add_sy = VIEW_EVENT_Y;
-		}
-		Vector pos( player->getPos( ) - Vector( 0, player->getChipSize( ) / 2 ) );
-		drawer->drawCircle( pos + Vector( add_sx, add_sy ), player->getRadius( ) );
-
-	}
-	
-	MonmotaroConstPtr monmo = family->getMonmotaro( );
-	int add_sx = - camera_pos;
-	int add_sy = VIEW_STREET_Y;
-	if ( monmo->getArea( ) == AREA_EVENT ) {
-		add_sx = 0;
-		add_sy = VIEW_EVENT_Y;
-	}
-	if ( monmo ) {
-		Vector monmo_pos( monmo->getPos( ) - Vector( 0, monmo->getChipSize( ) / 2 ) );
-		drawer->drawCircle( monmo_pos + Vector( add_sx, add_sy ), monmo->getRadius( ) );
-	}
-}
-
-void ViewerDebug::drawEnemy( ) const {
-	DrawerPtr drawer( Drawer::getTask( ) );
-	FamilyPtr family( Family::getTask( ) );
-	MilitaryPtr military( Military::getTask( ) );
-	{//main
-		int camera_pos = family->getCameraPosX( );
-		std::list< EnemyPtr > enemies = military->getEnemyList( );
-		std::list< EnemyPtr >::const_iterator ite = enemies.begin( );
-		int enemy_num = 0;
-		while ( ite != enemies.end( ) ) {
-			EnemyPtr enemy = ( *ite );
-			if ( !enemy ) {
-				ite++;
-				continue;
-			}
-			Vector pos( enemy->getPos( ) - Vector( camera_pos, enemy->getChipSize( ) / 2 ) );
-			drawer->drawCircle( pos + Vector( 0, VIEW_STREET_Y ), enemy->getRadius( ) );
-			enemy_num++;
-			ite++;
-		}
-		drawer->drawString( 0, 20, "Enemy-Street:%d", enemy_num );
-	}
-	{//event
-		std::list< EnemyPtr > enemies = military->getEventEnemyList( );
-		std::list< EnemyPtr >::const_iterator ite = enemies.begin( );
-		int enemy_num = 0;
-		while ( ite != enemies.end( ) ) {
-			EnemyPtr enemy = ( *ite );
-			if ( !enemy ) {
-				ite++;
-				continue;
-			}
-			Vector pos( enemy->getPos( ) - Vector( 0, enemy->getChipSize( ) / 2 ) );
-			drawer->drawCircle( pos + Vector( 0, VIEW_EVENT_Y ), enemy->getRadius( ) );
-			enemy_num++;
-			ite++;
-		}
-		drawer->drawString( 0, 0, "Enemy-Event:%d", enemy_num );
-	}
-	{//boss
-		EnemyPtr boss = military->getBoss( );
-		if ( boss ) {
-			Vector pos( boss->getPos( ) - Vector( 0, boss->getChipSize( ) / 2 ) );
-			drawer->drawCircle( pos + Vector( 0, VIEW_EVENT_Y ), boss->getRadius( ) );
-		}
-	}
-}
-
-void ViewerDebug::drawShot( ) const {
-	FamilyPtr family( Family::getTask( ) );
-	int camera_pos = family->getCameraPosX( );
-	DrawerPtr drawer( Drawer::getTask( ) );
-	ArmouryPtr armoury( Armoury::getTask( ) );
-	for ( int i = 0; i < armoury->getMaxShotNum( ); i++ ) {
-		ShotConstPtr shot = armoury->getShot( i );
-		if ( !shot ) {
-			continue;
-		}
-		int add_sx = -camera_pos;
-		int add_sy = VIEW_STREET_Y;
-		if ( shot->getArea( ) == AREA_EVENT ) {
-			add_sx = 0;
-			add_sy = VIEW_EVENT_Y;
-		}
-		Vector pos( shot->getPos( ) - Vector( 0, shot->getChipSize( ) / 2 ) );
-		drawer->drawCircle( pos + Vector( add_sx, add_sy ), shot->getRadius( ) );
-	}
-}
-
-void ViewerDebug::drawChip( ) const {
+void ViewerDebug::drawChip( ) {
 	FamilyPtr family( Family::getTask( ) );
 	int camera_pos = family->getCameraPosX( );
 	DrawerPtr drawer( Drawer::getTask( ) );
@@ -171,7 +81,7 @@ void ViewerDebug::drawChip( ) const {
 		int width = 8 * PAGE_OBJECT_WIDTH_NUM;
 		WorldPtr world = World::getTask( );
 		MapPtr map = World::getTask( )->getMap( AREA_EVENT );
-		if ( world->getEvent( ) != EVENT_NONE ) {
+		if ( world->getEvent( ) != EVENT_TITLE ) {
 			for ( int i = 0; i < width; i++ ) {
 				for ( int j = 0; j < OBJECT_CHIP_HEIGHT_NUM; j++ ) {
 					int x = i * OBJECT_CHIP_SIZE;
@@ -206,13 +116,27 @@ void ViewerDebug::drawChip( ) const {
 	}
 }
 
-void ViewerDebug::drawConnect( ) const {
-	DrawerPtr drawer( Drawer::getTask( ) );
+void ViewerDebug::pushMessageConnect( ) {
 	ServerPtr server( Server::getTask( ) );
-	int sx = 0;
-	int sy = 70;
 	for ( int i = 0; i < Server::MAX_MACHINES; i++ ) {
-		drawer->drawString( sx, sy, "IP:%s", server->getMachineIPStr( i ).c_str( ) );
-		sy += 20;
+		_data.message.push_back( "IP:" + server->getMachineIPStr( i ) );
 	}
+}
+
+void ViewerDebug::drawCircle( ) {
+	DrawerPtr drawer = Drawer::getTask( );
+	for ( Data::Circle circle : _data.circle ) {
+		drawer->drawCircle( circle.pos, circle.radius );
+	}
+	_data.circle.clear( );
+}
+
+void ViewerDebug::drawMessage( ) {
+	DrawerPtr drawer = Drawer::getTask( );
+	int y = 0;
+	for ( std::string message : _data.message ) {
+		drawer->drawString( 0, y, message.c_str( ) );
+		y += 20;
+	}
+	_data.message.clear( );
 }

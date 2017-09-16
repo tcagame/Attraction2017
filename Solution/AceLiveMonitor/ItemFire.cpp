@@ -12,7 +12,7 @@ ItemFire::~ItemFire( ) {
 void ItemFire::act( ) {
 }
 
-void ItemFire::setSynchronousData( unsigned char type, int camera_pos ) const {
+void ItemFire::setSynchronousData( int camera_pos ) const {
 	Vector pos = getPos( );
 	int x = ( int )pos.x;
 	int y = ( int )pos.y;
@@ -24,5 +24,5 @@ void ItemFire::setSynchronousData( unsigned char type, int camera_pos ) const {
 	}
 	unsigned char attribute = 0;
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
-	data->addObject( area, type, 37, attribute, x, y );
+	data->addObject( area, SynchronousData::TYPE_ITEM, 37, attribute, x, y );
 }

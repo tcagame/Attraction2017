@@ -6,7 +6,7 @@ static const int MAX_HP = 5;
 
 EnemyShell::EnemyShell( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ) {
-	setRadius( 30 );
+	setOverlappedRadius( 30 );
 }
 
 
@@ -16,7 +16,7 @@ EnemyShell::~EnemyShell( ) {
 void EnemyShell::act( ) {
 }
 
-void EnemyShell::setSynchronousData( unsigned char type, int camera_pos ) const {
+void EnemyShell::setSynchronousData( int camera_pos ) const {
 	const int ANIM[ ] = { 189, 190, 191, 192, 193, 194, 195, 196, 197 };
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	
@@ -34,5 +34,6 @@ void EnemyShell::setSynchronousData( unsigned char type, int camera_pos ) const 
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	unsigned char type = getType( );
 	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
 }

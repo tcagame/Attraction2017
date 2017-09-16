@@ -6,7 +6,7 @@ static const int MAX_HP = 1;
 
 EnemyRedBirdAttack::EnemyRedBirdAttack( const Vector& pos ) :
 EnemyAttack( pos, SMALL_CHAR_GRAPH_SIZE, MAX_HP ) {
-	setRadius( 18 );
+	setOverlappedRadius( 18 );
 }
 
 
@@ -17,7 +17,7 @@ void EnemyRedBirdAttack::act( ) {
 	if ( isStanding( ) ) damage( -1 );
 }
 
-void EnemyRedBirdAttack::setSynchronousData( unsigned char type, int camera_pos ) const {
+void EnemyRedBirdAttack::setSynchronousData( int camera_pos ) const {
 	const int ANIM[ ] = {
 		0, 1, 2, 1
 	};
@@ -37,5 +37,6 @@ void EnemyRedBirdAttack::setSynchronousData( unsigned char type, int camera_pos 
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	unsigned char type = getType( );
 	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
 }

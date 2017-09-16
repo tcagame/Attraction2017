@@ -1,7 +1,7 @@
 #include "Enemy.h"
 #include "Family.h"
 #include <assert.h>
-
+#include "SynchronousData.h"
 
 Enemy::Enemy( const Vector& pos, const int chip_size, const int hp, bool mass ) :
 Character( pos, chip_size, hp, mass ),
@@ -33,7 +33,7 @@ bool Enemy::isInScreen( ) const {
 	}
 	if ( getArea( ) == AREA_EVENT ) {
 		Vector vec = getVec( );
-		if ( pos.x + vec.x - getRadius( ) < 0 ) {
+		if ( pos.x + vec.x - getOverlappedRadius( ) < 0 ) {
 			result = false;
 		}
 	}
@@ -46,4 +46,21 @@ int Enemy::getForce( ) const {
 
 void Enemy::setForce( int force ) {
 	_force = force;
+}
+
+unsigned char Enemy::getType( ) const {
+	unsigned char type = 0;
+	switch ( getChipSize( ) ) {
+	case SMALL_CHAR_GRAPH_SIZE:
+		type = SynchronousData::TYPE_ENEMY_SMALL;
+		break;
+	case NORMAL_CHAR_GRAPH_SIZE:
+		type = SynchronousData::TYPE_ENEMY_MIDIUM;
+		break;
+	case BIG_CHAR_GRAPH_SIZE:
+		type = SynchronousData::TYPE_ENEMY_BIG;
+		break;
+	}
+
+	return type;
 }

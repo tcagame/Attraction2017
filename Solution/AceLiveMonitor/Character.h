@@ -2,6 +2,7 @@
 #include "mathmatics.h"
 #include "ace_define.h"
 #include "smart_ptr.h"
+#include "ViewerDebug.h"
 
 PTR( Character );
 
@@ -15,12 +16,14 @@ public:
 	void update( );
 	virtual void damage( int force );
 	bool isOverlapped( CharacterConstPtr target ) const;
-	double getRadius( ) const;
+	double getOverlappedRadius( ) const;
 	AREA getArea( ) const;
 	void setArea( AREA area );
 	int getChipSize( ) const;
 	int getPower( ) const;
 	DIR getDir( ) const;
+	ViewerDebug::Data::Circle getDebugDataCircle( ) const;
+	Vector getOverlappedPos( ) const;
 protected:
 	void setDir( DIR dir );
 	void setVec( const Vector& vec );
@@ -29,7 +32,7 @@ protected:
 	bool isStanding( ) const;
 	virtual void act( ) = 0;
 	int getActCount( ) const;
-	void setRadius( int radius );
+	void setOverlappedRadius( int radius );
 	void setActCount( int count );
 private:
 	void updateDir( );

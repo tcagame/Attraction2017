@@ -51,7 +51,7 @@ void RockShotPlayer::act( ) {
 
 void RockShotPlayer::actOutBack( ) {
 	RockPlayerPtr player = RockFamily::getTask( )->getPlayer( _target_id );
-	Vector diff = ( player->getPos( ) + Vector( 0, getRadius( ), 0 ) - getPos( ) );
+	Vector diff = ( player->getPos( ) + Vector( 0, getOverlappedRadius( ), 0 ) - getPos( ) );
 	if ( diff.getLength2( ) > MOVE_SPEED * MOVE_SPEED ) {
 		Vector vec = diff.normalize( ) * MOVE_SPEED;
 		vec.y = sin( PI2 / 60 * getActCount( ) ) * SHOT_MOVE_HEIGHT;

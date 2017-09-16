@@ -11,7 +11,7 @@ const int MOVE_SPEED = -2;
 
 EnemyHugDaemon::EnemyHugDaemon( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ) {
-	setRadius( 36 );
+	setOverlappedRadius( 36 );
 }
 
 
@@ -34,7 +34,7 @@ void EnemyHugDaemon::act( ) {
 	setVec( vec );
 }
 
-void EnemyHugDaemon::setSynchronousData( unsigned char type, int camera_pos ) const {
+void EnemyHugDaemon::setSynchronousData( int camera_pos ) const {
 	const int ANIM[ ] = {
 		227, 228, 229, 230, 231, 232, 233, 234, 235, 236
 	};
@@ -54,5 +54,6 @@ void EnemyHugDaemon::setSynchronousData( unsigned char type, int camera_pos ) co
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	unsigned char type = getType( );
 	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
 }

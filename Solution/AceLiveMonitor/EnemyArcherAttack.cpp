@@ -15,7 +15,7 @@ EnemyArcherAttack::~EnemyArcherAttack( ) {
 void EnemyArcherAttack::act( ) {
 }
 
-void EnemyArcherAttack::setSynchronousData( unsigned char type, int camera_pos ) const {
+void EnemyArcherAttack::setSynchronousData( int camera_pos ) const {
 	
 	Vector pos = getPos( );
 	int x = ( int )pos.x;
@@ -31,5 +31,6 @@ void EnemyArcherAttack::setSynchronousData( unsigned char type, int camera_pos )
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	unsigned char type = getType( );
 	data->addObject( area, type, 22, attribute, x, y );
 }

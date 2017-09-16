@@ -7,7 +7,7 @@ static const int MAX_HP = 6;
 
 EnemyRay::EnemyRay( const Vector& pos ) :
 Enemy( pos, BIG_CHAR_GRAPH_SIZE, MAX_HP, false ) {
-	setRadius( 18 );
+	setOverlappedRadius( 18 );
 }
 
 EnemyRay::~EnemyRay( ) {
@@ -18,7 +18,7 @@ void EnemyRay::act( ) {
 	setVec( move );
 }
 
-void EnemyRay::setSynchronousData( unsigned char type, int camera_pos ) const {
+void EnemyRay::setSynchronousData( int camera_pos ) const {
 	const int ANIM[ ] = {
 		80, 81, 82, 83, 84, 85
 	};
@@ -38,5 +38,6 @@ void EnemyRay::setSynchronousData( unsigned char type, int camera_pos ) const {
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	unsigned char type = getType( );
 	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
 }

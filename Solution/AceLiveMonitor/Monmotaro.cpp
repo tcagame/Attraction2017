@@ -28,7 +28,7 @@ Monmotaro::Monmotaro( const Vector& pos ) :
 Character( pos, NORMAL_CHAR_GRAPH_SIZE, 1, false ),
 _tracking( -1 ),
 _action( ACTION_HIDE ) {
-	setRadius( 36 );
+	setOverlappedRadius( 36 );
 }
 
 Monmotaro::~Monmotaro( ) {
@@ -75,7 +75,7 @@ void Monmotaro::actOnEntry( ) {
 	PlayerPtr player( family->getPlayer( _tracking ) );
 	Vector vec = ( player->getPos( ) - getPos( ) ).normalize( ) * ENTRY_SPEED;
 	setVec( vec );
-	if ( ( getPos( ) - player->getPos( ) ).getLength( ) < getRadius( ) + player->getRadius( ) ) {
+	if ( ( getPos( ) - player->getPos( ) ).getLength( ) < getOverlappedRadius( ) + player->getOverlappedRadius( ) ) {
 		DIR dir = player->getDir( );
 		setDir( dir );
 		setPos( player->getPos( ) + LEAVE_POS[ dir ] );

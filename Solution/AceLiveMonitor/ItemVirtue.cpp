@@ -12,7 +12,7 @@ ItemVirtue::~ItemVirtue( ) {
 void ItemVirtue::act( ) {
 }
 
-void ItemVirtue::setSynchronousData( unsigned char type, int camera_pos ) const {
+void ItemVirtue::setSynchronousData( int camera_pos ) const {
 	Vector pos = getPos( );
 	int x = ( int )pos.x;
 	int y = ( int )pos.y;
@@ -24,5 +24,5 @@ void ItemVirtue::setSynchronousData( unsigned char type, int camera_pos ) const 
 	}
 	unsigned char attribute = 0;
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
-	data->addObject( area, type, 34, attribute, x, y );
+	data->addObject( area, SynchronousData::TYPE_ITEM, 34, attribute, x, y );
 }

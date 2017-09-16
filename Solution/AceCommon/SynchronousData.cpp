@@ -139,7 +139,7 @@ void SynchronousData::setStatusState( PLAYER player, unsigned char area ) {
 void SynchronousData::resetObject( ) {
 	_data.idx[ AREA_STREET ] = 0;
 	_data.idx[ AREA_EVENT ] = OBJECT_NUM - 1;
-	_data.event = ( char )EVENT_NONE;
+	_data.event = ( char )EVENT_TITLE;
 	_data.camera_x = 0;
 }
 
@@ -192,6 +192,7 @@ void SynchronousData::addObject( AREA area, unsigned char type, int pattern, uns
 		return;
 	}
 	assert( pattern >= 0 );
+	assert( type > 0 );
 
 	int index = _data.idx[ area ];
 	if ( area == AREA_STREET ) {

@@ -14,7 +14,7 @@ public:
 	void update( );
 	Vector getPos( ) const;
 	Vector getDir( ) const;
-	int getRadius( ) const;
+	int getOverlappedRadius( ) const;
 	int getHeight( ) const;
 	virtual void damage( int force );
 	bool isHead( ) const;
@@ -33,7 +33,7 @@ protected:
 	bool isStanding( ) const;
 	void setActCount( int count );
 	int getActCount( ) const;
-	void setRadius( int radius );
+	void setOverlappedRadius( int radius );
 	DOLL getDoll( ) const;
 	void setDoll( DOLL doll );
 	void setMass( bool mass );

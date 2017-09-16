@@ -17,6 +17,7 @@
 #include "SynchronousData.h"
 #include "World.h"
 #include "Sound.h"
+#include "Drawer.h"
 
 
 PTR( Player );
@@ -36,139 +37,63 @@ Military::~Military( ) {
 
 
 void Military::update( ) {
+	updateEnemy( );
+	updateHellFire( );
+}
+
+
+void Military::updateEnemy( ) {
+	std::list< EnemyPtr >::const_iterator ite = _enemies.begin( );
 	FamilyPtr family( Family::getTask( ) );
-	StoragePtr storage( Storage::getTask( ) );
-	SoundPtr sound = Sound::getTask( );
 	int camera_pos = family->getCameraPosX( );
-	{//main
-		std::list< EnemyPtr >::const_iterator ite = _enemies.begin( );
-		while ( ite != _enemies.end( ) ) {
-			EnemyPtr enemy = (*ite);
-			if ( !enemy ) {
-				ite++;
-				continue;
+	while ( ite != _enemies.end( ) ) {
+		EnemyPtr enemy = (*ite);
+		if ( !enemy ) {
+			ite++;
+			continue;
+		}
+		if ( enemy->getPower( ) <= 0 ) {
+			//エネミーが倒れた場合、倒れた位置で爆発する
+			if ( !std::dynamic_pointer_cast< EnemyAttack >( enemy ) ) {
+				dropMoney( enemy );
 			}
-			if ( enemy->getPower( ) <= 0 ) {
-				//エネミーが倒れた場合、倒れた位置で爆発する
-				if ( !std::dynamic_pointer_cast< EnemyAttack >( enemy ) ) {
-					dropMoney( enemy );
-				}
 				
-				int impact_chip_size = enemy->getChipSize( ) * 2;
-				Magazine::getTask( )->add( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), AREA_STREET, impact_chip_size ) ) );
-				sound->playSE( "yokai_se_26.wav" );
-				ite = _enemies.erase( ite );
+			int impact_chip_size = enemy->getChipSize( ) * 2;
+			Magazine::getTask( )->add( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), enemy->getArea( ), impact_chip_size ) ) );
+			ite = _enemies.erase( ite );
+			continue;
+		}
+		if ( !enemy->isInScreen( ) ) {
+			//エネミーが画面外に行くと消える
+			ite = _enemies.erase( ite );
+			continue;
+		}
+		for ( int i = 0; i < MAX_PLAYER; i++ ) {
+			PlayerPtr player( family->getPlayer( i ) );
+			if ( !player->isExist( ) ) {
 				continue;
 			}
-			if ( !enemy->isInScreen( ) ) {
-				//エネミーが画面外に行くと消える
-				ite = _enemies.erase( ite );
-				continue;
-			}
-			for ( int i = 0; i < MAX_PLAYER; i++ ) {
-				PlayerPtr player( family->getPlayer( i ) );
-				if ( !player->isExist( ) ) {
-					continue;
-				}
-				if ( player->isOverlapped( enemy ) ) {
-					if ( player->isOnHead( enemy ) ) {
-						player->bound( );
-					} else {
-						int force = enemy->getForce( );
-						if ( force > 0 ) {
-							player->damage( force );
-						}
+			if ( player->isOverlapped( enemy ) ) {
+				if ( player->isOnHead( enemy ) ) {
+					player->bound( );
+				} else {
+					int force = enemy->getForce( );
+					if ( force > 0 ) {
+						player->damage( force );
 					}
 				}
 			}
-			enemy->update( );
-			unsigned char type = 0;
-			switch ( enemy->getChipSize( ) ) {
-			case SMALL_CHAR_GRAPH_SIZE:
-				type = SynchronousData::TYPE_ENEMY_SMALL;
-				break;
-			case NORMAL_CHAR_GRAPH_SIZE:
-				type = SynchronousData::TYPE_ENEMY_MIDIUM;
-				break;
-			case BIG_CHAR_GRAPH_SIZE:
-				type = SynchronousData::TYPE_ENEMY_BIG;
-				break;
-			}
-			enemy->setSynchronousData( type, camera_pos );
-			ite++;
 		}
+		enemy->update( );
+		enemy->setSynchronousData( camera_pos );
+		ite++;
 	}
-	{//event
-		if ( _boss ) {
-			_boss->update( );
-			_boss->setSynchronousData( SynchronousData::TYPE_ENEMY_BOSS, camera_pos );
-			for ( int i = 0; i < MAX_PLAYER; i++ ) {
-				PlayerPtr player( family->getPlayer( i ) );
-				if ( player->isOverlapped( _boss ) ) {
-					if ( player->isOnHead( _boss ) ) {
-						player->bound( );
-					} else {
-						player->damage( 3 );
-					}
-				}
-			}
-			if ( _boss->getPower( ) <= 0 ) {
-				_boss->dropItem( );//落ちるのではなく配られる
-				sound->playSE( "yokai_voice_29.wav" );
-				int impact_chip_size = _boss->getChipSize( ) * 2;
-				Magazine::getTask( )->add( ImpactPtr( new Impact( _boss->getPos( ) + Vector( 0, _boss->getChipSize( ) / 2 ), AREA_EVENT, impact_chip_size ) ) );
-				_boss = EnemyBossPtr( );
-			}
-		}
-		std::list< EnemyPtr >::const_iterator ite = _event_enemies.begin( );
-		while ( ite != _event_enemies.end( ) ) {
-			EnemyPtr enemy = (*ite);
-			if ( !enemy ) {
-				ite++;
-				continue;
-			}
-			if ( enemy->getPower( ) <= 0 ) {
-				//エネミーが倒れた場合、倒れた位置で爆発する
-				int impact_chip_size = enemy->getChipSize( ) * 2;
-				Magazine::getTask( )->add( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), AREA_STREET, impact_chip_size ) ) );
-				sound->playSE( "yokai_se_26.wav" );
-				ite = _event_enemies.erase( ite );
-				continue;
-			}
-			if ( !enemy->isInScreen( ) ) {
-				//エネミーが画面外に行くと消える
-				ite = _event_enemies.erase( ite );
-				continue;
-			}
-			for ( int i = 0; i < MAX_PLAYER; i++ ) {
-				PlayerPtr player( family->getPlayer( i ) );
-				if ( player->isOverlapped( enemy ) ) {
-					if ( player->isOnHead( enemy ) ) {
-						player->bound( );
-					} else {
-						player->damage( 3 );
-					}
-				}
-			}
-			enemy->update( );
-			
-			unsigned char type = 0;
-			switch ( enemy->getChipSize( ) ) {
-			case SMALL_CHAR_GRAPH_SIZE:
-				type = SynchronousData::TYPE_ENEMY_SMALL;
-				break;
-			case NORMAL_CHAR_GRAPH_SIZE:
-				type = SynchronousData::TYPE_ENEMY_MIDIUM;
-				break;
-			case BIG_CHAR_GRAPH_SIZE:
-				type = SynchronousData::TYPE_ENEMY_BIG;
-				break;
-			}
-			enemy->setSynchronousData( type, camera_pos );
-			ite++;
-		}
-	}
-	//地獄火
+}
+
+void Military::updateHellFire( ) {
+	FamilyPtr family( Family::getTask( ) );
+	int camera_pos = family->getCameraPosX( );
+
 	_hell_fire->update( );
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		PlayerPtr player( family->getPlayer( i ) );
@@ -177,93 +102,55 @@ void Military::update( ) {
 			player->blowAway( );
 		}
 	}
-	_hell_fire->setSynchronousData( SynchronousData::TYPE_ENEMY_MIDIUM, camera_pos );
-
+	_hell_fire->setSynchronousData( camera_pos );
 }
 
 const std::list< EnemyPtr > Military::getEnemyList( ) const {
 	return _enemies;
 }
 
-const std::list< EnemyPtr > Military::getEventEnemyList( ) const {
-	return _event_enemies;
-}
-
-
 void Military::popUp( EnemyPtr enemy ) {
 	_enemies.push_back( enemy );
 }
 
-void Military::popUpEventEnemy( EnemyPtr enemy ) {
-	_event_enemies.push_back( enemy );
-}
-
 EnemyPtr Military::getOverlappedEnemy( CharacterConstPtr character ) const {
 	EnemyPtr result = EnemyPtr( );
-	if ( character->getArea( ) == AREA_STREET ) {
-		std::list< EnemyPtr >::const_iterator ite = _enemies.begin( );
-		while ( ite != _enemies.end( ) ) {
-			EnemyPtr enemy = (*ite);
-			if ( !enemy ) {
-				ite++;
-				continue;
-			}
-			if ( enemy->isOverlapped( character ) ) {
-				result = enemy;
-				break;
-			}
+	AREA area_character = character->getArea( );
+	std::list< EnemyPtr >::const_iterator ite = _enemies.begin( );
+	while ( ite != _enemies.end( ) ) {
+		EnemyPtr enemy = (*ite);
+		if ( !enemy ) {
 			ite++;
+			continue;
 		}
-	} else {
-		if ( _boss ) {
-			if ( _boss->isOverlapped( character ) ) {
-				result = _boss;
-			}
-		}
-		std::list< EnemyPtr >::const_iterator ite = _event_enemies.begin( );
-		while ( ite != _event_enemies.end( ) ) {
-			EnemyPtr enemy = (*ite);
-			if ( !enemy ) {
-				ite++;
-				continue;
-			}
-			if ( enemy->isOverlapped( character ) ) {
-				result = enemy;
-				break;
-			}
+		if ( enemy->getArea( ) != area_character ) {
 			ite++;
+			continue;
 		}
+		if ( enemy->isOverlapped( character ) ) {
+			result = enemy;
+			break;
+		}
+		ite++;
 	}
+
 	return result;
 }
 
-void Military::createEventEnemy( EVENT type ) {
-	switch ( type ) {
-	case EVENT_REDDAEMON:
-		_boss = EnemyBossPtr( new EnemyBossRedDaemon( Vector( 800, 200 ) ) );
-		break;
-	case EVENT_FLAME:
-		_boss = EnemyBossPtr( new EnemyBossBloodDaemon( Vector( 800, 200 ) ) );
-		break;
-	case EVENT_WOOD:
-		_boss = EnemyBossPtr( new EnemyBossMonsterTree( Vector( 800, 225 ) ) );
-		break;
-	case EVENT_MINERAL:
-		_boss = EnemyBossPtr( new EnemyBossRock( Vector( 800, 225 ) ) );
-		break;
-	default:
-		_boss = EnemyBossPtr( );
-		break;
-	}
-}
-
 void Military::eraseEventEnemy( ) {
-	_event_enemies.clear( );
-	_boss = EnemyBossPtr( );
-}
-
-EnemyPtr Military::getBoss( ) const {
-	return _boss;
+	std::list< EnemyPtr >::iterator ite = _enemies.begin( );
+	while ( ite != _enemies.end( ) ) {
+		EnemyPtr enemy = (*ite);
+		if ( !enemy ) {
+			ite++;
+			continue;
+		}
+		if ( enemy->getArea( ) != AREA_EVENT ) {
+			ite = _enemies.erase( ite );
+			continue;
+		}
+		ite++;
+	}
 }
 
 EnemyPtr Military::getHellFire( ) const {
@@ -288,4 +175,23 @@ void Military::dropMoney( EnemyConstPtr enemy ) {
 	ItemPtr item = ItemPtr( new ItemMoney( pos, type ) );
 	item->setArea( enemy->getArea( ) );
 	Storage::getTask( )->add( item );
+}
+
+
+void Military::pushDebugData( ViewerDebug::Data& data ) const {
+	DrawerPtr drawer( Drawer::getTask( ) );
+	FamilyPtr family( Family::getTask( ) );
+	MilitaryPtr military( Military::getTask( ) );
+	int camera_pos = family->getCameraPosX( );
+
+	std::list< EnemyPtr >::const_iterator ite = _enemies.begin( );
+
+	while ( ite != _enemies.end( ) ) {
+		EnemyPtr enemy = ( *ite );
+		data.circle.push_back( enemy->getDebugDataCircle( ) );
+		ite++;
+	}
+
+	data.circle.push_back( _hell_fire->getDebugDataCircle( ) );
+	data.message.push_back( "Enemy:" + std::to_string( _enemies.size( ) ) );
 }

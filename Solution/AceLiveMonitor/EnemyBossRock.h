@@ -5,7 +5,7 @@ public:
 	EnemyBossRock( const Vector& pos );
 	virtual ~EnemyBossRock( );
 public:
-	void setSynchronousData( unsigned char type, int camera_pos ) const;
+	void setSynchronousData( int camera_pos ) const;
 	void dropItem( );
 protected:
 	void act( );

@@ -1,18 +1,29 @@
 #pragma once
 #include "Image.h"
+#include <list>
 
 class ViewerDebug {
 public:
 	ViewerDebug( );
 	virtual ~ViewerDebug( );
 public:
-	void draw( ) const;
-	void drawPlayer( ) const;
-	void drawEnemy( ) const;
-	void drawShot( ) const;
-	void drawChip( ) const;
-	void drawConnect( ) const;
+	struct Data {
+		struct Circle {
+			Vector pos;
+			double radius;
+		};
+		std::list< std::string > message;
+		std::list< Circle > circle;
+	};
+public:
+	void draw( );
+private:
+	void drawChip( );
+	void pushMessageConnect( );
+	void drawCircle( );
+	void drawMessage( );
 private:
 	ImagePtr _block;
+	Data _data;
 };
 

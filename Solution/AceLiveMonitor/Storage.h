@@ -20,8 +20,8 @@ public:
 	void add( ItemPtr item );
 	bool isExistanceEventItem( ) const;
 	std::list< ItemPtr > getItems( ) const;
-	void eraseEventItem( );
 	void createShopItem( );
+	void eraseEventItem( );
 private:
 	PlayerPtr getOverLappedPlayer( ItemPtr item ) const;
 	void createVirtue( ); //debug—p

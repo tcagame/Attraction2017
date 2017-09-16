@@ -12,7 +12,7 @@ ItemTree::~ItemTree( ) {
 void ItemTree::act( ) {
 }
 
-void ItemTree::setSynchronousData( unsigned char type, int camera_pos ) const {
+void ItemTree::setSynchronousData( int camera_pos ) const {
 	Vector pos = getPos( );
 	int x = ( int )pos.x;
 	int y = ( int )pos.y;
@@ -24,5 +24,5 @@ void ItemTree::setSynchronousData( unsigned char type, int camera_pos ) const {
 	}
 	unsigned char attribute = 0;
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
-	data->addObject( area, type, 36, attribute, x, y );
+	data->addObject( area, SynchronousData::TYPE_ITEM, 36, attribute, x, y );
 }

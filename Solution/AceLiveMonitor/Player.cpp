@@ -139,7 +139,7 @@ _charge_count( 0 ),
 _unrivaled_count( MAX_UNRIVALED_COUNT ),
 _action( ACTION_ENTRY ),
 _progress_count( 0 ) {
-	setRadius( 25 );
+	setOverlappedRadius( 25 );
 	setDir( DIR_RIGHT );
 
 	for ( int i = 0; i < MAX_ITEM; i++ ) {
@@ -592,14 +592,14 @@ void Player::actOnCamera( ) {
 	}
 	Vector pos = getPos( );
 	Vector vec = getVec( );
-	double radius = getRadius( );
+	double radius = getOverlappedRadius( );
 	if ( pos.x + vec.x - radius < x ) {
 		pos.x = x + radius;
 		vec.x = 0;
 		setPos( pos );
 		setVec( vec );
 	}
-	if ( getPos( ).x + getVec( ).x + getRadius( ) > x + SCREEN_WIDTH ) {
+	if ( getPos( ).x + getVec( ).x + getOverlappedRadius( ) > x + SCREEN_WIDTH ) {
 		pos.x = ( x + SCREEN_WIDTH ) - radius;
 		vec.x = 0;
 		setPos( pos );
@@ -712,7 +712,7 @@ bool Player::isOnHead( CharacterPtr target ) const {
 	if ( vec.y < 0 ) {
 		return false;
 	}
-	if ( vec.getLength( ) < target->getRadius( ) ) {
+	if ( vec.getLength( ) < target->getOverlappedRadius( ) ) {
 		return false;
 	}
 	if ( getPos( ).x < nonself.x - target->getChipSize( ) / 2 ||
@@ -912,12 +912,12 @@ EVENT Player::getOnEvent( ) const {
 	if ( !isStanding( ) ||
 		 getArea( ) == AREA_EVENT ||
 		 !isExist( ) ) {
-		return EVENT_NONE;
+		return EVENT_TITLE;
 	}
 
 	MapPtr map = World::getTask( )->getMap( AREA_STREET );
 	unsigned char obj = map->getObject( getPos( ) );
-	EVENT event = EVENT_NONE;
+	EVENT event = EVENT_TITLE;
 	switch ( obj ) {
 	case OBJECT_EVENT_REDDAEMON:
 		event = EVENT_REDDAEMON;

@@ -10,7 +10,7 @@ EnemyOnyudo::EnemyOnyudo( const Vector& pos ) :
 Enemy( pos, BIG_CHAR_GRAPH_SIZE, MAX_HP ),
 _before_pos( Vector( ) ), 
 _vec( MOVE_SPEED, 0 ) {
-	setRadius( 48 );
+	setOverlappedRadius( 48 );
 }
 
 
@@ -25,7 +25,7 @@ void EnemyOnyudo::act( ) {
 	_before_pos = getPos( );
 }
 
-void EnemyOnyudo::setSynchronousData( unsigned char type, int camera_pos ) const {
+void EnemyOnyudo::setSynchronousData( int camera_pos ) const {
 	const int ANIM[ ] = {
 		16, 17, 18, 19, 20, 21, 22, 23
 	};
@@ -45,5 +45,6 @@ void EnemyOnyudo::setSynchronousData( unsigned char type, int camera_pos ) const
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	unsigned char type = getType( );
 	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
 }

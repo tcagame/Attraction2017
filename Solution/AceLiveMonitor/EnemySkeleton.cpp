@@ -7,7 +7,7 @@ static const int MAX_HP = 6;
 
 EnemySkeleton::EnemySkeleton( const Vector& pos ) :
 Enemy( pos, BIG_CHAR_GRAPH_SIZE, MAX_HP, false ) {
-	setRadius( 18 );
+	setOverlappedRadius( 18 );
 }
 
 EnemySkeleton::~EnemySkeleton( ) {
@@ -18,7 +18,7 @@ void EnemySkeleton::act( ) {
 	setVec( move );
 }
 
-void EnemySkeleton::setSynchronousData( unsigned char type, int camera_pos ) const {
+void EnemySkeleton::setSynchronousData( int camera_pos ) const {
 	const int ANIM[ ] = {
 		96, 97, 98, 99, 100, 101, 102, 103, 104, 105
 	};
@@ -38,5 +38,6 @@ void EnemySkeleton::setSynchronousData( unsigned char type, int camera_pos ) con
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	unsigned char type = getType( );
 	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
 }

@@ -10,7 +10,7 @@ EnemyGreenZombie::EnemyGreenZombie( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ),
 _before_pos( Vector( ) ) {
 	setVec( Vector( MOVE_SPEED, 0 ) );
-	setRadius( 36 );
+	setOverlappedRadius( 36 );
 }
 
 
@@ -31,7 +31,7 @@ void EnemyGreenZombie::act( ) {
 	_before_pos = getPos( );
 }
 
-void EnemyGreenZombie::setSynchronousData( unsigned char type, int camera_pos ) const {
+void EnemyGreenZombie::setSynchronousData( int camera_pos ) const {
 	const int ANIM[ ] = {
 		66, 67, 68, 69, 70, 71
 	};
@@ -51,5 +51,6 @@ void EnemyGreenZombie::setSynchronousData( unsigned char type, int camera_pos ) 
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	unsigned char type = getType( );
 	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
 }

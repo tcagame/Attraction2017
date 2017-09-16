@@ -24,7 +24,7 @@ void EnemyHellFire::act( ) {
 	setVec( vec );
 }
 
-void EnemyHellFire::setSynchronousData( unsigned char type, int camera_pos ) const {
+void EnemyHellFire::setSynchronousData( int camera_pos ) const {
 	const int ANIM[ ] = {
 		360, 361, 362, 363, 364, 365, 366, 367, 368, 369,
 		370, 371, 372, 373, 374, 375, 376, 377, 378, 379,
@@ -45,5 +45,6 @@ void EnemyHellFire::setSynchronousData( unsigned char type, int camera_pos ) con
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	unsigned char type = getType( );
 	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
 }

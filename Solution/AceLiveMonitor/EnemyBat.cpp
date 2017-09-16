@@ -9,7 +9,7 @@ const Vector POS( 10, 0 );
 EnemyBat::EnemyBat( const Vector& pos ) :
 Enemy( pos + POS, SMALL_CHAR_GRAPH_SIZE, MAX_HP, false ),
 _center( pos ) {
-	setRadius( 16 );
+	setOverlappedRadius( 16 );
 }
 
 
@@ -24,7 +24,7 @@ void EnemyBat::act( ) {
 	setVec( rot * MOVE_SPEED );
 }
 
-void EnemyBat::setSynchronousData( unsigned char type, int camera_pos ) const {
+void EnemyBat::setSynchronousData( int camera_pos ) const {
 	const int ANIM[ ] = {
 		0, 1, 2, 3, 4, 5, 6, 7
 	};
@@ -44,5 +44,6 @@ void EnemyBat::setSynchronousData( unsigned char type, int camera_pos ) const {
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	unsigned char type = getType( );
 	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
 }

@@ -24,6 +24,11 @@ Office::~Office( ) {
 void Office::update( ) {
 	WorldPtr world = World::getTask( );
 	EVENT event = world->getEvent( );
+	if( event == EVENT_TITLE ) {
+		_npc = { };
+		return;
+	}
+
 	std::list< NPCPtr >::iterator ite = _npc.begin( );
 	while( ite != _npc.end( ) ) {
 		NPCPtr npc = (*ite);
@@ -33,10 +38,6 @@ void Office::update( ) {
 		}
 		npc->update( );
 		npc->setSynchronousData( );
-		if( event == EVENT_NONE ) {
-			ite = _npc.erase( ite );
-			continue;
-		}
 		ite++;
 	}
 }
@@ -67,11 +68,22 @@ void Office::popUpNPC( EVENT type ) {
 	}
 }
 
-void Office::eraseNPC( ) {
-	_npc = { };
-}
-
-
 std::list< NPCPtr > Office::getNPC( ) const {
 	return _npc;
+}
+
+void Office::eraseEventNPC( ) {
+	std::list< NPCPtr >::iterator ite = _npc.begin( );
+	while( ite != _npc.end( ) ) {
+		NPCPtr npc = (*ite);
+		if ( !npc ) {
+			ite++;
+			continue;
+		}
+		if ( npc->getArea( ) == AREA_EVENT ) {
+			ite = _npc.erase( ite );
+			continue;
+		}
+		ite++;
+	}
 }

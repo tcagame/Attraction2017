@@ -73,7 +73,7 @@ void ViewerLive::update( ) {
 
 	// ƒCƒxƒ“ƒg•`‰æ
 	EVENT event = data->getEvent( );
-	if ( event == EVENT_NONE ) {
+	if ( event == EVENT_TITLE ) {
 		_viewer_title->draw( );
 	} else {
 		_viewer_event->draw( event, EVENT_SX, EVENT_SY );

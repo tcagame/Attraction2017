@@ -6,7 +6,7 @@ public:
 	EnemySkeleton( const Vector& pos );
 	virtual ~EnemySkeleton( );
 public:
-	void setSynchronousData( unsigned char type, int camera_pos ) const;
+	void setSynchronousData( int camera_pos ) const;
 protected:
 	void act( );
 };

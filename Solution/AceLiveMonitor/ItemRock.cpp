@@ -12,7 +12,7 @@ ItemRock::~ItemRock( ) {
 void ItemRock::act( ) {
 }
 
-void ItemRock::setSynchronousData( unsigned char type, int camera_pos ) const {
+void ItemRock::setSynchronousData( int camera_pos ) const {
 	Vector pos = getPos( );
 	int x = ( int )pos.x;
 	int y = ( int )pos.y;
@@ -24,5 +24,5 @@ void ItemRock::setSynchronousData( unsigned char type, int camera_pos ) const {
 	}
 	unsigned char attribute = 0;
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
-	data->addObject( area, type, 38, attribute, x, y );
+	data->addObject( area, SynchronousData::TYPE_ITEM, 38, attribute, x, y );
 }

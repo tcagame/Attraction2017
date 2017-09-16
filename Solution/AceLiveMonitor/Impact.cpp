@@ -1,5 +1,6 @@
 #include "Impact.h"
 #include "SynchronousData.h"
+#include "Sound.h"
 
 const int IMPACT_CHIP_SIZE = 128;
 const int MAX_ANIM_COUNT = 30;
@@ -9,6 +10,8 @@ _pos( pos ),
 _anim_count( 0 ),
 _area( area ),
 _sprite_size( sprite_size ) {
+	SoundPtr sound = Sound::getTask( );
+	sound->playSE( "yokai_se_26.wav" );
 }
 
 

@@ -4,6 +4,7 @@
 #include "smart_ptr.h"
 #include <list>
 #include <array>
+#include "ViewerDebug.h"
 
 PTR( Shot );
 PTR( Armoury );
@@ -23,6 +24,7 @@ public:
 	void update( );
 	ShotConstPtr getShot( int idx ) const;
 	int getMaxShotNum( ) const;
+	void pushDebugData( ViewerDebug::Data& data );
 private:
 	static const int MAX_SHOT_NUM = 100;
 	int _shot_id;

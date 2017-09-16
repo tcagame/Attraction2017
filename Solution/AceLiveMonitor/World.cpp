@@ -6,7 +6,7 @@
 #include "Family.h"
 #include "Player.h"
 
-#include "EventNone.h"
+#include "EventTitle.h"
 #include "EventReddaemon.h"
 #include "EventFlame.h"
 #include "EventWood.h"
@@ -52,13 +52,15 @@ World::~World( ) {
 }
 
 void World::initialize( ) {
-	setEvent( EVENT_NONE );
+	setEvent( EVENT_TITLE );
 }
 
 void World::setEvent( EVENT type ) {
+	_event->reset( );
+
 	switch ( type ) {
-	case EVENT_NONE:
-		_event.reset( new EventNone( ) );
+	case EVENT_TITLE:
+		_event.reset( new EventTitle( ) );
 		break;
 	case EVENT_REDDAEMON:
 		_event.reset( new EventReddaemon( ) );
@@ -94,7 +96,7 @@ void World::setEvent( EVENT type ) {
 void World::playMapBgm( EVENT type ) {
 	SoundPtr sound = Sound::getTask( );
 	switch( type ) {
-	case EVENT_NONE:
+	case EVENT_TITLE:
 		sound->playBGM( "yokai_music_12.wav" );
 		break;
 	case EVENT_REDDAEMON:
@@ -116,6 +118,11 @@ void World::playMapBgm( EVENT type ) {
 		sound->playBGM( "yokai_music_06.wav" );
 		break;
 	case EVENT_CALL:
+		/*
+		メインテーマで前奏が長くドロドロしている雰囲気のBGMがある
+		コールではそのＢＧＭを流し、前奏がもんもたろーのテーマとおもわせる
+		そしてそのままメインテーマがながれるので、ここからタイトルに移った場合はBGMを再生させないようにする
+		*/
 		break;
 	}
 }
@@ -150,7 +157,7 @@ void World::update( ) {
 void World::updateEvent( ) {
 	FamilyPtr family( Family::getTask( ) );
 	if ( !family->isExistOnEvent( ) ) {
-		setEvent( EVENT_NONE );
+		setEvent( EVENT_TITLE );
 	}
 
 	_event->update( );
@@ -195,7 +202,7 @@ void World::onEvent( ) {
 
 
 void World::onEventReddaemon( PlayerPtr player ) {
-	if ( _event->getType( ) != EVENT_NONE && _event->getType( ) != EVENT_REDDAEMON ) {
+	if ( _event->getType( ) != EVENT_TITLE && _event->getType( ) != EVENT_REDDAEMON ) {
 		return;
 	}
 	if ( _event->getType( ) != EVENT_REDDAEMON ) {
@@ -205,7 +212,7 @@ void World::onEventReddaemon( PlayerPtr player ) {
 }
 
 void World::onEventFlame( PlayerPtr player ) {
-	if ( _event->getType( ) != EVENT_NONE && _event->getType( ) != EVENT_FLAME ) {
+	if ( _event->getType( ) != EVENT_TITLE && _event->getType( ) != EVENT_FLAME ) {
 		return;
 	}
 	if ( _event->getType( ) != EVENT_FLAME ) {
@@ -215,7 +222,7 @@ void World::onEventFlame( PlayerPtr player ) {
 }
 
 void World::onEventWood( PlayerPtr player ) {
-	if ( _event->getType( ) != EVENT_NONE && _event->getType( ) != EVENT_WOOD ) {
+	if ( _event->getType( ) != EVENT_TITLE && _event->getType( ) != EVENT_WOOD ) {
 		return;
 	}
 	if ( _event->getType( ) != EVENT_WOOD ) {
@@ -225,17 +232,17 @@ void World::onEventWood( PlayerPtr player ) {
 }
 
 void World::onEventMineral( PlayerPtr player ) {
-	if ( _event->getType( ) != EVENT_NONE && _event->getType( ) != EVENT_MINERAL ) {
+	if ( _event->getType( ) != EVENT_TITLE && _event->getType( ) != EVENT_MINERAL ) {
 		return;
 	}
-	if ( _event->getType( ) != EVENT_MINERAL ) {
+	if ( _event->getType( ) != EVENT_TITLE ) {
 		setEvent( EVENT_MINERAL );
 	}
 	player->enterEvent( );
 }
 
 void World::onEventShop( PlayerPtr player ) {
-	if ( _event->getType( ) != EVENT_NONE && _event->getType( ) != EVENT_SHOP ) {
+	if ( _event->getType( ) != EVENT_TITLE && _event->getType( ) != EVENT_SHOP ) {
 		return;
 	}
 	if ( _event->getType( ) != EVENT_SHOP ) {
@@ -245,7 +252,7 @@ void World::onEventShop( PlayerPtr player ) {
 }
 
 void World::onEventRyugu( PlayerPtr player ) {
-	if ( _event->getType( ) != EVENT_NONE && _event->getType( ) != EVENT_RYUGU ) {
+	if ( _event->getType( ) != EVENT_TITLE && _event->getType( ) != EVENT_RYUGU ) {
 		return;
 	}
 	if ( _event->getType( ) != EVENT_RYUGU ) {
@@ -255,7 +262,7 @@ void World::onEventRyugu( PlayerPtr player ) {
 }
 
 void World::onEventLake( PlayerPtr player ) {
-	if ( _event->getType( ) != EVENT_NONE && _event->getType( ) != EVENT_LAKE ) {
+	if ( _event->getType( ) != EVENT_TITLE && _event->getType( ) != EVENT_LAKE ) {
 		return;
 	}
 	if ( _event->getType( ) != EVENT_LAKE ) {
@@ -265,7 +272,7 @@ void World::onEventLake( PlayerPtr player ) {
 }
 
 void World::onEventCall( PlayerPtr player ) {
-	if ( _event->getType( ) != EVENT_NONE && _event->getType( ) != EVENT_CALL ) {
+	if ( _event->getType( ) != EVENT_TITLE && _event->getType( ) != EVENT_CALL ) {
 		return;
 	}
 	if ( _event->getType( ) != EVENT_CALL ) {
@@ -278,7 +285,7 @@ void World::onEventCall( PlayerPtr player ) {
 }
 
 void World::onEventGamble( PlayerPtr player ) {
-	if ( _event->getType( ) != EVENT_NONE && _event->getType( ) != EVENT_GAMBLE ) {
+	if ( _event->getType( ) != EVENT_TITLE && _event->getType( ) != EVENT_GAMBLE ) {
 		return;
 	}
 	if ( _event->getType( ) != EVENT_GAMBLE ) {

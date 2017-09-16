@@ -20,11 +20,11 @@ void EnemyBossRedDaemon::act( ) {
 	if ( getActCount( ) % WAIT_POP_TIME == 0 ) {
 		EnemyPtr enemy = EnemyPtr( new EnemyLittleRedDaemon( getPos( ) + Vector( 100, 0 ) ) );
 		enemy->setArea( AREA_EVENT );
-		Military::getTask( )->popUpEventEnemy( enemy );
+		Military::getTask( )->popUp( enemy );
 	}
 }
 
-void EnemyBossRedDaemon::setSynchronousData( unsigned char type, int camera_pos ) const {
+void EnemyBossRedDaemon::setSynchronousData( int camera_pos ) const {
 	const int ANIM[ ] = {
 		40, 41
 	};
@@ -42,10 +42,10 @@ void EnemyBossRedDaemon::setSynchronousData( unsigned char type, int camera_pos 
 	int chip_size = getChipSize( );
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
 	//–{‘Ì
-	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], 0, x, y, chip_size );
+	data->addObject( area, SynchronousData::TYPE_ENEMY_BOSS, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], 0, x, y, chip_size );
 	//˜r
 	y -= ( int )( sin( ( double )getActCount( ) / PI * 1 ) * 40 ) - 20;
-	data->addObject( area, type, 42, 0, x, y, chip_size );
+	data->addObject( area, SynchronousData::TYPE_ENEMY_BOSS, 42, 0, x, y, chip_size );
 	
 }
 

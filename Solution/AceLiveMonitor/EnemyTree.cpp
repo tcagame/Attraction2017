@@ -23,7 +23,7 @@ static const Vector GENERATE_POS[ MAX_GENERATE_NUM ] = {
 
 EnemyTree::EnemyTree( const Vector& pos ) :
 Enemy( pos, CHIP_SIZE, MAX_HP ) {
-	setRadius( 36 );
+	setOverlappedRadius( 36 );
 }
 
 
@@ -38,7 +38,7 @@ void EnemyTree::act( ) {
 	}
 }
 
-void EnemyTree::setSynchronousData( unsigned char type, int camera_pos ) const {
+void EnemyTree::setSynchronousData( int camera_pos ) const {
 	const int ANIM[ ] = {
 		36, 37
 	};

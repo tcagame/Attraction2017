@@ -9,7 +9,7 @@ public:
 	void erase( );
 protected:
 	void act( );
-	void setSynchronousData( unsigned char type, int camera_pos ) const;
+	void setSynchronousData( int camera_pos ) const;
 private:
 	PLAYER _player;
 	int _level;

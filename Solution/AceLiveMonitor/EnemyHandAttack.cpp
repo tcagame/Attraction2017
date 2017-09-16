@@ -6,7 +6,7 @@ static const int MAX_HP = 2;
 
 EnemyHandAttack::EnemyHandAttack( const Vector& pos ) :
 EnemyAttack( pos, SMALL_CHAR_GRAPH_SIZE, MAX_HP ) {
-	setRadius( 18 );
+	setOverlappedRadius( 18 );
 	Vector vec( -20, -8 );
 	setVec( vec );
 }
@@ -19,7 +19,7 @@ void EnemyHandAttack::act( ) {
 	if ( isStanding( ) ) damage( -1 );
 }
 
-void EnemyHandAttack::setSynchronousData( unsigned char type, int camera_pos ) const {
+void EnemyHandAttack::setSynchronousData( int camera_pos ) const {
 	const int ANIM[ ] = {
 		60, 61, 62, 63
 	};
@@ -38,5 +38,6 @@ void EnemyHandAttack::setSynchronousData( unsigned char type, int camera_pos ) c
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	unsigned char type = getType( );
 	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
 }

@@ -120,7 +120,7 @@ bool RockMapBoss::isWarpToBoss( const Vector& pos ) {
 		}
 		Vector p_pos = player->getPos( );
 		Vector diff = p_pos - pos;
-		double radius = player->getRadius( );
+		double radius = player->getOverlappedRadius( );
 		if ( diff.getLength2( ) < WARP_RANGE * WARP_RANGE ) {
 			return true;
 		}

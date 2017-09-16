@@ -9,11 +9,9 @@ public:
 	EnemyBossMonsterTree( const Vector& pos );
 	virtual ~EnemyBossMonsterTree( );
 public:
-	void setSynchronousData( unsigned char type, int camera_pos ) const;
+	void setSynchronousData( int camera_pos ) const;
 	void dropItem( );
 protected:
 	void act( );
-private:
-	EnemyPtr _branch;
 };
 

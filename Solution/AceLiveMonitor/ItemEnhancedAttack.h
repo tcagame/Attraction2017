@@ -5,7 +5,7 @@ public:
 	ItemEnhancedAttack( const Vector& pos );
 	virtual ~ItemEnhancedAttack( );
 public:
-	void setSynchronousData( unsigned char type, int camera_pos ) const;
+	void setSynchronousData( int camera_pos ) const;
 protected:
 	void act( );
 };

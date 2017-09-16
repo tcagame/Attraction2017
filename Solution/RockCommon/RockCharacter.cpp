@@ -76,7 +76,7 @@ void RockCharacter::update( ) {
 		 diff.getLength2( ) < DRAW_SHADOW_RANGE * DRAW_SHADOW_RANGE ) {
 		RockShadowPtr shadow = RockShadow::getTask( );
 		if( shadow ){
-			shadow->set( getPos( ), getRadius( ) );
+			shadow->set( getPos( ), getOverlappedRadius( ) );
 		}
 	}
 }
@@ -121,7 +121,7 @@ int RockCharacter::getActCount( ) const {
 	return _act_count;
 }
 
-void RockCharacter::setRadius( int radius ) {
+void RockCharacter::setOverlappedRadius( int radius ) {
 	_radius = radius;
 }
 
@@ -133,7 +133,7 @@ void RockCharacter::setDoll( DOLL doll ) {
 	_doll = doll;
 }
 
-int RockCharacter::getRadius( ) const {
+int RockCharacter::getOverlappedRadius( ) const {
 	return _radius;
 }
 
@@ -180,7 +180,7 @@ bool RockCharacter::isOverLapped( RockCharacterConstPtr target ) const {
 	distance.y = 0;
 
 	double length = distance.getLength2( );
-	double range_hol = target->getRadius( ) + getRadius( );
+	double range_hol = target->getOverlappedRadius( ) + getOverlappedRadius( );
 	double range_vir = target->getHeight( ) + getHeight( );
 	if ( length < range_hol * range_hol ) {
 		if ( distance_y < range_vir ) {
@@ -219,7 +219,7 @@ bool RockCharacter::isOnMapModel( const Vector& vec ) const {
 void RockCharacter::adjustPosForOverLapped( RockCharacterPtr target ) {
 	Vector target_pos = target->getPos( );
 	Vector distance = target_pos - _pos;
-	Vector pos = target_pos - distance.normalize( ) * ( target->getRadius( ) + _radius - 1 );
+	Vector pos = target_pos - distance.normalize( ) * ( target->getOverlappedRadius( ) + _radius - 1 );
 	Vector vec = pos - _pos;
 	vec.y = 0;
 	if( isOnMapModel( vec ) ) {

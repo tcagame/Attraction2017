@@ -9,23 +9,21 @@ static const int MAX_HP = 3;
 
 EnemyBranch::EnemyBranch( const Vector& pos ) :
 EnemyAttack( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP, false ) {
-	setRadius( 36 );
+	setOverlappedRadius( 36 );
 }
 
 EnemyBranch::~EnemyBranch( ) {
-	_seeds.clear( );
 }
 
 void EnemyBranch::act( ) {
 	if ( !( ( getActCount( ) + WAIT_ANIM_TIME * 5 ) % ATTACK_TIME ) ) {
 		EnemyPtr seed( new EnemySeed( getPos( ) ) );
 		seed->setArea( AREA_EVENT );
-		_seeds.push_back( seed );
-		Military::getTask( )->popUpEventEnemy( seed );
+		Military::getTask( )->popUp( seed );
 	}
 }
 
-void EnemyBranch::setSynchronousData( unsigned char type, int camera_pos ) const {
+void EnemyBranch::setSynchronousData( int camera_pos ) const {
 	const int ANIM[ ] = { 99, 100, 101, 102, 103, 104, 105, 101, 100, 99  };
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	Vector pos = getPos( );

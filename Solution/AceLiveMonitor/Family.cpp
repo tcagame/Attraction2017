@@ -174,3 +174,12 @@ bool Family::isExistOnEvent( ) const {
 	}
 	return exist;
 }
+
+void Family::pushDebugData( ViewerDebug::Data& data ) const {
+	for ( int i = 0; i < MAX_PLAYER; i++ ) {
+		if ( !_player[ i ]->isExist( ) ) {
+			continue;
+		}
+		data.circle.push_back( _player[ i ]->getDebugDataCircle( ) );
+	}
+}

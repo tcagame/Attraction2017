@@ -11,7 +11,7 @@ EnemyEyeDaemon::EnemyEyeDaemon( const Vector& pos ) :
 Enemy( pos, SMALL_CHAR_GRAPH_SIZE, MAX_HP ),
 _before_pos( pos ),
 _air_jump( false ) {
-	setRadius( 16 );
+	setOverlappedRadius( 16 );
 }
 
 
@@ -46,7 +46,7 @@ void EnemyEyeDaemon::act( ) {
 	_before_pos = getPos( );
 }
 
-void EnemyEyeDaemon::setSynchronousData( unsigned char type, int camera_pos ) const {
+void EnemyEyeDaemon::setSynchronousData( int camera_pos ) const {
 	const int ANIM[ ] = {
 		48, 49, 50, 51, 52, 53, 54, 55
 	};
@@ -66,5 +66,6 @@ void EnemyEyeDaemon::setSynchronousData( unsigned char type, int camera_pos ) co
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	unsigned char type = getType( );
 	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
 }

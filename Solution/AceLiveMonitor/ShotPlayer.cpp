@@ -28,11 +28,13 @@ void ShotPlayer::act( ) {
 
 void ShotPlayer::erase( ) {
 	// ’µ‚Ë•Ô‚è’e‚ð¶¬
-	Armoury::getTask( )->add( ShotPtr( new ShotReflect( _player, getPos( ) ) ) );
+	ShotPtr shot = ShotPtr( new ShotReflect( _player, getPos( ) ) );
+	shot->setArea( getArea( ) );
+	Armoury::getTask( )->add( shot );
 	Shot::erase( );
 }
 
-void ShotPlayer::setSynchronousData( unsigned char type, int camera_pos ) const {
+void ShotPlayer::setSynchronousData( int camera_pos ) const {
 	int ANIM[ ] = { 16, 17, 18, 19, 20, 21, 22, 23, 14, 15 };
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	
@@ -50,5 +52,5 @@ void ShotPlayer::setSynchronousData( unsigned char type, int camera_pos ) const 
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
-	data->addObject( area, type, ANIM[ ( _level - 1 ) * 2 + ( getActCount( ) % 2 ) ], attribute, x, y );
+	data->addObject( area, SynchronousData::TYPE_SHOT, ANIM[ ( _level - 1 ) * 2 + ( getActCount( ) % 2 ) ], attribute, x, y );
 }

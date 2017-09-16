@@ -156,22 +156,26 @@ int Character::getChipSize( ) const {
 	return _chip_size;
 }
 
+Vector Character::getOverlappedPos( ) const {
+	return _pos + Vector( 0, -_radius );
+}
+
 bool Character::isOverlapped( CharacterConstPtr target ) const {
 	if ( _area != target->getArea( ) || _power <= 0 ) {
 		return false;
 	}
-	Vector self = _pos + Vector( 0, getChipSize( ) / 2 );
-	Vector nonself = target->getPos( ) + Vector( 0, target->getChipSize( ) / 2 );
+	Vector self = getOverlappedPos( );
+	Vector nonself = target->getOverlappedPos( );
 	double length = ( self - nonself ).getLength( );
-	double radius = _radius + target->getRadius( );
+	double radius = getOverlappedRadius( ) + target->getOverlappedRadius( );
 	return ( length < radius );
 }
 
-void Character::setRadius( int radius ) {
+void Character::setOverlappedRadius( int radius ) {
 	_radius = radius;
 }
 
-double Character::getRadius( ) const {
+double Character::getOverlappedRadius( ) const {
 	return _radius;
 }
 
@@ -181,4 +185,16 @@ void Character::setActCount( int count ) {
 
 void Character::setArea( AREA area ) {
 	_area = area;
+}
+
+ViewerDebug::Data::Circle Character::getDebugDataCircle( ) const {
+	ViewerDebug::Data::Circle circle;
+	circle.pos = getOverlappedPos( );
+	circle.radius = getOverlappedRadius( );
+
+	if ( getArea( ) == AREA_STREET ) {
+		circle.pos.y += VIEW_STREET_Y;
+		circle.pos.x -= Family::getTask( )->getCameraPosX( );
+	}
+	return circle;
 }

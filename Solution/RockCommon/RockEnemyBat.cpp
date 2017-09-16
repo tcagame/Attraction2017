@@ -23,7 +23,7 @@ void RockEnemyBat::act( ) {
 	Vector near_distance = SEARCH_RANGE;
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		RockPlayerPtr player = RockFamily::getTask( )->getPlayer( i );
-		_player_radius = player->getRadius( );
+		_player_radius = player->getOverlappedRadius( );
 		if ( !player->isActive( ) || player->isBubble( ) ) {
 			setVec( Vector( ) );
 			continue;
@@ -37,7 +37,7 @@ void RockEnemyBat::act( ) {
 		Vector dir = near_distance.normalize( );	
 		Vector vec = dir * MOVE_SPEED;
 		setVec( vec );
-		if ( near_distance.getLength( ) < MOVE_SPEED + ( getRadius( ) + _player_radius ) - 1 ) {
+		if ( near_distance.getLength( ) < MOVE_SPEED + ( getOverlappedRadius( ) + _player_radius ) - 1 ) {
 			setVec( Vector( ) );
 		}
 	}
@@ -52,5 +52,5 @@ double RockEnemyBat::getAnimTime( ) const {
 }
 
 void RockEnemyBat::dropItem( ) {
-	RockStorage::getTask( )->addDropItem( RockItemPtr( new RockItemMoney( getPos( ) + Vector( 0, getRadius( ), 0 ), RockItemMoney::MONEY_VALUE_3 ) ) );
+	RockStorage::getTask( )->addDropItem( RockItemPtr( new RockItemMoney( getPos( ) + Vector( 0, getOverlappedRadius( ), 0 ), RockItemMoney::MONEY_VALUE_3 ) ) );
 }

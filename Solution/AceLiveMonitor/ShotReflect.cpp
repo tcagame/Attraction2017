@@ -17,7 +17,7 @@ _player( player ) {
 ShotReflect::~ShotReflect( ) {
 }
 
-void ShotReflect::setSynchronousData( unsigned char type, int camera_pos ) const {
+void ShotReflect::setSynchronousData( int camera_pos ) const {
 	const int ANIM = 16;
 
 	Vector pos = getPos( );
@@ -34,7 +34,7 @@ void ShotReflect::setSynchronousData( unsigned char type, int camera_pos ) const
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
-	data->addObject( area, type, ANIM, attribute, x, y );
+	data->addObject( area, SynchronousData::TYPE_SHOT, ANIM, attribute, x, y );
 }
 
 void ShotReflect::act( ) {

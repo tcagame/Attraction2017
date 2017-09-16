@@ -18,8 +18,8 @@ public:
 public:
 	void update( );
 	void popUpNPC( EVENT type );
-	void eraseNPC( );
 	std::list< NPCPtr > getNPC( ) const;
+	void eraseEventNPC( );
 private:
 	std::list< NPCPtr > _npc;
 };

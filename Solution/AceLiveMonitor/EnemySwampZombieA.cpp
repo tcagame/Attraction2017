@@ -7,7 +7,7 @@ static const int MAX_HP = 3;
 
 EnemySwampZombieA::EnemySwampZombieA( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ) {
-	setRadius( 36 );
+	setOverlappedRadius( 36 );
 	SoundPtr sound = Sound::getTask( );
 	if ( !sound->isPlayingSE( "yokai_voice_04.wav" ) ) {
 		sound->getTask( )->playSE( "yokai_voice_04.wav" );
@@ -22,7 +22,7 @@ void EnemySwampZombieA::act( ) {
 
 }
 
-void EnemySwampZombieA::setSynchronousData( unsigned char type, int camera_pos ) const {
+void EnemySwampZombieA::setSynchronousData( int camera_pos ) const {
 	const int ANIM[ ] = {
 		80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93
 	};
@@ -42,6 +42,7 @@ void EnemySwampZombieA::setSynchronousData( unsigned char type, int camera_pos )
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	unsigned char type = getType( );
 	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
 }
 

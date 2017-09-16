@@ -20,7 +20,7 @@ void EnemyBossBloodDaemon::act( ) {
 
 }
 
-void EnemyBossBloodDaemon::setSynchronousData( unsigned char type, int camera_pos ) const {
+void EnemyBossBloodDaemon::setSynchronousData( int camera_pos ) const {
 	const int ANIM[ ] = {
 		48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63,
 		64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78
@@ -37,7 +37,7 @@ void EnemyBossBloodDaemon::setSynchronousData( unsigned char type, int camera_po
 		area = AREA_STREET;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
-	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], 0, x, y, getChipSize( ) );
+	data->addObject( area, SynchronousData::TYPE_ENEMY_BOSS, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], 0, x, y, getChipSize( ) );
 	
 }
 

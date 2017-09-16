@@ -51,7 +51,7 @@ void EnemyStoneFace::act( ) {
 	setVec( vec );
 }
 
-void EnemyStoneFace::setSynchronousData( unsigned char type, int camera_pos ) const {
+void EnemyStoneFace::setSynchronousData( int camera_pos ) const {
 	const int ANIM[ ] = {
 		32, 33, 34, 35, 36
 	};
@@ -71,5 +71,6 @@ void EnemyStoneFace::setSynchronousData( unsigned char type, int camera_pos ) co
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	unsigned char type = getType( );
 	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
 }

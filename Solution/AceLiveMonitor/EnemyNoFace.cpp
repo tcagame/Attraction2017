@@ -10,7 +10,7 @@ const double MOVE_SPEED = 0.5;
 EnemyNoFace::EnemyNoFace( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ),
 _vec_x( -MOVE_SPEED ) {
-	setRadius( 36 );
+	setOverlappedRadius( 36 );
 	setVec( Vector( _vec_x, 0 ) );
 }
 
@@ -30,7 +30,7 @@ void EnemyNoFace::act( ) {
 	setVec( Vector( vec.x + _vec_x, vec.y ) );
 }
 
-void EnemyNoFace::setSynchronousData( unsigned char type, int camera_pos ) const {
+void EnemyNoFace::setSynchronousData( int camera_pos ) const {
 	const int ANIM[ ] = {
 		260, 261, 262, 263, 264, 265, 266, 267, 268, 269
 	};
@@ -50,5 +50,6 @@ void EnemyNoFace::setSynchronousData( unsigned char type, int camera_pos ) const
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	unsigned char type = getType( );
 	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
 }

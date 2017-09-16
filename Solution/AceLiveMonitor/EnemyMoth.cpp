@@ -9,7 +9,7 @@ EnemyMoth::EnemyMoth( const Vector& pos ) :
 Enemy( pos, SMALL_CHAR_GRAPH_SIZE, MAX_HP, false ),
 _vy( 0 ),
 _dir( 1 ) {
-	setRadius( 16 );
+	setOverlappedRadius( 16 );
 }
 
 
@@ -28,7 +28,7 @@ void EnemyMoth::act( ) {
 	}
 }
 
-void EnemyMoth::setSynchronousData( unsigned char type, int camera_pos ) const {
+void EnemyMoth::setSynchronousData( int camera_pos ) const {
 	int ANIM[ ] = { 40, 41, 42, 43 };
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	
@@ -46,5 +46,6 @@ void EnemyMoth::setSynchronousData( unsigned char type, int camera_pos ) const {
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	unsigned char type = getType( );
 	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
 }

@@ -9,7 +9,7 @@ EnemyBlueMonk::EnemyBlueMonk( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ),
 _before_pos( Vector( ) ),
 _vec( Vector( MOVE_SPEED, 0 ) ) {
-	setRadius( 30 );
+	setOverlappedRadius( 30 );
 }
 
 
@@ -24,7 +24,7 @@ void EnemyBlueMonk::act( ) {
 	_before_pos = getPos( );
 }
 
-void EnemyBlueMonk::setSynchronousData( unsigned char type, int camera_pos ) const {
+void EnemyBlueMonk::setSynchronousData( int camera_pos ) const {
 	const int ANIM[ ] = {
 		220, 221, 222, 223, 224, 225, 226
 	};
@@ -44,5 +44,6 @@ void EnemyBlueMonk::setSynchronousData( unsigned char type, int camera_pos ) con
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	unsigned char type = getType( );
 	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
 }

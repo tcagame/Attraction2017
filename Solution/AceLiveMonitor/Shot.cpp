@@ -8,7 +8,7 @@ _pos( pos ),
 _origin_pos( pos ),
 _power( power ),
 _finished( false ) {
-	setRadius( 20 );
+	setOverlappedRadius( 20 );
 }
 
 Shot::~Shot( ) {

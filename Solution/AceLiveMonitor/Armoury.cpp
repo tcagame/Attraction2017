@@ -37,7 +37,7 @@ void Armoury::update( ) {
 			continue;
 		}
 		_shot_list[ i ]->update( );
-		_shot_list[ i ]->setSynchronousData( SynchronousData::TYPE_SHOT, camera_pos );
+		_shot_list[ i ]->setSynchronousData( camera_pos );
 		EnemyPtr hit_enemy = militari->getOverlappedEnemy( _shot_list[ i ] );
 		if ( hit_enemy ) {
 			hit_enemy->damage( _shot_list[ i ]->getPower( ) );
@@ -69,4 +69,11 @@ void Armoury::add( ShotPtr shot ) {
 	_shot_id = ( _shot_id + 1 ) % MAX_SHOT_NUM;
 }
 
-
+void Armoury::pushDebugData( ViewerDebug::Data& data ) {
+	for ( int i = 0; i < MAX_SHOT_NUM; i++ ) {
+		if ( !_shot_list[ i ] ) {
+			continue;
+		}
+		data.circle.push_back( _shot_list[ i ]->getDebugDataCircle( ) );
+	}
+}

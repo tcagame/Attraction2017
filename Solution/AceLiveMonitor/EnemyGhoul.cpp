@@ -31,7 +31,7 @@ void EnemyGhoul::act( ) {
 	}
 }
 
-void EnemyGhoul::setSynchronousData( unsigned char type, int camera_pos ) const {
+void EnemyGhoul::setSynchronousData( int camera_pos ) const {
 	const int ANIM[ ] = {
 		20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31
 	};
@@ -51,5 +51,6 @@ void EnemyGhoul::setSynchronousData( unsigned char type, int camera_pos ) const 
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	unsigned char type = getType( );
 	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
 }

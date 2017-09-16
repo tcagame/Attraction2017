@@ -10,7 +10,7 @@ EnemyWhiteMist::EnemyWhiteMist( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP, false ),
 _vy( 0 ),
 _dir( 1 ) {
-	setRadius( 36 );
+	setOverlappedRadius( 36 );
 }
 
 
@@ -29,7 +29,7 @@ void EnemyWhiteMist::act( ) {
 	}
 }
 
-void EnemyWhiteMist::setSynchronousData( unsigned char type, int camera_pos ) const {
+void EnemyWhiteMist::setSynchronousData( int camera_pos ) const {
 	const int ANIM[ ] = {
 		160, 161, 162, 163, 164, 165, 166, 167, 168, 169
 	};
@@ -49,5 +49,6 @@ void EnemyWhiteMist::setSynchronousData( unsigned char type, int camera_pos ) co
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	unsigned char type = getType( );
 	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
 }

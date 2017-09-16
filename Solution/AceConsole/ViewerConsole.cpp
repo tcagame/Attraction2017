@@ -103,6 +103,12 @@ void ViewerConsole::drawAreaStreet( ) {
 void ViewerConsole::drawAreaEvent( ) {
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
 
+	// イベント描画
+	EVENT event = data->getEvent( );
+	if ( event == EVENT_TITLE ) {
+		return;
+	}
+
 	int camera_pos = data->getStatusX( _player ) - 320;
 	if ( camera_pos < 0 ) {
 		camera_pos = 0;
@@ -111,11 +117,6 @@ void ViewerConsole::drawAreaEvent( ) {
 		camera_pos = 1280 - 640 - 1;
 	}
 
-	// イベント描画
-	EVENT event = data->getEvent( );
-	if ( event == EVENT_NONE ) {
-		return;
-	}
 	_viewer_event->draw( event, AREA_SX - camera_pos, AREA_SY );
 	_viewer_object->draw( AREA_EVENT, AREA_SX - camera_pos, AREA_SY );
 }

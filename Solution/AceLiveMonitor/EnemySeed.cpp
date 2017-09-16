@@ -9,7 +9,7 @@ static const int MAX_HP = 2;
 
 EnemySeed::EnemySeed( const Vector& pos ) :
 EnemyAttack( pos, SMALL_CHAR_GRAPH_SIZE, MAX_HP ) {
-	setRadius( 16 );
+	setOverlappedRadius( 16 );
 	setVec( Vector( -10, 0 ) );
 }
 
@@ -20,7 +20,7 @@ void EnemySeed::act( ) {
 	if ( isStanding( ) ) setVec( getVec( ) + Vector( 0, JUMP_MAX_HP ) );
 }
 
-void EnemySeed::setSynchronousData( unsigned char type, int camera_pos ) const {
+void EnemySeed::setSynchronousData( int camera_pos ) const {
 	int anim = 405;
 	if ( isStanding( ) ) {
 		anim++;

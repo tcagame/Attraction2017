@@ -9,7 +9,7 @@ static const int GUIDE_TIME = 180;
 EnemyGama::EnemyGama( const Vector& pos ) :
 Enemy( pos, BIG_CHAR_GRAPH_SIZE, MAX_HP ),
 _guide( false ) {
-	setRadius( 36 );
+	setOverlappedRadius( 36 );
 }
 
 
@@ -26,7 +26,7 @@ bool EnemyGama::isGuide( ) const {
 	return _guide;
 }
 
-void EnemyGama::setSynchronousData( unsigned char type, int camera_pos ) const {
+void EnemyGama::setSynchronousData( int camera_pos ) const {
 	const int ANIM[ ] = {
 		112, 113, 114, 115
 	};
@@ -49,6 +49,7 @@ void EnemyGama::setSynchronousData( unsigned char type, int camera_pos ) const {
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	unsigned char type = getType( );
 	data->addObject( area, type, pattern, attribute, x, y );
 }
 

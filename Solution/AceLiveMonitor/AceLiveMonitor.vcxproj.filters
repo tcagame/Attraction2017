@@ -65,7 +65,7 @@
       <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyBoss.cpp">
-      <Filter>Boss</Filter>
+      <Filter>Character\Enemy\Boss</Filter>
     </ClCompile>
     <ClCompile Include="EnemyJizo.cpp">
       <Filter>Character\Enemy</Filter>
@@ -209,7 +209,7 @@
       <Filter>Viewer</Filter>
     </ClCompile>
     <ClCompile Include="EnemyBossRock.cpp">
-      <Filter>Boss</Filter>
+      <Filter>Character\Enemy\Boss</Filter>
     </ClCompile>
     <ClCompile Include="NPCObaba.cpp">
       <Filter>NPC</Filter>
@@ -225,21 +225,6 @@
     </ClCompile>
     <ClCompile Include="NPCOtohime.cpp">
       <Filter>NPC</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyRedBirdAttack.cpp">
-      <Filter>Shot\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyBranch.cpp">
-      <Filter>Shot\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemySeed.cpp">
-      <Filter>Shot\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyTreeNuts.cpp">
-      <Filter>Shot\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyHandAttack.cpp">
-      <Filter>Shot\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyTreeNuts.cpp">
       <Filter>EnemyAttack</Filter>
@@ -262,9 +247,6 @@
     <ClCompile Include="ItemRock.cpp">
       <Filter>Item</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyAttack.cpp">
-      <Filter>Shot\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyEyeDaemon.cpp">
       <Filter>Character\Enemy</Filter>
     </ClCompile>
@@ -278,13 +260,13 @@
       <Filter>Character\Enemy</Filter>
     </ClCompile>
     <ClCompile Include="EnemyBossBloodDaemon.cpp">
-      <Filter>Boss</Filter>
+      <Filter>Character\Enemy\Boss</Filter>
     </ClCompile>
     <ClCompile Include="EnemyBossRedDaemon.cpp">
-      <Filter>Boss</Filter>
+      <Filter>Character\Enemy\Boss</Filter>
     </ClCompile>
     <ClCompile Include="EnemyBossMonsterTree.cpp">
-      <Filter>Boss</Filter>
+      <Filter>Character\Enemy\Boss</Filter>
     </ClCompile>
     <ClCompile Include="PopEyeDaemon.cpp">
       <Filter>Pop</Filter>
@@ -367,12 +349,6 @@
     <ClCompile Include="Character.cpp">
       <Filter>Character</Filter>
     </ClCompile>
-    <ClCompile Include="ShotMonmotaro.cpp">
-      <Filter>Shot\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="ShotPlayer.cpp">
-      <Filter>Shot\Player</Filter>
-    </ClCompile>
     <ClCompile Include="Armoury.cpp">
       <Filter>Shot</Filter>
     </ClCompile>
@@ -396,9 +372,6 @@
     </ClCompile>
     <ClCompile Include="ShopItem.cpp">
       <Filter>Item</Filter>
-    </ClCompile>
-    <ClCompile Include="ShotReflect.cpp">
-      <Filter>Shot\Player</Filter>
     </ClCompile>
     <ClCompile Include="ViewerProgressBar.cpp">
       <Filter>Viewer</Filter>
@@ -433,8 +406,35 @@
     <ClCompile Include="EventWood.cpp">
       <Filter>Event</Filter>
     </ClCompile>
-    <ClCompile Include="EventNone.cpp">
+    <ClCompile Include="EventTitle.cpp">
       <Filter>Event</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyAttack.cpp">
+      <Filter>Character\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBranch.cpp">
+      <Filter>Character\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyHandAttack.cpp">
+      <Filter>Character\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyRedBirdAttack.cpp">
+      <Filter>Character\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemySeed.cpp">
+      <Filter>Character\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyTreeNuts.cpp">
+      <Filter>Character\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="ShotMonmotaro.cpp">
+      <Filter>Shot</Filter>
+    </ClCompile>
+    <ClCompile Include="ShotPlayer.cpp">
+      <Filter>Shot</Filter>
+    </ClCompile>
+    <ClCompile Include="ShotReflect.cpp">
+      <Filter>Shot</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -502,7 +502,7 @@
       <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyBoss.h">
-      <Filter>Boss</Filter>
+      <Filter>Character\Enemy\Boss</Filter>
     </ClInclude>
     <ClInclude Include="EnemyJizo.h">
       <Filter>Character\Enemy</Filter>
@@ -646,7 +646,7 @@
       <Filter>Viewer</Filter>
     </ClInclude>
     <ClInclude Include="EnemyBossRock.h">
-      <Filter>Boss</Filter>
+      <Filter>Character\Enemy\Boss</Filter>
     </ClInclude>
     <ClInclude Include="NPCObaba.h">
       <Filter>NPC</Filter>
@@ -662,21 +662,6 @@
     </ClInclude>
     <ClInclude Include="NPCOtohime.h">
       <Filter>NPC</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyRedBirdAttack.h">
-      <Filter>Shot\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyBranch.h">
-      <Filter>Shot\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemySeed.h">
-      <Filter>Shot\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyTreeNuts.h">
-      <Filter>Shot\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyHandAttack.h">
-      <Filter>Shot\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyTreeNuts.h">
       <Filter>EnemyAttack</Filter>
@@ -699,9 +684,6 @@
     <ClInclude Include="ItemRock.h">
       <Filter>Item</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyAttack.h">
-      <Filter>Shot\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="EnemyEyeDaemon.h">
       <Filter>Character\Enemy</Filter>
     </ClInclude>
@@ -715,13 +697,13 @@
       <Filter>Character\Enemy</Filter>
     </ClInclude>
     <ClInclude Include="EnemyBossBloodDaemon.h">
-      <Filter>Boss</Filter>
+      <Filter>Character\Enemy\Boss</Filter>
     </ClInclude>
     <ClInclude Include="EnemyBossRedDaemon.h">
-      <Filter>Boss</Filter>
+      <Filter>Character\Enemy\Boss</Filter>
     </ClInclude>
     <ClInclude Include="EnemyBossMonsterTree.h">
-      <Filter>Boss</Filter>
+      <Filter>Character\Enemy\Boss</Filter>
     </ClInclude>
     <ClInclude Include="PopEyeDaemon.h">
       <Filter>Pop</Filter>
@@ -801,12 +783,6 @@
     <ClInclude Include="Character.h">
       <Filter>Character</Filter>
     </ClInclude>
-    <ClInclude Include="ShotMonmotaro.h">
-      <Filter>Shot\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="ShotPlayer.h">
-      <Filter>Shot\Player</Filter>
-    </ClInclude>
     <ClInclude Include="Armoury.h">
       <Filter>Shot</Filter>
     </ClInclude>
@@ -830,9 +806,6 @@
     </ClInclude>
     <ClInclude Include="ShopItem.h">
       <Filter>Item</Filter>
-    </ClInclude>
-    <ClInclude Include="ShotReflect.h">
-      <Filter>Shot\Player</Filter>
     </ClInclude>
     <ClInclude Include="ViewerProgressBar.h">
       <Filter>Viewer</Filter>
@@ -867,16 +840,40 @@
     <ClInclude Include="EventWood.h">
       <Filter>Event</Filter>
     </ClInclude>
-    <ClInclude Include="EventNone.h">
+    <ClInclude Include="EventTitle.h">
       <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyAttack.h">
+      <Filter>Character\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBranch.h">
+      <Filter>Character\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyHandAttack.h">
+      <Filter>Character\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyRedBirdAttack.h">
+      <Filter>Character\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemySeed.h">
+      <Filter>Character\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyTreeNuts.h">
+      <Filter>Character\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="ShotMonmotaro.h">
+      <Filter>Shot</Filter>
+    </ClInclude>
+    <ClInclude Include="ShotPlayer.h">
+      <Filter>Shot</Filter>
+    </ClInclude>
+    <ClInclude Include="ShotReflect.h">
+      <Filter>Shot</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">
       <UniqueIdentifier>{850afb85-911e-43b2-a175-64364fee8f68}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Boss">
-      <UniqueIdentifier>{ac0a6380-7baf-4cac-a471-08c053d3e854}</UniqueIdentifier>
     </Filter>
     <Filter Include="Viewer">
       <UniqueIdentifier>{947e2af3-b4cc-4bea-b71e-fe5bab2e28d9}</UniqueIdentifier>
@@ -905,17 +902,14 @@
     <Filter Include="Character\Player">
       <UniqueIdentifier>{b586965a-c5df-44ef-97f3-bc1072dd8673}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Shot\Player">
-      <UniqueIdentifier>{26b1eacd-4e0b-4315-85aa-31784b036a6f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Shot\Enemy">
-      <UniqueIdentifier>{a4bea1fa-d4cd-4c18-a4cc-4e1ee9e929f3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Map">
       <UniqueIdentifier>{ef7bfeff-736b-4045-92ee-f366049380ac}</UniqueIdentifier>
     </Filter>
     <Filter Include="Event">
       <UniqueIdentifier>{936d5c50-167e-470a-b42c-7637bdd7d230}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Character\Enemy\Boss">
+      <UniqueIdentifier>{ac0a6380-7baf-4cac-a471-08c053d3e854}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

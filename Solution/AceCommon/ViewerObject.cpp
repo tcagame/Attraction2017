@@ -1,6 +1,7 @@
 #include "ViewerObject.h"
 #include "SynchronousData.h"
 #include "Drawer.h"
+#include <assert.h>
 
 ViewerObject::ViewerObject( ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
@@ -80,6 +81,7 @@ void ViewerObject::drawSprite( int x, int y, unsigned char type, unsigned char a
 	case SynchronousData::TYPE_NPC:
 		sprite = getSpriteNPC( GRAPH_NPC				, x, y, attribute, pattern, size );
 		break;
+	default: assert( 0 );
 	};
 
 	_image[ sprite.graph ]->setRect( sprite.tx, sprite.ty, sprite.tw, sprite.th );

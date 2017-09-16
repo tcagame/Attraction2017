@@ -8,7 +8,7 @@ static const int MAX_HP = 3;
 EnemyCrocoSnake::EnemyCrocoSnake( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ),
 _before_pos( Vector( ) ) {
-	setRadius( 30 );
+	setOverlappedRadius( 30 );
 	setVec( Vector( MOVE_SPEED, 0 ) );
 }
 
@@ -27,7 +27,7 @@ void EnemyCrocoSnake::act( ) {
 	_before_pos = getPos( );
 }
 
-void EnemyCrocoSnake::setSynchronousData( unsigned char type, int camera_pos ) const {
+void EnemyCrocoSnake::setSynchronousData( int camera_pos ) const {
 	const int ANIM[ ] = {
 		180, 181, 182, 183, 184, 185, 186, 187, 188
 
@@ -48,5 +48,6 @@ void EnemyCrocoSnake::setSynchronousData( unsigned char type, int camera_pos ) c
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	unsigned char type = getType( );
 	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
 }
