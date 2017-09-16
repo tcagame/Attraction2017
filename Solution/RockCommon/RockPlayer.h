@@ -33,6 +33,7 @@ private:
 		ACTION_WALK,
 		ACTION_BRAKE,
 		ACTION_CHARGE,
+		ACTION_BURST,
 		ACTION_DEAD,
 		ACTION_WISH
 	};
@@ -44,6 +45,7 @@ private:
 	void actOnWalking( );
 	void actOnAttacking( );
 	void actOnCharging( );
+	void actOnBurst( );
 	void actOnBraking( );
 	void actOnDead( );
 	void actOnWish( );

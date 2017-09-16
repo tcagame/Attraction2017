@@ -35,9 +35,10 @@ void StatusSender::update( ) {
 	}
 	
 	for ( int i = 0; i < Status::PLAYER_NUM; i++ ) {
-		if ( _reset_count[ i ] > RESET_TIME ) {
-			// リセットすべき情報を記述
-			_status->getPlayer( i ).area = AREA_ENTRY;
+		if ( _reset_count[ i ] > RESET_TIME &&
+			 _status->getPlayer( i ).area != AREA_WAIT ) {
+			_status->resetPlayer( i );
+			_status->getPlayer(i).area = AREA_WAIT;
 		}
 	}
 	Server::getTask( )->sendUdp( _status );
