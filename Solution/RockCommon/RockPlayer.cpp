@@ -49,7 +49,7 @@ static const double BUBBLE_MOVE_SPEED = MOVE_SPEED * 0.9;
 static const int DEAD_ANIM_TIME = 150;
 static const int ENTRY_TIME = 30;
 static const int FLOAT_HEIGHT = 1;
-
+static const int SEVER_RAG_ADJUST_TIME = 10; // 参加受付からエントリーになるときのラグ対応のため
 
 RockPlayer::RockPlayer( StatusPtr status, const Vector& pos, int id, RockAncestorsPtr ancestors ) :
 RockCharacter( pos, ( DOLL )( DOLL_TAROSUKE_WAIT + id * ROCK_PLAYER_MOTION_NUM ), RADIUS, HEIGHT ),
@@ -199,7 +199,7 @@ void RockPlayer::actOnBubble( ) {
 		if ( isOnMapModel( ) ) {
 			setMass( true );
 			setCol( true );
-			setAction( ACTION_WAIT );
+			setAction( ACTION_JUMP );
 			return;
 		}
 	}
@@ -228,6 +228,9 @@ void RockPlayer::actOnBubble( ) {
 			if ( status.area & AREA_WAIT ) {
 				unsigned char area = AREA_ENTRY;
 				MessageSender::getTask( )->sendMessage( _id, Message::COMMAND_AREA, &area );
+				setAction( ACTION_JUMP );
+				setMass( true );
+				setCol( true );
 			}
 			return;
 		}
@@ -246,7 +249,8 @@ void RockPlayer::actOnWaiting( ) {
 		actOnKilled( );
 		return;
 	}
-	if ( player.area == AREA_WAIT ) {
+	if ( player.area == AREA_WAIT &&
+		 getActCount( ) > SEVER_RAG_ADJUST_TIME ) {
 		setAction( ACTION_BUBBLE );
 		setPos( getPos( ) + BUBBLE_FOOT );
 		return;
@@ -299,7 +303,8 @@ void RockPlayer::actOnJumping( ) {
 		actOnKilled( );
 		return;
 	}
-	if ( player.area == AREA_WAIT ) {
+	if ( player.area == AREA_WAIT &&
+		 getActCount( ) > SEVER_RAG_ADJUST_TIME ) {
 		setAction( ACTION_BUBBLE );
 		setPos( getPos( ) + BUBBLE_FOOT );
 		return;
@@ -326,7 +331,8 @@ void RockPlayer::actOnWalking( ) {
 		actOnKilled( );
 		return;
 	}
-	if ( player.area == AREA_WAIT ) {
+	if ( player.area == AREA_WAIT &&
+		 getActCount( ) > SEVER_RAG_ADJUST_TIME ) {
 		setAction( ACTION_BUBBLE );
 		setPos( getPos( ) + BUBBLE_FOOT );
 		return;
@@ -409,7 +415,8 @@ void RockPlayer::actOnCharging( ) {
 		actOnKilled( );
 		return;
 	}
-	if ( player.area == AREA_WAIT ) {
+	if ( player.area == AREA_WAIT &&
+		 getActCount( ) > SEVER_RAG_ADJUST_TIME ) {
 		setAction( ACTION_BUBBLE );
 		setPos( getPos( ) + BUBBLE_FOOT );
 		return;
@@ -481,7 +488,8 @@ void RockPlayer::actOnBraking( ) {
 		actOnKilled( );
 		return;
 	}
-	if ( player.area == AREA_WAIT ) {
+	if ( player.area == AREA_WAIT &&
+		 getActCount( ) > SEVER_RAG_ADJUST_TIME ) {
 		setAction( ACTION_BUBBLE );
 		setPos( getPos( ) + BUBBLE_FOOT );
 		return;
