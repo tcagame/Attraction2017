@@ -21,8 +21,8 @@ RockMapStreetDrawer::RockMapStreetDrawer( RockMapStreet::STAGE stage ) {
 			map->addModel( model );
 		}
 		ModelMV1Ptr col_model = ModelMV1Ptr( new ModelMV1 );
-		col_model->load( "Resource/Rock/map/street1/map02_col.mv1" );
-		col_model->setTrans( Matrix::makeTransformTranslation( Vector( 0, 10, 0 ) ) );
+		col_model->load( "Resource/Rock/map/street1/map02_CL.mv1" );
+		col_model->setTrans( Matrix::makeTransformTranslation( Vector( 0, 0, 0 ) ) );
 		map->addColModel( col_model );
 
 		//ModelMV1Ptr bg_model = ModelMV1Ptr( new ModelMV1 );
