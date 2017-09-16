@@ -9,7 +9,7 @@ const int HP = 20;
 const double ACCEL = 0.1;
 const double MAX_SPEED = 1.5;
 const double ANIM_SPEED = 0.9;
-const Vector SEARCH_RANGE( 10000, 10000, 10000 );
+const Vector SEARCH_RANGE( 1000, 1000, 1000 );
 
 RockEnemyFaceAndHand::RockEnemyFaceAndHand( const Vector& pos ) :
 RockEnemy( pos, DOLL_FACE_AND_HAND, HP, 1, 10, 10, false, true ),

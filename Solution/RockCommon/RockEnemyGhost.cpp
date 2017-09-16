@@ -9,7 +9,7 @@ const int HP = 10;
 const double ACCEL = 0.1;
 const double MAX_SPEED = 2.2;
 const double ANIM_SPEED = 0.9;
-const Vector SEARCH_RANGE( 10000, 10000, 10000 );
+const Vector SEARCH_RANGE( 1000, 1000, 1000 );
 
 RockEnemyGhost::RockEnemyGhost( const Vector& pos ) :
 RockEnemy( pos, DOLL_GHOST, HP, 1, 10, 10, false, false ),

@@ -9,7 +9,7 @@ const int HP = 10;
 const double ACCEL = 0.15;
 const double MAX_SPEED = 3.0;
 static const double ANIM_SPEED = 0.9;
-const Vector SEARCH_RANGE( 10000, 10000, 10000 );
+const Vector SEARCH_RANGE( 1000, 1000, 1000 );
 
 RockEnemyRedBard::RockEnemyRedBard( const Vector& pos ) :
 RockEnemy( pos, DOLL_REDBARD, HP, 1, 10, 10, false, true ) {
