@@ -3,9 +3,15 @@
 #include "Drawer.h"
 #include "RockFamily.h"
 #include "RockPlayer.h"
+#include "RockMapStreet.h"
+
 
 const Vector INIT_POS = Vector( 0, 500, -1000 );
 const Vector INIT_TARGET = Vector( 0, 60, -500 );
+
+const Vector STREET_DIR = Vector( 0, 0.8, -1 ).normalize( );
+const Vector BOSS_DIR = Vector( -1, 0.5, 0 ).normalize( );
+const double LENGTH = 300;
 
 
 RockMapStreetCamera::RockMapStreetCamera( ) :
@@ -24,14 +30,26 @@ RockMapStreetCamera::~RockMapStreetCamera( ) {
 }
 
 void RockMapStreetCamera::setCamera( ) {
-	RockMapStreetPtr map = std::dynamic_pointer_cast< RockMapStreet >( RockMap::getTask( ) );
 	Vector target = RockFamily::getTask( )->getCameraPos( );
+	RockMapStreetPtr map = std::dynamic_pointer_cast< RockMapStreet >( RockMap::getTask( ) );
+	RockMapStreet::STAGE stage = map->getStage( );
+
 	if ( target.isOrijin( ) ) {
 		setPos( INIT_POS );
 		setTarget( INIT_TARGET );
 	} else {
-		RockMapStreet::STAGE stage = map->getStage( );
-		Vector pos = target + _dir[ stage ] * _length[ stage ];
+		Vector pos;
+		switch( stage ) {
+		case RockMapStreet::STAGE_STREET:
+			pos = target + STREET_DIR * LENGTH;
+			break;
+		case RockMapStreet::STAGE_CAVE:
+			pos = target + BOSS_DIR * LENGTH;
+			break;
+		case RockMapStreet::STAGE_RYUGU:
+			RockMapStreet::STAGE stage = map->getStage( );
+			Vector pos = target + _dir[ stage ] * _length[ stage ];
+		}
 		setPos( pos );
 		setTarget( target );
 	}
