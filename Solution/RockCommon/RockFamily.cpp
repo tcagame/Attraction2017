@@ -108,13 +108,14 @@ Vector RockFamily::getCameraPos( ) const {
 	int num = 0;
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		if ( _player[ i ]->isActive( ) ) {
-			result += _player[ i ]->getPos( );
+			result += _player[ i ]->getPos( ) * 0.01;
 			num++;
 		}
 	}
 	if ( num > 0 ) {
 		result *= ( 1.0 / ( double )num );
 	}
+	result *= 100;
 	return result;
 }
 
