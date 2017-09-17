@@ -106,11 +106,10 @@ void RockViewer::update( ) {
 		drawGame( );
 	} else {
 		MoviePtr movie = theater->getMovie( );
-		if ( movie->isPlay( ) ) {
-			drawResult( );
-		} else {
+		if ( !movie->isPlay( ) ) {
 			drawGame( );
 		}
+		drawResult( );
 	}
 }
 
