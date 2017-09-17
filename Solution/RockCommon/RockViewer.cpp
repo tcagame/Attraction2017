@@ -100,13 +100,27 @@ void RockViewer::update( ) {
 	DrawerPtr drawer = Drawer::getTask( );
 	drawer->waitForSync( );
 	drawer->flip( );
+	
+	RockTheaterPtr theater = RockTheater::getTask( );
+	if ( !theater ) {
+		drawGame( );
+	} else {
+		MoviePtr movie = theater->getMovie( );
+		if ( movie->isPlay( ) ) {
+			drawResult( );
+		} else {
+			drawGame( );
+		}
+	}
+}
+
+void RockViewer::drawGame( ) const {
 	drawMap( );
 	drawShadow( );
 	drawEnemy( );
 	drawPlayer( );
 	drawAncestors( );
 	drawEventCharacter( );
-	//drawShot( );
 	drawItem( );
 	drawAlter( );
 	drawCasket( );
@@ -115,8 +129,8 @@ void RockViewer::update( ) {
 	Effect::getTask( )->drawEffect( );
 	drawDebug( );
 	drawUI( );
-	drawResult( );
 }
+
 
 void RockViewer::drawMap( ) const {
 	std::vector< ModelMV1Ptr > back_ground_models = RockMap::getTask( )->getBackGroundModels( );
@@ -232,24 +246,6 @@ void RockViewer::drawEventCharacter( ) const {
 
 		ModelMV1Ptr model = chara->getModel( );
 		model->draw( );
-		ite++;
-	}
-}
-
-void RockViewer::drawShot( ) const {
-	DrawerPtr drawer( Drawer::getTask( ) );
-	RockArmouryPtr armoury( RockArmoury::getTask( ) );
-	std::list< RockShotPtr > shots = armoury->getShots( );
-	std::list< RockShotPtr >::const_iterator ite = shots.begin( );
-	while ( ite != shots.end( ) ) {
-		RockShotPtr shot = *ite;
-		if ( !shot ) {
-			ite++;
-			continue;
-		}
-
-		Vector pos = shot->getPos( );
-		drawer->drawLine( pos, pos + Vector( 0, 10, 0 ) );
 		ite++;
 	}
 }
@@ -556,3 +552,4 @@ void RockViewer::drawDebug( ) const {
 		}
 	}
 }
+
