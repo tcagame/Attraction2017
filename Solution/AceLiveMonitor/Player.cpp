@@ -309,13 +309,13 @@ void Player::actOnEntry( ) {
 	}
 }
 
-void Player::actOnContinue() {
+void Player::actOnContinue( ) {
 	adjustToCamera( );
 	updateProgressBar( );
 
 	if ( _progress_count >= 100 ) {
 		// Ä“oê‚Ì‚½‚ß‚É‰Šú‰»
-		appear();
+		appear( );
 	}
 }
 
@@ -602,6 +602,7 @@ void Player::actOnOverCharge( ) {
 		_over_charge_time = -1;
 	}
 }
+
 
 void Player::actOnCamera( ) {
 	FamilyConstPtr family( Family::getTask( ) );
@@ -891,11 +892,21 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		motion = getActCount( ) / PLAYER_ANIM_WAIT_COUNT / 2;
 		break;
 	case ACTION_OVER_CHARGE:
-		if ( player == PLAYER_TAROJIRO ) {
-			num = num - 1;
+		{
+			int anim = getActCount( ) / PLAYER_ANIM_WAIT_COUNT;
+			int stop_anim = 2;
+			int remaining_anim = 3;
+			if ( player == PLAYER::PLAYER_TAROJIRO ) {
+				stop_anim = stop_anim + 1;
+				remaining_anim = remaining_anim - 2;
+			}
+			if ( anim > stop_anim && getActCount( ) - _over_charge_time < BURST_TIME - ( PLAYER_ANIM_WAIT_COUNT * remaining_anim ) ) {
+				anim = stop_anim;
+			}
+
+			motion = anim;
+			break;
 		}
-		motion = getActCount( ) / PLAYER_ANIM_WAIT_COUNT;
-		break;
 	case ACTION_DEAD:
 		{
 			int anim = getActCount( ) / ( PLAYER_ANIM_WAIT_COUNT / 2 );
@@ -932,8 +943,18 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 	} else {
 		pattern = off;
 	}
+	
+	int offset = 160;
+	int anim_num = 16;
 	if ( isStanding( ) && map->getObject( getPos( ) ) == OBJECT_WATER ) {
-		pattern += 16 * 9;
+		if ( player == PLAYER::PLAYER_TAROSUKE ) {
+			offset = offset + 16;
+		}
+		if ( player == PLAYER::PLAYER_TAROJIRO ) {
+			offset = offset + 16;
+			anim_num = anim_num - 4;
+		}
+		pattern = offset + ( ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT / 4 ) % anim_num;
 	}
 
 	unsigned char attribute = 0;
