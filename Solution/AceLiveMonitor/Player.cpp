@@ -433,8 +433,8 @@ void Player::actOnBreaking( ) {
 		setAction( ACTION_WALK );
 	}
 	if ( isStanding( ) && device->getPush( _device_id ) & BUTTON_C ) {
-		vec.y = JUMP_POWER;
 		Sound::getTask( )->playSE( "yokai_voice_17.wav" );
+		vec.y = JUMP_POWER;
 		setAction( ACTION_FLOAT );
 	}
 	if ( vec.x < 0 ) {
@@ -547,9 +547,9 @@ void Player::actOnCharge( ) {
 		}
 		Vector vec = getVec( );
 		if ( device->getPush( _device_id ) & BUTTON_C ) {
+			Sound::getTask( )->playSE( "yokai_voice_17.wav" );
 			vec.y = JUMP_POWER;
 			setVec( vec );
-			Sound::getTask( )->playSE( "yokai_voice_17.wav" );
 			setAction( ACTION_FLOAT );
 			return;
 		}
@@ -738,6 +738,7 @@ bool Player::isOnHead( CharacterPtr target ) const {
 
 void Player::bound( ) {
 	setAction( ACTION_FLOAT );
+	Sound::getTask( )->playSE( "yokai_voice_17.wav" );
 	Vector vec = getVec( );
 	vec.y = JUMP_POWER;
 	setVec( vec );
