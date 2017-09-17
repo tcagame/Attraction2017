@@ -16,9 +16,13 @@ RockOffice::~RockOffice( ) {
 void RockOffice::update( ) {
 	std::list< RockEventCharacterPtr >::iterator ite = _event_chara_list.begin( );
 	while ( ite != _event_chara_list.end( ) ) {
-		RockCharacterPtr chara = *ite;
+		RockEventCharacterPtr chara = *ite;
 		if ( !chara ) {
 			ite++;
+			continue;
+		}
+		if ( chara->isFinished( ) ) {
+			ite = _event_chara_list.erase( ite );
 			continue;
 		}
 

@@ -3,6 +3,7 @@
 #include "RockCamera.h"
 #include "Status.h"
 #include "MessageSender.h"
+#include "Client.h"
 //Player
 #include "RockFamily.h"
 #include "RockPlayer.h"
@@ -42,6 +43,7 @@ RockMapStreet::~RockMapStreet( ) {
 }
 
 void RockMapStreet::initialize( ) {
+	Client::getTask( )->update( );
 	loadStage( STAGE_STREET );
 }
 
@@ -110,6 +112,7 @@ void RockMapStreet::updateStreet( ) {
 				}
 			}
 		}
+
 	}
 }
 
@@ -219,11 +222,22 @@ void RockMapStreet::genarateEventCharacters( STAGE next ) {
 	office->clean( );
 	switch ( next ) {
 	case STAGE_STREET:
+	{
 		if ( _stage != STAGE_RYUGU ) {
 			//—³‹{‚©‚ç–ß‚Á‚Ä‚­‚é‚Æ‚«‚Í‹T‚ðo‚³‚È‚¢B
 			office->add( RockEventCharacterPtr( new RockEventTurtle( Vector( 3610, 320, -210 ) ) ) );
 		}
-		office->add( RockEventCharacterPtr( new RockEventMiko( Vector( 3910, 320, -310 ) ) ) );
+		bool genarate_miko = true;
+		for ( int i = 0; i < ROCK_PLAYER_NUM; i++  ) {
+			if ( _status->getPlayer( i ).item & ITEM_HEART ) {
+				genarate_miko = false;
+				break;//for‚ð”²‚¯‚é
+			}
+		}
+		if ( genarate_miko ) {
+			office->add( RockEventCharacterPtr( new RockEventMiko( Vector( 3910, 320, -310 ), _status ) ) );
+		}
+	}
 		break;
 	case STAGE_CAVE:
 		break;
