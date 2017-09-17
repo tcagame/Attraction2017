@@ -228,7 +228,8 @@ void RockPlayer::actOnBubble( ) {
 	}
 	setMass( false );
 	setCol( false );
-	if ( status.device_button ) {
+	if ( status.device_button &&
+		 status.device_button != 0b00001111 ) {
 		_bubble_count++;		
 	} else {
 		_bubble_count = 0;
