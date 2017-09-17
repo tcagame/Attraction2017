@@ -17,11 +17,11 @@ void EventMineral::update( ) {
 
 
 bool EventMineral::isFinished( ) const {
-	return true;
+	return _boss->getPower( ) <= 0;
 }
 
 bool EventMineral::isJoining( ) const {
-	return false;
+	return true;
 }
 
 void EventMineral::join( PLAYER target ) {

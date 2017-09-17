@@ -8,6 +8,7 @@
 #include "Military.h"
 #include "Office.h"
 #include "Storage.h"
+#include "Armoury.h"
 
 #include "EventTitle.h"
 #include "EventReddaemon.h"
@@ -102,7 +103,9 @@ MapPtr World::getMap( AREA area ) const {
 	} else {
 		map = _map_event[ _event->getType( ) ];
 	}
-
+	if ( !map ) {
+		int check = -1;
+	}
 	return map;
 }
 
@@ -119,8 +122,13 @@ void World::updateBGM ( ) {
 }
 
 void World::updateEvent( ) {
+	// イベント更新
+	_event->update( );
+
 	// イベントが終了
 	if ( _event->isFinished( ) ) {
+		//退場
+		_event->exit( );
 		changeEvent( EVENT_NONE );
 	}
 
@@ -141,7 +149,7 @@ void World::updateEvent( ) {
 		}
 
 		// 別のイベントが実行中
-		if ( _event->getType( ) == event ) {
+		if ( _event->getType( ) != event ) {
 			continue;
 		}
 		
@@ -164,6 +172,7 @@ void World::changeEvent( EVENT type ) {
 	Military::getTask( )->eraseEventEnemy( );
 	Office::getTask( )->eraseEventNPC( );
 	Storage::getTask( )->eraseEventItem( );
+	Armoury::getTask( )->eraseEventShot( );
 
 	switch ( type ) {
 	case EVENT_NONE:
@@ -200,28 +209,3 @@ void World::changeEvent( EVENT type ) {
 
 	playMapBgm( type );
 }
-
-/*
-		}
-
-		if ( map->getObject( _player[ i ]->getPos( ) + _player[ i ]->getVec( ) ) == OBJECT_EVENT_CALL ) {
-		}
-
-		if ( _player[ i ]->getArea( ) == AREA_EVENT ) {
-			//一ページ目にいたらメインに戻る
-			}
-			//ボスが倒れている場合 && アイテムが無い[退場]
-			StoragePtr storage( Storage::getTask( ) );
-			if ( !Military::getTask( )->getBoss( ) &&
-				 !storage->isExistanceEventItem( ) &&
-				 world->getEvent( ) < EVENT_SHOP ) {
-				_player[ i ]->setArea( AREA_STREET );
-				world->setEvent( EVENT_NONE );
-				militaly->eraseEventEnemy( );
-				_player[ i ]->setPos( Vector( family->getCameraPosX( ) + SCREEN_WIDTH / 2, 0 ) );
-				_player[ i ]->setVec( Vector( ) );
-			}
-		}
-	}
-}
-*/

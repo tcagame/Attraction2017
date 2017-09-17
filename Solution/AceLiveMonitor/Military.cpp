@@ -145,7 +145,7 @@ void Military::eraseEventEnemy( ) {
 			ite++;
 			continue;
 		}
-		if ( enemy->getArea( ) != AREA_EVENT ) {
+		if ( enemy->getArea( ) == AREA_EVENT ) {
 			ite = _enemies.erase( ite );
 			continue;
 		}

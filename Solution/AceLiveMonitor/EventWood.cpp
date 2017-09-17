@@ -16,11 +16,11 @@ void EventWood::update( ) {
 }
 
 bool EventWood::isFinished( ) const {
-	return true;
+	return _boss->getPower( ) <= 0;
 }
 
 bool EventWood::isJoining( ) const {
-	return false;
+	return true;
 }
 
 void EventWood::join( PLAYER target ) {

@@ -16,11 +16,11 @@ void EventFlame::update( ) {
 }
 
 bool EventFlame::isFinished( ) const {
-	return true;
+	return _boss->getPower( ) <= 0;
 }
 
 bool EventFlame::isJoining( ) const {
-	return false;
+	return true;
 }
 
 void EventFlame::join( PLAYER target ) {

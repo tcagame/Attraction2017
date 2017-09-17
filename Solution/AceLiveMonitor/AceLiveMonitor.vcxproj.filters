@@ -226,9 +226,6 @@
     <ClCompile Include="NPCOtohime.cpp">
       <Filter>NPC</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyTreeNuts.cpp">
-      <Filter>EnemyAttack</Filter>
-    </ClCompile>
     <ClCompile Include="Item.cpp">
       <Filter>Item</Filter>
     </ClCompile>
@@ -317,10 +314,10 @@
       <Filter>Character\Player</Filter>
     </ClCompile>
     <ClCompile Include="Map.cpp">
-      <Filter>Map</Filter>
+      <Filter>World</Filter>
     </ClCompile>
     <ClCompile Include="World.cpp">
-      <Filter>Map</Filter>
+      <Filter>World</Filter>
     </ClCompile>
     <ClCompile Include="Storage.cpp">
       <Filter>Item</Filter>
@@ -377,37 +374,37 @@
       <Filter>Viewer</Filter>
     </ClCompile>
     <ClCompile Include="Event.cpp">
-      <Filter>Event</Filter>
+      <Filter>World\Event</Filter>
     </ClCompile>
     <ClCompile Include="EventCall.cpp">
-      <Filter>Event</Filter>
+      <Filter>World\Event</Filter>
     </ClCompile>
     <ClCompile Include="EventFlame.cpp">
-      <Filter>Event</Filter>
+      <Filter>World\Event</Filter>
     </ClCompile>
     <ClCompile Include="EventGamble.cpp">
-      <Filter>Event</Filter>
+      <Filter>World\Event</Filter>
     </ClCompile>
     <ClCompile Include="EventLake.cpp">
-      <Filter>Event</Filter>
+      <Filter>World\Event</Filter>
     </ClCompile>
     <ClCompile Include="EventMineral.cpp">
-      <Filter>Event</Filter>
+      <Filter>World\Event</Filter>
     </ClCompile>
     <ClCompile Include="EventReddaemon.cpp">
-      <Filter>Event</Filter>
+      <Filter>World\Event</Filter>
     </ClCompile>
     <ClCompile Include="EventRyugu.cpp">
-      <Filter>Event</Filter>
+      <Filter>World\Event</Filter>
     </ClCompile>
     <ClCompile Include="EventShop.cpp">
-      <Filter>Event</Filter>
+      <Filter>World\Event</Filter>
     </ClCompile>
     <ClCompile Include="EventWood.cpp">
-      <Filter>Event</Filter>
+      <Filter>World\Event</Filter>
     </ClCompile>
     <ClCompile Include="EventTitle.cpp">
-      <Filter>Event</Filter>
+      <Filter>World\Event</Filter>
     </ClCompile>
     <ClCompile Include="EnemyAttack.cpp">
       <Filter>Character\Enemy</Filter>
@@ -436,6 +433,7 @@
     <ClCompile Include="ShotReflect.cpp">
       <Filter>Shot</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyTreeNuts.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy.h">
@@ -663,9 +661,6 @@
     <ClInclude Include="NPCOtohime.h">
       <Filter>NPC</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyTreeNuts.h">
-      <Filter>EnemyAttack</Filter>
-    </ClInclude>
     <ClInclude Include="Item.h">
       <Filter>Item</Filter>
     </ClInclude>
@@ -754,10 +749,10 @@
       <Filter>Character\Player</Filter>
     </ClInclude>
     <ClInclude Include="Map.h">
-      <Filter>Map</Filter>
+      <Filter>World</Filter>
     </ClInclude>
     <ClInclude Include="World.h">
-      <Filter>Map</Filter>
+      <Filter>World</Filter>
     </ClInclude>
     <ClInclude Include="Storage.h">
       <Filter>Item</Filter>
@@ -811,37 +806,37 @@
       <Filter>Viewer</Filter>
     </ClInclude>
     <ClInclude Include="Event.h">
-      <Filter>Event</Filter>
+      <Filter>World\Event</Filter>
     </ClInclude>
     <ClInclude Include="EventCall.h">
-      <Filter>Event</Filter>
+      <Filter>World\Event</Filter>
     </ClInclude>
     <ClInclude Include="EventFlame.h">
-      <Filter>Event</Filter>
+      <Filter>World\Event</Filter>
     </ClInclude>
     <ClInclude Include="EventGamble.h">
-      <Filter>Event</Filter>
+      <Filter>World\Event</Filter>
     </ClInclude>
     <ClInclude Include="EventLake.h">
-      <Filter>Event</Filter>
+      <Filter>World\Event</Filter>
     </ClInclude>
     <ClInclude Include="EventMineral.h">
-      <Filter>Event</Filter>
+      <Filter>World\Event</Filter>
     </ClInclude>
     <ClInclude Include="EventReddaemon.h">
-      <Filter>Event</Filter>
+      <Filter>World\Event</Filter>
     </ClInclude>
     <ClInclude Include="EventRyugu.h">
-      <Filter>Event</Filter>
+      <Filter>World\Event</Filter>
     </ClInclude>
     <ClInclude Include="EventShop.h">
-      <Filter>Event</Filter>
+      <Filter>World\Event</Filter>
     </ClInclude>
     <ClInclude Include="EventWood.h">
-      <Filter>Event</Filter>
+      <Filter>World\Event</Filter>
     </ClInclude>
     <ClInclude Include="EventTitle.h">
-      <Filter>Event</Filter>
+      <Filter>World\Event</Filter>
     </ClInclude>
     <ClInclude Include="EnemyAttack.h">
       <Filter>Character\Enemy</Filter>
@@ -870,6 +865,7 @@
     <ClInclude Include="ShotReflect.h">
       <Filter>Shot</Filter>
     </ClInclude>
+    <ClInclude Include="EnemyTreeNuts.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">
@@ -902,14 +898,14 @@
     <Filter Include="Character\Player">
       <UniqueIdentifier>{b586965a-c5df-44ef-97f3-bc1072dd8673}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Map">
-      <UniqueIdentifier>{ef7bfeff-736b-4045-92ee-f366049380ac}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Event">
-      <UniqueIdentifier>{936d5c50-167e-470a-b42c-7637bdd7d230}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Character\Enemy\Boss">
       <UniqueIdentifier>{ac0a6380-7baf-4cac-a471-08c053d3e854}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World">
+      <UniqueIdentifier>{ef7bfeff-736b-4045-92ee-f366049380ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="World\Event">
+      <UniqueIdentifier>{936d5c50-167e-470a-b42c-7637bdd7d230}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

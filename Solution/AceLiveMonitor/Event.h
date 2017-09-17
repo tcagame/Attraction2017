@@ -11,6 +11,7 @@ public:
 	virtual bool isFinished( ) const = 0;
 	virtual bool isJoining( ) const = 0;
 	virtual void join( PLAYER target ) = 0;
+	void exit( );
 private:
 	EVENT _type;
 };

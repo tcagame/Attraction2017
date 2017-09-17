@@ -23,12 +23,6 @@ Office::~Office( ) {
 
 void Office::update( ) {
 	WorldPtr world = World::getTask( );
-	EVENT event = world->getEvent( );
-	if( event == EVENT_NONE ) {
-		_npc = { };
-		return;
-	}
-
 	std::list< NPCPtr >::iterator ite = _npc.begin( );
 	while( ite != _npc.end( ) ) {
 		NPCPtr npc = (*ite);

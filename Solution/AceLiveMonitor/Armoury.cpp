@@ -77,3 +77,14 @@ void Armoury::pushDebugData( ViewerDebug::Data& data ) {
 		data.circle.push_back( _shot_list[ i ]->getDebugDataCircle( ) );
 	}
 }
+
+void Armoury::eraseEventShot( ) {
+	for ( int i = 0; i < MAX_SHOT_NUM; i++ ) {
+		if ( !_shot_list[ i ] ) {
+			continue;
+		}
+		if ( _shot_list[ i ]->getArea( ) == AREA_EVENT ) {
+			_shot_list[ i ] = ShotPtr( );
+		}
+	}
+}
