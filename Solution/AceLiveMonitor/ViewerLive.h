@@ -36,5 +36,6 @@ private:
 	ImagePtr _image_cover_entry;
 	ImagePtr _image_cover_continue;
 	ImagePtr _image_device;
+	ImagePtr _image_fade;
 };
 
