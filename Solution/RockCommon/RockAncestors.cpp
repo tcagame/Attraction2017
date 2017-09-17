@@ -16,7 +16,7 @@ static const Vector TARGET( 0, 40, 100 );//プレイヤーの向きにあわせる( zが奥行き
 static const double FOLLOW_RANGE = 50;
 static const double FOLLOW_Y = 30;
 //移動
-static const double MAX_MOVE_SPEED = 5.55 * 2;
+static const double MAX_MOVE_SPEED = 5.55;
 static const double ACCEL = 1.11;
 //しょっと
 static const int SHOT_INTERVAL = 50;
