@@ -28,6 +28,7 @@
 #include "RockEnemyKimono.h"
 #include "RockEnemyCloud.h"
 #include "RockEnemySkeleton.h"
+#include "RockEnemyBossReaDaemon.h"
 
 const int REMOVE_CAVE_TIME = 500;
 const int DROP_TIMING = 1800;
@@ -121,11 +122,7 @@ void RockMapStreet::updateCave( ) {
 		if ( !player->isActive( ) ) {
 			continue;
 		}
-
-		if ( _time > REMOVE_CAVE_TIME ) {
-			loadStage( STAGE_STREET );
-			_time = 0;
-		}
+		//loadStage( STAGE_STREET );
 	}
 }
 
@@ -188,6 +185,7 @@ void RockMapStreet::genarateEnemies( STAGE next ) {
 		military->add( RockEnemyPtr( new RockEnemyKimono     ( Vector( 2300, 200, -600 ) ) ) );
 		break;
 	case STAGE_CAVE:
+		military->add( RockEnemyPtr( new RockEnemyBossReaDaemon  ( Vector(  20, 20, 0 ) ) ) );
 		break;
 	case STAGE_RYUGU:
 		break;

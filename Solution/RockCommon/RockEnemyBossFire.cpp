@@ -15,7 +15,6 @@ RockEnemyBossFire::~RockEnemyBossFire( ) {
 }
 
 void RockEnemyBossFire::act( ) {
-
 }
 
 double RockEnemyBossFire::getAnimTime( ) const {
