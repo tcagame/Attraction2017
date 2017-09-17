@@ -25,6 +25,7 @@ private:
 	void actOnFollow( );
 private:
 	int _player_id;
+	int _fadein_effect;
 	ACTION _action;
 };
 

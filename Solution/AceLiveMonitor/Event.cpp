@@ -1,9 +1,12 @@
 #include "Event.h"
 #include "Family.h"
 #include "Player.h"
+#include "SynchronousData.h"
 
 Event::Event( EVENT type ) :
-_type( type ) {
+_type( type ),
+_fade_type( FADE_IN ),
+_fade_count( 100 ) {
 }
 
 
@@ -22,4 +25,29 @@ void Event::exit( ) {
 			player->leaveEvent( );
 		}
 	}
+}
+
+void Event::fade( ) {
+	switch ( _fade_type ) {
+	case FADE_IN:
+		if ( _fade_count > 0 ) {
+			_fade_count--;
+		}
+		if ( !Family::getTask( )->isExistOnEvent( ) &&
+			 _type != EVENT_NONE ) {
+			_fade_type = FADE_OUT;
+			_fade_count = 0;
+		}
+		break;
+	case FADE_OUT:
+		if ( _fade_count < 100 ) {
+			_fade_count++;
+		}
+		break;
+	}
+	SynchronousData::getTask( )->setFade( _fade_count );
+}
+
+bool Event::isFinished( ) {
+	return _fade_count >= 100 && _fade_type == FADE_OUT;
 }
