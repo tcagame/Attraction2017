@@ -17,6 +17,7 @@
 #include "RockOffice.h"
 #include "RockEventTurtle.h"
 #include "RockEventMiko.h"
+#include "RockEventObaba.h"
 #include "RockEventOtohime.h"
 //Enemy
 #include "RockMilitary.h"
@@ -223,6 +224,7 @@ void RockMapStreet::genarateEventCharacters( STAGE next ) {
 			//—³‹{‚©‚ç–ß‚Á‚Ä‚­‚é‚Æ‚«‚Í‹T‚ðo‚³‚È‚¢B
 			office->add( RockEventCharacterPtr( new RockEventTurtle( Vector( 3610, 320, -210 ) ) ) );
 		}
+		office->add( RockEventCharacterPtr( new RockEventObaba( Vector( 7200, 600, -110 ) ) ) );
 		office->add( RockEventCharacterPtr( new RockEventMiko( Vector( 3910, 320, -310 ) ) ) );
 		break;
 	case STAGE_CAVE:

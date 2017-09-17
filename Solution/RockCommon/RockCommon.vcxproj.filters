@@ -146,6 +146,9 @@
       <Filter>Enemy</Filter>
     </ClCompile>
     <ClCompile Include="RockDebug.cpp" />
+    <ClCompile Include="RockEventObaba.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="define.h" />
@@ -296,6 +299,9 @@
       <Filter>Enemy</Filter>
     </ClInclude>
     <ClInclude Include="RockDebug.h" />
+    <ClInclude Include="RockEventObaba.h">
+      <Filter>Event</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Item">
