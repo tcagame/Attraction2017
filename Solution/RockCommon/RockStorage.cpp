@@ -52,7 +52,8 @@ void RockStorage::updateItem( ) {
 		item->update( );
 		bool col = false;
 		RockPlayerPtr overlapped_player = family->getOverLappedPlayer( item );
-		if ( overlapped_player ) {
+		if ( overlapped_player &&
+			 !overlapped_player->isBubble( ) ) {
 			if ( pickUpItem( item, overlapped_player->getId( ) ) ) {
 				col = true;
 			}

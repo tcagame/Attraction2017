@@ -52,14 +52,17 @@ void RockDollHouse::initialize( ) {
 	_dolls[ DOLL_ANCESTORS		 ]->load( "Resource/Rock/player/ancestors.mv1" );
 
 	//enemy
-	_dolls[ DOLL_GHOST		   ]->load( "Resource/Rock/enemy/enm05_yurei/enm05_a01.mv1" );
-	_dolls[ DOLL_REDBARD	   ]->load( "Resource/Rock/enemy/enm02_bird/enm02_a01.mv1" );
-	_dolls[ DOLL_WATERGHOST    ]->load( "Resource/Rock/enemy/enm17_mizunoyokai/enm17_a02.mv1" );
-	_dolls[ DOLL_CLOUD         ]->load( "Resource/Rock/enemy/enm06_cloud/enm06_a01.mv1" );
-	_dolls[ DOLL_FACE_AND_HAND ]->load( "Resource/Rock/enemy/enm03_face_and_hand/enm03_a01_face_and_hand.mv1" );
-	_dolls[ DOLL_BOSS_ROCK	   ]->load( "Resource/Rock/enemy/enm22_rock/scenes/enm22_rock.mv1" );
-	_dolls[ DOLL_BAT           ]->load( "Resource/Rock/enemy/enm09_Babitto/enm09_a01.mv1" );
-	_dolls[ DOLL_KIMONO		   ]->load( "Resource/Rock/enemy/enm07_Kimono-no-Yokai/enm07_a01.mv1" );
+	_dolls[ DOLL_GHOST		           ]->load( "Resource/Rock/enemy/enm05_yurei/enm05_a01.mv1" );
+	_dolls[ DOLL_REDBARD	           ]->load( "Resource/Rock/enemy/enm02_bird/enm02_a01.mv1" );
+	_dolls[ DOLL_WATERGHOST            ]->load( "Resource/Rock/enemy/enm17_mizunoyokai/enm17_a02.mv1" );
+	_dolls[ DOLL_CLOUD                 ]->load( "Resource/Rock/enemy/enm06_cloud/enm06_a01.mv1" );
+	_dolls[ DOLL_FACE_AND_HAND         ]->load( "Resource/Rock/enemy/enm03_face_and_hand/enm03_a01_face_and_hand.mv1" );
+	_dolls[ DOLL_BAT                   ]->load( "Resource/Rock/enemy/enm09_Babitto/enm09_a01.mv1" );
+	_dolls[ DOLL_KIMONO		           ]->load( "Resource/Rock/enemy/enm07_Kimono-no-Yokai/enm07_a01.mv1" );
+	_dolls[ DOLL_BOSS_FIRE             ]->load( "Resource/Rock/enemy/enm20_fire/enm20_fire.mv1" );
+	_dolls[ DOLL_BOSS_TREE             ]->load( "Resource/Rock/enemy/enm21_tree/enm21_tree.mv1" );
+	_dolls[ DOLL_BOSS_ROCK	           ]->load( "Resource/Rock/enemy/enm22_rock/scenes/enm22_rock.mv1" );
+	_dolls[ DOLL_BOSS_RED_DAEMON	   ]->load( "Resource/Rock/enemy/enm23_reddaemon/enm23_a02.mv1" );
 
 	//item
 	_dolls[ DOLL_DANGO	 ]->load( "Resource/Rock/item/itm01/itm01.mv1" );
@@ -90,6 +93,7 @@ void RockDollHouse::initialize( ) {
 	//event char
 	_dolls[ DOLL_OTOHIME ]->load( "Resource/Rock/event_chara/chr06_a01.mv1" );
 	_dolls[ DOLL_TURTLE  ]->load( "Resource/Rock/event_chara/chr07.mv1" );
+	_dolls[ DOLL_OBABA   ]->load( "Resource/Rock/event_chara/chr08_a01.mv1" );
 	_dolls[ DOLL_MIKO    ]->load( "Resource/Rock/event_chara/chr11_a01.mv1" );
 }
 

@@ -228,7 +228,8 @@ void RockPlayer::actOnBubble( ) {
 	}
 	setMass( false );
 	setCol( false );
-	if ( status.device_button ) {
+	if ( status.device_button &&
+		 status.device_button != 0b00001111 ) {
 		_bubble_count++;		
 	} else {
 		_bubble_count = 0;
@@ -286,7 +287,11 @@ void RockPlayer::actOnWaiting( ) {
 	//攻撃
 	if ( player.device_button & BUTTON_A &&
 		 _interval > INTERVAL_TIME ) {
-		setAction( ACTION_CHARGE );
+		if ( isStanding( ) ) {
+			setAction( ACTION_CHARGE );
+		} else {
+			_attack_count = 1;
+		}
 		return;
 	}
 	//移動
@@ -414,11 +419,6 @@ void RockPlayer::actOnCharging( ) {
 	if ( player.area == AREA_WAIT &&
 		 getActCount( ) > SEVER_RAG_ADJUST_TIME ) {
 		setAction( ACTION_BUBBLE );
-		return;
-	}
-	// ジャンプ中であればチャージしない
-	if ( !isStanding( ) ) {
-		setAction( ACTION_JUMP );
 		return;
 	}
 
@@ -666,8 +666,22 @@ void RockPlayer::resetBubble( ) {
 }
 
 void RockPlayer::sendDamage( ) {
+	SoundPtr sound = Sound::getTask( );
 	if ( _damage != 0 ) {
-		Sound::getTask( )->playSE( "yokai_voice_26.wav" );
+		switch(_id ) {
+		case 0:
+			sound->playSE( "yokai_voice_26.wav" );
+			break; 
+		case 1:
+			sound->playSE( "yokai_voice_26_1.wav" );
+			break;
+		case 2:
+			sound->playSE( "yokai_voice_26_3.wav" );
+			break;
+		case 3:
+			sound->playSE( "yokai_voice_26_2.wav" );
+			break; 
+		}
 		MessageSender::getTask( )->sendMessage( _id, Message::COMMAND_POWER, &_damage );
 		_damage = 0;
 	}

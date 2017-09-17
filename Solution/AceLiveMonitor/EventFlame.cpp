@@ -1,6 +1,8 @@
 #include "EventFlame.h"
 #include "Military.h"
 #include "EnemyBossBloodDaemon.h"
+#include "Family.h"
+#include "Player.h"
 
 EventFlame::EventFlame( ) :
 Event( EVENT_FLAME ) {
@@ -24,5 +26,6 @@ bool EventFlame::isJoining( ) const {
 }
 
 void EventFlame::join( PLAYER target ) {
-
+	PlayerPtr player = Family::getTask( )->getPlayer( target );
+	player->setActionEnteringFadeOut( );
 }

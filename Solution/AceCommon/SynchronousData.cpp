@@ -87,6 +87,10 @@ int SynchronousData::getStatusDevice( PLAYER player ) const {
 	return _data.status[ player ].device;
 }
 
+int SynchronousData::getFade( ) const {
+	return _data.fade;
+}
+
 void SynchronousData::setStatusDevice( PLAYER player, int id ) {
 	_data.status[ player ].device = ( char )id;
 }
@@ -133,6 +137,10 @@ void SynchronousData::setStatusRedo( PLAYER player, int redo ) {
 
 void SynchronousData::setStatusState( PLAYER player, unsigned char area ) {
 	_data.status[ player ].state = ( unsigned char )area;
+}
+
+void SynchronousData::setFade( int fade ) {
+	_data.fade = fade;
 }
 
 

@@ -15,20 +15,27 @@ EventReddaemon::~EventReddaemon( ) {
 }
 
 void EventReddaemon::update( ) {
-}
+	// 透明化し切ったら、イベントへ
+	for ( int i = 0; i < MAX_PLAYER; i++ ) {
+		PlayerPtr player = Family::getTask( )->getPlayer( i );
+		if ( player->isEntering( ) ) {
+			player->enterEvent( );
+		}
+	}
 
-
-bool EventReddaemon::isFinished( ) const {
-	return _boss->getPower( ) <= 0;
+	// ボスを倒した
+	if ( _boss->getPower( ) <= 0 ) {
+		exit( );
+	}
 }
 
 bool EventReddaemon::isJoining( ) const {
-	return true;
+	return getFade( ) != FADE_OUT;
 }
 
 void EventReddaemon::join( PLAYER target ) {
 	PlayerPtr player = Family::getTask( )->getPlayer( target );
-	player->enterEvent( );
+	player->setActionEnteringFadeOut( );
 }
 /*
 void Military::updateBoss( ) {
@@ -59,27 +66,6 @@ void Military::updateBoss( ) {
 		int impact_chip_size = _boss->getChipSize( ) * 2;
 		Magazine::getTask( )->add( ImpactPtr( new Impact( _boss->getPos( ) + Vector( 0, _boss->getChipSize( ) / 2 ), AREA_EVENT, impact_chip_size ) ) );
 		_boss = EnemyBossPtr( );
-	}
-}
-*/
-/*
-void Military::createEventEnemy( EVENT type ) {
-	switch ( type ) {
-	case EVENT_REDDAEMON:
-		_enemies.push = EnemyBossPtr( new EnemyBossRedDaemon( Vector( 800, 200 ) ) );
-		break;
-	case EVENT_FLAME:
-		_boss = EnemyBossPtr( new EnemyBossBloodDaemon( Vector( 800, 200 ) ) );
-		break;
-	case EVENT_WOOD:
-		_boss = EnemyBossPtr( new EnemyBossMonsterTree( Vector( 800, 225 ) ) );
-		break;
-	case EVENT_MINERAL:
-		_boss = EnemyBossPtr( new EnemyBossRock( Vector( 800, 225 ) ) );
-		break;
-	default:
-		_boss = EnemyBossPtr( );
-		break;
 	}
 }
 */

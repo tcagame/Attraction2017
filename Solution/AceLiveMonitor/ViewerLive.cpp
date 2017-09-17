@@ -51,6 +51,10 @@ void ViewerLive::initialize( ) {
 	_image_cover_continue = drawer->createImage( "UI/ui_cover_continue.png" );
 
 	_image_device = drawer->createImage( "UI/ui_device.png" );
+
+	_image_fade = drawer->createImage( "UI/ui_fade.png" );
+	_image_fade->setRect( 0, 0, 256, 256 );
+	_image_fade->setPos( 0, 0, 1280, 256 );
 }
 
 void ViewerLive::update( ) {
@@ -79,12 +83,17 @@ void ViewerLive::update( ) {
 		_viewer_event->draw( event, EVENT_SX, EVENT_SY );
 	}
 
-	// イベント枠描画
-	_image_frame->draw( );
-
 	// オブジェクト描画
 	_viewer_object->draw( AREA_EVENT, EVENT_SX, EVENT_SY );
 	
+	// イベントフェード
+	double ratio = data->getFade( ) / 100.0;
+	_image_fade->setBlend( Image::BLEND_ALPHA, ratio );
+	_image_fade->draw( );
+
+	// イベント枠描画
+	_image_frame->draw( );
+
 	// ステータス描画
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		PLAYER target = ( PLAYER )i;

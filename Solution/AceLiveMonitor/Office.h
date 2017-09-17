@@ -20,6 +20,7 @@ public:
 	void popUpNPC( EVENT type );
 	std::list< NPCPtr > getNPC( ) const;
 	void eraseEventNPC( );
+	void addEventNPC( NPCPtr npc );
 private:
 	std::list< NPCPtr > _npc;
 };

@@ -7,7 +7,7 @@
 const int HP = 10;
 
 RockEnemyBossFire::RockEnemyBossFire( const Vector& pos ) :
-RockEnemyBoss( pos, DOLL_GHOST, HP, 1, 10, 10, true, true ) {
+RockEnemyBoss( pos, DOLL_BOSS_FIRE, HP, 1, 10, 10, true, true ) {
 }
 
 
@@ -15,7 +15,6 @@ RockEnemyBossFire::~RockEnemyBossFire( ) {
 }
 
 void RockEnemyBossFire::act( ) {
-
 }
 
 double RockEnemyBossFire::getAnimTime( ) const {
