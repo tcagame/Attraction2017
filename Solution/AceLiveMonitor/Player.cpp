@@ -771,7 +771,8 @@ void Player::bound( ) {
 }
 
 void Player::blowAway( ) {
-	if ( isExist( ) ) {
+	if ( isExist( ) &&
+		 !Debug::getTask( )->isDebug( ) ) {
 		setAction( ACTION_BLOW_AWAY );
 	}
 }
