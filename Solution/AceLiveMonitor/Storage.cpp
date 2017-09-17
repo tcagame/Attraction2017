@@ -28,16 +28,10 @@ Storage::~Storage( ) {
 void Storage::update( ) {
 	int camera_pos = Family::getTask( )->getCameraPosX( );
 	std::list< ItemPtr >::iterator ite = _items.begin( );
-	EVENT event_type = World::getTask( )->getEvent( );
 	while ( ite != _items.end( ) ) {
 		ItemPtr item = *ite;
 		if ( !item ) {
 			ite++;
-			continue;
-		}
-		if ( item->getArea( ) == AREA_EVENT &&
-			 event_type == EVENT_NONE ) {
-			ite = _items.erase( ite );
 			continue;
 		}
 		item->update( );

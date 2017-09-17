@@ -1,6 +1,8 @@
 #include "EventReddaemon.h"
 #include "Military.h"
 #include "EnemyBossRedDaemon.h"
+#include "Family.h"
+#include "Player.h"
 
 EventReddaemon::EventReddaemon( ) :
 Event( EVENT_REDDAEMON ) {
@@ -17,15 +19,16 @@ void EventReddaemon::update( ) {
 
 
 bool EventReddaemon::isFinished( ) const {
-	return true;
+	return _boss->getPower( ) <= 0;
 }
 
 bool EventReddaemon::isJoining( ) const {
-	return false;
+	return true;
 }
 
 void EventReddaemon::join( PLAYER target ) {
-
+	PlayerPtr player = Family::getTask( )->getPlayer( target );
+	player->enterEvent( );
 }
 /*
 void Military::updateBoss( ) {
