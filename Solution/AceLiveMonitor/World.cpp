@@ -151,7 +151,7 @@ void World::updateEvent( ) {
 		
 		// Œ»ÝŽQ‰Á‚Å‚«‚È‚¢
 		if ( !_event->isJoining( ) ) {
-			return;
+			continue;
 		}
 
 		// ŽQ‰Á

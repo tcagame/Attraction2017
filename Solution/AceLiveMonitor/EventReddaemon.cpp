@@ -15,18 +15,27 @@ EventReddaemon::~EventReddaemon( ) {
 }
 
 void EventReddaemon::update( ) {
+	// 透明化し切ったら、イベントへ
+	for ( int i = 0; i < MAX_PLAYER; i++ ) {
+		PlayerPtr player = Family::getTask( )->getPlayer( i );
+		if ( player->isEntering( ) ) {
+			player->enterEvent( );
+		}
+	}
+
+	// ボスを倒した
 	if ( _boss->getPower( ) <= 0 ) {
 		exit( );
 	}
 }
 
 bool EventReddaemon::isJoining( ) const {
-	return true;
+	return getFade( ) != FADE_OUT;
 }
 
 void EventReddaemon::join( PLAYER target ) {
 	PlayerPtr player = Family::getTask( )->getPlayer( target );
-	player->enterEvent( );
+	player->setActionEnteringFadeOut( );
 }
 /*
 void Military::updateBoss( ) {

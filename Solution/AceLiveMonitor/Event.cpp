@@ -6,7 +6,8 @@
 Event::Event( EVENT type ) :
 _type( type ),
 _fade_type( FADE_IN ),
-_fade_count( 100 ) {
+_fade_count( 100 ),
+_exiting( false ) {
 }
 
 
@@ -25,6 +26,7 @@ void Event::exit( ) {
 			player->leaveEvent( );
 		}
 	}
+	_exiting = true;
 }
 
 void Event::fade( ) {
@@ -33,7 +35,8 @@ void Event::fade( ) {
 		if ( _fade_count > 0 ) {
 			_fade_count--;
 		}
-		if ( !Family::getTask( )->isExistOnEvent( ) &&
+		if ( _exiting &&
+			!Family::getTask( )->isExistOnEvent( ) &&
 			 _type != EVENT_NONE ) {
 			_fade_type = FADE_OUT;
 			_fade_count = 0;
@@ -50,4 +53,8 @@ void Event::fade( ) {
 
 bool Event::isFinished( ) {
 	return _fade_count >= 100 && _fade_type == FADE_OUT;
+}
+
+Event::FADE Event::getFade( ) const {
+	return _fade_type;
 }

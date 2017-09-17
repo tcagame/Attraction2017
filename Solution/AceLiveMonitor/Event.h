@@ -3,6 +3,11 @@
 
 class Event {
 public:
+	enum FADE {
+		FADE_IN,
+		FADE_OUT,
+	};
+public:
 	Event( EVENT type );
 	virtual ~Event( );
 public:
@@ -12,16 +17,13 @@ public:
 	virtual void join( PLAYER target ) = 0;
 	bool isFinished( );
 	void fade( );
+	FADE getFade( ) const;
 protected:
 	void exit( );
-private:
-	enum FADE {
-		FADE_IN,
-		FADE_OUT,
-	};
 private:
 	EVENT _type;
 	FADE _fade_type;
 	int _fade_count;
+	bool _exiting;
 };
 
