@@ -36,9 +36,6 @@
     <ClCompile Include="RockEnemy.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="RockEnemyBossRock.cpp">
-      <Filter>Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="RockEnemyCloud.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
@@ -60,20 +57,11 @@
     <ClCompile Include="RockStorage.cpp">
       <Filter>Item</Filter>
     </ClCompile>
-    <ClCompile Include="RockEnemyBoss.cpp">
-      <Filter>Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="RockEnemyBossTree.cpp">
-      <Filter>Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="RockItemFire.cpp">
       <Filter>Item</Filter>
     </ClCompile>
     <ClCompile Include="RockItemTree.cpp">
       <Filter>Item</Filter>
-    </ClCompile>
-    <ClCompile Include="RockEnemyBossFire.cpp">
-      <Filter>Enemy</Filter>
     </ClCompile>
     <ClCompile Include="RockEnemyBat.cpp">
       <Filter>Enemy</Filter>
@@ -146,6 +134,26 @@
       <Filter>Enemy</Filter>
     </ClCompile>
     <ClCompile Include="RockDebug.cpp" />
+<<<<<<< HEAD
+    <ClCompile Include="RockEnemyBoss.cpp">
+      <Filter>Enemy\boss</Filter>
+    </ClCompile>
+    <ClCompile Include="RockEnemyBossFire.cpp">
+      <Filter>Enemy\boss</Filter>
+    </ClCompile>
+    <ClCompile Include="RockEnemyBossRock.cpp">
+      <Filter>Enemy\boss</Filter>
+    </ClCompile>
+    <ClCompile Include="RockEnemyBossTree.cpp">
+      <Filter>Enemy\boss</Filter>
+    </ClCompile>
+    <ClCompile Include="RockEnemyBossReaDaemon.cpp">
+      <Filter>Enemy\boss</Filter>
+=======
+    <ClCompile Include="RockEventObaba.cpp">
+      <Filter>Event</Filter>
+>>>>>>> a2e0a931fe4eab5ae25e6ae22124de3b12505a3a
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="define.h" />
@@ -186,9 +194,6 @@
     <ClInclude Include="RockEnemy.h">
       <Filter>Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="RockEnemyBossRock.h">
-      <Filter>Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="RockEnemyCloud.h">
       <Filter>Enemy</Filter>
     </ClInclude>
@@ -210,20 +215,11 @@
     <ClInclude Include="RockStorage.h">
       <Filter>Item</Filter>
     </ClInclude>
-    <ClInclude Include="RockEnemyBoss.h">
-      <Filter>Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="RockEnemyBossTree.h">
-      <Filter>Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="RockItemFire.h">
       <Filter>Item</Filter>
     </ClInclude>
     <ClInclude Include="RockItemTree.h">
       <Filter>Item</Filter>
-    </ClInclude>
-    <ClInclude Include="RockEnemyBossFire.h">
-      <Filter>Enemy</Filter>
     </ClInclude>
     <ClInclude Include="RockEnemyBat.h">
       <Filter>Enemy</Filter>
@@ -296,6 +292,26 @@
       <Filter>Enemy</Filter>
     </ClInclude>
     <ClInclude Include="RockDebug.h" />
+<<<<<<< HEAD
+    <ClInclude Include="RockEnemyBoss.h">
+      <Filter>Enemy\boss</Filter>
+    </ClInclude>
+    <ClInclude Include="RockEnemyBossFire.h">
+      <Filter>Enemy\boss</Filter>
+    </ClInclude>
+    <ClInclude Include="RockEnemyBossRock.h">
+      <Filter>Enemy\boss</Filter>
+    </ClInclude>
+    <ClInclude Include="RockEnemyBossTree.h">
+      <Filter>Enemy\boss</Filter>
+    </ClInclude>
+    <ClInclude Include="RockEnemyBossReaDaemon.h">
+      <Filter>Enemy\boss</Filter>
+=======
+    <ClInclude Include="RockEventObaba.h">
+      <Filter>Event</Filter>
+>>>>>>> a2e0a931fe4eab5ae25e6ae22124de3b12505a3a
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Item">
@@ -312,6 +328,9 @@
     </Filter>
     <Filter Include="Event">
       <UniqueIdentifier>{1040fa5f-79b8-4914-bf2f-120186d2f970}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Enemy\boss">
+      <UniqueIdentifier>{524bffff-c8bb-4d02-8d6f-caabaf490cb9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

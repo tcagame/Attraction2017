@@ -228,7 +228,8 @@ void RockPlayer::actOnBubble( ) {
 	}
 	setMass( false );
 	setCol( false );
-	if ( status.device_button ) {
+	if ( status.device_button &&
+		 status.device_button != 0b00001111 ) {
 		_bubble_count++;		
 	} else {
 		_bubble_count = 0;
@@ -665,8 +666,22 @@ void RockPlayer::resetBubble( ) {
 }
 
 void RockPlayer::sendDamage( ) {
+	SoundPtr sound = Sound::getTask( );
 	if ( _damage != 0 ) {
-		Sound::getTask( )->playSE( "yokai_voice_26.wav" );
+		switch(_id ) {
+		case 0:
+			sound->playSE( "yokai_voice_26.wav" );
+			break; 
+		case 1:
+			sound->playSE( "yokai_voice_26_1.wav" );
+			break;
+		case 2:
+			sound->playSE( "yokai_voice_26_3.wav" );
+			break;
+		case 3:
+			sound->playSE( "yokai_voice_26_2.wav" );
+			break; 
+		}
 		MessageSender::getTask( )->sendMessage( _id, Message::COMMAND_POWER, &_damage );
 		_damage = 0;
 	}

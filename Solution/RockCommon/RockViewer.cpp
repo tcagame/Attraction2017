@@ -106,11 +106,10 @@ void RockViewer::update( ) {
 		drawGame( );
 	} else {
 		MoviePtr movie = theater->getMovie( );
-		if ( movie->isPlay( ) ) {
-			drawResult( );
-		} else {
+		if ( !movie->isPlay( ) ) {
 			drawGame( );
 		}
+		drawResult( );
 	}
 }
 
@@ -124,9 +123,9 @@ void RockViewer::drawGame( ) const {
 	drawItem( );
 	drawAlter( );
 	drawCasket( );
-	drawCleannessMap( );
-	drawBubbles( );
 	Effect::getTask( )->drawEffect( );
+	drawBubbles( );
+	drawCleannessMap( );
 	drawDebug( );
 	drawUI( );
 }
