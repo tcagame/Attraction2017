@@ -7,7 +7,7 @@
 const int HP = 10;
 
 RockEnemyBossTree::RockEnemyBossTree( const Vector& pos ) :
-RockEnemyBoss( pos, DOLL_GHOST, HP, 1, 10, 10, true, true ) {
+RockEnemyBoss( pos, DOLL_BOSS_TREE, HP, 1, 10, 10, true, true ) {
 }
 
 
