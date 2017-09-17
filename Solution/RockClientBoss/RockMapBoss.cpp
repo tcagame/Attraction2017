@@ -11,6 +11,8 @@
 #include "RockEnemyBossRock.h"
 #include "RockEnemyBossFire.h"
 #include "RockEnemyBossTree.h"
+#include "RockArmoury.h"
+#include "RockShot.h"
 
 const int WARP_RANGE = 75;
 
@@ -27,12 +29,12 @@ void RockMapBoss::initialize( ) {
 
 void RockMapBoss::update( ) {
 	RockFamilyPtr family( RockFamily::getTask( ) );
-	bool reset_stage[ ROCK_PLAYER_NUM ] = { false };
+	bool reset_stage = true;
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		if ( !family->getPlayer( i )->isActive( ) ) {
-			reset_stage[ i ] = true;
 			continue;
 		}
+		reset_stage = false;
 		Status::Player player = _status->getPlayer( i );
 		unsigned char item = player.item;
 		//ê_äÌÇéùÇ¡ÇƒÇ¢ÇÈÇ∆ÅASTREET_3Ç÷à⁄ìÆ
@@ -44,11 +46,26 @@ void RockMapBoss::update( ) {
 		}
 	}
 
+	if ( reset_stage ) {
+		RockArmouryPtr armory( RockArmoury::getTask( ) );
+		std::list< RockShotPtr > shots = armory->getShots( );
+		std::list< RockShotPtr >::const_iterator ite = shots.begin( );
+		while ( ite != shots.end( ) ) {
+			RockShotPtr shot = *ite;
+			if ( !shot ) {
+				ite++;
+				continue;
+			}
+
+			shot = RockShotPtr( );
+			ite++;
+		}
+
+		armory->clearShot( );
+	}
+
 	STAGE now = _drawer->getStage( );
-	if ( reset_stage[ 0 ] &&
-		 reset_stage[ 1 ] &&
-		 reset_stage[ 2 ] &&
-		 reset_stage[ 3 ] &&
+	if ( reset_stage &&
 		 now != STAGE_TREE_TO_FIRE ) {
 		_drawer.reset( );
 		_drawer = RockMapBossDrawerPtr( new RockMapBossDrawer( STAGE_TREE_TO_FIRE ) );

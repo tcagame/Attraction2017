@@ -6,6 +6,9 @@
 //Player
 #include "RockFamily.h"
 #include "RockPlayer.h"
+//shot
+#include "RockArmoury.h"
+#include "RockShot.h"
 //Item
 #include "RockStorage.h"
 #include "RockItemToku.h"
@@ -65,12 +68,13 @@ void RockMapStreet::update( ) {
 
 void RockMapStreet::updateStreet( ) {
 	RockFamilyPtr family = RockFamily::getTask( );
+	bool active = false;
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		RockPlayerPtr player = family->getPlayer( i );
 		if ( !player->isActive( ) ) {
 			continue;
 		}
-
+		active = true;
 		{//’¹‹‚Ös‚­‚ÆSTAGE_CAVE‚ÖˆÚ“®
 			double length = ( Vector( -200, 0, -500 ) - player->getPos( ) ).getLength( );
 			if ( length < 100 ) {
@@ -110,6 +114,24 @@ void RockMapStreet::updateStreet( ) {
 				}
 			}
 		}
+	}
+
+	if ( !active ) {
+		RockArmouryPtr armory( RockArmoury::getTask( ) );
+		std::list< RockShotPtr > shots = armory->getShots( );
+		std::list< RockShotPtr >::const_iterator ite = shots.begin( );
+		while ( ite != shots.end( ) ) {
+			RockShotPtr shot = *ite;
+			if ( !shot ) {
+				ite++;
+				continue;
+			}
+
+			shot = RockShotPtr( );
+			ite++;
+		}
+
+		armory->clearShot( );
 	}
 }
 
