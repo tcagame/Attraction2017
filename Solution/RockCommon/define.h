@@ -102,6 +102,7 @@ enum DOLL {
 	//event
 	DOLL_OTOHIME,
 	DOLL_TURTLE,
+	DOLL_OBABA,
 	DOLL_MIKO,
 
 	MAX_DOLL,

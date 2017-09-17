@@ -25,12 +25,6 @@ RockMapStreetDrawer::RockMapStreetDrawer( RockMapStreet::STAGE stage ) {
 		col_model->setTrans( Matrix::makeTransformTranslation( Vector( 0, 0, 0 ) ) );
 		map->addColModel( col_model );
 
-		//ModelMV1Ptr bg_model = ModelMV1Ptr( new ModelMV1 );
-		//bg_model->load( "Resource/Rock/map/streetBoss/to_boss_street_bg.mv1" );
-		//
-		//bg_model->draw( );
-		//map->addModel( bg_model );
-
 
 		ModelMV1Ptr clear_model = ModelMV1Ptr( new ModelMV1 );
 		clear_model->load( "Resource/Rock/map/street1/map02_03.mv1" );
@@ -51,11 +45,6 @@ RockMapStreetDrawer::RockMapStreetDrawer( RockMapStreet::STAGE stage ) {
 		boss_col_model->draw( );
 		map->addColModel( boss_col_model );
 
-		ModelMV1Ptr boss_bg_model = ModelMV1Ptr( new ModelMV1 );
-		boss_bg_model->load( "Resource/Rock/map/streetBoss/to_boss_street_bg.mv1" );
-		
-		boss_bg_model->draw( );
-		map->addModel( boss_bg_model );
 	}
 		break;
 	case RockMapStreet::STAGE_RYUGU:
