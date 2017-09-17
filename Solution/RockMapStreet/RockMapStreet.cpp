@@ -3,6 +3,7 @@
 #include "RockCamera.h"
 #include "Status.h"
 #include "MessageSender.h"
+#include "Client.h"
 //Player
 #include "RockFamily.h"
 #include "RockPlayer.h"
@@ -47,6 +48,7 @@ RockMapStreet::~RockMapStreet( ) {
 }
 
 void RockMapStreet::initialize( ) {
+	Client::getTask( )->update( );
 	loadStage( STAGE_STREET );
 }
 
@@ -81,6 +83,7 @@ void RockMapStreet::updateStreet( ) {
 			double length = ( Vector( -200, 0, -500 ) - player->getPos( ) ).getLength( );
 			if ( length < 100 ) {
 				loadStage( STAGE_CAVE );
+				RockFamily::getTask( )->resetPos( Vector( -1679, 0, -185 ) );
 			}
 		}
 		{//‹T‚Éæ‚é‚Æ—³‹{é‚ÖˆÚ“®
@@ -116,6 +119,7 @@ void RockMapStreet::updateStreet( ) {
 				}
 			}
 		}
+
 	}
 
 	if ( !active ) {
@@ -240,12 +244,23 @@ void RockMapStreet::genarateEventCharacters( STAGE next ) {
 	office->clean( );
 	switch ( next ) {
 	case STAGE_STREET:
+	{
 		if ( _stage != STAGE_RYUGU ) {
 			//—³‹{‚©‚ç–ß‚Á‚Ä‚­‚é‚Æ‚«‚Í‹T‚ðo‚³‚È‚¢B
 			office->add( RockEventCharacterPtr( new RockEventTurtle( Vector( 3610, 320, -210 ) ) ) );
 		}
+		bool genarate_miko = true;
+		for ( int i = 0; i < ROCK_PLAYER_NUM; i++  ) {
+			if ( _status->getPlayer( i ).item & ITEM_HEART ) {
+				genarate_miko = false;
+				break;//for‚ð”²‚¯‚é
+			}
+		}
+		if ( genarate_miko ) {
+			office->add( RockEventCharacterPtr( new RockEventMiko( Vector( 3910, 320, -310 ), _status ) ) );
+		}
+	}
 		office->add( RockEventCharacterPtr( new RockEventObaba( Vector( 7200, 600, -110 ) ) ) );
-		office->add( RockEventCharacterPtr( new RockEventMiko( Vector( 3910, 320, -310 ) ) ) );
 		break;
 	case STAGE_CAVE:
 		break;
