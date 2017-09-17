@@ -926,12 +926,12 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 			break;
 		}
 	}
-	if ( motion ) {
-		pattern = off + motion % num;
+	if ( motion + num != 0 ) {
+		pattern = off + ( motion + num ) % num;
 	} else {
-		pattern = off + num;
+		pattern = off;
 	}
-	if ( isStanding() && map->getObject( getPos( ) ) == OBJECT_WATER ) {
+	if ( isStanding( ) && map->getObject( getPos( ) ) == OBJECT_WATER ) {
 		pattern += 16 * 9;
 	}
 
