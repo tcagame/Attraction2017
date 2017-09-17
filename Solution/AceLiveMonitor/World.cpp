@@ -124,11 +124,10 @@ void World::updateBGM ( ) {
 void World::updateEvent( ) {
 	// イベント更新
 	_event->update( );
+	_event->fade( );
 
 	// イベントが終了
 	if ( _event->isFinished( ) ) {
-		//退場
-		_event->exit( );
 		changeEvent( EVENT_NONE );
 	}
 
