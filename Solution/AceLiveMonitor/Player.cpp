@@ -657,7 +657,8 @@ void Player::actOnDead( ) {
 		int chip_size = getChipSize( );
 		Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, chip_size / 2 ), area, chip_size * 2 ) ) );
 		// コンティニューへ
-		setAction(ACTION_CONTINUE);
+		setAction( ACTION_CONTINUE );
+		setArea( AREA_STREET );
 	}
 }
 

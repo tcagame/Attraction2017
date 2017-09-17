@@ -5,6 +5,8 @@
 #include "RockArmoury.h"
 #include "RockShotAncestors.h"
 #include "Sound.h"
+#include "RockStudio.h"
+#include "Effect.h"
 
 static const int EXISTANCE_TIME = 2000;
 //pop
@@ -14,7 +16,7 @@ static const Vector TARGET( 0, 40, 100 );//プレイヤーの向きにあわせる( zが奥行き
 static const double FOLLOW_RANGE = 50;
 static const double FOLLOW_Y = 30;
 //移動
-static const double MAX_MOVE_SPEED = 5.55;
+static const double MAX_MOVE_SPEED = 5.55 * 2;
 static const double ACCEL = 1.11;
 //しょっと
 static const int SHOT_INTERVAL = 50;
@@ -69,6 +71,10 @@ void RockAncestors::pop( ) {
 	Vector pop_relative_pos = Matrix::makeTransformRotation( axis, angle ).multiply( POP_POS );
 	Vector pop_pos = player_pos + pop_relative_pos;
 	setPos( pop_pos );
+	
+	EffectPtr effect( Effect::getTask( ) );
+	_fadein_effect = effect->playEffect( RockStudio::getTask( )->getEffectHandle( EFFECT_ANCESTORS_FADEIN ) );
+	effect->updateEffectTransform( _fadein_effect, getPos( ), 5 );
 }
 
 void RockAncestors::actOnAbsent( ) {
@@ -93,6 +99,9 @@ void RockAncestors::actOnFadeIn( ) {
 	Vector distance = target - getPos( );
 	if ( distance.getLength2( ) < 30 ) {
 		_action = ACTION_FOLLOW;
+		EffectPtr effect( Effect::getTask( ) );
+		int handle = effect->playEffect( RockStudio::getTask( )->getEffectHandle( EFFECT_ANCESTORS_POP ) );
+		effect->updateEffectTransform( handle, getPos( ), 10 );
 		return;
 	}
 	Vector vec = getVec( ) + distance.normalize( ) * ACCEL;
@@ -101,6 +110,8 @@ void RockAncestors::actOnFadeIn( ) {
 	}
 	
 	setVec( vec );
+	
+	Effect::getTask( )->updateEffectTransform( _fadein_effect, getPos( ), 5 );
 }
 
 void RockAncestors::actOnFollow( ) {
