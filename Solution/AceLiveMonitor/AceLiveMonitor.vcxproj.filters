@@ -274,9 +274,6 @@
     <ClCompile Include="PopShishimaiDaemon.cpp">
       <Filter>Pop</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyArcherAttack.cpp">
-      <Filter>Character\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyRay.cpp">
       <Filter>Character\Enemy</Filter>
     </ClCompile>
@@ -406,21 +403,6 @@
     <ClCompile Include="EventTitle.cpp">
       <Filter>World\Event</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyAttack.cpp">
-      <Filter>Character\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyBranch.cpp">
-      <Filter>Character\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyHandAttack.cpp">
-      <Filter>Character\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemyRedBirdAttack.cpp">
-      <Filter>Character\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="EnemySeed.cpp">
-      <Filter>Character\Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyTreeNuts.cpp">
       <Filter>Character\Enemy</Filter>
     </ClCompile>
@@ -433,7 +415,27 @@
     <ClCompile Include="ShotReflect.cpp">
       <Filter>Shot</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyTreeNuts.cpp" />
+    <ClCompile Include="EnemyArcherAttack.cpp">
+      <Filter>Character\Enemy\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyHandAttack.cpp">
+      <Filter>Character\Enemy\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyAttack.cpp">
+      <Filter>Character\Enemy\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyRedBirdAttack.cpp">
+      <Filter>Character\Enemy\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyTreeNuts.cpp">
+      <Filter>Character\Enemy\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyBranch.cpp">
+      <Filter>Character\Enemy\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemySeed.cpp">
+      <Filter>Character\Enemy\Attack</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy.h">
@@ -709,9 +711,6 @@
     <ClInclude Include="PopShishimaiDaemon.h">
       <Filter>Pop</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyArcherAttack.h">
-      <Filter>Character\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="EnemyRay.h">
       <Filter>Character\Enemy</Filter>
     </ClInclude>
@@ -838,21 +837,6 @@
     <ClInclude Include="EventTitle.h">
       <Filter>World\Event</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyAttack.h">
-      <Filter>Character\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyBranch.h">
-      <Filter>Character\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyHandAttack.h">
-      <Filter>Character\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemyRedBirdAttack.h">
-      <Filter>Character\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="EnemySeed.h">
-      <Filter>Character\Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="EnemyTreeNuts.h">
       <Filter>Character\Enemy</Filter>
     </ClInclude>
@@ -865,7 +849,27 @@
     <ClInclude Include="ShotReflect.h">
       <Filter>Shot</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyTreeNuts.h" />
+    <ClInclude Include="EnemyArcherAttack.h">
+      <Filter>Character\Enemy\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyHandAttack.h">
+      <Filter>Character\Enemy\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyRedBirdAttack.h">
+      <Filter>Character\Enemy\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyAttack.h">
+      <Filter>Character\Enemy\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyTreeNuts.h">
+      <Filter>Character\Enemy\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyBranch.h">
+      <Filter>Character\Enemy\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemySeed.h">
+      <Filter>Character\Enemy\Attack</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">
@@ -906,6 +910,9 @@
     </Filter>
     <Filter Include="World\Event">
       <UniqueIdentifier>{936d5c50-167e-470a-b42c-7637bdd7d230}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Character\Enemy\Attack">
+      <UniqueIdentifier>{4787bf7c-e00b-47fd-9db2-129958db31c6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

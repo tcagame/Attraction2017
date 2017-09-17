@@ -657,7 +657,8 @@ void Player::actOnDead( ) {
 		int chip_size = getChipSize( );
 		Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, chip_size / 2 ), area, chip_size * 2 ) ) );
 		// コンティニューへ
-		setAction(ACTION_CONTINUE);
+		setAction( ACTION_CONTINUE );
+		setArea( AREA_STREET );
 	}
 }
 
@@ -679,7 +680,20 @@ void Player::damage( int force ) {
 	}
 
 	SoundPtr sound = Sound::getTask( );
-	sound->playSE( "yokai_voice_26.wav" );
+	switch( _player ) {
+	case 0:
+		sound->playSE( "yokai_voice_26.wav" );
+		break; 
+	case 1:
+		sound->playSE( "yokai_voice_26_1.wav" );
+		break;
+	case 2:
+		sound->playSE( "yokai_voice_26_3.wav" );
+		break;
+	case 3:
+		sound->playSE( "yokai_voice_26_2.wav" );
+		break; 
+	}
 
 	Character::damage( force );
 

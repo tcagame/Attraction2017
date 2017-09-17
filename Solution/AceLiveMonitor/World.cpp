@@ -62,9 +62,7 @@ void World::playMapBgm( EVENT type ) {
 	SoundPtr sound = Sound::getTask( );
 	switch( type ) {
 	case EVENT_NONE:
-		if ( !sound->isPlayingBGM( ) ) {
-			sound->playBGM( "yokai_music_12.wav" );
-		}
+		sound->playBGM( "yokai_music_12.wav" );
 		break;
 	case EVENT_REDDAEMON:
 	case EVENT_FLAME:
@@ -110,7 +108,6 @@ MapPtr World::getMap( AREA area ) const {
 }
 
 void World::update( ) {
-
 	updateEvent( );
 	updateBGM( );
 }
@@ -124,11 +121,10 @@ void World::updateBGM ( ) {
 void World::updateEvent( ) {
 	// イベント更新
 	_event->update( );
+	_event->fade( );
 
 	// イベントが終了
 	if ( _event->isFinished( ) ) {
-		//退場
-		_event->exit( );
 		changeEvent( EVENT_NONE );
 	}
 
