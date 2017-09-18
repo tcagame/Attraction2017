@@ -30,6 +30,7 @@ private:
 	void updatePlayer( PLAYER taget );
 	void updateCameraPos( );
 	void setSynchronousData( ) const;
+	void shiftPos( );
 private:
 	double _camera_pos_x;
 	std::array< PlayerPtr, MAX_PLAYER > _player;

@@ -24,6 +24,7 @@ public:
 	DIR getDir( ) const;
 	ViewerDebug::Data::Circle getDebugDataCircle( ) const;
 	Vector getOverlappedPos( ) const;
+	void shiftPos( );
 protected:
 	void setDir( DIR dir );
 	void setVec( const Vector& vec );

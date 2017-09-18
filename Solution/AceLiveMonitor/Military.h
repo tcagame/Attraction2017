@@ -26,6 +26,7 @@ public:
 	void pushDebugData( ViewerDebug::Data& data ) const;
 	void eraseEventEnemy( );
 	EnemyPtr getHellFire( ) const;
+	void shiftPos( );
 private:
 	void updateEnemy( );
 	void updateHellFire( );
