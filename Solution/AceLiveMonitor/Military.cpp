@@ -195,3 +195,17 @@ void Military::pushDebugData( ViewerDebug::Data& data ) const {
 	data.circle.push_back( _hell_fire->getDebugDataCircle( ) );
 	data.message.push_back( "Enemy:" + std::to_string( _enemies.size( ) ) );
 }
+
+void Military::shiftPos( ) {
+	std::list< EnemyPtr >::iterator ite = _enemies.begin( );
+	while ( ite != _enemies.end( ) ) {
+		EnemyPtr enemy = (*ite);
+		if ( !enemy ) {
+			ite++;
+			continue;
+		}
+		enemy->shiftPos( );
+		ite++;
+	}
+	_hell_fire->shiftPos( );
+}

@@ -8,6 +8,9 @@
 #include "Map.h"
 #include "Sound.h"
 #include <assert.h>
+#include "Military.h"
+#include "Storage.h"
+#include "Office.h"
 
 const int CAMERA_SCROLL_SPEED = 8;
 const int SCROLL_BUFFER = SCREEN_WIDTH / 10;
@@ -44,6 +47,7 @@ void Family::initialize( ) {
 		camera_pos += _player[ i ]->getPos( ).x;
 	}
 	_camera_pos_x = camera_pos * 0.25 - SCREEN_WIDTH / 2;
+
 }
 
 void Family::update( ) {
@@ -111,6 +115,13 @@ void Family::updateCameraPos( ) {
 	_updating_camera = true;
 	if ( !updating ) {
 		return;
+	}
+
+	//À•W’²®
+	int map_width = World::getTask( )->getMap( AREA_STREET )->getPageNum( ) * GRAPH_SIZE;
+	if ( _camera_pos_x > map_width ) {
+		_camera_pos_x -= map_width;
+		shiftPos( );
 	}
 
 	double total = 0;
@@ -182,4 +193,13 @@ void Family::pushDebugData( ViewerDebug::Data& data ) const {
 		}
 		data.circle.push_back( _player[ i ]->getDebugDataCircle( ) );
 	}
+}
+
+void Family::shiftPos( ) {
+	for ( int i = 0; i < MAX_PLAYER; i++ ) {
+		_player[ i ]->shiftPos( );
+	}
+	Military::getTask( )->shiftPos( );
+	Storage::getTask( )->shiftPos( );
+	Office::getTask( )->shiftPos( );
 }

@@ -74,7 +74,7 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		17, // ACTION_WAIT,
 		16, // ACTION_WALK,
 		1 , // ACTION_BRAKE,
-		11 , // ACTION_FLOAT,
+		11, // ACTION_FLOAT,
 		1 , // ACTION_ATTACK,
 		9 , // ACTION_CHARGE,
 		7 , // ACTION_OVER_CHARGE,
@@ -91,7 +91,7 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		21, // ACTION_WAIT,
 		12, // ACTION_WALK,
 		1 , // ACTION_BRAKE,
-		11 , // ACTION_FLOAT,
+		11, // ACTION_FLOAT,
 		1 , // ACTION_ATTACK,
 		9 , // ACTION_CHARGE,
 		6 , // ACTION_OVER_CHARGE,
@@ -108,7 +108,7 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		16, // ACTION_WAIT,
 		16, // ACTION_WALK,
 		1 , // ACTION_BRAKE,
-		11 , // ACTION_FLOAT,
+		11, // ACTION_FLOAT,
 		1 , // ACTION_ATTACK,
 		9 , // ACTION_CHARGE,
 		7 , // ACTION_OVER_CHARGE,
@@ -125,7 +125,7 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		16, // ACTION_WAIT,
 		16, // ACTION_WALK,
 		1 , // ACTION_BRAKE,
-		11 , // ACTION_FLOAT,
+		11, // ACTION_FLOAT,
 		1 , // ACTION_ATTACK,
 		9 , // ACTION_CHARGE,
 		7 , // ACTION_OVER_CHARGE,
@@ -899,7 +899,7 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		break;
 	case ACTION_WAIT:
 	case ACTION_CALL:
-		motion = getActCount( ) / PLAYER_ANIM_WAIT_COUNT / 2;
+		motion = getActCount( ) / PLAYER_ANIM_WAIT_COUNT;
 		break;
 	case ACTION_OVER_CHARGE:
 		{

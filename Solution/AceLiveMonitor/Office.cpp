@@ -86,3 +86,16 @@ void Office::addEventNPC( NPCPtr npc ) {
 	npc->setArea( AREA_EVENT );
 	_npc.push_back( npc );
 }
+
+void Office::shiftPos( ) {
+	std::list< NPCPtr >::iterator ite = _npc.begin( );
+	while( ite != _npc.end( ) ) {
+		NPCPtr npc = (*ite);
+		if ( !npc ) {
+			ite++;
+			continue;
+		}
+		npc->shiftPos( );
+		ite++;
+	}
+}

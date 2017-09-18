@@ -163,3 +163,16 @@ void Storage::eraseEventItem( ) {
 		ite++;
 	}
 }
+
+void Storage::shiftPos( ) {
+	std::list< ItemPtr >::iterator ite = _items.begin( );
+	while ( ite != _items.end( ) ) {
+		ItemPtr item = *ite;
+		if ( !item ) {
+			ite++;
+			continue;
+		}
+		item->shiftPos( );
+		ite++;
+	}
+}
