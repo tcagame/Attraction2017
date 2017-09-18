@@ -89,6 +89,7 @@ private:
 	int _over_charge_time;
 	int _charge_count;
 	int _unrivaled_count;
+	int _cool_time;
 	unsigned char _progress_type;
 	int _progress_count;
 	std::array< bool, MAX_ITEM > _item;
