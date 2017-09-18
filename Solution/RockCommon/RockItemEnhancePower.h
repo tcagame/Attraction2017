@@ -8,6 +8,8 @@ public:
 	RockItemEnhancePower( const Vector& pos );
 	virtual ~RockItemEnhancePower( );
 public:
+	double getAnimTime( ) const;
+public:
 	void eraseBubble( );
 	ModelMV1Ptr getModel( ) const;
 	RockItemBubblePtr _bubble;

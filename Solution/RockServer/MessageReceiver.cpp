@@ -168,6 +168,9 @@ void MessageReceiver::excuteState( std::vector< std::string > command ) {
 		}
 
 		if ( player_num >= 0 && player_num <= ROCK_PLAYER_NUM ) {
+			if ( area == AREA_WAIT ) {
+				_status->resetPlayer( player_num );
+			}
 			_status->getPlayer( player_num ).area = area;
 		}
 	}

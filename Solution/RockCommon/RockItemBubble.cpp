@@ -22,3 +22,7 @@ void RockItemBubble::setFinished( bool finish ) {
 bool RockItemBubble::isFinished( ) const {
 	return _finished;
 }
+
+double RockItemBubble::getAnimTime( ) const {
+	return 0;
+}

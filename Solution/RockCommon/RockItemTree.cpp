@@ -24,3 +24,7 @@ ModelMV1Ptr RockItemTree::getModel( ) const {
 void RockItemTree::eraseBubble( ) {
 	_bubble->setFinished( true );
 }
+
+double RockItemTree::getAnimTime( ) const {
+	return 0;
+}

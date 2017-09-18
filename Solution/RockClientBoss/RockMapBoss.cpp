@@ -13,6 +13,7 @@
 #include "RockEnemyBossTree.h"
 #include "RockArmoury.h"
 #include "RockShot.h"
+#include "Sound.h"
 
 const int WARP_RANGE = 75;
 
@@ -74,9 +75,11 @@ void RockMapBoss::update( ) {
 
 	//一定の位置に行くとマップ切り替え
 	RockMilitaryPtr military( RockMilitary::getTask( ) );
+	SoundPtr sound = Sound::getTask( );
 	switch ( now ) {
 	case STAGE_TREE_TO_FIRE:
 		if ( isWarpToBoss( Vector( 1550, 0, -50 ) ) ) {
+			sound->playBGM( "yokai_music_04.wav" );
 			RockFamily::getTask( )->resetPos( Vector( 0, 0, 0 ) ); // room_fire
 			military->clean( );
 			military->add( RockEnemyPtr( new RockEnemyBossFire( Vector( 220, 10, 0 ) ) ) );
@@ -85,6 +88,7 @@ void RockMapBoss::update( ) {
 		return;
 	case STAGE_FIRE:
 		if ( isWarpToStreet( STAGE_FIRE ) ) {
+			sound->stopBGM( );
 			RockFamily::getTask( )->resetPos( Vector( -700, 75, -25 ) ); // fire to rock
 			military->clean( );
 			break;
@@ -92,6 +96,7 @@ void RockMapBoss::update( ) {
 		return;
 	case STAGE_FIRE_TO_ROCK:
 		if ( isWarpToBoss( Vector( 1550, 0, -50 ) ) ) {
+			sound->playBGM( "yokai_music_04.wav" );
 			//STAGE_ROCKへ行く
 			RockFamily::getTask( )->resetPos( Vector( 0, 0, 0 ) );
 			military->clean( );
@@ -101,6 +106,7 @@ void RockMapBoss::update( ) {
 		return;
 	case STAGE_ROCK:
 		if ( isWarpToStreet( STAGE_ROCK ) ) {
+			sound->stopBGM( );
 			RockFamily::getTask( )->resetPos( Vector( -700, 75, -25 ) ); // rock to tree
 			military->clean( );
 			break;
@@ -108,6 +114,7 @@ void RockMapBoss::update( ) {
 		return;
 	case STAGE_ROCK_TO_TREE:
 		if ( isWarpToBoss( Vector( 1550, 0, -50 ) ) ) {
+			sound->playBGM( "yokai_music_04.wav" );
 			RockFamily::getTask( )->resetPos( Vector( 0, 0, 0 ) ); // tree
 			military->clean( );
 			military->add( RockEnemyPtr( new RockEnemyBossTree( Vector( 300, 10, 0 ) ) ) );
@@ -116,6 +123,7 @@ void RockMapBoss::update( ) {
 		return;
 	case STAGE_TREE:
 		if ( isWarpToStreet( STAGE_TREE ) ) {
+			sound->stopBGM( );
 			RockFamily::getTask( )->resetPos( Vector( -700, 75, -25 ) ); // tree to fire
 			military->clean( );
 			break;
