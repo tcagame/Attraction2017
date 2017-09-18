@@ -121,6 +121,8 @@ void ViewerDebug::pushMessageConnect( ) {
 	for ( int i = 0; i < Server::MAX_MACHINES; i++ ) {
 		_data.message.push_back( "IP:" + server->getMachineIPStr( i ) );
 	}
+	std::string fps = std::to_string( Drawer::getTask( )->getFps( ) );
+	_data.message.push_back( "FPS:" + fps );
 }
 
 void ViewerDebug::drawCircle( ) {
