@@ -40,7 +40,6 @@ public:
 	std::list< RockItemBubblePtr > getBubbles( ) const;
 	bool pickUpItem( RockItemPtr item, int player_id );
 	void clean( );
-	void eraseCasket( );
 private:
 	void updateItem( );
 	void updateAlter( );
