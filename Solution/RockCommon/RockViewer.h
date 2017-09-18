@@ -26,7 +26,6 @@ private:
 	void drawBubbles( ) const;
 	void drawAncestors( ) const;
 	void drawEventCharacter( ) const;
-	void drawShot( ) const;// debug
 	void drawItem( ) const; 
 	void drawAlter( ) const;
 	void drawCasket( ) const;
@@ -34,6 +33,7 @@ private:
 	void drawUI( ) const;
 	void drawResult( ) const;
 	void drawDebug( ) const;
+	void drawGame( ) const;
 private:
 	StatusPtr _status;
 	ImagePtr _dummy_ui;

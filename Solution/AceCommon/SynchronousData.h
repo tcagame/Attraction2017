@@ -35,6 +35,7 @@ public:
 	static const unsigned char TYPE_IMPACT			= 0x26;
 	static const unsigned char TYPE_ITEM			= 0x27;
 	static const unsigned char TYPE_NPC 			= 0x28;
+	static const unsigned char TYPE_SANZO 			= 0x29;
 	static const unsigned char PROGRESS_NONE             = 0x00;
 	static const unsigned char PROGRESS_BAR              = 0x01;
 	static const unsigned char PROGRESS_ITEM_DANGO       = 0x02;
@@ -73,6 +74,7 @@ public:
 	int getObjectPattern( int idx ) const;
 	int getObjectSize( int idx ) const;
 	int getIdx( AREA area, int relative_idx ) const;
+	int getFade( ) const;
 public:
 	void * getPtr( );
 	int getSize( );
@@ -87,6 +89,7 @@ public:
 	void setStatusVirtue( PLAYER player, int virtue );
 	void setStatusRedo( PLAYER player, int redo );
 	void setStatusState( PLAYER player, unsigned char area );
+	void setFade( int fade );
 	void resetObject( );
 	void addObject( AREA area, unsigned char type, int pattern, unsigned char attribute, int ax, int ay, int size = -1 );
 private:
@@ -95,11 +98,12 @@ private:
 	#pragma pack( 1 )
 		struct SyncData {
 			long camera_x;
-			char event;
+			unsigned char event;
+			unsigned char fade; // 0 - 99
 			struct Status {
 				char          device;
 				unsigned char progress_type;
-				char          progress_count;
+				char          progress_count; // 0 - 99
 				long          x;
 				unsigned char power;
 				unsigned long money;

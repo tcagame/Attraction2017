@@ -40,7 +40,7 @@ void RockFamily::updatePlayer( ) {
 	RockMilitaryPtr military( RockMilitary::getTask( ) );
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		if ( !_player[ i ]->isActive( ) ) {
-			_player[ i ]->resetPos( Vector( i * 50, 75 ) + _base_pos );
+			_player[ i ]->resetPos( Vector( i * 50, 60 ) + getBeforeCameraPos() );
 			_player[ i ]->resetBubble( );
 			_before_active[ i ] = false;
 			continue;
@@ -108,13 +108,14 @@ Vector RockFamily::getCameraPos( ) const {
 	int num = 0;
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		if ( _player[ i ]->isActive( ) ) {
-			result += _player[ i ]->getPos( );
+			result += _player[ i ]->getPos( ) * 0.01;
 			num++;
 		}
 	}
 	if ( num > 0 ) {
 		result *= ( 1.0 / ( double )num );
 	}
+	result *= 100;
 	return result;
 }
 
@@ -151,12 +152,13 @@ Vector RockFamily::getBeforeCameraPos( ) const {
 	int num = 0;
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		if ( _before_active[ i ] ) {
-			result += _player[ i ]->getPos( );
+			result += _player[ i ]->getPos( ) * 0.01;
 			num++;
 		}
 	}
 	if ( num > 0 ) {
 		result *= ( 1.0 / ( double )num );
+		result *= 100;
 	} else {
 		result = Vector( 50, 75 ) + _base_pos;
 	}

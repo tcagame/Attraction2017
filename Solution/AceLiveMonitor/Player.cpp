@@ -21,31 +21,32 @@
 #include <assert.h>
 
 //画像サイズ
-static const int PLAYER_FOOT = 7;
+const int PLAYER_FOOT = 7;
 //速度
-static const int MAX_SPEED = 20;
-static const int MOVE_SPEED = 7;
-static const int BRAKE_ACCEL = 5;
-static const int JUMP_POWER = -10;
-static const int BLOW_POWER = -30;
+const int MAX_SPEED = 20;
+const int MOVE_SPEED = 7;
+const int BRAKE_ACCEL = 5;
+const int JUMP_POWER = -10;
+const int BLOW_POWER = -30;
 //攻撃関係
-static const int CHARGE_PHASE_COUNT = 25;
-static const int MAX_CHARGE_COUNT = CHARGE_PHASE_COUNT * 4 - 1;
-static const int BURST_TIME = 60;
-static const int MAX_HP = 16;
-static const int COOL_TIME = 8;
+const int CHARGE_PHASE_COUNT = 25;
+const int MAX_CHARGE_COUNT = CHARGE_PHASE_COUNT * 4 - 1;
+const int BURST_TIME = 60;
+const int MAX_HP = 16;
+const int COOL_TIME = 8;
 //アニメーション
-static const int PLAYER_ANIM_WAIT_COUNT = 4;
-static const int PLAYER_ANIM_WIDTH_NUM = 10;
-static const int PLAYER_FLASH_WAIT_TIME = 2;
+const int PLAYER_ANIM_WAIT_COUNT = 4;
+const int PLAYER_ANIM_WIDTH_NUM = 10;
+const int PLAYER_FLASH_WAIT_TIME = 2;
 //カウント
-static const int MAX_DAMEGE_COUNT = 20;
-static const int MAX_BACK_COUNT = 6;
-static const int MAX_UNRIVALED_COUNT = 45;
-static const int MAX_DEAD_ACTCOUNT = 120;
-static const int MAX_IMPACT_COUNT = 30;
+const int MAX_DAMEGE_COUNT = 20;
+const int MAX_BACK_COUNT = 6;
+const int MAX_UNRIVALED_COUNT = 45;
+const int MAX_DEAD_ACTCOUNT = 120;
+const int MAX_IMPACT_COUNT = 30;
+const int ENTERING_COUNT = 50;
 
-static const int HEAL_DANGO = 6;
+const int HEAL_DANGO = 6;
 
 // モーションテーブル
 const int MOTION_OFFSET[Player::MAX_ACTION] = {
@@ -62,6 +63,8 @@ const int MOTION_OFFSET[Player::MAX_ACTION] = {
 	50,  // ACTION_BLOW_AWAY,
 	80,  // ACTION_DEAD,
 	112, // ACTION_CALL,
+	0,   //ACTION_ENTERING_FADEOUT,
+	0,   //ACTION_ENTERING_SANZO,
 };
 
 const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
@@ -79,6 +82,8 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		1 , // ACTION_BLOW_AWAY,
 		27, // ACTION_DEAD,
 		18, // ACTION_CALL,
+		1,  //ACTION_ENTERING_FADEOUT,
+		1,  //ACTION_ENTERING_SANZO,
 	},
 	{ // たろじろー
 		0 , // ACTION_ENTRY,
@@ -94,6 +99,8 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		1 , // ACTION_BLOW_AWAY,
 		27, // ACTION_DEAD,
 		18, // ACTION_CALL,
+		1,  //ACTION_ENTERING_FADEOUT,
+		1,  //ACTION_ENTERING_SANZO,
 	},
 	{ // ガりすけ
 		0 , // ACTION_ENTRY,
@@ -109,6 +116,8 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		1 , // ACTION_BLOW_AWAY,
 		27, // ACTION_DEAD,
 		12, // ACTION_CALL,
+		1,  //ACTION_ENTERING_FADEOUT,
+		1,  //ACTION_ENTERING_SANZO,
 	},
 	{ // たろみ
 		0 , // ACTION_ENTRY,
@@ -124,6 +133,8 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		1 , // ACTION_BLOW_AWAY,
 		32, // ACTION_DEAD,
 		12, // ACTION_CALL,
+		1,  //ACTION_ENTERING_FADEOUT,
+		1,  //ACTION_ENTERING_SANZO,
 	}
 };
 
@@ -157,7 +168,9 @@ bool Player::isExist( ) const {
 		_action != ACTION_CONTINUE &&
 		_action != ACTION_CALL &&
 		_action != ACTION_DAMEGE &&
-		_action != ACTION_BLOW_AWAY;
+		_action != ACTION_BLOW_AWAY &&
+		_action != ACTION_ENTERING_FADEOUT &&
+		_action != ACTION_ENTERING_SANZO;
 }
 
 int Player::getDeviceId( ) const {
@@ -241,6 +254,12 @@ void Player::act( ) {
 	case ACTION_CALL:
 		actOnCall( );
 		break;
+	case ACTION_ENTERING_FADEOUT:
+		actOnEnteringFadeOut( );
+		break;
+	case ACTION_ENTERING_SANZO:
+		actOnEnteringSanzo( );
+		break;
 	}
 
 	actOnCamera( );
@@ -292,13 +311,13 @@ void Player::actOnEntry( ) {
 	}
 }
 
-void Player::actOnContinue() {
+void Player::actOnContinue( ) {
 	adjustToCamera( );
 	updateProgressBar( );
 
 	if ( _progress_count >= 100 ) {
 		// 再登場のために初期化
-		appear();
+		appear( );
 	}
 }
 
@@ -437,8 +456,8 @@ void Player::actOnBreaking( ) {
 	}
 	DevicePtr device( Device::getTask( ) );
 	if ( isStanding( ) && device->getPush( _device_id ) & BUTTON_C ) {
-		vec.y = JUMP_POWER;
 		Sound::getTask( )->playSE( "yokai_voice_17.wav" );
+		vec.y = JUMP_POWER;
 		setAction( ACTION_FLOAT );
 	}
 	if ( vec.x < 0 ) {
@@ -557,9 +576,9 @@ void Player::actOnCharge( ) {
 		}
 		Vector vec = getVec( );
 		if ( device->getPush( _device_id ) & BUTTON_C ) {
+			Sound::getTask( )->playSE( "yokai_voice_17.wav" );
 			vec.y = JUMP_POWER;
 			setVec( vec );
-			Sound::getTask( )->playSE( "yokai_voice_17.wav" );
 			setAction( ACTION_FLOAT );
 			return;
 		}
@@ -593,6 +612,7 @@ void Player::actOnOverCharge( ) {
 		_over_charge_time = -1;
 	}
 }
+
 
 void Player::actOnCamera( ) {
 	FamilyConstPtr family( Family::getTask( ) );
@@ -667,7 +687,8 @@ void Player::actOnDead( ) {
 		int chip_size = getChipSize( );
 		Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, chip_size / 2 ), area, chip_size * 2 ) ) );
 		// コンティニューへ
-		setAction(ACTION_CONTINUE);
+		setAction( ACTION_CONTINUE );
+		setArea( AREA_STREET );
 	}
 }
 
@@ -677,6 +698,13 @@ void Player::actOnCall( ) {
 	if ( monmo->getAction( ) == Monmotaro::ACTION_MOVE ) {
 		setAction( ACTION_WAIT );
 	}
+}
+
+void Player::actOnEnteringFadeOut( ) {
+
+}
+
+void Player::actOnEnteringSanzo( ) {
 }
 
 void Player::damage( int force ) {
@@ -689,7 +717,20 @@ void Player::damage( int force ) {
 	}
 
 	SoundPtr sound = Sound::getTask( );
-	sound->playSE( "yokai_voice_26.wav" );
+	switch( _player ) {
+	case 0:
+		sound->playSE( "yokai_voice_26.wav" );
+		break; 
+	case 1:
+		sound->playSE( "yokai_voice_26_1.wav" );
+		break;
+	case 2:
+		sound->playSE( "yokai_voice_26_3.wav" );
+		break;
+	case 3:
+		sound->playSE( "yokai_voice_26_2.wav" );
+		break; 
+	}
 
 	Character::damage( force );
 
@@ -734,13 +775,15 @@ bool Player::isOnHead( CharacterPtr target ) const {
 
 void Player::bound( ) {
 	setAction( ACTION_FLOAT );
+	Sound::getTask( )->playSE( "yokai_voice_17.wav" );
 	Vector vec = getVec( );
 	vec.y = JUMP_POWER;
 	setVec( vec );
 }
 
 void Player::blowAway( ) {
-	if ( isExist( ) ) {
+	if ( isExist( ) &&
+		 !Debug::getTask( )->isDebug( ) ) {
 		setAction( ACTION_BLOW_AWAY );
 	}
 }
@@ -843,6 +886,7 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 	case ACTION_BRAKE:
 	case ACTION_DAMEGE:
 	case ACTION_BLOW_AWAY:
+	case ACTION_ENTERING_FADEOUT:
 		break;
 	case ACTION_ENTRY:
 	case ACTION_CONTINUE:
@@ -858,11 +902,21 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		motion = getActCount( ) / PLAYER_ANIM_WAIT_COUNT / 2;
 		break;
 	case ACTION_OVER_CHARGE:
-		if ( player == PLAYER_TAROJIRO ) {
-			num = num - 1;
+		{
+			int anim = getActCount( ) / PLAYER_ANIM_WAIT_COUNT;
+			int stop_anim = 2;
+			int remaining_anim = 3;
+			if ( player == PLAYER::PLAYER_TAROJIRO ) {
+				stop_anim = stop_anim + 1;
+				remaining_anim = remaining_anim - 2;
+			}
+			if ( anim > stop_anim && getActCount( ) - _over_charge_time < BURST_TIME - ( PLAYER_ANIM_WAIT_COUNT * remaining_anim ) ) {
+				anim = stop_anim;
+			}
+
+			motion = anim;
+			break;
 		}
-		motion = getActCount( ) / PLAYER_ANIM_WAIT_COUNT;
-		break;
 	case ACTION_DEAD:
 		{
 			int anim = getActCount( ) / ( PLAYER_ANIM_WAIT_COUNT / 2 );
@@ -881,12 +935,36 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 			motion = anim;
 			break;
 		}
-
+	case ACTION_ENTERING_SANZO:
+		{
+			// 蛇三蔵
+			Matrix mat = Matrix::makeTransformRotation( Vector( 0, 0, -1 ), PI * getActCount( ) / ENTERING_COUNT );
+			Vector pos = Vector( x, y - 256 ) + mat.multiply( Vector( 256, 0 ) );
+			data->addObject( AREA_STREET, SynchronousData::TYPE_SANZO, getActCount( ) / PLAYER_ANIM_WAIT_COUNT % 6 ,0 ,( int )pos.x, ( int )pos.y );
+			if ( getActCount( ) > ENTERING_COUNT / 2 ) {
+				x = ( int )pos.x;
+				y = ( int )pos.y;
+			}
+			break;
+		}
 	}
-	pattern = off + motion % num;
-
-	if ( isStanding() && map->getObject( getPos( ) ) == OBJECT_WATER ) {
-		pattern += 16 * 9;
+	if ( motion + num != 0 ) {
+		pattern = off + ( motion + num ) % num;
+	} else {
+		pattern = off;
+	}
+	
+	int offset = 160;
+	int anim_num = 16;
+	if ( isStanding( ) && map->getObject( getPos( ) ) == OBJECT_WATER ) {
+		if ( player == PLAYER::PLAYER_TAROSUKE ) {
+			offset = offset + 16;
+		}
+		if ( player == PLAYER::PLAYER_TAROJIRO ) {
+			offset = offset + 16;
+			anim_num = anim_num - 4;
+		}
+		pattern = offset + ( ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT / 4 ) % anim_num;
 	}
 
 	unsigned char attribute = 0;
@@ -906,16 +984,39 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 	}
 }
 
+void Player::setActionEnteringFadeOut( ) {
+	setVec( Vector( ) );
+	setAction( ACTION_ENTERING_FADEOUT );
+}
+
+void Player::setActionEnteringSanzo( ) {
+	setVec( Vector( ) );
+	setAction( ACTION_ENTERING_SANZO );
+}
+
+bool Player::isEntering( ) const {
+	if ( _action != ACTION_ENTERING_FADEOUT &&
+		 _action != ACTION_ENTERING_SANZO ) {
+		return false;
+	}
+
+	return getActCount( ) >= ENTERING_COUNT;
+}
+
 void Player::enterEvent( ) {
 	setArea( AREA_EVENT );
 	setPos( Vector( GRAPH_SIZE * 3 / 2, 0 ) );
 	setVec( Vector( ) );
+	setAction( ACTION_FLOAT );
 }
+
 
 void Player::leaveEvent( ) {
 	setArea( AREA_STREET );
 	setPos( Vector( Family::getTask( )->getCameraPosX( ) + SCREEN_WIDTH / 2, 0 ) );
 	setVec( Vector( ) );
+	
+	Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, getOverlappedRadius( ) ), getArea( ), ( int )getOverlappedRadius( ) * 2 ) ) );
 }
 
 EVENT Player::getOnEvent( ) const {

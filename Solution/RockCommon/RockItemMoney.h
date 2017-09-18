@@ -15,6 +15,7 @@ public:
 	virtual ~RockItemMoney( );
 public:
 	ModelMV1Ptr getModel( ) const;
+	double getAnimTime( ) const;
 	int getValue( ) const;
 private:
 	int _value;

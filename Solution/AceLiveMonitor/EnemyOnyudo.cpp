@@ -1,16 +1,20 @@
 #include "EnemyOnyudo.h"
 #include "SynchronousData.h"
+#include "Property.h"
 
 const int WAIT_ANIM_TIME = 5;
 const int GRAPH_WIDTH_NUM = 16;
 const int MOVE_SPEED = 1;
-const int MAX_HP = 6;
 
 EnemyOnyudo::EnemyOnyudo( const Vector& pos ) :
-Enemy( pos, BIG_CHAR_GRAPH_SIZE, MAX_HP ),
+Enemy( pos, BIG_CHAR_GRAPH_SIZE ),
 _before_pos( Vector( ) ), 
 _vec( MOVE_SPEED, 0 ) {
 	setOverlappedRadius( 48 );
+
+	PropertyPtr property( Property::getTask( ) );
+	setPower( property->getData( "Onyudo_POWER" ) );
+	setForce( property->getData( "Onyudo_FORCE" ) );
 }
 
 

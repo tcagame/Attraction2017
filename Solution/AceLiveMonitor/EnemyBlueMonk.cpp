@@ -1,15 +1,19 @@
 #include "EnemyBlueMonk.h"
 #include "SynchronousData.h"
+#include "Property.h"
 
-static const int WAIT_ANIM_TIME = 5;
-static const int MOVE_SPEED = 2;
-static const int MAX_HP = 4;
+const int WAIT_ANIM_TIME = 5;
+const int MOVE_SPEED = 2;
 
 EnemyBlueMonk::EnemyBlueMonk( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ),
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ),
 _before_pos( Vector( ) ),
 _vec( Vector( MOVE_SPEED, 0 ) ) {
 	setOverlappedRadius( 30 );
+
+	PropertyPtr property( Property::getTask( ) );
+	setPower( property->getData( "BlueMonk_POWER" ) );
+	setForce( property->getData( "BlueMonk_FORCE" ) );
 }
 
 

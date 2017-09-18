@@ -1,14 +1,14 @@
 #include "EnemyStoneFace.h"
 #include "Family.h"
 #include "SynchronousData.h"
+#include "Property.h"
 
-static const int WAIT_ANIM_TIME = 5;
-static const int MAX_HP = 3;
-static const double MAX_MOVE_SPEED = 5;
-static const double ACCEL = 0.3;
+const int WAIT_ANIM_TIME = 5;
+const double MAX_MOVE_SPEED = 5;
+const double ACCEL = 0.3;
 
 EnemyStoneFace::EnemyStoneFace( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP, false ),
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, false ),
 _action( ACTION_IN ) {
 	Vector target = Vector( Family::getTask( )->getCameraPosX( ) + SCREEN_WIDTH / 2, GRAPH_SIZE );
 	Vector vec = target - getPos( );
@@ -17,6 +17,10 @@ _action( ACTION_IN ) {
 	}
 	vec = vec.normalize( ) * MAX_MOVE_SPEED;
 	setVec( vec );
+
+	PropertyPtr property( Property::getTask( ) );
+	setPower( property->getData( "StoneFace_POWER" ) );
+	setForce( property->getData( "StoneFace_FORCE" ) );
 }
 
 EnemyStoneFace::~EnemyStoneFace( ) {

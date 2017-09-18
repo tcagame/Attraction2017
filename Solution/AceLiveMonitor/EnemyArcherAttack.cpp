@@ -1,12 +1,16 @@
 #include "EnemyArcherAttack.h"
 #include "SynchronousData.h"
+#include "Property.h"
 
-const int MAX_HP = 2;
 const Vector MOVE_SPEED( -6, 0 );
 
 EnemyArcherAttack::EnemyArcherAttack( const Vector& pos ) :
-Enemy( pos, SMALL_CHAR_GRAPH_SIZE, MAX_HP, false ) {
+Enemy( pos, SMALL_CHAR_GRAPH_SIZE, false ) {
 	setVec( MOVE_SPEED );
+
+	PropertyPtr property( Property::getTask( ) );
+	setPower( property->getData( "ArcherAttack_POWER" ) );
+	setForce( property->getData( "ArcherAttack_FORCE" ) );
 }
 
 EnemyArcherAttack::~EnemyArcherAttack( ) {

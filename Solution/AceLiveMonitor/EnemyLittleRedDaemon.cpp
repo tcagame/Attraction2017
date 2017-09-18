@@ -1,11 +1,15 @@
 #include "EnemyLittleRedDaemon.h"
 #include "SynchronousData.h"
+#include "Property.h"
 
-static const int WAIT_ANIM_TIME = 6;
-static const int MAX_HP = 1;
+const int WAIT_ANIM_TIME = 6;
 
 EnemyLittleRedDaemon::EnemyLittleRedDaemon( const Vector& pos ):
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ) {
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ) {
+
+	PropertyPtr property( Property::getTask( ) );
+	setPower( property->getData( "LittleRedDaemon_POWER" ) );
+	setForce( property->getData( "LittleRedDaemon_FORCE" ) );
 }
 
 

@@ -4,11 +4,14 @@
 #include "SynchronousData.h"
 #include "Family.h"
 #include "Player.h"
-
-static const int MAX_HP = 12;
+#include "Property.h"
 
 EnemyBossRock::EnemyBossRock( const Vector& pos ) :
-EnemyBoss( pos, 128, MAX_HP ) {
+EnemyBoss( pos, 128 ) {
+
+	PropertyPtr property( Property::getTask( ) );
+	setPower( property->getData( "Rock_POWER" ) );
+	setForce( property->getData( "Rock_FORCE" ) );
 }
 
 

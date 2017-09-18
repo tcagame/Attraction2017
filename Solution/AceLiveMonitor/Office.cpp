@@ -23,12 +23,6 @@ Office::~Office( ) {
 
 void Office::update( ) {
 	WorldPtr world = World::getTask( );
-	EVENT event = world->getEvent( );
-	if( event == EVENT_NONE ) {
-		_npc = { };
-		return;
-	}
-
 	std::list< NPCPtr >::iterator ite = _npc.begin( );
 	while( ite != _npc.end( ) ) {
 		NPCPtr npc = (*ite);
@@ -45,24 +39,24 @@ void Office::update( ) {
 void Office::popUpNPC( EVENT type ) {
 	switch ( type ) {
 	case EVENT_SHOP:
-		_npc.push_back( NPCPtr( new NPCObaba( Vector( 800, 225 ) ) ) );
+		addEventNPC( NPCPtr( new NPCObaba( Vector( 800, 225 ) ) ) );
 		break;
 	case EVENT_LAKE:
-		_npc.push_back( NPCPtr( new NPCMiko( Vector( 200, 225 ) ) ) );
+		addEventNPC( NPCPtr( new NPCMiko( Vector( 200, 225 ) ) ) );
 		break;
 	case EVENT_RYUGU:
 		//“V—
-		_npc.push_back( NPCPtr( new NPCAngel( Vector( 325, 225 ) ) ) );
-		_npc.push_back( NPCPtr( new NPCAngel( Vector( 700, 225 ) ) ) );
+		addEventNPC( NPCPtr( new NPCAngel( Vector( 325, 225 ) ) ) );
+		addEventNPC( NPCPtr( new NPCAngel( Vector( 700, 225 ) ) ) );
 		//‰³•P
-		_npc.push_back( NPCPtr( new NPCOtohime( Vector( 510, 150 ) ) ) );
+		addEventNPC( NPCPtr( new NPCOtohime( Vector( 510, 150 ) ) ) );
 		//l‹›
-		_npc.push_back( NPCPtr( new NPCMermaid( Vector( 225, 250 ) ) ) );
-		_npc.push_back( NPCPtr( new NPCMermaid( Vector( 864, 250 ) ) ) );
+		addEventNPC( NPCPtr( new NPCMermaid( Vector( 225, 250 ) ) ) );
+		addEventNPC( NPCPtr( new NPCMermaid( Vector( 864, 250 ) ) ) );
 		break;
 	case EVENT_GAMBLE:
 		//ƒcƒ{U‚è
-		_npc.push_back( NPCPtr( new NPCShaker( Vector( 650, 225 ) ) ) );
+		addEventNPC( NPCPtr( new NPCShaker( Vector( 650, 225 ) ) ) );
 		//’†–~
 		break;
 	}
@@ -86,4 +80,9 @@ void Office::eraseEventNPC( ) {
 		}
 		ite++;
 	}
+}
+
+void Office::addEventNPC( NPCPtr npc ) {
+	npc->setArea( AREA_EVENT );
+	_npc.push_back( npc );
 }

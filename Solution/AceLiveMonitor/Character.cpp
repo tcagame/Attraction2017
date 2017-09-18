@@ -15,7 +15,7 @@ _chip_size( chip_size ),
 _act_count( 0 ),
 _power( power ),
 _mass( mass ),
-_radius( chip_size / 2 ),
+_radius( chip_size / 3 ),
 _area( AREA_STREET ) {
 }
 

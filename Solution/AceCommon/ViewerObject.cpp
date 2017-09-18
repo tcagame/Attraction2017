@@ -10,6 +10,7 @@ ViewerObject::ViewerObject( ) {
 	_image[ GRAPH_PLAYER_GARISUKE	] = drawer->createImage( "Family/garisuke.png"				);
 	_image[ GRAPH_PLAYER_TAROMI		] = drawer->createImage( "Family/taromi.png"				);
 	_image[ GRAPH_MONMOTARO			] = drawer->createImage( "Family/momotaro.png"				);
+	_image[ GRAPH_SANZO				] = drawer->createImage( "Family/hebisanzo.png"         	);
 	_image[ GRAPH_SHOT				] = drawer->createImage( "Effect/psychic.png"				);
 	_image[ GRAPH_ENEMY_MIDIUM		] = drawer->createImage( "Enemy/enemy_medium.png"			);
 	_image[ GRAPH_ENEMY_SMALL		] = drawer->createImage( "Enemy/enemy_small.png"			);
@@ -80,6 +81,9 @@ void ViewerObject::drawSprite( int x, int y, unsigned char type, unsigned char a
 		break;
 	case SynchronousData::TYPE_NPC:
 		sprite = getSpriteNPC( GRAPH_NPC				, x, y, attribute, pattern, size );
+		break;
+	case SynchronousData::TYPE_SANZO:
+		sprite = getSpriteSanzo( GRAPH_SANZO            , x, y, attribute, pattern, size );
 		break;
 	default: assert( 0 );
 	};
@@ -270,5 +274,21 @@ ViewerObject::Sprite ViewerObject::getSpriteNPC( GRAPH graph, int x, int y, unsi
 		sprite.sx2 = sprite.sx1 + size;
 		sprite.sy2 = sprite.sy1 + size;
 	}
+	return sprite;
+}
+
+ViewerObject::Sprite ViewerObject::getSpriteSanzo( GRAPH graph, int x, int y, unsigned char attribute, int pattern, int size ) const {
+	Sprite sprite;
+	sprite.graph = graph;
+	sprite.tx = pattern % 6 * 64;
+	sprite.ty = pattern / 6 * 64;
+	sprite.tw = 64;
+	sprite.th = 64;
+
+	sprite.sx1 = x - 64 / 2;
+	sprite.sy1 = y - 64;
+	sprite.sx2 = sprite.sx1 + 64;
+	sprite.sy2 = sprite.sy1 + 64;
+
 	return sprite;
 }

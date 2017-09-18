@@ -1,15 +1,19 @@
 #include "EnemyCrocoSnake.h"
 #include "SynchronousData.h"
+#include "Property.h"
 
-static const int WAIT_ANIM_TIME = 5;
-static const int MOVE_SPEED = -1;
-static const int MAX_HP = 3;
+const int WAIT_ANIM_TIME = 5;
+const int MOVE_SPEED = -1;
 
 EnemyCrocoSnake::EnemyCrocoSnake( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ),
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ),
 _before_pos( Vector( ) ) {
 	setOverlappedRadius( 30 );
 	setVec( Vector( MOVE_SPEED, 0 ) );
+
+	PropertyPtr property( Property::getTask( ) );
+	setPower( property->getData( "CrocoSnake_POWER" ) );
+	setForce( property->getData( "CrocoSnake_FORCE" ) );
 }
 
 

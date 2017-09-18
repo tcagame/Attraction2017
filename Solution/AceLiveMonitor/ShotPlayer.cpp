@@ -3,8 +3,8 @@
 #include "Armoury.h"
 #include "ShotReflect.h"
 
-static const int SHOT_SPEED = 15;
-static const int VANISH_LENGTH = 320;
+const int SHOT_SPEED = 15;
+const int VANISH_LENGTH = 320;
 
 ShotPlayer::ShotPlayer( const PLAYER player, const Vector& pos, DIR dir, int level ) :
 Shot( pos, ( int )( pow( 2, level - 1 ) + 1 ) ),

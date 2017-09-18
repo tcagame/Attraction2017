@@ -4,9 +4,9 @@
 #include "World.h"
 #include "Map.h"
 
-static const int POP_INTERVAL_COUNT = 600;
-static const int MAX_PAGE = SCREEN_WIDTH / GRAPH_SIZE;
-static const int POP_RANGE = SCREEN_WIDTH * 3 / 2;
+const int POP_INTERVAL_COUNT = 600;
+const int MAX_PAGE = SCREEN_WIDTH / GRAPH_SIZE;
+const int POP_RANGE = SCREEN_WIDTH * 3 / 2;
 
 Pop::Pop( const Vector& pos ) :
 _pos( pos ),

@@ -8,6 +8,7 @@
 #include "Military.h"
 #include "Office.h"
 #include "Storage.h"
+#include "Armoury.h"
 
 #include "EventTitle.h"
 #include "EventReddaemon.h"
@@ -21,16 +22,16 @@
 #include "EventGamble.h"
 
 
-static const char * FILENAME_STREET          = "Resource/Ace/Street/mapdata";
-static const char * FILENAME_EVENT_REDDAEMON = "Resource/Ace/Event/Reddaemon/mapdata";
-static const char * FILENAME_EVENT_FIRE      = "Resource/Ace/Event/Fire/mapdata";
-static const char * FILENAME_EVENT_TREE      = "Resource/Ace/Event/Tree/mapdata";
-static const char * FILENAME_EVENT_ROCK      = "Resource/Ace/Event/Rock/mapdata";
-static const char * FILENAME_EVENT_SHOP      = "Resource/Ace/Event/Shop/mapdata";
-static const char * FILENAME_EVENT_RYUGU     = "Resource/Ace/Event/Ryugu/mapdata"; 
-static const char * FILENAME_EVENT_LAKE      = "Resource/Ace/Event/Lake/mapdata";
-static const char * FILENAME_EVENT_CALL 	 = "Resource/Ace/Event/Call/mapdata";
-static const char * FILENAME_EVENT_GAMBLE	 = "Resource/Ace/Event/Gamble/mapdata";
+const char * FILENAME_STREET          = "Resource/Ace/Street/mapdata";
+const char * FILENAME_EVENT_REDDAEMON = "Resource/Ace/Event/Reddaemon/mapdata";
+const char * FILENAME_EVENT_FIRE      = "Resource/Ace/Event/Fire/mapdata";
+const char * FILENAME_EVENT_TREE      = "Resource/Ace/Event/Tree/mapdata";
+const char * FILENAME_EVENT_ROCK      = "Resource/Ace/Event/Rock/mapdata";
+const char * FILENAME_EVENT_SHOP      = "Resource/Ace/Event/Shop/mapdata";
+const char * FILENAME_EVENT_RYUGU     = "Resource/Ace/Event/Ryugu/mapdata"; 
+const char * FILENAME_EVENT_LAKE      = "Resource/Ace/Event/Lake/mapdata";
+const char * FILENAME_EVENT_CALL 	 = "Resource/Ace/Event/Call/mapdata";
+const char * FILENAME_EVENT_GAMBLE	 = "Resource/Ace/Event/Gamble/mapdata";
 
 WorldPtr World::getTask( ) {
 	return std::dynamic_pointer_cast< World >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -61,9 +62,7 @@ void World::playMapBgm( EVENT type ) {
 	SoundPtr sound = Sound::getTask( );
 	switch( type ) {
 	case EVENT_NONE:
-		if ( !sound->isPlayingBGM( ) ) {
-			sound->playBGM( "yokai_music_12.wav" );
-		}
+		sound->playBGM( "yokai_music_12.wav" );
 		break;
 	case EVENT_REDDAEMON:
 	case EVENT_FLAME:
@@ -102,12 +101,13 @@ MapPtr World::getMap( AREA area ) const {
 	} else {
 		map = _map_event[ _event->getType( ) ];
 	}
-
+	if ( !map ) {
+		int check = -1;
+	}
 	return map;
 }
 
 void World::update( ) {
-
 	updateEvent( );
 	updateBGM( );
 }
@@ -119,6 +119,10 @@ void World::updateBGM ( ) {
 }
 
 void World::updateEvent( ) {
+	// イベント更新
+	_event->update( );
+	_event->fade( );
+
 	// イベントが終了
 	if ( _event->isFinished( ) ) {
 		changeEvent( EVENT_NONE );
@@ -141,13 +145,13 @@ void World::updateEvent( ) {
 		}
 
 		// 別のイベントが実行中
-		if ( _event->getType( ) == event ) {
+		if ( _event->getType( ) != event ) {
 			continue;
 		}
 		
 		// 現在参加できない
 		if ( !_event->isJoining( ) ) {
-			return;
+			continue;
 		}
 
 		// 参加
@@ -164,6 +168,7 @@ void World::changeEvent( EVENT type ) {
 	Military::getTask( )->eraseEventEnemy( );
 	Office::getTask( )->eraseEventNPC( );
 	Storage::getTask( )->eraseEventItem( );
+	Armoury::getTask( )->eraseEventShot( );
 
 	switch ( type ) {
 	case EVENT_NONE:
@@ -200,28 +205,3 @@ void World::changeEvent( EVENT type ) {
 
 	playMapBgm( type );
 }
-
-/*
-		}
-
-		if ( map->getObject( _player[ i ]->getPos( ) + _player[ i ]->getVec( ) ) == OBJECT_EVENT_CALL ) {
-		}
-
-		if ( _player[ i ]->getArea( ) == AREA_EVENT ) {
-			//一ページ目にいたらメインに戻る
-			}
-			//ボスが倒れている場合 && アイテムが無い[退場]
-			StoragePtr storage( Storage::getTask( ) );
-			if ( !Military::getTask( )->getBoss( ) &&
-				 !storage->isExistanceEventItem( ) &&
-				 world->getEvent( ) < EVENT_SHOP ) {
-				_player[ i ]->setArea( AREA_STREET );
-				world->setEvent( EVENT_NONE );
-				militaly->eraseEventEnemy( );
-				_player[ i ]->setPos( Vector( family->getCameraPosX( ) + SCREEN_WIDTH / 2, 0 ) );
-				_player[ i ]->setVec( Vector( ) );
-			}
-		}
-	}
-}
-*/

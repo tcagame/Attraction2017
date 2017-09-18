@@ -49,7 +49,6 @@ private:
 	void actOnBraking( );
 	void actOnDead( );
 	void actOnWish( );
-	void actOnKilled( );
 	void updateEffect( );
 	void updeteState( );
 	void sendDamage( );

@@ -22,6 +22,8 @@ public:
 		ACTION_BLOW_AWAY,
 		ACTION_DEAD,
 		ACTION_CALL,
+		ACTION_ENTERING_FADEOUT,
+		ACTION_ENTERING_SANZO,
 		MAX_ACTION,
 	};
 	enum ITEM {
@@ -57,6 +59,9 @@ public:
 	void leaveEvent( );
 	EVENT getOnEvent( ) const;
 	void pickUpItem( ITEM item );
+	void setActionEnteringFadeOut( );
+	void setActionEnteringSanzo( );
+	bool isEntering( ) const;
 private:
 	void actOnEntry( );
 	void actOnContinue( );
@@ -72,6 +77,8 @@ private:
 	void actOnBlowAway( );
 	void actOnDead( );
 	void actOnCall( );
+	void actOnEnteringFadeOut( );
+	void actOnEnteringSanzo( );
 	void setAction( ACTION action );
 	void adjustToCamera( );
 	void updateProgressBar( );

@@ -1,17 +1,21 @@
 #include "EnemyJizo.h"
 #include "SynchronousData.h"
+#include "Property.h"
 
 const int WAIT_ANIM_TIME = 8;
 const int GRAPH_WIDTH_NUM = 16;
 const int FADE_IN_TIME = WAIT_ANIM_TIME * 6;
-const int MAX_HP = 6;
 const int MOVE_SPEED = 1;
 
 EnemyJizo::EnemyJizo( const Vector& pos ) :
-Enemy( pos, BIG_CHAR_GRAPH_SIZE, MAX_HP ),
+Enemy( pos, BIG_CHAR_GRAPH_SIZE ),
 _act( ACTION_FADE_IN ),
 _before_pos( pos ) {
 	setOverlappedRadius( 48 );
+
+	PropertyPtr property( Property::getTask( ) );
+	setPower( property->getData( "Jizo_POWER" ) );
+	setForce( property->getData( "Jizo_FORCE" ) );
 }
 
 
