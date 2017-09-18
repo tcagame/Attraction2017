@@ -11,5 +11,7 @@ public:
 public:
 	void initialize( );
 	void update( );
+private:
+	bool _darw_butta;
 };
 
