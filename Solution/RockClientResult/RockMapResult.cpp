@@ -1,6 +1,7 @@
 #include "RockMapResult.h"
 #include "ModelMV1.h"
 #include "Effect.h"
+#include "RockStudio.h"
 
 RockMapResult::RockMapResult( ) {
 }
@@ -36,12 +37,14 @@ void RockMapResult::initialize( ) {
 	map02->load( "Resource/Rock/map/result/map11_02.mv1" );
 	addModel( map02 );
 
-	EffectPtr effect = Effect::getTask( );
-	int handle = effect->loadEffect( "butta.efk" );
-	effect->playEffect( handle );
-	effect->updateEffectTransform( handle, Vector( 500, 250, 0 ) );
+	_darw_butta = false;
+
 }
 
 void RockMapResult::update( ) {
-
+	EffectPtr effect = Effect::getTask( );
+	if ( !_darw_butta ) {
+		effect->updateEffectTransform( effect->playEffect( RockStudio::getTask( )->getEffectHandle( EFFECT_BUTTA ) ), Vector( 500, 250, 0 ) );
+		_darw_butta = true;
+	}
 }

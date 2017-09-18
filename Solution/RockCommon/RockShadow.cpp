@@ -81,9 +81,8 @@ Vector RockShadow::getAdjustPos( const Vector& pos ) {
 	int size = ( int )col_models.size( );
 	for ( int i = 0; i < size; i++ ) {
 		Vector fpos = result + Vector( 0, FALL_POWER, 0 );
-		Vector hit_pos = col_models[ i ]->getHitPos( result, fpos );
-		if ( !hit_pos.isOrijin( ) ) {
-			result.y = hit_pos.y;
+		if ( col_models[ i ]->isHitLine( result, fpos ) ) {
+			result.y = col_models[ i ]->getHitPos( ).y;
 		}
 	}
 	return result;
