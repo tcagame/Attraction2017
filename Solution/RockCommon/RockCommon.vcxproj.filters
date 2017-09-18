@@ -15,6 +15,8 @@
     <ClCompile Include="RockTheater.cpp" />
     <ClCompile Include="RockViewer.cpp" />
     <ClCompile Include="RockPopItem.cpp" />
+    <ClCompile Include="RockDebug.cpp" />
+    <ClCompile Include="RockShadow.cpp" />
     <ClCompile Include="RockItem.cpp">
       <Filter>Item</Filter>
     </ClCompile>
@@ -87,21 +89,20 @@
     <ClCompile Include="RockPlayer.cpp">
       <Filter>Player</Filter>
     </ClCompile>
-    <ClCompile Include="RockOffice.cpp">
-      <Filter>Event</Filter>
-    </ClCompile>
-    <ClCompile Include="RockEventCharacter.cpp">
-      <Filter>Event</Filter>
-    </ClCompile>
-    <ClCompile Include="RockShadow.cpp" />
     <ClCompile Include="RockAncestors.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="RockBubble.cpp">
       <Filter>Player</Filter>
     </ClCompile>
     <ClCompile Include="RockItemEnhancePower.cpp">
       <Filter>Item</Filter>
     </ClCompile>
-    <ClCompile Include="RockBubble.cpp">
-      <Filter>Player</Filter>
+    <ClCompile Include="RockOffice.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
+    <ClCompile Include="RockEventCharacter.cpp">
+      <Filter>Event</Filter>
     </ClCompile>
     <ClCompile Include="RockEventMiko.cpp">
       <Filter>Event</Filter>
@@ -110,6 +111,9 @@
       <Filter>Event</Filter>
     </ClCompile>
     <ClCompile Include="RockEventOtohime.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
+    <ClCompile Include="RockEventObaba.cpp">
       <Filter>Event</Filter>
     </ClCompile>
     <ClCompile Include="RockEnemyChivil.cpp">
@@ -133,8 +137,6 @@
     <ClCompile Include="RockEnemyStoneFace.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="RockDebug.cpp" />
-<<<<<<< HEAD
     <ClCompile Include="RockEnemyBoss.cpp">
       <Filter>Enemy\boss</Filter>
     </ClCompile>
@@ -149,10 +151,6 @@
     </ClCompile>
     <ClCompile Include="RockEnemyBossReaDaemon.cpp">
       <Filter>Enemy\boss</Filter>
-=======
-    <ClCompile Include="RockEventObaba.cpp">
-      <Filter>Event</Filter>
->>>>>>> a2e0a931fe4eab5ae25e6ae22124de3b12505a3a
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -169,10 +167,12 @@
     <ClInclude Include="RockMap.h" />
     <ClInclude Include="RockPop.h" />
     <ClInclude Include="RockStudio.h" />
+    <ClInclude Include="RockDebug.h" />
     <ClInclude Include="RockTheater.h" />
     <ClInclude Include="RockViewer.h" />
     <ClInclude Include="Status.h" />
     <ClInclude Include="RockPopItem.h" />
+    <ClInclude Include="RockShadow.h" />
     <ClInclude Include="RockItemToku.h">
       <Filter>Item</Filter>
     </ClInclude>
@@ -245,21 +245,17 @@
     <ClInclude Include="RockPlayer.h">
       <Filter>Player</Filter>
     </ClInclude>
+    <ClInclude Include="RockBubble.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="RockAncestors.h">
+      <Filter>Player</Filter>
+    </ClInclude>
     <ClInclude Include="RockOffice.h">
       <Filter>Event</Filter>
     </ClInclude>
     <ClInclude Include="RockEventCharacter.h">
       <Filter>Event</Filter>
-    </ClInclude>
-    <ClInclude Include="RockShadow.h" />
-    <ClInclude Include="RockAncestors.h">
-      <Filter>Player</Filter>
-    </ClInclude>
-    <ClInclude Include="RockItemEnhancePower.h">
-      <Filter>Item</Filter>
-    </ClInclude>
-    <ClInclude Include="RockBubble.h">
-      <Filter>Player</Filter>
     </ClInclude>
     <ClInclude Include="RockEventMiko.h">
       <Filter>Event</Filter>
@@ -269,6 +265,12 @@
     </ClInclude>
     <ClInclude Include="RockEventOtohime.h">
       <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="RockEventObaba.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="RockItemEnhancePower.h">
+      <Filter>Item</Filter>
     </ClInclude>
     <ClInclude Include="RockEnemyStoneFace.h">
       <Filter>Enemy</Filter>
@@ -291,8 +293,6 @@
     <ClInclude Include="RockEnemyStone.h">
       <Filter>Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="RockDebug.h" />
-<<<<<<< HEAD
     <ClInclude Include="RockEnemyBoss.h">
       <Filter>Enemy\boss</Filter>
     </ClInclude>
@@ -307,10 +307,6 @@
     </ClInclude>
     <ClInclude Include="RockEnemyBossReaDaemon.h">
       <Filter>Enemy\boss</Filter>
-=======
-    <ClInclude Include="RockEventObaba.h">
-      <Filter>Event</Filter>
->>>>>>> a2e0a931fe4eab5ae25e6ae22124de3b12505a3a
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
