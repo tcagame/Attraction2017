@@ -18,3 +18,7 @@ ModelMV1Ptr RockItemDango::getModel( ) const {
 	return model;
 }
 
+double RockItemDango::getAnimTime( ) const {
+	return 0;
+}
+

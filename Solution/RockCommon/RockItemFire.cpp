@@ -25,3 +25,7 @@ ModelMV1Ptr RockItemFire::getModel( ) const {
 void RockItemFire::eraseBubble( ) {
 	_bubble->setFinished( true );
 }
+
+double RockItemFire::getAnimTime( ) const {
+	return 0;
+}

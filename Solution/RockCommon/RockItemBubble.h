@@ -8,6 +8,7 @@ public:
 	void setFinished( bool finish );
 	bool isFinished( ) const;
 	ModelMV1Ptr getModel( ) const;
+	double getAnimTime( ) const;
 private:
 	bool _finished;
 };

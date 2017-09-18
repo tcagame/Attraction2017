@@ -15,3 +15,7 @@ ModelMV1Ptr RockItemToku::getModel( ) const {
 	model->setTrans( Matrix::makeTransformTranslation( getPos( ) ) );
 	return model;
 }
+
+double RockItemToku::getAnimTime( ) const {
+	return 0;
+}
