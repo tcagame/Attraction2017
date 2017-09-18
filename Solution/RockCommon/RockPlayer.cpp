@@ -152,15 +152,6 @@ void RockPlayer::updeteState( ) {
 			return;
 		}
 	}
-		
-	if ( _status->getPlayer( _id ).toku >= TRANSITION_TOKU_NUM ) {
-		if ( _status->getPlayer( _id ).area == AREA_STREET_3 ) {
-			unsigned char state = AREA_RESULT;
-			MessageSender::getTask( )->sendMessage( _id, Message::COMMAND_AREA, &state );
-			return;
-		}
-	}
-
 }
 
 void RockPlayer::setAction( ACTION action ) {

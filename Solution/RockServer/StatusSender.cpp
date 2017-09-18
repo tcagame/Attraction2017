@@ -26,21 +26,36 @@ void StatusSender::update( ) {
 		_status->getPlayer( i ).device_y = device->getDirY( i );
 		_status->getPlayer( i ).device_button = device->getButton( i );
 	}
+	bool is_result = true;
 	for ( int i = 0; i < Status::PLAYER_NUM; i++ ) {
+		//ボタンリセット
 		if ( _status->getPlayer( i ).device_button == 15 ) {
 			_reset_count[ i ]++;
 		} else {
 			_reset_count[ i ] = 0;
 		}
-	}
-	
-	for ( int i = 0; i < Status::PLAYER_NUM; i++ ) {
 		if ( _reset_count[ i ] > RESET_TIME &&
 			 _status->getPlayer( i ).area != AREA_WAIT ) {
 			_status->resetPlayer( i );
-			_status->getPlayer(i).area = AREA_WAIT;
+			_status->getPlayer( i ).area = AREA_WAIT;
+		}
+		if ( _status->getPlayer( i ).area == AREA_RESULT ) {
+			is_result = false;
 		}
 	}
+	
+	// リザルトへ移動
+	if ( is_result ) {
+		for ( int i = 0; i < Status::PLAYER_NUM; i++ ) {
+			if ( _status->getPlayer( i ).toku >= TRANSITION_TOKU_NUM ) {
+				if ( _status->getPlayer( i ).area == AREA_STREET_3 ) {
+					_status->getPlayer( i ).area = AREA_RESULT;
+					break;
+				}
+			}
+		}
+	}
+
 	Server::getTask( )->sendUdp( _status );
 	server->sendUdp( _status );
 }
