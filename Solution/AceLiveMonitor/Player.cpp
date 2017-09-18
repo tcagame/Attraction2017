@@ -25,7 +25,7 @@ const int PLAYER_FOOT = 7;
 //‘¬“x
 const int MAX_SPEED = 20;
 const int MOVE_SPEED = 7;
-const int BRAKE_ACCEL = 1;
+const int BRAKE_ACCEL = 5;
 const int JUMP_POWER = -10;
 const int BLOW_POWER = -30;
 //UŒ‚ŠÖŒW
@@ -149,7 +149,8 @@ _virtue( 0 ),
 _charge_count( 0 ),
 _unrivaled_count( MAX_UNRIVALED_COUNT ),
 _action( ACTION_ENTRY ),
-_progress_count( 0 ) {
+_progress_count( 0 ),
+_cool_time( COOL_TIME ) {
 	setOverlappedRadius( 25 );
 	setDir( DIR_RIGHT );
 
@@ -263,6 +264,7 @@ void Player::act( ) {
 
 	actOnCamera( );
 	_unrivaled_count++;
+	_cool_time++;
 
 	updateShowMoney( );
 	updateProgressEffect( );
@@ -364,7 +366,7 @@ void Player::actOnWaiting( ) {
 		return;
 	}
 	if ( device->getPush( _device_id ) & BUTTON_A &&
-		 getActCount( ) > COOL_TIME ) {
+		 _cool_time > COOL_TIME ) {
 		setAction( ACTION_ATTACK );
 		return;
 	}
@@ -435,6 +437,11 @@ void Player::actOnWalking( ) {
 		}
 	}
 	setVec( vec );
+
+	if ( device->getPush( _device_id ) & BUTTON_A &&
+		 _cool_time > COOL_TIME ) {
+		setAction( ACTION_ATTACK );
+	}
 }
 
 void Player::actOnBreaking( ) {
@@ -448,9 +455,6 @@ void Player::actOnBreaking( ) {
 		setAction( ACTION_WAIT );
 	}
 	DevicePtr device( Device::getTask( ) );
-	if ( device->getDirX( ) * vec.x > 0 ) {
-		setAction( ACTION_WALK );
-	}
 	if ( isStanding( ) && device->getPush( _device_id ) & BUTTON_C ) {
 		Sound::getTask( )->playSE( "yokai_voice_17.wav" );
 		vec.y = JUMP_POWER;
@@ -471,6 +475,11 @@ void Player::actOnBreaking( ) {
 		}
 	}
 	setVec( vec );
+
+	if ( device->getPush( _device_id ) & BUTTON_A &&
+		 _cool_time > COOL_TIME ) {
+		setAction( ACTION_ATTACK );
+	}
 }
 
 void Player::actOnFloating( ) {
@@ -516,7 +525,7 @@ void Player::actOnFloating( ) {
 
 	setVec( vec );
 	if ( device->getPush( _device_id ) & BUTTON_A &&
-		 getActCount( ) > COOL_TIME ) {
+		 _cool_time > COOL_TIME ) {
 		setAction( ACTION_ATTACK );
 	}
 }
@@ -530,8 +539,9 @@ void Player::actOnAttack( ) {
 	ShotPlayerPtr shot( new ShotPlayer( _player, getPos( ), getDir( ), level ) );
 	shot->setArea( getArea( ) );
 	Armoury::getTask( )->add( shot );
-	setAction( ACTION_WAIT );
+	setAction( ACTION_BRAKE );
 	_charge_count = 0;
+	_cool_time = 0;
 }
 
 void Player::actOnCharge( ) {
@@ -546,7 +556,7 @@ void Player::actOnCharge( ) {
 		return;
 	}
 	if ( device->getPush( _device_id ) & BUTTON_A &&
-		 getActCount( ) > COOL_TIME ) {
+		 _cool_time > COOL_TIME ) {
 		sound->stopSE( "yokai_se_21.wav" );
 		sound->stopSE( "yokai_se_22.wav" );
 		setAction( ACTION_ATTACK );

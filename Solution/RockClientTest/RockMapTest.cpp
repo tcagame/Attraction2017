@@ -13,6 +13,7 @@
 #include "RockItemToku.h"
 #include "RockItemDango.h"
 #include "RockItemEnhancePower.h"
+#include "RockItemMoney.h"
 //Enemy
 #include "RockMilitary.h"
 #include "RockEnemyGhost.h"
@@ -49,7 +50,7 @@ void RockMapTest::initialize( ) {
 	//obj06->load( "Resource/Rock/object/obj06/obj06.mv1" );
 	//obj06->setScale( Matrix::makeTransformScaling( Vector( 5, 1, 5 ) ) );
 	//addModel( obj06 );
-	//
+
 	//ModelMV1Ptr obj01 = ModelMV1Ptr(new ModelMV1);
 	//obj01->load("Resource/Rock/object/obj01/obj01.mv1");
 	//addModel(obj01);
@@ -58,6 +59,7 @@ void RockMapTest::initialize( ) {
 	//アイテム
 	//storage->addItem( RockItemPtr( new RockItemToku( Vector( 100, 50, 0 ) ) ) );
 	//storage->addItem( RockItemPtr( new RockItemRock( Vector( 0, 50, 0 ) ) ) );
+	storage->addItem( RockItemPtr( new RockItemMoney( Vector( 0, 50, 0 ), 500 ) ) );
 	////ショップアイテム
 	//storage->addShopItem( RockItemPtr( new RockItemDango( Vector( -50, 50, 0 ) ) ) );
 	//storage->addShopItem( RockItemPtr( new RockItemEnhancePower( Vector( 200, 50, 0 ) ) ) );
