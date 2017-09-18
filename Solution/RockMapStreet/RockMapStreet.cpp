@@ -259,6 +259,9 @@ void RockMapStreet::genarateStorage( STAGE next ) {
 		for ( int i = 0; i < 30; i++ ) {
 			storage->addItem( RockItemPtr( new RockItemMoney( Vector( i * INTERVAL, 200, -500 - i * 10 ), 500 ) ) );
 		}
+		if ( _stage == STAGE_RYUGU ) {
+			storage->eraseCasket( );
+		}
 	}
 		break;
 	case STAGE_CAVE:
