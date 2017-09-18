@@ -1,7 +1,7 @@
 #include "NPCAngel.h"
 #include "SynchronousData.h"
 
-static const int WAIT_ANIM_TIME = 10;
+const int WAIT_ANIM_TIME = 10;
 
 
 NPCAngel::NPCAngel( const Vector& pos ) :

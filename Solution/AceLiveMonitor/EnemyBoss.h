@@ -2,7 +2,7 @@
 #include "Enemy.h"
 class EnemyBoss : public Enemy {
 public:
-	EnemyBoss( const Vector& pos, const int chip_size, const int hp );
+	EnemyBoss( const Vector& pos, const int chip_size );
 	virtual ~EnemyBoss( );
 public:
 	virtual void dropItem( ) = 0;

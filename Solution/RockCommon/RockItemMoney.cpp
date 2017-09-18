@@ -1,6 +1,7 @@
 #include "RockItemMoney.h"
 #include "RockDollHouse.h"
 
+static const double ANIM_SPEED = 0.9;
 
 
 RockItemMoney::RockItemMoney( const Vector& pos, int value ) :
@@ -41,6 +42,14 @@ ModelMV1Ptr RockItemMoney::getModel( ) const {
 	return model;
 }
 
+
+double RockItemMoney::getAnimTime( ) const {
+	ModelMV1Ptr model = RockDollHouse::getTask( )->getModel( getDoll( ) );
+	double anim_time = 0;
+	double end_time = model->getEndAnimTime( );	
+	anim_time = fmod( ( double )getActCount( ) * ANIM_SPEED, end_time );
+	return anim_time;
+}
 
 int RockItemMoney::getValue( ) const {
 	return _value;

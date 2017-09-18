@@ -2,16 +2,20 @@
 #include "Family.h"
 #include "Player.h"
 #include "SynchronousData.h"
+#include "Property.h"
 
 const int WAIT_ANIM_TIME = 5;
-const int MAX_HP = 3;
 const int JUMP_POWER = -13;
 const int RANGE = 150;
 const int MOVE_SPEED = -2;
 
 EnemyHugDaemon::EnemyHugDaemon( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ) {
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ) {
 	setOverlappedRadius( 36 );
+
+	PropertyPtr property( Property::getTask( ) );
+	setPower( property->getData( "HugDaemon_POWER" ) );
+	setForce( property->getData( "HugDaemon_FORCE" ) );
 }
 
 

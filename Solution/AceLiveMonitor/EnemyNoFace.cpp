@@ -1,17 +1,21 @@
 #include "EnemyNoFace.h"
 #include "ace_define.h"
 #include "SynchronousData.h"
+#include "Property.h"
 
 const int WAIT_ANIM_TIME = 4;
-const int MAX_HP = 3;
 const int MOVE_RANGE = 10;
 const double MOVE_SPEED = 0.5;
 
 EnemyNoFace::EnemyNoFace( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ),
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ),
 _vec_x( -MOVE_SPEED ) {
 	setOverlappedRadius( 36 );
 	setVec( Vector( _vec_x, 0 ) );
+
+	PropertyPtr property( Property::getTask( ) );
+	setPower( property->getData( "NoFace_POWER" ) );
+	setForce( property->getData( "NoFace_FORCE" ) );
 }
 
 EnemyNoFace::~EnemyNoFace( ) {

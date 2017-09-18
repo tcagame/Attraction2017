@@ -1,16 +1,20 @@
 #include "EnemyOneEyeSnake.h"
 #include "SynchronousData.h"
+#include "Property.h"
 
-static const int WAIT_ANIM_TIME = 5;
-static const int MOVE_SPEED = 2;
-static const int MAX_HP = 3;
-static const int JUMP_POWER = -400;
+const int WAIT_ANIM_TIME = 5;
+const int MOVE_SPEED = 2;
+const int JUMP_POWER = -400;
 
 EnemyOneEyeSnake::EnemyOneEyeSnake( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ),
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ),
 _before_pos( Vector( ) ),
 _vec( Vector( MOVE_SPEED, 0 ) ) {
 	setOverlappedRadius( 36 );
+
+	PropertyPtr property( Property::getTask( ) );
+	setPower( property->getData( "OneEyeSnake_POWER" ) );
+	setForce( property->getData( "OneEyeSnake_FORCE" ) );
 }
 
 

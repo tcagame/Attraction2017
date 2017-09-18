@@ -3,16 +3,20 @@
 #include "Military.h"
 #include "SynchronousData.h"
 #include "Sound.h"
+#include "Property.h"
 
 const int WAIT_ANIM_TIME = 4;
 const int ATTACK_TIME = 30;
-const int MAX_HP = 3;
 const int MOVE_SPEED = -5;
 
 EnemyRedBird::EnemyRedBird( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP, false ) {
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, false ) {
 	setOverlappedRadius( 36 );
 	Sound::getTask( )->playSE( "yokai_voice_02.wav" );
+
+	PropertyPtr property( Property::getTask( ) );
+	setPower( property->getData( "RedBird_POWER" ) );
+	setForce( property->getData( "RedBird_FORCE" ) );
 }
 
 

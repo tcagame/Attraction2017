@@ -1,15 +1,19 @@
 #include "EnemyBat.h"
 #include "SynchronousData.h"
+#include "Property.h"
 
 const int WAIT_ANIM_TIME = 3;
-const int MAX_HP = 1;
 const int MOVE_SPEED = 2;
 const Vector POS( 10, 0 );
 
 EnemyBat::EnemyBat( const Vector& pos ) :
-Enemy( pos + POS, SMALL_CHAR_GRAPH_SIZE, MAX_HP, false ),
+Enemy( pos + POS, SMALL_CHAR_GRAPH_SIZE, false ),
 _center( pos ) {
 	setOverlappedRadius( 16 );
+
+	PropertyPtr property( Property::getTask( ) );
+	setPower( property->getData( "Bat_POWER" ) );
+	setForce( property->getData( "Bat_FORCE" ) );
 }
 
 

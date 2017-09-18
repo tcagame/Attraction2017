@@ -2,14 +2,18 @@
 #include "EnemyLittleRedDaemon.h"
 #include "Military.h"
 #include "SynchronousData.h"
+#include "Property.h"
 
-static const int WAIT_ANIM_TIME = 10;
-static const int WAIT_POP_TIME = 30000;
-static const int MAX_HP = 12;
-static const int CHIP_SIZE = 192;
+const int WAIT_ANIM_TIME = 10;
+const int WAIT_POP_TIME = 300;
+const int CHIP_SIZE = 192;
 
 EnemyBossRedDaemon::EnemyBossRedDaemon( const Vector& pos ) :
-EnemyBoss( pos, CHIP_SIZE, MAX_HP ) {
+EnemyBoss( pos, CHIP_SIZE ) {
+
+	PropertyPtr property( Property::getTask( ) );
+	setPower( property->getData( "RedDaemon_POWER" ) );
+	setForce( property->getData( "RedDaemon_FORCE" ) );
 }
 
 

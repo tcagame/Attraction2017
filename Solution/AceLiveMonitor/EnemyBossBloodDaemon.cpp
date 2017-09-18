@@ -4,12 +4,16 @@
 #include "SynchronousData.h"
 #include "Family.h"
 #include "Player.h"
+#include "Property.h"
 
-static const int WAIT_ANIM_TIME = 7;
-static const int MAX_HP = 12;
+const int WAIT_ANIM_TIME = 7;
 
 EnemyBossBloodDaemon::EnemyBossBloodDaemon( const Vector& pos ) :
-EnemyBoss( pos, 128, MAX_HP ) {
+EnemyBoss( pos, 128 ) {
+
+	PropertyPtr property( Property::getTask( ) );
+	setPower( property->getData( "BloodDaemon_POWER" ) );
+	setForce( property->getData( "BloodDaemon_FORCE" ) );
 }
 
 
