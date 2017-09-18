@@ -55,14 +55,14 @@ const int MOTION_OFFSET[Player::MAX_ACTION] = {
 	0,   // ACTION_WAIT,
 	32,  // ACTION_WALK,
 	1,  // ACTION_BRAKE,
-	48,  // ACTION_FLOAT,
+	160,  // ACTION_FLOAT,
 	0,   // ACTION_ATTACK,
-	64,  // ACTION_CHARGE,
-	73,  // ACTION_OVER_CHARGE,
-	81,  // ACTION_DAMEGE,
-	50,  // ACTION_BLOW_AWAY,
-	80,  // ACTION_DEAD,
-	112, // ACTION_CALL,
+	176,  // ACTION_CHARGE,
+	185,  // ACTION_OVER_CHARGE,
+	49,  // ACTION_DAMEGE,
+	162,  // ACTION_BLOW_AWAY,
+	48,  // ACTION_DEAD,
+	192, // ACTION_CALL,
 	0,   //ACTION_ENTERING_FADEOUT,
 	0,   //ACTION_ENTERING_SANZO,
 };
@@ -954,14 +954,10 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		pattern = off;
 	}
 	
-	int offset = 160;
+	int offset = 112;
 	int anim_num = 16;
 	if ( isStanding( ) && map->getObject( getPos( ) ) == OBJECT_WATER ) {
-		if ( player == PLAYER::PLAYER_TAROSUKE ) {
-			offset = offset + 16;
-		}
 		if ( player == PLAYER::PLAYER_TAROJIRO ) {
-			offset = offset + 16;
 			anim_num = anim_num - 4;
 		}
 		pattern = offset + ( ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT / 4 ) % anim_num;
