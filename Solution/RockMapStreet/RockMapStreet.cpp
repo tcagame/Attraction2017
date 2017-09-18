@@ -85,7 +85,7 @@ void RockMapStreet::updateStreet( ) {
 		}
 		active = true;
 		{//’¹‹‚Ös‚­‚ÆSTAGE_CAVE‚ÖˆÚ“®
-			double length = ( Vector( -200, 0, -500 ) - player->getPos( ) ).getLength( );
+			double length = ( Vector( 17675, -1105, 6123 ) - player->getPos( ) ).getLength( );
 			if ( length < 100 ) {
 				loadStage( STAGE_CAVE );
 				RockFamily::getTask( )->resetPos( Vector( -1679, 0, -185 ) );
