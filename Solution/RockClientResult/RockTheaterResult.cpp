@@ -15,13 +15,15 @@ const int ENDING_SCREEN_X = SCREEN_WIDTH / 2 - ENDING_WIDTH / 2;
 const int ENDING_SCREEN_Y = SCREEN_HEIGHT / 2 - ENDING_HEIGHT / 2;
 const int SHOWN_RANGE = 100;
 const int EXIT_TIME = 6000;
+const int INIT_ENDING_VY = 0;
+const int INIT_OFFSET_Y = 500;
 
 RockTheaterResult::RockTheaterResult( StatusPtr status ) :
 _play( true ),
 _ending_index( 0 ),
 _ending_time( 0 ),
-_offset_y( 500 ),
-_ending_vy( 0 ),
+_offset_y( INIT_OFFSET_Y ),
+_ending_vy( INIT_ENDING_VY ),
 _shown( false ),
 _status( status ) {
 }
@@ -199,6 +201,9 @@ bool RockTheaterResult::isShown( const Vector& pos ) {
 }
 
 void RockTheaterResult::exitClient( int player ) {
+	_shown = false;
+	_ending_vy = INIT_ENDING_VY;
+	_offset_y = INIT_OFFSET_Y;
 	unsigned char area = AREA_WAIT;
 	MessageSender::getTask( )->sendMessage( player, Message::COMMAND_AREA, &area );
 }
