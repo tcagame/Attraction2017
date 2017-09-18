@@ -26,9 +26,12 @@ RockMapStreetDrawer::RockMapStreetDrawer( RockMapStreet::STAGE stage ) {
 		map->addColModel( col_model );
 
 
-		ModelMV1Ptr clear_model = ModelMV1Ptr( new ModelMV1 );
-		clear_model->load( "Resource/Rock/map/street1/map02_03.mv1" );
-		map->addCleannessModel( clear_model );
+		ModelMV1Ptr see_model = ModelMV1Ptr( new ModelMV1 );
+		see_model->load( "Resource/Rock/map/street1/map02_03.mv1" );
+		map->addCleannessModel( see_model );
+		ModelMV1Ptr lake_model = ModelMV1Ptr( new ModelMV1 );
+		lake_model->load( "Resource/Rock/map/street1/map02_04.mv1" );
+		map->addCleannessModel( lake_model );
 	}
 		break;
 	case RockMapStreet::STAGE_CAVE:
