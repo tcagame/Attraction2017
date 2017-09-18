@@ -453,12 +453,18 @@ void Player::actOnBreaking( ) {
 	}
 	if ( ( int )vec.x == 0 ) {
 		setAction( ACTION_WAIT );
+		return;
 	}
 	DevicePtr device( Device::getTask( ) );
 	if ( isStanding( ) && device->getPush( _device_id ) & BUTTON_C ) {
 		Sound::getTask( )->playSE( "yokai_voice_17.wav" );
 		vec.y = JUMP_POWER;
 		setAction( ACTION_FLOAT );
+		return;
+	}
+	if ( device->getDirX( _device_id ) != 0 ) {
+		setAction( ACTION_WALK );
+		return;
 	}
 	if ( vec.x < 0 ) {
 		if ( vec.x < -BRAKE_ACCEL ) {

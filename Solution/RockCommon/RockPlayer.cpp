@@ -152,15 +152,6 @@ void RockPlayer::updeteState( ) {
 			return;
 		}
 	}
-		
-	if ( _status->getPlayer( _id ).toku >= TRANSITION_TOKU_NUM ) {
-		if ( _status->getPlayer( _id ).area == AREA_STREET_3 ) {
-			unsigned char state = AREA_RESULT;
-			MessageSender::getTask( )->sendMessage( _id, Message::COMMAND_AREA, &state );
-			return;
-		}
-	}
-
 }
 
 void RockPlayer::setAction( ACTION action ) {
@@ -451,6 +442,12 @@ void RockPlayer::actOnCharging( ) {
 	if ( player.device_x != 0 ||
 		player.device_y != 0 ) {
 		setAction( ACTION_WALK );
+		return;
+	}
+	Vector vec = getVec( );
+	vec.y = 0;
+	if ( vec.getLength2( ) != 0 ) {
+		setAction( ACTION_BRAKE );
 		return;
 	}
 	if ( player.device_button & BUTTON_C ) {
