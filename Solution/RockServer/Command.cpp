@@ -11,6 +11,7 @@
 
 const unsigned char BACKSPACE = 0x08;
 const unsigned char ENTER = 0x0d;
+const unsigned int MAX_COMMAND_LENGTH = 256;
 
 const std::string COMMAND_FIRST_WORD[ Command::MAX_COMMAND ] = {
 	"ip",//IP
@@ -61,7 +62,7 @@ void Command::update( ) {
 			if( _command.size( ) != 0 ) {
 				_command.pop_back( );
 			}
-		} else {
+		} else if ( _command.size() < MAX_COMMAND_LENGTH ) {
 			_command += key;
 		}
 	}
