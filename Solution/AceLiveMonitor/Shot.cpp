@@ -1,9 +1,9 @@
 #include "Shot.h"
 
-static const int MAX_HP = 3;
+
 
 Shot::Shot( const Vector& pos, int power ) :
-Character( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP, false ),
+Character( pos, NORMAL_CHAR_GRAPH_SIZE, 3, false ),
 _pos( pos ),
 _origin_pos( pos ),
 _power( power ),

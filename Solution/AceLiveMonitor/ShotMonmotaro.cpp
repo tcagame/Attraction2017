@@ -1,10 +1,10 @@
 #include "ShotMonmotaro.h"
 #include "SynchronousData.h"
 
-static const int SHOT_SPEED = 10;
-static const int MAX_HEIGHT = 5;
-static const int WAVE_COUNT = 30;
-static const int VANISH_LENGTH = 320;
+const int SHOT_SPEED = 10;
+const int MAX_HEIGHT = 5;
+const int WAVE_COUNT = 30;
+const int VANISH_LENGTH = 320;
 
 ShotMonmotaro::ShotMonmotaro( const PLAYER player, const Vector& pos, DIR dir, int power ) :
 Shot( pos, power ) {

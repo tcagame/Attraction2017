@@ -21,32 +21,32 @@
 #include <assert.h>
 
 //画像サイズ
-static const int PLAYER_FOOT = 7;
+const int PLAYER_FOOT = 7;
 //速度
-static const int MAX_SPEED = 20;
-static const int MOVE_SPEED = 7;
-static const int BRAKE_ACCEL = 1;
-static const int JUMP_POWER = -10;
-static const int BLOW_POWER = -30;
+const int MAX_SPEED = 20;
+const int MOVE_SPEED = 7;
+const int BRAKE_ACCEL = 1;
+const int JUMP_POWER = -10;
+const int BLOW_POWER = -30;
 //攻撃関係
-static const int CHARGE_PHASE_COUNT = 25;
-static const int MAX_CHARGE_COUNT = CHARGE_PHASE_COUNT * 4 - 1;
-static const int BURST_TIME = 60;
-static const int MAX_HP = 16;
-static const int COOL_TIME = 8;
+const int CHARGE_PHASE_COUNT = 25;
+const int MAX_CHARGE_COUNT = CHARGE_PHASE_COUNT * 4 - 1;
+const int BURST_TIME = 60;
+const int MAX_HP = 16;
+const int COOL_TIME = 8;
 //アニメーション
-static const int PLAYER_ANIM_WAIT_COUNT = 4;
-static const int PLAYER_ANIM_WIDTH_NUM = 10;
-static const int PLAYER_FLASH_WAIT_TIME = 2;
+const int PLAYER_ANIM_WAIT_COUNT = 4;
+const int PLAYER_ANIM_WIDTH_NUM = 10;
+const int PLAYER_FLASH_WAIT_TIME = 2;
 //カウント
-static const int MAX_DAMEGE_COUNT = 20;
-static const int MAX_BACK_COUNT = 6;
-static const int MAX_UNRIVALED_COUNT = 45;
-static const int MAX_DEAD_ACTCOUNT = 120;
-static const int MAX_IMPACT_COUNT = 30;
-static const int ENTERING_COUNT = 50;
+const int MAX_DAMEGE_COUNT = 20;
+const int MAX_BACK_COUNT = 6;
+const int MAX_UNRIVALED_COUNT = 45;
+const int MAX_DEAD_ACTCOUNT = 120;
+const int MAX_IMPACT_COUNT = 30;
+const int ENTERING_COUNT = 50;
 
-static const int HEAL_DANGO = 6;
+const int HEAL_DANGO = 6;
 
 // モーションテーブル
 const int MOTION_OFFSET[Player::MAX_ACTION] = {

@@ -1,15 +1,19 @@
 #include "EnemyGhoul.h"
 #include "SynchronousData.h"
+#include "Property.h"
 
 const int WAIT_ANIM_TIME = 5;
-const int MAX_HP = 3;
 const int MOVE_SPEED = 1;
 const int MOVE_RANGE = 25;
 
 EnemyGhoul::EnemyGhoul( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ),
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ),
 _origin_pos( pos ) {
 	setVec( Vector( MOVE_SPEED, 0 ) );
+
+	PropertyPtr property( Property::getTask( ) );
+	setPower( property->getData( "Ghoul_POWER" ) );
+	setForce( property->getData( "Ghoul_FORCE" ) );
 }
 
 

@@ -17,6 +17,7 @@
 #include "Sender.h"
 #include "Magazine.h"
 #include "Sound.h"
+#include "Property.h"
 
 
 void main( ) {
@@ -44,6 +45,7 @@ void main( ) {
 	app->addTask( Military  ::getTag( ), MilitaryPtr  ( new Military  ( ) ) );
 	app->addTask( Office    ::getTag( ), OfficePtr	  ( new Office    ( ) ) );
 	app->addTask( Debug	    ::getTag( ), DebugPtr     ( new Debug     ( ) ) );
+	app->addTask( Property  ::getTag( ), PropertyPtr  ( new Property  ( ) ) );
 	app->addTask( ViewerLive::getTag( ), ViewerLivePtr( new ViewerLive( ) ) );
 	app->addTask( Sender    ::getTag( ), SenderPtr    ( new Sender    ( data ) ) );
 

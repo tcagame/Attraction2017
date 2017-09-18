@@ -2,14 +2,19 @@
 #include "Family.h"
 #include "SynchronousData.h"
 
-static const int HP = 3;
-static const double MOVE_SPEED = 3;
-static const double ACCEL = 0.5;
-static const int WAIT_ANIM_TIME = 4;
+const double MOVE_SPEED = 3;
+const double ACCEL = 0.5;
+const int WAIT_ANIM_TIME = 4;
 
 EnemyHellFire::EnemyHellFire( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, HP, false ) {
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, false ) {
 	setVec( Vector( MOVE_SPEED, 0 ) );
+	
+	/*
+	PropertyPtr property( Property::getTask( ) );
+	setPower( property->getData( "HellFire_POWER" ) );
+	setForce( property->getData( "HellFire_FORCE" ) );
+	*/
 }
 
 

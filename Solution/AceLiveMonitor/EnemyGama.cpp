@@ -1,15 +1,19 @@
 #include "EnemyGama.h"
 #include "SynchronousData.h"
+#include "Property.h"
 
-static const int WAIT_ANIM_TIME = 5;
-static const int GRAPH_WIDTH_NUM = 10;
-static const int MAX_HP = 6;
-static const int GUIDE_TIME = 180;
+const int WAIT_ANIM_TIME = 5;
+const int GRAPH_WIDTH_NUM = 10;
+const int GUIDE_TIME = 180;
 
 EnemyGama::EnemyGama( const Vector& pos ) :
-Enemy( pos, BIG_CHAR_GRAPH_SIZE, MAX_HP ),
+Enemy( pos, BIG_CHAR_GRAPH_SIZE ),
 _guide( false ) {
 	setOverlappedRadius( 36 );
+
+	PropertyPtr property( Property::getTask( ) );
+	setPower( property->getData( "Gama_POWER" ) );
+	setForce( property->getData( "Gama_FORCE" ) );
 }
 
 

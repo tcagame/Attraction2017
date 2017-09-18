@@ -6,15 +6,19 @@
 #include "SynchronousData.h"
 #include "Family.h"
 #include "Player.h"
+#include "Property.h"
 
-static const int ATTACK_TIME = 50;
-static const int MAX_HP = 12;
+const int ATTACK_TIME = 50;
 
 EnemyBossMonsterTree::EnemyBossMonsterTree( const Vector& pos ) :
-EnemyBoss( pos, 192, MAX_HP ) {
+EnemyBoss( pos, 192 ) {
 	EnemyPtr branch = EnemyPtr( new EnemyBranch( getPos( ) + Vector( -70, -20 ) ) );
 	branch->setArea( AREA_EVENT );
 	Military::getTask( )->popUp( branch );
+
+	PropertyPtr property( Property::getTask( ) );
+	setPower( property->getData( "MonsterTree_POWER" ) );
+	setForce( property->getData( "MonsterTree_FORCE" ) );
 }
 
 

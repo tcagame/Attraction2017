@@ -129,10 +129,18 @@ void RockPlayer::act( ) {
 
 void RockPlayer::updateEffect( ) {
 	EffectPtr effect( Effect::getTask( ) );
-	double size = _attack_count / ( MAX_CHARGE_COUNT / ( MAX_PLAYER_SHOT_POWER - 1 ) ) + 4.0;
-	effect->updateEffectTransform( _charge_effect_handle, getPos( ) + CHARGE_EFFECT_ADJUST, size );
+	if ( _charge_effect_handle > 0 ) {
+		if ( _attack_count > 0 ) {
+			double size = _attack_count / ( MAX_CHARGE_COUNT / ( MAX_PLAYER_SHOT_POWER - 1 ) ) + 4.0;
+			effect->updateEffectTransform( _charge_effect_handle, getPos( ) + CHARGE_EFFECT_ADJUST, size );
+		} else {
+			effect->stopEffect( _charge_effect_handle );
+		}
+	}
 	if ( _speed_down ) {
-		Effect::getTask( )->updateEffectTransform( _speed_down_effect_handle, getPos( ) + SPEED_DOWN_EFFECT_ADJUST );
+		effect->updateEffectTransform( _speed_down_effect_handle, getPos( ) + SPEED_DOWN_EFFECT_ADJUST );
+	} else {
+		effect->stopEffect( _speed_down_effect_handle );
 	}
 }
 
@@ -618,6 +626,8 @@ void RockPlayer::damage( int force ) {
 		_damage += force;
 		_damage_count = 0;
 		_attack_count = 0;
+		Effect::getTask( )->stopEffect( _charge_effect_handle );
+		_charge_effect_handle = -1;
 	}
 }
 

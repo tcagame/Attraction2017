@@ -1,16 +1,20 @@
 #include "EnemySeed.h"
 #include "Military.h"
 #include "SynchronousData.h"
+#include "Property.h"
 
-static const int WAIT_ANIM_TIME = 5;
-static const int ATTACK_TIME = WAIT_ANIM_TIME * 11;
-static const int JUMP_MAX_HP = -15;
-static const int MAX_HP = 2;
+const int WAIT_ANIM_TIME = 5;
+const int ATTACK_TIME = WAIT_ANIM_TIME * 11;
+const int JUMP_MAX_HP = -15;
 
 EnemySeed::EnemySeed( const Vector& pos ) :
-EnemyAttack( pos, SMALL_CHAR_GRAPH_SIZE, MAX_HP ) {
+EnemyAttack( pos, SMALL_CHAR_GRAPH_SIZE ) {
 	setOverlappedRadius( 16 );
 	setVec( Vector( -10, 0 ) );
+
+	PropertyPtr property( Property::getTask( ) );
+	setPower( property->getData( "Seed_POWER" ) );
+	setForce( property->getData( "Seed_FORCE" ) );
 }
 
 EnemySeed::~EnemySeed( ) {

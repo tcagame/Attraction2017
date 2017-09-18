@@ -1,19 +1,23 @@
 #include "EnemyGhost.h"
 #include "Family.h"
 #include "SynchronousData.h"
+#include "Property.h"
 
-static const int WAIT_ANIM_TIME = 3;
-static const int FADE_IN_TIME = WAIT_ANIM_TIME * 10;
-static const int MAX_HP = 3;
-static const int MOVE_SPEED = -3;
-static const double ASCEND_SPEED = -0.1;
+const int WAIT_ANIM_TIME = 3;
+const int FADE_IN_TIME = WAIT_ANIM_TIME * 10;
+const int MOVE_SPEED = -3;
+const double ASCEND_SPEED = -0.1;
 
 EnemyGhost::EnemyGhost( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP, false ),
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, false ),
 _act( ACTION_FADE_IN ),
 _ascend_speed( 0 ) {
 	setOverlappedRadius( 36 );
 	setVec( Vector( ) );
+
+	PropertyPtr property( Property::getTask( ) );
+	setPower( property->getData( "Ghost_POWER" ) );
+	setForce( property->getData( "Ghost_FORCE" ) );
 }
 
 EnemyGhost::~EnemyGhost( ) {
