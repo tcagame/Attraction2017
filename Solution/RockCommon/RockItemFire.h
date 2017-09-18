@@ -10,6 +10,7 @@ public:
 public:
 	void eraseBubble( );
 	ModelMV1Ptr getModel( ) const;
+	double getAnimTime( ) const;
 private:
 	RockItemBubblePtr _bubble;
 };

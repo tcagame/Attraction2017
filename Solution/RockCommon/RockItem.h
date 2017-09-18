@@ -10,6 +10,7 @@ public:
 	bool isRepop( ) const;
 	bool isShopItem( ) const;
 	int getPrice( ) const;
+	virtual double getAnimTime( ) const = 0;
 protected:
 	void act( );
 private:
