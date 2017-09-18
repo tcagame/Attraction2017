@@ -34,6 +34,8 @@
 #include "RockEnemyKimono.h"
 #include "RockEnemyCloud.h"
 #include "RockEnemySkeleton.h"
+#include "RockEnemyStone.h"
+#include "RockEnemyLittleRedDaemon.h"
 #include "RockEnemyBossReaDaemon.h"
 
 PTR( RockEnemyBossReaDaemon );
@@ -225,7 +227,8 @@ void RockMapStreet::genarateEnemies( STAGE next ) {
 	military->clean( );
 	switch ( next ) {
 	case STAGE_STREET:
-		military->add( RockEnemyPtr( new RockEnemyRedBard    ( Vector(  800,  60, -520 ) ) ) );
+		military->add( RockEnemyPtr( new RockEnemyStone      ( Vector(  800,  60, -520 ) ) ) );
+		military->add( RockEnemyPtr( new RockEnemySkeleton   ( Vector(  850,  60, -520 ) ) ) );
 		military->add( RockEnemyPtr( new RockEnemyWaterGhost ( Vector( 3800,  320, -530 ) ) ) );
 		military->add( RockEnemyPtr( new RockEnemyWaterGhost ( Vector( 4100,  320, -700 ) ) ) );
 		military->add( RockEnemyPtr( new RockEnemyWaterGhost ( Vector( 4700,  320, -680 ) ) ) );
@@ -236,6 +239,10 @@ void RockMapStreet::genarateEnemies( STAGE next ) {
 		break;
 	case STAGE_CAVE:
 		military->add( RockEnemyPtr( new RockEnemyBossReaDaemon( Vector(  20, 20, 0 ) ) ) );
+		military->add( RockEnemyPtr( new RockEnemyLittleRedDaemon( Vector( 30, 20, 0 ) ) ) );
+		military->add( RockEnemyPtr( new RockEnemyLittleRedDaemon( Vector( 10, 20, 0 ) ) ) );
+		military->add( RockEnemyPtr( new RockEnemyLittleRedDaemon( Vector( 0, 20, 10 ) ) ) );
+		military->add( RockEnemyPtr( new RockEnemyLittleRedDaemon( Vector( 0, 20, -10 ) ) ) );
 		break;
 	case STAGE_RYUGU:
 		break;
