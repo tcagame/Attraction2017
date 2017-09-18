@@ -209,7 +209,7 @@ void RockMapStreet::genarateEnemies( STAGE next ) {
 		military->add( RockEnemyPtr( new RockEnemyCloud      ( Vector( 4500, 330, -650 ) ) ) );
 		military->add( RockEnemyPtr( new RockEnemyCloud      ( Vector( 4900, 330, -650 ) ) ) );
 		military->add( RockEnemyPtr( new RockEnemyBat        ( Vector( 2000, 190, -600 ) ) ) );
-		military->add( RockEnemyPtr( new RockEnemyKimono     ( Vector( 2300, 200, -600 ) ) ) );
+		military->add( RockEnemyPtr( new RockEnemyKimono     ( Vector( 7200, 600, -110 ) ) ) );
 		break;
 	case STAGE_CAVE:
 		military->add( RockEnemyPtr( new RockEnemyBossReaDaemon  ( Vector(  20, 20, 0 ) ) ) );
@@ -227,7 +227,7 @@ void RockMapStreet::genarateStorage( STAGE next ) {
 	{
 		const int INTERVAL = 200;
 		for ( int i = 0; i < 30; i++ ) {
-			storage->addItem( RockItemPtr( new RockItemMoney( Vector( i * INTERVAL, 200, -500 - i * 10 ), 10000 ) ) );
+			storage->addItem( RockItemPtr( new RockItemMoney( Vector( i * INTERVAL, 200, -500 - i * 10 ), 500 ) ) );
 		}
 	}
 		break;
