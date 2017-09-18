@@ -230,6 +230,7 @@
     <ClInclude Include="RockShadow.h" />
     <ClInclude Include="RockShot.h" />
     <ClInclude Include="RockShotAncestors.h" />
+    <ClInclude Include="RockEnemyBossFireAttack.h" />
     <ClInclude Include="RockShotPlayer.h" />
     <ClInclude Include="RockStorage.h" />
     <ClInclude Include="RockStudio.h" />
@@ -294,6 +295,7 @@
     <ClCompile Include="RockShadow.cpp" />
     <ClCompile Include="RockShot.cpp" />
     <ClCompile Include="RockShotAncestors.cpp" />
+    <ClCompile Include="RockEnemyBossFireAttack.cpp" />
     <ClCompile Include="RockShotPlayer.cpp" />
     <ClCompile Include="RockStorage.cpp" />
     <ClCompile Include="RockStudio.cpp" />

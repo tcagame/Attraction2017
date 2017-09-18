@@ -27,6 +27,7 @@ void RockStudio::initialize( ) {
 	_effect[ EFFECT_CASKET_BAD       ] = effect->loadEffect( "casket_bad.efk"         );
 	_effect[ EFFECT_SPEED_DOWN       ] = effect->loadEffect( "speed_down.efk"         );
 	_effect[ EFFECT_MIKO             ] = effect->loadEffect( "miko.efk"               );
+	_effect[ EFFECT_BOSS_FIRE        ] = effect->loadEffect( "boss_fire.efk"          );
 }
 
 void RockStudio::update( ) {

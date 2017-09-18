@@ -54,12 +54,12 @@ void RockCharacter::update( ) {
 	std::vector< ModelMV1Ptr > col_models = RockMap::getTask( )->getColModels( );
 	int col_models_size = ( int )col_models.size( );
 	if ( _col ) {//è„â∫îªíË
-		Vector pos = _pos + Vector( 0, _radius, 0 );
+		Vector pos = _pos + Vector( 0, _radius * 2, 0 );
 		Vector fpos = _pos + Vector( 0, _vec.y, 0 );
 		for ( int i = 0; i < col_models_size; i++ ) {
-			Vector hit_pos = col_models[ i ]->getHitPos( pos, fpos );
-			if ( !hit_pos.isOrijin( ) ) {
-				_vec.y = hit_pos.y - _pos.y;
+			if ( col_models[ i ]->isHitLine( pos, fpos ) ) {
+				_pos.y = col_models[ i ]->getHitPos( ).y - GRAVITY / 2;
+				_vec.y = 0;
 				_standing = true;
 				break;
 			}
@@ -208,8 +208,7 @@ bool RockCharacter::isOnMapModel( const Vector& vec ) const {
 			break;
 		}
 		//ë´å≥Ç™Ç»Ç¢( pos1:íÜêSÅApos2:åãç\â∫ÇÃÇŸÇ§ )
-		Vector hit_pos = col_models[ i ]->getHitPos( central_pos, central_pos - Vector( 0, STAND_RANGE, 0 ) );
-		if ( hit_pos.isOrijin( ) ) {
+		if ( !col_models[ i ]->isHitLine( central_pos, central_pos - Vector( 0, STAND_RANGE, 0 ) ) ) {
 			result = false;
 			break;
 		}
