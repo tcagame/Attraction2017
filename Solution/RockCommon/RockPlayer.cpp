@@ -21,7 +21,7 @@
 
 //移動
 static const double JUMP_POWER = 6.0;
-static const double MOVE_SPEED = 6.5*3;
+static const double MOVE_SPEED = 6.5;
 static const double BRAKE_SPEED = 0.5;
 //アニメーション
 static const double ANIM_SPEED = 1.0;
@@ -442,6 +442,12 @@ void RockPlayer::actOnCharging( ) {
 	if ( player.device_x != 0 ||
 		player.device_y != 0 ) {
 		setAction( ACTION_WALK );
+		return;
+	}
+	Vector vec = getVec( );
+	vec.y = 0;
+	if ( vec.getLength2( ) != 0 ) {
+		setAction( ACTION_BRAKE );
 		return;
 	}
 	if ( player.device_button & BUTTON_C ) {
