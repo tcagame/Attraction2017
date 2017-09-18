@@ -660,6 +660,7 @@ bool RockPlayer::wish( ) {
 
 void RockPlayer::resetPos( const Vector& pos ) {
 	setPos( pos );
+	setAction( ACTION_JUMP );
 }
 
 bool RockPlayer::isDead( ) const {

@@ -11,7 +11,7 @@ public:
 	void damage( int force );
 	bool isFinished( ) const;
 	void reset( );
-	ModelMV1Ptr getModel( ) const;
+	virtual ModelMV1Ptr getModel( );
 	virtual double getAnimTime( ) const = 0;
 	virtual void dropItem( ) { };
 	void kickDown( );

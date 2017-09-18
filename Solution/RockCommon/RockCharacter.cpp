@@ -23,6 +23,7 @@ _height( height ),
 _head( head ),
 _col( col ),
 _shadow( shadow ),
+_standing( false ),
 _dir( Vector( 0, 0, -1 ) ) {
 }
 

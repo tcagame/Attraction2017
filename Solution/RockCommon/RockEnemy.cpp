@@ -46,7 +46,7 @@ bool RockEnemy::isFinished( ) const {
 	return _finished;
 }
 
-ModelMV1Ptr RockEnemy::getModel( ) const {
+ModelMV1Ptr RockEnemy::getModel( ) {
 	ModelMV1Ptr model = RockDollHouse::getTask( )->getModel( getDoll( ) );
 	model->setAnimTime( getAnimTime( ) );
 	double rot = Vector( 0, 0, -1 ).angle( getDir( ) );
@@ -60,5 +60,5 @@ ModelMV1Ptr RockEnemy::getModel( ) const {
 }
 
 void RockEnemy::kickDown( ) {
-	setVec( Vector( 0, KICK_POWER, 0 ) );
+	setVec( Vector( getVec( ).x, KICK_POWER, getVec( ).z ) );
 }
