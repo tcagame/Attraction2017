@@ -318,4 +318,5 @@ void RockStorage::updateBubble( ) {
 void RockStorage::clean( ) {
 	_items = { };
 	_pop_items = { };
+	_caskets = { };
 }

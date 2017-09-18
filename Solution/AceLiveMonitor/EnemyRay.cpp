@@ -1,13 +1,17 @@
 #include "EnemyRay.h"
 #include "SynchronousData.h"
+#include "Property.h"
 
-static const int WAIT_ANIM_TIME = 5;
-static const int GRAPH_WIDTH_NUM = 10;
-static const int MAX_HP = 6;
+const int WAIT_ANIM_TIME = 5;
+const int GRAPH_WIDTH_NUM = 10;
 
 EnemyRay::EnemyRay( const Vector& pos ) :
-Enemy( pos, BIG_CHAR_GRAPH_SIZE, MAX_HP, false ) {
+Enemy( pos, BIG_CHAR_GRAPH_SIZE, false ) {
 	setOverlappedRadius( 18 );
+
+	PropertyPtr property( Property::getTask( ) );
+	setPower( property->getData( "Ray_POWER" ) );
+	setForce( property->getData( "Ray_FORCE" ) );
 }
 
 EnemyRay::~EnemyRay( ) {

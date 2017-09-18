@@ -41,7 +41,7 @@ const int ITEM_DRAW_SIZE = 32;
 const int CONTINUE_GRAPH_SIZE = 32;
 const int CONTINUE_Y = DRAW_UI_Y + 126;
 const int CONTINUE_DRAW_SIZE = CONTINUE_GRAPH_SIZE / 2;
-const int CONTINUE_X_NUM = 13;
+const int CONTINUE_X_NUM = 6;
 const int VIRTUE_GRAPH_WIDTH = 32;
 
 RockViewerPtr RockViewer::getTask( ) {
@@ -399,9 +399,9 @@ void RockViewer::drawUI( ) const {
 			unsigned int continue_num = _status->getPlayer( i ).continue_num;
 			for ( int j = 0; j < (int)continue_num; j++ ) {
 				_dummy_ui->setRect( CONTINUE_GRAPH_SIZE * 2, CONTINUE_GRAPH_SIZE * 4, CONTINUE_GRAPH_SIZE, CONTINUE_GRAPH_SIZE );
-				int sx = player_status_pos + 105 - ( CONTINUE_DRAW_SIZE / 2 ) * ( j % CONTINUE_X_NUM );
+				int sx = player_status_pos + 115 - CONTINUE_DRAW_SIZE * ( j % CONTINUE_X_NUM );
 				int sy = CONTINUE_Y - ( j / CONTINUE_X_NUM ) * CONTINUE_DRAW_SIZE;
-				_dummy_ui->setPos( sx, sy, sx + CONTINUE_DRAW_SIZE, sy + CONTINUE_DRAW_SIZE );
+				_dummy_ui->setPos( sx - 16, sy - 16, sx + CONTINUE_DRAW_SIZE, sy + CONTINUE_DRAW_SIZE );
 				_dummy_ui->draw( );
 			}
 		}

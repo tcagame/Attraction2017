@@ -31,7 +31,6 @@ private:
 	void resetFamilyPos( STAGE next );
 	bool isInActivePlayer( );
 private:
-	int _time;
 	bool _virtue_pop;
 	RockMapStreetDrawerPtr _drawer;
 	StatusPtr _status;

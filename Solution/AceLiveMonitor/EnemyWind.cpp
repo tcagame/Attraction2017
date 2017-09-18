@@ -1,10 +1,10 @@
 #include "EnemyWind.h"
 #include "SynchronousData.h"
 #include "Sound.h"
+#include "Property.h"
 
 const int WAIT_ANIM_TIME = 3;
 const int GRAPH_WIDTH_NUM = 10;
-const int MAX_HP = 6;
 const int MOVE_TIME = WAIT_ANIM_TIME * 17;
 const int ANIM_LOOP_TIME = WAIT_ANIM_TIME * 24;
 const int MOVE_SPEED = 8;
@@ -22,13 +22,17 @@ Vector DESTINATION_POS[ MAX_DESTINATION_POS ] = {
 };
 
 EnemyWind::EnemyWind( const Vector& pos ) :
-Enemy( pos, BIG_CHAR_GRAPH_SIZE, MAX_HP, false ),
+Enemy( pos, BIG_CHAR_GRAPH_SIZE, false ),
 _count( 0 ) {
 	setOverlappedRadius( 32 );
 	DESTINATION_POS[ 0 ].y = pos.y;
 	for ( int i = 0; i < MAX_DESTINATION_POS; i++ ) {
 		DESTINATION_POS[ i ].x += pos.x;
 	}
+
+	PropertyPtr property( Property::getTask( ) );
+	setPower( property->getData( "Wind_POWER" ) );
+	setForce( property->getData( "Wind_FORCE" ) );
 }
 
 

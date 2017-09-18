@@ -25,3 +25,7 @@ ModelMV1Ptr RockItemEnhancePower::getModel( ) const {
 void RockItemEnhancePower::eraseBubble( ) {
 	_bubble->setFinished( true );
 }
+
+double RockItemEnhancePower::getAnimTime( ) const {
+	return 0;
+}

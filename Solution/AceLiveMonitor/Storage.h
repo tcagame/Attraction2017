@@ -22,6 +22,7 @@ public:
 	std::list< ItemPtr > getItems( ) const;
 	void createShopItem( );
 	void eraseEventItem( );
+	void shiftPos( );
 private:
 	PlayerPtr getOverLappedPlayer( ItemPtr item ) const;
 	void createVirtue( ); //debug—p

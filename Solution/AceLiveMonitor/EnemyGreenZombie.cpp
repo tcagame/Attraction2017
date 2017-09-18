@@ -1,16 +1,20 @@
 #include "EnemyGreenZombie.h"
 #include "SynchronousData.h"
+#include "Property.h"
 
-static const int WAIT_ANIM_TIME = 5;
-static const int MOVE_SPEED = -5;
-static const int JUMP_POWER = -10;
-static const int MAX_HP = 3;
+const int WAIT_ANIM_TIME = 5;
+const int MOVE_SPEED = -5;
+const int JUMP_POWER = -10;
 
 EnemyGreenZombie::EnemyGreenZombie( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ),
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ),
 _before_pos( Vector( ) ) {
 	setVec( Vector( MOVE_SPEED, 0 ) );
 	setOverlappedRadius( 36 );
+
+	PropertyPtr property( Property::getTask( ) );
+	setPower( property->getData( "GreenZombie_POWER" ) );
+	setForce( property->getData( "GreenZombie_FORCE" ) );
 }
 
 

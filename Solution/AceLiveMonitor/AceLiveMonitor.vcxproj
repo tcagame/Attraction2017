@@ -288,6 +288,7 @@
     <ClCompile Include="PopWaterGhost.cpp" />
     <ClCompile Include="PopWhiteMist.cpp" />
     <ClCompile Include="PopWind.cpp" />
+    <ClCompile Include="Property.cpp" />
     <ClCompile Include="Sender.cpp" />
     <ClCompile Include="ShopItem.cpp" />
     <ClCompile Include="ShotMonmotaro.cpp" />
@@ -433,6 +434,7 @@
     <ClInclude Include="PopWaterGhost.h" />
     <ClInclude Include="PopWhiteMist.h" />
     <ClInclude Include="PopWind.h" />
+    <ClInclude Include="Property.h" />
     <ClInclude Include="Sender.h" />
     <ClInclude Include="ShopItem.h" />
     <ClInclude Include="ShotMonmotaro.h" />

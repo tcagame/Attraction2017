@@ -198,3 +198,11 @@ ViewerDebug::Data::Circle Character::getDebugDataCircle( ) const {
 	}
 	return circle;
 }
+
+void Character::shiftPos( ) {
+	if ( _area == AREA_EVENT ) {
+		return;
+	}
+	int width = World::getTask( )->getMap( AREA_STREET )->getPageNum( ) * GRAPH_SIZE;
+	_pos.x -= width;
+}

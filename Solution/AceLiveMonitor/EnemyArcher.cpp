@@ -2,18 +2,22 @@
 #include "EnemyArcherAttack.h"
 #include "Military.h"
 #include "SynchronousData.h"
+#include "Property.h"
 
 const int WAIT_ANIM_TIME = 5;
-const int MAX_HP = 5;
 const int MOVE_SPEED = -2;
 const int MOVE_TIME = WAIT_ANIM_TIME * 9;
 const int ANIM_LOOP_TIME = WAIT_ANIM_TIME * 18;
 const int SHOT_TIMING = ( MOVE_TIME + WAIT_ANIM_TIME * 5 ) - 2;
 
 EnemyArcher::EnemyArcher( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ),
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ),
 _act( ACTION_MOVE ) {
 	setOverlappedRadius( 36 );
+	
+	PropertyPtr property( Property::getTask( ) );
+	setPower( property->getData( "Archer_POWER" ) );
+	setForce( property->getData( "Archer_FORCE" ) );
 }
 
 EnemyArcher::~EnemyArcher( ) {

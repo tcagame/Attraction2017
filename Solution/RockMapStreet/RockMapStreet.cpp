@@ -4,6 +4,7 @@
 #include "Status.h"
 #include "MessageSender.h"
 #include "Client.h"
+#include "Sound.h"
 //Player
 #include "RockFamily.h"
 #include "RockPlayer.h"
@@ -33,13 +34,16 @@
 #include "RockEnemyKimono.h"
 #include "RockEnemyCloud.h"
 #include "RockEnemySkeleton.h"
+#include "RockEnemyStone.h"
+#include "RockEnemyLittleRedDaemon.h"
 #include "RockEnemyBossReaDaemon.h"
+
+PTR( RockEnemyBossReaDaemon );
 
 const int REMOVE_CAVE_TIME = 500;
 const int DROP_TIMING = 1800;
 
 RockMapStreet::RockMapStreet( StatusPtr status ) :
-_time( 0 ),
 _virtue_pop( false ),
 _status( status ) {
 }
@@ -72,6 +76,7 @@ void RockMapStreet::update( ) {
 
 void RockMapStreet::updateStreet( ) {
 	RockFamilyPtr family = RockFamily::getTask( );
+	Sound::getTask( )->stopBGM( );
 	bool active = false;
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		RockPlayerPtr player = family->getPlayer( i );
@@ -80,10 +85,11 @@ void RockMapStreet::updateStreet( ) {
 		}
 		active = true;
 		{//’¹‹‚Ös‚­‚ÆSTAGE_CAVE‚ÖˆÚ“®
-			double length = ( Vector( -200, 0, -500 ) - player->getPos( ) ).getLength( );
+			double length = ( Vector( 17675, -1105, 6123 ) - player->getPos( ) ).getLength( );
 			if ( length < 100 ) {
 				loadStage( STAGE_CAVE );
 				RockFamily::getTask( )->resetPos( Vector( -1679, 0, -185 ) );
+				Sound::getTask( )->playBGM( "yokai_music_04.wav" );
 			}
 		}
 		{//‹T‚Éæ‚é‚Æ—³‹{é‚ÖˆÚ“®
@@ -99,6 +105,7 @@ void RockMapStreet::updateStreet( ) {
 				if ( player->isOverLapped( turtle ) ) {
 					if ( player->isOnHead( turtle ) ) {
 						loadStage( STAGE_RYUGU );
+						Sound::getTask( )->playBGM( "yokai_music_06.wav" );
 						break;//while‚ð”²‚¯‚é
 					}
 				}
@@ -132,7 +139,6 @@ void RockMapStreet::updateStreet( ) {
 				ite++;
 				continue;
 			}
-
 			shot = RockShotPtr( );
 			ite++;
 		}
@@ -142,14 +148,33 @@ void RockMapStreet::updateStreet( ) {
 }
 
 void RockMapStreet::updateCave( ) {
-	_time++;
 	RockFamilyPtr family = RockFamily::getTask( );
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		RockPlayerPtr player = family->getPlayer( i );
 		if ( !player->isActive( ) ) {
 			continue;
 		}
-		//loadStage( STAGE_STREET );
+	}
+
+	RockMilitaryPtr military = RockMilitary::getTask( );
+	std::list< RockEnemyPtr > enemies = military->getEnemyList( );
+	std::list< RockEnemyPtr >::iterator ite = enemies.begin( );
+	bool load = true;
+	if ( enemies.size( ) > 0 ) {
+		load = false;
+	}
+	while ( ite != enemies.end( ) ) {
+		RockEnemyBossReaDaemonPtr redDaemon = std::dynamic_pointer_cast< RockEnemyBossReaDaemon >( *ite );
+		if ( redDaemon ) {
+			load = false;
+			break;
+		}
+		ite++;
+	}
+
+	if ( load ) {
+		Sound::getTask( )->playSE( "yokai_se_32.wav" );
+		loadStage( STAGE_STREET );
 	}
 }
 
@@ -202,17 +227,22 @@ void RockMapStreet::genarateEnemies( STAGE next ) {
 	military->clean( );
 	switch ( next ) {
 	case STAGE_STREET:
-		military->add( RockEnemyPtr( new RockEnemyRedBard    ( Vector(  800,  60, -520 ) ) ) );
+		military->add( RockEnemyPtr( new RockEnemyStone      ( Vector(  800,  60, -520 ) ) ) );
+		military->add( RockEnemyPtr( new RockEnemySkeleton   ( Vector(  850,  60, -520 ) ) ) );
 		military->add( RockEnemyPtr( new RockEnemyWaterGhost ( Vector( 3800,  320, -530 ) ) ) );
 		military->add( RockEnemyPtr( new RockEnemyWaterGhost ( Vector( 4100,  320, -700 ) ) ) );
 		military->add( RockEnemyPtr( new RockEnemyWaterGhost ( Vector( 4700,  320, -680 ) ) ) );
 		military->add( RockEnemyPtr( new RockEnemyCloud      ( Vector( 4500, 330, -650 ) ) ) );
 		military->add( RockEnemyPtr( new RockEnemyCloud      ( Vector( 4900, 330, -650 ) ) ) );
 		military->add( RockEnemyPtr( new RockEnemyBat        ( Vector( 2000, 190, -600 ) ) ) );
-		military->add( RockEnemyPtr( new RockEnemyKimono     ( Vector( 2300, 200, -600 ) ) ) );
+		military->add( RockEnemyPtr( new RockEnemyKimono     ( Vector( 7200, 600, -110 ) ) ) );
 		break;
 	case STAGE_CAVE:
-		military->add( RockEnemyPtr( new RockEnemyBossReaDaemon  ( Vector(  20, 20, 0 ) ) ) );
+		military->add( RockEnemyPtr( new RockEnemyBossReaDaemon( Vector(  20, 20, 0 ) ) ) );
+		military->add( RockEnemyPtr( new RockEnemyLittleRedDaemon( Vector( 30, 20, 0 ) ) ) );
+		military->add( RockEnemyPtr( new RockEnemyLittleRedDaemon( Vector( 10, 20, 0 ) ) ) );
+		military->add( RockEnemyPtr( new RockEnemyLittleRedDaemon( Vector( 0, 20, 10 ) ) ) );
+		military->add( RockEnemyPtr( new RockEnemyLittleRedDaemon( Vector( 0, 20, -10 ) ) ) );
 		break;
 	case STAGE_RYUGU:
 		break;
@@ -227,7 +257,7 @@ void RockMapStreet::genarateStorage( STAGE next ) {
 	{
 		const int INTERVAL = 200;
 		for ( int i = 0; i < 30; i++ ) {
-			storage->addItem( RockItemPtr( new RockItemMoney( Vector( i * INTERVAL, 200, -500 - i * 10 ), 10000 ) ) );
+			storage->addItem( RockItemPtr( new RockItemMoney( Vector( i * INTERVAL, 200, -500 - i * 10 ), 500 ) ) );
 		}
 	}
 		break;

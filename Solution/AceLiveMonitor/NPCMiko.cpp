@@ -1,7 +1,7 @@
 #include "NPCMiko.h"
 #include "SynchronousData.h"
 
-static const int WAIT_ANIM_TIME = 10;
+const int WAIT_ANIM_TIME = 10;
 
 NPCMiko::NPCMiko( const Vector& pos ) :
 NPC( pos, BIG_CHAR_GRAPH_SIZE ) {

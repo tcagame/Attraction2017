@@ -1,17 +1,21 @@
 #include "EnemyEyeDaemon.h"
 #include "SynchronousData.h"
 #include "Sound.h"
+#include "Property.h"
 
-static const int WAIT_ANIM_TIME = 5;
-static const int MAX_HP = 1;
+const int WAIT_ANIM_TIME = 5;
 const int MOVE_SPEED = 1;
 const int JUMP_COUNT = 6;
 
 EnemyEyeDaemon::EnemyEyeDaemon( const Vector& pos ) :
-Enemy( pos, SMALL_CHAR_GRAPH_SIZE, MAX_HP ),
+Enemy( pos, SMALL_CHAR_GRAPH_SIZE ),
 _before_pos( pos ),
 _air_jump( false ) {
 	setOverlappedRadius( 16 );
+
+	PropertyPtr property( Property::getTask( ) );
+	setPower( property->getData( "EyeDaemon_POWER" ) );
+	setForce( property->getData( "EyeDaemon_FORCE" ) );
 }
 
 

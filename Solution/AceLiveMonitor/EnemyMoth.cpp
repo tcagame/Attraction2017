@@ -1,15 +1,19 @@
 #include "EnemyMoth.h"
 #include "SynchronousData.h"
+#include "Property.h"
 
-static const int WAIT_ANIM_TIME = 5;
-static const int FLOAT_RANGE = 4;
-static const int MAX_HP = 2;
+const int WAIT_ANIM_TIME = 5;
+const int FLOAT_RANGE = 4;
 
 EnemyMoth::EnemyMoth( const Vector& pos ) :
-Enemy( pos, SMALL_CHAR_GRAPH_SIZE, MAX_HP, false ),
+Enemy( pos, SMALL_CHAR_GRAPH_SIZE, false ),
 _vy( 0 ),
 _dir( 1 ) {
 	setOverlappedRadius( 16 );
+
+	PropertyPtr property( Property::getTask( ) );
+	setPower( property->getData( "Moth_POWER" ) );
+	setForce( property->getData( "Moth_FORCE" ) );
 }
 
 
