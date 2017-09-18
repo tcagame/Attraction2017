@@ -1,16 +1,20 @@
 #include "EnemyPurpleZombie.h"
 #include "ace_define.h"
 #include "SynchronousData.h"
+#include "Property.h"
 
-static const int WAIT_ANIM_TIME = 5;
-static const int MOVE_SPEED = 4;
-static const int MAX_HP = 8;
+const int WAIT_ANIM_TIME = 5;
+const int MOVE_SPEED = 4;
 
 EnemyPurpleZombie::EnemyPurpleZombie( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ),
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ),
 _before_pos( Vector( ) ),
 _vec( Vector( -MOVE_SPEED, 0 ) ) {
 	setOverlappedRadius( 36 );
+
+	PropertyPtr property( Property::getTask( ) );
+	setPower( property->getData( "PurpleZombie_POWER" ) );
+	setForce( property->getData( "PurpleZombie_FORCE" ) );
 }
 
 

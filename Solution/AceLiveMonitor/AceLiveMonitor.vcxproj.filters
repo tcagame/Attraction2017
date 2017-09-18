@@ -319,9 +319,6 @@
     <ClCompile Include="Storage.cpp">
       <Filter>Item</Filter>
     </ClCompile>
-    <ClCompile Include="AceLiveMain.cpp">
-      <Filter>core</Filter>
-    </ClCompile>
     <ClCompile Include="Debug.cpp">
       <Filter>core</Filter>
     </ClCompile>
@@ -435,6 +432,12 @@
     </ClCompile>
     <ClCompile Include="EnemySeed.cpp">
       <Filter>Character\Enemy\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="AceLiveMain.cpp">
+      <Filter>core</Filter>
+    </ClCompile>
+    <ClCompile Include="Property.cpp">
+      <Filter>core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -869,6 +872,9 @@
     </ClInclude>
     <ClInclude Include="EnemySeed.h">
       <Filter>Character\Enemy\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="Property.h">
+      <Filter>core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -2,14 +2,19 @@
 #include "EnemySeed.h"
 #include "Military.h"
 #include "SynchronousData.h"
+#include "Property.h"
 
-static const int WAIT_ANIM_TIME = 5;
-static const int ATTACK_TIME = WAIT_ANIM_TIME * 10;
-static const int MAX_HP = 3;
+const int WAIT_ANIM_TIME = 5;
+const int ATTACK_TIME = WAIT_ANIM_TIME * 10;
+
 
 EnemyBranch::EnemyBranch( const Vector& pos ) :
-EnemyAttack( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP, false ) {
+EnemyAttack( pos, NORMAL_CHAR_GRAPH_SIZE, false ) {
 	setOverlappedRadius( 36 );
+
+	PropertyPtr property( Property::getTask( ) );
+	setPower( property->getData( "Branch_POWER" ) );
+	setForce( property->getData( "Branch_FORCE" ) );
 }
 
 EnemyBranch::~EnemyBranch( ) {

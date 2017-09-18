@@ -1,16 +1,20 @@
 #include "EnemyFlog.h"
 #include "SynchronousData.h"
 #include "Sound.h"
+#include "Property.h"
 
 const int WAIT_ANIM_TIME = 5;
 const int JUMP_TIME = WAIT_ANIM_TIME * 6;
-const int MAX_HP = 2;
 const int JUMP_POWER = -5;
 const int MOVE_SPEED = 2;
 
 EnemyFlog::EnemyFlog( const Vector& pos ) :
-Enemy( pos, SMALL_CHAR_GRAPH_SIZE, MAX_HP ) {
+Enemy( pos, SMALL_CHAR_GRAPH_SIZE ) {
 	setOverlappedRadius( 16 );
+
+	PropertyPtr property( Property::getTask( ) );
+	setPower( property->getData( "Flog_POWER" ) );
+	setForce( property->getData( "Flog_FORCE" ) );
 }
 
 

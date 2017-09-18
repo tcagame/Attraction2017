@@ -2,19 +2,23 @@
 #include "Player.h"
 #include "Family.h"
 #include "SynchronousData.h"
+#include "Property.h"
 
 const int WAIT_ANIM_TIME = 5;
-const int MAX_HP = 3;
 const int MOVE_SPEED = -4;
 const int RANGE = 100;
 const int RANGE_SUB = 300;
 
 EnemyShishimai::EnemyShishimai( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ),
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ),
 _origin_pos( pos ),
 _attack( false ) {
 	setOverlappedRadius( 36 );
 	setVec( Vector( MOVE_SPEED, 0 ) );
+
+	PropertyPtr property( Property::getTask( ) );
+	setPower( property->getData( "Shishimai_POWER" ) );
+	setForce( property->getData( "Shishimai_FORCE" ) );
 }
 
 

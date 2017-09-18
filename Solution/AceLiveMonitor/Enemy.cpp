@@ -3,10 +3,8 @@
 #include <assert.h>
 #include "SynchronousData.h"
 
-Enemy::Enemy( const Vector& pos, const int chip_size, const int hp, bool mass ) :
-Character( pos, chip_size, hp, mass ),
-//後に全てのエネミーのコンストラクターで指定する
-_force( 3 ) {
+Enemy::Enemy( const Vector& pos, const int chip_size, bool mass ) :
+Character( pos, chip_size, 0, mass ) {
 	setDir( DIR_LEFT );
 }
 

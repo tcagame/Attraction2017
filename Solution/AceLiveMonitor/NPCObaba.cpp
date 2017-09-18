@@ -1,8 +1,8 @@
 #include "NPCObaba.h"
 #include "SynchronousData.h"
 
-static const int TIME = 60;
-static const int WAIT_ANIM_TIME = 10;
+const int TIME = 60;
+const int WAIT_ANIM_TIME = 10;
 
 NPCObaba::NPCObaba( const Vector& pos ) :
 NPC( pos, BIG_CHAR_GRAPH_SIZE ) {

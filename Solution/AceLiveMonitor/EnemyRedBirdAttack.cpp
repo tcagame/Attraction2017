@@ -1,12 +1,16 @@
 #include "EnemyRedBirdAttack.h"
 #include "SynchronousData.h"
+#include "Property.h"
 
-static const int WAIT_ANIM_TIME = 5;
-static const int MAX_HP = 1;
+const int WAIT_ANIM_TIME = 5;
 
 EnemyRedBirdAttack::EnemyRedBirdAttack( const Vector& pos ) :
-EnemyAttack( pos, SMALL_CHAR_GRAPH_SIZE, MAX_HP ) {
+EnemyAttack( pos, SMALL_CHAR_GRAPH_SIZE ) {
 	setOverlappedRadius( 18 );
+
+	PropertyPtr property( Property::getTask( ) );
+	setPower( property->getData( "RedBirdAttack_POWER" ) );
+	setForce( property->getData( "RedBirdAttack_FORCE" ) );
 }
 
 

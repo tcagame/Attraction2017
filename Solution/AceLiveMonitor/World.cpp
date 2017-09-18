@@ -22,16 +22,16 @@
 #include "EventGamble.h"
 
 
-static const char * FILENAME_STREET          = "Resource/Ace/Street/mapdata";
-static const char * FILENAME_EVENT_REDDAEMON = "Resource/Ace/Event/Reddaemon/mapdata";
-static const char * FILENAME_EVENT_FIRE      = "Resource/Ace/Event/Fire/mapdata";
-static const char * FILENAME_EVENT_TREE      = "Resource/Ace/Event/Tree/mapdata";
-static const char * FILENAME_EVENT_ROCK      = "Resource/Ace/Event/Rock/mapdata";
-static const char * FILENAME_EVENT_SHOP      = "Resource/Ace/Event/Shop/mapdata";
-static const char * FILENAME_EVENT_RYUGU     = "Resource/Ace/Event/Ryugu/mapdata"; 
-static const char * FILENAME_EVENT_LAKE      = "Resource/Ace/Event/Lake/mapdata";
-static const char * FILENAME_EVENT_CALL 	 = "Resource/Ace/Event/Call/mapdata";
-static const char * FILENAME_EVENT_GAMBLE	 = "Resource/Ace/Event/Gamble/mapdata";
+const char * FILENAME_STREET          = "Resource/Ace/Street/mapdata";
+const char * FILENAME_EVENT_REDDAEMON = "Resource/Ace/Event/Reddaemon/mapdata";
+const char * FILENAME_EVENT_FIRE      = "Resource/Ace/Event/Fire/mapdata";
+const char * FILENAME_EVENT_TREE      = "Resource/Ace/Event/Tree/mapdata";
+const char * FILENAME_EVENT_ROCK      = "Resource/Ace/Event/Rock/mapdata";
+const char * FILENAME_EVENT_SHOP      = "Resource/Ace/Event/Shop/mapdata";
+const char * FILENAME_EVENT_RYUGU     = "Resource/Ace/Event/Ryugu/mapdata"; 
+const char * FILENAME_EVENT_LAKE      = "Resource/Ace/Event/Lake/mapdata";
+const char * FILENAME_EVENT_CALL 	 = "Resource/Ace/Event/Call/mapdata";
+const char * FILENAME_EVENT_GAMBLE	 = "Resource/Ace/Event/Gamble/mapdata";
 
 WorldPtr World::getTask( ) {
 	return std::dynamic_pointer_cast< World >( Application::getInstance( )->getTask( getTag( ) ) );

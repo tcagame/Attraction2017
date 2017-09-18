@@ -1,14 +1,18 @@
 #include "EnemyTreeNuts.h"
 #include "SynchronousData.h"
+#include "Property.h"
 
-static const int WAIT_ANIM_TIME = 5;
-static const int FADE_IN_TIME = WAIT_ANIM_TIME * 9;
-static const int MAX_HP = 2;
+const int WAIT_ANIM_TIME = 5;
+const int FADE_IN_TIME = WAIT_ANIM_TIME * 9;
 
 EnemyTreeNuts::EnemyTreeNuts( const Vector& pos ) :
-EnemyAttack( pos, SMALL_CHAR_GRAPH_SIZE, MAX_HP, false ),
+EnemyAttack( pos, SMALL_CHAR_GRAPH_SIZE, false ),
 _act( ACTION_FADE_IN ) {
 	setOverlappedRadius( 18 );
+
+	PropertyPtr property( Property::getTask( ) );
+	setPower( property->getData( "TreeNuts_POWER" ) );
+	setForce( property->getData( "TreeNuts_FORCE" ) );
 }
 
 EnemyTreeNuts::~EnemyTreeNuts( ) {

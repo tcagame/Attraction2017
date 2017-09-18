@@ -1,7 +1,7 @@
 #include "NPCShaker.h"
 #include "SynchronousData.h"
 
-static const int WAIT_ANIM_TIME = 10;
+const int WAIT_ANIM_TIME = 10;
 
 NPCShaker::NPCShaker( const Vector& pos ) :
 NPC( pos, NORMAL_CHAR_GRAPH_SIZE ) {

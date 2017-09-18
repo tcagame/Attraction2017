@@ -1,16 +1,20 @@
 #include "EnemyNoNeckGhost.h"
 #include "SynchronousData.h"
+#include "Property.h"
 
 const int WAIT_ANIM_TIME = 5;
-const int MAX_HP = 3;
 const int MOVE_SPEED = -4;
 const int FLOAT_RANGE = 5;
 
 EnemyNoNeckGhost::EnemyNoNeckGhost( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP, false ),
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, false ),
 _vy( 0 ),
 _dir( 1 ) {
 	setOverlappedRadius( 36 );
+
+	PropertyPtr property( Property::getTask( ) );
+	setPower( property->getData( "NoNeckGhost_POWER" ) );
+	setForce( property->getData( "NoNeckGhost_FORCE" ) );
 }
 
 

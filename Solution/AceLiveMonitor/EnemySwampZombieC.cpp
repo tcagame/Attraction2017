@@ -1,17 +1,22 @@
 #include "EnemySwampZombieC.h"
 #include "SynchronousData.h"
 #include "Sound.h"
+#include "Property.h"
 
-static const int WAIT_ANIM_TIME = 5;
-static const int MAX_HP = 3;
+const int WAIT_ANIM_TIME = 5;
+
 
 EnemySwampZombieC::EnemySwampZombieC( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ) {
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ) {
 	setOverlappedRadius( 36 );
 	SoundPtr sound = Sound::getTask( );
 	if ( !sound->isPlayingSE( "yokai_voice_04.wav" ) ) {
 		sound->getTask( )->playSE( "yokai_voice_04.wav" );
 	}
+
+	PropertyPtr property( Property::getTask( ) );
+	setPower( property->getData( "SwampZombieC_POWER" ) );
+	setForce( property->getData( "SwampZombieC_FORCE" ) );
 }
 
 

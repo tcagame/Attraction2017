@@ -1,14 +1,18 @@
 #include "EnemyHandAttack.h"
 #include "SynchronousData.h"
+#include "Property.h"
 
-static const int WAIT_ANIM_TIME = 1;
-static const int MAX_HP = 2;
+const int WAIT_ANIM_TIME = 1;
 
 EnemyHandAttack::EnemyHandAttack( const Vector& pos ) :
-EnemyAttack( pos, SMALL_CHAR_GRAPH_SIZE, MAX_HP ) {
+EnemyAttack( pos, SMALL_CHAR_GRAPH_SIZE ) {
 	setOverlappedRadius( 18 );
 	Vector vec( -20, -8 );
 	setVec( vec );
+
+	PropertyPtr property( Property::getTask( ) );
+	setPower( property->getData( "HandAttack_POWER" ) );
+	setForce( property->getData( "HandAttack_FORCE" ) );
 }
 
 

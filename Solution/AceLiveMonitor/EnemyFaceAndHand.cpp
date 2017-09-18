@@ -1,13 +1,17 @@
 #include "EnemyFaceAndHand.h"
 #include "SynchronousData.h"
+#include "Property.h"
 
-static const int WAIT_ANIM_TIME = 6;
-static const int FADE_IN_TIME = 15;
-static const int MAX_HP = 3;
+const int WAIT_ANIM_TIME = 6;
+const int FADE_IN_TIME = 15;
 
 EnemyFaceAndHand::EnemyFaceAndHand( const Vector& pos ) :
-Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP, false ),
+Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, false ),
 _act( ACTION_FADE_IN ){
+
+	PropertyPtr property( Property::getTask( ) );
+	setPower( property->getData( "FaceAndHand_POWER" ) );
+	setForce( property->getData( "FaceAndHand_FORCE" ) );
 }
 
 
