@@ -261,6 +261,7 @@ bool Command::excuteArea( std::vector< std::string > command ) {
 		if ( !same ) {
 			std::string message = "#ERROR# AREA " + command[ 2 ] + "‚Í‘¶Ý‚µ‚Ü‚¹‚ñ";
 			Log::getTask( )->addMessage( message );
+			return false;
 		}
 		if ( command[ 1 ] == "all" ) {
 			if ( area == AREA_RESULT ) {
