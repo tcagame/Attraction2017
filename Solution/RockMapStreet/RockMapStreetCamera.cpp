@@ -49,6 +49,10 @@ void RockMapStreetCamera::setCamera( ) {
 		case RockMapStreet::STAGE_RYUGU:
 			RockMapStreet::STAGE stage = map->getStage( );
 			pos = target + _dir[ stage ] * _length[ stage ];
+			if ( pos.x > 1000 ) {
+				pos.x = 1000;
+				target = pos - _dir[ stage ] * _length[ stage ];
+			}
 			break;
 		}
 		setPos( pos );

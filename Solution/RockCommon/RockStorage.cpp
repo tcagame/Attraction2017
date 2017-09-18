@@ -319,3 +319,18 @@ void RockStorage::clean( ) {
 	_items = { };
 	_pop_items = { };
 }
+
+void RockStorage::eraseCasket( ) {
+	std::list< RockCasketPtr >::iterator ite = _caskets.begin( );
+	RockFamilyPtr family( RockFamily::getTask( ) );
+	while ( ite != _caskets.end( ) ) {
+		RockCasketPtr casket = *ite;
+		if ( !casket ) {
+			ite++;
+			continue;
+		}
+		ite = _caskets.erase( ite );
+		continue;
+		ite++;
+	}
+}

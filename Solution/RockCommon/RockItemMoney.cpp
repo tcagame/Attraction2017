@@ -1,7 +1,7 @@
 #include "RockItemMoney.h"
 #include "RockDollHouse.h"
 
-static const double ANIM_SPEED = 0.9;
+static const double ANIM_SPEED = 1.5;
 
 
 RockItemMoney::RockItemMoney( const Vector& pos, int value ) :
@@ -38,6 +38,13 @@ RockItemMoney::~RockItemMoney( ) {
 
 ModelMV1Ptr RockItemMoney::getModel( ) const {
 	ModelMV1Ptr model = RockDollHouse::getTask( )->getModel( getDoll( ) );
+	model->setAnimTime( getAnimTime( ) );
+	double rot = Vector( 0, 0, -1 ).angle( getDir( ) );
+	Vector axis = Vector( 0, 1, 0 );
+	if ( Vector( 0, 0, -1 ).cross( getDir( ) ).y < 0 ) {
+		axis = Vector( 0, -1, 0 );
+	}
+	model->setRot( Matrix::makeTransformRotation( axis, rot ) );
 	model->setTrans( Matrix::makeTransformTranslation( getPos( ) ) );
 	return model;
 }
