@@ -17,7 +17,7 @@ const double LENGTH = 300;
 RockMapStreetCamera::RockMapStreetCamera( ) :
 RockCamera( INIT_POS, INIT_TARGET ) {
 	_dir[ RockMapStreet::STAGE_STREET ] = Vector( 0, 0.8, -1 );
-	_dir[ RockMapStreet::STAGE_CAVE   ] = Vector( 0, 0.8, -1 );
+	_dir[ RockMapStreet::STAGE_CAVE   ] = Vector( -1, 0.8, -1 );
 	_dir[ RockMapStreet::STAGE_RYUGU  ] = Vector( 1, 0.25,  0 );
 	
 	_length[ RockMapStreet::STAGE_STREET ] = 300.0;
@@ -41,14 +41,15 @@ void RockMapStreetCamera::setCamera( ) {
 		Vector pos;
 		switch( stage ) {
 		case RockMapStreet::STAGE_STREET:
-			pos = target + STREET_DIR * LENGTH;
+			pos = target + _dir[ stage ] * _length[ stage ];
 			break;
 		case RockMapStreet::STAGE_CAVE:
-			pos = target + BOSS_DIR * LENGTH;
+			pos = target +_dir[ stage ] * _length[ stage ];
 			break;
 		case RockMapStreet::STAGE_RYUGU:
 			RockMapStreet::STAGE stage = map->getStage( );
-			Vector pos = target + _dir[ stage ] * _length[ stage ];
+			pos = target + _dir[ stage ] * _length[ stage ];
+			break;
 		}
 		setPos( pos );
 		setTarget( target );

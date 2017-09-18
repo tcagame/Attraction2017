@@ -4,6 +4,7 @@
 #include "Status.h"
 #include "MessageSender.h"
 #include "Client.h"
+#include "Sound.h"
 //Player
 #include "RockFamily.h"
 #include "RockPlayer.h"
@@ -73,6 +74,7 @@ void RockMapStreet::update( ) {
 
 void RockMapStreet::updateStreet( ) {
 	RockFamilyPtr family = RockFamily::getTask( );
+	Sound::getTask( )->stopBGM( );
 	bool active = false;
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		RockPlayerPtr player = family->getPlayer( i );
@@ -85,6 +87,7 @@ void RockMapStreet::updateStreet( ) {
 			if ( length < 100 ) {
 				loadStage( STAGE_CAVE );
 				RockFamily::getTask( )->resetPos( Vector( -1679, 0, -185 ) );
+				Sound::getTask( )->playBGM( "yokai_music_04.wav" );
 			}
 		}
 		{//‹T‚Éæ‚é‚Æ—³‹{é‚ÖˆÚ“®
@@ -100,6 +103,7 @@ void RockMapStreet::updateStreet( ) {
 				if ( player->isOverLapped( turtle ) ) {
 					if ( player->isOnHead( turtle ) ) {
 						loadStage( STAGE_RYUGU );
+						Sound::getTask( )->playBGM( "yokai_music_06.wav" );
 						break;//while‚ð”²‚¯‚é
 					}
 				}
@@ -167,6 +171,7 @@ void RockMapStreet::updateCave( ) {
 	}
 
 	if ( load ) {
+		Sound::getTask( )->playSE( "yokai_se_32.wav" );
 		loadStage( STAGE_STREET );
 	}
 }
