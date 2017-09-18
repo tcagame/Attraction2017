@@ -84,8 +84,11 @@ void RockMapStreet::updateStreet( ) {
 			continue;
 		}
 		active = true;
-		{//鳥居へ行くとSTAGE_CAVEへ移動
+		{//洞窟へ行くとSTAGE_CAVEへ移動
 			double length = ( Vector( 17675, -1105, 6123 ) - player->getPos( ) ).getLength( );
+			//Debug用鳥居ワープ
+			//double length = ( Vector( -173, 3, -520 ) - player->getPos( ) ).getLength( );
+
 			if ( length < 100 ) {
 				loadStage( STAGE_CAVE );
 				RockFamily::getTask( )->resetPos( Vector( -1679, 0, -185 ) );
@@ -173,6 +176,10 @@ void RockMapStreet::updateCave( ) {
 	}
 
 	if ( load ) {
+		for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+			int value = 50000;
+			 MessageSender::getTask( )->sendMessage( i, Message::COMMAND_MONEY, &value );
+		}
 		Sound::getTask( )->playSE( "yokai_se_32.wav" );
 		loadStage( STAGE_STREET );
 	}

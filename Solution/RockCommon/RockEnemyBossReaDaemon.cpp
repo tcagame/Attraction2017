@@ -5,7 +5,7 @@
 #include "RockPlayer.h"
 #include "RockDollHouse.h"
 
-const int HP = 10;
+const int HP = 1;
 static const double ANIM_SPEED = 0.9;
 
 RockEnemyBossReaDaemon::RockEnemyBossReaDaemon( const Vector& pos ) :
