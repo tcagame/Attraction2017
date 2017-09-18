@@ -11,11 +11,12 @@ const int HP = 20;
 const double ACCEL = 0.1;
 const double MAX_SPEED = 1.5;
 const double ANIM_SPEED = 0.9;
-const Vector SEARCH_RANGE( 1000, 1000, 1000 );
 
 RockEnemyStone::RockEnemyStone( const Vector& pos ) :
-RockEnemy( pos, DOLL_STONE, HP, 1, 10, 10, false, true ),
-_player_radius( 0 ) {
+RockEnemy( pos, DOLL_STONE, HP, 1, 10, 10, true, true ),
+_player_radius( 0 ),
+_rot( 0 ) {
+	setVec( Vector( -1, 0, 0 ) );
 }
 
 
@@ -23,30 +24,24 @@ RockEnemyStone::~RockEnemyStone( ) {
 }
 
 void RockEnemyStone::act( ) {
-	Vector near_distance = SEARCH_RANGE;
-	bool wait = true;
-	for (int i = 0; i < ROCK_PLAYER_NUM; i++) {
-		RockPlayerPtr player = RockFamily::getTask( )->getPlayer( i );
-		if ( !player->isActive( ) || player->isBubble( ) ) {
-			continue;
-		}
-		wait = false;
-		Vector distance = player->getPos( ) - getPos( );
-		if ( near_distance.getLength( ) > distance.getLength( ) ) {
-			near_distance = distance;
-		}
+	if ( getActCount( ) % 30 == 0 ) {
+		setVec( Vector( getVec( ).x, 3, getVec( ).z ) );
 	}
-	if ( near_distance != SEARCH_RANGE ) {
-		Vector dir = near_distance.normalize( );
-		Vector vec = getVec( ) + dir * ACCEL;
-		if ( vec.getLength2( ) > MAX_SPEED * MAX_SPEED ) {
-			vec = vec.normalize( ) * MAX_SPEED;
-		}
-		setVec( vec );
-	}
-	if ( wait ) {
-		setVec( Vector( ) );
-	}
+}
+
+ModelMV1Ptr RockEnemyStone::getModel( ) {
+	ModelMV1Ptr model = RockDollHouse::getTask( )->getModel( getDoll( ) );
+	model->setAnimTime( getAnimTime( ) );
+	
+	//c‚É‰ñ“]
+	_rot += getVec( ).getLength( ) * 0.2;
+	Vector axis = Matrix::makeTransformRotation( Vector( 0, -1, 0 ), PI / 2 ).multiply( getDir( ) );
+	Matrix rot = Matrix::makeTransformRotation( axis, _rot );
+	model->setRot( rot );
+
+	//À•W
+	model->setTrans( Matrix::makeTransformTranslation( getPos( ) + Vector( 0, getOverlappedRadius( ), 0 ) ) );
+	return model;
 }
 
 double RockEnemyStone::getAnimTime( ) const {

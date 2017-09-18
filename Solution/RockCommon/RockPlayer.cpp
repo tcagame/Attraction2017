@@ -444,6 +444,12 @@ void RockPlayer::actOnCharging( ) {
 		setAction( ACTION_WALK );
 		return;
 	}
+	Vector vec = getVec( );
+	vec.y = 0;
+	if ( vec.getLength2( ) != 0 ) {
+		setAction( ACTION_BRAKE );
+		return;
+	}
 	if ( player.device_button & BUTTON_C ) {
 		setAction( ACTION_JUMP );
 		return;
@@ -651,6 +657,7 @@ bool RockPlayer::wish( ) {
 
 void RockPlayer::resetPos( const Vector& pos ) {
 	setPos( pos );
+	setAction( ACTION_JUMP );
 }
 
 bool RockPlayer::isDead( ) const {

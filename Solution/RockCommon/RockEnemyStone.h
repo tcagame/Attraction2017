@@ -8,8 +8,10 @@ public:
 public:
 	double getAnimTime( ) const;
 	void dropItem( );
+	ModelMV1Ptr getModel( );
 protected:
 	void act( );
 private:
 	int _player_radius;
+	double _rot;
 };
