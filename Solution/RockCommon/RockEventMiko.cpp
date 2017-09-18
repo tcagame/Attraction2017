@@ -6,6 +6,7 @@
 #include "Effect.h"
 #include "RockOffice.h"
 #include "Status.h"
+#include "Sound.h"
 
 const int RADIUS = 30;
 const int HEIGHT = 30;
@@ -35,6 +36,7 @@ void RockEventMiko::act( ) {
 		RockPlayerPtr player = RockFamily::getTask( )->getPlayer( i );
 		if ( isOverLapped( player ) && !( _status->getPlayer( i ).item & ITEM_HEART ) ) {
 			effect->updateEffectTransform( effect->playEffect( RockStudio::getTask( )->getEffectHandle( EFFECT_MIKO ) ), pos );
+			Sound::getTask( )->playSE( "yokai_se_05.wav" );
 			unsigned char item = ITEM_HEART;
 			MessageSender::getTask( )->sendMessage( i, Message::COMMAND_ITEM, &item );
 		}
