@@ -134,20 +134,7 @@ void RockMapStreet::updateStreet( ) {
 	}
 
 	if ( !active ) {
-		RockArmouryPtr armory( RockArmoury::getTask( ) );
-		std::list< RockShotPtr > shots = armory->getShots( );
-		std::list< RockShotPtr >::const_iterator ite = shots.begin( );
-		while ( ite != shots.end( ) ) {
-			RockShotPtr shot = *ite;
-			if ( !shot ) {
-				ite++;
-				continue;
-			}
-			shot = RockShotPtr( );
-			ite++;
-		}
-
-		armory->clearShot( );
+		RockArmoury::getTask( )->clearShot( );
 	}
 }
 
