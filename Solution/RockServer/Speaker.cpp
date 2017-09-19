@@ -34,9 +34,10 @@ void Speaker::update( ) {
 			return;
 		}
 	}
-	
+
 	if ( !_normal_bgm ) {
 		sound->playBGM( "yokai_music_12.wav" );
 		_normal_bgm = true;
 	}
+	
 }

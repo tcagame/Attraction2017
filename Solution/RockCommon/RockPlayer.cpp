@@ -17,7 +17,7 @@
 #include "RockShotPlayer.h"
 #include "RockStudio.h"
 #include "Sound.h"
-
+#include "RockMap.h"
 
 //ˆÚ“®
 static const double JUMP_POWER = 6.0;
@@ -267,9 +267,16 @@ void RockPlayer::actOnBubble( ) {
 		}
 	}
 	int dir =  _id % 2 ? -1 : 1;
-	double height_vec = sin( PI2 / 180 * getActCount( ) ) * FLOAT_HEIGHT * dir;
-	double width_vec = sin( PI2 / 360 * getActCount( ) + 120 ) * FLOAT_HEIGHT * 2 * dir;
-	setVec( getApproachesVec( ) + Vector( width_vec, height_vec, 0 ) );
+	double vertical_vec = sin( PI2 / 180 * getActCount( ) ) * FLOAT_HEIGHT * dir;
+	double horizontal_vec = sin( PI2 / 360 * getActCount( ) + 120 ) * FLOAT_HEIGHT * 2 * dir;
+	Vector vec = Vector( horizontal_vec, vertical_vec, 0 );
+	ModelMV1Ptr col = RockMap::getTask( )->getColModels( )[ 0 ];
+	Vector pos = getPos( );
+	Vector vertical_up( 0, 500, 0 );
+	if ( col->isHitLine( pos, pos + vertical_up ) ) {
+		vec.y = col->getHitPos( ).y + BUBBLE_FOLLOW_RANGE;
+	}
+	setVec( getApproachesVec( ) + vec );
 }
 
 void RockPlayer::actOnWaiting( ) {
@@ -405,7 +412,7 @@ void RockPlayer::actOnAttacking( ) {
 		sound->stopSE( "yokai_se_21.wav" );
 		sound->stopSE( "yokai_se_22.wav" );
 		sound->playSE( "yokai_se_20.wav" );
-		bool max_charge = ( MAX_CHARGE_COUNT == _attack_count );
+		bool max_charge = ( MAX_CHARGE_COUNT <= _attack_count );
 		int power = _attack_count / ( MAX_CHARGE_COUNT / ( MAX_PLAYER_SHOT_POWER - 1 ) ) + 1;
 		if ( player.item & ITEM_ENHANCED_ATTACK ) {
 			power *= ENHANCED_POWER;
@@ -447,7 +454,7 @@ void RockPlayer::actOnCharging( ) {
 		_attack_count++;
 	}
 
-	if ( _attack_count > MAX_CHARGE_COUNT ) {
+	if ( _attack_count > MAX_CHARGE_COUNT + ( MAX_CHARGE_COUNT / MAX_PLAYER_SHOT_POWER ) * 0.6 ) {
 		setAction( ACTION_BURST );
 		return;
 	}

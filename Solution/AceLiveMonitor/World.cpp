@@ -97,8 +97,10 @@ void World::playMapBgm( EVENT type ) {
 		sound->playBGM( "yokai_music_13.wav", false );
 		break;
 	case EVENT_ENMA:
+		sound->playBGM( "yokai_music_02.wav" );
 		break;
 	case EVENT_BUDHA:
+		sound->playBGM( "yokai_music_08.wav" );
 		break;
 	}
 }

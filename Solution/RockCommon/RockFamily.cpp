@@ -40,7 +40,7 @@ void RockFamily::updatePlayer( ) {
 	RockMilitaryPtr military( RockMilitary::getTask( ) );
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		if ( !_player[ i ]->isActive( ) ) {
-			_player[ i ]->resetPos( Vector( i * 50, 60 ) + getBeforeCameraPos() );
+			_player[ i ]->resetPos( Vector( i * 50, 60 ) + getBeforeCameraPos( ) );
 			_player[ i ]->resetBubble( );
 			_before_active[ i ] = false;
 			continue;
@@ -51,13 +51,15 @@ void RockFamily::updatePlayer( ) {
 		_before_active[ i ] = true;
 		_player[ i ]->update( );
 
+		if ( _player[ i ]->isBubble( ) ) {
+			continue;
+		}
+
 		//player-player
 		RockPlayerPtr overlapped_player = getOverLappedPlayer( _player[ i ] );
 		if ( overlapped_player ) {
 			if ( _player[ i ]->isOnHead( overlapped_player ) ) {
 				_player[ i ]->bound( );
-			} else {
-				_player[ i ]->adjustPosForOverLapped( overlapped_player );
 			}
 		}
 		//player_enemy
@@ -160,8 +162,9 @@ Vector RockFamily::getBeforeCameraPos( ) const {
 		result *= ( 1.0 / ( double )num );
 		result *= 100;
 	} else {
-		result = Vector( 50, 75 ) + _base_pos;
+		result = _base_pos;
 	}
 
+	result += Vector( 75, 0 );
 	return result;
 }
