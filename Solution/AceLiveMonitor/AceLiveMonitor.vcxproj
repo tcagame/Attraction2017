@@ -168,7 +168,9 @@
     <ClCompile Include="EnemyShell.cpp" />
     <ClCompile Include="EnemyWaterGhost.cpp" />
     <ClCompile Include="Event.cpp" />
+    <ClCompile Include="EventBudha.cpp" />
     <ClCompile Include="EventCall.cpp" />
+    <ClCompile Include="EventEnma.cpp" />
     <ClCompile Include="EventFlame.cpp" />
     <ClCompile Include="EventGamble.cpp" />
     <ClCompile Include="EventLake.cpp" />
@@ -314,7 +316,9 @@
     <ClInclude Include="EnemyShell.h" />
     <ClInclude Include="EnemyWaterGhost.h" />
     <ClInclude Include="Event.h" />
+    <ClInclude Include="EventBudha.h" />
     <ClInclude Include="EventCall.h" />
+    <ClInclude Include="EventEnma.h" />
     <ClInclude Include="EventFlame.h" />
     <ClInclude Include="EventGamble.h" />
     <ClInclude Include="EventLake.h" />
