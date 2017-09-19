@@ -30,13 +30,13 @@ void Speaker::update( ) {
 
 	// í èÌÇ…ñﬂÇ∑Ç©ÇÃîªíf
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
-		if ( _status->getPlayer( i ).area == AREA_RESULT ) {
+		if ( _status->getPlayer( i ).area == AREA_RESULT || _normal_bgm ) {
 			return;
+		}
+		if ( !_normal_bgm ) {
+			sound->playBGM( "yokai_music_12.wav" );
+			_normal_bgm = true;
 		}
 	}
 	
-	if ( !_normal_bgm ) {
-		sound->playBGM( "yokai_music_12.wav" );
-		_normal_bgm = true;
-	}
 }
