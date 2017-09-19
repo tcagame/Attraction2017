@@ -69,6 +69,7 @@ void RockFamily::updatePlayer( ) {
 			} else {
 				int force = -overlapped_enemy->getForce( );
 				_player[ i ]->damage( force );
+				_player[ i ]->knockBack( overlapped_enemy );
 				_player[ i ]->adjustPosForOverLapped( overlapped_enemy );
 			}
 		}

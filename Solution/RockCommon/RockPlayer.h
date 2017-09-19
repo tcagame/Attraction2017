@@ -4,6 +4,7 @@
 
 PTR( Status );
 PTR( RockAncestors );
+PTR( RockEnemy );
 
 class RockPlayer : public RockCharacter {
 public:
@@ -23,6 +24,7 @@ public:
 	void setAdmissionPos( const Vector& camera_pos );
 	int getId( ) const;
 	void speedDown( );
+	void knockBack( RockEnemyPtr enemy );
 protected:
 	void act( );
 	void updateInCamera( );

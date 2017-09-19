@@ -23,6 +23,7 @@
 static const double JUMP_POWER = 6.0;
 static const double MOVE_SPEED = 6.5;
 static const double BRAKE_SPEED = 0.5;
+static const double KNOCK_BACK_SPEED = 5.0;
 //アニメーション
 static const double ANIM_SPEED = 1.0;
 
@@ -738,4 +739,14 @@ int RockPlayer::getId( ) const {
 void RockPlayer::speedDown( ) {
 	_speed_down = true;
 	_speed_down_effect_handle = Effect::getTask( )->playEffect( RockStudio::getTask( )->getEffectHandle( EFFECT_SPEED_DOWN ) );
+}
+
+void RockPlayer::knockBack( RockEnemyPtr enemy ) {
+	Vector dir = getPos( ) - enemy->getPos( );
+	dir.y = 0;
+	dir = dir.normalize( );
+	Vector vec = dir * KNOCK_BACK_SPEED;
+	if ( _status->getPlayer( _id ).power > 0 ) {
+		setVec( vec );
+	}
 }
