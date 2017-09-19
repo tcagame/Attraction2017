@@ -17,7 +17,7 @@ RockEnemyBoss( pos, DOLL_BOSS_FIRE, HP, 1, 10, 10, true, true ) {
 	RockMilitaryPtr military = RockMilitary::getTask( );
 	Vector attack_pos = getPos( ) + getDir( ) * SHOT_POS_RANGE;
 	attack_pos.y += 15;
-	military->add( RockEnemyPtr( new RockEnemyBossFireAttack( attack_pos ) ) );
+	military->addEnemy( RockEnemyPtr( new RockEnemyBossFireAttack( attack_pos ) ) );
 }
 
 

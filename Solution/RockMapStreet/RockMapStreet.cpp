@@ -25,6 +25,7 @@
 #include "RockEventObaba.h"
 #include "RockEventOtohime.h"
 //Enemy
+#include "RockPop.h"
 #include "RockMilitary.h"
 #include "RockEnemyGhost.h"
 #include "RockEnemyRedBard.h"
@@ -234,22 +235,22 @@ void RockMapStreet::genarateEnemies( STAGE next ) {
 	military->clean( );
 	switch ( next ) {
 	case STAGE_STREET:
-		military->add( RockEnemyPtr( new RockEnemyStone      ( Vector(  800,  60, -520 ) ) ) );
-		military->add( RockEnemyPtr( new RockEnemySkeleton   ( Vector(  850,  60, -520 ) ) ) );
-		military->add( RockEnemyPtr( new RockEnemyWaterGhost ( Vector( 3800,  320, -530 ) ) ) );
-		military->add( RockEnemyPtr( new RockEnemyWaterGhost ( Vector( 4100,  320, -700 ) ) ) );
-		military->add( RockEnemyPtr( new RockEnemyWaterGhost ( Vector( 4700,  320, -680 ) ) ) );
-		military->add( RockEnemyPtr( new RockEnemyCloud      ( Vector( 4500, 330, -650 ) ) ) );
-		military->add( RockEnemyPtr( new RockEnemyCloud      ( Vector( 4900, 330, -650 ) ) ) );
-		military->add( RockEnemyPtr( new RockEnemyBat        ( Vector( 2000, 190, -600 ) ) ) );
-		military->add( RockEnemyPtr( new RockEnemyKimono     ( Vector( 7200, 600, -110 ) ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyStone      ( Vector(  800,  60, -520 ) ) ), true ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemySkeleton   ( Vector(  850,  60, -520 ) ) ), true ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyWaterGhost ( Vector( 3800, 320, -530 ) ) ), true ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyWaterGhost ( Vector( 4100, 320, -700 ) ) ), true ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyWaterGhost ( Vector( 4700, 320, -680 ) ) ), true ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyCloud      ( Vector( 4500, 330, -650 ) ) ), true ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyCloud      ( Vector( 4900, 330, -650 ) ) ), true ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyBat        ( Vector( 2000, 190, -600 ) ) ), true ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyKimono     ( Vector( 7200, 600, -110 ) ) ), true ) ) );
 		break;
 	case STAGE_CAVE:
-		military->add( RockEnemyPtr( new RockEnemyBossRedDaemon( Vector(  20, 20, 0 ) ) ) );
-		military->add( RockEnemyPtr( new RockEnemyLittleRedDaemon( Vector( 30, 20, 0 ) ) ) );
-		military->add( RockEnemyPtr( new RockEnemyLittleRedDaemon( Vector( 10, 20, 0 ) ) ) );
-		military->add( RockEnemyPtr( new RockEnemyLittleRedDaemon( Vector( 0, 20, 10 ) ) ) );
-		military->add( RockEnemyPtr( new RockEnemyLittleRedDaemon( Vector( 0, 20, -10 ) ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyBossRedDaemon  ( Vector( 20, 20,   0 ) ) ), true ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyLittleRedDaemon( Vector( 30, 20,   0 ) ) ), true ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyLittleRedDaemon( Vector( 10, 20,   0 ) ) ), true ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyLittleRedDaemon( Vector(  0, 20,  10 ) ) ), true ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyLittleRedDaemon( Vector(  0, 20, -10 ) ) ), true ) ) );
 		break;
 	case STAGE_RYUGU:
 		break;

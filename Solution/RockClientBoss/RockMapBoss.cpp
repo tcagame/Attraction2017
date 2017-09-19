@@ -82,7 +82,7 @@ void RockMapBoss::update( ) {
 			sound->playBGM( "yokai_music_04.wav" );
 			RockFamily::getTask( )->resetPos( Vector( 0, 0, 0 ) ); // room_fire
 			military->clean( );
-			military->add( RockEnemyPtr( new RockEnemyBossFire( Vector( 220, 10, 0 ) ) ) );
+			military->addEnemy( RockEnemyPtr( new RockEnemyBossFire( Vector( 220, 10, 0 ) ) ) );
 			break;
 		}
 		return;
@@ -100,7 +100,7 @@ void RockMapBoss::update( ) {
 			//STAGE_ROCK‚Ös‚­
 			RockFamily::getTask( )->resetPos( Vector( 0, 0, 0 ) );
 			military->clean( );
-			military->add( RockEnemyPtr( new RockEnemyBossRock( Vector( 300, 10, 0 ) ) ) );
+			military->addEnemy( RockEnemyPtr( new RockEnemyBossRock( Vector( 300, 10, 0 ) ) ) );
 			break;
 		}
 		return;
@@ -117,7 +117,7 @@ void RockMapBoss::update( ) {
 			sound->playBGM( "yokai_music_04.wav" );
 			RockFamily::getTask( )->resetPos( Vector( 0, 0, 0 ) ); // tree
 			military->clean( );
-			military->add( RockEnemyPtr( new RockEnemyBossTree( Vector( 300, 10, 0 ) ) ) );
+			military->addEnemy( RockEnemyPtr( new RockEnemyBossTree( Vector( 300, 10, 0 ) ) ) );
 			break;
 		}
 		return;

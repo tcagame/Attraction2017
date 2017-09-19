@@ -39,6 +39,7 @@ protected:
 	void setMass( bool mass );
 	void setCol( bool col );
 	bool isOnMapModel( const Vector& vec = Vector( 0, 0, 0 ) ) const;
+	virtual void updateInCamera( ) { };
 private:
 	Vector _pos;
 	Vector _vec;

@@ -482,6 +482,7 @@ void RockViewer::drawDebug( ) const {
 			drawer->drawSphere( pos, enemy->getOverlappedRadius( ) );
 			ite++;
 		}
+		drawer->drawString( 0, 0, "Enemy:%d", ( int )enemies.size( ) );
 	}
 
 	{//event
