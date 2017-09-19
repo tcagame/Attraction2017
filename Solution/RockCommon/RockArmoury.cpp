@@ -79,5 +79,16 @@ RockEnemyPtr RockArmoury::getOverLappedEnemy( RockShotPtr shot ) const {
 }
 
 void RockArmoury::clearShot( ) {
+	std::list< RockShotPtr >::const_iterator ite = _shots.begin( );
+	while ( ite != _shots.end( ) ) {
+		RockShotPtr shot = *ite;
+		if ( !shot ) {
+			ite++;
+			continue;
+		}
+
+		shot = RockShotPtr( );
+		ite++;
+	}
 	_shots.clear( );
 }

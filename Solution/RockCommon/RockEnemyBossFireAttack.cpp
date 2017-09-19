@@ -8,7 +8,7 @@ const int READY_TIME = 50;
 const Vector VEC( -6, 0 , 0 );
 
 RockEnemyBossFireAttack::RockEnemyBossFireAttack( const Vector pos ) :
-RockEnemy( pos, DOLL_NONE, 99, FORCE, 10, 30, false, false ),
+RockEnemyAttack( pos, DOLL_NONE, 99, FORCE, 10, 30, false, false ),
 _shot( false ) {
 	EffectPtr effect = Effect::getTask( );
 	_handle = effect->playEffect( RockStudio::getTask( )->getEffectHandle( EFFECT_BOSS_FIRE ) );
@@ -16,7 +16,10 @@ _shot( false ) {
 
 
 RockEnemyBossFireAttack::~RockEnemyBossFireAttack( ) {
-
+	EffectPtr effect = Effect::getTask( );
+	if ( effect ) {
+		effect->stopEffect( _handle );
+	}
 }
 
 void RockEnemyBossFireAttack::act( ) {
@@ -26,7 +29,7 @@ void RockEnemyBossFireAttack::act( ) {
 		pos += VEC;
 	}
 	setPos( pos );
-	effect->updateEffectTransform( _handle, pos + Vector( 0, 15, 0 ), 5 );
+	effect->updateEffectTransform( _handle, pos + Vector( 0, 15, 0 ), 5 , Vector( 0, 0, -1 ) );
 }
 
 ModelMV1Ptr RockEnemyBossFireAttack::getModel( ) const {

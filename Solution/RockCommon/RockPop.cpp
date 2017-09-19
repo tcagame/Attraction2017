@@ -1,10 +1,18 @@
 #include "RockPop.h"
 #include "RockMilitary.h"
+#include "Drawer.h"
+#include "RockEnemy.h"
 
-static const int MAX_POP_COUNT = 100;
+const int MAX_POP_COUNT = 400;
 
-RockPop::RockPop( RockEnemyPtr enemy ) :
-_enemy( enemy ) {
+RockPop::RockPop( RockEnemyPtr enemy, bool moment ) :
+_enemy( enemy ),
+_pop( false ) {
+	if ( moment ) {
+		_count = MAX_POP_COUNT;
+	} else {
+		_count = 0;
+	}
 }
 
 
@@ -14,10 +22,13 @@ RockPop::~RockPop( ) {
 void RockPop::update( ) {
 	_count++;
 	if ( _count > MAX_POP_COUNT ) {
-		RockMilitary::getTask( )->add( _enemy );
+		if ( Drawer::getTask( )->isInCamera( _enemy->getPos( ) ) ) {
+			_pop = true;
+			RockMilitary::getTask( )->addEnemy( _enemy );
+		}
 	}
 }
 
 bool RockPop::isFinished( ) const {
-	return ( _count > MAX_POP_COUNT );
+	return _pop;
 }

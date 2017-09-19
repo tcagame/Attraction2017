@@ -107,15 +107,7 @@ void RockPlayer::act( ) {
 	updateEffect( );
 	updeteState( );
 	sendDamage( );
-	// ƒJƒƒ‰‚É“ü‚è‘±‚¯‚é
-	DrawerPtr drawer( Drawer::getTask( ) );
-	if ( !drawer->isInCamera( getPos( ) + getVec( ) ) ) {
-		setVec( Vector( ) );
-	}
-	Vector dir = ( RockCamera::getTask( )->getTarget( ) - getPos( ) ).normalize( );
-	while( !drawer->isInCamera( getPos( ) + getVec( ) ) ) {
-		setVec( getVec( ) + dir );
-	}
+	updateInCamera( );
 
 	if ( _speed_down ) {
 		Vector vec = getVec( ) * 0.5;
@@ -145,6 +137,10 @@ void RockPlayer::updateEffect( ) {
 }
 
 void RockPlayer::updeteState( ) {
+	if ( _status->getPlayer( _id ).power <= 0 ) {
+		setCol( false );
+		setMass( false );
+	}
 	if ( _status->getPlayer( _id ).money >= TRANSITION_MONEY_NUM ) {
 		if ( _status->getPlayer( _id ).area == AREA_STREET_1 ) {
 			unsigned char state = AREA_STREET_2;
@@ -154,8 +150,19 @@ void RockPlayer::updeteState( ) {
 	}
 }
 
+void RockPlayer::updateInCamera( ) {
+	// ƒJƒƒ‰‚É“ü‚è‘±‚¯‚é
+	DrawerPtr drawer( Drawer::getTask( ) );
+	if ( !drawer->isInCamera( getPos( ) + getVec( ) ) ) {
+		setVec( Vector( ) );
+	}
+	Vector dir = ( RockCamera::getTask( )->getTarget( ) - getPos( ) ).normalize( );
+	while( !drawer->isInCamera( getPos( ) + getVec( ) ) ) {
+		setVec( getVec( ) + dir );
+	}
+}
+
 void RockPlayer::setAction( ACTION action ) {
-	SoundPtr sound = Sound::getTask( );
 	EffectPtr effect = Effect::getTask( );
 	_action = action;
 	setActCount( 0 );
@@ -167,7 +174,6 @@ void RockPlayer::setAction( ACTION action ) {
 		break;
 	case ACTION_JUMP:
 		setDoll( ( DOLL )( DOLL_TAROSUKE_JUMP + _id * ROCK_PLAYER_MOTION_NUM ) );
-		sound->playSE( "yokai_voice_17.wav" );
 		{
 			Vector vec = getVec( );
 			vec.y = JUMP_POWER;
@@ -179,7 +185,6 @@ void RockPlayer::setAction( ACTION action ) {
 		break;
 	case ACTION_DEAD:
 		setDoll( ( DOLL )( DOLL_TAROSUKE_DEAD + _id * ROCK_PLAYER_MOTION_NUM ) );
-		sound->playSE( "yokai_se_31.wav" );
 		setVec( Vector( ) );
 		effect->stopEffect( _speed_down_effect_handle );
 		_attack_count = 0;
@@ -196,8 +201,8 @@ void RockPlayer::setAction( ACTION action ) {
 		effect->stopEffect( _charge_effect_handle );
 		_charge_effect_handle = -1;
 		setVec( Vector( ) );
-		sound->stopSE( "yokai_se_21.wav" );
-		sound->stopSE( "yokai_se_22.wav" );
+		Sound::getTask( )->stopSE( "yokai_se_21.wav" );
+		Sound::getTask( )->stopSE( "yokai_se_22.wav" );
 		break;
 	case ACTION_WISH:
 		setDoll( ( DOLL )( DOLL_TAROSUKE_WISH + _id * ROCK_PLAYER_MOTION_NUM ) );
@@ -222,6 +227,7 @@ void RockPlayer::actOnBubble( ) {
 			setMass( true );
 			setCol( true );
 			setAction( ACTION_JUMP );
+			sound->playSE( "yokai_voice_17.wav" );
 			return;
 		}
 	}
@@ -252,6 +258,7 @@ void RockPlayer::actOnBubble( ) {
 				unsigned char area = AREA_ENTRY;
 				MessageSender::getTask( )->sendMessage( _id, Message::COMMAND_AREA, &area );
 				setAction( ACTION_JUMP );
+				sound->playSE( "yokai_voice_17.wav" );
 				setMass( true );
 				setCol( true );
 			}
@@ -269,6 +276,7 @@ void RockPlayer::actOnWaiting( ) {
 	//Ž€–S
 	if ( player.power <= 0 ) {
 		setAction( ACTION_DEAD );
+		Sound::getTask( )->playSE( "yokai_se_31.wav" );
 		return;
 	}
 	if ( player.area == AREA_WAIT &&
@@ -280,6 +288,7 @@ void RockPlayer::actOnWaiting( ) {
 	if ( isStanding( ) ) {
 		if ( player.device_button & BUTTON_C ) {
 			setAction( ACTION_JUMP );
+			Sound::getTask( )->playSE( "yokai_voice_17.wav" );
 			return;
 		}
 	}
@@ -322,6 +331,7 @@ void RockPlayer::actOnJumping( ) {
 	//Ž€–S
 	if ( player.power <= 0 ) {
 		setAction( ACTION_DEAD );
+		Sound::getTask( )->playSE( "yokai_se_31.wav" );
 		return;
 	}
 	if ( player.area == AREA_WAIT &&
@@ -349,6 +359,7 @@ void RockPlayer::actOnWalking( ) {
 	//Ž€–S
 	if ( player.power <= 0 ) {
 		setAction( ACTION_DEAD );
+		Sound::getTask( )->playSE( "yokai_se_31.wav" );
 		return;
 	}
 	if ( player.area == AREA_WAIT &&
@@ -360,6 +371,7 @@ void RockPlayer::actOnWalking( ) {
 	if ( isStanding( ) ) {
 		if ( player.device_button & BUTTON_C ) {
 			setAction( ACTION_JUMP );
+			Sound::getTask( )->playSE( "yokai_voice_17.wav" );
 			return;
 		}
 	}
@@ -413,6 +425,7 @@ void RockPlayer::actOnCharging( ) {
 	//Ž€–S
 	if ( player.power <= 0 ) {
 		setAction( ACTION_DEAD );
+		Sound::getTask( )->playSE( "yokai_se_31.wav" );
 		return;
 	}
 	if ( player.area == AREA_WAIT &&
@@ -452,6 +465,7 @@ void RockPlayer::actOnCharging( ) {
 	}
 	if ( player.device_button & BUTTON_C ) {
 		setAction( ACTION_JUMP );
+		Sound::getTask( )->playSE( "yokai_voice_17.wav" );
 		return;
 	}
 	if ( !sound->isPlayingSE( "yokai_se_21.wav" ) ) {
@@ -476,6 +490,7 @@ void RockPlayer::actOnBraking( ) {
 	//Ž€–S
 	if ( player.power <= 0 ) {
 		setAction( ACTION_DEAD );
+		Sound::getTask( )->playSE( "yokai_se_31.wav" );
 		return;
 	}
 	if ( player.area == AREA_WAIT &&
@@ -635,8 +650,8 @@ void RockPlayer::bound( ) {
 	}
 	setAction( ACTION_JUMP );
 	RockCharacter::bound( );
+	Sound::getTask( )->playSE( "yokai_voice_17.wav" );
 }
-
 
 void RockPlayer::back( ) {
 	Vector vec = getVec( );

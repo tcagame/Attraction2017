@@ -9,15 +9,15 @@
 
 const int HP = 10;
 const double ANIM_SPEED = 0.9;
-const int SHOT_POS_RANGE = 30;
+const int SHOT_POS_RANGE = 70;
+const int MAX_ATTACK_NUM = 5;
+const int ATTACK_TIME = 240;
+
+
 
 RockEnemyBossFire::RockEnemyBossFire( const Vector& pos ) :
 RockEnemyBoss( pos, DOLL_BOSS_FIRE, HP, 1, 10, 10, true, true ) {
 	setDir( Vector( -1, 0, 0 ) );
-	RockMilitaryPtr military = RockMilitary::getTask( );
-	Vector attack_pos = getPos( ) + getDir( ) * SHOT_POS_RANGE;
-	attack_pos.y += 15;
-	military->add( RockEnemyPtr( new RockEnemyBossFireAttack( attack_pos ) ) );
 }
 
 
@@ -25,7 +25,23 @@ RockEnemyBossFire::~RockEnemyBossFire( ) {
 }
 
 void RockEnemyBossFire::act( ) {
+	Vector attack_pos = getPos( ) + ( getDir( ) * SHOT_POS_RANGE );
+	attack_pos.y += 15;
 
+	const Vector ATTACK_FIRE_POS[ MAX_ATTACK_NUM ] = { 
+		Vector( attack_pos.x, attack_pos.y, attack_pos.z ),
+		Vector( attack_pos.x + 20, attack_pos.y, attack_pos.z + 20 ),
+		Vector( attack_pos.x + 40, attack_pos.y, attack_pos.z + 40 ),
+		Vector( attack_pos.x + 20, attack_pos.y, attack_pos.z - 20 ),
+		Vector( attack_pos.x + 40, attack_pos.y, attack_pos.z - 40 )
+	};
+
+	RockMilitaryPtr military = RockMilitary::getTask( );
+	if ( getActCount( ) % ATTACK_TIME == 0 ) {
+		for ( int i = 0; i < MAX_ATTACK_NUM; i++ ) {
+			military->addEnemy( RockEnemyPtr( new RockEnemyBossFireAttack( ATTACK_FIRE_POS[ i ] ) ) );
+		}
+	}
 }
 
 double RockEnemyBossFire::getAnimTime( ) const {

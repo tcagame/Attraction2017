@@ -9,6 +9,7 @@
 #include "define.h"
 #include "Effect.h"
 #include "RockEnemyBoss.h"
+#include "RockEnemyAttack.h"
 #include "Sound.h"
 
 PTR( RockEnemyBoss );
@@ -52,12 +53,13 @@ void RockMilitary::updateEnemies( ) {
 			continue;
 		}
 		if ( enemy->isFinished( ) ) {
-			add( RockImpactPtr( new RockImpact( enemy->getPos( ) + Vector( 0, 30, 0 ) ) ) );
+			addImpact( RockImpactPtr( new RockImpact( enemy->getPos( ) + Vector( 0, 30, 0 ) ) ) );
 			Sound::getTask( )->playSE( "yokai_se_26.wav" );
 			enemy->dropItem( );
-			enemy->reset( );
-			if ( !std::dynamic_pointer_cast< RockEnemyBoss >( enemy ) ) {
-				_pops.push_back( RockPopPtr( new RockPop( enemy ) ) );
+			if ( !std::dynamic_pointer_cast< RockEnemyBoss >( enemy ) &&
+				 !std::dynamic_pointer_cast< RockEnemyAttack >( enemy ) ) {
+				enemy->reset( );
+				_pops.push_back( RockPopPtr( new RockPop( enemy, false ) ) );
 			}
 			ite = _enemies.erase( ite );
 			continue;
@@ -115,18 +117,43 @@ void RockMilitary::updatePop( ) {
 	}
 }
 
-void RockMilitary::add( RockEnemyPtr enemy ) {
+void RockMilitary::addEnemy( RockEnemyPtr enemy ) {
 	_enemies.push_back( enemy );
 }
 
-void RockMilitary::add( RockImpactPtr impact ) {
+void RockMilitary::addPop( RockPopPtr pop ) {
+	_pops.push_back( pop );
+}
+
+void RockMilitary::addImpact( RockImpactPtr impact ) {
 	_impacts.push_back( impact );
 }
 
 void RockMilitary::clean( ) {
-	_enemies = { };
-	_impacts = { };
-	_pops = { };
+	{
+		std::list< RockEnemyPtr >::iterator ite = _enemies.begin( );
+		while ( ite != _enemies.end( ) ) {
+			*ite = RockEnemyPtr( );
+			ite++;
+		}
+		_enemies = { };
+	}
+	{
+		std::list< RockImpactPtr >::iterator ite = _impacts.begin( );
+		while ( ite != _impacts.end( ) ) {
+			*ite = RockImpactPtr( );
+			ite++;
+		}
+		_impacts = { };
+	}
+	{
+		std::list< RockPopPtr >::iterator ite = _pops.begin( );
+		while ( ite != _pops.end( ) ) {
+			*ite = RockPopPtr( );
+			ite++;
+		}
+		_pops = { };
+	}
 }
 
 

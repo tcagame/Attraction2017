@@ -15,11 +15,14 @@ public:
 	virtual double getAnimTime( ) const = 0;
 	virtual void dropItem( ) { };
 	void kickDown( );
+protected:
+	virtual void updateInCamera( );
 private:
 	int _force;
 	int _hp;
 	int _max_hp;
 	Vector _start_pos;
 	bool _finished;
+	int _out_camera_count;
 };
 
