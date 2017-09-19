@@ -155,6 +155,7 @@
     <ClCompile Include="RockEnemyBossFireAttack.cpp">
       <Filter>Enemy\boss</Filter>
     </ClCompile>
+    <ClCompile Include="RockEnemyAttack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="define.h" />
@@ -314,6 +315,7 @@
     <ClInclude Include="RockEnemyBossFireAttack.h">
       <Filter>Enemy\boss</Filter>
     </ClInclude>
+    <ClInclude Include="RockEnemyAttack.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Item">

@@ -9,7 +9,7 @@
 
 const int HP = 10;
 const double ANIM_SPEED = 0.9;
-const int SHOT_POS_RANGE = 30;
+const int SHOT_POS_RANGE = 70;
 const int MAX_ATTACK_NUM = 5;
 const int ATTACK_TIME = 240;
 
@@ -29,11 +29,11 @@ void RockEnemyBossFire::act( ) {
 	attack_pos.y += 15;
 
 	const Vector ATTACK_FIRE_POS[ MAX_ATTACK_NUM ] = { 
-		Vector( attack_pos.x, attack_pos.y + 30, attack_pos.z ),
-		Vector( attack_pos.x, attack_pos.y + 20, attack_pos.z + 20 ),
-		Vector( attack_pos.x, attack_pos.y + 10, attack_pos.z + 40 ),
-		Vector( attack_pos.x, attack_pos.y + 20, attack_pos.z - 20 ),
-		Vector( attack_pos.x, attack_pos.y + 10, attack_pos.z - 40 )
+		Vector( attack_pos.x, attack_pos.y, attack_pos.z ),
+		Vector( attack_pos.x + 20, attack_pos.y, attack_pos.z + 20 ),
+		Vector( attack_pos.x + 40, attack_pos.y, attack_pos.z + 40 ),
+		Vector( attack_pos.x + 20, attack_pos.y, attack_pos.z - 20 ),
+		Vector( attack_pos.x + 40, attack_pos.y, attack_pos.z - 40 )
 	};
 
 	RockMilitaryPtr military = RockMilitary::getTask( );

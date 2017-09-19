@@ -9,6 +9,7 @@
 #include "define.h"
 #include "Effect.h"
 #include "RockEnemyBoss.h"
+#include "RockEnemyAttack.h"
 #include "Sound.h"
 
 PTR( RockEnemyBoss );
@@ -55,7 +56,8 @@ void RockMilitary::updateEnemies( ) {
 			addImpact( RockImpactPtr( new RockImpact( enemy->getPos( ) + Vector( 0, 30, 0 ) ) ) );
 			Sound::getTask( )->playSE( "yokai_se_26.wav" );
 			enemy->dropItem( );
-			if ( !std::dynamic_pointer_cast< RockEnemyBoss >( enemy ) ) {
+			if ( !std::dynamic_pointer_cast< RockEnemyBoss >( enemy ) &&
+				 !std::dynamic_pointer_cast< RockEnemyAttack >( enemy ) ) {
 				enemy->reset( );
 				_pops.push_back( RockPopPtr( new RockPop( enemy, false ) ) );
 			}

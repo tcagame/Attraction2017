@@ -82,7 +82,7 @@ void RockMapBoss::update( ) {
 			sound->playBGM( "yokai_music_04.wav" );
 			RockFamily::getTask( )->resetPos( Vector( 0, 0, 0 ) ); // room_fire
 			military->clean( );
-			military->addEnemy( RockEnemyPtr( new RockEnemyBossFire( Vector( 220, 10, 0 ) ) ) );
+			military->addEnemy( RockEnemyPtr( new RockEnemyBossFire( Vector( 220, 10, -20 ) ) ) );
 			break;
 		}
 		return;
