@@ -200,6 +200,19 @@ void Family::shiftPos( ) {
 		_player[ i ]->shiftPos( );
 	}
 	Military::getTask( )->shiftPos( );
-	Storage::getTask( )->shiftPos( );
-	Office::getTask( )->shiftPos( );
+	Storage ::getTask( )->shiftPos( );
+	Office  ::getTask( )->shiftPos( );
+	World   ::getTask( )->shiftPos( );
 }
+
+bool Family::isModeVirtue( ) const {
+	bool mode_virtue = false;
+	for ( int i = 0; i < MAX_PLAYER; i++ ) {
+		if ( _player[ i ]->getMode( ) == Player::MODE_VIRTUE ) {
+			mode_virtue = true;
+			break;
+		}
+	}
+	return mode_virtue;
+}
+
