@@ -101,30 +101,33 @@ void RockTheaterResult::update( ) {
 void RockTheaterResult::createImage( ) {
 	_draw_image->clear( );
 	Drawer::getTask( )->setImageTarget( _draw_image );
+	
+	_images[ 0 ]->setPos( 0, INFO_HEIGHT - 256 );
+	_images[ 0 ]->draw( );
 
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		Status::Player player = _status->getPlayer( i );
 		int sx = 0;
-		int sy = 0;
+		int sy = 30;
 		switch ( player.area ) {
 		case AREA_WAIT:
 			sx = i * ( SCREEN_WIDTH / 4 );
-			sy = 0;
+			sy += 0;
 			_images[ 5 ]->setPos( sx + 100, sy, sx + ( SCREEN_WIDTH / 4 ), sy + 100 );
 			_images[ 5 ]->draw( );
 			break;
 		case AREA_ENTRY:
 			sx = i * 100;
-			sy = 100;
+			sy += 120;
 			break;
 		case AREA_STREET_1:
 		case AREA_STREET_3:
 			sx = i * 100 + ONE_MONITOR_WIDTH * 1;
-			sy = 100;
+			sy += 120;
 			break;
 		case AREA_STREET_2:
 			sx = i * 100 + ONE_MONITOR_WIDTH * 2;
-			sy = 100;
+			sy += 120;
 			break;
 		default:
 			continue;
@@ -132,10 +135,7 @@ void RockTheaterResult::createImage( ) {
 		_images[ i + 1 ]->setPos( sx, sy, sx + 100, sy + 100 );
 		_images[ i + 1 ]->draw( );
 	}
-
-	_images[ 0 ]->setPos( 0, INFO_HEIGHT - 256 );
-	_images[ 0 ]->draw( );
-	
+		
 	Drawer::getTask( )->setImageTarget( ImageTargetPtr( ) );
 
 	setImage( _draw_image );
