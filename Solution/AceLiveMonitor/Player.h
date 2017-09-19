@@ -13,7 +13,6 @@ public:
 		ACTION_CONTINUE,
 		ACTION_WAIT,
 		ACTION_WALK,
-		ACTION_BRAKE,
 		ACTION_FLOAT,
 		ACTION_ATTACK,
 		ACTION_CHARGE,
@@ -67,7 +66,6 @@ private:
 	void actOnContinue( );
 	void actOnWaiting( );
 	void actOnWalking( );
-	void actOnBreaking( );
 	void actOnFloating( );
 	void actOnAttack( );
 	void actOnCharge( );
