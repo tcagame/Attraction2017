@@ -149,10 +149,13 @@
     <ClCompile Include="RockEnemyBossTree.cpp">
       <Filter>Enemy\boss</Filter>
     </ClCompile>
-    <ClCompile Include="RockEnemyBossFireAttack.cpp" />
     <ClCompile Include="RockEnemyBossRedDaemon.cpp">
       <Filter>Enemy\boss</Filter>
     </ClCompile>
+    <ClCompile Include="RockEnemyBossFireAttack.cpp">
+      <Filter>Enemy\boss</Filter>
+    </ClCompile>
+    <ClCompile Include="RockEnemyAttack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="define.h" />
@@ -306,10 +309,13 @@
     <ClInclude Include="RockEnemyBossTree.h">
       <Filter>Enemy\boss</Filter>
     </ClInclude>
-    <ClInclude Include="RockEnemyBossFireAttack.h" />
     <ClInclude Include="RockEnemyBossRedDaemon.h">
       <Filter>Enemy\boss</Filter>
     </ClInclude>
+    <ClInclude Include="RockEnemyBossFireAttack.h">
+      <Filter>Enemy\boss</Filter>
+    </ClInclude>
+    <ClInclude Include="RockEnemyAttack.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Item">

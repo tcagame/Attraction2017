@@ -1,7 +1,7 @@
 #pragma once
-#include "RockEnemy.h"
+#include "RockEnemyAttack.h"
 
-class RockEnemyBossFireAttack : public RockEnemy {
+class RockEnemyBossFireAttack : public RockEnemyAttack {
 public:
 	RockEnemyBossFireAttack( const Vector pos );
 	virtual ~RockEnemyBossFireAttack( );
