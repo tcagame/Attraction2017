@@ -5,7 +5,7 @@
 #include "Player.h"
 
 EventFlame::EventFlame( ) :
-Event( EVENT_FLAME ) {
+Event( EVENT_FLAME, DIR_LEFT ) {
 	_boss = EnemyBossPtr( new EnemyBossBloodDaemon( Vector( 800, 200 ) ) );
 	Military::getTask( )->popUp( _boss );
 }
@@ -36,5 +36,12 @@ bool EventFlame::isJoining( ) const {
 
 void EventFlame::join( PLAYER target ) {
 	PlayerPtr player = Family::getTask( )->getPlayer( target );
-	player->setActionEnteringFadeOut( );
+	if ( !player->isWearingItem( Player::ITEM_FLAME ) ) {
+		player->setActionEnteringFadeOut( );
+		start( );
+	}
+}
+
+int EventFlame::getLeavePosX( ) const {
+	return GRAPH_SIZE;
 }

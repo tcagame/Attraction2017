@@ -12,6 +12,8 @@ public:
 	void update( );
 	bool isJoining( ) const;
 	void join( PLAYER target );
+protected:
+	int getLeavePosX( ) const;
 private:
 	EnemyBossPtr _boss;
 };

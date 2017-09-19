@@ -3,7 +3,7 @@
 
 
 EventGamble::EventGamble( ) :
-Event( EVENT_GAMBLE ) {
+Event( EVENT_GAMBLE, DIR_LEFT ) {
 }
 
 

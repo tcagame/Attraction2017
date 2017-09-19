@@ -61,6 +61,7 @@ public:
 	void setActionEnteringFadeOut( );
 	void setActionEnteringSanzo( );
 	bool isEntering( ) const;
+	bool isWearingItem( ITEM item ) const;
 private:
 	void actOnEntry( );
 	void actOnContinue( );
@@ -84,6 +85,7 @@ private:
 	void appear( );
 	void updateShowMoney( );
 	void setProgressType( unsigned char type );
+	void jump( );
 private:
 	PLAYER _player;
 	ACTION _action;
@@ -91,7 +93,6 @@ private:
 	int _money;
 	int _show_money;
 	int _virtue;
-	int _over_charge_time;
 	int _charge_count;
 	int _unrivaled_count;
 	int _cool_time;

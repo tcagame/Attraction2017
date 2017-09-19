@@ -5,7 +5,7 @@
 #include "Player.h"
 
 EventMineral::EventMineral( ) :
-Event( EVENT_MINERAL ) {
+Event( EVENT_MINERAL, DIR_LEFT ) {
 	_boss = EnemyBossPtr( new EnemyBossRock( Vector( 800, 225 ) ) );
 	Military::getTask( )->popUp( _boss );
 }
@@ -36,5 +36,8 @@ bool EventMineral::isJoining( ) const {
 
 void EventMineral::join( PLAYER target ) {
 	PlayerPtr player = Family::getTask( )->getPlayer( target );
-	player->setActionEnteringFadeOut( );
+	if ( !player->isWearingItem( Player::ITEM_MINERAL ) ) {
+		player->setActionEnteringFadeOut( );
+		start( );
+	}
 }
