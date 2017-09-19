@@ -14,7 +14,6 @@ public:
 	virtual ModelMV1Ptr getModel( );
 	virtual double getAnimTime( ) const = 0;
 	virtual void dropItem( ) { };
-	void kickDown( );
 protected:
 	virtual void updateInCamera( );
 private:
