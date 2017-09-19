@@ -11,7 +11,7 @@ const int HP = 10;
 const double ANIM_SPEED = 0.9;
 const int SHOT_POS_RANGE = 30;
 const int MAX_ATTACK_NUM = 5;
-const int ATTACK_TIME = 180;
+const int ATTACK_TIME = 240;
 
 
 
@@ -39,7 +39,7 @@ void RockEnemyBossFire::act( ) {
 	RockMilitaryPtr military = RockMilitary::getTask( );
 	if ( getActCount( ) % ATTACK_TIME == 0 ) {
 		for ( int i = 0; i < MAX_ATTACK_NUM; i++ ) {
-			military->add( RockEnemyPtr( new RockEnemyBossFireAttack( ATTACK_FIRE_POS[ i ] ) ) );
+			military->addEnemy( RockEnemyPtr( new RockEnemyBossFireAttack( ATTACK_FIRE_POS[ i ] ) ) );
 		}
 	}
 }

@@ -20,14 +20,14 @@ public:
 public:
 	void update( );
 	void initialize( );
-	void add( RockEnemyPtr enemy );
+	void addPop( RockPopPtr pop );
+	void addEnemy( RockEnemyPtr enemy );
+	void addImpact( RockImpactPtr impact );
 	std::list< RockEnemyPtr > getEnemyList( ) const;
 	std::list< RockImpactPtr > getImpactList( ) const;
 	void clean( );
 	virtual void createEnemies( ) { };
 	RockEnemyPtr getOverLappedEnemy( RockCharacterPtr target ) const;
-protected:
-	void add( RockImpactPtr impact );
 private:
 	void updateEnemies( );
 	void updateImpact( );
