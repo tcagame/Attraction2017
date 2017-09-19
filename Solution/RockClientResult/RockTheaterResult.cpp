@@ -42,7 +42,10 @@ void RockTheaterResult::initialize( ) {
 	_images.push_back( drawer->createImage( "UI/breast4.png" ) );
 	_images.push_back( drawer->createImage( "result/ui_cover_entry.png" ) );
 
-	_end_image.push_back( drawer->createImage( "result/heaven_frame.png" ) );
+	_end_image.push_back( drawer->createImage( "result/heaven/heaven_tarosuke.png" ) );
+	_end_image.push_back( drawer->createImage( "result/heaven/heaven_garisuke.png" ) );
+	_end_image.push_back( drawer->createImage( "result/heaven/heaven_tarojiro.png" ) );
+	_end_image.push_back( drawer->createImage( "result/heaven/heaven_taromi.png" ) );
 	_end_image.push_back( drawer->createImage( "result/human_frame.png" ) );
 	_end_image.push_back( drawer->createImage( "result/damn_frame.png" ) );
 	_end_image.push_back( drawer->createImage( "result/hungry_frame.png" ) );
@@ -147,27 +150,22 @@ void RockTheaterResult::createEndingImage( ) {
 		if ( player.area == AREA_RESULT ) {
 			switch ( player.continue_num ) {
 			case 0:
-				//_ending_index = ENDING_HEAVEN * i * 5;
-				_ending_index = ENDING_HEAVEN;
+				_ending_index = ENDING_HEAVEN + i * 5;
 				break;
 			case 1:
 			case 2:
-				//_ending_index = ENDING_HUMAN * i * 5;
-				_ending_index = ENDING_HUMAN;
+				_ending_index = ENDING_HUMAN + i * 5;
 				break;
 			case 3:
 			case 4:
-				//_ending_index = ENDING_BRUET * i * 5;
-				_ending_index = ENDING_BRUET;
+				_ending_index = ENDING_BRUET + i * 5;
 				break;
 			case 5:
 			case 6:
-				//_ending_index = ENDING_BRAD * i * 5;
-				_ending_index = ENDING_BRAD;
+				_ending_index = ENDING_BRAD + i * 5;
 				break;
 			default:
-				//_ending_index = ENDING_HELL * i * 5;
-				_ending_index = ENDING_HELL;
+				_ending_index = ENDING_HELL + i * 5;
 				break;
 			}
 		}

@@ -9,6 +9,7 @@
 #include "Office.h"
 #include "Storage.h"
 #include "Armoury.h"
+#include "ItemVirtue.h"
 
 #include "EventTitle.h"
 #include "EventReddaemon.h"
@@ -23,6 +24,8 @@
 #include "EventEnma.h"
 #include "EventBudha.h"
 
+
+const int VIRTUE_RANGE = 500;
 
 const char * FILENAME_STREET          = "Resource/Ace/Street/mapdata";
 const char * FILENAME_EVENT_REDDAEMON = "Resource/Ace/Event/Reddaemon/mapdata";
@@ -41,7 +44,8 @@ WorldPtr World::getTask( ) {
 	return std::dynamic_pointer_cast< World >( Application::getInstance( )->getTask( getTag( ) ) );
 }
 
-World::World( ) {
+World::World( ) :
+_virtue_pos_x( 0 ) {
 	_map_street = MapPtr( new Map( FILENAME_STREET ) );
 	_map_event[ EVENT_REDDAEMON ] = MapPtr( new Map( FILENAME_EVENT_REDDAEMON ) );
 	_map_event[ EVENT_FLAME     ] = MapPtr( new Map( FILENAME_EVENT_FIRE      ) );
@@ -62,6 +66,7 @@ World::~World( ) {
 
 void World::initialize( ) {
 	changeEvent( EVENT_NONE );
+	_virtue_pos_x = Family::getTask( )->getCameraPosX( );
 }
 
 void World::playMapBgm( EVENT type ) {
@@ -113,15 +118,32 @@ MapPtr World::getMap( AREA area ) const {
 	} else {
 		map = _map_event[ _event->getType( ) ];
 	}
-	if ( !map ) {
-		int check = -1;
-	}
 	return map;
 }
 
 void World::update( ) {
 	updateEvent( );
 	updateBGM( );
+	updateVirtue( );
+}
+
+void World::shiftPos( ) {
+	int width = getMap( AREA_STREET )->getPageNum( ) * GRAPH_SIZE;
+	_virtue_pos_x -= width;
+}
+
+void World::updateVirtue( ) {
+	int camera_x = Family::getTask( )->getCameraPosX( );
+	if ( camera_x - _virtue_pos_x > VIRTUE_RANGE ) {
+		_virtue_pos_x = camera_x;
+		FamilyPtr family( Family::getTask( ) );
+		//徳回収モードの場合、徳を出す
+		if ( family->isModeVirtue( ) ) {
+			StoragePtr storage = Storage::getTask( );
+			storage->add( ItemPtr( new ItemVirtue( Vector( camera_x + 640, 100 ) ) ) );
+		}
+		
+	}
 }
 
 void World::updateBGM ( ) {

@@ -39,6 +39,9 @@ void Event::escape( ) {
 	FamilyPtr family( Family::getTask( ) );
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		PlayerPtr player = family->getPlayer( i );
+		if ( player->getArea( ) == AREA_STREET ) {
+			continue;
+		}
 		int area = ( int )player->getPos( ).x - 640;
 		if ( _exist_dir == DIR_LEFT ) {
 			if ( area < -OVERAREA ) {
