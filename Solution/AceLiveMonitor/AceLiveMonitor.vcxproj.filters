@@ -439,8 +439,14 @@
     <ClCompile Include="Property.cpp">
       <Filter>core</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyTurtle.cpp" />
-    <ClCompile Include="PopTurtle.cpp" />
+    <ClCompile Include="EventBudha.cpp" />
+    <ClCompile Include="EventEnma.cpp" />
+    <ClCompile Include="PopTurtle.cpp">
+      <Filter>Pop</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyTurtle.cpp">
+      <Filter>Character\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy.h">
@@ -878,9 +884,14 @@
     <ClInclude Include="Property.h">
       <Filter>core</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyTurtle.h" />
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="PopTurtle.h" />
+    <ClInclude Include="EventBudha.h" />
+    <ClInclude Include="EventEnma.h" />
+    <ClInclude Include="PopTurtle.h">
+      <Filter>Pop</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyTurtle.h">
+      <Filter>Character\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">

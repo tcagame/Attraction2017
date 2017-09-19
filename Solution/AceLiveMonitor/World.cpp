@@ -20,6 +20,8 @@
 #include "EventLake.h"
 #include "EventCall.h"
 #include "EventGamble.h"
+#include "EventEnma.h"
+#include "EventBudha.h"
 
 
 const char * FILENAME_STREET          = "Resource/Ace/Street/mapdata";
@@ -30,8 +32,10 @@ const char * FILENAME_EVENT_ROCK      = "Resource/Ace/Event/Rock/mapdata";
 const char * FILENAME_EVENT_SHOP      = "Resource/Ace/Event/Shop/mapdata";
 const char * FILENAME_EVENT_RYUGU     = "Resource/Ace/Event/Ryugu/mapdata"; 
 const char * FILENAME_EVENT_LAKE      = "Resource/Ace/Event/Lake/mapdata";
-const char * FILENAME_EVENT_CALL 	 = "Resource/Ace/Event/Call/mapdata";
-const char * FILENAME_EVENT_GAMBLE	 = "Resource/Ace/Event/Gamble/mapdata";
+const char * FILENAME_EVENT_CALL 	  = "Resource/Ace/Event/Call/mapdata";
+const char * FILENAME_EVENT_GAMBLE	  = "Resource/Ace/Event/Gamble/mapdata";
+const char * FILENAME_EVENT_ENMA	  = "Resource/Ace/Event/Enma/mapdata";
+const char * FILENAME_EVENT_BUDHA	  = "Resource/Ace/Event/Budha/mapdata";
 
 WorldPtr World::getTask( ) {
 	return std::dynamic_pointer_cast< World >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -48,6 +52,8 @@ World::World( ) {
 	_map_event[ EVENT_LAKE      ] = MapPtr( new Map( FILENAME_EVENT_LAKE      ) );
 	_map_event[ EVENT_CALL      ] = MapPtr( new Map( FILENAME_EVENT_GAMBLE	  ) );
 	_map_event[ EVENT_GAMBLE    ] = MapPtr( new Map( FILENAME_EVENT_GAMBLE	  ) );
+	//_map_event[ EVENT_ENMA      ] = MapPtr( new Map( FILENAME_EVENT_ENMA	  ) );
+	//_map_event[ EVENT_BUDHA     ] = MapPtr( new Map( FILENAME_EVENT_BUDHA	  ) );
 
 }
 
@@ -84,6 +90,10 @@ void World::playMapBgm( EVENT type ) {
 		break;
 	case EVENT_CALL:
 		sound->playBGM( "yokai_music_13.wav", false );
+		break;
+	case EVENT_ENMA:
+		break;
+	case EVENT_BUDHA:
 		break;
 	}
 }
@@ -136,7 +146,7 @@ void World::updateEvent( ) {
 
 		// 現在イベント
 		if ( _event->getType( ) == EVENT_NONE ) {
-			// イベントチェンジ
+			// イベントチェンジs
 			changeEvent( event );
 		}
 
@@ -201,6 +211,12 @@ void World::changeEvent( EVENT type ) {
 		break;
 	case EVENT_GAMBLE:
 		_event.reset( new EventGamble( ) );
+		break;
+	case EVENT_ENMA:
+		_event.reset( new EventEnma( ) );
+		break;
+	case EVENT_BUDHA:
+		_event.reset( new EventBudha( ) );
 		break;
 	}
 

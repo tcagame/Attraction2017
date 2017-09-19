@@ -169,7 +169,9 @@
     <ClCompile Include="EnemyTurtle.cpp" />
     <ClCompile Include="EnemyWaterGhost.cpp" />
     <ClCompile Include="Event.cpp" />
+    <ClCompile Include="EventBudha.cpp" />
     <ClCompile Include="EventCall.cpp" />
+    <ClCompile Include="EventEnma.cpp" />
     <ClCompile Include="EventFlame.cpp" />
     <ClCompile Include="EventGamble.cpp" />
     <ClCompile Include="EventLake.cpp" />
@@ -317,7 +319,9 @@
     <ClInclude Include="EnemyTurtle.h" />
     <ClInclude Include="EnemyWaterGhost.h" />
     <ClInclude Include="Event.h" />
+    <ClInclude Include="EventBudha.h" />
     <ClInclude Include="EventCall.h" />
+    <ClInclude Include="EventEnma.h" />
     <ClInclude Include="EventFlame.h" />
     <ClInclude Include="EventGamble.h" />
     <ClInclude Include="EventLake.h" />
@@ -439,7 +443,6 @@
     <ClInclude Include="PopWhiteMist.h" />
     <ClInclude Include="PopWind.h" />
     <ClInclude Include="Property.h" />
-    <ClInclude Include="resource.h" />
     <ClInclude Include="Sender.h" />
     <ClInclude Include="ShopItem.h" />
     <ClInclude Include="ShotMonmotaro.h" />
