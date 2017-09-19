@@ -16,7 +16,10 @@ _shot( false ) {
 
 
 RockEnemyBossFireAttack::~RockEnemyBossFireAttack( ) {
-
+	EffectPtr effect = Effect::getTask( );
+	if ( effect ) {
+		effect->stopEffect( _handle );
+	}
 }
 
 void RockEnemyBossFireAttack::act( ) {
