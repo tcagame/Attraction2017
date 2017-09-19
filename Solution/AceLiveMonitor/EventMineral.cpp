@@ -4,8 +4,11 @@
 #include "Family.h"
 #include "Player.h"
 
+const int START_POS_X = 256 + ( 1280 / 2 - 256 ) / 2;
+const int START_POS_Y = 128;
+
 EventMineral::EventMineral( ) :
-Event( EVENT_MINERAL ) {
+Event( EVENT_MINERAL, DIR_LEFT ) {
 	_boss = EnemyBossPtr( new EnemyBossRock( Vector( 800, 225 ) ) );
 	Military::getTask( )->popUp( _boss );
 }
@@ -19,7 +22,7 @@ void EventMineral::update( ) {
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		PlayerPtr player = Family::getTask( )->getPlayer( i );
 		if ( player->isEntering( ) ) {
-			player->enterEvent( );
+			player->enterEvent( START_POS_X, START_POS_Y );
 		}
 	}
 
@@ -36,5 +39,8 @@ bool EventMineral::isJoining( ) const {
 
 void EventMineral::join( PLAYER target ) {
 	PlayerPtr player = Family::getTask( )->getPlayer( target );
-	player->setActionEnteringFadeOut( );
+	if ( !player->isWearingItem( Player::ITEM_MINERAL ) ) {
+		player->setActionEnteringFadeOut( );
+		start( );
+	}
 }

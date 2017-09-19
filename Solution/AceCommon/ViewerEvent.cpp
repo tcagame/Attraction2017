@@ -35,6 +35,12 @@ ViewerEvent::ViewerEvent( ) {
 		//GAMBLE
 		sprintf_s( buf, "Event/gamble/back_%003d.png", i );
 		_images[ EVENT_GAMBLE * EVENT_PAGE_NUM + i ] = drawer->createImage( buf );
+		//ENMA
+		sprintf_s( buf, "Event/enma/back_%003d.png", i );
+		_images[ EVENT_ENMA * EVENT_PAGE_NUM + i ] = drawer->createImage( buf );
+		//BUDHA
+		sprintf_s( buf, "Event/shaka/back_%003d.png", i );
+		_images[ EVENT_BUDHA * EVENT_PAGE_NUM + i ] = drawer->createImage( buf );
 	}
 }
 

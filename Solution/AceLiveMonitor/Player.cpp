@@ -23,15 +23,16 @@
 //画像サイズ
 const int PLAYER_FOOT = 7;
 //速度
-const int MAX_SPEED = 20;
-const int MOVE_SPEED = 7;
-const int BRAKE_ACCEL = 5;
-const int JUMP_POWER = -10;
+const int MAX_SPEED = 7;
+const int ACCEL_SPEED_WALKING = 2;
+const int BREAK_SPEED_WALKING = 1;
+const int ACCEL_SPEED_FLOATING = 1;
+const int JUMP_POWER = 15;
 const int BLOW_POWER = -30;
 //攻撃関係
-const int CHARGE_PHASE_COUNT = 25;
+const int CHARGE_PHASE_COUNT = 15;
 const int MAX_CHARGE_COUNT = CHARGE_PHASE_COUNT * 4 - 1;
-const int BURST_TIME = 60;
+const int BURST_TIME = 30;
 const int MAX_HP = 16;
 const int COOL_TIME = 8;
 //アニメーション
@@ -62,14 +63,14 @@ const int MOTION_OFFSET[Player::MAX_ACTION] = {
 	162,  // ACTION_BLOW_AWAY,
 	48,  // ACTION_DEAD,
 	192, // ACTION_CALL,
-	0,   //ACTION_ENTERING_FADEOUT,
+	14 * 16,   //ACTION_ENTERING_FADEOUT,
 	0,   //ACTION_ENTERING_SANZO,
 };
 
 const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 	{ // たろすけ
-		0 , // ACTION_ENTRY,
-		0 , // ACTION_CONTINUE,
+		1 , // ACTION_ENTRY,
+		1 , // ACTION_CONTINUE,
 		17, // ACTION_WAIT,
 		16, // ACTION_WALK,
 		11, // ACTION_FLOAT,
@@ -80,12 +81,12 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		1 , // ACTION_BLOW_AWAY,
 		27, // ACTION_DEAD,
 		18, // ACTION_CALL,
-		1,  //ACTION_ENTERING_FADEOUT,
+		8,  //ACTION_ENTERING_FADEOUT,
 		1,  //ACTION_ENTERING_SANZO,
 	},
 	{ // たろじろー
-		0 , // ACTION_ENTRY,
-		0 , // ACTION_CONTINUE,
+		1 , // ACTION_ENTRY,
+		1 , // ACTION_CONTINUE,
 		21, // ACTION_WAIT,
 		12, // ACTION_WALK,
 		11, // ACTION_FLOAT,
@@ -96,12 +97,12 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		1 , // ACTION_BLOW_AWAY,
 		27, // ACTION_DEAD,
 		18, // ACTION_CALL,
-		1,  //ACTION_ENTERING_FADEOUT,
+		8,  //ACTION_ENTERING_FADEOUT,
 		1,  //ACTION_ENTERING_SANZO,
 	},
 	{ // ガりすけ
-		0 , // ACTION_ENTRY,
-		0 , // ACTION_CONTINUE,
+		1 , // ACTION_ENTRY,
+		1 , // ACTION_CONTINUE,
 		16, // ACTION_WAIT,
 		16, // ACTION_WALK,
 		11, // ACTION_FLOAT,
@@ -112,12 +113,12 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		1 , // ACTION_BLOW_AWAY,
 		27, // ACTION_DEAD,
 		12, // ACTION_CALL,
-		1,  //ACTION_ENTERING_FADEOUT,
+		8,  //ACTION_ENTERING_FADEOUT,
 		1,  //ACTION_ENTERING_SANZO,
 	},
 	{ // たろみ
-		0 , // ACTION_ENTRY,
-		0 , // ACTION_CONTINUE,
+		1 , // ACTION_ENTRY,
+		1 , // ACTION_CONTINUE,
 		16, // ACTION_WAIT,
 		16, // ACTION_WALK,
 		11, // ACTION_FLOAT,
@@ -128,14 +129,13 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		1 , // ACTION_BLOW_AWAY,
 		32, // ACTION_DEAD,
 		12, // ACTION_CALL,
-		1,  //ACTION_ENTERING_FADEOUT,
+		8,  //ACTION_ENTERING_FADEOUT,
 		1,  //ACTION_ENTERING_SANZO,
 	}
 };
 
 Player::Player( PLAYER player, Vector pos ) :
 Character( pos, NORMAL_CHAR_GRAPH_SIZE, MAX_HP ),
-_over_charge_time( -1 ),
 _player( player ),
 _device_id( -1 ),
 _money( 0 ),
@@ -298,8 +298,9 @@ void Player::actOnEntry( ) {
 		for ( int i = 0; i < MAX_ITEM; i++ ) {
 			_item[ i ] = false;
 		}
-		_virtue = 9;
-		_money = 98765;
+		_virtue = 0;
+		_money = 0;
+		_mode = MODE_NORMAL;
 	}
 }
 
@@ -340,25 +341,30 @@ void Player::updateProgressBar( ) {
 }
 
 void Player::actOnWaiting( ) {
-	//デバイスのスティック入力があった場合、action_walk
+	// 足場が無くなった
 	SoundPtr sound = Sound::getTask( );
 	if ( !isStanding( ) ) {
 		sound->playSE( "yokai_voice_17.wav" );
 		setAction( ACTION_FLOAT );
 		return;
 	}
-	Vector vec = getVec( );
 
+	// 入力があったら、ACTION_WALKへ
 	DevicePtr device( Device::getTask( ) );
-	if ( abs( device->getDirX( _device_id ) ) > 50 ) {
+	double dir_x = getVec( ).x;
+	if ( abs( device->getDirX( _device_id ) ) > 50 || dir_x != 0 ) {
 		setAction( ACTION_WALK );
 		return;
 	}
+
+	// 攻撃
 	if ( device->getPush( _device_id ) & BUTTON_A &&
 		 _cool_time > COOL_TIME ) {
 		setAction( ACTION_ATTACK );
 		return;
 	}
+
+	// チャージ
 	if ( device->getDirY( _device_id ) > 0 ) {
 		MapPtr map = World::getTask( )->getMap( getArea( ) );
 		if ( map->getObject( getPos( ) ) != OBJECT_WATER ) {
@@ -366,13 +372,14 @@ void Player::actOnWaiting( ) {
 			return;
 		}
 	}
+
+	// ジャンプ
 	if ( device->getPush( _device_id ) & BUTTON_C ) {
-		sound->playSE( "yokai_voice_17.wav" );
-		vec.y = JUMP_POWER;
-		setVec( vec );
-		setAction( ACTION_FLOAT );
+		jump( );
 		return;
 	}
+
+	// 止まっているときだけチャージが徐々に失われていく
 	_charge_count -= 2;
 	if ( _charge_count < 0 ) {
 		_charge_count = 0;
@@ -384,34 +391,65 @@ void Player::actOnWalking( ) {
 	DevicePtr device( Device::getTask( ) );
 	SoundPtr sound = Sound::getTask( );
 
-	// 遷移
+	// 地面から離れた
 	if ( !isStanding( ) ) {
 		sound->playSE( "yokai_voice_17.wav" );
 		setAction( ACTION_FLOAT );
 		return;
 	}
 
+	// ジャンプする？
+	if ( device->getPush( _device_id ) & BUTTON_C ) {
+		jump( );
+		return;
+	}
+
 	Vector vec = getVec( );
-	if ( vec.isOrijin( ) ) {
+
+	// ブレーキ処理
+	if ( vec.x < 0 ) {
+		vec.x += BREAK_SPEED_WALKING;
+		if ( vec.x > 0 ) {
+			vec.x = 0;
+		}
+	}
+	if ( vec.x > 0 ) {
+		vec.x += -BREAK_SPEED_WALKING;
+		if ( vec.x < 0 ) {
+			vec.x = 0;
+		}
+	}
+
+	// アクセル処理
+	if ( device->getDirX( _device_id ) < -50 ) {
+		vec.x += -ACCEL_SPEED_WALKING;
+		if ( vec.x < -MAX_SPEED ) {
+			vec.x = -MAX_SPEED;
+		}
+	}
+	if ( device->getDirX( _device_id ) > 50 ) {
+		vec.x += ACCEL_SPEED_WALKING;
+		if ( vec.x > MAX_SPEED ) {
+			vec.x = MAX_SPEED;
+		}
+	}
+
+	// 移動量更新
+	setVec( vec );
+	
+	// 止まった
+	if ( getVec( ).isOrijin( ) ) {
 		setAction( ACTION_WAIT );
 		return;
 	}
 
-	if ( device->getPush( _device_id ) & BUTTON_C ) {
-		sound->playSE( "yokai_voice_17.wav" );
-		vec.y = JUMP_POWER;
-		setVec( vec );
-		setAction( ACTION_FLOAT );
-		return;
+	// ショット
+	if ( device->getPush( _device_id ) & BUTTON_A &&
+		 _cool_time > COOL_TIME ) {
+		setAction( ACTION_ATTACK );
 	}
-
-	// 歩く処理
-	if ( device->getDirX( _device_id ) < -50 ) {
-		vec.x = -MOVE_SPEED;
-	}
-	if ( device->getDirX( _device_id ) > 50 ) {
-		vec.x = MOVE_SPEED;
-	}
+	
+	// 歩く音
 	MapPtr map = World::getTask( )->getMap( getArea( ) );
 	if ( map->getObject( getPos( ) ) == OBJECT_WATER ) {
 		if ( !sound->isPlayingSE( "yokai_voice_14.wav" ) ) {
@@ -422,82 +460,40 @@ void Player::actOnWalking( ) {
 			sound->playSE( "yokai_voice_15.wav" );
 		}
 	}
-	setVec( vec );
-
-	if ( device->getPush( _device_id ) & BUTTON_A &&
-		 _cool_time > COOL_TIME ) {
-		setAction( ACTION_ATTACK );
-	}
 }
-/*
-	if ( vec.x < 0 ) {
-		if ( vec.x < -BRAKE_ACCEL ) {
-			vec.x += BRAKE_ACCEL;
-		} else {
-			vec.x = 0;
-		}
-	}
-	if ( vec.x > 0 ) {
-		if ( vec.x > BRAKE_ACCEL ) {
-			vec.x -= BRAKE_ACCEL;
-		} else {
-			vec.x = 0;
-		}
-	}
-	setVec( vec );
-
-	if ( device->getPush( _device_id ) & BUTTON_A &&
-		 _cool_time > COOL_TIME ) {
-		setAction( ACTION_ATTACK );
-	}
-	*/
 
 void Player::actOnFloating( ) {
+	// 地面に降り立った
 	if ( isStanding( ) ) {
 		setAction( ACTION_WAIT );
 		return;
 	}
+	
 	DevicePtr device( Device::getTask( ) );
-	Vector vec = getVec( );
-	// 空中の移動
-	int dir_x = device->getDirX( _device_id );
-	//右に移動してるとき
-	if ( vec.x >= 0 ) {
-		//入力方向が逆
-		if ( dir_x < 0 ) {
-			if ( vec.x > BRAKE_ACCEL ) {
-				vec.x -= BRAKE_ACCEL;
-			} else {
-				vec.x = 0;
-			}
-		}
-		//入力が同じ
-		if ( dir_x > 0 ) {
-			vec.x = MOVE_SPEED;
-		}
-	}
 
-	//左に移動してるとき
-	if ( vec.x <= 0 ) {
-		//入力方向が逆
-		if ( dir_x > 0 ) {
-			if ( vec.x < -BRAKE_ACCEL ) {
-				vec.x += BRAKE_ACCEL;
-			} else {
-				vec.x = 0;
-			}
-		}
-		//入力方向が一緒
-		if ( dir_x < 0 ) {
-			vec.x = -MOVE_SPEED;
-		}
-	}
-
-	setVec( vec );
+	// 攻撃
 	if ( device->getPush( _device_id ) & BUTTON_A &&
 		 _cool_time > COOL_TIME ) {
 		setAction( ACTION_ATTACK );
+		return;
 	}
+
+	// 入力している方向にアクセルを加える
+	int dir_x = device->getDirX( _device_id );
+	Vector vec = getVec( );
+	if ( dir_x < -50 ) {
+		vec.x += -ACCEL_SPEED_FLOATING;
+		if ( vec.x < -MAX_SPEED ) {
+			vec.x = -MAX_SPEED;
+		}
+	}
+	if ( dir_x > 50 ) {
+		vec.x += ACCEL_SPEED_FLOATING;
+		if ( vec.x > MAX_SPEED ) {
+			vec.x = MAX_SPEED;
+		}
+	}
+	setVec( vec );
 }
 
 void Player::actOnAttack( ) {
@@ -511,6 +507,8 @@ void Player::actOnAttack( ) {
 	Armoury::getTask( )->add( shot );
 	_charge_count = 0;
 	_cool_time = 0;
+	
+	setAction( ACTION_FLOAT );
 }
 
 void Player::actOnCharge( ) {
@@ -545,10 +543,7 @@ void Player::actOnCharge( ) {
 		}
 		Vector vec = getVec( );
 		if ( device->getPush( _device_id ) & BUTTON_C ) {
-			Sound::getTask( )->playSE( "yokai_voice_17.wav" );
-			vec.y = JUMP_POWER;
-			setVec( vec );
-			setAction( ACTION_FLOAT );
+			jump( );
 			return;
 		}
 	}
@@ -564,21 +559,14 @@ void Player::actOnCharge( ) {
 	}
 	if ( _charge_count > MAX_CHARGE_COUNT ) {
 		_charge_count = 0;
-		_over_charge_time = getActCount( );
 		sound->stopSE( "yokai_se_22.wav" );
 		setAction( ACTION_OVER_CHARGE );
 	}
 }
 
 void Player::actOnOverCharge( ) {
-	if ( _over_charge_time < 0 ) {
+	if ( getActCount( ) > BURST_TIME ) {
 		setAction( ACTION_WAIT );
-		return;
-	}
-	
-	if ( getActCount( ) - _over_charge_time > BURST_TIME ) {
-		setAction( ACTION_WAIT );
-		_over_charge_time = -1;
 	}
 }
 
@@ -743,11 +731,7 @@ bool Player::isOnHead( CharacterPtr target ) const {
 }
 
 void Player::bound( ) {
-	setAction( ACTION_FLOAT );
-	Sound::getTask( )->playSE( "yokai_voice_17.wav" );
-	Vector vec = getVec( );
-	vec.y = JUMP_POWER;
-	setVec( vec );
+	jump( );
 }
 
 void Player::blowAway( ) {
@@ -854,7 +838,6 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 	switch ( _action ) {
 	case ACTION_DAMEGE:
 	case ACTION_BLOW_AWAY:
-	case ACTION_ENTERING_FADEOUT:
 		break;
 	case ACTION_ENTRY:
 	case ACTION_CONTINUE:
@@ -870,21 +853,12 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		motion = getActCount( ) / PLAYER_ANIM_WAIT_COUNT;
 		break;
 	case ACTION_OVER_CHARGE:
-		{
-			int anim = getActCount( ) / PLAYER_ANIM_WAIT_COUNT;
-			int stop_anim = 2;
-			int remaining_anim = 3;
-			if ( player == PLAYER::PLAYER_TAROJIRO ) {
-				stop_anim = stop_anim + 1;
-				remaining_anim = remaining_anim - 2;
-			}
-			if ( anim > stop_anim && getActCount( ) - _over_charge_time < BURST_TIME - ( PLAYER_ANIM_WAIT_COUNT * remaining_anim ) ) {
-				anim = stop_anim;
-			}
-
-			motion = anim;
-			break;
+		motion = getActCount( ) * num / BURST_TIME;
+		if ( motion > num - 1 ) {
+			motion = num - 1;
 		}
+			
+		break;
 	case ACTION_DEAD:
 		{
 			int anim = getActCount( ) / ( PLAYER_ANIM_WAIT_COUNT / 2 );
@@ -903,6 +877,9 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 			motion = anim;
 			break;
 		}
+	case ACTION_ENTERING_FADEOUT:
+		motion = getActCount( ) * num / ENTERING_COUNT;
+		break;
 	case ACTION_ENTERING_SANZO:
 		{
 			// 蛇三蔵
@@ -916,11 +893,8 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 			break;
 		}
 	}
-	if ( motion + num != 0 ) {
-		pattern = off + ( motion + num ) % num;
-	} else {
-		pattern = off;
-	}
+
+	pattern = off + motion % num;
 	
 	int offset = 112;
 	int anim_num = 16;
@@ -967,9 +941,13 @@ bool Player::isEntering( ) const {
 	return getActCount( ) >= ENTERING_COUNT;
 }
 
-void Player::enterEvent( ) {
+bool Player::isWearingItem( ITEM item ) const {
+	return _item[ item ];
+}
+
+void Player::enterEvent( int x, int y ) {
 	setArea( AREA_EVENT );
-	setPos( Vector( GRAPH_SIZE * 3 / 2, 0 ) );
+	setPos( Vector( x, y ) );
 	setVec( Vector( ) );
 	setAction( ACTION_FLOAT );
 }
@@ -1022,10 +1000,34 @@ EVENT Player::getOnEvent( ) const {
 		event = EVENT_GAMBLE;
 		break;
 	}
+
+
+	if ( _mode == MODE_ENMA ) {
+		event = EVENT_ENMA;
+	}
+
 	return event;
 }
 
 
 void Player::pickUpItem( ITEM item ) {
 	_item[ item ] = true;
+	if ( _item[ ITEM_WOOD ] &&
+		 _item[ ITEM_FLAME ] &&
+		 _item[ ITEM_MINERAL ] &&
+		 _mode == MODE_NORMAL ) {
+		_mode = MODE_ENMA;
+	}
+}
+
+void Player::jump( ) {
+	Sound::getTask( )->playSE( "yokai_voice_17.wav" );
+	Vector vec = getVec( );
+	vec.y = -JUMP_POWER;
+	setVec( vec );
+	setAction( ACTION_FLOAT );
+}
+
+Player::MODE Player::getMode( ) const {
+	return _mode;
 }

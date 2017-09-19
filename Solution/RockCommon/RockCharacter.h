@@ -5,6 +5,8 @@
 #include "ModelMV1.h"
 
 PTR( RockCharacter );
+PTR( RockPlayer );
+PTR( RockEnemy );
 
 class RockCharacter {
 public:
@@ -21,7 +23,8 @@ public:
 	bool isOnHead( RockCharacterConstPtr target ) const;
 	bool isOverLapped( RockCharacterConstPtr target ) const;
 	void back( );
-	void adjustPosForOverLapped( RockCharacterPtr target );
+	void adjustPosForOverLapped( RockPlayerPtr target );
+	void adjustPosForOverLapped( RockEnemyPtr target );
 	virtual void bound( );
 	virtual ModelMV1Ptr getModel( ) const { return ModelMV1Ptr( ); };
 protected:

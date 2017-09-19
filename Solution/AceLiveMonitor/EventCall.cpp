@@ -2,7 +2,7 @@
 
 
 EventCall::EventCall( ) :
-Event( EVENT_CALL ) {
+Event( EVENT_CALL, DIR_LEFT ) {
 }
 
 

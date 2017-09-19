@@ -6,6 +6,8 @@
 #include "RockCasket.h"
 #include "RockStorage.h"
 #include "Status.h"
+#include "RockOffice.h"
+#include "RockEventStartFace.h"
 
 const Vector ENTRY_POS = Vector( 200, 0, 270 );
 const double ENTRY_RADIUS = 40;
@@ -28,6 +30,8 @@ void RockMapEntry::initialize( ) {
 	col01->setTrans( Matrix::makeTransformTranslation( Vector( 0, 10, 0 ) ) );
 	col01->draw( );
 	addColModel( col01 );
+
+	RockOffice::getTask( )->add( RockEventCharacterPtr( new RockEventStartFace( Vector( 240, 80, 190 ) ) ) );
 }
 
 

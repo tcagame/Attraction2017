@@ -4,7 +4,7 @@
 #include "RockMap.h"
 #include "Drawer.h"
 
-const double KICK_POWER = -5.0;
+const double KICK_POWER = -10.0;
 const int MAX_OUT_CAMERA_COUNT = 90;
 
 RockEnemy::RockEnemy( const Vector& pos, DOLL doll, int hp, int force, int radius, int height, bool mass, bool head ) :
@@ -60,10 +60,6 @@ ModelMV1Ptr RockEnemy::getModel( ) {
 	model->setRot( Matrix::makeTransformRotation( axis, rot ) );
 	model->setTrans( Matrix::makeTransformTranslation( getPos( ) ) );
 	return model;
-}
-
-void RockEnemy::kickDown( ) {
-	setVec( Vector( getVec( ).x, KICK_POWER, getVec( ).z ) );
 }
 
 void RockEnemy::updateInCamera( ) {

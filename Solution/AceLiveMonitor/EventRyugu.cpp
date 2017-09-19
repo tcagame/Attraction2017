@@ -2,7 +2,7 @@
 #include "Office.h"
 
 EventRyugu::EventRyugu( ) :
-Event( EVENT_RYUGU ) {
+Event( EVENT_RYUGU, DIR_RIGHT ) {
 	Office::getTask( )->popUpNPC( EVENT_RYUGU );
 }
 
