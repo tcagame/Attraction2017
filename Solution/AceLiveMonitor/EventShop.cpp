@@ -5,7 +5,7 @@
 #include "Player.h"
 
 EventShop::EventShop( ) :
-Event( EVENT_SHOP ) {
+Event( EVENT_SHOP, DIR_LEFT ) {
 	Office::getTask( )->popUpNPC( EVENT_SHOP );
 	Storage::getTask( )->createShopItem( );
 }
@@ -34,4 +34,5 @@ bool EventShop::isJoining( ) const {
 void EventShop::join( PLAYER target ) {
 	PlayerPtr player = Family::getTask( )->getPlayer( target );
 	player->setActionEnteringSanzo( );
+	start( );
 }

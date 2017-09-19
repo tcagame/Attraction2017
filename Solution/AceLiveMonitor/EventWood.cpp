@@ -5,7 +5,7 @@
 #include "Player.h"
 
 EventWood::EventWood( ) :
-Event( EVENT_WOOD ) {
+Event( EVENT_WOOD, DIR_LEFT ) {
 	_boss = EnemyBossPtr( new EnemyBossMonsterTree( Vector( 800, 225 ) ) );
 	Military::getTask( )->popUp( _boss );
 }
@@ -36,5 +36,8 @@ bool EventWood::isJoining( ) const {
 
 void EventWood::join( PLAYER target ) {
 	PlayerPtr player = Family::getTask( )->getPlayer( target );
-	player->setActionEnteringFadeOut( );
+	if ( !player->isWearingItem( Player::ITEM_WOOD ) ) {
+		player->setActionEnteringFadeOut( );
+		start( );
+	}
 }

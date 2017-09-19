@@ -3,7 +3,7 @@
 
 
 EventLake::EventLake( ) :
-Event( EVENT_LAKE ) {
+Event( EVENT_LAKE, DIR_RIGHT ) {
 }
 
 
