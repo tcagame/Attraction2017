@@ -9,7 +9,7 @@ public:
 		TYPE_500,
 	};
 public:
-	ItemMoney( const Vector& pos, TYPE money );
+	ItemMoney( const Vector& pos, TYPE money, AREA area );
 	virtual ~ItemMoney( );
 public:
 	void setSynchronousData( int camera_pos ) const;

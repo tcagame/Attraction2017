@@ -206,6 +206,7 @@ void Player::updatetDevice( ) {
 	} else {
 		if ( device->getButton( _device_id ) == BUTTON_B + BUTTON_C + BUTTON_D ) {
 			setAction( ACTION_ENTRY );
+			_progress_count = 0;
 		}
 		if ( device->getDirY( _device_id ) < 0 &&
 			device->getButton( _device_id ) == BUTTON_E + BUTTON_F ) {
@@ -294,6 +295,7 @@ void Player::updateProgressEffect( ) {
 
 	_progress_count += 3;
 	if ( _progress_count >= 100 ) {
+		_progress_count = 100;
 		_progress_type = SynchronousData::PROGRESS_NONE;
 	}
 }
@@ -307,13 +309,12 @@ void Player::actOnEntry( ) {
 		appear( );
 		// アイテム初期化
 		for ( int i = 0; i < MAX_ITEM; i++ ) {
-			_item[ i ] = true;
+			_item[ i ] = false;
 		}
-		_item[ ITEM_WOOD ] = false;
 
 		_virtue = 0;
 		_money = 0;
-		_mode = MODE_NORMAL;
+		_mode = MODE_VIRTUE;
 	}
 }
 
@@ -651,6 +652,7 @@ void Player::actOnDead( ) {
 		int chip_size = getChipSize( );
 		Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, chip_size / 2 ), area, chip_size * 2 ) ) );
 		// コンティニューへ
+		_progress_count = 0;
 		setAction( ACTION_CONTINUE );
 		setArea( AREA_STREET );
 	}
@@ -770,7 +772,6 @@ void Player::pickUpVirtue( ) {
 void Player::setAction( ACTION action ) {
 	_action = action;
 	setActCount( 0 );
-	_progress_count = 0;
 }
 
 void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
@@ -1026,6 +1027,16 @@ EVENT Player::getOnEvent( ) const {
 
 void Player::pickUpItem( ITEM item ) {
 	_item[ item ] = true;
+	switch ( item ) {
+	case ITEM_DANGO      : setProgressType( SynchronousData::PROGRESS_ITEM_DANGO       ); break;
+	case ITEM_HEART	     : setProgressType( SynchronousData::PROGRESS_ITEM_HEART	      ); break;
+	case ITEM_HYPERTROPHY: setProgressType( SynchronousData::PROGRESS_ITEM_HYPERTROPHY ); break;
+	case ITEM_SHORTENING : setProgressType( SynchronousData::PROGRESS_ITEM_SHORTENING  ); break;	
+	case ITEM_WOOD	     : setProgressType( SynchronousData::PROGRESS_ITEM_WOOD	      ); break;
+	case ITEM_FLAME	     : setProgressType( SynchronousData::PROGRESS_ITEM_FLAME	      ); break;
+	case ITEM_MINERAL    : setProgressType( SynchronousData::PROGRESS_ITEM_MINERAL     ); break;
+	}
+
 	if ( _item[ ITEM_WOOD ] &&
 		 _item[ ITEM_FLAME ] &&
 		 _item[ ITEM_MINERAL ] &&

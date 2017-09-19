@@ -124,6 +124,17 @@ void ViewerStatus::drawItem( PLAYER player, int sx, int sy ) const {
 	item[ 4 ] = data->isInProssessionOfStatusItem( player, SynchronousData::ITEM_WOOD );
 	item[ 5 ] = data->isInProssessionOfStatusItem( player, SynchronousData::ITEM_FLAME );
 	item[ 6 ] = data->isInProssessionOfStatusItem( player, SynchronousData::ITEM_MINERAL );
+	
+	for ( int i = 0; i < 7; i++ ) {
+		if ( !item[ i ] ) {
+			continue;
+		}
+
+		int x = sx + ITEM_OX + i * ITEM_PITCH + ( i == 0 ) * 12;
+		int y = sy + ITEM_OY;
+		_image_item[ i ]->setPos( x, y );
+		_image_item[ i ]->draw( );
+	}
 
 	int target = -1;
 	switch ( data->getStatusProgressType( player ) ) {
@@ -136,24 +147,13 @@ void ViewerStatus::drawItem( PLAYER player, int sx, int sy ) const {
 	case SynchronousData::PROGRESS_ITEM_MINERAL    : target = 6; break;
 	}
 
-	for ( int i = 0; i < 7; i++ ) {
-		if ( !item[ i ] ) {
-			continue;
-		}
-
-		int x = sx + ITEM_OX + i * ITEM_PITCH + ( i == 0 ) * 12;
-		int y = sy + ITEM_OY;
-		_image_item[ i ]->setPos( x, y );
-		_image_item[ i ]->draw( );
-	}
-
 	int count = data->getStatusProgressCount( player );
-	if ( target >= 0 && count < 100 ) {
+	if ( target >= 0 ) {
 		int x = sx + ITEM_OX + target * ITEM_PITCH + ( target == 0 ) * 12 - 16;
 		int y = sy + ITEM_OY - 16;
 		int n = count * 13 / 100;
 		_image_item_effect->setRect( n % 4 * 128, n / 4 * 128, 128, 128 );
-		_image_item_effect->setPos( x, y, x+ 64, y + 64 );
+		_image_item_effect->setPos( x, y, x + 64, y + 64 );
 		_image_item_effect->draw( );
 	}
 }

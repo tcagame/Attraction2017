@@ -5,8 +5,8 @@
 const int WAIT_ANIM_TIME = 150;
 const int MAX_ANIM_NUM = 2;
 
-ItemMoney::ItemMoney( const Vector& pos, TYPE type ) :
-Item( pos ),
+ItemMoney::ItemMoney( const Vector& pos, TYPE type, AREA area ) :
+Item( pos, area ),
 _type( type ) {
 }
 

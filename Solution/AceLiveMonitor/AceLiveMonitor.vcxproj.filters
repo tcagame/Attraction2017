@@ -229,20 +229,11 @@
     <ClCompile Include="Item.cpp">
       <Filter>Item</Filter>
     </ClCompile>
-    <ClCompile Include="ItemFire.cpp">
-      <Filter>Item</Filter>
-    </ClCompile>
-    <ClCompile Include="ItemTree.cpp">
-      <Filter>Item</Filter>
-    </ClCompile>
     <ClCompile Include="ItemMoney.cpp">
       <Filter>Item</Filter>
     </ClCompile>
     <ClCompile Include="EnemyHellFire.cpp">
       <Filter>Character\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="ItemRock.cpp">
-      <Filter>Item</Filter>
     </ClCompile>
     <ClCompile Include="EnemyEyeDaemon.cpp">
       <Filter>Character\Enemy</Filter>
@@ -681,20 +672,11 @@
     <ClInclude Include="Item.h">
       <Filter>Item</Filter>
     </ClInclude>
-    <ClInclude Include="ItemFire.h">
-      <Filter>Item</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemTree.h">
-      <Filter>Item</Filter>
-    </ClInclude>
     <ClInclude Include="ItemMoney.h">
       <Filter>Item</Filter>
     </ClInclude>
     <ClInclude Include="EnemyHellFire.h">
       <Filter>Character\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemRock.h">
-      <Filter>Item</Filter>
     </ClInclude>
     <ClInclude Include="EnemyEyeDaemon.h">
       <Filter>Character\Enemy</Filter>

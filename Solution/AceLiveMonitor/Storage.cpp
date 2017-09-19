@@ -5,10 +5,10 @@
 #include "Player.h"
 #include "ItemMoney.h"
 #include "ItemVirtue.h"
-#include "SynchronousData.h"
 #include "ItemDango.h"
 #include "ItemEnhancedAttack.h"
 #include "ItemEnhancedCharge.h"
+#include "SynchronousData.h"
 #include "World.h"
 
 PTR( ItemMoney );
@@ -46,15 +46,10 @@ void Storage::update( ) {
 		}
 		ite++;
 	}
-	//createVirtue( );
 }
 
 void Storage::add( ItemPtr item ) {
 	_items.push_back( item );
-}
-
-std::list< ItemPtr > Storage::getItems( ) const {
-	return _items;
 }
 
 bool Storage::isExistanceEventItem( ) const {
@@ -88,19 +83,6 @@ PlayerPtr Storage::getOverLappedPlayer( ItemPtr item ) const {
 	return result;
 }
 
-void Storage::createVirtue( ) {
-	static int count = 0;
-	count++;
-	const int create_time = 60;
-	if ( !( count % create_time ) ) {
-		FamilyPtr family( Family::getTask( ) );
-		Vector pos = Vector( family->getCameraPosX( ) + ( rand( ) % SCREEN_WIDTH ), 100 );
-		ItemPtr virtue( new ItemVirtue( pos ) );
-		virtue->setArea( AREA_STREET );
-		add( virtue );
-	}
-}
-
 bool Storage::pickUpItem( ItemPtr item, PlayerPtr player ) {
 	bool result = true;
 	{//‚¨‹à
@@ -129,7 +111,7 @@ bool Storage::pickUpItem( ItemPtr item, PlayerPtr player ) {
 	}
 	return result;
 }
-
+/*
 void Storage::createShopItem( ) {
 	{
 		ItemPtr item = ShopItemPtr( new ItemDango( Vector( 500, 0 ) ) );
@@ -147,6 +129,7 @@ void Storage::createShopItem( ) {
 		_items.push_back( item );
 	}
 }
+*/
 
 void Storage::eraseEventItem( ) {
 	std::list< ItemPtr >::iterator ite = _items.begin( );

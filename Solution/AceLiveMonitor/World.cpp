@@ -25,7 +25,7 @@
 #include "EventBudha.h"
 
 
-const int VIRTUE_RANGE = 500;
+const int VIRTUE_RANGE = 1300;
 
 const char * FILENAME_STREET          = "Resource/Ace/Street/mapdata";
 const char * FILENAME_EVENT_REDDAEMON = "Resource/Ace/Event/Reddaemon/mapdata";
@@ -140,7 +140,8 @@ void World::updateVirtue( ) {
 		//徳回収モードの場合、徳を出す
 		if ( family->isModeVirtue( ) ) {
 			StoragePtr storage = Storage::getTask( );
-			storage->add( ItemPtr( new ItemVirtue( Vector( camera_x + 640, 100 ) ) ) );
+			ItemVirtuePtr virtue( new ItemVirtue( camera_x + 1280 ) );
+			storage->add( virtue );
 		}
 		
 	}

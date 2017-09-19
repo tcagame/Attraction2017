@@ -10,7 +10,7 @@ const int START_POS_Y = 128;
 EventShop::EventShop( ) :
 Event( EVENT_SHOP, DIR_LEFT ) {
 	Office::getTask( )->popUpNPC( EVENT_SHOP );
-	Storage::getTask( )->createShopItem( );
+	// ここにショップのアイテムを設定
 }
 
 

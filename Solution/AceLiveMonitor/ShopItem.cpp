@@ -1,9 +1,7 @@
 #include "ShopItem.h"
 
-
-
 ShopItem::ShopItem( const Vector& pos, int price ) :
-Item( pos, 64 ),
+Item( pos, AREA_EVENT, 64 ),
 _price( price ) {
 }
 

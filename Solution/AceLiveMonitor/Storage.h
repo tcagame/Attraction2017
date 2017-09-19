@@ -19,8 +19,6 @@ public:
 	void update( );
 	void add( ItemPtr item );
 	bool isExistanceEventItem( ) const;
-	std::list< ItemPtr > getItems( ) const;
-	void createShopItem( );
 	void eraseEventItem( );
 	void shiftPos( );
 private:
