@@ -60,12 +60,12 @@ void RockMapTest::initialize( ) {
 	//アイテム
 	//storage->addItem( RockItemPtr( new RockItemToku( Vector( 100, 50, 0 ) ) ) );
 	//storage->addItem( RockItemPtr( new RockItemRock( Vector( 0, 50, 0 ) ) ) );
-	storage->addItem( RockItemPtr( new RockItemMoney( Vector( 0, 50, 0 ), 500 ) ) );
+	//storage->addItem( RockItemPtr( new RockItemMoney( Vector( 0, 50, 0 ), 500 ) ) );
 	////ショップアイテム
 	//storage->addShopItem( RockItemPtr( new RockItemDango( Vector( -50, 50, 0 ) ) ) );
 	//storage->addShopItem( RockItemPtr( new RockItemEnhancePower( Vector( 200, 50, 0 ) ) ) );
 	//祭壇
-	storage->addAlter( RockAlterPtr( new RockAlter( Vector( 50, 0, 50 ), Vector( 50, 50, 50 ) ) ) );
+	//storage->addAlter( RockAlterPtr( new RockAlter( Vector( 50, 0, 50 ), Vector( 50, 50, 50 ) ) ) );
 	//エネミー
 	genarateEnemies( );
 }
@@ -97,7 +97,7 @@ bool RockMapTest::isNext( const Vector& pos ) const {
 
 void RockMapTest::genarateEnemies( ) {
 	RockMilitaryPtr military = RockMilitary::getTask( );
-	military->addEnemy( RockEnemyPtr( new RockEnemyBossTree( Vector( 0, 0, 0 ) ) ) );
+	military->addEnemy( RockEnemyPtr( new RockEnemyBossRock( Vector( 10, 0, 10 ) ) ) );
 	///military->add( RockEnemyPtr( new RockEnemyGhost( Vector( 0, 40, 0 ) ) ) );
 	///military->add( RockEnemyPtr( new RockEnemyRedBard( Vector( 10, 30, 10 ) ) ) );
 	///military->add( RockEnemyPtr( new RockEnemyWaterGhost( Vector( -10, 30, 30 ) ) ) );

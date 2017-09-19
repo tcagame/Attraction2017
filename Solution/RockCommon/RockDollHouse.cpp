@@ -65,8 +65,17 @@ void RockDollHouse::initialize( ) {
 	_dolls[ DOLL_STONE                 ]->load( "Resource/Rock/enemy/enm04_stone/enm04.mv1" );
 	_dolls[ DOLL_BOSS_FIRE             ]->load( "Resource/Rock/enemy/enm20_fire/enm20_fire.mv1" );
 	_dolls[ DOLL_BOSS_TREE             ]->load( "Resource/Rock/enemy/enm21_tree/enm21_tree.mv1" );
-	_dolls[ DOLL_BOSS_ROCK	           ]->load( "Resource/Rock/enemy/enm22_rock/scenes/enm22_rock.mv1" );
 	_dolls[ DOLL_BOSS_RED_DAEMON	   ]->load( "Resource/Rock/enemy/enm23_reddaemon/enm23_a02.mv1" );
+	_dolls[ DOLL_BOSS_ROCK	           ]->load( "Resource/Rock/enemy/enm22_rock/enm22_rock/enm22_rock.mv1" );
+	_dolls[ DOLL_BOSS_ROCK_ATTACK_1    ]->load( "Resource/Rock/enemy/enm22_rock/enm22_rock/enm22_01.mv1" );
+	_dolls[ DOLL_BOSS_ROCK_ATTACK_2    ]->load( "Resource/Rock/enemy/enm22_rock/enm22_rock/enm22_02.mv1" );
+	_dolls[ DOLL_BOSS_ROCK_ATTACK_3    ]->load( "Resource/Rock/enemy/enm22_rock/enm22_rock/enm22_03.mv1" );
+	_dolls[ DOLL_BOSS_ROCK_ATTACK_4    ]->load( "Resource/Rock/enemy/enm22_rock/enm22_rock/enm22_04.mv1" );
+	_dolls[ DOLL_BOSS_ROCK_ATTACK_5    ]->load( "Resource/Rock/enemy/enm22_rock/enm22_rock/enm22_05.mv1" );
+	_dolls[ DOLL_BOSS_ROCK_ATTACK_6    ]->load( "Resource/Rock/enemy/enm22_rock/enm22_rock/enm22_06.mv1" );
+	_dolls[ DOLL_BOSS_ROCK_ATTACK_7    ]->load( "Resource/Rock/enemy/enm22_rock/enm22_rock/enm22_07.mv1" );
+	_dolls[ DOLL_BOSS_ROCK_ATTACK_8    ]->load( "Resource/Rock/enemy/enm22_rock/enm22_rock/enm22_08.mv1" );
+	_dolls[ DOLL_BOSS_ROCK_ATTACK_9    ]->load( "Resource/Rock/enemy/enm22_rock/enm22_rock/enm22_09.mv1" );
 
 	//item
 	_dolls[ DOLL_DANGO	 ]->load( "Resource/Rock/item/itm01/itm01.mv1" );

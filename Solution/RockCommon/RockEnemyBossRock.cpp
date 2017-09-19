@@ -5,15 +5,43 @@
 #include "RockFamily.h"
 #include "RockPlayer.h"
 #include "RockDollHouse.h"
+#include "RockEnemyBossRockAttack.h"
+#include "RockMilitary.h"
 
-
-const int HP = 50;
+static const int HP = 50;
 static const double ANIM_SPEED = 0.9;
-
+static const Vector STONE_POS[ 9 ] = {
+	Vector( 0, 110, 0 ),
+	Vector( 0, 86, -28 ),
+	Vector( 19, 87, -26 ),
+	Vector( 23, 91, -11 ),
+	Vector( 23, 93, 15 ),
+	Vector( -24, 99, 4 ),
+	Vector( 2, 98, 22 ),
+	Vector( -11, 91, 18 ),
+	Vector( -22, 92, -17 )
+};
+static const Vector STONE_DIR[ 9 ] = {
+	Vector( 0, 0, 0 ),
+	Vector( 0, 0, -1 ),
+	Vector( 1, 0, -1 ),
+	Vector( 1, 0, 0 ),
+	Vector( 1, 0, 1 ),
+	Vector( 0, 0, 1 ),
+	Vector( -1, 0, 1 ),
+	Vector( -1, 0, 0 ),
+	Vector( -1, 0, -1 ),
+};
 
 RockEnemyBossRock::RockEnemyBossRock( const Vector& pos ) :
 RockEnemyBoss( pos, DOLL_BOSS_ROCK, HP, 1, 10, 10, true, true ) {
 	setDir( Vector( -1, 0, 0 ) );
+	RockMilitaryPtr military = RockMilitary::getTask( );
+	for ( int i = 0; i < STONE_NUM; i++ ) {
+		Vector pos = getPos( ) + STONE_POS[ i ];
+		_stones[ i ] = RockEnemyBossRockAttackPtr( new RockEnemyBossRockAttack( pos, (DOLL)( i + DOLL_BOSS_ROCK_ATTACK_1 ), STONE_DIR[ i ] ) );
+		military->addEnemy( _stones[ i ] );
+	}
 }
 
 

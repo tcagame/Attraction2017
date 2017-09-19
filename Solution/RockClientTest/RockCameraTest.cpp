@@ -3,7 +3,7 @@
 #include "Drawer.h"
 #include "RockFamily.h"
 
-const Vector INIT_POS = Vector( 0, 80, -180 );
+const Vector INIT_POS = Vector( 0, 180, -380 );
 const Vector DIR = Vector( 0, 0.8, -1 ).normalize( );
 const double LENGTH = 300;
 

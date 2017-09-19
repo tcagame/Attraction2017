@@ -1,5 +1,8 @@
 #pragma once
 #include "RockEnemyBoss.h"
+#include <array>
+
+PTR( RockEnemyBossRockAttack );
 
 class RockEnemyBossRock : public RockEnemyBoss {
 public:
@@ -10,5 +13,8 @@ public:
 	void dropItem( );
 protected:
 	void act( );
+private:
+	static const int STONE_NUM = 9;
+	std::array< RockEnemyBossRockAttackPtr, STONE_NUM > _stones;
 };
 
