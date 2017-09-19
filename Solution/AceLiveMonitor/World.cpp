@@ -35,7 +35,7 @@ const char * FILENAME_EVENT_LAKE      = "Resource/Ace/Event/Lake/mapdata";
 const char * FILENAME_EVENT_CALL 	  = "Resource/Ace/Event/Call/mapdata";
 const char * FILENAME_EVENT_GAMBLE	  = "Resource/Ace/Event/Gamble/mapdata";
 const char * FILENAME_EVENT_ENMA	  = "Resource/Ace/Event/Enma/mapdata";
-const char * FILENAME_EVENT_BUDHA	  = "Resource/Ace/Event/Budha/mapdata";
+const char * FILENAME_EVENT_BUDHA	  = "Resource/Ace/Event/Shaka/mapdata";
 
 WorldPtr World::getTask( ) {
 	return std::dynamic_pointer_cast< World >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -52,8 +52,8 @@ World::World( ) {
 	_map_event[ EVENT_LAKE      ] = MapPtr( new Map( FILENAME_EVENT_LAKE      ) );
 	_map_event[ EVENT_CALL      ] = MapPtr( new Map( FILENAME_EVENT_GAMBLE	  ) );
 	_map_event[ EVENT_GAMBLE    ] = MapPtr( new Map( FILENAME_EVENT_GAMBLE	  ) );
-	//_map_event[ EVENT_ENMA      ] = MapPtr( new Map( FILENAME_EVENT_ENMA	  ) );
-	//_map_event[ EVENT_BUDHA     ] = MapPtr( new Map( FILENAME_EVENT_BUDHA	  ) );
+	_map_event[ EVENT_ENMA      ] = MapPtr( new Map( FILENAME_EVENT_ENMA	  ) );
+	_map_event[ EVENT_BUDHA     ] = MapPtr( new Map( FILENAME_EVENT_BUDHA	  ) );
 
 }
 
