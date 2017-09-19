@@ -15,14 +15,23 @@ EventFlame::~EventFlame( ) {
 }
 
 void EventFlame::update( ) {
-}
+	// 透明化し切ったら、イベントへ
+	for ( int i = 0; i < MAX_PLAYER; i++ ) {
+		PlayerPtr player = Family::getTask( )->getPlayer( i );
+		if ( player->isEntering( ) ) {
+			player->enterEvent( );
+		}
+	}
 
-bool EventFlame::isFinished( ) const {
-	return _boss->getPower( ) <= 0;
+	// ボスを倒した
+	if ( _boss->getPower( ) <= 0 ) {
+		_boss->dropItem( );//神器(火)を配る
+		exit( );
+	}
 }
 
 bool EventFlame::isJoining( ) const {
-	return true;
+	return getFade( ) != FADE_OUT;
 }
 
 void EventFlame::join( PLAYER target ) {

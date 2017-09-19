@@ -217,7 +217,22 @@ bool RockCharacter::isOnMapModel( const Vector& vec ) const {
 	return result;
 }
 
-void RockCharacter::adjustPosForOverLapped( RockCharacterPtr target ) {
+void RockCharacter::adjustPosForOverLapped( RockPlayerPtr target ) {
+	Vector target_pos = target->getPos( );
+	Vector distance = target_pos - _pos;
+	Vector pos = target_pos - distance.normalize( ) * ( target->getOverlappedRadius( ) + _radius - 1 );
+	Vector vec = pos - _pos;
+	if ( distance.y > 0 ) {
+		vec.y = -distance.y;
+	} else {
+		vec.y = 0;
+	}
+	if( isOnMapModel( vec ) ) {
+		_pos = _pos + vec;
+	}
+}
+
+void RockCharacter::adjustPosForOverLapped( RockEnemyPtr target ) {
 	Vector target_pos = target->getPos( );
 	Vector distance = target_pos - _pos;
 	Vector pos = target_pos - distance.normalize( ) * ( target->getOverlappedRadius( ) + _radius - 1 );

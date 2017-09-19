@@ -23,6 +23,8 @@ static const int SHOT_INTERVAL = 50;
 static const int SHOT_POWER = 3;
 static const double SHOT_ANGLE = PI / 6;
 static const Vector SHOT_FOOT( 0, 0, 0 );//ショットの高さ
+//アニメーション
+static const double ANIM_SPEED = 1.0;
 
 RockAncestors::RockAncestors( int id ) :
 RockCharacter( Vector( ), DOLL_ANCESTORS, 30, 50, false, false, false ),
@@ -176,5 +178,6 @@ ModelMV1Ptr RockAncestors::getModel( ) const {
 	}
 	model->setRot( Matrix::makeTransformRotation( axis, rot ) );
 	model->setTrans( Matrix::makeTransformTranslation( getPos( ) ) );
+	model->setAnimTime( fmod( ( double )getActCount( ) * ANIM_SPEED, model->getEndAnimTime( ) ) );
 	return model;
 }

@@ -48,11 +48,8 @@ void Property::update( ) {
 
 int Property::getData( std::string tag ) {
 	if ( _data.find( tag ) == _data.end( ) ) {
-		assert( -1 );
-		return 0;
+		assert( 0 );
+		return 1;
 	}
 	return _data[ tag ];
 }
-
-
-

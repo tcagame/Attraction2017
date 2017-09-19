@@ -54,7 +54,6 @@ const int MOTION_OFFSET[Player::MAX_ACTION] = {
 	0,   // ACTION_CONTINUE,
 	0,   // ACTION_WAIT,
 	32,  // ACTION_WALK,
-	1,  // ACTION_BRAKE,
 	160,  // ACTION_FLOAT,
 	0,   // ACTION_ATTACK,
 	176,  // ACTION_CHARGE,
@@ -73,7 +72,6 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		0 , // ACTION_CONTINUE,
 		17, // ACTION_WAIT,
 		16, // ACTION_WALK,
-		1 , // ACTION_BRAKE,
 		11, // ACTION_FLOAT,
 		1 , // ACTION_ATTACK,
 		9 , // ACTION_CHARGE,
@@ -90,7 +88,6 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		0 , // ACTION_CONTINUE,
 		21, // ACTION_WAIT,
 		12, // ACTION_WALK,
-		1 , // ACTION_BRAKE,
 		11, // ACTION_FLOAT,
 		1 , // ACTION_ATTACK,
 		9 , // ACTION_CHARGE,
@@ -107,7 +104,6 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		0 , // ACTION_CONTINUE,
 		16, // ACTION_WAIT,
 		16, // ACTION_WALK,
-		1 , // ACTION_BRAKE,
 		11, // ACTION_FLOAT,
 		1 , // ACTION_ATTACK,
 		9 , // ACTION_CHARGE,
@@ -124,7 +120,6 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		0 , // ACTION_CONTINUE,
 		16, // ACTION_WAIT,
 		16, // ACTION_WALK,
-		1 , // ACTION_BRAKE,
 		11, // ACTION_FLOAT,
 		1 , // ACTION_ATTACK,
 		9 , // ACTION_CHARGE,
@@ -226,9 +221,6 @@ void Player::act( ) {
 		break;
 	case ACTION_WALK:
 		actOnWalking( );
-		break;
-	case ACTION_BRAKE:
-		actOnBreaking( );
 		break;
 	case ACTION_FLOAT:
 		actOnFloating( );
@@ -356,10 +348,7 @@ void Player::actOnWaiting( ) {
 		return;
 	}
 	Vector vec = getVec( );
-	if ( fabs( vec.x ) > 0 ) {
-		setAction( ACTION_BRAKE );
-		return;
-	}
+
 	DevicePtr device( Device::getTask( ) );
 	if ( abs( device->getDirX( _device_id ) ) > 50 ) {
 		setAction( ACTION_WALK );
@@ -401,12 +390,9 @@ void Player::actOnWalking( ) {
 		setAction( ACTION_FLOAT );
 		return;
 	}
+
 	Vector vec = getVec( );
-	if ( device->getDirX( _device_id ) * vec.x < 0 ) {
-		setAction( ACTION_BRAKE );
-		return;
-	}
-	if ( device->getDirX( _device_id ) == 0 ) {
+	if ( vec.isOrijin( ) ) {
 		setAction( ACTION_WAIT );
 		return;
 	}
@@ -443,29 +429,7 @@ void Player::actOnWalking( ) {
 		setAction( ACTION_ATTACK );
 	}
 }
-
-void Player::actOnBreaking( ) {
-	Vector vec = getVec( );
-	if ( !isStanding( ) ) {
-		Sound::getTask( )->playSE( "yokai_voice_17.wav" );
-		setAction( ACTION_FLOAT );
-		return;
-	}
-	if ( ( int )vec.x == 0 ) {
-		setAction( ACTION_WAIT );
-		return;
-	}
-	DevicePtr device( Device::getTask( ) );
-	if ( isStanding( ) && device->getPush( _device_id ) & BUTTON_C ) {
-		Sound::getTask( )->playSE( "yokai_voice_17.wav" );
-		vec.y = JUMP_POWER;
-		setAction( ACTION_FLOAT );
-		return;
-	}
-	if ( device->getDirX( _device_id ) != 0 ) {
-		setAction( ACTION_WALK );
-		return;
-	}
+/*
 	if ( vec.x < 0 ) {
 		if ( vec.x < -BRAKE_ACCEL ) {
 			vec.x += BRAKE_ACCEL;
@@ -486,7 +450,7 @@ void Player::actOnBreaking( ) {
 		 _cool_time > COOL_TIME ) {
 		setAction( ACTION_ATTACK );
 	}
-}
+	*/
 
 void Player::actOnFloating( ) {
 	if ( isStanding( ) ) {
@@ -545,7 +509,6 @@ void Player::actOnAttack( ) {
 	ShotPlayerPtr shot( new ShotPlayer( _player, getPos( ), getDir( ), level ) );
 	shot->setArea( getArea( ) );
 	Armoury::getTask( )->add( shot );
-	setAction( ACTION_BRAKE );
 	_charge_count = 0;
 	_cool_time = 0;
 }
@@ -889,7 +852,6 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 	int motion = 0;
 	int pattern = 0;
 	switch ( _action ) {
-	case ACTION_BRAKE:
 	case ACTION_DAMEGE:
 	case ACTION_BLOW_AWAY:
 	case ACTION_ENTERING_FADEOUT:

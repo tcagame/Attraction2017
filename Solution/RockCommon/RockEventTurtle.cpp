@@ -8,7 +8,7 @@ const int RADIUS = 64;
 const double ANIM_SPEED = 0.9;
 
 RockEventTurtle::RockEventTurtle( const Vector& pos ) :
-RockEventCharacter( pos, DOLL_TURTLE, RADIUS, HEIGHT, true ) {
+RockEventCharacter( pos, DOLL_TURTLE, RADIUS, HEIGHT, false ) {
 }
 
 
