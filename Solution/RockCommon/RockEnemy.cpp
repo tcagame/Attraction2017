@@ -2,8 +2,10 @@
 #include "RockPlayer.h"
 #include "RockDollHouse.h"
 #include "RockMap.h"
+#include "Drawer.h"
 
 const double KICK_POWER = -5.0;
+const int MAX_OUT_CAMERA_COUNT = 300;
 
 RockEnemy::RockEnemy( const Vector& pos, DOLL doll, int hp, int force, int radius, int height, bool mass, bool head ) :
 RockCharacter( pos, doll, radius, height, mass, head ),
@@ -11,7 +13,8 @@ _force( 1 ),
 _hp( hp ),
 _finished( false ),
 _max_hp( hp ),
-_start_pos( pos ) {
+_start_pos( pos ),
+_out_camera_count( 0 ) {
 }
 
 
@@ -61,4 +64,15 @@ ModelMV1Ptr RockEnemy::getModel( ) {
 
 void RockEnemy::kickDown( ) {
 	setVec( Vector( getVec( ).x, KICK_POWER, getVec( ).z ) );
+}
+
+void RockEnemy::updateInCamera( ) {
+	if ( Drawer::getTask( )->isInCamera( getPos( ) ) ) {
+		_out_camera_count = 0;
+	} else {
+		_out_camera_count++;
+		if ( _out_camera_count > MAX_OUT_CAMERA_COUNT ) {
+			_finished = true;
+		}
+	}
 }

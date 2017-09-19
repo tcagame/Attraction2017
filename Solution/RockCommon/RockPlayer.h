@@ -25,6 +25,7 @@ public:
 	void speedDown( );
 protected:
 	void act( );
+	void updateInCamera( );
 private:
 	enum ACTION {
 		ACTION_BUBBLE,

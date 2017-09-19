@@ -107,15 +107,7 @@ void RockPlayer::act( ) {
 	updateEffect( );
 	updeteState( );
 	sendDamage( );
-	// ƒJƒƒ‰‚É“ü‚è‘±‚¯‚é
-	DrawerPtr drawer( Drawer::getTask( ) );
-	if ( !drawer->isInCamera( getPos( ) + getVec( ) ) ) {
-		setVec( Vector( ) );
-	}
-	Vector dir = ( RockCamera::getTask( )->getTarget( ) - getPos( ) ).normalize( );
-	while( !drawer->isInCamera( getPos( ) + getVec( ) ) ) {
-		setVec( getVec( ) + dir );
-	}
+	updateInCamera( );
 
 	if ( _speed_down ) {
 		Vector vec = getVec( ) * 0.5;
@@ -151,6 +143,18 @@ void RockPlayer::updeteState( ) {
 			MessageSender::getTask( )->sendMessage( _id, Message::COMMAND_AREA, &state );
 			return;
 		}
+	}
+}
+
+void RockPlayer::updateInCamera( ) {
+	// ƒJƒƒ‰‚É“ü‚è‘±‚¯‚é
+	DrawerPtr drawer( Drawer::getTask( ) );
+	if ( !drawer->isInCamera( getPos( ) + getVec( ) ) ) {
+		setVec( Vector( ) );
+	}
+	Vector dir = ( RockCamera::getTask( )->getTarget( ) - getPos( ) ).normalize( );
+	while( !drawer->isInCamera( getPos( ) + getVec( ) ) ) {
+		setVec( getVec( ) + dir );
 	}
 }
 

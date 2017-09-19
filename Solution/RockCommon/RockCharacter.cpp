@@ -33,6 +33,7 @@ RockCharacter::~RockCharacter( ) {
 
 void RockCharacter::update( ) {
 	act( );
+	updateInCamera( );
 	_act_count++;
 	_standing = false;
 	if ( _mass ) {
