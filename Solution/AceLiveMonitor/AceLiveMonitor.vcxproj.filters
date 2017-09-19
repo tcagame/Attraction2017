@@ -445,6 +445,12 @@
     <ClCompile Include="EventEnma.cpp">
       <Filter>World\Event</Filter>
     </ClCompile>
+    <ClCompile Include="PopTurtle.cpp">
+      <Filter>Pop</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyTurtle.cpp">
+      <Filter>Character\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy.h">
@@ -887,6 +893,12 @@
     </ClInclude>
     <ClInclude Include="EventBudha.h">
       <Filter>World\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="PopTurtle.h">
+      <Filter>Pop</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyTurtle.h">
+      <Filter>Character\Enemy</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

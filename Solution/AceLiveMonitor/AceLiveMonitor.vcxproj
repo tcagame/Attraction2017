@@ -166,6 +166,7 @@
     <ClCompile Include="EnemyHellFire.cpp" />
     <ClCompile Include="EnemyRay.cpp" />
     <ClCompile Include="EnemyShell.cpp" />
+    <ClCompile Include="EnemyTurtle.cpp" />
     <ClCompile Include="EnemyWaterGhost.cpp" />
     <ClCompile Include="Event.cpp" />
     <ClCompile Include="EventBudha.cpp" />
@@ -287,6 +288,7 @@
     <ClCompile Include="PopSwampZombieA.cpp" />
     <ClCompile Include="PopSwampZombieB.cpp" />
     <ClCompile Include="PopTree.cpp" />
+    <ClCompile Include="PopTurtle.cpp" />
     <ClCompile Include="PopWaterGhost.cpp" />
     <ClCompile Include="PopWhiteMist.cpp" />
     <ClCompile Include="PopWind.cpp" />
@@ -314,6 +316,7 @@
     <ClInclude Include="EnemyHellFire.h" />
     <ClInclude Include="EnemyRay.h" />
     <ClInclude Include="EnemyShell.h" />
+    <ClInclude Include="EnemyTurtle.h" />
     <ClInclude Include="EnemyWaterGhost.h" />
     <ClInclude Include="Event.h" />
     <ClInclude Include="EventBudha.h" />
@@ -435,6 +438,7 @@
     <ClInclude Include="PopSwampZombieA.h" />
     <ClInclude Include="PopSwampZombieB.h" />
     <ClInclude Include="PopTree.h" />
+    <ClInclude Include="PopTurtle.h" />
     <ClInclude Include="PopWaterGhost.h" />
     <ClInclude Include="PopWhiteMist.h" />
     <ClInclude Include="PopWind.h" />

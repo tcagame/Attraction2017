@@ -43,6 +43,7 @@
 #include "PopShell.h"
 #include "PopWaterGhost.h"
 #include "PopRay.h"
+#include "PopTurtle.h"
 
 PopperPtr Popper::getTask( ) {
 	return std::dynamic_pointer_cast< Popper >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -177,6 +178,8 @@ void Popper::initialize( ) {
 			case OBJECT_RAY:
 				_pops.push_back( PopPtr( new PopRay( Vector( x, y ) ) ) );
 				break;
+			case OBJECT_TURTLE:
+				_pops.push_back( PopPtr( new PopTurtle( Vector( x, y ) ) ) );
 			}
 		}
 	}
