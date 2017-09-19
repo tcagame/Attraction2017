@@ -145,6 +145,10 @@ void RockPlayer::updateEffect( ) {
 }
 
 void RockPlayer::updeteState( ) {
+	if ( _status->getPlayer( _id ).power <= 0 ) {
+		setCol( false );
+		setMass( false );
+	}
 	if ( _status->getPlayer( _id ).money >= TRANSITION_MONEY_NUM ) {
 		if ( _status->getPlayer( _id ).area == AREA_STREET_1 ) {
 			unsigned char state = AREA_STREET_2;
