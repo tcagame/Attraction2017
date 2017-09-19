@@ -5,7 +5,7 @@
 #include "Drawer.h"
 
 const double KICK_POWER = -5.0;
-const int MAX_OUT_CAMERA_COUNT = 300;
+const int MAX_OUT_CAMERA_COUNT = 90;
 
 RockEnemy::RockEnemy( const Vector& pos, DOLL doll, int hp, int force, int radius, int height, bool mass, bool head ) :
 RockCharacter( pos, doll, radius, height, mass, head ),

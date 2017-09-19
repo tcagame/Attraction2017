@@ -3,7 +3,7 @@
 #include "Drawer.h"
 #include "RockEnemy.h"
 
-static const int MAX_POP_COUNT = 100;
+const int MAX_POP_COUNT = 400;
 
 RockPop::RockPop( RockEnemyPtr enemy, bool moment ) :
 _enemy( enemy ),
