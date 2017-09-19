@@ -36,9 +36,9 @@
 #include "RockEnemySkeleton.h"
 #include "RockEnemyStone.h"
 #include "RockEnemyLittleRedDaemon.h"
-#include "RockEnemyBossReaDaemon.h"
+#include "RockEnemyBossRedDaemon.h"
 
-PTR( RockEnemyBossReaDaemon );
+PTR( RockEnemyBossRedDaemon );
 
 const int REMOVE_CAVE_TIME = 500;
 const int DROP_TIMING = 1800;
@@ -167,7 +167,7 @@ void RockMapStreet::updateCave( ) {
 		load = false;
 	}
 	while ( ite != enemies.end( ) ) {
-		RockEnemyBossReaDaemonPtr redDaemon = std::dynamic_pointer_cast< RockEnemyBossReaDaemon >( *ite );
+		RockEnemyBossRedDaemonPtr redDaemon = std::dynamic_pointer_cast< RockEnemyBossRedDaemon >( *ite );
 		if ( redDaemon ) {
 			load = false;
 			break;
@@ -245,7 +245,7 @@ void RockMapStreet::genarateEnemies( STAGE next ) {
 		military->add( RockEnemyPtr( new RockEnemyKimono     ( Vector( 7200, 600, -110 ) ) ) );
 		break;
 	case STAGE_CAVE:
-		military->add( RockEnemyPtr( new RockEnemyBossReaDaemon( Vector(  20, 20, 0 ) ) ) );
+		military->add( RockEnemyPtr( new RockEnemyBossRedDaemon( Vector(  20, 20, 0 ) ) ) );
 		military->add( RockEnemyPtr( new RockEnemyLittleRedDaemon( Vector( 30, 20, 0 ) ) ) );
 		military->add( RockEnemyPtr( new RockEnemyLittleRedDaemon( Vector( 10, 20, 0 ) ) ) );
 		military->add( RockEnemyPtr( new RockEnemyLittleRedDaemon( Vector( 0, 20, 10 ) ) ) );
