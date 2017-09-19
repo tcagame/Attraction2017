@@ -24,6 +24,7 @@
 #include "RockEnemyCloud.h"
 #include "RockEnemyBat.h"
 #include "RockEnemyKimono.h"
+#include "RockEnemyBossTree.h"
 
 const Vector ENTRY_POS = Vector( 200, 0, 270 );
 const double ENTRY_RADIUS = 40;
@@ -96,6 +97,7 @@ bool RockMapTest::isNext( const Vector& pos ) const {
 
 void RockMapTest::genarateEnemies( ) {
 	RockMilitaryPtr military = RockMilitary::getTask( );
+	military->addEnemy( RockEnemyPtr( new RockEnemyBossTree( Vector( 0, 0, 0 ) ) ) );
 	///military->add( RockEnemyPtr( new RockEnemyGhost( Vector( 0, 40, 0 ) ) ) );
 	///military->add( RockEnemyPtr( new RockEnemyRedBard( Vector( 10, 30, 10 ) ) ) );
 	///military->add( RockEnemyPtr( new RockEnemyWaterGhost( Vector( -10, 30, 30 ) ) ) );
