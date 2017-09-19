@@ -4,6 +4,9 @@
 #include "Family.h"
 #include "Player.h"
 
+const int START_POS_X = 256 + ( 1280 / 2 - 256 ) / 2;
+const int START_POS_Y = 128;
+
 EventShop::EventShop( ) :
 Event( EVENT_SHOP, DIR_LEFT ) {
 	Office::getTask( )->popUpNPC( EVENT_SHOP );
@@ -18,7 +21,7 @@ void EventShop::update( ) {
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		PlayerPtr player = Family::getTask( )->getPlayer( i );
 		if ( player->isEntering( ) ) {
-			player->enterEvent( ); // 本来は出現位置や自動移動などを設定する
+			player->enterEvent( START_POS_X, START_POS_Y ); // 本来は出現位置や自動移動などを設定する
 		}
 	}
 }

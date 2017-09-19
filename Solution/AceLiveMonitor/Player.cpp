@@ -298,8 +298,9 @@ void Player::actOnEntry( ) {
 		for ( int i = 0; i < MAX_ITEM; i++ ) {
 			_item[ i ] = false;
 		}
-		_virtue = 9;
-		_money = 98765;
+		_virtue = 0;
+		_money = 0;
+		_mode = MODE_NORMAL;
 	}
 }
 
@@ -944,9 +945,9 @@ bool Player::isWearingItem( ITEM item ) const {
 	return _item[ item ];
 }
 
-void Player::enterEvent( ) {
+void Player::enterEvent( int x, int y ) {
 	setArea( AREA_EVENT );
-	setPos( Vector( GRAPH_SIZE * 3 / 2, 0 ) );
+	setPos( Vector( x, y ) );
 	setVec( Vector( ) );
 	setAction( ACTION_FLOAT );
 }
@@ -999,12 +1000,24 @@ EVENT Player::getOnEvent( ) const {
 		event = EVENT_GAMBLE;
 		break;
 	}
+
+
+	if ( _mode == MODE_ENMA ) {
+		event = EVENT_ENMA;
+	}
+
 	return event;
 }
 
 
 void Player::pickUpItem( ITEM item ) {
 	_item[ item ] = true;
+	if ( _item[ ITEM_WOOD ] &&
+		 _item[ ITEM_FLAME ] &&
+		 _item[ ITEM_MINERAL ] &&
+		 _mode == MODE_NORMAL ) {
+		_mode = MODE_ENMA;
+	}
 }
 
 void Player::jump( ) {
@@ -1013,4 +1026,8 @@ void Player::jump( ) {
 	vec.y = -JUMP_POWER;
 	setVec( vec );
 	setAction( ACTION_FLOAT );
+}
+
+Player::MODE Player::getMode( ) const {
+	return _mode;
 }

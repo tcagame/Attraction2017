@@ -439,6 +439,8 @@
     <ClCompile Include="Property.cpp">
       <Filter>core</Filter>
     </ClCompile>
+    <ClCompile Include="EventBudha.cpp" />
+    <ClCompile Include="EventEnma.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy.h">
@@ -876,6 +878,8 @@
     <ClInclude Include="Property.h">
       <Filter>core</Filter>
     </ClInclude>
+    <ClInclude Include="EventBudha.h" />
+    <ClInclude Include="EventEnma.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">
