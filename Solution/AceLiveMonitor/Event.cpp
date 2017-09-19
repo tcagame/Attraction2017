@@ -3,11 +3,17 @@
 #include "Player.h"
 #include "SynchronousData.h"
 
-Event::Event( EVENT type ) :
+const int OVERAREA = 1280 / 2 - 256;
+const int NOBODY_COUNT = 60;
+
+Event::Event( EVENT type, DIR exit_dir ) :
 _type( type ),
 _fade_type( FADE_IN ),
 _fade_count( 100 ),
-_exiting( false ) {
+_exiting( false ),
+_finished( true ),
+_exist_dir( exit_dir ),
+_nobody_count( 0 ) {
 }
 
 
@@ -29,6 +35,31 @@ void Event::exit( ) {
 	_exiting = true;
 }
 
+void Event::escape( ) {
+	FamilyPtr family( Family::getTask( ) );
+	for ( int i = 0; i < MAX_PLAYER; i++ ) {
+		PlayerPtr player = family->getPlayer( i );
+		int area = ( int )player->getPos( ).x - 640;
+		if ( _exist_dir == DIR_LEFT ) {
+			if ( area < -OVERAREA ) {
+				player->leaveEvent( );
+			}
+		} else {
+			if ( area > OVERAREA ) {
+				player->leaveEvent( );
+			}
+		}
+	}
+	if ( !family->isExistOnEvent( ) ) {
+		_nobody_count++;
+		if ( _nobody_count > NOBODY_COUNT ) {
+			_exiting = true;
+		}
+	} else {
+		_nobody_count = 0;
+	}
+}
+
 void Event::fade( ) {
 	switch ( _fade_type ) {
 	case FADE_IN:
@@ -43,8 +74,10 @@ void Event::fade( ) {
 		}
 		break;
 	case FADE_OUT:
-		if ( _fade_count < 100 ) {
-			_fade_count++;
+		_fade_count++;
+		if ( _fade_count >= 100 ) {
+			_fade_count = 100;
+			_finished = true;
 		}
 		break;
 	}
@@ -52,9 +85,17 @@ void Event::fade( ) {
 }
 
 bool Event::isFinished( ) {
-	return _fade_count >= 100 && _fade_type == FADE_OUT;
+	return _finished;
 }
 
 Event::FADE Event::getFade( ) const {
 	return _fade_type;
+}
+
+void Event::start( bool nofade ) {
+	_finished = false;
+	_nobody_count = 0;
+	if ( nofade ) {
+		_fade_count = 0;
+	}
 }

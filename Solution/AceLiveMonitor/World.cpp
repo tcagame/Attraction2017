@@ -121,12 +121,8 @@ void World::updateBGM ( ) {
 void World::updateEvent( ) {
 	// イベント更新
 	_event->update( );
+	_event->escape( );
 	_event->fade( );
-
-	// イベントが終了
-	if ( _event->isFinished( ) ) {
-		changeEvent( EVENT_NONE );
-	}
 
 	FamilyPtr family( Family::getTask( ) );
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
@@ -158,6 +154,11 @@ void World::updateEvent( ) {
 		_event->join( ( PLAYER )i );
 	}
 	
+	// イベントが終了
+	if ( _event->isFinished( ) ) {
+		changeEvent( EVENT_NONE );
+	}
+
 	// 同期データにイベント情報を設定
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
 	data->setEvent( _event->getType( ) );

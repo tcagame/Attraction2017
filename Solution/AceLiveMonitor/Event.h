@@ -8,7 +8,7 @@ public:
 		FADE_OUT,
 	};
 public:
-	Event( EVENT type );
+	Event( EVENT type, DIR exit_dir );
 	virtual ~Event( );
 public:
 	EVENT getType( ) const;
@@ -18,12 +18,17 @@ public:
 	bool isFinished( );
 	void fade( );
 	FADE getFade( ) const;
+	void escape( );
 protected:
 	void exit( );
+	void start( bool nofade = false );
 private:
 	EVENT _type;
 	FADE _fade_type;
+	DIR _exist_dir;
 	int _fade_count;
 	bool _exiting;
+	bool _finished;
+	int _nobody_count;
 };
 
