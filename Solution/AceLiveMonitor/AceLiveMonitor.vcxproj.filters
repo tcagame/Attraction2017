@@ -439,8 +439,12 @@
     <ClCompile Include="Property.cpp">
       <Filter>core</Filter>
     </ClCompile>
-    <ClCompile Include="EventBudha.cpp" />
-    <ClCompile Include="EventEnma.cpp" />
+    <ClCompile Include="EventBudha.cpp">
+      <Filter>World\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="EventEnma.cpp">
+      <Filter>World\Event</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy.h">
@@ -878,8 +882,12 @@
     <ClInclude Include="Property.h">
       <Filter>core</Filter>
     </ClInclude>
-    <ClInclude Include="EventBudha.h" />
-    <ClInclude Include="EventEnma.h" />
+    <ClInclude Include="EventEnma.h">
+      <Filter>World\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="EventBudha.h">
+      <Filter>World\Event</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">
