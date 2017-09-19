@@ -18,6 +18,8 @@
 #include "Status.h"
 #include "Sound.h"
 
+const int ABSTINENCE_DAMAGE = -2;
+
 RockStoragePtr RockStorage::getTask( ) {
 	return std::dynamic_pointer_cast< RockStorage >( Application::getInstance( )->getTask( getTag( ) ) );
 }
@@ -169,9 +171,15 @@ bool RockStorage::pickUpItem( RockItemPtr item, int player_id ) {
 	{//‚¨‹à
 		RockItemMoneyPtr money = std::dynamic_pointer_cast< RockItemMoney >( item );
 		if ( money ) {
-			Sound::getTask( )->playSE( "yokai_voice_30.wav" );
-			int value = money->getValue( );
-			sender->sendMessage( player_id, Message::COMMAND_MONEY, &value );
+			SoundPtr sound = Sound::getTask( );
+			Status::Player player = _status->getPlayer( player_id );
+			if ( player.area == AREA_STREET_3 ) {
+				RockFamily::getTask( )->getPlayer( player_id )->damage( ABSTINENCE_DAMAGE );
+			} else {
+				sound->playSE( "yokai_voice_30.wav" );
+				int value = money->getValue( );
+				sender->sendMessage( player_id, Message::COMMAND_MONEY, &value );
+			}
 		}
 	}
 
