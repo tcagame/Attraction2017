@@ -439,6 +439,8 @@
     <ClCompile Include="Property.cpp">
       <Filter>core</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyTurtle.cpp" />
+    <ClCompile Include="PopTurtle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy.h">
@@ -876,6 +878,9 @@
     <ClInclude Include="Property.h">
       <Filter>core</Filter>
     </ClInclude>
+    <ClInclude Include="EnemyTurtle.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="PopTurtle.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">

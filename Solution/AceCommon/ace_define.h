@@ -131,6 +131,8 @@ const unsigned char OBJECT_EYE_DAEMON		= 0x24;
 const unsigned char OBJECT_SHELL			= 0x25;
 const unsigned char OBJECT_RAY				= 0x26;
 const unsigned char OBJECT_WATER_GHOST		= 0x27;
+// ƒCƒxƒ“ƒg
+const unsigned char OBJECT_TURTLE			= 0x28;
 
 const unsigned char OBJECT_ENEMY_END = 0x7F;
 //block
