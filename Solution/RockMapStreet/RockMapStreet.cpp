@@ -298,7 +298,7 @@ void RockMapStreet::resetFamilyPos( STAGE next ) {
 	case STAGE_STREET:
 		if ( _stage == STAGE_RYUGU ) {
 			//‹T‚ÌˆÊ’u‚É–ß‚é
-			family->resetPos( Vector( 3610, 320, -210 ) );
+			family->resetPos( Vector( 3610, 320, -550 ) );
 		}
 		if ( _stage != STAGE_RYUGU ) {
 			//‰ŠúˆÊ’u
