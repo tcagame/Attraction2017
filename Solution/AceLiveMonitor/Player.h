@@ -35,6 +35,11 @@ public:
 		ITEM_MINERAL,
 		MAX_ITEM,
 	};
+	enum MODE {
+		MODE_NORMAL,
+		MODE_ENMA,
+		MODE_VIRTUE,
+	};
 public:
 	Player( PLAYER player, Vector pos );
 	virtual ~Player( );
@@ -54,7 +59,7 @@ public:
 	void pickUpVirtue( );
 	void setSynchronousData( PLAYER player, int camera_pos ) const;
 	bool isExist( ) const;
-	void enterEvent( );
+	void enterEvent( int x, int y );
 	void leaveEvent( );
 	EVENT getOnEvent( ) const;
 	void pickUpItem( ITEM item );
@@ -62,6 +67,7 @@ public:
 	void setActionEnteringSanzo( );
 	bool isEntering( ) const;
 	bool isWearingItem( ITEM item ) const;
+	MODE getMode( ) const;
 private:
 	void actOnEntry( );
 	void actOnContinue( );
@@ -99,5 +105,6 @@ private:
 	unsigned char _progress_type;
 	int _progress_count;
 	std::array< bool, MAX_ITEM > _item;
+	MODE _mode;
 };
 

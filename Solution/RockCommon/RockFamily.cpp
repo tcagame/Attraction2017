@@ -51,13 +51,15 @@ void RockFamily::updatePlayer( ) {
 		_before_active[ i ] = true;
 		_player[ i ]->update( );
 
+		if ( _player[ i ]->isBubble( ) ) {
+			continue;
+		}
+
 		//player-player
 		RockPlayerPtr overlapped_player = getOverLappedPlayer( _player[ i ] );
 		if ( overlapped_player ) {
 			if ( _player[ i ]->isOnHead( overlapped_player ) ) {
 				_player[ i ]->bound( );
-			} else {
-				_player[ i ]->adjustPosForOverLapped( overlapped_player );
 			}
 		}
 		//player_enemy

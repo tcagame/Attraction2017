@@ -10,6 +10,7 @@ const Vector VEC( -6, 0 , 0 );
 RockEnemyBossFireAttack::RockEnemyBossFireAttack( const Vector pos ) :
 RockEnemyAttack( pos, DOLL_NONE, 99, FORCE, 10, 30, false, false ),
 _shot( false ) {
+	setDir( Vector( -1, 0, 0 ) );
 	EffectPtr effect = Effect::getTask( );
 	_handle = effect->playEffect( RockStudio::getTask( )->getEffectHandle( EFFECT_BOSS_FIRE ) );
 }

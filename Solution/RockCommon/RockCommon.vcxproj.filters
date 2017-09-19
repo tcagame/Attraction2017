@@ -41,7 +41,11 @@
     <ClCompile Include="RockEnemyCloud.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
+<<<<<<< HEAD
+    <ClCompile Include="RockEnemyGhost.cpp">
+=======
     <ClCompile Include="RockEnemyFaceAndHand.cpp">
+>>>>>>> 5404ae0d98b6446a55ecb97fb6cbb2fcccbc8641
       <Filter>Enemy</Filter>
     </ClCompile>
     <ClCompile Include="RockEnemyRedBard.cpp">
@@ -116,9 +120,6 @@
     <ClCompile Include="RockEnemyChivil.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="RockEnemyLittleRedDaemon.cpp">
-      <Filter>Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="RockEnemyMoth.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
@@ -152,6 +153,17 @@
     <ClCompile Include="RockEnemyBossFireAttack.cpp">
       <Filter>Enemy\boss</Filter>
     </ClCompile>
+<<<<<<< HEAD
+    <ClCompile Include="RockEnemyAttack.cpp" />
+    <ClCompile Include="RockEnemyLittleRedDaemon.cpp">
+      <Filter>Enemy\boss</Filter>
+    </ClCompile>
+    <ClCompile Include="RockEnemyFaceAndHand.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="RockEnemyBossTreeNuts.cpp">
+      <Filter>Enemy\boss</Filter>
+=======
     <ClCompile Include="RockEnemyAttack.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
@@ -160,6 +172,7 @@
     </ClCompile>
     <ClCompile Include="RockEventStartFace.cpp">
       <Filter>Event</Filter>
+>>>>>>> 5404ae0d98b6446a55ecb97fb6cbb2fcccbc8641
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -204,9 +217,6 @@
       <Filter>Enemy</Filter>
     </ClInclude>
     <ClInclude Include="RockEnemyCloud.h">
-      <Filter>Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="RockEnemyFaceAndHand.h">
       <Filter>Enemy</Filter>
     </ClInclude>
     <ClInclude Include="RockEnemyGhost.h">
@@ -287,9 +297,6 @@
     <ClInclude Include="RockEnemyChivil.h">
       <Filter>Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="RockEnemyLittleRedDaemon.h">
-      <Filter>Enemy</Filter>
-    </ClInclude>
     <ClInclude Include="RockEnemyMoth.h">
       <Filter>Enemy</Filter>
     </ClInclude>
@@ -320,11 +327,23 @@
     <ClInclude Include="RockEnemyBossFireAttack.h">
       <Filter>Enemy\boss</Filter>
     </ClInclude>
+<<<<<<< HEAD
+    <ClInclude Include="RockEnemyAttack.h" />
+    <ClInclude Include="RockEnemyLittleRedDaemon.h">
+      <Filter>Enemy\boss</Filter>
+    </ClInclude>
+    <ClInclude Include="RockEnemyFaceAndHand.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="RockEnemyBossTreeNuts.h">
+      <Filter>Enemy\boss</Filter>
+=======
     <ClInclude Include="RockEnemyAttack.h">
       <Filter>Enemy</Filter>
     </ClInclude>
     <ClInclude Include="RockEventStartFace.h">
       <Filter>Event</Filter>
+>>>>>>> 5404ae0d98b6446a55ecb97fb6cbb2fcccbc8641
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
