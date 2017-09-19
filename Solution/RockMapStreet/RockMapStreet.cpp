@@ -290,7 +290,7 @@ void RockMapStreet::genarateEventCharacters( STAGE next ) {
 	case STAGE_CAVE:
 		break;
 	case STAGE_RYUGU:
-		office->add( RockEventCharacterPtr( new RockEventTurtle( Vector( 900, 30, 0 ) ) ) );
+		office->add( RockEventCharacterPtr( new RockEventTurtle( Vector( 750, 10, 120 ) ) ) );
 		office->add( RockEventCharacterPtr( new RockEventOtohime( Vector( -460, 30, 0 ) ) ) );
 		break;
 	}
