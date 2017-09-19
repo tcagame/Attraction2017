@@ -272,7 +272,7 @@ void RockMapStreet::genarateEventCharacters( STAGE next ) {
 	{
 		if ( _stage != STAGE_RYUGU ) {
 			//—³‹{‚©‚ç–ß‚Á‚Ä‚­‚é‚Æ‚«‚Í‹T‚ðo‚³‚È‚¢B
-			office->add( RockEventCharacterPtr( new RockEventTurtle( Vector( 3610, 320, -210 ) ) ) );
+			office->add( RockEventCharacterPtr( new RockEventTurtle( Vector( 3610, 335, -210 ) ) ) );
 		}
 		bool genarate_miko = true;
 		for ( int i = 0; i < ROCK_PLAYER_NUM; i++  ) {
@@ -282,7 +282,7 @@ void RockMapStreet::genarateEventCharacters( STAGE next ) {
 			}
 		}
 		if ( genarate_miko ) {
-			office->add( RockEventCharacterPtr( new RockEventMiko( Vector( 3910, 320, -310 ), _status ) ) );
+			office->add( RockEventCharacterPtr( new RockEventMiko( Vector( 3910, 350, -310 ), _status ) ) );
 		}
 	}
 		office->add( RockEventCharacterPtr( new RockEventObaba( Vector( 7200, 600, -110 ) ) ) );

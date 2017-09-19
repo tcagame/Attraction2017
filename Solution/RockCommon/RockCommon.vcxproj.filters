@@ -156,6 +156,7 @@
       <Filter>Enemy\boss</Filter>
     </ClCompile>
     <ClCompile Include="RockEnemyAttack.cpp" />
+    <ClCompile Include="RockEventStartFace.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="define.h" />
@@ -316,6 +317,7 @@
       <Filter>Enemy\boss</Filter>
     </ClInclude>
     <ClInclude Include="RockEnemyAttack.h" />
+    <ClInclude Include="RockEventStartFace.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Item">

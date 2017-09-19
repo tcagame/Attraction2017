@@ -65,10 +65,10 @@ void RockFamily::updatePlayer( ) {
 		if ( overlapped_enemy ) {
 			if ( _player[ i ]->isOnHead( overlapped_enemy ) ) {
 				_player[ i ]->bound( );
-				overlapped_enemy->kickDown( );
 			} else {
 				int force = -overlapped_enemy->getForce( );
 				_player[ i ]->damage( force );
+				_player[ i ]->knockBack( overlapped_enemy );
 				_player[ i ]->adjustPosForOverLapped( overlapped_enemy );
 			}
 		}

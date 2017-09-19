@@ -186,6 +186,7 @@
     <ClInclude Include="RockEventCharacter.h" />
     <ClInclude Include="RockEventObaba.h" />
     <ClInclude Include="RockEventOtohime.h" />
+    <ClInclude Include="RockEventStartFace.h" />
     <ClInclude Include="RockEventTurtle.h" />
     <ClInclude Include="Message.h" />
     <ClInclude Include="MessageSender.h" />
@@ -253,6 +254,7 @@
     <ClCompile Include="RockEventCharacter.cpp" />
     <ClCompile Include="RockEventObaba.cpp" />
     <ClCompile Include="RockEventOtohime.cpp" />
+    <ClCompile Include="RockEventStartFace.cpp" />
     <ClCompile Include="RockEventTurtle.cpp" />
     <ClCompile Include="MessageSender.cpp" />
     <ClCompile Include="RockBubble.cpp" />

@@ -3,6 +3,7 @@
 #include "mathmatics.h"
 
 PTR( Status );
+PTR( RockEventCharacter );
 
 class RockMapEntry :	public RockMap {
 public:

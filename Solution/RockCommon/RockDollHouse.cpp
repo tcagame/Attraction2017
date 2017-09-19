@@ -98,6 +98,7 @@ void RockDollHouse::initialize( ) {
 	_dolls[ DOLL_TURTLE  ]->load( "Resource/Rock/event_chara/chr07.mv1" );
 	_dolls[ DOLL_OBABA   ]->load( "Resource/Rock/event_chara/chr08_a01.mv1" );
 	_dolls[ DOLL_MIKO    ]->load( "Resource/Rock/event_chara/chr11_a01.mv1" );
+	_dolls[ DOLL_START   ]->load( "Resource/Rock/event_chara/enm01_a01.mv1" );
 }
 
 ModelMV1Ptr RockDollHouse::getModel( DOLL id ) const {

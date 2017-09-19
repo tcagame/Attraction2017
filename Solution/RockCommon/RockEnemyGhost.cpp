@@ -23,27 +23,27 @@ RockEnemyGhost::~RockEnemyGhost( ) {
 void RockEnemyGhost::act( ) {
 	Vector near_distance = SEARCH_RANGE;
 	bool wait = true;
-	for (int i = 0; i < ROCK_PLAYER_NUM; i++) {
-		RockPlayerPtr player = RockFamily::getTask()->getPlayer(i);
-		if (!player->isActive() || player->isBubble()) {
+	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+		RockPlayerPtr player = RockFamily::getTask( )->getPlayer( i );
+		if ( !player->isActive( ) || player->isBubble( ) ) {
 			continue;
 		}
 		wait = false;
-		Vector distance = player->getPos() - getPos();
-		if (near_distance.getLength() > distance.getLength()) {
-			near_distance = distance;
+		Vector distance = player->getPos( ) - getPos( );
+		if ( near_distance.getLength( ) > distance.getLength( ) ) {
+			 near_distance = distance;
 		}
 	}
-	if (near_distance != SEARCH_RANGE) {
-		Vector dir = near_distance.normalize();
-		Vector vec = getVec() + dir * ACCEL;
-		if (vec.getLength2() > MAX_SPEED * MAX_SPEED) {
-			vec = vec.normalize() * MAX_SPEED;
+	if ( near_distance != SEARCH_RANGE ) {
+		Vector dir = near_distance.normalize( );
+		Vector vec = getVec( ) + dir * ACCEL;
+		if ( vec.getLength2( ) > MAX_SPEED * MAX_SPEED ) {
+			vec = vec.normalize( ) * MAX_SPEED;
 		}
-		setVec(vec);
+		setVec( vec );
 	}
-	if (wait) {
-		setVec(Vector());
+	if ( wait ) {
+		setVec( Vector( ) );
 	}
 }
 
