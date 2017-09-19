@@ -5,11 +5,11 @@
 #include "RockPlayer.h"
 #include "RockDollHouse.h"
 
-const int HP = 20;
+const int HP = 3;
 const double ACCEL = 0.1;
 const double MAX_SPEED = 1.5;
 const double ANIM_SPEED = 0.9;
-const Vector SEARCH_RANGE( 1000, 1000, 1000 );
+const Vector SEARCH_RANGE( 500, 500, 500 );
 
 RockEnemyLittleRedDaemon::RockEnemyLittleRedDaemon( const Vector& pos ) :
 RockEnemyBoss( pos, DOLL_LITTLE_RED_DAMON, HP, 1, 10, 10, true, true ),

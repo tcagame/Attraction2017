@@ -9,4 +9,6 @@ public:
 	double getAnimTime( ) const;
 protected:
 	void act( );
+private:
+	int _count;
 };

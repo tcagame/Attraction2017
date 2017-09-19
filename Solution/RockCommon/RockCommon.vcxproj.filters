@@ -44,9 +44,6 @@
     <ClCompile Include="RockEnemyFaceAndHand.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="RockEnemyGhost.cpp">
-      <Filter>Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="RockEnemyRedBard.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
@@ -155,8 +152,15 @@
     <ClCompile Include="RockEnemyBossFireAttack.cpp">
       <Filter>Enemy\boss</Filter>
     </ClCompile>
-    <ClCompile Include="RockEnemyAttack.cpp" />
-    <ClCompile Include="RockEventStartFace.cpp" />
+    <ClCompile Include="RockEnemyAttack.cpp">
+      <Filter>Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="RockEnemyGhost.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
+    <ClCompile Include="RockEventStartFace.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="define.h" />
@@ -316,8 +320,12 @@
     <ClInclude Include="RockEnemyBossFireAttack.h">
       <Filter>Enemy\boss</Filter>
     </ClInclude>
-    <ClInclude Include="RockEnemyAttack.h" />
-    <ClInclude Include="RockEventStartFace.h" />
+    <ClInclude Include="RockEnemyAttack.h">
+      <Filter>Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="RockEventStartFace.h">
+      <Filter>Event</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Item">

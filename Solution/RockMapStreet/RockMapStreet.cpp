@@ -86,9 +86,9 @@ void RockMapStreet::updateStreet( ) {
 		}
 		active = true;
 		{//洞窟へ行くとSTAGE_CAVEへ移動
-			double length = ( Vector( 17675, -1105, 6123 ) - player->getPos( ) ).getLength( );
+			//double length = ( Vector( 17675, -1105, 6123 ) - player->getPos( ) ).getLength( );
 			//Debug用鳥居ワープ
-			//double length = ( Vector( -173, 3, -520 ) - player->getPos( ) ).getLength( );
+			double length = ( Vector( -173, 3, -520 ) - player->getPos( ) ).getLength( );
 
 			if ( length < 100 ) {
 				loadStage( STAGE_CAVE );
@@ -234,10 +234,6 @@ void RockMapStreet::genarateEnemies( STAGE next ) {
 		break;
 	case STAGE_CAVE:
 		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyBossRedDaemon  ( Vector( 20, 20,   0 ) ) ), true ) ) );
-		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyLittleRedDaemon( Vector( 30, 20,   0 ) ) ), true ) ) );
-		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyLittleRedDaemon( Vector( 10, 20,   0 ) ) ), true ) ) );
-		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyLittleRedDaemon( Vector(  0, 20,  10 ) ) ), true ) ) );
-		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyLittleRedDaemon( Vector(  0, 20, -10 ) ) ), true ) ) );
 		break;
 	case STAGE_RYUGU:
 		break;
@@ -290,7 +286,7 @@ void RockMapStreet::genarateEventCharacters( STAGE next ) {
 	case STAGE_CAVE:
 		break;
 	case STAGE_RYUGU:
-		office->add( RockEventCharacterPtr( new RockEventTurtle( Vector( 900, 30, 0 ) ) ) );
+		office->add( RockEventCharacterPtr( new RockEventTurtle( Vector( 750, 10, 120 ) ) ) );
 		office->add( RockEventCharacterPtr( new RockEventOtohime( Vector( -460, 30, 0 ) ) ) );
 		break;
 	}
