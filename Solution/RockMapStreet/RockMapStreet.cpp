@@ -234,15 +234,15 @@ void RockMapStreet::genarateEnemies( STAGE next ) {
 	military->clean( );
 	switch ( next ) {
 	case STAGE_STREET:
-		military->add( RockEnemyPtr( new RockEnemyStone      ( Vector(  800,  60, -520 ) ) ) );
-		military->add( RockEnemyPtr( new RockEnemySkeleton   ( Vector(  850,  60, -520 ) ) ) );
+		military->add( RockEnemyPtr( new RockEnemyStone      ( Vector( 10200, 1000, -3010 ) ) ) );
+		military->add( RockEnemyPtr( new RockEnemySkeleton   ( Vector( 10200, 1000, -3010 ) ) ) );
 		military->add( RockEnemyPtr( new RockEnemyWaterGhost ( Vector( 3800,  320, -530 ) ) ) );
 		military->add( RockEnemyPtr( new RockEnemyWaterGhost ( Vector( 4100,  320, -700 ) ) ) );
 		military->add( RockEnemyPtr( new RockEnemyWaterGhost ( Vector( 4700,  320, -680 ) ) ) );
 		military->add( RockEnemyPtr( new RockEnemyCloud      ( Vector( 4500, 330, -650 ) ) ) );
 		military->add( RockEnemyPtr( new RockEnemyCloud      ( Vector( 4900, 330, -650 ) ) ) );
 		military->add( RockEnemyPtr( new RockEnemyBat        ( Vector( 2000, 190, -600 ) ) ) );
-		military->add( RockEnemyPtr( new RockEnemyKimono     ( Vector( 7200, 600, -110 ) ) ) );
+		military->add( RockEnemyPtr( new RockEnemyKimono     ( Vector( 2000, 190, -600 ) ) ) );
 		break;
 	case STAGE_CAVE:
 		military->add( RockEnemyPtr( new RockEnemyBossRedDaemon( Vector(  20, 20, 0 ) ) ) );
@@ -284,7 +284,7 @@ void RockMapStreet::genarateEventCharacters( STAGE next ) {
 	{
 		if ( _stage != STAGE_RYUGU ) {
 			//—³‹{‚©‚ç–ß‚Á‚Ä‚­‚é‚Æ‚«‚Í‹T‚ðo‚³‚È‚¢B
-			office->add( RockEventCharacterPtr( new RockEventTurtle( Vector( 3610, 320, -210 ) ) ) );
+			office->add( RockEventCharacterPtr( new RockEventTurtle( Vector( 3610, 335, -210 ) ) ) );
 		}
 		bool genarate_miko = true;
 		for ( int i = 0; i < ROCK_PLAYER_NUM; i++  ) {
@@ -294,7 +294,7 @@ void RockMapStreet::genarateEventCharacters( STAGE next ) {
 			}
 		}
 		if ( genarate_miko ) {
-			office->add( RockEventCharacterPtr( new RockEventMiko( Vector( 3910, 320, -310 ), _status ) ) );
+			office->add( RockEventCharacterPtr( new RockEventMiko( Vector( 3910, 350, -310 ), _status ) ) );
 		}
 	}
 		office->add( RockEventCharacterPtr( new RockEventObaba( Vector( 7200, 600, -110 ) ) ) );
