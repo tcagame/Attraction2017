@@ -1,8 +1,13 @@
 #include "ItemVirtue.h"
 #include "SynchronousData.h"
+#include "Family.h"
+
+const double MOVE_SPEED = 3;
+const double ACCEL_SPEED = 1.5;
 
 ItemVirtue::ItemVirtue( Vector pos ) :
-Item( pos ) {
+Item( pos, 32, false ),
+_target( Vector( pos.x, 128 ) ) {
 }
 
 
@@ -10,6 +15,12 @@ ItemVirtue::~ItemVirtue( ) {
 }
 
 void ItemVirtue::act( ) {
+	/*
+	Vector distance = _target - getPos( );
+	Vector force = distance.normalize( ) * ACCEL_SPEED;
+	Vector vec = ( getVec( ) + force ).normalize( ) * MOVE_SPEED;
+	setVec( vec );
+	*/
 }
 
 void ItemVirtue::setSynchronousData( int camera_pos ) const {

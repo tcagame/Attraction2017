@@ -47,6 +47,7 @@ const int MAX_DEAD_ACTCOUNT = 120;
 const int MAX_IMPACT_COUNT = 30;
 const int ENTERING_COUNT = 50;
 
+const int AUTO_FINISH_RANGE = 5;
 const int HEAL_DANGO = 6;
 
 // モーションテーブル
@@ -65,6 +66,7 @@ const int MOTION_OFFSET[Player::MAX_ACTION] = {
 	192, // ACTION_CALL,
 	14 * 16,   //ACTION_ENTERING_FADEOUT,
 	0,   //ACTION_ENTERING_SANZO,
+	3 * 16 + 14,   //ACTION_AUDIENCE
 };
 
 const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
@@ -83,6 +85,7 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		18, // ACTION_CALL,
 		8,  //ACTION_ENTERING_FADEOUT,
 		1,  //ACTION_ENTERING_SANZO,
+		1,  //ACTION_AUDIENCE
 	},
 	{ // たろじろー
 		1 , // ACTION_ENTRY,
@@ -99,6 +102,7 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		18, // ACTION_CALL,
 		8,  //ACTION_ENTERING_FADEOUT,
 		1,  //ACTION_ENTERING_SANZO,
+		1,  //ACTION_AUDIENCE
 	},
 	{ // ガりすけ
 		1 , // ACTION_ENTRY,
@@ -115,6 +119,7 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		12, // ACTION_CALL,
 		8,  //ACTION_ENTERING_FADEOUT,
 		1,  //ACTION_ENTERING_SANZO,
+		1,  //ACTION_AUDIENCE
 	},
 	{ // たろみ
 		1 , // ACTION_ENTRY,
@@ -131,6 +136,7 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		12, // ACTION_CALL,
 		8,  //ACTION_ENTERING_FADEOUT,
 		1,  //ACTION_ENTERING_SANZO,
+		1,  //ACTION_AUDIENCE
 	}
 };
 
@@ -145,7 +151,8 @@ _charge_count( 0 ),
 _unrivaled_count( MAX_UNRIVALED_COUNT ),
 _action( ACTION_ENTRY ),
 _progress_count( 0 ),
-_cool_time( COOL_TIME ) {
+_cool_time( COOL_TIME ),
+_auto_move_target_x( -1 ) {
 	setOverlappedRadius( 25 );
 	setDir( DIR_RIGHT );
 
@@ -179,6 +186,7 @@ void Player::setProgressType( unsigned char type ) {
 
 void Player::updatetDevice( ) {
 	DevicePtr device = Device::getTask( );
+
 	if ( _device_id < 0 ) {
 		unsigned char button[ MAX_PLAYER ];
 		button[ PLAYER_TAROSUKE ] = BUTTON_C;
@@ -252,6 +260,9 @@ void Player::act( ) {
 	case ACTION_ENTERING_SANZO:
 		actOnEnteringSanzo( );
 		break;
+	case ACTION_AUDIENCE:
+		actOnAudience( );
+		break;
 	}
 
 	actOnCamera( );
@@ -296,8 +307,10 @@ void Player::actOnEntry( ) {
 		appear( );
 		// アイテム初期化
 		for ( int i = 0; i < MAX_ITEM; i++ ) {
-			_item[ i ] = false;
+			_item[ i ] = true;
 		}
+		_item[ ITEM_WOOD ] = false;
+
 		_virtue = 0;
 		_money = 0;
 		_mode = MODE_NORMAL;
@@ -329,8 +342,7 @@ void Player::adjustToCamera( ) {
 }
 
 void Player::updateProgressBar( ) {
-	DevicePtr device = Device::getTask( );
-	if ( device->getButton( _device_id ) ) {
+	if ( getDeviceButton( ) ) {
 		_progress_count += 2;
 		if ( _progress_count > 100 ) {
 			_progress_count = 100;
@@ -350,22 +362,21 @@ void Player::actOnWaiting( ) {
 	}
 
 	// 入力があったら、ACTION_WALKへ
-	DevicePtr device( Device::getTask( ) );
 	double dir_x = getVec( ).x;
-	if ( abs( device->getDirX( _device_id ) ) > 50 || dir_x != 0 ) {
+	if ( abs( getDeviceDirX( ) ) > 50 || dir_x != 0 ) {
 		setAction( ACTION_WALK );
 		return;
 	}
 
 	// 攻撃
-	if ( device->getPush( _device_id ) & BUTTON_A &&
+	if ( getDevicePush( ) & BUTTON_A &&
 		 _cool_time > COOL_TIME ) {
 		setAction( ACTION_ATTACK );
 		return;
 	}
 
 	// チャージ
-	if ( device->getDirY( _device_id ) > 0 ) {
+	if ( getDeviceDirY( ) > 0 ) {
 		MapPtr map = World::getTask( )->getMap( getArea( ) );
 		if ( map->getObject( getPos( ) ) != OBJECT_WATER ) {
 			setAction( ACTION_CHARGE );
@@ -374,7 +385,7 @@ void Player::actOnWaiting( ) {
 	}
 
 	// ジャンプ
-	if ( device->getPush( _device_id ) & BUTTON_C ) {
+	if ( getDevicePush( ) & BUTTON_C ) {
 		jump( );
 		return;
 	}
@@ -388,7 +399,6 @@ void Player::actOnWaiting( ) {
 
 void Player::actOnWalking( ) {
 	//スティックの入力が無い場合action_wait
-	DevicePtr device( Device::getTask( ) );
 	SoundPtr sound = Sound::getTask( );
 
 	// 地面から離れた
@@ -399,7 +409,7 @@ void Player::actOnWalking( ) {
 	}
 
 	// ジャンプする？
-	if ( device->getPush( _device_id ) & BUTTON_C ) {
+	if ( getDevicePush( ) & BUTTON_C ) {
 		jump( );
 		return;
 	}
@@ -421,13 +431,13 @@ void Player::actOnWalking( ) {
 	}
 
 	// アクセル処理
-	if ( device->getDirX( _device_id ) < -50 ) {
+	if ( getDeviceDirX( ) < -50 ) {
 		vec.x += -ACCEL_SPEED_WALKING;
 		if ( vec.x < -MAX_SPEED ) {
 			vec.x = -MAX_SPEED;
 		}
 	}
-	if ( device->getDirX( _device_id ) > 50 ) {
+	if ( getDeviceDirX( ) > 50 ) {
 		vec.x += ACCEL_SPEED_WALKING;
 		if ( vec.x > MAX_SPEED ) {
 			vec.x = MAX_SPEED;
@@ -444,7 +454,7 @@ void Player::actOnWalking( ) {
 	}
 
 	// ショット
-	if ( device->getPush( _device_id ) & BUTTON_A &&
+	if ( getDevicePush( ) & BUTTON_A &&
 		 _cool_time > COOL_TIME ) {
 		setAction( ACTION_ATTACK );
 	}
@@ -468,18 +478,16 @@ void Player::actOnFloating( ) {
 		setAction( ACTION_WAIT );
 		return;
 	}
-	
-	DevicePtr device( Device::getTask( ) );
 
 	// 攻撃
-	if ( device->getPush( _device_id ) & BUTTON_A &&
+	if ( getDevicePush( ) & BUTTON_A &&
 		 _cool_time > COOL_TIME ) {
 		setAction( ACTION_ATTACK );
 		return;
 	}
 
 	// 入力している方向にアクセルを加える
-	int dir_x = device->getDirX( _device_id );
+	int dir_x = getDeviceDirX( );
 	Vector vec = getVec( );
 	if ( dir_x < -50 ) {
 		vec.x += -ACCEL_SPEED_FLOATING;
@@ -512,7 +520,6 @@ void Player::actOnAttack( ) {
 }
 
 void Player::actOnCharge( ) {
-	DevicePtr device( Device::getTask( ) );
 	SoundPtr sound = Sound::getTask( );
 	sound->playSE( "yokai_se_21.wav", true );
 	if ( !isStanding( ) ) {
@@ -522,15 +529,15 @@ void Player::actOnCharge( ) {
 		setAction( ACTION_FLOAT );
 		return;
 	}
-	if ( device->getPush( _device_id ) & BUTTON_A &&
+	if ( getDevicePush( ) & BUTTON_A &&
 		 _cool_time > COOL_TIME ) {
 		sound->stopSE( "yokai_se_21.wav" );
 		sound->stopSE( "yokai_se_22.wav" );
 		setAction( ACTION_ATTACK );
 		return;
 	}
-	if ( device->getDirY( _device_id ) <= 0 ) {
-		if ( device->getDirX( _device_id ) == 0 ) {
+	if ( getDeviceDirY( ) <= 0 ) {
+		if ( getDeviceDirX( ) == 0 ) {
 			sound->stopSE( "yokai_se_21.wav" );
 			sound->stopSE( "yokai_se_22.wav" );
 			setAction( ACTION_WAIT );
@@ -542,7 +549,7 @@ void Player::actOnCharge( ) {
 			return;
 		}
 		Vector vec = getVec( );
-		if ( device->getPush( _device_id ) & BUTTON_C ) {
+		if ( getDevicePush( ) & BUTTON_C ) {
 			jump( );
 			return;
 		}
@@ -662,6 +669,9 @@ void Player::actOnEnteringFadeOut( ) {
 }
 
 void Player::actOnEnteringSanzo( ) {
+}
+
+void Player::actOnAudience( ) {
 }
 
 void Player::damage( int force ) {
@@ -892,6 +902,9 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 			}
 			break;
 		}
+	case ACTION_AUDIENCE:
+		motion = 0;
+		break;
 	}
 
 	pattern = off + motion % num;
@@ -954,11 +967,12 @@ void Player::enterEvent( int x, int y ) {
 
 
 void Player::leaveEvent( ) {
+	Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, getOverlappedRadius( ) ), getArea( ), ( int )getOverlappedRadius( ) * 2 ) ) );
+
 	setArea( AREA_STREET );
 	setPos( Vector( Family::getTask( )->getCameraPosX( ) + SCREEN_WIDTH / 2, 0 ) );
 	setVec( Vector( ) );
-	
-	Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, getOverlappedRadius( ) ), getArea( ), ( int )getOverlappedRadius( ) * 2 ) ) );
+	setAction( ACTION_FLOAT );
 }
 
 EVENT Player::getOnEvent( ) const {
@@ -1030,4 +1044,59 @@ void Player::jump( ) {
 
 Player::MODE Player::getMode( ) const {
 	return _mode;
+}
+
+void Player::autoMove( int target_x ) {
+	_auto_move_target_x = target_x;
+}
+
+bool Player::isFinishedAutomoving( ) const {
+	return _auto_move_target_x < 0;
+}
+
+void Player::audience( ) {
+	setVec( Vector( ) );
+	setAction( ACTION_AUDIENCE );
+}
+
+void Player::setModeVirtue( ) {
+	_mode = MODE_VIRTUE;
+}
+
+
+int Player::getDeviceDirX( ) {
+	if ( abs( getPos( ).x - _auto_move_target_x ) < 5.0 ) {
+		_auto_move_target_x = -1;
+	}
+
+	if ( _auto_move_target_x < 0 ) {
+		DevicePtr device = Device::getTask( );
+		return device->getDirX( _device_id );
+	}
+
+	return 100 - 200 * ( _auto_move_target_x - getPos( ).x < 0 );
+}
+
+int Player::getDeviceDirY( ) {
+	if ( _auto_move_target_x < 0 ) {
+		DevicePtr device = Device::getTask( );
+		return device->getDirY( _device_id );
+	}
+	return 0;
+}
+
+unsigned char Player::getDevicePush( ) {
+	if ( _auto_move_target_x < 0 ) {
+		DevicePtr device = Device::getTask( );
+		return device->getPush( _device_id );
+	}
+	return 0;
+}
+
+unsigned char Player::getDeviceButton( ) {
+	if ( _auto_move_target_x < 0 ) {
+		DevicePtr device = Device::getTask( );
+		return device->getButton( _device_id );
+	}
+	return 0;
 }

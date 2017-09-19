@@ -23,11 +23,14 @@ public:
 	void playMapBgm( EVENT event );
 	EVENT getEvent( ) const;
 	MapPtr getMap( AREA area ) const;
+	void shiftPos( );
 private:
 	void updateEvent( );
 	void updateBGM( );
+	void updateVirtue( );
 	void changeEvent( EVENT type );
 private:
+	int _virtue_pos_x;
 	EventPtr _event;
 	MapPtr _map_street;
 	std::array< MapPtr, MAX_EVENT > _map_event;

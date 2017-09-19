@@ -26,6 +26,7 @@ public:
 	MonmotaroConstPtr getMonmotaro( ) const;
 	bool isExistOnEvent( ) const;
 	void pushDebugData( ViewerDebug::Data& data ) const;
+	bool isModeVirtue( ) const;
 private:
 	void updatePlayer( PLAYER taget );
 	void updateCameraPos( );

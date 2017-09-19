@@ -23,6 +23,7 @@ public:
 		ACTION_CALL,
 		ACTION_ENTERING_FADEOUT,
 		ACTION_ENTERING_SANZO,
+		ACTION_AUDIENCE,
 		MAX_ACTION,
 	};
 	enum ITEM {
@@ -68,6 +69,10 @@ public:
 	bool isEntering( ) const;
 	bool isWearingItem( ITEM item ) const;
 	MODE getMode( ) const;
+	void autoMove( int target_x );
+	bool isFinishedAutomoving( ) const;
+	void audience( );
+	void setModeVirtue( );
 private:
 	void actOnEntry( );
 	void actOnContinue( );
@@ -84,6 +89,7 @@ private:
 	void actOnCall( );
 	void actOnEnteringFadeOut( );
 	void actOnEnteringSanzo( );
+	void actOnAudience( );
 	void setAction( ACTION action );
 	void adjustToCamera( );
 	void updateProgressBar( );
@@ -92,9 +98,15 @@ private:
 	void updateShowMoney( );
 	void setProgressType( unsigned char type );
 	void jump( );
+	int getDeviceDirX( );
+	int getDeviceDirY( );
+	unsigned char getDevicePush( );
+	unsigned char getDeviceButton( );
 private:
 	PLAYER _player;
 	ACTION _action;
+	MODE _mode;
+	int _auto_move_target_x;
 	int _device_id;
 	int _money;
 	int _show_money;
@@ -105,6 +117,5 @@ private:
 	unsigned char _progress_type;
 	int _progress_count;
 	std::array< bool, MAX_ITEM > _item;
-	MODE _mode;
 };
 
