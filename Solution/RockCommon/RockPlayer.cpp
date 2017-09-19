@@ -405,7 +405,7 @@ void RockPlayer::actOnAttacking( ) {
 		sound->stopSE( "yokai_se_21.wav" );
 		sound->stopSE( "yokai_se_22.wav" );
 		sound->playSE( "yokai_se_20.wav" );
-		bool max_charge = ( MAX_CHARGE_COUNT == _attack_count );
+		bool max_charge = ( MAX_CHARGE_COUNT <= _attack_count );
 		int power = _attack_count / ( MAX_CHARGE_COUNT / ( MAX_PLAYER_SHOT_POWER - 1 ) ) + 1;
 		if ( player.item & ITEM_ENHANCED_ATTACK ) {
 			power *= ENHANCED_POWER;
@@ -447,7 +447,7 @@ void RockPlayer::actOnCharging( ) {
 		_attack_count++;
 	}
 
-	if ( _attack_count > MAX_CHARGE_COUNT ) {
+	if ( _attack_count > MAX_CHARGE_COUNT + ( MAX_CHARGE_COUNT / MAX_PLAYER_SHOT_POWER ) * 0.6 ) {
 		setAction( ACTION_BURST );
 		return;
 	}
