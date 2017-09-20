@@ -93,9 +93,9 @@ void RockMapStreet::updateStreet( ) {
 		}
 		active = true;
 		{//洞窟へ行くとSTAGE_CAVEへ移動
-			//double length = ( Vector( 17675, -1105, 6123 ) - player->getPos( ) ).getLength( );
+			double length = ( Vector( 17675, -1105, 6123 ) - player->getPos( ) ).getLength( );
 			//Debug用鳥居ワープ
-			double length = ( Vector( -173, 3, -520 ) - player->getPos( ) ).getLength( );
+			//double length = ( Vector( -173, 3, -520 ) - player->getPos( ) ).getLength( );
 
 			if ( length < 100 ) {
 				loadStage( STAGE_CAVE );
@@ -240,9 +240,9 @@ void RockMapStreet::genarateEnemies( STAGE next ) {
 		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyKimono     ( Vector(  950,  60, -510 ) ) ), true ) ) );
 		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyFaceAndHand( Vector( 6000, 360, -620 ) ) ), true ) ) );
 		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyGhost		 ( Vector(  900,  60, -520 ) ) ), true ) ) );
-		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemySmallFrog	 ( Vector( 7050,  60, -520 ) ) ), true ) ) );
-		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyChivil	 ( Vector( 7000,  60, -520 ) ) ), true ) ) );
-		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyMoth		 ( Vector( 7050,  60, -520 ) ) ), true ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemySmallFrog	 ( Vector( 7250,  600, -1020 ) ) ), true ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyChivil	 ( Vector( 7200,  60, -3020 ) ) ), true ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyMoth		 ( Vector( 7250,  500, -2020 ) ) ), true ) ) );
 		break;
 	case STAGE_CAVE:
 		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyBossRedDaemon  ( Vector( 20, 20,   0 ) ) ), true ) ) );

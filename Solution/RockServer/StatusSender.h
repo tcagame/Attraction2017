@@ -17,6 +17,7 @@ public:
 	virtual ~StatusSender( );
 public:
 	void update( );
+	void updateFamily( );
 	bool setContinueNum( int idx, int num );
 	bool setTokuNum( int idx, int num );
 	bool setPower( int idx, int power );

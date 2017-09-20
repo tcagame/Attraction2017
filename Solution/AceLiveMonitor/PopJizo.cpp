@@ -3,7 +3,7 @@
 #include "Military.h"
 
 const int MAX_POP_COUNT = 1000;
-const int POP_RANGE = 300;
+const int POP_RANGE = 400;
 
 PopJizo::PopJizo( const Vector& pos ) :
 Pop( pos ),

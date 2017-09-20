@@ -1,6 +1,9 @@
 #pragma once
 #include "Pop.h"
 #include "mathmatics.h"
+#include "smart_ptr.h"
+
+PTR( Enemy );
 
 class PopTree : public Pop {
 public:
@@ -9,6 +12,7 @@ public:
 public:
 	void update( );
 private:
-	bool _pop;
+	int _count;
+	EnemyWeakPtr _enemy;
 };
 

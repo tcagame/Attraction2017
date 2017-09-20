@@ -14,8 +14,11 @@ PopMoney::~PopMoney( ) {
 }
 
 void PopMoney::update( ) {
+	if ( !_item.expired( ) ) {
+		return;
+	}
 	if ( _count > MAX_POP_COUNT ) {
-		if ( _item.expired( ) ) {
+		if ( isInScreen( ) ) {
 			ItemPtr item = ItemPtr( new ItemMoney( getPos( ), _type, AREA_STREET ) );
 			Storage::getTask( )->add( item );
 			_item = item;
