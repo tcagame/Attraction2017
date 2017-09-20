@@ -10,7 +10,7 @@ const int RANGE = 150;
 
 EnemyLancer::EnemyLancer( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ) {
-	setOverlappedRadius( 36 );
+	setOverlappedRadius( 26 );
 	setVec( Vector( MOVE_SPEED, 0 ) );
 
 	PropertyPtr property( Property::getTask( ) );

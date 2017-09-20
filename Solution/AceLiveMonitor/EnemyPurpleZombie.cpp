@@ -10,7 +10,7 @@ EnemyPurpleZombie::EnemyPurpleZombie( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ),
 _before_pos( Vector( ) ),
 _vec( Vector( -MOVE_SPEED, 0 ) ) {
-	setOverlappedRadius( 36 );
+	setOverlappedRadius( 30 );
 
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "PurpleZombie_POWER" ) );

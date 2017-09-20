@@ -12,7 +12,7 @@ EnemyShishimaiDaemon::EnemyShishimaiDaemon( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ),
 _escape( false ),
 _befor_pos( pos ) {
-	setOverlappedRadius( 36 );
+	setOverlappedRadius( 28 );
 	setVec( Vector( MOVE_SPEED, 0 ) );
 
 	PropertyPtr property( Property::getTask( ) );

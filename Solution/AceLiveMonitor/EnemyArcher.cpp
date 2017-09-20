@@ -13,7 +13,7 @@ const int SHOT_TIMING = ( MOVE_TIME + WAIT_ANIM_TIME * 5 ) - 2;
 EnemyArcher::EnemyArcher( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ),
 _act( ACTION_MOVE ) {
-	setOverlappedRadius( 36 );
+	setOverlappedRadius( 30 );
 	
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "Archer_POWER" ) );

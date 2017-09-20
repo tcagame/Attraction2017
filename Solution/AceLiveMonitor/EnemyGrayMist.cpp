@@ -11,6 +11,9 @@ Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, false ),
 _vy( 0 ),
 _dir( 1 ) {
 	setOverlappedRadius( 36 );
+	if ( getPos( ).y > GRAPH_SIZE / 3 * 2 ) {
+		setPos( Vector( getPos( ).x, GRAPH_SIZE / 3 * 2 ) );
+	}
 
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "GrayMist_POWER" ) );
