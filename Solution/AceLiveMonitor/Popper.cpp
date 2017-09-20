@@ -44,6 +44,8 @@
 #include "PopWaterGhost.h"
 #include "PopRay.h"
 #include "PopTurtle.h"
+//item
+#include "PopMoney.h"
 
 PopperPtr Popper::getTask( ) {
 	return std::dynamic_pointer_cast< Popper >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -180,6 +182,25 @@ void Popper::initialize( ) {
 				break;
 			case OBJECT_TURTLE:
 				_pops.push_back( PopPtr( new PopTurtle( Vector( x, y ) ) ) );
+				break;
+			case OBJECT_MONEY_PURSE:
+				_pops.push_back( PopPtr( new PopMoney( Vector( x, y ), OBJECT_MONEY_PURSE ) ) );
+				break;
+			case OBJECT_MONEY_BAG:
+				_pops.push_back( PopPtr( new PopMoney( Vector( x, y ), OBJECT_MONEY_BAG ) ) );
+				break;
+			case OBJECT_MONEY_500:
+				_pops.push_back( PopPtr( new PopMoney( Vector( x, y ), OBJECT_MONEY_500 ) ) );
+				break;
+			case OBJECT_MONEY_1000:
+				_pops.push_back( PopPtr( new PopMoney( Vector( x, y ), OBJECT_MONEY_1000 ) ) );
+				break;
+			case OBJECT_MONEY_5000:
+				_pops.push_back( PopPtr( new PopMoney( Vector( x, y ), OBJECT_MONEY_5000 ) ) );
+				break;
+			case OBJECT_MONEY_10000:
+				_pops.push_back( PopPtr( new PopMoney( Vector( x, y ), OBJECT_MONEY_10000 ) ) );
+				break;
 			}
 		}
 	}

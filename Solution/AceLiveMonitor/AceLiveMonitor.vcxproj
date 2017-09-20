@@ -264,6 +264,7 @@
     <ClCompile Include="PopJizo.cpp" />
     <ClCompile Include="PopLady.cpp" />
     <ClCompile Include="PopLancer.cpp" />
+    <ClCompile Include="PopMoney.cpp" />
     <ClCompile Include="PopMoth.cpp" />
     <ClCompile Include="PopNoFace.cpp" />
     <ClCompile Include="PopNoNeckGhost.cpp" />
@@ -411,6 +412,7 @@
     <ClInclude Include="PopJizo.h" />
     <ClInclude Include="PopLady.h" />
     <ClInclude Include="PopLancer.h" />
+    <ClInclude Include="PopMoney.h" />
     <ClInclude Include="PopMoth.h" />
     <ClInclude Include="PopNoFace.h" />
     <ClInclude Include="PopNoNeckGhost.h" />
