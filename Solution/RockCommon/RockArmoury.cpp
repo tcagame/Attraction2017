@@ -86,7 +86,7 @@ void RockArmoury::clearShot( ) {
 			ite++;
 			continue;
 		}
-
+		shot->stopEffect( );
 		shot = RockShotPtr( );
 		ite++;
 	}
