@@ -95,7 +95,6 @@ void ViewerStatus::drawPower( int power, int sx, int sy ) const {
 }
 
 void ViewerStatus::drawMoney( int money, int sx, int sy ) const {
-	money *= 100;
 	int pos = 0;
 	do {
 		int n = money % 10;
