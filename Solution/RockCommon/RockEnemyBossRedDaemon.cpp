@@ -14,7 +14,7 @@ const int GENERATE_TIME = 300;
 const int POP_NUM = 4;
 
 RockEnemyBossRedDaemon::RockEnemyBossRedDaemon( const Vector& pos ) :
-RockEnemyBoss( pos, DOLL_BOSS_RED_DAEMON, HP, 1, 30, 10, true, true ),
+RockEnemyBoss( pos, DOLL_BOSS_RED_DAEMON, HP, 1, 45, 10, true, true ),
 _count( 0 ) {
 }
 
@@ -24,6 +24,7 @@ RockEnemyBossRedDaemon::~RockEnemyBossRedDaemon( ) {
 
 void RockEnemyBossRedDaemon::act( ) {
 	Vector generate_pos( getPos( ) );
+	setDir( Vector( -1, 0, 0 ) );
 	const Vector GENERATE_POS[ GENERATE_NUM ] = { 
 		Vector( generate_pos.x + 30, generate_pos.y, generate_pos.z ),
 		Vector( generate_pos.x - 30, generate_pos.y, generate_pos.z ),
