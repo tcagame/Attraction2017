@@ -156,8 +156,9 @@ _redo( 0 ) {
 	setOverlappedRadius( 25 );
 	setDir( DIR_RIGHT );
 	PropertyPtr property = Property::getTask( );
-	_jump_power = property->getData( "PLAYER_JUMP_POWER" );
+	_jump_power             = property->getData( "PLAYER_JUMP_POWER" );
 	_max_charge_phase_count = property->getData( "MAX_CHARGE_PHASE_COUNT" );
+	_max_virtue             = property->getData( "MAX_VIRTUE" );
 	for ( int i = 0; i < MAX_ITEM; i++ ) {
 		_item[ i ] = false;
 	}
@@ -1061,6 +1062,9 @@ EVENT Player::getOnEvent( ) const {
 
 	if ( _mode == MODE_ENMA ) {
 		event = EVENT_ENMA;
+	}
+	if ( _virtue > _max_virtue ) {
+		event = EVENT_BUDHA;
 	}
 
 	return event;
