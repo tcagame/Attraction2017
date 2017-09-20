@@ -8,7 +8,5 @@ public:
 protected:
 	void act( );
 	double getAnimTime( ) const;
-private:
-	int _hp;
 };
 
