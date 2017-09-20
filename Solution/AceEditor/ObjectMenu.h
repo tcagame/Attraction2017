@@ -41,6 +41,7 @@ private:
 	ImagePtr _block;
 	ImagePtr _enemy[ MAX_GRAPH_ENEMY ];
 	ImagePtr _event;
+	ImagePtr _money;
 	ObjectEditorPtr _object_editor;
 };
 
