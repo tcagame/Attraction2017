@@ -55,7 +55,10 @@ void RockMilitary::updateEnemies( ) {
 		if ( enemy->isFinished( ) ) {
 			addImpact( RockImpactPtr( new RockImpact( enemy->getPos( ) + Vector( 0, 30, 0 ) ) ) );
 			Sound::getTask( )->playSE( "yokai_se_26.wav" );
-			enemy->dropItem( );
+			//Ž€‚ñ‚¾ê‡‚Íƒhƒƒbƒv
+			if ( enemy->isDead( ) ) {
+				enemy->dropItem( );
+			}
 			if ( !std::dynamic_pointer_cast< RockEnemyBoss >( enemy ) &&
 				 !std::dynamic_pointer_cast< RockEnemyAttack >( enemy ) ) {
 				enemy->reset( );
