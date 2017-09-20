@@ -49,6 +49,10 @@ bool RockEnemy::isFinished( ) const {
 	return _finished;
 }
 
+bool RockEnemy::isDead( ) const {
+	return _hp == 0;
+}
+
 ModelMV1Ptr RockEnemy::getModel( ) {
 	ModelMV1Ptr model = RockDollHouse::getTask( )->getModel( getDoll( ) );
 	model->setAnimTime( getAnimTime( ) );
