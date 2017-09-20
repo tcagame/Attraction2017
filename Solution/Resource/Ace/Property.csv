@@ -110,9 +110,9 @@ HandAttack_RADIUS,18
 RedBirdAttack_RADIUS,18
 Seed_RADIUS,16
 
-BloodDaemon_RADIUS,100
-MonsterTree_RADIUS,100
-RedDaemon_RADIUS,100
+BloodDaemon_RADIUS,60
+MonsterTree_RADIUS,70
+RedDaemon_RADIUS,70
 Rock_RADIUS,64
 
 Archer_RADIUS,30

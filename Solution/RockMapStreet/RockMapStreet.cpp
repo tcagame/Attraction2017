@@ -292,7 +292,7 @@ void RockMapStreet::genarateEnemies( STAGE next ) {
 		//military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyMoth		 ( Vector(  7250,    500, -2020 ) ) ), true ) ) );
 		break;
 	case STAGE_CAVE:
-		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyBossRedDaemon  ( Vector( 17675, -1105, 6123 ) ) ), true ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyBossRedDaemon  ( Vector( 17733, -1104, 5960 ) ) ), true ) ) );
 		break;
 	case STAGE_RYUGU:
 		break;

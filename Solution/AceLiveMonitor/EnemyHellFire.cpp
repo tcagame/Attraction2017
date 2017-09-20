@@ -1,5 +1,6 @@
 #include "EnemyHellFire.h"
 #include "Family.h"
+#include "Player.h"
 #include "SynchronousData.h"
 #include "Property.h"
 
@@ -25,6 +26,18 @@ EnemyHellFire::~EnemyHellFire( ) {
 
 void EnemyHellFire::act( ) {
 	Vector target = Vector( Family::getTask( )->getCameraPosX( ) + GRAPH_SIZE, GRAPH_SIZE / 2 );
+	FamilyPtr family( Family::getTask( ) );
+	//放置プレイヤーを狙う
+	for ( int i = 0; i < MAX_PLAYER; i++ ) {
+		PlayerPtr player = family->getPlayer( i );
+		if ( !player->isExist( ) ) {
+			continue;
+		}
+		if ( player->isLeaveAlone( ) ) {
+			target = player->getPos( );
+			return;
+		}
+	}
 	Vector distance = target - getPos( );
 	Vector vec = getVec( ) + distance.normalize( ) * ACCEL;
 	vec = vec.normalize( ) * MOVE_SPEED;

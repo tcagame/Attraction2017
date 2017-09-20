@@ -12,7 +12,7 @@ const double ANIM_SPEED = 0.9;
 const Vector SEARCH_RANGE( 500, 500, 500 );
 
 RockEnemyLittleRedDaemon::RockEnemyLittleRedDaemon( const Vector& pos ) :
-RockEnemyBoss( pos, DOLL_LITTLE_RED_DAMON, HP, 1, 10, 10, true, true ),
+RockEnemyBoss( pos, DOLL_LITTLE_RED_DAMON, HP, 1, 15, 10, true, true ),
 _player_radius( 0 ) {
 }
 

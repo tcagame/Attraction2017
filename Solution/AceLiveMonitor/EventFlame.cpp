@@ -9,7 +9,7 @@ const int START_POS_Y = 128;
 
 EventFlame::EventFlame( ) :
 Event( EVENT_FLAME, DIR_LEFT ) {
-	_boss = EnemyBossPtr( new EnemyBossBloodDaemon( Vector( 800, 200 ) ) );
+	_boss = EnemyBossPtr( new EnemyBossBloodDaemon( Vector( 1000, 230 ) ) );
 	Military::getTask( )->popUp( _boss );
 }
 
