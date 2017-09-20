@@ -92,15 +92,16 @@ void RockDollHouse::initialize( ) {
 	_dolls[ DOLL_MONEY_6 ]->load( "Resource/Rock/item/itm09/itm09.mv1" );
 
 
-	_dolls[ DOLL_TOKU          ]->load( "Resource/Rock/item/itm10/itm10.mv1" );
-	_dolls[ DOLL_SACRED_ROCK   ]->load( "Resource/Rock/object/sacred/sacred_rock.mv1" );
-	_dolls[ DOLL_SACRED_ROCK   ]->setScale( Matrix::makeTransformScaling( Vector( 2, 2, 2 ) ) );
-	_dolls[ DOLL_SACRED_FIRE   ]->load( "Resource/Rock/object/sacred/sacred_fire.mv1" );
-	_dolls[ DOLL_SACRED_FIRE   ]->setScale( Matrix::makeTransformScaling( Vector( 2, 2, 2 ) ) );
-	_dolls[ DOLL_SACRED_TREE   ]->load( "Resource/Rock/object/sacred/sacred_tree.mv1" );
-	_dolls[ DOLL_SACRED_TREE   ]->setScale( Matrix::makeTransformScaling( Vector( 2, 2, 2 ) ) );
-	_dolls[ DOLL_ENHANCE_POWER ]->load( "Resource/Rock/item/itm02/itm02.mv1" );
-	_dolls[ DOLL_BUBBLE        ]->load( "Resource/Rock/object/bubble/obj11.mv1" );
+	_dolls[ DOLL_TOKU           ]->load( "Resource/Rock/item/itm10/itm10.mv1" );
+	_dolls[ DOLL_SACRED_ROCK    ]->load( "Resource/Rock/object/sacred/sacred_rock.mv1" );
+	_dolls[ DOLL_SACRED_ROCK    ]->setScale( Matrix::makeTransformScaling( Vector( 2, 2, 2 ) ) );
+	_dolls[ DOLL_SACRED_FIRE    ]->load( "Resource/Rock/object/sacred/sacred_fire.mv1" );
+	_dolls[ DOLL_SACRED_FIRE    ]->setScale( Matrix::makeTransformScaling( Vector( 2, 2, 2 ) ) );
+	_dolls[ DOLL_SACRED_TREE    ]->load( "Resource/Rock/object/sacred/sacred_tree.mv1" );
+	_dolls[ DOLL_SACRED_TREE    ]->setScale( Matrix::makeTransformScaling( Vector( 2, 2, 2 ) ) );
+	_dolls[ DOLL_ENHANCE_POWER  ]->load( "Resource/Rock/item/itm02/itm02.mv1" );
+	_dolls[ DOLL_ENHANCE_CHARGE ]->load( "Resource/Rock/item/itm03/itm03.mv1" );
+	_dolls[ DOLL_BUBBLE         ]->load( "Resource/Rock/object/bubble/obj11.mv1" );
 
 	//obj
 	_dolls[ DOLL_ALTER_BEFORE ]->load( "Resource/Rock/object/obj04/obj04.mv1" );
