@@ -10,8 +10,8 @@ public:
 protected:
 	void act( );
 private:
-	bool _jump;
-	bool _back;
+	void assaultPlayer( );
+private:
 	Vector _dir;
 	Vector _start_pos;
 };
