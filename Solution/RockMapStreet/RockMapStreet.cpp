@@ -95,21 +95,18 @@ void RockMapStreet::updateStreet( ) {
 
 			if ( length < 100 ) {
 				loadStage( STAGE_CAVE );
-				RockFamily::getTask( )->resetPos( Vector( -1679, 0, -185 ) );
+				RockFamily::getTask( )->resetPos( Vector( 16347, -1104, 5888 ) );
 				Sound::getTask( )->playBGM( "yokai_music_04.wav" );
 			}
 		}
-		{//ì¥åAÇ÷çsÇ≠Ç∆STAGE_CAVEÇ÷à⁄ìÆ
-			//double length = ( Vector( 17675, -1105, 6123 ) - player->getPos( ) ).getLength( );
-			//DebugópíπãèÉèÅ[Év
-			double length = ( Vector( -173, 3, -520 ) - player->getPos( ) ).getLength( );
-
-			if ( length < 100 ) {
-				//loadStage( STAGE_CAVE );
-				RockFamily::getTask( )->resetPos( Vector( 17575, -1105, 6023 ) );
-				Sound::getTask( )->playBGM( "yokai_music_04.wav" );
-			}
-		}
+		//{//debug
+		//	double length1 = ( Vector( -173, 3, -520 ) - player->getPos( ) ).getLength( );
+		//	if ( length1 < 100 ) {
+		//		//loadStage( STAGE_CAVE );
+		//		RockFamily::getTask( )->resetPos( Vector( 17575, -1105, 6023 ) );
+		//		Sound::getTask( )->playBGM( "yokai_music_04.wav" );
+		//	}
+		//}
 		{//ãTÇ…èÊÇÈÇ∆ó≥ã{èÈÇ÷à⁄ìÆ
 			RockOfficePtr office = RockOffice::getTask( );
 			std::list< RockEventCharacterPtr > eve_chara = office->getEventCharacters( );
@@ -220,10 +217,10 @@ RockMapStreet::STAGE RockMapStreet::getStage( ) const {
 }
 
 void RockMapStreet::loadStage( STAGE next ) {
+	resetFamilyPos( next );
 	genarateEnemies( next );
 	genarateEventCharacters( next );
 	genarateStorage( next );
-	resetFamilyPos( next );
 	_drawer.reset( new RockMapStreetDrawer( next ) );
 	_stage = next;
 	_virtue_pop = false;
@@ -252,7 +249,7 @@ void RockMapStreet::genarateEnemies( STAGE next ) {
 		//litary->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyMoth		 ( Vector( 7250,  500, -2020 ) ) ), true ) ) );
 		break;
 	case STAGE_CAVE:
-		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyBossRedDaemon  ( Vector( 20, 20,   0 ) ) ), true ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyBossRedDaemon  ( Vector( 17675, -1105, 6123 ) ) ), true ) ) );
 		break;
 	case STAGE_RYUGU:
 		break;
