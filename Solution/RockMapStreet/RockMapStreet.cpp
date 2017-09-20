@@ -237,23 +237,54 @@ void RockMapStreet::genarateEnemies( STAGE next ) {
 	military->clean( );
 	switch ( next ) {
 	case STAGE_STREET:
-		//litary->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyStone      ( Vector(  800,  60, -520 ) ) ), true ) ) );
-		//litary->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemySkeleton   ( Vector(  850,  60, -520 ) ) ), true ) ) );
-		//litary->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyWaterGhost ( Vector( 3800, 320, -530 ) ) ), true ) ) );
-		//litary->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyWaterGhost ( Vector( 4100, 320, -700 ) ) ), true ) ) );
-		//litary->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyWaterGhost ( Vector( 4700, 320, -680 ) ) ), true ) ) );
-		//litary->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyCloud      ( Vector( 4500, 330, -650 ) ) ), true ) ) );
-		//litary->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyCloud      ( Vector( 4900, 330, -650 ) ) ), true ) ) );
-		//litary->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyBat        ( Vector( 2000, 190, -600 ) ) ), true ) ) );
-		//litary->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyKimono     ( Vector(  950,  60, -510 ) ) ), true ) ) );
-		//litary->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyFaceAndHand( Vector( 6000, 360, -620 ) ) ), true ) ) );
-		//litary->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyGhost		 ( Vector(  900,  60, -520 ) ) ), true ) ) );
-		//litary->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemySmallFrog	 ( Vector( 7250,  600, -1020 ) ) ), true ) ) );
-		//litary->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyChivil	 ( Vector( 7200,  60, -3020 ) ) ), true ) ) );
-		//litary->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyMoth		 ( Vector( 7250,  500, -2020 ) ) ), true ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemySmallFrog  ( Vector(   2703,   403,  -423 ) ) ), true ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemySmallFrog	 ( Vector(   2743,   453,  -653 ) ) ), true ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemySmallFrog  ( Vector(   2603,   403,  -403 ) ) ), true ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemySmallFrog  ( Vector(   2503,   400   -443 ) ) ), true ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemySmallFrog  ( Vector(   2103,   353,  -423 ) ) ), true ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemySmallFrog  ( Vector(   2303,   353,  -503 ) ) ), true ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemySmallFrog  ( Vector(   2203,   353,  -453 ) ) ), true ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemySmallFrog  ( Vector(   2303,   365,  -603 ) ) ), true ) ) );
+		//military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemySkeleton   ( Vector(   850,     60,  -520 ) ) ), true ) ) );
+		//military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemySkeleton   ( Vector(  6000,     30, -2100 ) ) ), true ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemySkeleton   ( Vector(  5500,      0,  -520 ) ) ), true ) ) );
+		//military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemySkeleton   ( Vector(  5000,    -50,  -520 ) ) ), true ) ) );
+		//military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemySkeleton   ( Vector(  4300,   -250,  -520 ) ) ), true ) ) );
+		//military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemySkeleton   ( Vector(  3400,   -568, -3120 ) ) ), true ) ) );//坂の折り返し
+		//military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemySkeleton   ( Vector(  5110,   -850, -3120 ) ) ), true ) ) );//坂の中心
+		//military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemySkeleton   ( Vector(  7400,   -900, -3120 ) ) ), true ) ) );//海の手前
+		//military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemySkeleton   ( Vector(  9090,  -1350, -2840 ) ) ), true ) ) );//海の最初
+		//military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemySkeleton   ( Vector(  9950,  -1380, -2843 ) ) ), true ) ) );//海の最初と中心の間
+		//military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemySkeleton   ( Vector( 11000,  -1380, -2553 ) ) ), true ) ) );//海の中心
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyWaterGhost ( Vector(11000, -1380, -2553) ) ), true ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyWaterGhost ( Vector(12220, -1380, -2553) ) ), true ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyWaterGhost ( Vector(13360, -1380, -2003) ) ), true ) ) );
+		//military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemySkeleton   ( Vector( 12220,  -1380, -2553 ) ) ), true ) ) );//海の中心と最後の間
+		//military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemySkeleton   ( Vector( 13360,  -1380, -2003 ) ) ), true ) ) );//海の最後
+		//military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemySkeleton   ( Vector( 15600,  -1380, -2843 ) ) ), true ) ) );//海の隅っこ下
+		//military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemySkeleton   ( Vector( 13080,  -1380,     0 ) ) ), true ) ) );//海の隅っこ上
+		//military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemySkeleton   ( Vector( 16500,   -850,     0 ) ) ), true ) ) );//橋手前　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　　
+		//military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemySkeleton   ( Vector( 15080,   -850,  3412 ) ) ), true ) ) );//洞窟手前
+		//military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemySkeleton   ( Vector( 15350,   -850,  1700 ) ) ), true ) ) );//橋の上
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyRedBard ( Vector(  3400,    520,  -630 ) ) ), true ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyRedBard ( Vector(  3400,    520,  -530 ) ) ), true ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyRedBard ( Vector(  3300,    520,  -760 ) ) ), true ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyWaterGhost ( Vector(  3800,    320,  -530 ) ) ), true ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyWaterGhost ( Vector(  4100,    320,  -700 ) ) ), true ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyWaterGhost ( Vector(  5300,    320,  -780 ) ) ), true ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyWaterGhost ( Vector(  4700,    320,  -680 ) ) ), true ) ) );
+		//military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyCloud      ( Vector(  4500,    330,  -650 ) ) ), true ) ) );
+		//military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyCloud      ( Vector(  4900,    330,  -650 ) ) ), true ) ) );
+		//military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyBat        ( Vector(  2000,    190,  -600 ) ) ), true ) ) );
+		//military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyKimono     ( Vector(   950,     60,  -510 ) ) ), true ) ) );
+		//military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyFaceAndHand( Vector(  6000,    360,  -620 ) ) ), true ) ) );
+		//military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyGhost		 ( Vector(   900,     60,  -520 ) ) ), true ) ) );
+		//military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemySmallFrog	 ( Vector(  7250,    600, -1020 ) ) ), true ) ) );
+		//military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyChivil	 ( Vector(  7200,     60, -3020 ) ) ), true ) ) );
+		//military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyMoth		 ( Vector(  7250,    500, -2020 ) ) ), true ) ) );
 		break;
 	case STAGE_CAVE:
-		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyBossRedDaemon  ( Vector( 17675, -1105, 6123 ) ) ), true ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyBossRedDaemon  ( Vector( 17733, -1104, 5960 ) ) ), true ) ) );
 		break;
 	case STAGE_RYUGU:
 		break;
