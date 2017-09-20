@@ -240,7 +240,7 @@ ViewerObject::Sprite ViewerObject::getSpriteItem( GRAPH graph, int x, int y, uns
 	if ( size < 0 ) {
 		size = 32;
 	}
-	int width_num = 256 / size;
+	int width_num = 128 / size;
 	sprite.tx = pattern % width_num * size;
 	sprite.ty = pattern / width_num * size;
 	sprite.tw = size;
