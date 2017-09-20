@@ -77,6 +77,9 @@ bool Storage::pickUpItem( ItemPtr item, PlayerPtr player ) {
 		ItemMoneyPtr money = std::dynamic_pointer_cast< ItemMoney >( item );
 		if ( money ) {
 			player->addMoney( money->getValue( ) );
+			if ( player->getMode( ) == Player::MODE_VIRTUE ) {
+				player->damage( 1 );
+			}
 		}
 	}
 	{//“¿

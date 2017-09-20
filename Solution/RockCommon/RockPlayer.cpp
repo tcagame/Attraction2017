@@ -138,9 +138,12 @@ void RockPlayer::updateEffect( ) {
 }
 
 void RockPlayer::updeteState( ) {
-	if ( _status->getPlayer( _id ).power <= 0 ) {
+	if ( _status->getPlayer( _id ).power <= 0 || isBubble( ) ) {
 		setCol( false );
 		setMass( false );
+	} else {
+		setCol( true );
+		setMass( true );
 	}
 	if ( _status->getPlayer( _id ).money >= TRANSITION_MONEY_NUM ) {
 		if ( _status->getPlayer( _id ).area == AREA_STREET_1 ) {
@@ -223,6 +226,7 @@ void RockPlayer::actOnBubble( ) {
 	SoundPtr sound = Sound::getTask( );
 	if ( status.area == AREA_RESULT ||
 		 status.area == AREA_ENTRY ) {
+		_speed_down = false;
 		//éQâ¡éÛïtèÛë‘Ç≈ÇÕÇ»Ç¢Ç‹ÇΩÇÕÉäÉUÉãÉgÇ…ì¸Ç¡ÇΩÇÁñAÇ…ì¸ÇÁÇ»Ç¢
 		if ( isOnMapModel( ) ) {
 			setMass( true );
@@ -271,10 +275,12 @@ void RockPlayer::actOnBubble( ) {
 	double horizontal_vec = sin( PI2 / 360 * getActCount( ) + 120 ) * FLOAT_HEIGHT * 2 * dir;
 	Vector vec = Vector( horizontal_vec, vertical_vec, 0 );
 	ModelMV1Ptr col = RockMap::getTask( )->getColModels( )[ 0 ];
-	Vector pos = getPos( );
+	Vector check_pos = getPos( );
 	Vector vertical_up( 0, 500, 0 );
-	if ( col->isHitLine( pos, pos + vertical_up ) ) {
-		vec.y = col->getHitPos( ).y + BUBBLE_FOLLOW_RANGE;
+	if ( col->isHitLine( check_pos, check_pos + vertical_up ) ) {
+		vec.y = ( col->getHitPos( ).y - getPos( ).y ) + BUBBLE_FOLLOW_RANGE;
+		//Ç±Ç±ÇÕÇ¢Ç¡ÇΩ
+		Drawer::getTask()->drawString( 0,0, "ñAèCê≥" );
 	}
 	setVec( getApproachesVec( ) + vec );
 }
@@ -448,7 +454,7 @@ void RockPlayer::actOnCharging( ) {
 		return;
 	}
 
-	if ( _attack_count == 0 ) {
+	if ( _charge_effect_handle < 0 ) {
 		EffectPtr effect( Effect::getTask( ) );
 		_charge_effect_handle = effect->playEffect( RockStudio::getTask( )->getEffectHandle( EFFECT_CHARGE ) );
 		effect->updateEffectTransform( _charge_effect_handle, getPos( ) + CHARGE_EFFECT_ADJUST );

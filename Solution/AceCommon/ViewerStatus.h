@@ -16,6 +16,7 @@ private:
 	void drawMoney( int money, int sx, int sy ) const;
 	void drawItem( PLAYER player, int sx, int sy ) const;
 	void drawVirtue( int virtue, int sx, int sy ) const;
+	void drawRedo( int redo, int sx, int sy ) const;
 private:
 	ImagePtr _image_frame;
 	std::array< ImagePtr, MAX_PLAYER > _image_bustup;
@@ -26,5 +27,6 @@ private:
 	ImagePtr _image_virtue_number;
 	ImagePtr _image_money_number;
 	ImagePtr _image_item_effect;
+	ImagePtr _image_redo;
 };
 

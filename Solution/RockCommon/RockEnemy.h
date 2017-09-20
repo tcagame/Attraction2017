@@ -10,6 +10,7 @@ public:
 	int getForce( ) const;
 	void damage( int force );
 	bool isFinished( ) const;
+	bool isDead( ) const;
 	void reset( );
 	virtual ModelMV1Ptr getModel( );
 	virtual double getAnimTime( ) const = 0;

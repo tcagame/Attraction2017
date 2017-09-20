@@ -123,10 +123,12 @@ Vector RockFamily::getCameraPos( ) const {
 
 void RockFamily::resetPos( const Vector& base_pos ) {
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
-		if ( !_player[ i ]->isActive( ) ) {
-			continue;
+		if ( _player[ i ]->isActive( ) ) {
+			_player[ i ]->resetPos( Vector( i * 35, 1 ) + base_pos );
 		}
-		_player[ i ]->resetPos( Vector( i * 35, 1 ) + base_pos );
+		if ( _ancestors[ i ]->isActive( ) ) {
+			_ancestors[ i ]->resetPos( );
+		}
 	}
 	RockArmoury::getTask( )->clearShot( );
 }

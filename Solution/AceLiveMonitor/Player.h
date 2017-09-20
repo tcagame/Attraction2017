@@ -102,6 +102,7 @@ private:
 	int getDeviceDirY( );
 	unsigned char getDevicePush( );
 	unsigned char getDeviceButton( );
+	void debugItem( );
 private:
 	PLAYER _player;
 	ACTION _action;
@@ -116,6 +117,7 @@ private:
 	int _cool_time;
 	unsigned char _progress_type;
 	int _progress_count;
+	int _redo;
 	std::array< bool, MAX_ITEM > _item;
 };
 

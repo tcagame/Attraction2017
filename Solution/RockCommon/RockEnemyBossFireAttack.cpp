@@ -17,6 +17,7 @@ _shot( false ) {
 
 
 RockEnemyBossFireAttack::~RockEnemyBossFireAttack( ) {
+	Effect::getTask( )->stopEffect( _handle );
 }
 
 void RockEnemyBossFireAttack::act( ) {

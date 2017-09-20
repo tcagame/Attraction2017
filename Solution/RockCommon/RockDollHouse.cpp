@@ -31,7 +31,7 @@ void RockDollHouse::initialize( ) {
 	_dolls[ DOLL_GARISUKE_DEAD	 ]->load( "Resource/Rock/player/garisuke_dead.mv1" );
 	_dolls[ DOLL_GARISUKE_CHARGE ]->load( "Resource/Rock/player/garisuke_charge.mv1" );
 	_dolls[ DOLL_GARISUKE_WISH	 ]->load( "Resource/Rock/player/garisuke_wish.mv1" );
-	//_dolls[ DOLL_GARISUKE_BURST	 ]->load( "Resource/Rock/player/garisuke_burst.mv1" );
+	_dolls[ DOLL_GARISUKE_BURST	 ]->load( "Resource/Rock/player/garisuke_burst.mv1" );
 
 	_dolls[ DOLL_TAROJIRO_WAIT	 ]->load( "Resource/Rock/player/tarojiro_wait.mv1" );
 	_dolls[ DOLL_TAROJIRO_JUMP	 ]->load( "Resource/Rock/player/tarojiro_jump.mv1" );
@@ -39,7 +39,7 @@ void RockDollHouse::initialize( ) {
 	_dolls[ DOLL_TAROJIRO_DEAD	 ]->load( "Resource/Rock/player/tarojiro_dead.mv1" );
 	_dolls[ DOLL_TAROJIRO_CHARGE ]->load( "Resource/Rock/player/tarojiro_charge.mv1" );
 	_dolls[ DOLL_TAROJIRO_WISH	 ]->load( "Resource/Rock/player/tarojiro_wish.mv1" );
-	//_dolls[ DOLL_TAROJIRO_BURST	 ]->load( "Resource/Rock/player/tarojiro_burst.mv1" );
+	_dolls[ DOLL_TAROJIRO_BURST	 ]->load( "Resource/Rock/player/tarojiro_burst.mv1" );
 
 	_dolls[ DOLL_TAROMI_WAIT	 ]->load( "Resource/Rock/player/taromi_wait.mv1" );
 	_dolls[ DOLL_TAROMI_JUMP	 ]->load( "Resource/Rock/player/taromi_jump.mv1" );
@@ -47,25 +47,26 @@ void RockDollHouse::initialize( ) {
 	_dolls[ DOLL_TAROMI_DEAD	 ]->load( "Resource/Rock/player/taromi_dead.mv1" );
 	_dolls[ DOLL_TAROMI_CHARGE	 ]->load( "Resource/Rock/player/taromi_charge.mv1" );
 	_dolls[ DOLL_TAROMI_WISH	 ]->load( "Resource/Rock/player/taromi_wish.mv1" );
-	//_dolls[ DOLL_TAROMI_BURST	 ]->load( "Resource/Rock/player/taromi_burst.mv1" );
+	_dolls[ DOLL_TAROMI_BURST	 ]->load( "Resource/Rock/player/taromi_burst.mv1" );
 
 	_dolls[ DOLL_ANCESTORS		 ]->load( "Resource/Rock/player/ancestors.mv1" );
 
 	//enemy
-	_dolls[ DOLL_GHOST		           ]->load( "Resource/Rock/enemy/enm05_yurei/enm05_a01.mv1" );
 	_dolls[ DOLL_REDBARD	           ]->load( "Resource/Rock/enemy/enm02_bird/enm02_a01.mv1" );
-	_dolls[ DOLL_WATERGHOST            ]->load( "Resource/Rock/enemy/enm17_mizunoyokai/enm17_a02.mv1" );
-	_dolls[ DOLL_CLOUD                 ]->load( "Resource/Rock/enemy/enm06_cloud/enm06_a01.mv1" );
 	_dolls[ DOLL_FACE_AND_HAND         ]->load( "Resource/Rock/enemy/enm03_face_and_hand/enm03_a01.mv1" );
-	_dolls[ DOLL_BAT                   ]->load( "Resource/Rock/enemy/enm09_Babitto/enm09_a01.mv1" );
-	_dolls[ DOLL_TREE_NUTS             ]->load( "Resource/Rock/enemy/enm40_tree_nuts/enm40_a01.mv1" );
-	_dolls[ DOLL_KIMONO		           ]->load( "Resource/Rock/enemy/enm07_Kimono-no-Yokai/enm07_a1.mv1" );
-	_dolls[ DOLL_SKELETON              ]->load( "Resource/Rock/enemy/enm16_skeleton/enm16_a01.mv1" );
-	_dolls[ DOLL_LITTLE_RED_DAMON      ]->load( "Resource/Rock/enemy/enm18_little_red_daemon/enm18_a2.mv1" );
 	_dolls[ DOLL_STONE                 ]->load( "Resource/Rock/enemy/enm04_stone/enm04.mv1" );
+	_dolls[ DOLL_GHOST		           ]->load( "Resource/Rock/enemy/enm05_yurei/enm05_a01.mv1" );
+	_dolls[ DOLL_CLOUD                 ]->load( "Resource/Rock/enemy/enm06_cloud/enm06_a01.mv1" );
+	_dolls[ DOLL_KIMONO		           ]->load( "Resource/Rock/enemy/enm07_Kimono-no-Yokai/enm07_a1.mv1" );
+	_dolls[ DOLL_BAT                   ]->load( "Resource/Rock/enemy/enm09_Babitto/enm09_a01.mv1" );
+	_dolls[ DOLL_BIRD_ATTACK           ]->load( "Resource/Rock/enemy/enm10_bird_attack/enm10.mv1" );
+	_dolls[ DOLL_MOTH                  ]->load( "Resource/Rock/enemy/enm11_moth/enm11_a1.mv1" );
+	_dolls[ DOLL_CHIVIL                ]->load( "Resource/Rock/enemy/enm13_chivil/enm13_a01.mv1" );
+	_dolls[ DOLL_SKELETON              ]->load( "Resource/Rock/enemy/enm16_skeleton/enm16_a01.mv1" );
+	_dolls[ DOLL_WATERGHOST            ]->load( "Resource/Rock/enemy/enm17_mizunoyokai/enm17_a02.mv1" );
+	_dolls[ DOLL_LITTLE_RED_DAMON      ]->load( "Resource/Rock/enemy/enm18_little_red_daemon/enm18_a2.mv1" );
 	_dolls[ DOLL_BOSS_FIRE             ]->load( "Resource/Rock/enemy/enm20_fire/enm20_fire.mv1" );
 	_dolls[ DOLL_BOSS_TREE             ]->load( "Resource/Rock/enemy/enm21_tree/enm21_tree.mv1" );
-	_dolls[ DOLL_BOSS_RED_DAEMON	   ]->load( "Resource/Rock/enemy/enm23_reddaemon/enm23_a02.mv1" );
 	_dolls[ DOLL_BOSS_ROCK	           ]->load( "Resource/Rock/enemy/enm22_rock/enm22_rock/enm22_rock.mv1" );
 	_dolls[ DOLL_BOSS_ROCK_ATTACK_1    ]->load( "Resource/Rock/enemy/enm22_rock/enm22_rock/enm22_01.mv1" );
 	_dolls[ DOLL_BOSS_ROCK_ATTACK_2    ]->load( "Resource/Rock/enemy/enm22_rock/enm22_rock/enm22_02.mv1" );
@@ -76,11 +77,10 @@ void RockDollHouse::initialize( ) {
 	_dolls[ DOLL_BOSS_ROCK_ATTACK_7    ]->load( "Resource/Rock/enemy/enm22_rock/enm22_rock/enm22_07.mv1" );
 	_dolls[ DOLL_BOSS_ROCK_ATTACK_8    ]->load( "Resource/Rock/enemy/enm22_rock/enm22_rock/enm22_08.mv1" );
 	_dolls[ DOLL_BOSS_ROCK_ATTACK_9    ]->load( "Resource/Rock/enemy/enm22_rock/enm22_rock/enm22_09.mv1" );
-	_dolls[ DOLL_MOTH                  ]->load( "Resource/Rock/enemy/enm11_moth/enm11_a1.mv1" );
-	_dolls[ DOLL_CHIVIL                ]->load( "Resource/Rock/enemy/enm13_chivil/enm13_a01.mv1" );
+	_dolls[ DOLL_BOSS_RED_DAEMON	   ]->load( "Resource/Rock/enemy/enm23_reddaemon/enm23_a02.mv1" );
 	_dolls[ DOLL_FLOG_1                ]->load( "Resource/Rock/enemy/enm25_flog/enm25_a01.mv1" );
 	_dolls[ DOLL_FLOG_2                ]->load( "Resource/Rock/enemy/enm25_flog/enm25_a02.mv1" );
-	_dolls[ DOLL_BIRD_ATTACK           ]->load( "Resource/Rock/enemy/enm10_bird_attack/enm10.mv1" );
+	_dolls[ DOLL_TREE_NUTS             ]->load( "Resource/Rock/enemy/enm40_tree_nuts/enm40_a01.mv1" );
 
 	//item
 	_dolls[ DOLL_DANGO	 ]->load( "Resource/Rock/item/itm01/itm01.mv1" );

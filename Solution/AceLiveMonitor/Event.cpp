@@ -8,11 +8,11 @@ const int NOBODY_COUNT = 60;
 
 Event::Event( EVENT type, DIR exit_dir ) :
 _type( type ),
+_exist_dir( exit_dir ),
 _fade_type( FADE_IN ),
 _fade_count( 100 ),
 _exiting( false ),
 _finished( true ),
-_exist_dir( exit_dir ),
 _nobody_count( 0 ) {
 }
 

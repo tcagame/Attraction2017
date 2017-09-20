@@ -2,7 +2,7 @@
 
 #include "smart_ptr.h"
 
-PTR( Image );
+PTR( Movie );
 
 class ViewerTitle {
 public:
@@ -13,6 +13,6 @@ public:
 	void draw( );
 
 private:
-	ImagePtr _image;
+	MoviePtr _movie;
 };
 

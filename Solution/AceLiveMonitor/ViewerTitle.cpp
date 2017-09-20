@@ -1,15 +1,17 @@
 #include "ViewerTitle.h"
 #include "Drawer.h"
-#include "Image.h"
+#include "Movie.h"
 
 ViewerTitle::ViewerTitle( ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
-	_image = drawer->createImage( "Title/title_logo.png" );
+	_movie = MoviePtr( new Movie );
+	_movie->load( "Resource/Ace/Event/title/ui_main_title.mp4" );
+	_movie->play( true );
 }
 
 ViewerTitle::~ViewerTitle( ) {
 }
 
 void ViewerTitle::draw( ) {
-	_image->draw( );
+	_movie->draw( );
 }

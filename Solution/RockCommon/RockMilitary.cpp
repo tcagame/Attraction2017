@@ -55,7 +55,10 @@ void RockMilitary::updateEnemies( ) {
 		if ( enemy->isFinished( ) ) {
 			addImpact( RockImpactPtr( new RockImpact( enemy->getPos( ) + Vector( 0, 30, 0 ) ) ) );
 			Sound::getTask( )->playSE( "yokai_se_26.wav" );
-			enemy->dropItem( );
+			//Ž€‚ñ‚¾ê‡‚Íƒhƒƒbƒv
+			if ( enemy->isDead( ) ) {
+				enemy->dropItem( );
+			}
 			if ( !std::dynamic_pointer_cast< RockEnemyBoss >( enemy ) &&
 				 !std::dynamic_pointer_cast< RockEnemyAttack >( enemy ) ) {
 				enemy->reset( );
@@ -134,7 +137,9 @@ void RockMilitary::clean( ) {
 	{
 		std::list< RockEnemyPtr >::iterator ite = _enemies.begin( );
 		while ( ite != _enemies.end( ) ) {
-			*ite = RockEnemyPtr( );
+			RockEnemyPtr enemy = *ite;
+			enemy->stopEffect( );
+			enemy.reset( );
 			ite++;
 		}
 		_enemies = { };
@@ -142,7 +147,8 @@ void RockMilitary::clean( ) {
 	{
 		std::list< RockImpactPtr >::iterator ite = _impacts.begin( );
 		while ( ite != _impacts.end( ) ) {
-			*ite = RockImpactPtr( );
+			RockImpactPtr impact = *ite;
+			impact.reset( );
 			ite++;
 		}
 		_impacts = { };
@@ -150,7 +156,8 @@ void RockMilitary::clean( ) {
 	{
 		std::list< RockPopPtr >::iterator ite = _pops.begin( );
 		while ( ite != _pops.end( ) ) {
-			*ite = RockPopPtr( );
+			RockPopPtr pop = *ite;
+			pop.reset( );
 			ite++;
 		}
 		_pops = { };

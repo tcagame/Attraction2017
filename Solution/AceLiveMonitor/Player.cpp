@@ -18,6 +18,7 @@
 #include "Map.h"
 #include "Monmotaro.h"
 #include "Sound.h"
+#include "Keyboard.h"
 #include <assert.h>
 
 //‰æ‘œƒTƒCƒY
@@ -152,7 +153,8 @@ _unrivaled_count( MAX_UNRIVALED_COUNT ),
 _action( ACTION_ENTRY ),
 _progress_count( 0 ),
 _cool_time( COOL_TIME ),
-_auto_move_target_x( -1 ) {
+_auto_move_target_x( -1 ),
+_redo( 0 ) {
 	setOverlappedRadius( 25 );
 	setDir( DIR_RIGHT );
 
@@ -272,6 +274,40 @@ void Player::act( ) {
 
 	updateShowMoney( );
 	updateProgressEffect( );
+
+	debugItem( );
+}
+
+void Player::debugItem( ) {
+	KeyboardPtr keyboard = Keyboard::getTask( );
+	
+	if ( keyboard->isPushKey( "NUM1" ) ) {
+		pickUpItem( ITEM_DANGO );
+	}
+	if ( keyboard->isPushKey( "NUM2" ) ) {
+		pickUpItem( ITEM_HEART );
+	}
+	if ( keyboard->isPushKey( "NUM3" ) ) {
+		pickUpItem( ITEM_HYPERTROPHY );
+	}
+	if ( keyboard->isPushKey( "NUM4" ) ) {
+		pickUpItem( ITEM_SHORTENING );
+	}
+	if ( keyboard->isPushKey( "NUM5" ) ) {
+		pickUpItem( ITEM_WOOD );
+	}
+	if ( keyboard->isPushKey( "NUM6" ) ) {
+		pickUpItem( ITEM_FLAME );
+	}
+	if ( keyboard->isPushKey( "NUM7" ) ) {
+		pickUpItem( ITEM_MINERAL );
+	}
+	if ( keyboard->isPushKey( "NUM8" ) ) {
+		pickUpVirtue( );
+	}
+	if ( keyboard->isPushKey( "R" ) ) {
+		_redo++;
+	}
 }
 
 void Player::updateShowMoney( ) {
@@ -314,7 +350,8 @@ void Player::actOnEntry( ) {
 
 		_virtue = 0;
 		_money = 0;
-		_mode = MODE_VIRTUE;
+		_redo = 0;
+		_mode = MODE_NORMAL;
 	}
 }
 
@@ -324,6 +361,7 @@ void Player::actOnContinue( ) {
 
 	if ( _progress_count >= 100 ) {
 		// Ä“oê‚Ì‚½‚ß‚É‰Šú‰»
+		_redo++;
 		appear( );
 	}
 }
@@ -767,6 +805,9 @@ int Player::getVirtue( ) const {
 
 void Player::pickUpVirtue( ) {
 	_virtue++;
+	if ( _virtue > 9 ) {
+		_virtue = 9;
+	}
 }
 
 void Player::setAction( ACTION action ) {
@@ -817,6 +858,7 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 	for ( int i = 0; i < MAX_ITEM; i++ ) {
 		data->setInProssessionOfStatusItem( _player, CONV[ i ], _item[ i ] );
 	}
+	data->setStatusRedo( _player, _redo );
 
 	// Object
 	if ( _unrivaled_count < MAX_UNRIVALED_COUNT ) {

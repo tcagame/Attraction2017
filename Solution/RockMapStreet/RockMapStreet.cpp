@@ -36,6 +36,9 @@
 #include "RockEnemyCloud.h"
 #include "RockEnemySkeleton.h"
 #include "RockEnemyStone.h"
+#include "RockEnemySmallFrog.h"
+#include "RockEnemyChivil.h"
+#include "RockEnemyMoth.h"
 #include "RockEnemyLittleRedDaemon.h"
 #include "RockEnemyBossRedDaemon.h"
 
@@ -130,7 +133,6 @@ void RockMapStreet::updateStreet( ) {
 				}
 			}
 		}
-
 	}
 
 	if ( !active ) {
@@ -213,6 +215,7 @@ void RockMapStreet::loadStage( STAGE next ) {
 	resetFamilyPos( next );
 	_drawer.reset( new RockMapStreetDrawer( next ) );
 	_stage = next;
+	_virtue_pop = false;
 }
 
 
@@ -233,6 +236,9 @@ void RockMapStreet::genarateEnemies( STAGE next ) {
 		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyKimono     ( Vector(  950,  60, -510 ) ) ), true ) ) );
 		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyFaceAndHand( Vector( 6000, 360, -620 ) ) ), true ) ) );
 		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyGhost		 ( Vector(  900,  60, -520 ) ) ), true ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemySmallFrog	 ( Vector( 7050,  60, -520 ) ) ), true ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyChivil	 ( Vector( 7000,  60, -520 ) ) ), true ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyMoth		 ( Vector( 7050,  60, -520 ) ) ), true ) ) );
 		break;
 	case STAGE_CAVE:
 		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyBossRedDaemon  ( Vector( 20, 20,   0 ) ) ), true ) ) );
@@ -252,6 +258,7 @@ void RockMapStreet::genarateStorage( STAGE next ) {
 		for ( int i = 0; i < 30; i++ ) {
 			storage->addItem( RockItemPtr( new RockItemMoney( Vector( i * INTERVAL, 200, -500 - i * 10 ), 500 ) ) );
 		}
+		storage->addAlter( RockAlterPtr( new RockAlter( Vector( 300, 0, -300 ), Vector( 0, 0, -1 ) ) ) );
 	}
 		break;
 	case STAGE_CAVE:

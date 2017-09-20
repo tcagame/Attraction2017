@@ -13,7 +13,9 @@ public:
 	void dropItem( );
 protected:
 	void act( );
+	void stopEffect( );
 private:
+	int _soul_handle;
 	static const int STONE_NUM = 9;
 	std::array< RockEnemyBossRockAttackPtr, STONE_NUM > _stones;
 };
