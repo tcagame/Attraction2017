@@ -122,7 +122,7 @@ CrocoSnake_RADIUS,28
 EyeDaemon_RADIUS,16
 FaceAndHand_RADIUS,28
 Flog_RADIUS,16
-Gama_RADIUS,36
+Gama_RADIUS,33
 Ghost_RADIUS,32
 Ghoul_RADIUS,28
 GrayMist_RADIUS,30
@@ -130,7 +130,7 @@ GreenZombie_RADIUS,30
 Hand_RADIUS,28
 HellFire_RADIUS,28
 HugDaemon_RADIUS,30
-Jizo_RADIUS,48
+Jizo_RADIUS,40
 Lady_RADIUS,18
 Lancer_RADIUS,26
 LittleRedDaemon_RADIUS,28
@@ -151,7 +151,7 @@ StoneFace_RADIUS,28
 SwampZombieA_RADIUS,28
 SwampZombieB_RADIUS,28
 SwampZombieC_RADIUS,28
-Tree_RADIUS,40
+Tree_RADIUS,60
 TreeNuts_RADIUS,18
 WaterGhost_RADIUS,30
 WhiteMist_RADIUS,30
