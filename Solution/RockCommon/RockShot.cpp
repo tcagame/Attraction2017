@@ -14,7 +14,10 @@ _effect_handle( -1 ) {
 }
 
 RockShot::~RockShot( ) {
-	Effect::getTask( )->stopEffect( _effect_handle );
+	EffectPtr effect( Effect::getTask( ) );
+	if ( effect ) {
+		effect->stopEffect( _effect_handle );
+	}
 }
 
 bool RockShot::isFinished( ) const {
