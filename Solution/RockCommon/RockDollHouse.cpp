@@ -64,6 +64,7 @@ void RockDollHouse::initialize( ) {
 	_dolls[ DOLL_CHIVIL                ]->load( "Resource/Rock/enemy/enm13_chivil/enm13_a01.mv1" );
 	_dolls[ DOLL_SKELETON              ]->load( "Resource/Rock/enemy/enm16_skeleton/enm16_a01.mv1" );
 	_dolls[ DOLL_WATERGHOST            ]->load( "Resource/Rock/enemy/enm17_mizunoyokai/enm17_a02.mv1" );
+	_dolls[ DOLL_WATERGHOST            ]->setScale( Matrix::makeTransformScaling( Vector( 0.3, 0.3, 0.3 ) ) );
 	_dolls[ DOLL_LITTLE_RED_DAMON      ]->load( "Resource/Rock/enemy/enm18_little_red_daemon/enm18_a2.mv1" );
 	_dolls[ DOLL_BOSS_FIRE             ]->load( "Resource/Rock/enemy/enm20_fire/enm20_fire.mv1" );
 	_dolls[ DOLL_BOSS_TREE             ]->load( "Resource/Rock/enemy/enm21_tree/enm21_tree.mv1" );

@@ -16,7 +16,7 @@ const int ATTACK_TIME = 240;
 
 
 RockEnemyBossFire::RockEnemyBossFire( const Vector& pos ) :
-RockEnemyBoss( pos, DOLL_BOSS_FIRE, HP, 1, 10, 10, true, true ) {
+RockEnemyBoss( pos, DOLL_BOSS_FIRE, HP, 1, 32, 10, true, true ) {
 	setDir( Vector( -1, 0, 0 ) );
 }
 
