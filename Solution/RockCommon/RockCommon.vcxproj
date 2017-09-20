@@ -180,6 +180,7 @@
     <ClInclude Include="RockEnemyChivil.h" />
     <ClInclude Include="RockEnemyLittleRedDaemon.h" />
     <ClInclude Include="RockEnemyMoth.h" />
+    <ClInclude Include="RockEnemyRedBirdAttack.h" />
     <ClInclude Include="RockEnemySkeleton.h" />
     <ClInclude Include="RockEnemySmallFrog.h" />
     <ClInclude Include="RockEnemyStone.h" />
@@ -250,6 +251,7 @@
     <ClCompile Include="RockEnemyChivil.cpp" />
     <ClCompile Include="RockEnemyLittleRedDaemon.cpp" />
     <ClCompile Include="RockEnemyMoth.cpp" />
+    <ClCompile Include="RockEnemyRedBirdAttack.cpp" />
     <ClCompile Include="RockEnemySkeleton.cpp" />
     <ClCompile Include="RockEnemySmallFrog.cpp" />
     <ClCompile Include="RockEnemyStone.cpp" />

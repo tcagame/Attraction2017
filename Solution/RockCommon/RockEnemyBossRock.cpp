@@ -34,7 +34,7 @@ static const Vector STONE_DIR[ 9 ] = {
 };
 
 RockEnemyBossRock::RockEnemyBossRock( const Vector& pos ) :
-RockEnemyBoss( pos, DOLL_BOSS_ROCK, HP, 1, 10, 10, true, true ) {
+RockEnemyBoss( pos, DOLL_BOSS_ROCK, HP, 1, 10, 10, true, false ) {
 	setDir( Vector( -1, 0, 0 ) );
 	RockMilitaryPtr military = RockMilitary::getTask( );
 	for ( int i = 0; i < STONE_NUM; i++ ) {

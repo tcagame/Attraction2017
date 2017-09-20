@@ -26,6 +26,7 @@ RockMapBoss::~RockMapBoss( ) {
 
 void RockMapBoss::initialize( ) {
 	_drawer = RockMapBossDrawerPtr( new RockMapBossDrawer( STAGE_ROCK ) );
+	Sound::getTask( )->stopBGM( );
 }
 
 void RockMapBoss::update( ) {
@@ -48,6 +49,7 @@ void RockMapBoss::update( ) {
 	}
 
 	if ( reset_stage ) {
+		Sound::getTask( )->stopBGM( );
 		RockArmoury::getTask( )->clearShot( );
 		RockMilitary::getTask( )->clean( );
 	}
@@ -128,6 +130,7 @@ bool RockMapBoss::isWarpToBoss( const Vector& pos ) {
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		RockPlayerPtr player( family->getPlayer( i ) );
 		if ( !player->isActive( ) ) {
+			Sound::getTask( )->stopBGM( );
 			continue;
 		}
 		Vector p_pos = player->getPos( );
@@ -161,6 +164,7 @@ bool RockMapBoss::isWarpToStreet( STAGE stage ) {
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		RockPlayerPtr player( family->getPlayer( i ) );
 		if ( !player->isActive( ) ) {
+		Sound::getTask( )->stopBGM( );
 			continue;
 		}
 		if ( !( _status->getPlayer( i ).item & sacred ) ) {

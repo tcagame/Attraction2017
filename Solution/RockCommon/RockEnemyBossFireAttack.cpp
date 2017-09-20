@@ -17,10 +17,6 @@ _shot( false ) {
 
 
 RockEnemyBossFireAttack::~RockEnemyBossFireAttack( ) {
-	EffectPtr effect = Effect::getTask( );
-	if ( effect ) {
-		effect->stopEffect( _handle );
-	}
 }
 
 void RockEnemyBossFireAttack::act( ) {
@@ -41,4 +37,8 @@ ModelMV1Ptr RockEnemyBossFireAttack::getModel( ) const {
 
 double RockEnemyBossFireAttack::getAnimTime( ) const {
 	return 0;
+}
+
+void RockEnemyBossFireAttack::stopEffect( ) {
+	Effect::getTask( )->stopEffect( _handle );
 }
