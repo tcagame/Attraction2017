@@ -35,7 +35,7 @@ RockTheaterResult::~RockTheaterResult( ) {
 void RockTheaterResult::initialize( ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
 	MoviePtr movie = drawer->createMovie( "result/ui_main_title.mp4" );
-	_images.push_back( drawer->createImage( "result/play_monitor.JPG" ) );
+	_images.push_back( drawer->createImage( "result/play_monitor.png" ) );
 	_images.push_back( drawer->createImage( "UI/breast1.png" ) );
 	_images.push_back( drawer->createImage( "UI/breast2.png" ) );
 	_images.push_back( drawer->createImage( "UI/breast3.png" ) );
