@@ -235,7 +235,7 @@ void RockPlayer::actOnBubble( ) {
 	setMass( false );
 	setCol( false );
 	if ( status.device_button &&
-		 status.device_button != 0b00001111 ) {
+		 status.device_button != 0b00001111) {
 		_bubble_count++;		
 	} else {
 		_bubble_count = 0;
@@ -661,7 +661,8 @@ ModelMV1Ptr RockPlayer::getModel( ) const {
 void RockPlayer::damage( int force ) {
 	if ( isDead( ) ||
 		 isBubble( ) ||
-		_action == ACTION_WISH ) {
+		_action == ACTION_WISH ||
+		_status->getPlayer( _id ).toku >= 10) {
 		return;
 	}
 	if ( _damage_count > DAMAGE_COUNT ) {
