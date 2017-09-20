@@ -196,13 +196,14 @@ void Family::pushDebugData( ViewerDebug::Data& data ) const {
 }
 
 void Family::shiftPos( ) {
+	int map_width = World::getTask( )->getMap( AREA_STREET )->getPageNum( ) * GRAPH_SIZE;
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
-		_player[ i ]->shiftPos( );
+		_player[ i ]->shiftPos( map_width );
 	}
-	Military::getTask( )->shiftPos( );
-	Storage ::getTask( )->shiftPos( );
-	Office  ::getTask( )->shiftPos( );
-	World   ::getTask( )->shiftPos( );
+	Military::getTask( )->shiftPos( map_width );
+	Storage ::getTask( )->shiftPos( map_width );
+	Office  ::getTask( )->shiftPos( map_width );
+	World   ::getTask( )->shiftPos( map_width );
 }
 
 bool Family::isModeVirtue( ) const {

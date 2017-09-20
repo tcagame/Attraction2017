@@ -48,12 +48,11 @@ void Military::updateEnemy( ) {
 	int camera_pos = family->getCameraPosX( );
 	while ( ite != _enemies.end( ) ) {
 		EnemyPtr enemy = (*ite);
-		if ( !enemy ) {
-			ite++;
-			continue;
-		}
+		enemy->update( );
+		enemy->setSynchronousData( camera_pos );
+
+		//エネミーが倒れたときの処理
 		if ( enemy->getPower( ) <= 0 ) {
-			//エネミーが倒れた場合、倒れた位置で爆発する
 			if ( !std::dynamic_pointer_cast< EnemyAttack >( enemy ) ) {
 				dropMoney( enemy );
 			}
@@ -62,11 +61,14 @@ void Military::updateEnemy( ) {
 			ite = _enemies.erase( ite );
 			continue;
 		}
+
+		//エネミーが画面外に行った時の処理
 		if ( !enemy->isInScreen( ) ) {
-			//エネミーが画面外に行くと消える
 			ite = _enemies.erase( ite );
 			continue;
 		}
+
+		//プレイヤーと接触したときの処理
 		for ( int i = 0; i < MAX_PLAYER; i++ ) {
 			PlayerPtr player( family->getPlayer( i ) );
 			if ( !player->isExist( ) ) {
@@ -83,8 +85,6 @@ void Military::updateEnemy( ) {
 				}
 			}
 		}
-		enemy->update( );
-		enemy->setSynchronousData( camera_pos );
 		ite++;
 	}
 }
@@ -118,10 +118,6 @@ EnemyPtr Military::getOverlappedEnemy( CharacterConstPtr character ) const {
 	std::list< EnemyPtr >::const_iterator ite = _enemies.begin( );
 	while ( ite != _enemies.end( ) ) {
 		EnemyPtr enemy = (*ite);
-		if ( !enemy ) {
-			ite++;
-			continue;
-		}
 		if ( enemy->getArea( ) != area_character ) {
 			ite++;
 			continue;
@@ -140,10 +136,6 @@ void Military::eraseEventEnemy( ) {
 	std::list< EnemyPtr >::iterator ite = _enemies.begin( );
 	while ( ite != _enemies.end( ) ) {
 		EnemyPtr enemy = (*ite);
-		if ( !enemy ) {
-			ite++;
-			continue;
-		}
 		if ( enemy->getArea( ) == AREA_EVENT ) {
 			ite = _enemies.erase( ite );
 			continue;
@@ -194,16 +186,12 @@ void Military::pushDebugData( ViewerDebug::Data& data ) const {
 	data.message.push_back( "Enemy:" + std::to_string( _enemies.size( ) ) );
 }
 
-void Military::shiftPos( ) {
+void Military::shiftPos( int map_width ) {
 	std::list< EnemyPtr >::iterator ite = _enemies.begin( );
 	while ( ite != _enemies.end( ) ) {
 		EnemyPtr enemy = (*ite);
-		if ( !enemy ) {
-			ite++;
-			continue;
-		}
-		enemy->shiftPos( );
+		enemy->shiftPos( map_width );
 		ite++;
 	}
-	_hell_fire->shiftPos( );
+	_hell_fire->shiftPos( map_width );
 }

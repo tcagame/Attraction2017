@@ -26,10 +26,6 @@ void Office::update( ) {
 	std::list< NPCPtr >::iterator ite = _npc.begin( );
 	while( ite != _npc.end( ) ) {
 		NPCPtr npc = (*ite);
-		if ( !npc ) {
-			ite++;
-			continue;
-		}
 		npc->update( );
 		npc->setSynchronousData( );
 		ite++;
@@ -70,10 +66,6 @@ void Office::eraseEventNPC( ) {
 	std::list< NPCPtr >::iterator ite = _npc.begin( );
 	while( ite != _npc.end( ) ) {
 		NPCPtr npc = (*ite);
-		if ( !npc ) {
-			ite++;
-			continue;
-		}
 		if ( npc->getArea( ) == AREA_EVENT ) {
 			ite = _npc.erase( ite );
 			continue;
@@ -87,15 +79,11 @@ void Office::addEventNPC( NPCPtr npc ) {
 	_npc.push_back( npc );
 }
 
-void Office::shiftPos( ) {
+void Office::shiftPos( int map_width ) {
 	std::list< NPCPtr >::iterator ite = _npc.begin( );
 	while( ite != _npc.end( ) ) {
 		NPCPtr npc = (*ite);
-		if ( !npc ) {
-			ite++;
-			continue;
-		}
-		npc->shiftPos( );
+		npc->shiftPos( map_width );
 		ite++;
 	}
 }

@@ -23,7 +23,7 @@ public:
 	void playMapBgm( EVENT event );
 	EVENT getEvent( ) const;
 	MapPtr getMap( AREA area ) const;
-	void shiftPos( );
+	void shiftPos( int map_width );
 private:
 	void updateEvent( );
 	void updateBGM( );

@@ -30,19 +30,23 @@ void Storage::update( ) {
 	std::list< ItemPtr >::iterator ite = _items.begin( );
 	while ( ite != _items.end( ) ) {
 		ItemPtr item = *ite;
-		if ( !item ) {
-			ite++;
-			continue;
-		}
 		item->update( );
 		item->setSynchronousData( camera_pos );
+
+		//プレイヤーと当たる
 		PlayerPtr hit_player = getOverLappedPlayer( item );
 		if ( hit_player ) {
-			//プレイヤーがアイテムと接触
+			//アイテム取得
 			if ( pickUpItem( item, hit_player ) ) {
 				ite = _items.erase( ite );
 				continue;
 			}
+		}
+
+		//画面より左に行ったら削除
+		if ( item->isOutRange( ) ) {
+			ite = _items.erase( ite );
+			continue;
 		}
 		ite++;
 	}
@@ -57,10 +61,6 @@ bool Storage::isExistanceEventItem( ) const {
 	std::list< ItemPtr >::const_iterator ite = _items.begin( );
 	while ( ite != _items.end( ) ) {
 		ItemPtr item = *ite;
-		if ( !item ) {
-			ite++;
-			continue;
-		}
 		if ( item->getArea( ) == AREA_EVENT ) {
 			result = true;
 			break;
@@ -135,10 +135,6 @@ void Storage::eraseEventItem( ) {
 	std::list< ItemPtr >::iterator ite = _items.begin( );
 	while ( ite != _items.end( ) ) {
 		ItemPtr item = *ite;
-		if ( !item ) {
-			ite++;
-			continue;
-		}
 		if ( item->getArea( ) == AREA_EVENT ) {
 			ite = _items.erase( ite );
 			continue;
@@ -147,15 +143,21 @@ void Storage::eraseEventItem( ) {
 	}
 }
 
-void Storage::shiftPos( ) {
+void Storage::shiftPos( int map_width ) {
 	std::list< ItemPtr >::iterator ite = _items.begin( );
 	while ( ite != _items.end( ) ) {
 		ItemPtr item = *ite;
-		if ( !item ) {
-			ite++;
-			continue;
-		}
-		item->shiftPos( );
+		item->shiftPos( map_width );
 		ite++;
 	}
+}
+
+void Storage::pushDebugData( ViewerDebug::Data& data ) {
+	std::list< ItemPtr >::iterator ite = _items.begin( );
+	while ( ite != _items.end( ) ) {
+		ItemPtr item = *ite;
+		data.circle.push_back( item->getDebugDataCircle( ) );
+		ite++;
+	}
+	data.message.push_back( "Item:" + std::to_string( ( int )_items.size( ) ) );
 }
