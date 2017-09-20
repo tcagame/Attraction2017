@@ -100,6 +100,7 @@ private:
 			long camera_x;
 			unsigned char event;
 			unsigned char fade; // 0 - 99
+			unsigned char escape;
 			struct Status {
 				char          device;
 				unsigned char progress_type;

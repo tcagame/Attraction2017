@@ -42,6 +42,8 @@ ViewerEvent::ViewerEvent( ) {
 		sprintf_s( buf, "Event/shaka/back_%003d.png", i );
 		_images[ EVENT_BUDHA * EVENT_PAGE_NUM + i ] = drawer->createImage( buf );
 	}
+
+	_image_escape = drawer->createImage( "Event/event_escape.png" );
 }
 
 ViewerEvent::~ViewerEvent( ) {
@@ -51,5 +53,40 @@ void ViewerEvent::draw( EVENT event, int sx, int sy ) const {
 	for ( int i = 0; i < EVENT_PAGE_NUM; i++ ) {
 		_images[ event * EVENT_PAGE_NUM + i ]->setPos( i * VIEW_WIDTH + sx, sy );
 		_images[ event * EVENT_PAGE_NUM + i ]->draw( );
+	}
+
+	static int count = 0;
+	count++;
+	_image_escape->setBlend( Image::BLEND_ALPHA, abs( cos( PI * count / 60 ) ) );
+
+	switch ( event ) {
+	case EVENT_REDDAEMON:
+	case EVENT_FLAME    :
+	case EVENT_WOOD     :
+		_image_escape->setRect( 0, 0, 128, 64 );
+		_image_escape->setPos( 256 - 64, 0 );
+		_image_escape->draw( );
+		break;
+	case EVENT_GAMBLE   :
+	case EVENT_SHOP     :
+	case EVENT_RYUGU    :
+		_image_escape->setRect( 0, 64, 128, 64 );
+		_image_escape->setPos( 256 - 64, 0 );
+		_image_escape->draw( );
+		break;
+	case EVENT_MINERAL  :
+		_image_escape->setRect( 0, 0, 128, 64 );
+		_image_escape->setPos( 1280 - ( 256 - 64 ), 0 );
+		_image_escape->draw( );
+		break;
+	case EVENT_LAKE     :
+		_image_escape->setRect( 0, 64, 128, 64 );
+		_image_escape->setPos( 1280 - ( 256 - 64 ), 0  );
+		_image_escape->draw( );
+		break;
+	case EVENT_CALL     :
+	case EVENT_ENMA     :
+	case EVENT_BUDHA    : 
+		break;
 	}
 }
