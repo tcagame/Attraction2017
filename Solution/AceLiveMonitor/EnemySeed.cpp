@@ -9,12 +9,12 @@ const int JUMP_MAX_HP = -15;
 
 EnemySeed::EnemySeed( const Vector& pos ) :
 EnemyAttack( pos, SMALL_CHAR_GRAPH_SIZE ) {
-	setOverlappedRadius( 16 );
 	setVec( Vector( -10, 0 ) );
 
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "Seed_POWER" ) );
 	setForce( property->getData( "Seed_FORCE" ) );
+	setOverlappedRadius( property->getData( "Seed_RADIUS" ) );
 }
 
 EnemySeed::~EnemySeed( ) {

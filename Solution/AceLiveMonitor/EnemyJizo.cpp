@@ -11,11 +11,10 @@ EnemyJizo::EnemyJizo( const Vector& pos ) :
 Enemy( pos, BIG_CHAR_GRAPH_SIZE ),
 _act( ACTION_FADE_IN ),
 _before_pos( pos ) {
-	setOverlappedRadius( 48 );
-
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "Jizo_POWER" ) );
 	setForce( property->getData( "Jizo_FORCE" ) );
+	setOverlappedRadius( property->getData( "Jizo_RADIUS" ) );
 }
 
 

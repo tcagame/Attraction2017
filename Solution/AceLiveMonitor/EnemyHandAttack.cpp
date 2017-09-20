@@ -6,13 +6,13 @@ const int WAIT_ANIM_TIME = 1;
 
 EnemyHandAttack::EnemyHandAttack( const Vector& pos ) :
 EnemyAttack( pos, SMALL_CHAR_GRAPH_SIZE ) {
-	setOverlappedRadius( 18 );
 	Vector vec( -20, -8 );
 	setVec( vec );
 
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "HandAttack_POWER" ) );
 	setForce( property->getData( "HandAttack_FORCE" ) );
+	setOverlappedRadius( property->getData( "HandAttack_RADIUS" ) );
 }
 
 

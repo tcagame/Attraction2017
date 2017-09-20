@@ -11,6 +11,7 @@ Enemy( pos, SMALL_CHAR_GRAPH_SIZE, false ) {
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "ArcherAttack_POWER" ) );
 	setForce( property->getData( "ArcherAttack_FORCE" ) );
+	setOverlappedRadius( property->getData( "ArcherAttack_RADIUS" ) );
 }
 
 EnemyArcherAttack::~EnemyArcherAttack( ) {

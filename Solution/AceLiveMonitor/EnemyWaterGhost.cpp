@@ -6,11 +6,10 @@ const int WAIT_ANIM_TIME = 5;
 
 EnemyWaterGhost::EnemyWaterGhost( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ) {
-	setOverlappedRadius( 30 );
-
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "WaterGhost_POWER" ) );
 	setForce( property->getData( "WaterGhost_FORCE" ) );
+	setOverlappedRadius( property->getData( "WaterGhost_RADIUS" ) );
 }
 
 

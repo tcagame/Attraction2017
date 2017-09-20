@@ -13,11 +13,11 @@ _dir( -1 ) {
 	if ( getPos( ).y > GRAPH_SIZE / 3 * 2 ) {
 		setPos( Vector( getPos( ).x, GRAPH_SIZE / 3 * 2 ) );
 	}
-	setOverlappedRadius( 36 );
 
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "WhiteMist_POWER" ) );
 	setForce( property->getData( "WhiteMist_FORCE" ) );
+	setOverlappedRadius( property->getData( "WhiteMist_RADIUS" ) );
 }
 
 

@@ -7,11 +7,10 @@ const int GRAPH_WIDTH_NUM = 10;
 
 EnemyRay::EnemyRay( const Vector& pos ) :
 Enemy( pos, BIG_CHAR_GRAPH_SIZE, false ) {
-	setOverlappedRadius( 18 );
-
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "Ray_POWER" ) );
 	setForce( property->getData( "Ray_FORCE" ) );
+	setOverlappedRadius( property->getData( "Ray_RADIUS" ) );
 }
 
 EnemyRay::~EnemyRay( ) {

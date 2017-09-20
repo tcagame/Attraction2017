@@ -12,12 +12,12 @@ EnemyShishimaiDaemon::EnemyShishimaiDaemon( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ),
 _escape( false ),
 _befor_pos( pos ) {
-	setOverlappedRadius( 28 );
 	setVec( Vector( MOVE_SPEED, 0 ) );
 
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "ShishimaiDaemon_POWER" ) );
 	setForce( property->getData( "ShishimaiDaemon_FORCE" ) );
+	setOverlappedRadius( property->getData( "ShishimaiDaemon_RADIUS" ) );
 }
 
 

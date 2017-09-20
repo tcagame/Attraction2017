@@ -23,11 +23,10 @@ const Vector GENERATE_POS[ MAX_GENERATE_NUM ] = {
 
 EnemyTree::EnemyTree( const Vector& pos ) :
 Enemy( pos, CHIP_SIZE ) {
-	setOverlappedRadius( 36 );
-
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "Tree_POWER" ) );
 	setForce( property->getData( "Tree_FORCE" ) );
+	setOverlappedRadius( property->getData( "Tree_RADIUS" ) );
 }
 
 

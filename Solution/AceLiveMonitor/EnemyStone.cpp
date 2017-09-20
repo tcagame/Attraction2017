@@ -10,12 +10,12 @@ EnemyStone::EnemyStone( const Vector& pos ) :
 Enemy( pos, SMALL_CHAR_GRAPH_SIZE ),
 _before_pos( Vector( ) ),
 _vec( Vector( -MOVE_SPEED, 2 ) ) {
-	setOverlappedRadius( 16 );
 	setVec( _vec );
 
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "Stone_POWER" ) );
 	setForce( property->getData( "Stone_FORCE" ) );
+	setOverlappedRadius( property->getData( "Stone_RADIUS" ) );
 }
 
 

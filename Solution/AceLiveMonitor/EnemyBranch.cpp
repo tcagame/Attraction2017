@@ -10,11 +10,10 @@ const int ATTACK_TIME = WAIT_ANIM_TIME * 10;
 
 EnemyBranch::EnemyBranch( const Vector& pos ) :
 EnemyAttack( pos, NORMAL_CHAR_GRAPH_SIZE, false ) {
-	setOverlappedRadius( 36 );
-
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "Branch_POWER" ) );
 	setForce( property->getData( "Branch_FORCE" ) );
+	setOverlappedRadius( property->getData( "Branch_RADIUS" ) );
 }
 
 EnemyBranch::~EnemyBranch( ) {
