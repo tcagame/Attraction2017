@@ -59,7 +59,7 @@ void RockDollHouse::initialize( ) {
 	_dolls[ DOLL_FACE_AND_HAND         ]->load( "Resource/Rock/enemy/enm03_face_and_hand/enm03_a01.mv1" );
 	_dolls[ DOLL_BAT                   ]->load( "Resource/Rock/enemy/enm09_Babitto/enm09_a01.mv1" );
 	_dolls[ DOLL_TREE_NUTS             ]->load( "Resource/Rock/enemy/enm40_tree_nuts/enm40_a01.mv1" );
-	_dolls[ DOLL_KIMONO		           ]->load( "Resource/Rock/enemy/enm07_Kimono-no-Yokai/enm07_a01.mv1" );
+	_dolls[ DOLL_KIMONO		           ]->load( "Resource/Rock/enemy/enm07_Kimono-no-Yokai/enm07_a1.mv1" );
 	_dolls[ DOLL_SKELETON              ]->load( "Resource/Rock/enemy/enm16_skeleton/enm16_a01.mv1" );
 	_dolls[ DOLL_LITTLE_RED_DAMON      ]->load( "Resource/Rock/enemy/enm18_little_red_daemon/enm18_a2.mv1" );
 	_dolls[ DOLL_STONE                 ]->load( "Resource/Rock/enemy/enm04_stone/enm04.mv1" );
