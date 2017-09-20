@@ -25,7 +25,6 @@ private:
 	void excuteItem( std::vector< std::string > command );
 	void excuteState( std::vector< std::string > command );
 	void excuteContinue( std::vector< std::string > command );
-	void updateFamily( );
 private:
 	StatusPtr _status;
 	MessagePtr _message;

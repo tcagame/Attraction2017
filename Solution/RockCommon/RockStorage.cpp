@@ -105,7 +105,8 @@ void RockStorage::updateCasket( ) {
 						MessageSender::getTask( )->sendMessage( player->getId( ), Message::COMMAND_MONEY, &money );
 					} else {
 						//‘¬“x’á‰º
-						player->speedDown( );
+						unsigned char item = SPEED_DOWN;
+						MessageSender::getTask( )->sendMessage( player->getId( ), Message::COMMAND_ITEM, &item );
 					}
 				}
 			}

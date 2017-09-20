@@ -22,6 +22,7 @@ const unsigned char ITEM_ENHANCED_CHARGE = 0b00001000;//溜強化
 const unsigned char ITEM_FIRE            = 0b00010000;//神器（火）
 const unsigned char ITEM_ROCK            = 0b00100000;//神器（岩）
 const unsigned char ITEM_TREE            = 0b01000000;//神器（木）
+const unsigned char SPEED_DOWN           = 0b10000000;//スピードダウン
 
 const int ROCK_PLAYER_NUM = 4;
 const int ROCK_PLAYER_MOTION_NUM = 10;
