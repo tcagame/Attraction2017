@@ -192,3 +192,14 @@ ModelMV1Ptr RockAncestors::getModel( ) const {
 	model->setAnimTime( fmod( ( double )getActCount( ) * ANIM_SPEED, model->getEndAnimTime( ) ) );
 	return model;
 }
+
+
+void RockAncestors::resetPos( ) {
+	RockPlayerPtr player = RockFamily::getTask( )->getPlayer( _player_id );
+	Vector player_dir = player->getDir( ).normalize( );
+	player_dir.y = 0;
+	Vector player_pos = player->getPos( );
+	Vector target = player_pos - ( player_dir * FOLLOW_RANGE );
+	target.y = FOLLOW_Y + player_pos.y;
+	setPos( target );
+}
