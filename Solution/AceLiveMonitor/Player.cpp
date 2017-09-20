@@ -765,17 +765,22 @@ bool Player::isOnHead( CharacterPtr target ) const {
 	if ( _action != ACTION_FLOAT ) {
 		return false;
 	}
-	Vector self = getPos( ) + Vector( 0, -getChipSize( ) / 2 );
-	Vector nonself  = target->getPos( ) + Vector( 0, -target->getChipSize( ) / 2 );
-	Vector vec = nonself - self;
-	if ( vec.y < 0 ) {
+	Vector self = getOverlappedPos( );
+	Vector nonself  = target->getOverlappedPos( );
+	Vector distance = nonself - self;
+
+	//©•ª‚æ‚è‚à‘Šè‚ªã‚É‚¢‚½ê‡false
+	if ( distance.y < 0 ) {
 		return false;
 	}
-	if ( vec.getLength( ) < target->getOverlappedRadius( ) ) {
+	//Ú‹ß‚µ‚·‚¬‚Ìê‡false
+	if ( distance.getLength( ) < target->getOverlappedRadius( ) ) {
 		return false;
 	}
-	if ( getPos( ).x < nonself.x - target->getChipSize( ) / 2 ||
-		 getPos( ).x > nonself.x + target->getChipSize( ) / 2 ) {
+
+	//‰¡•ûŒü‚¾‚Á‚½ê‡false
+	if ( self.x < nonself.x - target->getOverlappedRadius( ) ||
+		 self.x > nonself.x + target->getOverlappedRadius( ) ) {
 		return false;
 	}
 	return true;

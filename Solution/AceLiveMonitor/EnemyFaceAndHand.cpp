@@ -72,3 +72,7 @@ void EnemyFaceAndHand::setSynchronousData( int camera_pos ) const {
 		break;
 	}
 }
+
+Vector EnemyFaceAndHand::getOverlappedPos( ) const {
+	return Character::getOverlappedPos( ) + Vector( 0, -10, 0 );
+}

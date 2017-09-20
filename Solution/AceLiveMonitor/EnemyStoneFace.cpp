@@ -78,3 +78,7 @@ void EnemyStoneFace::setSynchronousData( int camera_pos ) const {
 	unsigned char type = getType( );
 	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
 }
+
+Vector EnemyStoneFace::getOverlappedPos( ) const {
+	return Character::getOverlappedPos( ) + Vector( 0, -10 );
+}

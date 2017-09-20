@@ -12,7 +12,7 @@ EnemyGhost::EnemyGhost( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, false ),
 _act( ACTION_FADE_IN ),
 _ascend_speed( 0 ) {
-	setOverlappedRadius( 36 );
+	setOverlappedRadius( 32 );
 	setVec( Vector( ) );
 
 	PropertyPtr property( Property::getTask( ) );

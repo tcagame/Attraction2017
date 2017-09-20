@@ -11,7 +11,7 @@ const int MOVE_SPEED = -5;
 
 EnemyRedBird::EnemyRedBird( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, false ) {
-	setOverlappedRadius( 36 );
+	setOverlappedRadius( 30 );
 	Sound::getTask( )->playSE( "yokai_voice_02.wav" );
 
 	PropertyPtr property( Property::getTask( ) );

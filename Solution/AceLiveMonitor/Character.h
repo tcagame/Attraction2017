@@ -23,7 +23,7 @@ public:
 	int getPower( ) const;
 	DIR getDir( ) const;
 	ViewerDebug::Data::Circle getDebugDataCircle( ) const;
-	Vector getOverlappedPos( ) const;
+	virtual Vector getOverlappedPos( ) const;
 	void shiftPos( int map_width );
 	bool isOutRange( ) const;
 protected:
