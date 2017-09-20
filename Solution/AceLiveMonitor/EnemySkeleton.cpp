@@ -7,11 +7,10 @@ const int GRAPH_WIDTH_NUM = 10;
 
 EnemySkeleton::EnemySkeleton( const Vector& pos ) :
 Enemy( pos, BIG_CHAR_GRAPH_SIZE, false ) {
-	setOverlappedRadius( 18 );
-
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "Skeleton_POWER" ) );
 	setForce( property->getData( "Skeleton_FORCE" ) );
+	setOverlappedRadius( property->getData( "Skeleton_RADIUS" ) );
 }
 
 EnemySkeleton::~EnemySkeleton( ) {
@@ -44,4 +43,8 @@ void EnemySkeleton::setSynchronousData( int camera_pos ) const {
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
 	unsigned char type = getType( );
 	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
+}
+
+Vector EnemySkeleton::getOverlappedPos( ) const {
+	return getPos( ) + Vector( -40, -55 );
 }

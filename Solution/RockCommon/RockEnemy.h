@@ -1,6 +1,9 @@
 #pragma once
 #include "RockCharacter.h"
 #include "define.h"
+#include <string>
+
+PTR( RockEnemyBoss )
 
 class RockEnemy:  public RockCharacter {
 public:

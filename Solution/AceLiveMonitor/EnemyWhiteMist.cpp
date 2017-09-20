@@ -4,17 +4,20 @@
 
 const int WAIT_ANIM_TIME = 5;
 const int MOVE_SPEED = 2;
-const int FLOAT_RANGE = 10;
+const int FLOAT_RANGE = 8;
 
 EnemyWhiteMist::EnemyWhiteMist( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, false ),
 _vy( 0 ),
-_dir( 1 ) {
-	setOverlappedRadius( 36 );
+_dir( -1 ) {
+	if ( getPos( ).y > GRAPH_SIZE / 3 * 2 ) {
+		setPos( Vector( getPos( ).x, GRAPH_SIZE / 3 * 2 ) );
+	}
 
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "WhiteMist_POWER" ) );
 	setForce( property->getData( "WhiteMist_FORCE" ) );
+	setOverlappedRadius( property->getData( "WhiteMist_RADIUS" ) );
 }
 
 

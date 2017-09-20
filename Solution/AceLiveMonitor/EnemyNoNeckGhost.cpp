@@ -10,11 +10,10 @@ EnemyNoNeckGhost::EnemyNoNeckGhost( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, false ),
 _vy( 0 ),
 _dir( 1 ) {
-	setOverlappedRadius( 36 );
-
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "NoNeckGhost_POWER" ) );
 	setForce( property->getData( "NoNeckGhost_FORCE" ) );
+	setOverlappedRadius( property->getData( "NoNeckGhost_RADIUS" ) );
 }
 
 

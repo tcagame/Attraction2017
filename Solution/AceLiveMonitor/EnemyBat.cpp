@@ -9,11 +9,10 @@ const Vector POS( 10, 0 );
 EnemyBat::EnemyBat( const Vector& pos ) :
 Enemy( pos + POS, SMALL_CHAR_GRAPH_SIZE, false ),
 _center( pos ) {
-	setOverlappedRadius( 16 );
-
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "Bat_POWER" ) );
 	setForce( property->getData( "Bat_FORCE" ) );
+	setOverlappedRadius( property->getData( "Bat_RADIUS" ) );
 }
 
 

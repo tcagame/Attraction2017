@@ -11,11 +11,10 @@ const int MOVE_SPEED = -2;
 
 EnemyHugDaemon::EnemyHugDaemon( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ) {
-	setOverlappedRadius( 36 );
-
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "HugDaemon_POWER" ) );
 	setForce( property->getData( "HugDaemon_FORCE" ) );
+	setOverlappedRadius( property->getData( "HugDaemon_RADIUS" ) );
 }
 
 

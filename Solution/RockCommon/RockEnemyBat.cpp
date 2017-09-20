@@ -5,7 +5,7 @@
 #include "RockPlayer.h"
 #include "RockDollHouse.h"
 
-const int HP = 20;
+const int HP = 2;
 const int MOVE_SPEED = 1;
 static const double ANIM_SPEED = 0.9;
 const Vector SEARCH_RANGE( 10000, 10000, 10000 );

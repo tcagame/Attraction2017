@@ -9,11 +9,10 @@ const int GUIDE_TIME = 180;
 EnemyGama::EnemyGama( const Vector& pos ) :
 Enemy( pos, BIG_CHAR_GRAPH_SIZE ),
 _guide( false ) {
-	setOverlappedRadius( 36 );
-
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "Gama_POWER" ) );
 	setForce( property->getData( "Gama_FORCE" ) );
+	setOverlappedRadius( property->getData( "Gama_RADIUS" ) );
 }
 
 
@@ -73,4 +72,13 @@ void EnemyGama::damage( int force ) {
 		setActCount( 0 );
 		setForce( 0 );
 	}
+}
+
+
+Vector EnemyGama::getOverlappedPos( ) const {
+	Vector adjust = Vector( -10, 0 );
+	if ( getDir( ) == DIR_RIGHT ) {
+		adjust.x *= -1;
+	}
+	return Character::getOverlappedPos( ) + adjust;
 }

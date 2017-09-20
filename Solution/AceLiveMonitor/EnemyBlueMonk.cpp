@@ -9,11 +9,10 @@ EnemyBlueMonk::EnemyBlueMonk( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ),
 _before_pos( Vector( ) ),
 _vec( Vector( MOVE_SPEED, 0 ) ) {
-	setOverlappedRadius( 30 );
-
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "BlueMonk_POWER" ) );
 	setForce( property->getData( "BlueMonk_FORCE" ) );
+	setOverlappedRadius( property->getData( "Archer_RADIUS" ) );
 }
 
 

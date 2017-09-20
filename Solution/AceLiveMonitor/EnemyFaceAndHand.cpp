@@ -13,7 +13,7 @@ _act( ACTION_FADE_IN ) {
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "FaceAndHand_POWER" ) );
 	setForce( property->getData( "FaceAndHand_FORCE" ) );
-
+	setOverlappedRadius( property->getData( "FaceAndHand_RADIUS" ) );
 }
 
 
@@ -71,4 +71,8 @@ void EnemyFaceAndHand::setSynchronousData( int camera_pos ) const {
 	}
 		break;
 	}
+}
+
+Vector EnemyFaceAndHand::getOverlappedPos( ) const {
+	return Character::getOverlappedPos( ) + Vector( 0, -10, 0 );
 }

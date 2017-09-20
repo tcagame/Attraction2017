@@ -24,7 +24,6 @@ Vector DESTINATION_POS[ MAX_DESTINATION_POS ] = {
 EnemyWind::EnemyWind( const Vector& pos ) :
 Enemy( pos, BIG_CHAR_GRAPH_SIZE, false ),
 _count( 0 ) {
-	setOverlappedRadius( 32 );
 	DESTINATION_POS[ 0 ].y = pos.y;
 	for ( int i = 0; i < MAX_DESTINATION_POS; i++ ) {
 		DESTINATION_POS[ i ].x += pos.x;
@@ -33,6 +32,7 @@ _count( 0 ) {
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "Wind_POWER" ) );
 	setForce( property->getData( "Wind_FORCE" ) );
+	setOverlappedRadius( property->getData( "Wind_RADIUS" ) );
 }
 
 
@@ -101,4 +101,8 @@ void EnemyWind::damage( int force ) {
 		return;
 	}
 	Enemy::damage( force );
+}
+
+Vector EnemyWind::getOverlappedPos( ) const {
+	return getPos( ) + Vector( 0, -60, 0 );
 }

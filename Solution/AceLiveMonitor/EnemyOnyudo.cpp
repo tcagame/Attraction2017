@@ -10,11 +10,10 @@ EnemyOnyudo::EnemyOnyudo( const Vector& pos ) :
 Enemy( pos, BIG_CHAR_GRAPH_SIZE ),
 _before_pos( Vector( ) ), 
 _vec( MOVE_SPEED, 0 ) {
-	setOverlappedRadius( 48 );
-
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "Onyudo_POWER" ) );
 	setForce( property->getData( "Onyudo_FORCE" ) );
+	setOverlappedRadius( property->getData( "Onyudo_RADIUS" ) );
 }
 
 
@@ -51,4 +50,12 @@ void EnemyOnyudo::setSynchronousData( int camera_pos ) const {
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
 	unsigned char type = getType( );
 	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
+}
+
+Vector EnemyOnyudo::getOverlappedPos( ) const {
+	Vector adjust = Vector( -10, 0, 0 );
+	if ( getDir( ) == DIR_RIGHT ) {
+		adjust.x *= -1;
+	}
+	return Character::getOverlappedPos( ) + adjust;
 }

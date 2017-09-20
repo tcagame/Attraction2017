@@ -99,21 +99,18 @@ void RockMapStreet::updateStreet( ) {
 
 			if ( length < 100 ) {
 				loadStage( STAGE_CAVE );
-				RockFamily::getTask( )->resetPos( Vector( -1679, 0, -185 ) );
+				RockFamily::getTask( )->resetPos( Vector( 16347, -1104, 5888 ) );
 				Sound::getTask( )->playBGM( "yokai_music_04.wav" );
 			}
 		}
-		{//洞窟へ行くとSTAGE_CAVEへ移動
-			//double length = ( Vector( 17675, -1105, 6123 ) - player->getPos( ) ).getLength( );
-			//Debug用鳥居ワープ
-			double length = ( Vector( -173, 3, -520 ) - player->getPos( ) ).getLength( );
-
-			if ( length < 100 ) {
-				//loadStage( STAGE_CAVE );
-				RockFamily::getTask( )->resetPos( Vector( 17575, -1105, 6023 ) );
-				Sound::getTask( )->playBGM( "yokai_music_04.wav" );
-			}
-		}
+		//{//debug
+		//	double length1 = ( Vector( -173, 3, -520 ) - player->getPos( ) ).getLength( );
+		//	if ( length1 < 100 ) {
+		//		//loadStage( STAGE_CAVE );
+		//		RockFamily::getTask( )->resetPos( Vector( 17575, -1105, 6023 ) );
+		//		Sound::getTask( )->playBGM( "yokai_music_04.wav" );
+		//	}
+		//}
 		{//亀に乗ると竜宮城へ移動
 			RockOfficePtr office = RockOffice::getTask( );
 			std::list< RockEventCharacterPtr > eve_chara = office->getEventCharacters( );
@@ -224,10 +221,10 @@ RockMapStreet::STAGE RockMapStreet::getStage( ) const {
 }
 
 void RockMapStreet::loadStage( STAGE next ) {
+	resetFamilyPos( next );
 	genarateEnemies( next );
 	genarateEventCharacters( next );
 	genarateStorage( next );
-	resetFamilyPos( next );
 	_drawer.reset( new RockMapStreetDrawer( next ) );
 	_stage = next;
 	_virtue_pop = false;
@@ -287,7 +284,7 @@ void RockMapStreet::genarateEnemies( STAGE next ) {
 		//military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyMoth		 ( Vector(  7250,    500, -2020 ) ) ), true ) ) );
 		break;
 	case STAGE_CAVE:
-		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyBossRedDaemon  ( Vector( 20, 20,   0 ) ) ), true ) ) );
+		military->addPop( RockPopPtr( new RockPop( RockEnemyPtr( new RockEnemyBossRedDaemon  ( Vector( 17675, -1105, 6123 ) ) ), true ) ) );
 		break;
 	case STAGE_RYUGU:
 		break;
@@ -300,10 +297,10 @@ void RockMapStreet::genarateStorage( STAGE next ) {
 	switch ( next ) {
 	case STAGE_STREET:
 	{
-		const int INTERVAL = 200;
-		for ( int i = 0; i < 30; i++ ) {
-			storage->addItem( RockItemPtr( new RockItemMoney( Vector( i * INTERVAL, 200, -500 - i * 10 ), 500 ) ) );
-		}
+		//const int INTERVAL = 200;
+		//for ( int i = 0; i < 30; i++ ) {
+		//	storage->addItem( RockItemPtr( new RockItemMoney( Vector( i * INTERVAL, 200, -500 - i * 10 ), 500 ) ) );
+		//}
 		storage->addAlter( RockAlterPtr( new RockAlter( Vector( 300, 0, -300 ), Vector( 0, 0, -1 ) ) ) );
 		//ショップアイテム
 		storage->addShopItem( RockItemPtr( new RockItemEnhancePower ( Vector( OBABA_POS.x + 50, OBABA_POS.y, OBABA_POS.z - 50 ) ) ) );

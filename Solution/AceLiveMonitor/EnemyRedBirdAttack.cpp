@@ -6,11 +6,10 @@ const int WAIT_ANIM_TIME = 2;
 
 EnemyRedBirdAttack::EnemyRedBirdAttack( const Vector& pos ) :
 EnemyAttack( pos, SMALL_CHAR_GRAPH_SIZE ) {
-	setOverlappedRadius( 18 );
-
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "RedBirdAttack_POWER" ) );
 	setForce( property->getData( "RedBirdAttack_FORCE" ) );
+	setOverlappedRadius( property->getData( "RedBirdAttack_RADIUS" ) );
 }
 
 

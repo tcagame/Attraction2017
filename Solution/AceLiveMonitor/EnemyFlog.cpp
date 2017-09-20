@@ -10,11 +10,10 @@ const int MOVE_SPEED = 2;
 
 EnemyFlog::EnemyFlog( const Vector& pos ) :
 Enemy( pos, SMALL_CHAR_GRAPH_SIZE ) {
-	setOverlappedRadius( 16 );
-
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "Flog_POWER" ) );
 	setForce( property->getData( "Flog_FORCE" ) );
+	setOverlappedRadius( property->getData( "Flog_RADIUS" ) );
 }
 
 

@@ -172,6 +172,8 @@ bool RockStorage::pickUpItem( RockItemPtr item, int player_id ) {
 			Status::Player player = _status->getPlayer( player_id );
 			if ( player.area == AREA_STREET_3 ) {
 				RockFamily::getTask( )->getPlayer( player_id )->damage( ABSTINENCE_DAMAGE );
+				int value = money->getValue( );
+				sender->sendMessage( player_id, Message::COMMAND_MONEY, &value );
 			} else {
 				sound->playSE( "yokai_voice_30.wav" );
 				int value = money->getValue( );
