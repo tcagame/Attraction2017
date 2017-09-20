@@ -13,6 +13,7 @@ PTR( RockItemFire );
 PTR( RockItemToku );
 PTR( RockItemDango );
 PTR( RockItemEnhancePower );
+PTR( RockItemEnhanceCharge );
 PTR( ModelMV1 );
 PTR( RockCasket );
 PTR( RockPopItem );

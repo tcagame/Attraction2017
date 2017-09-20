@@ -14,6 +14,7 @@ const Vector SEARCH_RANGE( 1000, 1000, 1000 );
 RockEnemyChivil::RockEnemyChivil( const Vector& pos ) :
 RockEnemy( pos, DOLL_CHIVIL, HP, 1, 10, 10, true, true ),
 _player_radius( 0 ) {
+	setVec( Vector( 0, -5, 0 ) );
 }
 
 
@@ -40,6 +41,7 @@ void RockEnemyChivil::act( ) {
 		if ( vec.getLength2( ) > MAX_SPEED * MAX_SPEED ) {
 			vec = vec.normalize( ) * MAX_SPEED;
 		}
+		vec.y = getVec( ).y;
 		setVec( vec );
 	}
 	if ( wait ) {

@@ -54,7 +54,3 @@ double RockEnemyLittleRedDaemon::getAnimTime( ) const {
 	anim_time = fmod( ( double )getActCount( ) * ANIM_SPEED, end_time );
 	return anim_time;
 }
-
-void RockEnemyLittleRedDaemon::dropItem( ) {
-	RockStorage::getTask( )->addDropItem( RockItemPtr( new RockItemMoney( getPos( ) + Vector( 0, getOverlappedRadius( ), 0 ), RockItemMoney::MONEY_VALUE_3 ) ) );
-}

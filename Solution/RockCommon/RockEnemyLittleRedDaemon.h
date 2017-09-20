@@ -7,7 +7,6 @@ public:
 	virtual ~RockEnemyLittleRedDaemon( );
 public:
 	double getAnimTime( ) const;
-	void dropItem( );
 protected:
 	void act( );
 private:
