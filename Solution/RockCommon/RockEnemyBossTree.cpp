@@ -34,8 +34,7 @@ void RockEnemyBossTree::act( ) {
 		Vector( attack_pos.x - 42, attack_pos.y + 49, attack_pos.z - 6 ),
 		Vector( attack_pos.x +  6, attack_pos.y + 76, attack_pos.z + 0 ),
 		Vector( attack_pos.x - 27, attack_pos.y + 72, attack_pos.z + 0 ),
-		Vector( attack_pos.x - 31, attack_pos.y + 91, attack_pos.z - 4 ),
-		Vector( attack_pos.x - 45, attack_pos.y + 72, attack_pos.z + 0 ),
+
 	};
 
 		RockMilitaryPtr military = RockMilitary::getTask( );
