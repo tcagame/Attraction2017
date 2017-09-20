@@ -453,7 +453,7 @@ void RockPlayer::actOnCharging( ) {
 		return;
 	}
 
-	if ( _attack_count == 0 ) {
+	if ( _charge_effect_handle < 0 ) {
 		EffectPtr effect( Effect::getTask( ) );
 		_charge_effect_handle = effect->playEffect( RockStudio::getTask( )->getEffectHandle( EFFECT_CHARGE ) );
 		effect->updateEffectTransform( _charge_effect_handle, getPos( ) + CHARGE_EFFECT_ADJUST );
