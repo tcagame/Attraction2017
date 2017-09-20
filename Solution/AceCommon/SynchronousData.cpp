@@ -42,7 +42,6 @@ int SynchronousData::getCameraX( ) const {
 	return ( int )_data.camera_x;
 }
 
-
 void SynchronousData::setCameraX( int x ) {
 	_data.camera_x = ( long )x; 
 }

@@ -18,6 +18,7 @@
 #include "Map.h"
 #include "Monmotaro.h"
 #include "Sound.h"
+#include "Keyboard.h"
 #include <assert.h>
 
 //‰æ‘œƒTƒCƒY
@@ -272,6 +273,37 @@ void Player::act( ) {
 
 	updateShowMoney( );
 	updateProgressEffect( );
+
+	debugItem( );
+}
+
+void Player::debugItem( ) {
+	KeyboardPtr keyboard = Keyboard::getTask( );
+	
+	if ( keyboard->isPushKey( "NUM1" ) ) {
+		pickUpItem( ITEM_DANGO );
+	}
+	if ( keyboard->isPushKey( "NUM2" ) ) {
+		pickUpItem( ITEM_HEART );
+	}
+	if ( keyboard->isPushKey( "NUM3" ) ) {
+		pickUpItem( ITEM_HYPERTROPHY );
+	}
+	if ( keyboard->isPushKey( "NUM4" ) ) {
+		pickUpItem( ITEM_SHORTENING );
+	}
+	if ( keyboard->isPushKey( "NUM5" ) ) {
+		pickUpItem( ITEM_WOOD );
+	}
+	if ( keyboard->isPushKey( "NUM6" ) ) {
+		pickUpItem( ITEM_FLAME );
+	}
+	if ( keyboard->isPushKey( "NUM7" ) ) {
+		pickUpItem( ITEM_MINERAL );
+	}
+	if ( keyboard->isPushKey( "NUM8" ) ) {
+		pickUpVirtue( );
+	}
 }
 
 void Player::updateShowMoney( ) {
@@ -767,6 +799,9 @@ int Player::getVirtue( ) const {
 
 void Player::pickUpVirtue( ) {
 	_virtue++;
+	if ( _virtue > 9 ) {
+		_virtue = 9;
+	}
 }
 
 void Player::setAction( ACTION action ) {

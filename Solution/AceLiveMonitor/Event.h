@@ -23,9 +23,9 @@ protected:
 	void exit( );
 	void start( bool nofade = false );
 private:
-	EVENT _type;
+	const EVENT _type;
+	const DIR _exist_dir;
 	FADE _fade_type;
-	DIR _exist_dir;
 	int _fade_count;
 	bool _exiting;
 	bool _finished;
