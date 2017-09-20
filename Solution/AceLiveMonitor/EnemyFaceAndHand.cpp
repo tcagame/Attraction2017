@@ -26,6 +26,7 @@ void EnemyFaceAndHand::act( ) {
 		}
 		break;
 	case ACTION_MOVE:
+		setVec( Vector( -3, 1 ) );
 		break;
 	}
 }
