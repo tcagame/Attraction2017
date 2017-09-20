@@ -10,11 +10,10 @@ EnemyOneEyeSnake::EnemyOneEyeSnake( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ),
 _before_pos( Vector( ) ),
 _vec( Vector( MOVE_SPEED, 0 ) ) {
-	setOverlappedRadius( 36 );
-
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "OneEyeSnake_POWER" ) );
 	setForce( property->getData( "OneEyeSnake_FORCE" ) );
+	setOverlappedRadius( property->getData( "OneEyeSnake_RADIUS" ) );
 }
 
 

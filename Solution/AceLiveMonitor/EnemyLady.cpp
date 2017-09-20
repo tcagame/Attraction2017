@@ -7,11 +7,10 @@ const int GRAPH_WIDTH_NUM = 10;
 
 EnemyLady::EnemyLady( const Vector& pos ) :
 Enemy( pos, BIG_CHAR_GRAPH_SIZE, false ) {
-	setOverlappedRadius( 18 );
-
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "Lady_POWER" ) );
 	setForce( property->getData( "Lady_FORCE" ) );
+	setOverlappedRadius( property->getData( "Lady_RADIUS" ) );
 }
 
 
@@ -45,4 +44,8 @@ void EnemyLady::setSynchronousData( int camera_pos ) const {
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
 	unsigned char type = getType( );
 	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
+}
+
+Vector EnemyLady::getOverlappedPos( ) const {
+	return getPos( ) + Vector( -35, -65 );
 }

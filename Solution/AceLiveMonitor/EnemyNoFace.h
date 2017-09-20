@@ -9,6 +9,6 @@ public:
 protected:
 	void act( );
 private:
-	double _vec_x;
+	double _accel_x;
 };
 

@@ -46,6 +46,7 @@ const int MAX_DEAD_ACTCOUNT = 120;
 const int MAX_IMPACT_COUNT = 30;
 const int ENTERING_FADE_COUNT = 30;
 const int ENTERING_SANZO_COUNT = 90;
+const int MAX_SANDWICHED_COUNT = 300;
 
 const int AUTO_FINISH_RANGE = 5;
 const int HEAL_DANGO = 6;
@@ -276,7 +277,7 @@ void Player::act( ) {
 
 	updateShowMoney( );
 	updateProgressEffect( );
-
+	checkSandwichedWall( );
 	debugItem( );
 }
 
@@ -359,7 +360,7 @@ void Player::actOnEntry( ) {
 
 void Player::actOnContinue( ) {
 	adjustToCamera( );
-	updateProgressBar( );
+	//updateProgressBar( );
 
 	if ( _progress_count >= 100 ) {
 		// Ä“oê‚Ì‚½‚ß‚É‰Šú‰»
@@ -628,12 +629,21 @@ void Player::actOnCamera( ) {
 	Vector pos = getPos( );
 	Vector vec = getVec( );
 	double radius = getOverlappedRadius( );
+	//¶
 	if ( pos.x + vec.x - radius < x ) {
 		pos.x = x + radius;
 		vec.x = 0;
 		setPos( pos );
 		setVec( vec );
+		//•Ç‚É‹²‚Ü‚ê‚Ä‚¢‚½‚ç‚Á”ò‚Ô
+		if ( getArea( ) == AREA_STREET ) {
+			if ( World::getTask( )->getMap( AREA_STREET )->getObject( getPos( ) ) == OBJECT_BLOCK ) {
+				damage( 1 );
+				blowAway( );
+			}
+		}
 	}
+	//‰E
 	if ( getPos( ).x + getVec( ).x + getOverlappedRadius( ) > x + SCREEN_WIDTH ) {
 		pos.x = ( x + SCREEN_WIDTH ) - radius;
 		vec.x = 0;
@@ -766,17 +776,22 @@ bool Player::isOnHead( CharacterPtr target ) const {
 	if ( _action != ACTION_FLOAT ) {
 		return false;
 	}
-	Vector self = getPos( ) + Vector( 0, -getChipSize( ) / 2 );
-	Vector nonself  = target->getPos( ) + Vector( 0, -target->getChipSize( ) / 2 );
-	Vector vec = nonself - self;
-	if ( vec.y < 0 ) {
+	Vector self = getOverlappedPos( );
+	Vector nonself  = target->getOverlappedPos( );
+	Vector distance = nonself - self;
+
+	//©•ª‚æ‚è‚à‘Šè‚ªã‚É‚¢‚½ê‡false
+	if ( distance.y < 0 ) {
 		return false;
 	}
-	if ( vec.getLength( ) < target->getOverlappedRadius( ) ) {
+	//Ú‹ß‚µ‚·‚¬‚Ìê‡false
+	if ( distance.getLength( ) < target->getOverlappedRadius( ) ) {
 		return false;
 	}
-	if ( getPos( ).x < nonself.x - target->getChipSize( ) / 2 ||
-		 getPos( ).x > nonself.x + target->getChipSize( ) / 2 ) {
+
+	//‰¡•ûŒü‚¾‚Á‚½ê‡false
+	if ( self.x < nonself.x - target->getOverlappedRadius( ) ||
+		 self.x > nonself.x + target->getOverlappedRadius( ) ) {
 		return false;
 	}
 	return true;
@@ -952,16 +967,11 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		break;
 	}
 
-	pattern = off + motion % num;
-	
-	int offset = 112;
-	int anim_num = 16;
 	if ( isStanding( ) && map->getObject( getPos( ) ) == OBJECT_WATER ) {
-		if ( player == PLAYER::PLAYER_TAROJIRO ) {
-			anim_num = anim_num - 4;
-		}
-		pattern = offset + ( ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT / 4 ) % anim_num;
+		off = off + 80;
 	}
+
+	pattern = off + motion % num;
 
 	unsigned char attribute = 0;
 	if ( getDir( ) == DIR_RIGHT ) {
@@ -1160,4 +1170,20 @@ unsigned char Player::getDeviceButton( ) {
 		return device->getButton( _device_id );
 	}
 	return 0;
+}
+
+bool Player::isLeaveAlone( ) const {
+	return getActCount( ) > 30 * 30 && _action == ACTION_WAIT;
+}
+
+void Player::checkSandwichedWall( ) {
+	if ( getPos( ).x - Family::getTask( )->getCameraPosX( ) < 80 ) {
+		_sandwiched_count++;
+	} else {
+		_sandwiched_count = 0;
+	}
+	if ( _sandwiched_count > MAX_SANDWICHED_COUNT ) {
+		damage( 1 );
+		blowAway( );
+	}
 }

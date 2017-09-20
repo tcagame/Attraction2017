@@ -11,11 +11,10 @@ EnemyEyeDaemon::EnemyEyeDaemon( const Vector& pos ) :
 Enemy( pos, SMALL_CHAR_GRAPH_SIZE ),
 _before_pos( pos ),
 _air_jump( false ) {
-	setOverlappedRadius( 16 );
-
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "EyeDaemon_POWER" ) );
 	setForce( property->getData( "EyeDaemon_FORCE" ) );
+	setOverlappedRadius( property->getData( "EyeDaemon_RADIUS" ) );
 }
 
 

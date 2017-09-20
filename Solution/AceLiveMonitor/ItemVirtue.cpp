@@ -39,5 +39,5 @@ void ItemVirtue::setSynchronousData( int camera_pos ) const {
 	}
 	unsigned char attribute = 0;
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
-	data->addObject( area, SynchronousData::TYPE_ITEM, 34, attribute, x, y );
+	data->addObject( area, SynchronousData::TYPE_ITEM, 7, attribute, x, y );
 }

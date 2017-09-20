@@ -4,18 +4,18 @@
 #include "Property.h"
 
 const int WAIT_ANIM_TIME = 4;
-const int MOVE_RANGE = 10;
+const int REVERSE_TIME = 100;
 const double MOVE_SPEED = 0.5;
 
 EnemyNoFace::EnemyNoFace( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ),
-_vec_x( -MOVE_SPEED ) {
-	setOverlappedRadius( 36 );
-	setVec( Vector( _vec_x, 0 ) );
+_accel_x( -MOVE_SPEED ) {
+	setVec( Vector( _accel_x, 0 ) );
 
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "NoFace_POWER" ) );
 	setForce( property->getData( "NoFace_FORCE" ) );
+	setOverlappedRadius( property->getData( "NoFace_RADIUS" ) );
 }
 
 EnemyNoFace::~EnemyNoFace( ) {
@@ -23,15 +23,11 @@ EnemyNoFace::~EnemyNoFace( ) {
 
 void EnemyNoFace::act( ) {
 	Vector vec = getVec( );
-
-	if ( vec.x < -MOVE_RANGE ) {
-		_vec_x = MOVE_SPEED;
-	}
-	if ( vec.x > MOVE_RANGE ) {
-		_vec_x = -MOVE_SPEED;
+	if ( getActCount( ) % REVERSE_TIME == 0 ) {
+		_accel_x *= -1;
 	}
 
-	setVec( Vector( vec.x + _vec_x, vec.y ) );
+	setVec( Vector( vec.x + _accel_x, vec.y ) );
 }
 
 void EnemyNoFace::setSynchronousData( int camera_pos ) const {

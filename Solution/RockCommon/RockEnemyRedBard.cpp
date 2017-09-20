@@ -8,7 +8,7 @@
 #include "RockPop.h"
 #include "RockEnemyRedBirdAttack.h"
 
-const int HP = 10;
+const int HP = 5;
 static const double ANIM_SPEED = 0.9;
 const int GENERATE_COUNT = 120;
 

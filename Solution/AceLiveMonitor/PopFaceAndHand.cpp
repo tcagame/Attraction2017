@@ -3,7 +3,8 @@
 #include "Military.h"
 
 const int MAX_POP_COUNT = 300;
-const int POP_RANGE = 400;
+const int POP_RANGE = 600;
+const Vector FOOT = Vector( 0, -100, 0 );
 
 PopFaceAndHand::PopFaceAndHand( const Vector& pos ) : 
 Pop( pos ),
@@ -17,7 +18,7 @@ void PopFaceAndHand::update( ) {
 	//ƒvƒŒƒCƒ„[‚ª‹ß‚­‚É‚«‚½‚ç•¦‚­
 	if ( _count > MAX_POP_COUNT ) {
 		if ( isInRangePlayer( POP_RANGE ) ) {
-			Military::getTask( )->popUp( EnemyPtr( new EnemyFaceAndHand( getPos( ) ) ) );
+			Military::getTask( )->popUp( EnemyPtr( new EnemyFaceAndHand( getPos( ) + FOOT ) ) );
 			_count = 0;
 		}
 	}

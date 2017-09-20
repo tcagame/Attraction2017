@@ -6,21 +6,24 @@
 
 const int WAIT_ANIM_TIME = 5;
 const int ATTACK_TIME = WAIT_ANIM_TIME * 10;
+const int START_WAIT_TIME = 100;
 
 
 EnemyBranch::EnemyBranch( const Vector& pos ) :
 EnemyAttack( pos, NORMAL_CHAR_GRAPH_SIZE, false ) {
-	setOverlappedRadius( 36 );
-
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "Branch_POWER" ) );
 	setForce( property->getData( "Branch_FORCE" ) );
+	setOverlappedRadius( property->getData( "Branch_RADIUS" ) );
 }
 
 EnemyBranch::~EnemyBranch( ) {
 }
 
 void EnemyBranch::act( ) {
+	if ( getActCount( ) < START_WAIT_TIME ) {
+		return;
+	}
 	if ( !( ( getActCount( ) + WAIT_ANIM_TIME * 5 ) % ATTACK_TIME ) ) {
 		EnemyPtr seed( new EnemySeed( getPos( ) ) );
 		seed->setArea( AREA_EVENT );

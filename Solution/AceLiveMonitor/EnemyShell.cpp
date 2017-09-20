@@ -6,11 +6,10 @@ const int WAIT_ANIM_TIME = 5;
 
 EnemyShell::EnemyShell( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ) {
-	setOverlappedRadius( 30 );
-
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "Shell_POWER" ) );
 	setForce( property->getData( "Shell_FORCE" ) );
+	setOverlappedRadius( property->getData( "Shell_RADIUS" ) );
 }
 
 

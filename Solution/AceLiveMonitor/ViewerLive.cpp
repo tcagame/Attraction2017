@@ -48,7 +48,7 @@ void ViewerLive::initialize( ) {
 	_image_frame->setPos( 0, 0 );
 	
 	_image_cover_entry    = drawer->createImage( "UI/ui_cover_entry.png" );
-	_image_cover_continue = drawer->createImage( "UI/ui_cover_continue.png" );
+	_image_cover_continue = drawer->createImage( "UI/ui_cover_continue2.png" );
 
 	_image_device = drawer->createImage( "UI/ui_device.png" );
 
@@ -108,7 +108,7 @@ void ViewerLive::update( ) {
 		case SynchronousData::STATE_CONTINUE:
 			_image_cover_continue->setPos( i * VIEW_STATUS_WIDTH, VIEW_STATUS_Y );
 			_image_cover_continue->draw( );
-			_viewer_progress->draw( target );
+			//_viewer_progress->draw( target );
 			break;
 		}
 

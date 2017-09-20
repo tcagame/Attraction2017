@@ -4,7 +4,7 @@
 
 const int WAIT_ANIM_TIME = 5;
 const int MOVE_SPEED = 1;
-const int MOVE_RANGE = 25;
+const int MOVE_RANGE = 200;
 
 EnemyGhoul::EnemyGhoul( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ),
@@ -14,6 +14,7 @@ _origin_pos( pos ) {
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "Ghoul_POWER" ) );
 	setForce( property->getData( "Ghoul_FORCE" ) );
+	setOverlappedRadius( property->getData( "Ghoul_RADIUS" ) );
 }
 
 

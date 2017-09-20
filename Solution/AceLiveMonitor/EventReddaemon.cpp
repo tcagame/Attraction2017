@@ -9,7 +9,7 @@ const int START_POS_Y = 128;
 
 EventReddaemon::EventReddaemon( ) :
 Event( EVENT_REDDAEMON, DIR_LEFT ) {
-	_boss = EnemyBossPtr( new EnemyBossRedDaemon( Vector( 800, 200 ) ) );
+	_boss = EnemyBossPtr( new EnemyBossRedDaemon( Vector( 900, 220 ) ) );
 	Military::getTask( )->popUp( _boss );
 }
 

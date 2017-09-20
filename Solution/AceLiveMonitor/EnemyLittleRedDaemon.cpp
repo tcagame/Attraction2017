@@ -10,6 +10,7 @@ Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ) {
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "LittleRedDaemon_POWER" ) );
 	setForce( property->getData( "LittleRedDaemon_FORCE" ) );
+	setOverlappedRadius( property->getData( "LittleRedDaemon_RADIUS" ) );
 }
 
 

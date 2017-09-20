@@ -5,11 +5,11 @@
 #include "RockPlayer.h"
 #include "RockDollHouse.h"
 
-const int HP = 20;
+const int HP = 2;
 const double ACCEL = 0.1;
 const double MAX_SPEED = 1.5;
 const double ANIM_SPEED = 0.9;
-const Vector SEARCH_RANGE( 10000, 10000, 10000 );
+const Vector SEARCH_RANGE( 1000, 1000, 1000 );
 
 RockEnemySmallFrog::RockEnemySmallFrog( const Vector& pos ) :
 RockEnemy( pos, DOLL_FLOG_1, HP, 1, 10, 10, true, true ),
@@ -28,6 +28,9 @@ void RockEnemySmallFrog::act( ) {
 		RockPlayerPtr player = RockFamily::getTask( )->getPlayer( i );
 		if ( !player->isActive( ) || player->isBubble( ) ) {
 			continue;
+		}
+		if ( isOnHead( player ) ) {
+			damage( -1 );
 		}
 		wait = false;
 		Vector distance = player->getPos( ) - getPos( );
