@@ -3,7 +3,7 @@
 #include "Military.h"
 
 const int MAX_POP_COUNT = 300;
-const int POP_RANGE = 300;
+const int POP_RANGE = 400;
 
 PopFaceAndHand::PopFaceAndHand( const Vector& pos ) : 
 Pop( pos ),

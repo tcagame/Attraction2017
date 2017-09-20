@@ -3,7 +3,7 @@
 #include "Military.h"
 
 const int MAX_POP_COUNT = 400;
-const int POP_RANGE = 200;
+const int POP_RANGE = 300;
 
 PopWaterGhost::PopWaterGhost( const Vector& pos ) :
 Pop( pos ),

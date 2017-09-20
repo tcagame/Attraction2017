@@ -3,7 +3,7 @@
 #include "Military.h"
 
 const int MAX_POP_COUNT = 400;
-const int POP_RANGE = 300;
+const int POP_RANGE = 400;
 
 PopRedBird::PopRedBird( const Vector& pos ) :
 Pop( pos ),
