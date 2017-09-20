@@ -3,7 +3,7 @@
 #include "Military.h"
 
 const int MAX_POP_COUNT = 300;
-const int POP_RANGE = 200;
+const int POP_RANGE = 300;
 
 PopFlog::PopFlog( const Vector& pos ) :
 Pop( pos ),
