@@ -106,7 +106,7 @@ private:
 				char          progress_count; // 0 - 99
 				long          x;
 				unsigned char power;
-				unsigned long money;
+				int           money;
 				unsigned char items;
 				unsigned char virtue;
 				unsigned char redo;

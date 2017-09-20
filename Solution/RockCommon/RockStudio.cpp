@@ -29,6 +29,7 @@ void RockStudio::initialize( ) {
 	_effect[ EFFECT_MIKO             ] = effect->loadEffect( "miko.efk"               );
 	_effect[ EFFECT_BOSS_FIRE        ] = effect->loadEffect( "boss_fire.efk"          );
 	_effect[ EFFECT_BUTTA            ] = effect->loadEffect( "butta.efk"              );
+	_effect[ EFFECT_ROCK_SOUL        ] = effect->loadEffect( "rock_soul.efk"          );
 }
 
 void RockStudio::update( ) {

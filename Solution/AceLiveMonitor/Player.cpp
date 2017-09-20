@@ -314,7 +314,7 @@ void Player::actOnEntry( ) {
 
 		_virtue = 0;
 		_money = 0;
-		_mode = MODE_VIRTUE;
+		_mode = MODE_NORMAL;
 	}
 }
 
