@@ -274,9 +274,9 @@ void RockPlayer::actOnBubble( ) {
 	double horizontal_vec = sin( PI2 / 360 * getActCount( ) + 120 ) * FLOAT_HEIGHT * 2 * dir;
 	Vector vec = Vector( horizontal_vec, vertical_vec, 0 );
 	ModelMV1Ptr col = RockMap::getTask( )->getColModels( )[ 0 ];
-	Vector pos = getPos( );
+	Vector check_pos = getPos( ) - BUBBLE_FOOT;
 	Vector vertical_up( 0, 500, 0 );
-	if ( col->isHitLine( pos, pos + vertical_up ) ) {
+	if ( col->isHitLine( check_pos, check_pos + vertical_up ) ) {
 		vec.y = col->getHitPos( ).y + BUBBLE_FOLLOW_RANGE;
 	}
 	setVec( getApproachesVec( ) + vec );
