@@ -2,7 +2,7 @@
 #include "SynchronousData.h"
 #include "Sound.h"
 
-const int WAIT_ANIM_TIME = 150;
+const int WAIT_ANIM_TIME = 50;
 const int MAX_ANIM_NUM = 2;
 
 ItemMoney::ItemMoney( const Vector& pos, unsigned char type, AREA area ) :
