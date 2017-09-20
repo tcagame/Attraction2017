@@ -951,16 +951,11 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		break;
 	}
 
-	pattern = off + motion % num;
-	
-	int offset = 112;
-	int anim_num = 16;
 	if ( isStanding( ) && map->getObject( getPos( ) ) == OBJECT_WATER ) {
-		if ( player == PLAYER::PLAYER_TAROJIRO ) {
-			anim_num = anim_num - 4;
-		}
-		pattern = offset + ( ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT / 4 ) % anim_num;
+		off = off + 80;
 	}
+
+	pattern = off + motion % num;
 
 	unsigned char attribute = 0;
 	if ( getDir( ) == DIR_RIGHT ) {
