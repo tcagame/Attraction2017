@@ -11,7 +11,7 @@
 #include "RockStudio.h"
 
 static const Vector SOUL_FOOT( 0, 100, 0 );
-static const int HP = 50;
+static const int HP = 20;
 static const double ANIM_SPEED = 0.9;
 static const Vector STONE_POS[ 9 ] = {
 	Vector( 0, 110, 0 ),
@@ -37,7 +37,7 @@ static const Vector STONE_DIR[ 9 ] = {
 };
 
 RockEnemyBossRock::RockEnemyBossRock( const Vector& pos ) :
-RockEnemyBoss( pos, DOLL_BOSS_ROCK, HP, 1, 10, 10, true, false ),
+RockEnemyBoss( pos, DOLL_BOSS_ROCK, HP, 1, 30, 10, true, false ),
 _soul_handle( -1 ) {
 	setDir( Vector( -1, 0, 0 ) );
 	RockMilitaryPtr military = RockMilitary::getTask( );

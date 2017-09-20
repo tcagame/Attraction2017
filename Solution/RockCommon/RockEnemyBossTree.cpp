@@ -15,7 +15,7 @@ const int ATTACK_TIME = 600;
 
 
 RockEnemyBossTree::RockEnemyBossTree( const Vector& pos ) :
-RockEnemyBoss( pos, DOLL_BOSS_TREE, HP, 1, 10, 10, true, true ) {
+RockEnemyBoss( pos, DOLL_BOSS_TREE, HP, 1, 30, 10, true, true ) {
 	setDir( Vector( -1, 0, 0 ) );
 }
 

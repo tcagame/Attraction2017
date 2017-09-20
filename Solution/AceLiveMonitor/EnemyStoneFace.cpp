@@ -21,6 +21,7 @@ _action( ACTION_IN ) {
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "StoneFace_POWER" ) );
 	setForce( property->getData( "StoneFace_FORCE" ) );
+	setOverlappedRadius( property->getData( "StoneFace_RADIUS" ) );
 }
 
 EnemyStoneFace::~EnemyStoneFace( ) {
@@ -77,4 +78,8 @@ void EnemyStoneFace::setSynchronousData( int camera_pos ) const {
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
 	unsigned char type = getType( );
 	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
+}
+
+Vector EnemyStoneFace::getOverlappedPos( ) const {
+	return Character::getOverlappedPos( ) + Vector( 0, -10 );
 }

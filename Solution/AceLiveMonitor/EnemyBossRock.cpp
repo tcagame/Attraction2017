@@ -11,6 +11,7 @@ EnemyBoss( pos, 128 ) {
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "Rock_POWER" ) );
 	setForce( property->getData( "Rock_FORCE" ) );
+	setOverlappedRadius( property->getData( "Rock_RADIUS" ) );
 }
 
 

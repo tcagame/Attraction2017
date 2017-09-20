@@ -2,15 +2,14 @@
 #include "SynchronousData.h"
 #include "Property.h"
 
-const int WAIT_ANIM_TIME = 5;
+const int WAIT_ANIM_TIME = 2;
 
 EnemyRedBirdAttack::EnemyRedBirdAttack( const Vector& pos ) :
 EnemyAttack( pos, SMALL_CHAR_GRAPH_SIZE ) {
-	setOverlappedRadius( 18 );
-
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "RedBirdAttack_POWER" ) );
 	setForce( property->getData( "RedBirdAttack_FORCE" ) );
+	setOverlappedRadius( property->getData( "RedBirdAttack_RADIUS" ) );
 }
 
 
@@ -23,7 +22,7 @@ void EnemyRedBirdAttack::act( ) {
 
 void EnemyRedBirdAttack::setSynchronousData( int camera_pos ) const {
 	const int ANIM[ ] = {
-		0, 1, 2, 1
+		8, 9, 10, 11, 12, 13, 14, 15
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	

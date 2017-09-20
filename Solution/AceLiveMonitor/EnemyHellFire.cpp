@@ -1,6 +1,7 @@
 #include "EnemyHellFire.h"
 #include "Family.h"
 #include "SynchronousData.h"
+#include "Property.h"
 
 const double MOVE_SPEED = 3;
 const double ACCEL = 0.5;
@@ -11,10 +12,11 @@ Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, false ) {
 	setVec( Vector( MOVE_SPEED, 0 ) );
 	
 	/*
-	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "HellFire_POWER" ) );
-	setForce( property->getData( "HellFire_FORCE" ) );
 	*/
+	PropertyPtr property( Property::getTask( ) );
+	setForce( property->getData( "HellFire_FORCE" ) );
+	setOverlappedRadius( property->getData( "HellFire_RADIUS" ) );
 }
 
 

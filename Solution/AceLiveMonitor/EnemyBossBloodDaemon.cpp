@@ -13,6 +13,7 @@ EnemyBoss( pos, 128 ) {
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "BloodDaemon_POWER" ) );
 	setForce( property->getData( "BloodDaemon_FORCE" ) );
+	setOverlappedRadius( property->getData( "BloodDaemon_RADIUS" ) );
 }
 
 

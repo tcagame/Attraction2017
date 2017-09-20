@@ -15,6 +15,9 @@
 #include "RockStorage.h"
 #include "RockItemToku.h"
 #include "RockItemMoney.h"
+#include "RockItemDango.h"
+#include "RockItemEnhancePower.h"
+#include "RockItemEnhanceCharge.h"
 //EventObj
 #include "RockAlter.h"
 #include "RockCasket.h"
@@ -46,6 +49,7 @@ PTR( RockEnemyBossRedDaemon );
 
 const int REMOVE_CAVE_TIME = 500;
 const int DROP_TIMING = 1800;
+const Vector OBABA_POS( 7200, 750, -110 );
 
 RockMapStreet::RockMapStreet( StatusPtr status ) :
 _virtue_pop( false ),
@@ -262,11 +266,15 @@ void RockMapStreet::genarateStorage( STAGE next ) {
 	switch ( next ) {
 	case STAGE_STREET:
 	{
-		const int INTERVAL = 200;
-		for ( int i = 0; i < 30; i++ ) {
-			storage->addItem( RockItemPtr( new RockItemMoney( Vector( i * INTERVAL, 200, -500 - i * 10 ), 500 ) ) );
-		}
+		//const int INTERVAL = 200;
+		//for ( int i = 0; i < 30; i++ ) {
+		//	storage->addItem( RockItemPtr( new RockItemMoney( Vector( i * INTERVAL, 200, -500 - i * 10 ), 500 ) ) );
+		//}
 		storage->addAlter( RockAlterPtr( new RockAlter( Vector( 300, 0, -300 ), Vector( 0, 0, -1 ) ) ) );
+		//ショップアイテム
+		storage->addShopItem( RockItemPtr( new RockItemEnhancePower ( Vector( OBABA_POS.x + 50, OBABA_POS.y, OBABA_POS.z - 50 ) ) ) );
+		storage->addShopItem( RockItemPtr( new RockItemDango        ( Vector( OBABA_POS.x, OBABA_POS.y, OBABA_POS.z - 50 ) ) ) );
+		storage->addShopItem( RockItemPtr( new RockItemEnhanceCharge( Vector( OBABA_POS.x - 50, OBABA_POS.y, OBABA_POS.z - 50 ) ) ) );
 	}
 		break;
 	case STAGE_CAVE:
@@ -298,7 +306,7 @@ void RockMapStreet::genarateEventCharacters( STAGE next ) {
 			office->add( RockEventCharacterPtr( new RockEventMiko( Vector( 3910, 350, -310 ), _status ) ) );
 		}
 	}
-		office->add( RockEventCharacterPtr( new RockEventObaba( Vector( 7200, 600, -110 ) ) ) );
+		office->add( RockEventCharacterPtr( new RockEventObaba( OBABA_POS ) ) );
 		break;
 	case STAGE_CAVE:
 		break;

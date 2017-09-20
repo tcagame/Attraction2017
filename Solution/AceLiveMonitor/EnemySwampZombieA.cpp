@@ -8,7 +8,6 @@ const int WAIT_ANIM_TIME = 5;
 
 EnemySwampZombieA::EnemySwampZombieA( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ) {
-	setOverlappedRadius( 36 );
 	SoundPtr sound = Sound::getTask( );
 	if ( !sound->isPlayingSE( "yokai_voice_04.wav" ) ) {
 		sound->getTask( )->playSE( "yokai_voice_04.wav" );
@@ -17,6 +16,7 @@ Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ) {
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "SwampZombieA_POWER" ) );
 	setForce( property->getData( "SwampZombieA_FORCE" ) );
+	setOverlappedRadius( property->getData( "SwampZombieA_RADIUS" ) );
 }
 
 

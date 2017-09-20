@@ -18,6 +18,7 @@ EnemyBoss( pos, 192 ) {
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "MonsterTree_POWER" ) );
 	setForce( property->getData( "MonsterTree_FORCE" ) );
+	setOverlappedRadius( property->getData( "MonsterTree_RADIUS" ) );
 }
 
 

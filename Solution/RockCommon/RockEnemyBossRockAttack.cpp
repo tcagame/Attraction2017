@@ -2,7 +2,7 @@
 #include "RockFamily.h"
 #include "RockPlayer.h"
 
-static const int MAX_HP = 1;
+static const int MAX_HP = 5;
 static const int RADIUS = 10;
 static const int HEIGHT = 10;
 static const int ACTION_TIME = 90;
@@ -11,7 +11,7 @@ static const double MAX_SPEED = 10;
 static const double JUMP_POWER = 3;
 
 RockEnemyBossRockAttack::RockEnemyBossRockAttack( const Vector& pos, DOLL id, const Vector& dir ) :
-RockEnemyAttack( pos, id, MAX_HP, 1, RADIUS, HEIGHT, true ),
+RockEnemyAttack( pos, id, MAX_HP, 2, RADIUS, HEIGHT, true ),
 _dir( dir.normalize( ) ),
 _start_pos( pos ) {
 }

@@ -19,6 +19,7 @@ public:
 	Military( );
 	virtual ~Military( );
 public:
+	void initialize( );
 	void update( );
 	EnemyPtr getOverlappedEnemy( CharacterConstPtr character ) const;
 	const std::list< EnemyPtr > getEnemyList( ) const;

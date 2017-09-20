@@ -26,5 +26,5 @@ void ItemDango::setSynchronousData( int camera_pos ) const {
 	}
 	unsigned char attribute = 0;
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
-	data->addObject( area, SynchronousData::TYPE_ITEM, 6, attribute, x, y, 64 );
+	data->addObject( area, SynchronousData::TYPE_ITEM, 11, attribute, x, y, 64 );
 }

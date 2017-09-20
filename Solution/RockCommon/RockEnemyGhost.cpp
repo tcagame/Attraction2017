@@ -5,7 +5,7 @@
 #include "RockFamily.h"
 #include "RockDollHouse.h"
 
-const int HP = 10;
+const int HP = 5;
 const double ACCEL = 0.1;
 const double MAX_SPEED = 2.2;
 const double ANIM_SPEED = 0.9;
