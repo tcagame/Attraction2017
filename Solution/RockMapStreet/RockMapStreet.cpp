@@ -130,7 +130,6 @@ void RockMapStreet::updateStreet( ) {
 				}
 			}
 		}
-
 	}
 
 	if ( !active ) {
@@ -213,6 +212,7 @@ void RockMapStreet::loadStage( STAGE next ) {
 	resetFamilyPos( next );
 	_drawer.reset( new RockMapStreetDrawer( next ) );
 	_stage = next;
+	_virtue_pop = false;
 }
 
 
