@@ -127,9 +127,8 @@ void World::update( ) {
 	updateVirtue( );
 }
 
-void World::shiftPos( ) {
-	int width = getMap( AREA_STREET )->getPageNum( ) * GRAPH_SIZE;
-	_virtue_pos_x -= width;
+void World::shiftPos( int map_width ) {
+	_virtue_pos_x -= map_width;
 }
 
 void World::updateVirtue( ) {

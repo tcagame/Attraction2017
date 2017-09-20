@@ -2,16 +2,18 @@
 #include "Drawer.h"
 #include "Device.h"
 #include "ace_define.h"
-#include "Armoury.h"
 #include "Shot.h"
-#include "Military.h"
 #include "Enemy.h"
-#include "Family.h"
 #include "Player.h"
 #include "Monmotaro.h"
 #include "World.h"
 #include "Map.h"
 #include "Server.h"
+
+#include "Military.h"
+#include "Family.h"
+#include "Armoury.h"
+#include "Storage.h"
 
 ViewerDebug::ViewerDebug( ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
@@ -22,6 +24,8 @@ ViewerDebug::~ViewerDebug( ) {
 }
 
 void ViewerDebug::draw( ) {
+	pushMessageConnect( );
+
 	FamilyPtr family = Family::getTask( );
 	family->pushDebugData( _data );
 
@@ -31,7 +35,9 @@ void ViewerDebug::draw( ) {
 	ArmouryPtr armoury = Armoury::getTask( );
 	armoury->pushDebugData( _data );
 
-	pushMessageConnect( );
+	StoragePtr storage = Storage::getTask( );
+	storage->pushDebugData( _data );
+
 
 	drawChip( );
 	drawCircle( );
@@ -117,12 +123,11 @@ void ViewerDebug::drawChip( ) {
 }
 
 void ViewerDebug::pushMessageConnect( ) {
+	_data.message.push_back( "FPS:" + std::to_string( Drawer::getTask( )->getFps( ) ) );
 	ServerPtr server( Server::getTask( ) );
 	for ( int i = 0; i < Server::MAX_MACHINES; i++ ) {
 		_data.message.push_back( "IP:" + server->getMachineIPStr( i ) );
 	}
-	std::string fps = std::to_string( Drawer::getTask( )->getFps( ) );
-	_data.message.push_back( "FPS:" + fps );
 }
 
 void ViewerDebug::drawCircle( ) {

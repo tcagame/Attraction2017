@@ -12,6 +12,7 @@ _event( image_event ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
 	_choise = drawer->createImage( "guide/object_guide_cursor.png" );
 	_block = drawer->createImage( "block/block.png" );
+	_money = drawer->createImage( "item/money.png" );
 	_enemy[ GRAPH_ENEMY_MIDIUM ] = enemy_midium_image;
 	_enemy[ GRAPH_ENEMY_BIG ] = enemy_big_image;
 	_enemy[ GRAPH_ENEMY_WIDE ] = enemy_wide_image;
@@ -223,7 +224,39 @@ void ObjectPreview::draw( ) const {
 				_enemy[ GRAPH_ENEMY_WIDE ]->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE - ( BIG_CHAR_GRAPH_SIZE / 2 ), PREVIEW_Y + j * OBJECT_CHIP_SIZE - ( NORMAL_CHAR_GRAPH_SIZE - OBJECT_CHIP_SIZE ) );
 				_enemy[ GRAPH_ENEMY_WIDE ]->draw( );
 			}
-
+			
+			//item
+			if ( obj == OBJECT_MONEY_BAG ) {
+				_money->setRect( RECT_MONEY_BAG.tx, RECT_MONEY_BAG.ty, SMALL_CHAR_GRAPH_SIZE, SMALL_CHAR_GRAPH_SIZE );
+				_money->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE - ( SMALL_CHAR_GRAPH_SIZE / 2 ), PREVIEW_Y + j * OBJECT_CHIP_SIZE - ( SMALL_CHAR_GRAPH_SIZE - OBJECT_CHIP_SIZE ) );
+				_money->draw( );
+			}
+			if ( obj == OBJECT_MONEY_PURSE ) {
+				_money->setRect( RECT_MONEY_PURSE.tx, RECT_MONEY_PURSE.ty, SMALL_CHAR_GRAPH_SIZE, SMALL_CHAR_GRAPH_SIZE );
+				_money->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE - ( SMALL_CHAR_GRAPH_SIZE / 2 ), PREVIEW_Y + j * OBJECT_CHIP_SIZE - ( SMALL_CHAR_GRAPH_SIZE - OBJECT_CHIP_SIZE ) );
+				_money->draw( );
+			}
+			if ( obj == OBJECT_MONEY_500 ) {
+				_money->setRect( RECT_MONEY_500.tx, RECT_MONEY_500.ty, SMALL_CHAR_GRAPH_SIZE, SMALL_CHAR_GRAPH_SIZE );
+				_money->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE - ( SMALL_CHAR_GRAPH_SIZE / 2 ), PREVIEW_Y + j * OBJECT_CHIP_SIZE - ( SMALL_CHAR_GRAPH_SIZE - OBJECT_CHIP_SIZE ) );
+				_money->draw( );
+			}
+			if ( obj == OBJECT_MONEY_1000 ) {
+				_money->setRect( RECT_MONEY_1000.tx, RECT_MONEY_1000.ty, SMALL_CHAR_GRAPH_SIZE, SMALL_CHAR_GRAPH_SIZE );
+				_money->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE - ( SMALL_CHAR_GRAPH_SIZE / 2 ), PREVIEW_Y + j * OBJECT_CHIP_SIZE - ( SMALL_CHAR_GRAPH_SIZE - OBJECT_CHIP_SIZE ) );
+				_money->draw( );
+			}
+			if ( obj == OBJECT_MONEY_5000 ) {
+				_money->setRect( RECT_MONEY_5000.tx, RECT_MONEY_5000.ty, SMALL_CHAR_GRAPH_SIZE, SMALL_CHAR_GRAPH_SIZE );
+				_money->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE - ( SMALL_CHAR_GRAPH_SIZE / 2 ), PREVIEW_Y + j * OBJECT_CHIP_SIZE - ( SMALL_CHAR_GRAPH_SIZE - OBJECT_CHIP_SIZE ) );
+				_money->draw( );
+			}
+			if ( obj == OBJECT_MONEY_10000 ) {
+				_money->setRect( RECT_MONEY_10000.tx, RECT_MONEY_10000.ty, SMALL_CHAR_GRAPH_SIZE, SMALL_CHAR_GRAPH_SIZE );
+				_money->setPos( PREVIEW_X + i * OBJECT_CHIP_SIZE - ( SMALL_CHAR_GRAPH_SIZE / 2 ), PREVIEW_Y + j * OBJECT_CHIP_SIZE - ( SMALL_CHAR_GRAPH_SIZE - OBJECT_CHIP_SIZE ) );
+				_money->draw( );
+			}
+			
 			// オブジェクトブロック
 			if ( obj == OBJECT_BLOCK ) {
 				_block->setRect( 0, 16, OBJECT_CHIP_SIZE, OBJECT_CHIP_SIZE );

@@ -42,14 +42,29 @@ void RockTheaterResult::initialize( ) {
 	_images.push_back( drawer->createImage( "UI/breast4.png" ) );
 	_images.push_back( drawer->createImage( "result/ui_cover_entry.png" ) );
 
-	_end_image.push_back( drawer->createImage( "result/heaven/heaven_tarosuke.png" ) );
-	_end_image.push_back( drawer->createImage( "result/heaven/heaven_garisuke.png" ) );
-	_end_image.push_back( drawer->createImage( "result/heaven/heaven_tarojiro.png" ) );
-	_end_image.push_back( drawer->createImage( "result/heaven/heaven_taromi.png" ) );
-	_end_image.push_back( drawer->createImage( "result/human_frame.png" ) );
-	_end_image.push_back( drawer->createImage( "result/damn_frame.png" ) );
-	_end_image.push_back( drawer->createImage( "result/hungry_frame.png" ) );
-	_end_image.push_back( drawer->createImage( "result/hell_frame.png" ) );
+	_end_image.push_back( drawer->createImage( "result/heaven/heaven1.png" ) );
+	_end_image.push_back( drawer->createImage( "result/human/human1.png" ) );
+	_end_image.push_back( drawer->createImage( "result/damn/damn1.png" ) );
+	_end_image.push_back( drawer->createImage( "result/hungry/hungry1.png" ) );
+	_end_image.push_back( drawer->createImage( "result/hell/hell1.png" ) );
+
+	_end_image.push_back( drawer->createImage( "result/heaven/heaven2.png" ) );
+	_end_image.push_back( drawer->createImage( "result/human/human2.png" ) );
+	_end_image.push_back( drawer->createImage( "result/damn/damn2.png" ) );
+	_end_image.push_back( drawer->createImage( "result/hungry/hungry2.png" ) );
+	_end_image.push_back( drawer->createImage( "result/hell/hell2.png" ) );
+
+	_end_image.push_back( drawer->createImage( "result/heaven/heaven3.png" ) );
+	_end_image.push_back( drawer->createImage( "result/human/human3.png" ) );
+	_end_image.push_back( drawer->createImage( "result/damn/damn3.png" ) );
+	_end_image.push_back( drawer->createImage( "result/hungry/hungry3.png" ) );
+	_end_image.push_back( drawer->createImage( "result/hell/hell3.png" ) );
+
+	_end_image.push_back( drawer->createImage( "result/heaven/heaven4.png" ) );
+	_end_image.push_back( drawer->createImage( "result/human/human4.png" ) );
+	_end_image.push_back( drawer->createImage( "result/damn/damn4.png" ) );
+	_end_image.push_back( drawer->createImage( "result/hungry/hungry4.png" ) );
+	_end_image.push_back( drawer->createImage( "result/hell/hell4.png" ) );
 
 	for ( int i = 0; i < _end_image.size( ); i++ ) {
 		_end_image[ i ]->setPos( ENDING_SCREEN_X, ENDING_SCREEN_Y );

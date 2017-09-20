@@ -9,6 +9,7 @@
 PTR( Family );
 PTR( Player );
 PTR( Monmotaro );
+PTR( Character );
 
 class Family : public Task {
 public:
@@ -27,6 +28,7 @@ public:
 	bool isExistOnEvent( ) const;
 	void pushDebugData( ViewerDebug::Data& data ) const;
 	bool isModeVirtue( ) const;
+	PlayerPtr getOverlappedPlayer( CharacterConstPtr target ) const;
 private:
 	void updatePlayer( PLAYER taget );
 	void updateCameraPos( );

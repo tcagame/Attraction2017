@@ -199,10 +199,14 @@ ViewerDebug::Data::Circle Character::getDebugDataCircle( ) const {
 	return circle;
 }
 
-void Character::shiftPos( ) {
+void Character::shiftPos( int map_width ) {
 	if ( _area == AREA_EVENT ) {
 		return;
 	}
-	int width = World::getTask( )->getMap( AREA_STREET )->getPageNum( ) * GRAPH_SIZE;
-	_pos.x -= width;
+	_pos.x -= map_width;
+}
+
+
+bool Character::isOutRange( ) const {
+	return getPos( ).x - Family::getTask( )->getCameraPosX( ) < -GRAPH_SIZE;
 }
