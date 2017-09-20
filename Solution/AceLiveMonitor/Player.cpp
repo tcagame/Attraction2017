@@ -153,7 +153,8 @@ _unrivaled_count( MAX_UNRIVALED_COUNT ),
 _action( ACTION_ENTRY ),
 _progress_count( 0 ),
 _cool_time( COOL_TIME ),
-_auto_move_target_x( -1 ) {
+_auto_move_target_x( -1 ),
+_redo( 0 ) {
 	setOverlappedRadius( 25 );
 	setDir( DIR_RIGHT );
 

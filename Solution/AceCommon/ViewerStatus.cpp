@@ -177,7 +177,11 @@ void ViewerStatus::drawRedo( int redo, int sx, int sy ) const {
 	count++;
 
 	for ( int i = 0; i < redo; i++ ) {
-		_image_redo->setPos( sx + i * 20, + NAME_OX, sy + NAME_OY );
+		int add = ( int )( sin( PI2 * ( count + i * 10 ) / 160 ) * 10 );
+		if ( add < 0 ) {
+			add = 0;
+		}
+		_image_redo->setPos( sx + i * 10 + BUSTUP_OX, sy + BUSTUP_OY + add );
 		_image_redo->draw( );
 	}
 }

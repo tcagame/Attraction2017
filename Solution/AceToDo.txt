@@ -31,5 +31,4 @@ EnemyTurtleを無敵にする
 EnemyTurtleをイベント中消す
 
 エンディング関連
-コンティニュー回数？
 
