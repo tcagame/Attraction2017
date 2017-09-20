@@ -26,22 +26,59 @@ void StatusSender::update( ) {
 		_status->getPlayer( i ).device_y = device->getDirY( i );
 		_status->getPlayer( i ).device_button = device->getButton( i );
 	}
+
+	updateFamily( );
+
+	Server::getTask( )->sendUdp( _status );
+	server->sendUdp( _status );
+}
+
+void StatusSender::updateFamily( ) {
 	bool is_result = true;
 	for ( int i = 0; i < Status::PLAYER_NUM; i++ ) {
+		Status::Player player = _status->getPlayer( i );
 		//ボタンリセット
-		if ( _status->getPlayer( i ).device_button == 15 ) {
+		if ( player.device_button == 15 ) {
 			_reset_count[ i ]++;
 		} else {
 			_reset_count[ i ] = 0;
 		}
 		if ( _reset_count[ i ] > RESET_TIME &&
-			 _status->getPlayer( i ).area != AREA_WAIT ) {
+			 player.area != AREA_WAIT ) {
 			_status->resetPlayer( i );
-			_status->getPlayer( i ).area = AREA_WAIT;
+			player.area = AREA_WAIT;
 		}
-		if ( _status->getPlayer( i ).area == AREA_RESULT ) {
+		//リザルト判断
+		if ( player.area == AREA_RESULT ) {
 			is_result = false;
 		}
+		// スピードダウン効果
+		if ( player.area == AREA_WAIT ||
+			 player.area == AREA_ENTRY || 
+			 player.area == AREA_RESULT ) {
+			if ( player.item & SPEED_DOWN ) {
+				player.item ^= SPEED_DOWN;
+			}
+		}
+		// 復活
+		if ( player.power == 0 ) {
+			//　ハート有　＆＆　団子無
+			if ( player.item & ITEM_HEART &&
+				 !( player.item & ITEM_DANGO ) ) {
+				player.power = MAX_POWER;
+				player.item ^= ITEM_HEART;
+			}
+			//　団子有
+			if ( player.item & ITEM_DANGO ) {
+				player.power = MAX_POWER / 2;
+				player.item ^= ITEM_DANGO;
+			}
+			//　スピードダウン解除
+			if ( player.item & SPEED_DOWN ) {
+				player.item ^= SPEED_DOWN;
+			}
+		}
+		_status->getPlayer( i ) = player;
 	}
 	
 	// リザルトへ移動
@@ -55,9 +92,6 @@ void StatusSender::update( ) {
 			}
 		}
 	}
-
-	Server::getTask( )->sendUdp( _status );
-	server->sendUdp( _status );
 }
 
 bool StatusSender::setContinueNum( int idx, int num ) {

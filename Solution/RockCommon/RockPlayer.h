@@ -23,7 +23,6 @@ public:
 	bool isBubble( ) const;
 	void setAdmissionPos( const Vector& camera_pos );
 	int getId( ) const;
-	void speedDown( );
 	void knockBack( RockEnemyPtr enemy );
 protected:
 	void act( );
@@ -69,7 +68,6 @@ private:
 	int _charge_effect_handle;
 	int _speed_down_effect_handle;
 	bool _continue;
-	bool _speed_down;
 	RockAncestorsPtr _ancestors;
 };
 
