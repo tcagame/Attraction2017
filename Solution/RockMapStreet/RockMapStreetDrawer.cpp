@@ -39,12 +39,13 @@ RockMapStreetDrawer::RockMapStreetDrawer( RockMapStreet::STAGE stage ) {
 		// 赤鬼用ダミーマップ
 		ModelMV1Ptr boss_model = ModelMV1Ptr( new ModelMV1 );
 		boss_model->load( "Resource/Rock/map/street1/map03.mv1" );
+		boss_model->setTrans( Matrix::makeTransformTranslation( Vector( 17675, -1105, 6123 ) ) );
 		boss_model->draw( );
 		map->addModel( boss_model );
 
 		ModelMV1Ptr boss_col_model = ModelMV1Ptr( new ModelMV1 );
 		boss_col_model->load( "Resource/Rock/map/street1/map03_CL.mv1" );
-
+		boss_col_model->setTrans( Matrix::makeTransformTranslation( Vector( 17675, -1105, 6123 ) ) );
 		boss_col_model->draw( );
 		map->addColModel( boss_col_model );
 

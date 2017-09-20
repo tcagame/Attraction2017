@@ -67,6 +67,30 @@ ModelMV1Ptr RockEnemy::getModel( ) {
 }
 
 void RockEnemy::updateInCamera( ) {
+	/*bool enemy_boss = false;
+	RockMilitaryPtr military = RockMilitary::getTask( );
+	std::list< RockEnemyPtr > enemies = military->getEnemyList( );
+	std::list< RockEnemyPtr >::iterator ite = enemies.begin( );
+
+	if ( enemies.size( ) > 0 ) {
+		enemy_boss = true;
+	}
+	while ( ite != enemies.end( ) ) {
+		RockEnemyBossPtr boss = std::dynamic_pointer_cast< RockEnemyBoss >( *ite );
+		if ( boss ) {
+			enemy_boss = true;
+			break;
+		}ite++;
+	}
+
+	if ( Drawer::getTask( )->isInCamera( getPos( ) ) ) {
+		_out_camera_count = 0;
+	} else {
+		_out_camera_count++;
+		if ( _out_camera_count > MAX_OUT_CAMERA_COUNT && !enemy_boss ) {
+			_finished = true;
+		}
+	}*/
 	if ( Drawer::getTask( )->isInCamera( getPos( ) ) ) {
 		_out_camera_count = 0;
 	} else {

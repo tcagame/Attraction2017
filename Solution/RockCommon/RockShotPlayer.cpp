@@ -8,7 +8,7 @@
 static const int MOVE_SPEED = 9;
 static const double EFFECT_NORMAL_SIZE = 20.0;
 static const double EFFECT_CHARGE_SIZE = 15.0;
-static const int ACTIVE_COUNT = 120;
+static const int ACTIVE_COUNT = 60;
 static const int SHOT_MOVE_HEIGHT = 1;
 
 RockShotPlayer::RockShotPlayer( const int id, const Vector& pos, const Vector& dir, const int power, bool max_charge ) :

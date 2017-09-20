@@ -21,7 +21,7 @@
 
 //移動
 static const double JUMP_POWER = 6.0;
-static const double MOVE_SPEED = 10.5;
+static const double MOVE_SPEED = 5.5;
 static const double BRAKE_SPEED = 0.5;
 static const double KNOCK_BACK_SPEED = 5.0;
 //アニメーション
