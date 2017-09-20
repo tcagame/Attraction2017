@@ -21,7 +21,7 @@ RockCamera( INIT_POS, INIT_TARGET ) {
 	_dir[ RockMapStreet::STAGE_RYUGU  ] = Vector( 1, 0.25,  0 );
 	
 	_length[ RockMapStreet::STAGE_STREET ] = 300.0;
-	_length[ RockMapStreet::STAGE_CAVE   ] = 1200.0;
+	_length[ RockMapStreet::STAGE_CAVE   ] = 300.0;
 	_length[ RockMapStreet::STAGE_RYUGU  ] = 250.0;
 }
 

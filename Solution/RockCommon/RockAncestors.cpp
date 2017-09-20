@@ -6,6 +6,7 @@
 #include "RockShotAncestors.h"
 #include "Sound.h"
 #include "RockStudio.h"
+#include "Status.h"
 #include "Effect.h"
 
 static const int EXISTANCE_TIME = 2000;
@@ -209,4 +210,8 @@ void RockAncestors::resetPos( ) {
 	Vector target = player_pos - ( player_dir * FOLLOW_RANGE );
 	target.y = FOLLOW_Y + player_pos.y;
 	setPos( target );
+}
+
+void RockAncestors::fadeOut( ) {
+	_action = ACTION_ABSENT;
 }

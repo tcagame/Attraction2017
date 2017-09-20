@@ -7,6 +7,7 @@ public:
 	virtual ~RockAncestors( );
 public:
 	void pop( );
+	void fadeOut( );
 	bool isActive( );
 	ModelMV1Ptr getModel( ) const;
 	void resetPos( );

@@ -21,7 +21,7 @@
 
 //移動
 static const double JUMP_POWER = 6.0;
-static const double MOVE_SPEED = 6.5;
+static const double MOVE_SPEED = 10.5;
 static const double BRAKE_SPEED = 0.5;
 static const double KNOCK_BACK_SPEED = 5.0;
 //アニメーション
@@ -156,6 +156,11 @@ void RockPlayer::updeteState( ) {
 			MessageSender::getTask( )->sendMessage( _id, Message::COMMAND_AREA, &state );
 			return;
 		}
+	}
+	if ( player.area == AREA_RESULT || 
+		 player.area == AREA_WAIT   ||
+		 player.area == AREA_ENTRY ) {
+		_ancestors->fadeOut( );
 	}
 }
 
@@ -315,7 +320,7 @@ void RockPlayer::actOnWaiting( ) {
 		 _interval > INTERVAL_TIME ) {
 		if ( isStanding( ) ) {
 			setAction( ACTION_CHARGE );
-		} else {
+		} else if ( _attack_count == 0 ) {
 			_attack_count = 1;
 		}
 		return;
@@ -360,7 +365,8 @@ void RockPlayer::actOnJumping( ) {
 
 	//攻撃
 	if ( player.device_button & BUTTON_A &&
-		 _interval > INTERVAL_TIME ) {
+		 _interval > INTERVAL_TIME &&
+		 _attack_count == 0) {
 		_attack_count = 1;
 	}
 	//着地
@@ -396,7 +402,8 @@ void RockPlayer::actOnWalking( ) {
 	}
 	//攻撃
 	if ( player.device_button & BUTTON_A &&
-		 _interval > INTERVAL_TIME ) {
+		 _interval > INTERVAL_TIME &&
+		_attack_count == 0) {
 		_attack_count = 1;
 	}
 

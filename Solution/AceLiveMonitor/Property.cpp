@@ -3,7 +3,7 @@
 #include <assert.h>
 
 const int MAX_DATA_NUM = 100;
-const std::string FILENAME = "Resource/Ace/Enemy/Property.csv";
+const std::string FILENAME = "Resource/Ace/Property.csv";
 
 PropertyPtr Property::getTask( ) {
 	return std::dynamic_pointer_cast< Property >( Application::getInstance( )->getTask( getTag( ) ) );

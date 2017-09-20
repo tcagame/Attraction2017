@@ -184,7 +184,6 @@
     <ClInclude Include="RockEnemySkeleton.h" />
     <ClInclude Include="RockEnemySmallFrog.h" />
     <ClInclude Include="RockEnemyStone.h" />
-    <ClInclude Include="RockEnemyStoneFace.h" />
     <ClInclude Include="RockEnemyBossTreeNuts.h" />
     <ClInclude Include="RockEventCharacter.h" />
     <ClInclude Include="RockEventObaba.h" />
@@ -220,6 +219,7 @@
     <ClInclude Include="RockCasket.h" />
     <ClInclude Include="RockItemBubble.h" />
     <ClInclude Include="RockItemDango.h" />
+    <ClInclude Include="RockItemEnhanceCharge.h" />
     <ClInclude Include="RockItemEnhancePower.h" />
     <ClInclude Include="RockItemFire.h" />
     <ClInclude Include="RockItemMoney.h" />
@@ -255,7 +255,6 @@
     <ClCompile Include="RockEnemySkeleton.cpp" />
     <ClCompile Include="RockEnemySmallFrog.cpp" />
     <ClCompile Include="RockEnemyStone.cpp" />
-    <ClCompile Include="RockEnemyStoneFace.cpp" />
     <ClCompile Include="RockEnemyBossTreeNuts.cpp" />
     <ClCompile Include="RockEventCharacter.cpp" />
     <ClCompile Include="RockEventObaba.cpp" />
@@ -290,6 +289,7 @@
     <ClCompile Include="RockCasket.cpp" />
     <ClCompile Include="RockItemBubble.cpp" />
     <ClCompile Include="RockItemDango.cpp" />
+    <ClCompile Include="RockItemEnhanceCharge.cpp" />
     <ClCompile Include="RockItemEnhancePower.cpp" />
     <ClCompile Include="RockItemFire.cpp" />
     <ClCompile Include="RockItemMoney.cpp" />
