@@ -6,7 +6,9 @@ class PopFaceAndHand : public Pop {
 public:
 	PopFaceAndHand( const Vector& pos );
 	virtual ~PopFaceAndHand( );
-protected:
-	void create( );
+public:
+	void update( );
+private:
+	int _count;
 };
 
