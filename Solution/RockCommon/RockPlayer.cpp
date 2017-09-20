@@ -705,6 +705,7 @@ void RockPlayer::resetPos( const Vector& pos ) {
 	if ( _action != ACTION_BUBBLE ) {
 		setAction( ACTION_JUMP );
 	}
+	setVec( Vector( ) );
 }
 
 bool RockPlayer::isDead( ) const {

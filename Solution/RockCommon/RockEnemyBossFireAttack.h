@@ -9,6 +9,7 @@ public:
 	void act( );
 	double getAnimTime( ) const;
 	ModelMV1Ptr getModel( ) const;
+	void stopEffect( );
 private:
 	bool _shot;
 	int _handle;

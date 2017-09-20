@@ -61,6 +61,7 @@ void RockMilitary::updateEnemies( ) {
 				enemy->reset( );
 				_pops.push_back( RockPopPtr( new RockPop( enemy, false ) ) );
 			}
+			enemy->stopEffect( );
 			ite = _enemies.erase( ite );
 			continue;
 		}
