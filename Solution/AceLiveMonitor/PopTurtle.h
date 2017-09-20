@@ -6,7 +6,7 @@ class PopTurtle : public Pop {
 public:
 	PopTurtle( const Vector& pos );
 	virtual ~PopTurtle( );
-protected:
-	void create( );
+public:
+	void update( );
 };
 

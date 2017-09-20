@@ -2,15 +2,19 @@
 #include "EnemyTree.h"
 #include "Military.h"
 
-
 PopTree::PopTree( const Vector& pos ) :
-Pop( pos ) {
+Pop( pos ),
+_pop( false ) {
 }
 
 
 PopTree::~PopTree( ) {
 }
 
-void PopTree::create( ) {
-	Military::getTask( )->popUp( EnemyPtr( new EnemyTree( getPos( ) ) ) );
+void PopTree::update( ) {
+	if ( !_pop ) {
+		if ( isInScreen( ) ) {
+			Military::getTask( )->popUp( EnemyPtr( new EnemyTree( getPos( ) ) ) );
+		}
+	}
 }

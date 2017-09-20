@@ -11,6 +11,12 @@ Pop( pos ) {
 PopStone::~PopStone( ) {
 }
 
-void PopStone::create( ) {
-	Military::getTask( )->popUp( EnemyPtr( new EnemyStone( getPos( ) ) ) );
+void PopStone::update( ) {
+	if ( _enemy.expired( ) ) {
+		if ( isInScreen( ) ) {
+			EnemyPtr enemy = EnemyPtr( new EnemyStone( getPos( ) ) );
+			Military::getTask( )->popUp( enemy );
+			_enemy = enemy;
+		}
+	}
 }

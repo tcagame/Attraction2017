@@ -6,7 +6,9 @@ class PopTree : public Pop {
 public:
 	PopTree( const Vector& pos );
 	virtual ~PopTree( );
-protected:
-	void create( );
+public:
+	void update( );
+private:
+	bool _pop;
 };
 

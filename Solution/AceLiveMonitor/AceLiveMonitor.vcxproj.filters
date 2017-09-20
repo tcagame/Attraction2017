@@ -103,106 +103,10 @@
     <ClCompile Include="EnemyStone.cpp">
       <Filter>Character\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="PopGama.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
-    <ClCompile Include="PopGrayMist.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
-    <ClCompile Include="PopBat.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
-    <ClCompile Include="PopFlog.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
-    <ClCompile Include="PopMoth.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
-    <ClCompile Include="PopStone.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
     <ClCompile Include="Pop.cpp">
       <Filter>Pop</Filter>
     </ClCompile>
-    <ClCompile Include="PopFaceAndHand.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
     <ClCompile Include="Popper.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
-    <ClCompile Include="PopPurpleZombie.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
-    <ClCompile Include="PopNoFace.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
-    <ClCompile Include="PopLancer.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
-    <ClCompile Include="PopCrocoSnake.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
-    <ClCompile Include="PopGhoul.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
-    <ClCompile Include="PopArcher.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
-    <ClCompile Include="PopGhost.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
-    <ClCompile Include="PopHand.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
-    <ClCompile Include="PopNoNeckGhost.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
-    <ClCompile Include="PopOneEyeSnake.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
-    <ClCompile Include="PopRedBird.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
-    <ClCompile Include="PopShishimai.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
-    <ClCompile Include="PopStoneFace.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
-    <ClCompile Include="PopWhiteMist.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
-    <ClCompile Include="PopBlueMonk.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
-    <ClCompile Include="PopGreenZombie.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
-    <ClCompile Include="PopSwampZombieA.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
-    <ClCompile Include="PopSwampZombieC.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
-    <ClCompile Include="PopSwampZombieB.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
-    <ClCompile Include="PopJizo.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
-    <ClCompile Include="PopLady.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
-    <ClCompile Include="PopOnyudo.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
-    <ClCompile Include="PopSkeleton.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
-    <ClCompile Include="PopWind.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
-    <ClCompile Include="PopTree.cpp">
       <Filter>Pop</Filter>
     </ClCompile>
     <ClCompile Include="ViewerDebug.cpp">
@@ -256,15 +160,6 @@
     <ClCompile Include="EnemyBossMonsterTree.cpp">
       <Filter>Character\Enemy\Boss</Filter>
     </ClCompile>
-    <ClCompile Include="PopEyeDaemon.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
-    <ClCompile Include="PopHugDaemon.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
-    <ClCompile Include="PopShishimaiDaemon.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyRay.cpp">
       <Filter>Character\Enemy</Filter>
     </ClCompile>
@@ -273,15 +168,6 @@
     </ClCompile>
     <ClCompile Include="EnemyWaterGhost.cpp">
       <Filter>Character\Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="PopRay.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
-    <ClCompile Include="PopShell.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
-    <ClCompile Include="PopWaterGhost.cpp">
-      <Filter>Pop</Filter>
     </ClCompile>
     <ClCompile Include="Office.cpp">
       <Filter>NPC</Filter>
@@ -436,13 +322,129 @@
     <ClCompile Include="EventEnma.cpp">
       <Filter>World\Event</Filter>
     </ClCompile>
-    <ClCompile Include="PopTurtle.cpp">
-      <Filter>Pop</Filter>
-    </ClCompile>
     <ClCompile Include="EnemyTurtle.cpp">
       <Filter>Character\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="PopMoney.cpp" />
+    <ClCompile Include="PopMoney.cpp">
+      <Filter>Pop\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="PopArcher.cpp">
+      <Filter>Pop\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopBat.cpp">
+      <Filter>Pop\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopBlueMonk.cpp">
+      <Filter>Pop\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopCrocoSnake.cpp">
+      <Filter>Pop\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopEyeDaemon.cpp">
+      <Filter>Pop\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopFaceAndHand.cpp">
+      <Filter>Pop\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopFlog.cpp">
+      <Filter>Pop\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopGama.cpp">
+      <Filter>Pop\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopGhost.cpp">
+      <Filter>Pop\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopGhoul.cpp">
+      <Filter>Pop\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopGrayMist.cpp">
+      <Filter>Pop\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopGreenZombie.cpp">
+      <Filter>Pop\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopHand.cpp">
+      <Filter>Pop\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopHugDaemon.cpp">
+      <Filter>Pop\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopJizo.cpp">
+      <Filter>Pop\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopLady.cpp">
+      <Filter>Pop\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopLancer.cpp">
+      <Filter>Pop\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopMoth.cpp">
+      <Filter>Pop\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopNoFace.cpp">
+      <Filter>Pop\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopNoNeckGhost.cpp">
+      <Filter>Pop\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopOneEyeSnake.cpp">
+      <Filter>Pop\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopOnyudo.cpp">
+      <Filter>Pop\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopPurpleZombie.cpp">
+      <Filter>Pop\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopRay.cpp">
+      <Filter>Pop\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopRedBird.cpp">
+      <Filter>Pop\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopShell.cpp">
+      <Filter>Pop\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopShishimai.cpp">
+      <Filter>Pop\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopShishimaiDaemon.cpp">
+      <Filter>Pop\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopSkeleton.cpp">
+      <Filter>Pop\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopStone.cpp">
+      <Filter>Pop\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopStoneFace.cpp">
+      <Filter>Pop\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopSwampZombieA.cpp">
+      <Filter>Pop\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopSwampZombieB.cpp">
+      <Filter>Pop\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopSwampZombieC.cpp">
+      <Filter>Pop\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopTree.cpp">
+      <Filter>Pop\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopTurtle.cpp">
+      <Filter>Pop\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopWaterGhost.cpp">
+      <Filter>Pop\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopWhiteMist.cpp">
+      <Filter>Pop\Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="PopWind.cpp">
+      <Filter>Pop\Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy.h">
@@ -547,106 +549,10 @@
     <ClInclude Include="EnemyStone.h">
       <Filter>Character\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="PopGama.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
-    <ClInclude Include="PopGrayMist.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
-    <ClInclude Include="PopBat.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
-    <ClInclude Include="PopFlog.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
-    <ClInclude Include="PopMoth.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
-    <ClInclude Include="PopStone.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
     <ClInclude Include="Pop.h">
       <Filter>Pop</Filter>
     </ClInclude>
-    <ClInclude Include="PopFaceAndHand.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
     <ClInclude Include="Popper.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
-    <ClInclude Include="PopPurpleZombie.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
-    <ClInclude Include="PopNoFace.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
-    <ClInclude Include="PopLancer.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
-    <ClInclude Include="PopCrocoSnake.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
-    <ClInclude Include="PopGhoul.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
-    <ClInclude Include="PopArcher.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
-    <ClInclude Include="PopGhost.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
-    <ClInclude Include="PopHand.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
-    <ClInclude Include="PopNoNeckGhost.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
-    <ClInclude Include="PopOneEyeSnake.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
-    <ClInclude Include="PopRedBird.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
-    <ClInclude Include="PopShishimai.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
-    <ClInclude Include="PopStoneFace.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
-    <ClInclude Include="PopWhiteMist.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
-    <ClInclude Include="PopBlueMonk.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
-    <ClInclude Include="PopGreenZombie.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
-    <ClInclude Include="PopSwampZombieA.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
-    <ClInclude Include="PopSwampZombieC.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
-    <ClInclude Include="PopSwampZombieB.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
-    <ClInclude Include="PopJizo.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
-    <ClInclude Include="PopLady.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
-    <ClInclude Include="PopOnyudo.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
-    <ClInclude Include="PopSkeleton.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
-    <ClInclude Include="PopWind.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
-    <ClInclude Include="PopTree.h">
       <Filter>Pop</Filter>
     </ClInclude>
     <ClInclude Include="ViewerDebug.h">
@@ -700,15 +606,6 @@
     <ClInclude Include="EnemyBossMonsterTree.h">
       <Filter>Character\Enemy\Boss</Filter>
     </ClInclude>
-    <ClInclude Include="PopEyeDaemon.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
-    <ClInclude Include="PopHugDaemon.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
-    <ClInclude Include="PopShishimaiDaemon.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
     <ClInclude Include="EnemyRay.h">
       <Filter>Character\Enemy</Filter>
     </ClInclude>
@@ -717,15 +614,6 @@
     </ClInclude>
     <ClInclude Include="EnemyWaterGhost.h">
       <Filter>Character\Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="PopRay.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
-    <ClInclude Include="PopShell.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
-    <ClInclude Include="PopWaterGhost.h">
-      <Filter>Pop</Filter>
     </ClInclude>
     <ClInclude Include="Office.h">
       <Filter>NPC</Filter>
@@ -877,13 +765,129 @@
     <ClInclude Include="EventBudha.h">
       <Filter>World\Event</Filter>
     </ClInclude>
-    <ClInclude Include="PopTurtle.h">
-      <Filter>Pop</Filter>
-    </ClInclude>
     <ClInclude Include="EnemyTurtle.h">
       <Filter>Character\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="PopMoney.h" />
+    <ClInclude Include="PopMoney.h">
+      <Filter>Pop\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="PopArcher.h">
+      <Filter>Pop\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopBat.h">
+      <Filter>Pop\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopBlueMonk.h">
+      <Filter>Pop\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopCrocoSnake.h">
+      <Filter>Pop\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopEyeDaemon.h">
+      <Filter>Pop\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopFaceAndHand.h">
+      <Filter>Pop\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopFlog.h">
+      <Filter>Pop\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopGama.h">
+      <Filter>Pop\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopGhost.h">
+      <Filter>Pop\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopGhoul.h">
+      <Filter>Pop\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopGrayMist.h">
+      <Filter>Pop\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopGreenZombie.h">
+      <Filter>Pop\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopHand.h">
+      <Filter>Pop\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopHugDaemon.h">
+      <Filter>Pop\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopJizo.h">
+      <Filter>Pop\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopLady.h">
+      <Filter>Pop\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopLancer.h">
+      <Filter>Pop\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopMoth.h">
+      <Filter>Pop\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopNoFace.h">
+      <Filter>Pop\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopNoNeckGhost.h">
+      <Filter>Pop\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopOneEyeSnake.h">
+      <Filter>Pop\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopOnyudo.h">
+      <Filter>Pop\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopPurpleZombie.h">
+      <Filter>Pop\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopRay.h">
+      <Filter>Pop\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopRedBird.h">
+      <Filter>Pop\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopShell.h">
+      <Filter>Pop\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopShishimai.h">
+      <Filter>Pop\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopShishimaiDaemon.h">
+      <Filter>Pop\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopSkeleton.h">
+      <Filter>Pop\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopStone.h">
+      <Filter>Pop\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopStoneFace.h">
+      <Filter>Pop\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopSwampZombieA.h">
+      <Filter>Pop\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopSwampZombieB.h">
+      <Filter>Pop\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopSwampZombieC.h">
+      <Filter>Pop\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopTree.h">
+      <Filter>Pop\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopTurtle.h">
+      <Filter>Pop\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopWaterGhost.h">
+      <Filter>Pop\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopWhiteMist.h">
+      <Filter>Pop\Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="PopWind.h">
+      <Filter>Pop\Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">
@@ -927,6 +931,12 @@
     </Filter>
     <Filter Include="Character\Enemy\Attack">
       <UniqueIdentifier>{4787bf7c-e00b-47fd-9db2-129958db31c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pop\Item">
+      <UniqueIdentifier>{e549f0d2-77a3-4a73-8b70-fcde9becac11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Pop\Enemy">
+      <UniqueIdentifier>{6657b7b2-6048-44af-8d98-89208f16b942}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

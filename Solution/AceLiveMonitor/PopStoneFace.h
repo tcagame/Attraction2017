@@ -6,7 +6,9 @@ class PopStoneFace : public Pop {
 public:
 	PopStoneFace( const Vector& pos );
 	virtual ~PopStoneFace( );
-protected:
-	void create( );
+public:
+	void update( );
+private:
+	int _count;
 };
 

@@ -1,12 +1,18 @@
 #pragma once
 #include "Pop.h"
 #include "mathmatics.h"
+#include "smart_ptr.h"
+
+PTR( Enemy );
 
 class PopWaterGhost : public Pop {
 public:
 	PopWaterGhost( const Vector& pos );
 	virtual ~PopWaterGhost( );
-protected:
-	void create( );
+public:
+	void update( );
+private:
+	int _count;
+	EnemyWeakPtr _enemy;
 };
 

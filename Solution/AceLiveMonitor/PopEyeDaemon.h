@@ -6,7 +6,9 @@ class PopEyeDaemon : public Pop {
 public:
 	PopEyeDaemon( const Vector& pos );
 	virtual ~PopEyeDaemon( );
-protected:
-	void create( );
+public:
+	void update( );
+private:
+	int _count;
 };
 

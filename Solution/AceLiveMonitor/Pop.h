@@ -5,14 +5,12 @@ public:
 	Pop( const Vector& pos );
 	virtual ~Pop( );
 public:
-	void update( );
+	virtual void update( ) = 0;
 protected:
-	virtual void create( ) = 0;
 	Vector getPos( ) const;
-private:
 	bool isInScreen( ) const;
+	bool isInRangePlayer( int range ) const;
 private:
 	Vector _pos;
-	int _count;
 };
 

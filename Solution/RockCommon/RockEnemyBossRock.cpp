@@ -74,3 +74,7 @@ void RockEnemyBossRock::dropItem( ) {
 	
 	storage->addDropItem( RockItemPtr( new RockItemRock( getPos( ) + Vector( 20, getOverlappedRadius( ), 0 ) ) ) );
 }
+
+void RockEnemyBossRock::stopEffect( ) {
+	Effect::getTask( )->stopEffect( _soul_handle );
+}

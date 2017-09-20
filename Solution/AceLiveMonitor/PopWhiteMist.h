@@ -6,7 +6,9 @@ class PopWhiteMist : public Pop {
 public:
 	PopWhiteMist( const Vector& pos );
 	virtual ~PopWhiteMist( );
-protected:
-	void create( );
+public:
+	void update( );
+private:
+	int _count;
 };
 

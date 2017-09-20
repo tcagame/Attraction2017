@@ -1,12 +1,18 @@
 #pragma once
 #include "Pop.h"
 #include "mathmatics.h"
+#include "smart_ptr.h"
+
+PTR( Enemy );
 
 class PopNoNeckGhost : public Pop {
 public:
 	PopNoNeckGhost( const Vector& pos );
 	virtual ~PopNoNeckGhost( );
-protected:
-	void create( );
+public:
+	void update( );
+private:
+	int _count;
+	EnemyWeakPtr _enemy;
 };
 

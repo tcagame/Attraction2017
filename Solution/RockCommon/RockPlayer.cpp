@@ -226,6 +226,7 @@ void RockPlayer::actOnBubble( ) {
 	SoundPtr sound = Sound::getTask( );
 	if ( status.area == AREA_RESULT ||
 		 status.area == AREA_ENTRY ) {
+		_speed_down = false;
 		//参加受付状態ではないまたはリザルトに入ったら泡に入らない
 		if ( isOnMapModel( ) ) {
 			setMass( true );
@@ -453,7 +454,7 @@ void RockPlayer::actOnCharging( ) {
 		return;
 	}
 
-	if ( _attack_count == 0 ) {
+	if ( _charge_effect_handle < 0 ) {
 		EffectPtr effect( Effect::getTask( ) );
 		_charge_effect_handle = effect->playEffect( RockStudio::getTask( )->getEffectHandle( EFFECT_CHARGE ) );
 		effect->updateEffectTransform( _charge_effect_handle, getPos( ) + CHARGE_EFFECT_ADJUST );
