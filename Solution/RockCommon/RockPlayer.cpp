@@ -421,7 +421,7 @@ void RockPlayer::actOnAttacking( ) {
 		if ( player.item & ITEM_ENHANCED_ATTACK ) {
 			power *= ENHANCED_POWER;
 		}
-		RockShotPtr shot( new RockShotPlayer( _id, getPos( ) + SHOT_FOOT, getDir( ), power, max_charge ) );
+		RockShotPtr shot( new RockShotPlayer( _id, getPos( ) + SHOT_FOOT + getDir( ) * MOVE_SPEED, getDir( ), power, max_charge ) );
 		RockArmoury::getTask( )->addShot( shot );
 		bool want_move = player.device_x != 0 || player.device_y != 0;
 		if ( !want_move ) {
