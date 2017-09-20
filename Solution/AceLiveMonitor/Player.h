@@ -102,6 +102,7 @@ private:
 	int getDeviceDirY( );
 	unsigned char getDevicePush( );
 	unsigned char getDeviceButton( );
+	void debugItem( );
 private:
 	PLAYER _player;
 	ACTION _action;

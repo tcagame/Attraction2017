@@ -32,22 +32,22 @@ void ItemMoney::setSynchronousData( int camera_pos ) const {
 	int pattern = -1;
 	switch ( _type ) {
 	case OBJECT_MONEY_PURSE:
-		pattern = anim + 40;
+		pattern = 0;
 		break;
 	case OBJECT_MONEY_BAG:
-		pattern = anim + 32;
+		pattern = anim + 1;
 		break;
 	case OBJECT_MONEY_500:
-		pattern = anim + 60;
+		pattern = 3;
 		break;
 	case OBJECT_MONEY_1000:
-		pattern = anim + 62;
+		pattern = 4;
 		break;
 	case OBJECT_MONEY_5000:
-		pattern = anim + 58;
+		pattern = 5;
 		break;
 	case OBJECT_MONEY_10000:
-		pattern = anim + 56;
+		pattern = 6;
 		break;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
