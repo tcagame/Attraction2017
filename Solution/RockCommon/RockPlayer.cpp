@@ -157,6 +157,11 @@ void RockPlayer::updeteState( ) {
 			return;
 		}
 	}
+	if ( player.area == AREA_RESULT || 
+		 player.area == AREA_WAIT   ||
+		 player.area == AREA_ENTRY ) {
+		_ancestors->fadeOut( );
+	}
 }
 
 void RockPlayer::updateInCamera( ) {
