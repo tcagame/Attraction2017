@@ -9,6 +9,7 @@ public:
 	void pop( );
 	bool isActive( );
 	ModelMV1Ptr getModel( ) const;
+	void resetPos( );
 protected:
 	void act( );
 private:

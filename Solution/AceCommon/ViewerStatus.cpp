@@ -69,6 +69,7 @@ ViewerStatus::ViewerStatus( ) {
 	_image_money_number = drawer->createImage( "UI/ui_money_number.png" );
 
 	_image_item_effect = drawer->createImage( "Effect/impact.png" );
+	_image_redo = drawer->createImage( "UI/ui_continue_picture.png" );
 }
 
 ViewerStatus::~ViewerStatus( ) {
@@ -85,6 +86,7 @@ void ViewerStatus::draw( PLAYER player, int sx, int sy ) const {
 	drawMoney( data->getStatusMoney( player ), sx, sy );
 	drawItem( player, sx, sy );
 	drawVirtue( data->getStatusVirtue( player ), sx, sy );
+	drawRedo( data->getStatusRedo( player ), sx, sy );
 }
 
 void ViewerStatus::drawPower( int power, int sx, int sy ) const {
@@ -168,4 +170,18 @@ void ViewerStatus::drawVirtue( int virtue, int sx, int sy ) const {
 	_image_virtue_number->setRect( virtue * 32, 0, 32, 32 );
 	_image_virtue_number->setPos( sx + VIRTUE_OX + 40, sy + VIRTUE_OY );
 	_image_virtue_number->draw( );
+}
+
+void ViewerStatus::drawRedo( int redo, int sx, int sy ) const {
+	static int count = 0;
+	count++;
+
+	for ( int i = 0; i < redo; i++ ) {
+		int add = ( int )( sin( PI2 * ( count + i * 10 ) / 160 ) * 10 );
+		if ( add < 0 ) {
+			add = 0;
+		}
+		_image_redo->setPos( sx + i * 10 + BUSTUP_OX, sy + BUSTUP_OY + add );
+		_image_redo->draw( );
+	}
 }

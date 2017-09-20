@@ -153,7 +153,8 @@ _unrivaled_count( MAX_UNRIVALED_COUNT ),
 _action( ACTION_ENTRY ),
 _progress_count( 0 ),
 _cool_time( COOL_TIME ),
-_auto_move_target_x( -1 ) {
+_auto_move_target_x( -1 ),
+_redo( 0 ) {
 	setOverlappedRadius( 25 );
 	setDir( DIR_RIGHT );
 
@@ -304,6 +305,9 @@ void Player::debugItem( ) {
 	if ( keyboard->isPushKey( "NUM8" ) ) {
 		pickUpVirtue( );
 	}
+	if ( keyboard->isPushKey( "R" ) ) {
+		_redo++;
+	}
 }
 
 void Player::updateShowMoney( ) {
@@ -346,6 +350,7 @@ void Player::actOnEntry( ) {
 
 		_virtue = 0;
 		_money = 0;
+		_redo = 0;
 		_mode = MODE_NORMAL;
 	}
 }
@@ -356,6 +361,7 @@ void Player::actOnContinue( ) {
 
 	if ( _progress_count >= 100 ) {
 		// Ä“oê‚Ì‚½‚ß‚É‰Šú‰»
+		_redo++;
 		appear( );
 	}
 }
@@ -852,6 +858,7 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 	for ( int i = 0; i < MAX_ITEM; i++ ) {
 		data->setInProssessionOfStatusItem( _player, CONV[ i ], _item[ i ] );
 	}
+	data->setStatusRedo( _player, _redo );
 
 	// Object
 	if ( _unrivaled_count < MAX_UNRIVALED_COUNT ) {
