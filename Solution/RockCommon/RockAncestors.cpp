@@ -123,6 +123,13 @@ void RockAncestors::actOnFollow( ) {
 		return;
 	}
 	RockPlayerPtr player = RockFamily::getTask( )->getPlayer( _player_id );
+	if ( player->isBubble( ) ||
+		 player->isDead( ) ||
+		 !player->isActive( ) ) {
+		_action = ACTION_FADEOUT;
+		return;
+	}
+
 	const Vector player_pos = player->getPos( );
 	Vector player_dir = player->getDir( ).normalize( );
 	player_dir.y = 0;
