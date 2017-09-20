@@ -138,9 +138,12 @@ void RockPlayer::updateEffect( ) {
 }
 
 void RockPlayer::updeteState( ) {
-	if ( _status->getPlayer( _id ).power <= 0 ) {
+	if ( _status->getPlayer( _id ).power <= 0 || isBubble( ) ) {
 		setCol( false );
 		setMass( false );
+	} else {
+		setCol( true );
+		setMass( true );
 	}
 	if ( _status->getPlayer( _id ).money >= TRANSITION_MONEY_NUM ) {
 		if ( _status->getPlayer( _id ).area == AREA_STREET_1 ) {
