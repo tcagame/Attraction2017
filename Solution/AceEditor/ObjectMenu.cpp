@@ -29,9 +29,9 @@ const int BLOCK_Y = 42;
 const int BLOCK_DRAW_SIZE = 48;
 const int BLOCK_WIDTH_NUM = 6;
 
-const int ENEMY_WIDTH_NUM = 6;
-const int ENEMY_HEIGHT_NUM = 4;
-const int ENEMY_DRAW_SIZE = 48;
+const int CHARA_WIDTH_NUM = 6;
+const int CHARA_HEIGHT_NUM = 4;
+const int CHARA_DRAW_SIZE = 48;
 
 const int EVENT_SPRITE_SIZE = 32;
 const int EVENT_SPRITE_WIDTH_NUM = 4;
@@ -43,7 +43,7 @@ const int PAGE_ARROW_SIZE = 32;
 const int PAGE_ARROW_Y = FRAME_WINDOW_HEIGHT - FRAME_SIZE - PAGE_ARROW_SIZE - 5;
 const int PAGE_ARROW_DISTANCE_CENTER = 30;
 
-const Rect enemies_rect[ ] = {
+const Rect character_rect[ ] = {
 	RECT_PUPLE_ZOMBIE,
 	RECT_FACE_AND_HAND,
 	RECT_NO_FACE,
@@ -83,8 +83,14 @@ const Rect enemies_rect[ ] = {
 	RECT_STONE,
 	RECT_MOTH,
 	RECT_EYE_DAEMON,
+	RECT_MONEY_BAG,
+	RECT_MONEY_PURSE,
+	RECT_MONEY_500,
+	RECT_MONEY_1000,
+	RECT_MONEY_5000,
+	RECT_MONEY_10000,
 };
-const int MAX_ENEMY = sizeof( enemies_rect ) / sizeof( enemies_rect[ 0 ] );
+const int MAX_CHARA = sizeof( character_rect ) / sizeof( character_rect[ 0 ] );
 
 ObjectMenu::ObjectMenu( ImagePtr image_menu, ImagePtr image_block, ImagePtr enemy_midium_image, ImagePtr enemy_big_image, ImagePtr enemy_wide_image, ImagePtr enemy_small_image, ImagePtr image_event, ObjectEditorPtr object_editor ) :
 _active( false ),
@@ -98,6 +104,7 @@ _page( 0 ) {
 	_enemy[ GRAPH_ENEMY_BIG ] = enemy_big_image;
 	_enemy[ GRAPH_ENEMY_WIDE ] = enemy_wide_image;
 	_enemy[ GRAPH_ENEMY_SMALL ] = enemy_small_image;
+	_money = Drawer::getTask( )->createImage( "item/money.png" );
 }
 
 ObjectMenu::~ObjectMenu( ) {
@@ -153,20 +160,20 @@ void ObjectMenu::update( ) {
 				if ( sx1 < mouse_pos.x && sx2 > mouse_pos.x && sy1 < mouse_pos.y && sy2 > mouse_pos.y ) {
 					_active = true;
 					_page++;
-					if ( _page > MAX_ENEMY / ( ENEMY_WIDTH_NUM * ENEMY_HEIGHT_NUM ) ) {
-						_page = MAX_ENEMY / ( ENEMY_WIDTH_NUM * ENEMY_HEIGHT_NUM );
+					if ( _page > MAX_CHARA / ( CHARA_WIDTH_NUM * CHARA_HEIGHT_NUM ) ) {
+						_page = MAX_CHARA / ( CHARA_WIDTH_NUM * CHARA_HEIGHT_NUM );
 					}
 				}
 			}			
 			{ //enemy‘I‘ð
 				int sx1 = ( int )_pos.x + BLOCK_X;
 				int sy1 = ( int )_pos.y + BLOCK_Y;
-				int sx2 = sx1 + ENEMY_DRAW_SIZE * ENEMY_WIDTH_NUM;
-				int sy2 = sy1 + ENEMY_DRAW_SIZE * ENEMY_HEIGHT_NUM;
+				int sx2 = sx1 + CHARA_DRAW_SIZE * CHARA_WIDTH_NUM;
+				int sy2 = sy1 + CHARA_DRAW_SIZE * CHARA_HEIGHT_NUM;
 				if ( sx1 < mouse_pos.x && sx2 > mouse_pos.x && sy1 < mouse_pos.y && sy2 > mouse_pos.y ) {
-					int x = ( int )( mouse_pos.x - sx1 ) / ENEMY_DRAW_SIZE;
-					int y = ( int )( mouse_pos.y - sy1 ) / ENEMY_DRAW_SIZE;
-					int enemy_idx = x + y * ENEMY_WIDTH_NUM + _page * ENEMY_WIDTH_NUM * ENEMY_HEIGHT_NUM;
+					int x = ( int )( mouse_pos.x - sx1 ) / CHARA_DRAW_SIZE;
+					int y = ( int )( mouse_pos.y - sy1 ) / CHARA_DRAW_SIZE;
+					int enemy_idx = x + y * CHARA_WIDTH_NUM + _page * CHARA_WIDTH_NUM * CHARA_HEIGHT_NUM;
 					unsigned char enemy = getEnemy( enemy_idx );
 					_object_editor->setObject( enemy );
 				}
@@ -337,6 +344,24 @@ unsigned char ObjectMenu::getEnemy( int idx ) const {
 	case 38:
 		result = OBJECT_EYE_DAEMON;
 		break;
+	case 39:
+		result = OBJECT_MONEY_BAG;
+		break;
+	case 40:
+		result = OBJECT_MONEY_PURSE;
+		break;
+	case 41:
+		result = OBJECT_MONEY_500;
+		break;
+	case 42:
+		result = OBJECT_MONEY_1000;
+		break;
+	case 43:
+		result = OBJECT_MONEY_5000;
+		break;
+	case 44:
+		result = OBJECT_MONEY_10000;
+		break;
 	default:
 		result = OBJECT_NONE;
 		break;
@@ -473,35 +498,40 @@ void ObjectMenu::draw( ) const {
 			_menu->draw( );
 		}
 		{//enemy
-			int add = _page * ENEMY_HEIGHT_NUM * ENEMY_WIDTH_NUM;
-			for ( int i = 0; i < ENEMY_HEIGHT_NUM; i++ ) {
-				for ( int j = 0; j < ENEMY_WIDTH_NUM; j++ ) {
-					int idx = j + i * ENEMY_WIDTH_NUM + add;
-					if ( idx >= MAX_ENEMY ) {
+			int add = _page * CHARA_HEIGHT_NUM * CHARA_WIDTH_NUM;
+			for ( int i = 0; i < CHARA_HEIGHT_NUM; i++ ) {
+				for ( int j = 0; j < CHARA_WIDTH_NUM; j++ ) {
+					int idx = j + i * CHARA_WIDTH_NUM + add;
+					if ( idx >= MAX_CHARA ) {
 						break;
 					}
 					if ( idx != -1 ) {
-						int sx = ( int )_pos.x + BLOCK_X + j * ENEMY_DRAW_SIZE;
-						int sy = ( int )_pos.y + BLOCK_Y + i * ENEMY_DRAW_SIZE;
+						int sx = ( int )_pos.x + BLOCK_X + j * CHARA_DRAW_SIZE;
+						int sy = ( int )_pos.y + BLOCK_Y + i * CHARA_DRAW_SIZE;
 						if ( idx < 26 ) {
-							_enemy[ GRAPH_ENEMY_MIDIUM ]->setRect( enemies_rect[ idx ].tx, enemies_rect[ idx ].ty, NORMAL_CHAR_GRAPH_SIZE, NORMAL_CHAR_GRAPH_SIZE );
-							_enemy[ GRAPH_ENEMY_MIDIUM ]->setPos( sx, sy, sx + ENEMY_DRAW_SIZE, sy + ENEMY_DRAW_SIZE );
+							_enemy[ GRAPH_ENEMY_MIDIUM ]->setRect( character_rect[ idx ].tx, character_rect[ idx ].ty, NORMAL_CHAR_GRAPH_SIZE, NORMAL_CHAR_GRAPH_SIZE );
+							_enemy[ GRAPH_ENEMY_MIDIUM ]->setPos( sx, sy, sx + CHARA_DRAW_SIZE, sy + CHARA_DRAW_SIZE );
 							_enemy[ GRAPH_ENEMY_MIDIUM ]->draw( );
 						}
 						if ( 25 < idx && idx < 29 ) {
-							_enemy[ GRAPH_ENEMY_WIDE ]->setRect( enemies_rect[ idx ].tx, enemies_rect[ idx ].ty, NORMAL_CHAR_GRAPH_SIZE, NORMAL_CHAR_GRAPH_SIZE );
-							_enemy[ GRAPH_ENEMY_WIDE ]->setPos( sx, sy, sx + ENEMY_DRAW_SIZE, sy + ENEMY_DRAW_SIZE );
+							_enemy[ GRAPH_ENEMY_WIDE ]->setRect( character_rect[ idx ].tx, character_rect[ idx ].ty, NORMAL_CHAR_GRAPH_SIZE, NORMAL_CHAR_GRAPH_SIZE );
+							_enemy[ GRAPH_ENEMY_WIDE ]->setPos( sx, sy, sx + CHARA_DRAW_SIZE, sy + CHARA_DRAW_SIZE );
 							_enemy[ GRAPH_ENEMY_WIDE ]->draw( );
 						}
 						if ( 28 < idx && idx < 34 ) {
-							_enemy[ GRAPH_ENEMY_BIG ]->setRect( enemies_rect[ idx ].tx, enemies_rect[ idx ].ty, BIG_CHAR_GRAPH_SIZE, BIG_CHAR_GRAPH_SIZE );
-							_enemy[ GRAPH_ENEMY_BIG ]->setPos( sx, sy, sx + ENEMY_DRAW_SIZE, sy + ENEMY_DRAW_SIZE );
+							_enemy[ GRAPH_ENEMY_BIG ]->setRect( character_rect[ idx ].tx, character_rect[ idx ].ty, BIG_CHAR_GRAPH_SIZE, BIG_CHAR_GRAPH_SIZE );
+							_enemy[ GRAPH_ENEMY_BIG ]->setPos( sx, sy, sx + CHARA_DRAW_SIZE, sy + CHARA_DRAW_SIZE );
 							_enemy[ GRAPH_ENEMY_BIG ]->draw( );
 						}
 						if ( 33 < idx && idx < 39 ) {
-							_enemy[ GRAPH_ENEMY_SMALL ]->setRect( enemies_rect[ idx ].tx, enemies_rect[ idx ].ty, SMALL_CHAR_GRAPH_SIZE, SMALL_CHAR_GRAPH_SIZE );
-							_enemy[ GRAPH_ENEMY_SMALL ]->setPos( sx, sy, sx + ENEMY_DRAW_SIZE, sy + ENEMY_DRAW_SIZE );
+							_enemy[ GRAPH_ENEMY_SMALL ]->setRect( character_rect[ idx ].tx, character_rect[ idx ].ty, SMALL_CHAR_GRAPH_SIZE, SMALL_CHAR_GRAPH_SIZE );
+							_enemy[ GRAPH_ENEMY_SMALL ]->setPos( sx, sy, sx + CHARA_DRAW_SIZE, sy + CHARA_DRAW_SIZE );
 							_enemy[ GRAPH_ENEMY_SMALL ]->draw( );
+						}
+						if ( 38 < idx && idx < 45 ) {
+							_money->setRect( character_rect[ idx ].tx, character_rect[ idx ].ty, SMALL_CHAR_GRAPH_SIZE, SMALL_CHAR_GRAPH_SIZE );
+							_money->setPos( sx, sy, sx + CHARA_DRAW_SIZE, sy + CHARA_DRAW_SIZE );
+							_money->draw( );
 						}
 					}
 				}

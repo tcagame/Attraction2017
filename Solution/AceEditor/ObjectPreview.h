@@ -25,6 +25,7 @@ private:
 	ImagePtr _event;
 	ImagePtr _altar; //•§’d
 	ImagePtr _choise;
+	ImagePtr _money;
 	DataConstPtr _data;
 	ObjectCursorConstPtr _object_cursor;
 };
