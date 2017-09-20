@@ -63,6 +63,7 @@ void ViewerEvent::draw( EVENT event, int sx, int sy ) const {
 	case EVENT_REDDAEMON:
 	case EVENT_FLAME    :
 	case EVENT_WOOD     :
+	case EVENT_MINERAL  :
 		_image_escape->setRect( 0, 0, 128, 64 );
 		_image_escape->setPos( 256 - 64, 0 );
 		_image_escape->draw( );
@@ -72,11 +73,6 @@ void ViewerEvent::draw( EVENT event, int sx, int sy ) const {
 	case EVENT_RYUGU    :
 		_image_escape->setRect( 0, 64, 128, 64 );
 		_image_escape->setPos( 256 - 64, 0 );
-		_image_escape->draw( );
-		break;
-	case EVENT_MINERAL  :
-		_image_escape->setRect( 0, 0, 128, 64 );
-		_image_escape->setPos( 1280 - ( 256 - 64 ), 0 );
 		_image_escape->draw( );
 		break;
 	case EVENT_LAKE     :

@@ -52,7 +52,7 @@ void EventEnma::update( ) {
 }
 
 bool EventEnma::isJoining( ) const {
-	return true;
+	return !_audience;
 }
 
 void EventEnma::join( PLAYER target ) {

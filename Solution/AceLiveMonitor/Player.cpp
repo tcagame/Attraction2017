@@ -44,7 +44,8 @@ const int MAX_BACK_COUNT = 6;
 const int MAX_UNRIVALED_COUNT = 45;
 const int MAX_DEAD_ACTCOUNT = 120;
 const int MAX_IMPACT_COUNT = 30;
-const int ENTERING_COUNT = 50;
+const int ENTERING_FADE_COUNT = 30;
+const int ENTERING_SANZO_COUNT = 90;
 
 const int AUTO_FINISH_RANGE = 5;
 const int HEAL_DANGO = 6;
@@ -932,15 +933,15 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 			break;
 		}
 	case ACTION_ENTERING_FADEOUT:
-		motion = getActCount( ) * num / ENTERING_COUNT;
+		motion = getActCount( ) * num / ENTERING_FADE_COUNT;
 		break;
 	case ACTION_ENTERING_SANZO:
 		{
 			// ŽÖŽO‘ 
-			Matrix mat = Matrix::makeTransformRotation( Vector( 0, 0, -1 ), PI * getActCount( ) / ENTERING_COUNT );
+			Matrix mat = Matrix::makeTransformRotation( Vector( 0, 0, -1 ), PI * getActCount( ) / ENTERING_SANZO_COUNT );
 			Vector pos = Vector( x, y - 256 ) + mat.multiply( Vector( 256, 0 ) );
 			data->addObject( AREA_STREET, SynchronousData::TYPE_SANZO, getActCount( ) / PLAYER_ANIM_WAIT_COUNT % 6 ,0 ,( int )pos.x, ( int )pos.y );
-			if ( getActCount( ) > ENTERING_COUNT / 2 ) {
+			if ( getActCount( ) > ENTERING_SANZO_COUNT / 2 ) {
 				x = ( int )pos.x;
 				y = ( int )pos.y;
 			}
@@ -990,12 +991,15 @@ void Player::setActionEnteringSanzo( ) {
 }
 
 bool Player::isEntering( ) const {
-	if ( _action != ACTION_ENTERING_FADEOUT &&
-		 _action != ACTION_ENTERING_SANZO ) {
-		return false;
+	if ( _action == ACTION_ENTERING_FADEOUT ) {
+		return getActCount( ) >= ENTERING_FADE_COUNT;
 	}
 
-	return getActCount( ) >= ENTERING_COUNT;
+	if ( _action == ACTION_ENTERING_SANZO ) {
+		return getActCount( ) >= ENTERING_SANZO_COUNT;
+	}
+
+	return false;
 }
 
 bool Player::isWearingItem( ITEM item ) const {

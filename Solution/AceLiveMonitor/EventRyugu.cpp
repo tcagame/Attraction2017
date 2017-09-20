@@ -13,11 +13,6 @@ EventRyugu::~EventRyugu( ) {
 void EventRyugu::update( ) {
 }
 
-
-bool EventRyugu::isFinished( ) const {
-	return true;
-}
-
 bool EventRyugu::isJoining( ) const {
 	return false;
 }

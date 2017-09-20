@@ -26,12 +26,9 @@ void EventShop::update( ) {
 	}
 }
 
-bool EventShop::isFinished( ) const {
-	return false;
-}
-
 bool EventShop::isJoining( ) const {
-	return getFade( ) != FADE_OUT;
+	return false;
+	//return getFade( ) != FADE_OUT;
 }
 
 void EventShop::join( PLAYER target ) {

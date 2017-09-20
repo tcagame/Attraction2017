@@ -4,7 +4,7 @@
 #include "SynchronousData.h"
 
 const int OVERAREA = 1280 / 2 - 256;
-const int NOBODY_COUNT = 60;
+const int NOBODY_COUNT = 100;
 
 Event::Event( EVENT type, DIR exit_dir ) :
 _type( type ),
