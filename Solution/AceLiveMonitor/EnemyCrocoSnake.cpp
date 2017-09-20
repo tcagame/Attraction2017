@@ -8,12 +8,12 @@ const int MOVE_SPEED = -1;
 EnemyCrocoSnake::EnemyCrocoSnake( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ),
 _before_pos( Vector( ) ) {
-	setOverlappedRadius( 30 );
 	setVec( Vector( MOVE_SPEED, 0 ) );
 
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "CrocoSnake_POWER" ) );
 	setForce( property->getData( "CrocoSnake_FORCE" ) );
+	setOverlappedRadius( property->getData( "CrocoSnake_RADIUS" ) );
 }
 
 

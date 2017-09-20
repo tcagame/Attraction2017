@@ -10,11 +10,10 @@ EnemyGreenZombie::EnemyGreenZombie( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ),
 _before_pos( Vector( ) ) {
 	setVec( Vector( MOVE_SPEED, 0 ) );
-	setOverlappedRadius( 36 );
-
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "GreenZombie_POWER" ) );
 	setForce( property->getData( "GreenZombie_FORCE" ) );
+	setOverlappedRadius( property->getData( "GreenZombie_RADIUS" ) );
 }
 
 

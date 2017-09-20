@@ -10,7 +10,7 @@ EnemyGrayMist::EnemyGrayMist( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE, false ),
 _vy( 0 ),
 _dir( 1 ) {
-	setOverlappedRadius( 36 );
+	setOverlappedRadius( 30 );
 	if ( getPos( ).y > GRAPH_SIZE / 3 * 2 ) {
 		setPos( Vector( getPos( ).x, GRAPH_SIZE / 3 * 2 ) );
 	}
@@ -18,6 +18,7 @@ _dir( 1 ) {
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "GrayMist_POWER" ) );
 	setForce( property->getData( "GrayMist_FORCE" ) );
+	setOverlappedRadius( property->getData( "GrayMist_RADIUS" ) );
 }
 
 

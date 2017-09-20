@@ -10,12 +10,12 @@ const double MOVE_SPEED = 0.5;
 EnemyNoFace::EnemyNoFace( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ),
 _vec_x( -MOVE_SPEED ) {
-	setOverlappedRadius( 30 );
 	setVec( Vector( _vec_x, 0 ) );
 
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "NoFace_POWER" ) );
 	setForce( property->getData( "NoFace_FORCE" ) );
+	setOverlappedRadius( property->getData( "NoFace_RADIUS" ) );
 }
 
 EnemyNoFace::~EnemyNoFace( ) {

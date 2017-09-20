@@ -14,6 +14,7 @@ EnemyBoss( pos, CHIP_SIZE ) {
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "RedDaemon_POWER" ) );
 	setForce( property->getData( "RedDaemon_FORCE" ) );
+	setOverlappedRadius( property->getData( "RedDaemon_RADIUS" ) );
 }
 
 

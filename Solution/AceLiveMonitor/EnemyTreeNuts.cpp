@@ -8,11 +8,10 @@ const int FADE_IN_TIME = WAIT_ANIM_TIME * 9;
 EnemyTreeNuts::EnemyTreeNuts( const Vector& pos ) :
 EnemyAttack( pos, SMALL_CHAR_GRAPH_SIZE, false ),
 _act( ACTION_FADE_IN ) {
-	setOverlappedRadius( 18 );
-
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "TreeNuts_POWER" ) );
 	setForce( property->getData( "TreeNuts_FORCE" ) );
+	setOverlappedRadius( property->getData( "TreeNuts_RADIUS" ) );
 }
 
 EnemyTreeNuts::~EnemyTreeNuts( ) {

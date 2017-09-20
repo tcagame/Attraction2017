@@ -9,11 +9,10 @@ EnemyMoth::EnemyMoth( const Vector& pos ) :
 Enemy( pos, SMALL_CHAR_GRAPH_SIZE, false ),
 _vy( 0 ),
 _dir( 1 ) {
-	setOverlappedRadius( 16 );
-
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "Moth_POWER" ) );
 	setForce( property->getData( "Moth_FORCE" ) );
+	setOverlappedRadius( property->getData( "Moth_RADIUS" ) );
 }
 
 

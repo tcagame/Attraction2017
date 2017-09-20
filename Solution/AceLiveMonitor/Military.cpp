@@ -28,13 +28,15 @@ MilitaryPtr Military::getTask( ) {
 
 
 Military::Military( ) {
-	_hell_fire = EnemyPtr( new EnemyHellFire( Vector( 64, 64 ) ) );
 }
 
 
 Military::~Military( ) {
 }
 
+void Military::initialize( ) {
+	_hell_fire = EnemyPtr( new EnemyHellFire( Vector( 64, 64 ) ) );
+}
 
 void Military::update( ) {
 	updateEnemy( );

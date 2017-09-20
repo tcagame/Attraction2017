@@ -10,11 +10,10 @@ const int ATTACK_TIME = WAIT_ANIM_TIME * 21;
 
 EnemyHand::EnemyHand( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ) {
-	setOverlappedRadius( 28 );
-
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "Hand_POWER" ) );
 	setForce( property->getData( "Hand_FORCE" ) );
+	setOverlappedRadius( property->getData( "Hand_RADIUS" ) );
 }
 
 

@@ -13,7 +13,7 @@ _act( ACTION_FADE_IN ) {
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "FaceAndHand_POWER" ) );
 	setForce( property->getData( "FaceAndHand_FORCE" ) );
-
+	setOverlappedRadius( property->getData( "FaceAndHand_RADIUS" ) );
 }
 
 

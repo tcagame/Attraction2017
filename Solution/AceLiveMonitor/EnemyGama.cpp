@@ -9,11 +9,10 @@ const int GUIDE_TIME = 180;
 EnemyGama::EnemyGama( const Vector& pos ) :
 Enemy( pos, BIG_CHAR_GRAPH_SIZE ),
 _guide( false ) {
-	setOverlappedRadius( 36 );
-
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "Gama_POWER" ) );
 	setForce( property->getData( "Gama_FORCE" ) );
+	setOverlappedRadius( property->getData( "Gama_RADIUS" ) );
 }
 
 

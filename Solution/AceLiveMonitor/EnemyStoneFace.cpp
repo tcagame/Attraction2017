@@ -21,6 +21,7 @@ _action( ACTION_IN ) {
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "StoneFace_POWER" ) );
 	setForce( property->getData( "StoneFace_FORCE" ) );
+	setOverlappedRadius( property->getData( "StoneFace_RADIUS" ) );
 }
 
 EnemyStoneFace::~EnemyStoneFace( ) {

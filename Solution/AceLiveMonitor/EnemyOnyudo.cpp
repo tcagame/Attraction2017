@@ -10,11 +10,10 @@ EnemyOnyudo::EnemyOnyudo( const Vector& pos ) :
 Enemy( pos, BIG_CHAR_GRAPH_SIZE ),
 _before_pos( Vector( ) ), 
 _vec( MOVE_SPEED, 0 ) {
-	setOverlappedRadius( 48 );
-
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "Onyudo_POWER" ) );
 	setForce( property->getData( "Onyudo_FORCE" ) );
+	setOverlappedRadius( property->getData( "Onyudo_RADIUS" ) );
 }
 
 
