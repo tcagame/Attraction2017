@@ -45,6 +45,7 @@ const int MAX_UNRIVALED_COUNT = 45;
 const int MAX_DEAD_ACTCOUNT = 120;
 const int MAX_IMPACT_COUNT = 30;
 const int ENTERING_COUNT = 50;
+const int MAX_SANDWICHED_COUNT = 300;
 
 const int AUTO_FINISH_RANGE = 5;
 const int HEAL_DANGO = 6;
@@ -275,7 +276,7 @@ void Player::act( ) {
 
 	updateShowMoney( );
 	updateProgressEffect( );
-
+	checkSandwichedWall( );
 	debugItem( );
 }
 
@@ -627,12 +628,21 @@ void Player::actOnCamera( ) {
 	Vector pos = getPos( );
 	Vector vec = getVec( );
 	double radius = getOverlappedRadius( );
+	//ç∂
 	if ( pos.x + vec.x - radius < x ) {
 		pos.x = x + radius;
 		vec.x = 0;
 		setPos( pos );
 		setVec( vec );
+		//ï«Ç…ã≤Ç‹ÇÍÇƒÇ¢ÇΩÇÁêÅÇ¡îÚÇ‘
+		if ( getArea( ) == AREA_STREET ) {
+			if ( World::getTask( )->getMap( AREA_STREET )->getObject( getPos( ) ) == OBJECT_BLOCK ) {
+				damage( 1 );
+				blowAway( );
+			}
+		}
 	}
+	//âE
 	if ( getPos( ).x + getVec( ).x + getOverlappedRadius( ) > x + SCREEN_WIDTH ) {
 		pos.x = ( x + SCREEN_WIDTH ) - radius;
 		vec.x = 0;
@@ -1156,4 +1166,20 @@ unsigned char Player::getDeviceButton( ) {
 		return device->getButton( _device_id );
 	}
 	return 0;
+}
+
+bool Player::isLeaveAlone( ) const {
+	return getActCount( ) > 30 * 30 && _action == ACTION_WAIT;
+}
+
+void Player::checkSandwichedWall( ) {
+	if ( getPos( ).x - Family::getTask( )->getCameraPosX( ) < 80 ) {
+		_sandwiched_count++;
+	} else {
+		_sandwiched_count = 0;
+	}
+	if ( _sandwiched_count > MAX_SANDWICHED_COUNT ) {
+		damage( 1 );
+		blowAway( );
+	}
 }

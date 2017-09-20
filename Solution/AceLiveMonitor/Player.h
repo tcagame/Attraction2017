@@ -73,6 +73,7 @@ public:
 	bool isFinishedAutomoving( ) const;
 	void audience( );
 	void setModeVirtue( );
+	bool isLeaveAlone( ) const;
 private:
 	void actOnEntry( );
 	void actOnContinue( );
@@ -103,6 +104,7 @@ private:
 	unsigned char getDevicePush( );
 	unsigned char getDeviceButton( );
 	void debugItem( );
+	void checkSandwichedWall( );
 private:
 	PLAYER _player;
 	ACTION _action;
@@ -121,6 +123,7 @@ private:
 	int _jump_power;
 	int _max_charge_phase_count;
 	int _max_virtue;
+	int _sandwiched_count;
 	std::array< bool, MAX_ITEM > _item;
 };
 
