@@ -21,7 +21,7 @@ public:
 	std::list< NPCPtr > getNPC( ) const;
 	void eraseEventNPC( );
 	void addEventNPC( NPCPtr npc );
-	void shiftPos( );
+	void shiftPos( int map_width );
 private:
 	std::list< NPCPtr > _npc;
 };

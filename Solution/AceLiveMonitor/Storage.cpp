@@ -26,23 +26,28 @@ Storage::~Storage( ) {
 }
 
 void Storage::update( ) {
-	int camera_pos = Family::getTask( )->getCameraPosX( );
+	FamilyPtr family( Family::getTask( ) );
+	int camera_pos = family->getCameraPosX( );
 	std::list< ItemPtr >::iterator ite = _items.begin( );
 	while ( ite != _items.end( ) ) {
 		ItemPtr item = *ite;
-		if ( !item ) {
-			ite++;
-			continue;
-		}
 		item->update( );
 		item->setSynchronousData( camera_pos );
-		PlayerPtr hit_player = getOverLappedPlayer( item );
+
+		//プレイヤーと当たる
+		PlayerPtr hit_player = family->getOverlappedPlayer( item );
 		if ( hit_player ) {
-			//プレイヤーがアイテムと接触
+			//アイテム取得
 			if ( pickUpItem( item, hit_player ) ) {
 				ite = _items.erase( ite );
 				continue;
 			}
+		}
+
+		//画面より左に行ったら削除
+		if ( item->isOutRange( ) ) {
+			ite = _items.erase( ite );
+			continue;
 		}
 		ite++;
 	}
@@ -57,28 +62,11 @@ bool Storage::isExistanceEventItem( ) const {
 	std::list< ItemPtr >::const_iterator ite = _items.begin( );
 	while ( ite != _items.end( ) ) {
 		ItemPtr item = *ite;
-		if ( !item ) {
-			ite++;
-			continue;
-		}
 		if ( item->getArea( ) == AREA_EVENT ) {
 			result = true;
 			break;
 		}
 		ite++;
-	}
-	return result;
-}
-
-PlayerPtr Storage::getOverLappedPlayer( ItemPtr item ) const {
-	PlayerPtr result = PlayerPtr( );
-	FamilyPtr family( Family::getTask( ) );
-	for ( int i = 0; i < MAX_PLAYER; i++ ) {
-		PlayerPtr player = family->getPlayer( i );
-		if ( player->isOverlapped( item ) ) {
-			result = player;
-			break;
-		}
 	}
 	return result;
 }
@@ -135,10 +123,6 @@ void Storage::eraseEventItem( ) {
 	std::list< ItemPtr >::iterator ite = _items.begin( );
 	while ( ite != _items.end( ) ) {
 		ItemPtr item = *ite;
-		if ( !item ) {
-			ite++;
-			continue;
-		}
 		if ( item->getArea( ) == AREA_EVENT ) {
 			ite = _items.erase( ite );
 			continue;
@@ -147,15 +131,19 @@ void Storage::eraseEventItem( ) {
 	}
 }
 
-void Storage::shiftPos( ) {
+void Storage::shiftPos( int map_width ) {
 	std::list< ItemPtr >::iterator ite = _items.begin( );
 	while ( ite != _items.end( ) ) {
-		ItemPtr item = *ite;
-		if ( !item ) {
-			ite++;
-			continue;
-		}
-		item->shiftPos( );
+		( *ite )->shiftPos( map_width );
 		ite++;
 	}
+}
+
+void Storage::pushDebugData( ViewerDebug::Data& data ) {
+	std::list< ItemPtr >::iterator ite = _items.begin( );
+	while ( ite != _items.end( ) ) {
+		data.circle.push_back( ( *ite )->getDebugDataCircle( ) );
+		ite++;
+	}
+	data.message.push_back( "Item:" + std::to_string( ( int )_items.size( ) ) );
 }

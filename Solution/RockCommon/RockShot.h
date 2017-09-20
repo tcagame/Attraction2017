@@ -11,6 +11,7 @@ public:
 	void setFinished( );
 	int getPower( ) const;
 	int getEffectHandle( ) const;
+	void stopEffect( );
 protected:
 	void setSize( double size );
 	void setEffectHandle( int effect_handle );

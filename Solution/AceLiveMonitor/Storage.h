@@ -2,6 +2,7 @@
 #include "Task.h"
 #include <string>
 #include <list>
+#include "ViewerDebug.h"
 
 PTR( Storage );
 PTR( Item );
@@ -20,10 +21,9 @@ public:
 	void add( ItemPtr item );
 	bool isExistanceEventItem( ) const;
 	void eraseEventItem( );
-	void shiftPos( );
+	void shiftPos( int map_width );
+	void pushDebugData( ViewerDebug::Data& data );
 private:
-	PlayerPtr getOverLappedPlayer( ItemPtr item ) const;
-	void createVirtue( ); //debug—p
 	bool pickUpItem( ItemPtr item, PlayerPtr player );
 private:
 	std::list< ItemPtr > _items;

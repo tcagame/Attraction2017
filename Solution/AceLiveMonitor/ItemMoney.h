@@ -3,13 +3,7 @@
 
 class ItemMoney : public Item {
 public:
-	enum TYPE {
-		TYPE_PETTY,
-		TYPE_BAG,
-		TYPE_500,
-	};
-public:
-	ItemMoney( const Vector& pos, TYPE money, AREA area );
+	ItemMoney( const Vector& pos, unsigned char type, AREA area );
 	virtual ~ItemMoney( );
 public:
 	void setSynchronousData( int camera_pos ) const;
@@ -17,6 +11,6 @@ public:
 protected:
 	void act( );
 private:
-	TYPE _type;
+	unsigned char _type;
 };
 

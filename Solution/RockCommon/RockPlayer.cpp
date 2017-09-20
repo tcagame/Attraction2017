@@ -235,7 +235,7 @@ void RockPlayer::actOnBubble( ) {
 	setMass( false );
 	setCol( false );
 	if ( status.device_button &&
-		 status.device_button != 0b00001111 ) {
+		 status.device_button != 0b00001111) {
 		_bubble_count++;		
 	} else {
 		_bubble_count = 0;
@@ -292,6 +292,7 @@ void RockPlayer::actOnWaiting( ) {
 		setAction( ACTION_BUBBLE );
 		return;
 	}
+
 	//ジャンプ
 	if ( isStanding( ) ) {
 		if ( player.device_button & BUTTON_C ) {
@@ -312,21 +313,21 @@ void RockPlayer::actOnWaiting( ) {
 	}
 	//移動
 	bool want_move = player.device_x != 0 || player.device_y != 0;
-	if (want_move) {
+	if ( want_move ) {
 		if ( isStanding( ) ) {
 			setAction( ACTION_WALK );
 		} else {
-			move( );
-		} 
+			move( );//空中でWaitになったとき移動が出来る
+		}
 		return;
 	}
-
 
 	//ブレーキ
 	//水平方向のベクトル
 	Vector vec = getVec( );
 	vec.y = 0;
-	//移動条件以外でベクトルがある場合待機に移行する
+	
+	//デバイスの入力が無くベクトルがある場合
 	if ( vec.getLength( ) > 0 ) {
 		setAction( ACTION_BRAKE );
 		return;
@@ -347,14 +348,15 @@ void RockPlayer::actOnJumping( ) {
 		setAction( ACTION_BUBBLE );
 		return;
 	}
-	if ( isStanding( ) ) {
+
 	//攻撃
-		if ( player.device_button & BUTTON_A &&
-			 _interval > INTERVAL_TIME ) {
-			setAction( ACTION_CHARGE );
-		} else {
-			setAction( ACTION_WAIT );
-		}
+	if ( player.device_button & BUTTON_A &&
+		 _interval > INTERVAL_TIME ) {
+		_attack_count = 1;
+	}
+	//着地
+	if ( isStanding( ) ) {
+		setAction( ACTION_WAIT );
 		return;
 	}
 	//移動
@@ -363,7 +365,6 @@ void RockPlayer::actOnJumping( ) {
 
 void RockPlayer::actOnWalking( ) {
 	Status::Player player = _status->getPlayer( _id );
-	SoundPtr sound = Sound::getTask( );
 	//死亡
 	if ( player.power <= 0 ) {
 		setAction( ACTION_DEAD );
@@ -375,6 +376,7 @@ void RockPlayer::actOnWalking( ) {
 		setAction( ACTION_BUBBLE );
 		return;
 	}
+
 	//ジャンプ
 	if ( isStanding( ) ) {
 		if ( player.device_button & BUTTON_C ) {
@@ -383,11 +385,12 @@ void RockPlayer::actOnWalking( ) {
 			return;
 		}
 	}
-	//浮いている
-	if ( !isStanding( ) ) {
-		setAction( ACTION_WAIT );
-		return;
+	//攻撃
+	if ( player.device_button & BUTTON_A &&
+		 _interval > INTERVAL_TIME ) {
+		_attack_count = 1;
 	}
+
 	//ブレーキ
 	if ( player.device_x == 0 &&
 		 player.device_y == 0 ) {
@@ -398,6 +401,7 @@ void RockPlayer::actOnWalking( ) {
 	//移動
 	move( );
 
+	SoundPtr sound = Sound::getTask( );
 	if ( !sound->isPlayingSE( "yokai_voice_15.wav" ) ) {
 		sound->playSE( "yokai_voice_15.wav" );
 	}
@@ -417,9 +421,12 @@ void RockPlayer::actOnAttacking( ) {
 		if ( player.item & ITEM_ENHANCED_ATTACK ) {
 			power *= ENHANCED_POWER;
 		}
-		RockShotPtr shot( new RockShotPlayer( _id, getPos( ) + SHOT_FOOT, getDir( ), power, max_charge ) );
+		RockShotPtr shot( new RockShotPlayer( _id, getPos( ) + SHOT_FOOT + getDir( ) * MOVE_SPEED, getDir( ), power, max_charge ) );
 		RockArmoury::getTask( )->addShot( shot );
-		setAction( ACTION_WAIT );
+		bool want_move = player.device_x != 0 || player.device_y != 0;
+		if ( !want_move ) {
+			setAction( ACTION_WAIT );
+		}
 		Effect::getTask( )->stopEffect( _charge_effect_handle );
 		_attack_count = 0;
 		_charge_effect_handle = -1;
@@ -429,7 +436,6 @@ void RockPlayer::actOnAttacking( ) {
 
 void RockPlayer::actOnCharging( ) {
 	Status::Player player = _status->getPlayer( _id );
-	SoundPtr sound = Sound::getTask( );
 	//死亡
 	if ( player.power <= 0 ) {
 		setAction( ACTION_DEAD );
@@ -465,12 +471,8 @@ void RockPlayer::actOnCharging( ) {
 		setAction( ACTION_WALK );
 		return;
 	}
-	Vector vec = getVec( );
-	vec.y = 0;
-	if ( vec.getLength2( ) != 0 ) {
-		setAction( ACTION_BRAKE );
-		return;
-	}
+
+	SoundPtr sound = Sound::getTask( );
 	if ( player.device_button & BUTTON_C ) {
 		setAction( ACTION_JUMP );
 		Sound::getTask( )->playSE( "yokai_voice_17.wav" );
@@ -484,10 +486,28 @@ void RockPlayer::actOnCharging( ) {
 		if ( !sound->isPlayingSE( "yokai_se_22.wav" ) ) { 
 			sound->playSE( "yokai_se_22.wav" );
 		}
-	} 
+	}
+	//移動しない
+	Vector vec = getVec( );
+	vec.x = 0;
+	vec.z = 0;
+	setVec( vec );
 }
 
 void RockPlayer::actOnBurst( ) {
+	Status::Player player = _status->getPlayer( _id );
+	//死亡
+	if ( player.power <= 0 ) {
+		setAction( ACTION_DEAD );
+		Sound::getTask( )->playSE( "yokai_se_31.wav" );
+		return;
+	}
+	if ( player.area == AREA_WAIT &&
+		 getActCount( ) > SEVER_RAG_ADJUST_TIME ) {
+		setAction( ACTION_BUBBLE );
+		return;
+	}
+
 	if ( getActCount( ) > BURST_TIME ) {
 		setAction( ACTION_WAIT );
 	}
@@ -506,6 +526,7 @@ void RockPlayer::actOnBraking( ) {
 		setAction( ACTION_BUBBLE );
 		return;
 	}
+
 	//水平方向のベクトル
 	Vector vec = getVec( );
 	double tmp_y = vec.y;
@@ -639,7 +660,9 @@ ModelMV1Ptr RockPlayer::getModel( ) const {
 
 void RockPlayer::damage( int force ) {
 	if ( isDead( ) ||
-		 isBubble( ) ) {
+		 isBubble( ) ||
+		_action == ACTION_WISH ||
+		_status->getPlayer( _id ).toku >= 10) {
 		return;
 	}
 	if ( _damage_count > DAMAGE_COUNT ) {

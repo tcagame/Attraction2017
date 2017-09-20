@@ -48,12 +48,11 @@ void Military::updateEnemy( ) {
 	int camera_pos = family->getCameraPosX( );
 	while ( ite != _enemies.end( ) ) {
 		EnemyPtr enemy = (*ite);
-		if ( !enemy ) {
-			ite++;
-			continue;
-		}
+		enemy->update( );
+		enemy->setSynchronousData( camera_pos );
+
+		//エネミーが倒れたときの処理
 		if ( enemy->getPower( ) <= 0 ) {
-			//エネミーが倒れた場合、倒れた位置で爆発する
 			if ( !std::dynamic_pointer_cast< EnemyAttack >( enemy ) ) {
 				dropMoney( enemy );
 			}
@@ -62,29 +61,25 @@ void Military::updateEnemy( ) {
 			ite = _enemies.erase( ite );
 			continue;
 		}
+
+		//エネミーが画面外に行った時の処理
 		if ( !enemy->isInScreen( ) ) {
-			//エネミーが画面外に行くと消える
 			ite = _enemies.erase( ite );
 			continue;
 		}
-		for ( int i = 0; i < MAX_PLAYER; i++ ) {
-			PlayerPtr player( family->getPlayer( i ) );
-			if ( !player->isExist( ) ) {
-				continue;
-			}
-			if ( player->isOverlapped( enemy ) ) {
-				if ( player->isOnHead( enemy ) ) {
-					player->bound( );
-				} else {
-					int force = enemy->getForce( );
-					if ( force > 0 ) {
-						player->damage( force );
-					}
+
+		//プレイヤーと接触したときの処理
+		PlayerPtr overlapped_player = family->getOverlappedPlayer( enemy );
+		if ( overlapped_player ) {
+			if ( overlapped_player->isOnHead( enemy ) ) {
+				overlapped_player->bound( );
+			} else {
+				int force = enemy->getForce( );
+				if ( force > 0 ) {
+					overlapped_player->damage( force );
 				}
 			}
 		}
-		enemy->update( );
-		enemy->setSynchronousData( camera_pos );
 		ite++;
 	}
 }
@@ -118,10 +113,6 @@ EnemyPtr Military::getOverlappedEnemy( CharacterConstPtr character ) const {
 	std::list< EnemyPtr >::const_iterator ite = _enemies.begin( );
 	while ( ite != _enemies.end( ) ) {
 		EnemyPtr enemy = (*ite);
-		if ( !enemy ) {
-			ite++;
-			continue;
-		}
 		if ( enemy->getArea( ) != area_character ) {
 			ite++;
 			continue;
@@ -140,10 +131,6 @@ void Military::eraseEventEnemy( ) {
 	std::list< EnemyPtr >::iterator ite = _enemies.begin( );
 	while ( ite != _enemies.end( ) ) {
 		EnemyPtr enemy = (*ite);
-		if ( !enemy ) {
-			ite++;
-			continue;
-		}
 		if ( enemy->getArea( ) == AREA_EVENT ) {
 			ite = _enemies.erase( ite );
 			continue;
@@ -157,20 +144,21 @@ EnemyPtr Military::getHellFire( ) const {
 }
 
 void Military::dropMoney( EnemyConstPtr enemy ) {
-	int chip_size = enemy->getChipSize( );
-	ItemMoney::TYPE type = ItemMoney::TYPE_500;
-	switch ( chip_size ) {
-	case SMALL_CHAR_GRAPH_SIZE:
-		type = ItemMoney::TYPE_PETTY;
-		break;
-	case NORMAL_CHAR_GRAPH_SIZE:
-		type = ItemMoney::TYPE_BAG;
-		break;
-	case BIG_CHAR_GRAPH_SIZE:
-		type = ItemMoney::TYPE_500;
-		break;
+	int size = enemy->getChipSize( );
+	//エネミーの大きさで金の量を変える
+	unsigned char type = OBJECT_MONEY_PURSE;
+	if ( size <= SMALL_CHAR_GRAPH_SIZE ) {
+		type = OBJECT_MONEY_PURSE;
+	} else {
+		if ( size <= NORMAL_CHAR_GRAPH_SIZE ) {
+			type = OBJECT_MONEY_BAG;
+		} else {
+			if ( size <= BIG_CHAR_GRAPH_SIZE ) {
+				type = OBJECT_MONEY_500;
+			}
+		}
 	}
-	Vector pos = enemy->getPos( ) + Vector( 0, -chip_size );
+	Vector pos = enemy->getPos( ) + Vector( 0, -size );
 	ItemPtr item = ItemPtr( new ItemMoney( pos, type, enemy->getArea( ) ) );
 	Storage::getTask( )->add( item );
 }
@@ -194,16 +182,12 @@ void Military::pushDebugData( ViewerDebug::Data& data ) const {
 	data.message.push_back( "Enemy:" + std::to_string( _enemies.size( ) ) );
 }
 
-void Military::shiftPos( ) {
+void Military::shiftPos( int map_width ) {
 	std::list< EnemyPtr >::iterator ite = _enemies.begin( );
 	while ( ite != _enemies.end( ) ) {
 		EnemyPtr enemy = (*ite);
-		if ( !enemy ) {
-			ite++;
-			continue;
-		}
-		enemy->shiftPos( );
+		enemy->shiftPos( map_width );
 		ite++;
 	}
-	_hell_fire->shiftPos( );
+	_hell_fire->shiftPos( map_width );
 }

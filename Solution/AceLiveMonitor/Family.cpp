@@ -119,7 +119,7 @@ void Family::updateCameraPos( ) {
 
 	//À•W’²®
 	int map_width = World::getTask( )->getMap( AREA_STREET )->getPageNum( ) * GRAPH_SIZE;
-	if ( _camera_pos_x > map_width ) {
+	if ( _camera_pos_x > map_width + SCREEN_WIDTH ) {
 		_camera_pos_x -= map_width;
 		shiftPos( );
 	}
@@ -193,16 +193,18 @@ void Family::pushDebugData( ViewerDebug::Data& data ) const {
 		}
 		data.circle.push_back( _player[ i ]->getDebugDataCircle( ) );
 	}
+	data.message.push_back( "CameraX:" + std::to_string( ( int )_camera_pos_x ) );
 }
 
 void Family::shiftPos( ) {
+	int map_width = World::getTask( )->getMap( AREA_STREET )->getPageNum( ) * GRAPH_SIZE;
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
-		_player[ i ]->shiftPos( );
+		_player[ i ]->shiftPos( map_width );
 	}
-	Military::getTask( )->shiftPos( );
-	Storage ::getTask( )->shiftPos( );
-	Office  ::getTask( )->shiftPos( );
-	World   ::getTask( )->shiftPos( );
+	Military::getTask( )->shiftPos( map_width );
+	Storage ::getTask( )->shiftPos( map_width );
+	Office  ::getTask( )->shiftPos( map_width );
+	World   ::getTask( )->shiftPos( map_width );
 }
 
 bool Family::isModeVirtue( ) const {
@@ -216,3 +218,22 @@ bool Family::isModeVirtue( ) const {
 	return mode_virtue;
 }
 
+
+
+PlayerPtr Family::getOverlappedPlayer( CharacterConstPtr target ) const {
+	PlayerPtr result = PlayerPtr( );
+	for ( int i = 0; i < MAX_PLAYER; i++ ) {
+		if ( !_player[ i ]->isExist( ) ) {
+			continue;
+		}
+		if ( _player[ i ]->getArea( ) != target->getArea( ) ) {
+			continue;
+		}
+
+		if ( _player[ i ]->isOverlapped( target ) ) {
+			result = _player[ i ];
+			break;
+		}
+	}
+	return result;
+}
