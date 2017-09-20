@@ -7,7 +7,10 @@
 #include "RockDollHouse.h"
 #include "RockEnemyBossRockAttack.h"
 #include "RockMilitary.h"
+#include "Effect.h"
+#include "RockStudio.h"
 
+static const Vector SOUL_FOOT( 0, 100, 0 );
 static const int HP = 50;
 static const double ANIM_SPEED = 0.9;
 static const Vector STONE_POS[ 9 ] = {
@@ -34,7 +37,8 @@ static const Vector STONE_DIR[ 9 ] = {
 };
 
 RockEnemyBossRock::RockEnemyBossRock( const Vector& pos ) :
-RockEnemyBoss( pos, DOLL_BOSS_ROCK, HP, 1, 10, 10, true, false ) {
+RockEnemyBoss( pos, DOLL_BOSS_ROCK, HP, 1, 10, 10, true, false ),
+_soul_handle( -1 ) {
 	setDir( Vector( -1, 0, 0 ) );
 	RockMilitaryPtr military = RockMilitary::getTask( );
 	for ( int i = 0; i < STONE_NUM; i++ ) {
@@ -49,7 +53,12 @@ RockEnemyBossRock::~RockEnemyBossRock( ) {
 }
 
 void RockEnemyBossRock::act( ) {
-
+	EffectPtr effect = Effect::getTask( );
+	if ( _soul_handle < 0 ) {
+		RockStudioPtr studio = RockStudio::getTask( );
+		_soul_handle = effect->playEffect( studio->getEffectHandle( EFFECT_ROCK_SOUL ) );
+	}
+	effect->updateEffectTransform( _soul_handle, getPos( ) + SOUL_FOOT );
 }
 
 double RockEnemyBossRock::getAnimTime( ) const {
