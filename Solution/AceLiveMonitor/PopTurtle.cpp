@@ -9,6 +9,5 @@ Pop( pos ) {
 PopTurtle::~PopTurtle( ) {
 }
 
-void PopTurtle::create( ) {
-	Military::getTask( )->popUp( EnemyPtr( new EnemyTurtle( getPos( ) ) ) );
+void PopTurtle::update( ) {
 }

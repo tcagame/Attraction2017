@@ -6,7 +6,9 @@ class PopFlog : public Pop {
 public:
 	PopFlog( const Vector& pos );
 	virtual ~PopFlog( );
-protected:
-	void create( );
+public:
+	void update( );
+private:
+	int _count;
 };
 

@@ -6,7 +6,9 @@ class PopRedBird : public Pop {
 public:
 	PopRedBird( const Vector& pos );
 	virtual ~PopRedBird( );
-protected:
-	void create( );
+public:
+	void update( );
+private:
+	int _count;
 };
 

@@ -2,13 +2,27 @@
 #include "EnemyOnyudo.h"
 #include "Military.h"
 
+const int MAX_POP_COUNT = 1000;
+
 PopOnyudo::PopOnyudo( const Vector& pos ) :
-Pop( pos ) {
+Pop( pos ),
+_count( MAX_POP_COUNT ) {
 }
 
 PopOnyudo::~PopOnyudo( ) {
 }
 
-void PopOnyudo::create( ) {
-	Military::getTask( )->popUp( EnemyPtr( new EnemyOnyudo( getPos( ) ) ) );
+void PopOnyudo::update( ) {
+	if ( !_enemy.expired( ) ) {
+		return;
+	}
+	if ( _count > MAX_POP_COUNT ) {
+		if ( isInScreen( ) ) {
+			EnemyPtr enemy = EnemyPtr( new EnemyOnyudo( getPos( ) ) );
+			Military::getTask( )->popUp( enemy );
+			_enemy = enemy;
+			_count = 0;
+		}
+	}
+	_count++;
 }

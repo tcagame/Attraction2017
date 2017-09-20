@@ -2,15 +2,30 @@
 #include "EnemyBat.h"
 #include "Military.h"
 
+const int MAX_POP_COUNT = 300;
+const int POP_RANGE = 250;
 
 PopBat::PopBat( const Vector& pos ) :
-Pop( pos ) {
+Pop( pos ),
+_count( MAX_POP_COUNT ) {
 }
 
 
 PopBat::~PopBat( ) {
 }
 
-void PopBat::create( ) {
-	Military::getTask( )->popUp( EnemyPtr( new EnemyBat( getPos( ) ) ) );
+void PopBat::update( ) {
+	if ( !_enemy.expired( ) ) {
+		return;
+	}
+	//ƒvƒŒƒCƒ„[‚ª‹ß‚­‚É‚«‚½‚ç•¦‚­
+	if ( _count > MAX_POP_COUNT ) {
+		if ( isInRangePlayer( POP_RANGE ) ) {
+			EnemyPtr enemy = EnemyPtr( new EnemyBat( getPos( ) ) );
+			Military::getTask( )->popUp( enemy );
+			_count = 0;
+			_enemy = enemy;
+		}
+	}
+	_count++;
 }

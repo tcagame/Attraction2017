@@ -46,7 +46,7 @@ void Family::initialize( ) {
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		camera_pos += _player[ i ]->getPos( ).x;
 	}
-	_camera_pos_x = camera_pos * 0.25 - SCREEN_WIDTH / 2;
+	_camera_pos_x = ( int )( camera_pos * 0.25 ) - SCREEN_WIDTH / 2;
 
 }
 
@@ -143,20 +143,16 @@ void Family::updateCameraPos( ) {
 	if ( _camera_pos_x - camera_pos > 0 ) {
 		return;
 	}
-
-	if ( _camera_pos_x - camera_pos > CAMERA_SCROLL_SPEED ) {
-		_camera_pos_x -= CAMERA_SCROLL_SPEED;
+	if ( fabs( _camera_pos_x - camera_pos ) < CAMERA_SCROLL_SPEED ) {
+		_camera_pos_x = ( int )camera_pos;
 	}
 	if ( _camera_pos_x - camera_pos < -CAMERA_SCROLL_SPEED ) {
 		_camera_pos_x += CAMERA_SCROLL_SPEED;
 	}
-	if ( fabs( _camera_pos_x - camera_pos ) < CAMERA_SCROLL_SPEED ) {
-		_camera_pos_x = camera_pos;
-	}
 }
 
 int Family::getCameraPosX( ) const {
-	return ( int )_camera_pos_x;
+	return _camera_pos_x;
 }
 
 void Family::setSynchronousData( ) const {

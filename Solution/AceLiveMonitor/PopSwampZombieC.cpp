@@ -10,6 +10,13 @@ Pop( pos ) {
 PopSwampZombieC::~PopSwampZombieC( ) {
 }
 
-void PopSwampZombieC::create( ) {
-	Military::getTask( )->popUp( EnemyPtr( new EnemySwampZombieC( getPos( ) ) ) );
+void PopSwampZombieC::update( ) {
+	if ( !_enemy.expired( ) ) {
+		return;
+	}
+	if ( isInScreen( ) ) {
+		EnemyPtr enemy = EnemyPtr( new EnemySwampZombieC( getPos( ) ) );
+		Military::getTask( )->popUp( enemy );
+		_enemy = enemy;
+	}
 }
