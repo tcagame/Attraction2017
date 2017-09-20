@@ -14,10 +14,6 @@ _effect_handle( -1 ) {
 }
 
 RockShot::~RockShot( ) {
-	EffectPtr effect( Effect::getTask( ) );
-	if ( effect ) {
-		effect->stopEffect( _effect_handle );
-	}
 }
 
 bool RockShot::isFinished( ) const {
@@ -49,4 +45,9 @@ int RockShot::getEffectHandle( ) const {
 }
 void RockShot::setPower( int power ) {
 	_power = power;
+}
+
+void RockShot::stopEffect( ) {
+	//エラー防止のため、故意に削除するときのみ外部からエフェクトストップ
+	Effect::getTask( )->stopEffect( _effect_handle );
 }
