@@ -69,19 +69,14 @@ void Military::updateEnemy( ) {
 		}
 
 		//ƒvƒŒƒCƒ„[‚ÆÚG‚µ‚½‚Æ‚«‚Ìˆ—
-		for ( int i = 0; i < MAX_PLAYER; i++ ) {
-			PlayerPtr player( family->getPlayer( i ) );
-			if ( !player->isExist( ) ) {
-				continue;
-			}
-			if ( player->isOverlapped( enemy ) ) {
-				if ( player->isOnHead( enemy ) ) {
-					player->bound( );
-				} else {
-					int force = enemy->getForce( );
-					if ( force > 0 ) {
-						player->damage( force );
-					}
+		PlayerPtr overlapped_player = family->getOverlappedPlayer( enemy );
+		if ( overlapped_player ) {
+			if ( overlapped_player->isOnHead( enemy ) ) {
+				overlapped_player->bound( );
+			} else {
+				int force = enemy->getForce( );
+				if ( force > 0 ) {
+					overlapped_player->damage( force );
 				}
 			}
 		}

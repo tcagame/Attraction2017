@@ -26,7 +26,8 @@ Storage::~Storage( ) {
 }
 
 void Storage::update( ) {
-	int camera_pos = Family::getTask( )->getCameraPosX( );
+	FamilyPtr family( Family::getTask( ) );
+	int camera_pos = family->getCameraPosX( );
 	std::list< ItemPtr >::iterator ite = _items.begin( );
 	while ( ite != _items.end( ) ) {
 		ItemPtr item = *ite;
@@ -34,7 +35,7 @@ void Storage::update( ) {
 		item->setSynchronousData( camera_pos );
 
 		//プレイヤーと当たる
-		PlayerPtr hit_player = getOverLappedPlayer( item );
+		PlayerPtr hit_player = family->getOverlappedPlayer( item );
 		if ( hit_player ) {
 			//アイテム取得
 			if ( pickUpItem( item, hit_player ) ) {
@@ -66,19 +67,6 @@ bool Storage::isExistanceEventItem( ) const {
 			break;
 		}
 		ite++;
-	}
-	return result;
-}
-
-PlayerPtr Storage::getOverLappedPlayer( ItemPtr item ) const {
-	PlayerPtr result = PlayerPtr( );
-	FamilyPtr family( Family::getTask( ) );
-	for ( int i = 0; i < MAX_PLAYER; i++ ) {
-		PlayerPtr player = family->getPlayer( i );
-		if ( player->isOverlapped( item ) ) {
-			result = player;
-			break;
-		}
 	}
 	return result;
 }
@@ -146,8 +134,7 @@ void Storage::eraseEventItem( ) {
 void Storage::shiftPos( int map_width ) {
 	std::list< ItemPtr >::iterator ite = _items.begin( );
 	while ( ite != _items.end( ) ) {
-		ItemPtr item = *ite;
-		item->shiftPos( map_width );
+		( *ite )->shiftPos( map_width );
 		ite++;
 	}
 }
@@ -155,8 +142,7 @@ void Storage::shiftPos( int map_width ) {
 void Storage::pushDebugData( ViewerDebug::Data& data ) {
 	std::list< ItemPtr >::iterator ite = _items.begin( );
 	while ( ite != _items.end( ) ) {
-		ItemPtr item = *ite;
-		data.circle.push_back( item->getDebugDataCircle( ) );
+		data.circle.push_back( ( *ite )->getDebugDataCircle( ) );
 		ite++;
 	}
 	data.message.push_back( "Item:" + std::to_string( ( int )_items.size( ) ) );

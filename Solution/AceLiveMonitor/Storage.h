@@ -24,7 +24,6 @@ public:
 	void shiftPos( int map_width );
 	void pushDebugData( ViewerDebug::Data& data );
 private:
-	PlayerPtr getOverLappedPlayer( ItemPtr item ) const;
 	bool pickUpItem( ItemPtr item, PlayerPtr player );
 private:
 	std::list< ItemPtr > _items;

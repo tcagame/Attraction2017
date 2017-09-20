@@ -119,7 +119,7 @@ void Family::updateCameraPos( ) {
 
 	//À•W’²®
 	int map_width = World::getTask( )->getMap( AREA_STREET )->getPageNum( ) * GRAPH_SIZE;
-	if ( _camera_pos_x > map_width ) {
+	if ( _camera_pos_x > map_width + SCREEN_WIDTH ) {
 		_camera_pos_x -= map_width;
 		shiftPos( );
 	}
@@ -193,6 +193,7 @@ void Family::pushDebugData( ViewerDebug::Data& data ) const {
 		}
 		data.circle.push_back( _player[ i ]->getDebugDataCircle( ) );
 	}
+	data.message.push_back( "CameraX:" + std::to_string( ( int )_camera_pos_x ) );
 }
 
 void Family::shiftPos( ) {
@@ -217,3 +218,22 @@ bool Family::isModeVirtue( ) const {
 	return mode_virtue;
 }
 
+
+
+PlayerPtr Family::getOverlappedPlayer( CharacterConstPtr target ) const {
+	PlayerPtr result = PlayerPtr( );
+	for ( int i = 0; i < MAX_PLAYER; i++ ) {
+		if ( !_player[ i ]->isExist( ) ) {
+			continue;
+		}
+		if ( _player[ i ]->getArea( ) != target->getArea( ) ) {
+			continue;
+		}
+
+		if ( _player[ i ]->isOverlapped( target ) ) {
+			result = _player[ i ];
+			break;
+		}
+	}
+	return result;
+}
