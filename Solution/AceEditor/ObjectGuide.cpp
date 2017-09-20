@@ -64,6 +64,12 @@ void ObjectGuide::draw( ) const {
 				tx = 16;
 				ty = 32;
 			}
+			//お金
+			if ( obj >= OBJECT_MONEY_BAG &&
+				 obj <= OBJECT_MONEY_10000 ) {
+				tx = 16 * 3;
+				ty = 16 * 2;
+			}
 			//イベント配置ブロック
 			if ( obj >= OBJECT_EVENT_REDDAEMON ) {
 				tx = 32;

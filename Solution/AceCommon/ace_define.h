@@ -141,6 +141,13 @@ const unsigned char OBJECT_ENEMY_END = 0x7F;
 const unsigned char OBJECT_BLOCK  = 0x80;
 const unsigned char OBJECT_ONEWAY = 0x81;
 const unsigned char OBJECT_WATER  = 0x82;
+//item
+const unsigned char OBJECT_MONEY_BAG	= 0xA0;
+const unsigned char OBJECT_MONEY_PURSE	= 0xA1;
+const unsigned char OBJECT_MONEY_500	= 0xA2;
+const unsigned char OBJECT_MONEY_1000	= 0xA3;
+const unsigned char OBJECT_MONEY_5000	= 0xA4;
+const unsigned char OBJECT_MONEY_10000	= 0xA5;
 //event
 const unsigned char OBJECT_EVENT_REDDAEMON = 0xC0;
 const unsigned char OBJECT_EVENT_FLAME	   = 0xC1;
