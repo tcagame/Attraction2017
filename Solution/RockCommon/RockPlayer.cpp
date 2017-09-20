@@ -226,6 +226,7 @@ void RockPlayer::actOnBubble( ) {
 	SoundPtr sound = Sound::getTask( );
 	if ( status.area == AREA_RESULT ||
 		 status.area == AREA_ENTRY ) {
+		_speed_down = false;
 		//参加受付状態ではないまたはリザルトに入ったら泡に入らない
 		if ( isOnMapModel( ) ) {
 			setMass( true );
