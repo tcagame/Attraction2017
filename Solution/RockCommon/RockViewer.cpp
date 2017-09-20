@@ -124,8 +124,8 @@ void RockViewer::drawGame( ) const {
 	drawAlter( );
 	drawCasket( );
 	Effect::getTask( )->drawEffect( );
-	drawBubbles( );
 	drawCleannessMap( );
+	drawBubbles( );
 	drawDebug( );
 	drawUI( );
 }
