@@ -20,6 +20,7 @@
 #include "Sound.h"
 #include "Keyboard.h"
 #include <assert.h>
+#include "Property.h"
 
 //‰æ‘œƒTƒCƒY
 const int PLAYER_FOOT = 7;
@@ -28,11 +29,8 @@ const int MAX_SPEED = 7;
 const int ACCEL_SPEED_WALKING = 2;
 const int BREAK_SPEED_WALKING = 1;
 const int ACCEL_SPEED_FLOATING = 1;
-const int JUMP_POWER = 15;
 const int BLOW_POWER = -30;
 //UŒ‚ŠÖŒW
-const int CHARGE_PHASE_COUNT = 15;
-const int MAX_CHARGE_COUNT = CHARGE_PHASE_COUNT * 4 - 1;
 const int BURST_TIME = 30;
 const int MAX_HP = 16;
 const int COOL_TIME = 8;
@@ -157,7 +155,9 @@ _auto_move_target_x( -1 ),
 _redo( 0 ) {
 	setOverlappedRadius( 25 );
 	setDir( DIR_RIGHT );
-
+	PropertyPtr property = Property::getTask( );
+	_jump_power = property->getData( "PLAYER_JUMP_POWER" );
+	_max_charge_phase_count = property->getData( "MAX_CHARGE_PHASE_COUNT" );
 	for ( int i = 0; i < MAX_ITEM; i++ ) {
 		_item[ i ] = false;
 	}
@@ -544,7 +544,7 @@ void Player::actOnFloating( ) {
 }
 
 void Player::actOnAttack( ) {
-	int level = ( _charge_count / CHARGE_PHASE_COUNT ) + 1;
+	int level = ( _charge_count / _max_charge_phase_count ) + 1;
 	if ( _item[ ITEM_HYPERTROPHY ] ) {
 		level++;
 	}
@@ -603,7 +603,7 @@ void Player::actOnCharge( ) {
 			sound->playSE( "yokai_se_22.wav", true );
 		}
 	}
-	if ( _charge_count > MAX_CHARGE_COUNT ) {
+	if ( _charge_count > _max_charge_phase_count * 4 - 1 ) {
 		_charge_count = 0;
 		sound->stopSE( "yokai_se_22.wav" );
 		setAction( ACTION_OVER_CHARGE );
@@ -923,7 +923,7 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		}
 	case ACTION_CHARGE:
 		{
-			int anim = _charge_count / ( CHARGE_PHASE_COUNT / 6 );
+			int anim = _charge_count / ( _max_charge_phase_count / 6 );
 			if ( anim >= num ) {
 				anim = num - 1;
 			}
@@ -972,7 +972,7 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 			0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11
 		};
 		int anim_num = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
-		int phase = ( _charge_count / CHARGE_PHASE_COUNT ) * 2;
+		int phase = ( _charge_count / _max_charge_phase_count ) * 2;
 		int time = ( getActCount( ) / 2 ) % 2;
 		data->addObject( area, SynchronousData::TYPE_SHOT, ANIM[ phase + time ], attribute, x, y );
 	}
@@ -1090,7 +1090,7 @@ void Player::pickUpItem( ITEM item ) {
 void Player::jump( ) {
 	Sound::getTask( )->playSE( "yokai_voice_17.wav" );
 	Vector vec = getVec( );
-	vec.y = -JUMP_POWER;
+	vec.y = -_jump_power;
 	setVec( vec );
 	setAction( ACTION_FLOAT );
 }
