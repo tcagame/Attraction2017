@@ -14,6 +14,7 @@ const Vector SEARCH_RANGE( 10000, 10000, 10000 );
 RockEnemySmallFrog::RockEnemySmallFrog( const Vector& pos ) :
 RockEnemy( pos, DOLL_FLOG_1, HP, 1, 10, 10, true, true ),
 _player_radius( 0 ) {
+	setVec( Vector( 0, -5, 0 ) );
 }
 
 
@@ -40,6 +41,7 @@ void RockEnemySmallFrog::act( ) {
 		if ( vec.getLength2( ) > MAX_SPEED * MAX_SPEED ) {
 			vec = vec.normalize( ) * MAX_SPEED;
 		}
+		vec.y = getVec( ).y;
 		setVec( vec );
 	}
 	if ( wait ) {
