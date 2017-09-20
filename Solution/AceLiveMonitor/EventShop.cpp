@@ -31,7 +31,7 @@ bool EventShop::isFinished( ) const {
 }
 
 bool EventShop::isJoining( ) const {
-	return true;
+	return getFade( ) != FADE_OUT;
 }
 
 void EventShop::join( PLAYER target ) {
