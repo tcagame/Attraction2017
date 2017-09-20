@@ -108,10 +108,6 @@ void RockMilitary::updatePop( ) {
 	std::list< RockPopPtr >::iterator ite = _pops.begin( );
 	while ( ite != _pops.end( ) ) {
 		RockPopPtr pop = *ite;
-		if ( !pop ) {
-			ite++;
-			continue;
-		}
 		pop->update( );
 		if ( pop->isFinished( ) ) {
 			ite = _pops.erase( ite );

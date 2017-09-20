@@ -151,6 +151,10 @@ void ViewerConsole::playSe( ) {
 		sound->stopSE( "yokai_se_02.wav" );
 	}
 
+	if ( _dead_se[ _player ] > 0 ) {
+		_dead_se[ _player ] = false;
+	}
+
 	if ( data->getStatusPower( _player ) == 0 ) {
 		if ( !_dead_se[ _player ] ) {
 			sound->playSE( "yokai_se_31.wav" );
