@@ -89,9 +89,9 @@ void RockMapStreet::updateStreet( ) {
 		}
 		active = true;
 		{//洞窟へ行くとSTAGE_CAVEへ移動
-			//double length = ( Vector( 17675, -1105, 6123 ) - player->getPos( ) ).getLength( );
+			double length = ( Vector( 17675, -1105, 6123 ) - player->getPos( ) ).getLength( );
 			//Debug用鳥居ワープ
-			double length = ( Vector( -173, 3, -520 ) - player->getPos( ) ).getLength( );
+			//double length = ( Vector( -173, 3, -520 ) - player->getPos( ) ).getLength( );
 
 			if ( length < 100 ) {
 				loadStage( STAGE_CAVE );
