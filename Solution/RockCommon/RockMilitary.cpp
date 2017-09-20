@@ -137,7 +137,9 @@ void RockMilitary::clean( ) {
 	{
 		std::list< RockEnemyPtr >::iterator ite = _enemies.begin( );
 		while ( ite != _enemies.end( ) ) {
-			*ite = RockEnemyPtr( );
+			RockEnemyPtr enemy = *ite;
+			enemy->stopEffect( );
+			enemy.reset( );
 			ite++;
 		}
 		_enemies = { };
@@ -145,7 +147,8 @@ void RockMilitary::clean( ) {
 	{
 		std::list< RockImpactPtr >::iterator ite = _impacts.begin( );
 		while ( ite != _impacts.end( ) ) {
-			*ite = RockImpactPtr( );
+			RockImpactPtr impact = *ite;
+			impact.reset( );
 			ite++;
 		}
 		_impacts = { };
@@ -153,7 +156,8 @@ void RockMilitary::clean( ) {
 	{
 		std::list< RockPopPtr >::iterator ite = _pops.begin( );
 		while ( ite != _pops.end( ) ) {
-			*ite = RockPopPtr( );
+			RockPopPtr pop = *ite;
+			pop.reset( );
 			ite++;
 		}
 		_pops = { };
