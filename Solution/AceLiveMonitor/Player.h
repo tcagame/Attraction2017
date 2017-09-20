@@ -118,6 +118,9 @@ private:
 	unsigned char _progress_type;
 	int _progress_count;
 	int _redo;
+	int _jump_power;
+	int _max_charge_phase_count;
+	int _max_virtue;
 	std::array< bool, MAX_ITEM > _item;
 };
 
