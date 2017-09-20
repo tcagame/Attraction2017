@@ -442,6 +442,7 @@
     <ClCompile Include="EnemyTurtle.cpp">
       <Filter>Character\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="PopMoney.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy.h">
@@ -882,6 +883,7 @@
     <ClInclude Include="EnemyTurtle.h">
       <Filter>Character\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="PopMoney.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">

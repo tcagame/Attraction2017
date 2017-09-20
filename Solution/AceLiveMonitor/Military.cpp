@@ -144,20 +144,21 @@ EnemyPtr Military::getHellFire( ) const {
 }
 
 void Military::dropMoney( EnemyConstPtr enemy ) {
-	int chip_size = enemy->getChipSize( );
-	ItemMoney::TYPE type = ItemMoney::TYPE_500;
-	switch ( chip_size ) {
-	case SMALL_CHAR_GRAPH_SIZE:
-		type = ItemMoney::TYPE_PETTY;
-		break;
-	case NORMAL_CHAR_GRAPH_SIZE:
-		type = ItemMoney::TYPE_BAG;
-		break;
-	case BIG_CHAR_GRAPH_SIZE:
-		type = ItemMoney::TYPE_500;
-		break;
+	int size = enemy->getChipSize( );
+	//エネミーの大きさで金の量を変える
+	unsigned char type = OBJECT_MONEY_PURSE;
+	if ( size <= SMALL_CHAR_GRAPH_SIZE ) {
+		type = OBJECT_MONEY_PURSE;
+	} else {
+		if ( size <= NORMAL_CHAR_GRAPH_SIZE ) {
+			type = OBJECT_MONEY_BAG;
+		} else {
+			if ( size <= BIG_CHAR_GRAPH_SIZE ) {
+				type = OBJECT_MONEY_500;
+			}
+		}
 	}
-	Vector pos = enemy->getPos( ) + Vector( 0, -chip_size );
+	Vector pos = enemy->getPos( ) + Vector( 0, -size );
 	ItemPtr item = ItemPtr( new ItemMoney( pos, type, enemy->getArea( ) ) );
 	Storage::getTask( )->add( item );
 }

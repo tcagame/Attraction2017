@@ -5,7 +5,7 @@
 const int WAIT_ANIM_TIME = 150;
 const int MAX_ANIM_NUM = 2;
 
-ItemMoney::ItemMoney( const Vector& pos, TYPE type, AREA area ) :
+ItemMoney::ItemMoney( const Vector& pos, unsigned char type, AREA area ) :
 Item( pos, area ),
 _type( type ) {
 }
@@ -31,14 +31,23 @@ void ItemMoney::setSynchronousData( int camera_pos ) const {
 	int anim = getActCount( ) / WAIT_ANIM_TIME % MAX_ANIM_NUM;
 	int pattern = -1;
 	switch ( _type ) {
-	case TYPE_PETTY:
+	case OBJECT_MONEY_PURSE:
 		pattern = anim + 40;
 		break;
-	case TYPE_BAG:
+	case OBJECT_MONEY_BAG:
 		pattern = anim + 32;
 		break;
-	case TYPE_500:
+	case OBJECT_MONEY_500:
 		pattern = anim + 60;
+		break;
+	case OBJECT_MONEY_1000:
+		pattern = anim + 62;
+		break;
+	case OBJECT_MONEY_5000:
+		pattern = anim + 58;
+		break;
+	case OBJECT_MONEY_10000:
+		pattern = anim + 56;
 		break;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
@@ -46,18 +55,27 @@ void ItemMoney::setSynchronousData( int camera_pos ) const {
 }
 
 int ItemMoney::getValue( ) const {
-	int result = 0;
+	int value = 0;
 	Sound::getTask( )->playSE( "yokai_voice_30.wav" );
 	switch ( _type ) {
-	case TYPE_PETTY:
-		result = 100;
+	case OBJECT_MONEY_PURSE:
+		value = 100;
 		break;
-	case TYPE_BAG:
-		result = 200;
+	case OBJECT_MONEY_BAG:
+		value = 300;
 		break;
-	case TYPE_500:
-		result = 500;
+	case OBJECT_MONEY_500:
+		value = 500;
+		break;
+	case OBJECT_MONEY_1000:
+		value = 1000;
+		break;
+	case OBJECT_MONEY_5000:
+		value = 5000;
+		break;
+	case OBJECT_MONEY_10000:
+		value = 10000;
 		break;
 	}
-	return result;
+	return value;
 }
