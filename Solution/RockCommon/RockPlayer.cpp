@@ -235,7 +235,7 @@ void RockPlayer::actOnBubble( ) {
 	setMass( false );
 	setCol( false );
 	if ( status.device_button &&
-		 status.device_button != 0b00001111 ) {
+		 status.device_button != 0b00001111) {
 		_bubble_count++;		
 	} else {
 		_bubble_count = 0;
@@ -421,7 +421,7 @@ void RockPlayer::actOnAttacking( ) {
 		if ( player.item & ITEM_ENHANCED_ATTACK ) {
 			power *= ENHANCED_POWER;
 		}
-		RockShotPtr shot( new RockShotPlayer( _id, getPos( ) + SHOT_FOOT, getDir( ), power, max_charge ) );
+		RockShotPtr shot( new RockShotPlayer( _id, getPos( ) + SHOT_FOOT + getDir( ) * MOVE_SPEED, getDir( ), power, max_charge ) );
 		RockArmoury::getTask( )->addShot( shot );
 		bool want_move = player.device_x != 0 || player.device_y != 0;
 		if ( !want_move ) {
@@ -661,7 +661,8 @@ ModelMV1Ptr RockPlayer::getModel( ) const {
 void RockPlayer::damage( int force ) {
 	if ( isDead( ) ||
 		 isBubble( ) ||
-		_action == ACTION_WISH ) {
+		_action == ACTION_WISH ||
+		_status->getPlayer( _id ).toku >= 10) {
 		return;
 	}
 	if ( _damage_count > DAMAGE_COUNT ) {

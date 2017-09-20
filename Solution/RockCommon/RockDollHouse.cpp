@@ -76,6 +76,11 @@ void RockDollHouse::initialize( ) {
 	_dolls[ DOLL_BOSS_ROCK_ATTACK_7    ]->load( "Resource/Rock/enemy/enm22_rock/enm22_rock/enm22_07.mv1" );
 	_dolls[ DOLL_BOSS_ROCK_ATTACK_8    ]->load( "Resource/Rock/enemy/enm22_rock/enm22_rock/enm22_08.mv1" );
 	_dolls[ DOLL_BOSS_ROCK_ATTACK_9    ]->load( "Resource/Rock/enemy/enm22_rock/enm22_rock/enm22_09.mv1" );
+	_dolls[ DOLL_MOTH                  ]->load( "Resource/Rock/enemy/enm11_moth/enm11_a1.mv1" );
+	_dolls[ DOLL_CHIVIL                ]->load( "Resource/Rock/enemy/enm13_chivil/enm13_a01.mv1" );
+	_dolls[ DOLL_FLOG_1                ]->load( "Resource/Rock/enemy/enm25_flog/enm25_a01.mv1" );
+	_dolls[ DOLL_FLOG_2                ]->load( "Resource/Rock/enemy/enm25_flog/enm25_a02.mv1" );
+	_dolls[ DOLL_BIRD_ATTACK           ]->load( "Resource/Rock/enemy/enm10_bird_attack/enm10.mv1" );
 
 	//item
 	_dolls[ DOLL_DANGO	 ]->load( "Resource/Rock/item/itm01/itm01.mv1" );

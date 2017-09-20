@@ -12,7 +12,7 @@ const double ANIM_SPEED = 0.9;
 const Vector SEARCH_RANGE( 10000, 10000, 10000 );
 
 RockEnemySmallFrog::RockEnemySmallFrog( const Vector& pos ) :
-RockEnemy( pos, DOLL_FACE_AND_HAND, HP, 1, 10, 10, false, true ),
+RockEnemy( pos, DOLL_FLOG_1, HP, 1, 10, 10, true, true ),
 _player_radius( 0 ) {
 }
 

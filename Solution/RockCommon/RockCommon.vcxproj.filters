@@ -67,6 +67,7 @@
     <ClCompile Include="RockTheater.cpp" />
     <ClCompile Include="RockViewer.cpp" />
     <ClCompile Include="RockEnemyBossRockAttack.cpp" />
+    <ClCompile Include="RockEnemyRedBirdAttack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="define.h" />
@@ -138,5 +139,6 @@
     <ClInclude Include="RockViewer.h" />
     <ClInclude Include="Status.h" />
     <ClInclude Include="RockEnemyBossRockAttack.h" />
+    <ClInclude Include="RockEnemyRedBirdAttack.h" />
   </ItemGroup>
 </Project>
