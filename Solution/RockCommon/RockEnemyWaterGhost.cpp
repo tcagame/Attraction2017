@@ -3,11 +3,11 @@
 #include "RockItemMoney.h"
 #include "RockDollHouse.h"
 
-const int HP = 20;
+const int HP = 5;
 const double ANIM_SPEED = 0.9;
 
 RockEnemyWaterGhost::RockEnemyWaterGhost( const Vector& pos ) :
-RockEnemy( pos, DOLL_WATERGHOST, HP, 1, 10, 10, true, true ) {
+RockEnemy( pos, DOLL_WATERGHOST, HP, 1, 16, 10, true, true ) {
 }
 
 

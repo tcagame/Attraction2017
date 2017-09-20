@@ -12,7 +12,7 @@ const int MOVE_SPEED = 1;
 const int MOVE_TIME = 60;
 
 RockEnemyBossTreeNuts::RockEnemyBossTreeNuts( const Vector pos ) :
-RockEnemyAttack( pos, DOLL_TREE_NUTS, 2, FORCE, 10, 30, false, false ),
+RockEnemyAttack( pos, DOLL_TREE_NUTS, 1, FORCE, 10, 30, false, false ),
 _player_radius( 0 ) {
 	setDir( Vector( -1, 0, 0 ) );
 }
