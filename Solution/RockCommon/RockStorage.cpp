@@ -19,6 +19,7 @@
 #include "Sound.h"
 
 const int ABSTINENCE_DAMAGE = -2;
+const int CASKET_MONEY = 50000;
 
 RockStoragePtr RockStorage::getTask( ) {
 	return std::dynamic_pointer_cast< RockStorage >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -93,14 +94,20 @@ void RockStorage::updateCasket( ) {
 		RockCasketPtr casket = *ite;
 		casket->update( );
 		RockPlayerPtr overlapped_player = family->getOverLappedPlayer( casket );
-		if ( overlapped_player ) {
-			if ( casket->getOpenResult( ) == RockCasket::RESULT_SUCCESS ) {
-				//‚¨‹à‚ðŽè‚É“ü‚ê‚é
-				int value = 50000;
-				MessageSender::getTask( )->sendMessage( overlapped_player->getId( ), Message::COMMAND_MONEY, &value );
-			} else {
-				//‘¬“x’á‰º
-				overlapped_player->speedDown( );
+		if ( overlapped_player && !overlapped_player->isBubble( ) ) {
+			bool success = casket->getOpenResult( ) == RockCasket::RESULT_SUCCESS;
+			for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+				RockPlayerPtr player = family->getPlayer( i );
+				if ( player->isActive( ) && !player->isBubble( ) ) {
+					if (success) {
+						//‚¨‹à‚ðŽè‚É“ü‚ê‚é
+						int money = CASKET_MONEY;
+						MessageSender::getTask( )->sendMessage( player->getId( ), Message::COMMAND_MONEY, &money );
+					} else {
+						//‘¬“x’á‰º
+						player->speedDown( );
+					}
+				}
 			}
 			ite = _caskets.erase( ite );
 			continue;
