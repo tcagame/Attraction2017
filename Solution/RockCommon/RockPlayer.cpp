@@ -315,7 +315,7 @@ void RockPlayer::actOnWaiting( ) {
 		 _interval > INTERVAL_TIME ) {
 		if ( isStanding( ) ) {
 			setAction( ACTION_CHARGE );
-		} else {
+		} else if ( _attack_count == 0 ) {
 			_attack_count = 1;
 		}
 		return;
@@ -360,7 +360,8 @@ void RockPlayer::actOnJumping( ) {
 
 	//UŒ‚
 	if ( player.device_button & BUTTON_A &&
-		 _interval > INTERVAL_TIME ) {
+		 _interval > INTERVAL_TIME &&
+		 _attack_count == 0) {
 		_attack_count = 1;
 	}
 	//’…’n
@@ -396,7 +397,8 @@ void RockPlayer::actOnWalking( ) {
 	}
 	//UŒ‚
 	if ( player.device_button & BUTTON_A &&
-		 _interval > INTERVAL_TIME ) {
+		 _interval > INTERVAL_TIME &&
+		_attack_count == 0) {
 		_attack_count = 1;
 	}
 
