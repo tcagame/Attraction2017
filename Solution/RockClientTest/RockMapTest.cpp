@@ -18,6 +18,7 @@
 #include "RockMilitary.h"
 #include "RockEnemyGhost.h"
 #include "RockEnemyRedBard.h"
+#include "RockEnemyRedBirdAttack.h"
 #include "RockEnemyWaterGhost.h"
 #include "RockEnemyBossRock.h"
 #include "RockEnemyFaceAndHand.h"
@@ -97,7 +98,7 @@ bool RockMapTest::isNext( const Vector& pos ) const {
 
 void RockMapTest::genarateEnemies( ) {
 	RockMilitaryPtr military = RockMilitary::getTask( );
-	military->addEnemy( RockEnemyPtr( new RockEnemyBossRock( Vector( 10, 0, 10 ) ) ) );
+	military->addEnemy( RockEnemyPtr( new RockEnemyRedBirdAttack( Vector( 10, 80, 10 ) ) ) );
 	///military->add( RockEnemyPtr( new RockEnemyGhost( Vector( 0, 40, 0 ) ) ) );
 	///military->add( RockEnemyPtr( new RockEnemyRedBard( Vector( 10, 30, 10 ) ) ) );
 	///military->add( RockEnemyPtr( new RockEnemyWaterGhost( Vector( -10, 30, 30 ) ) ) );

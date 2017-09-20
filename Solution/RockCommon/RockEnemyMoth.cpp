@@ -5,46 +5,15 @@
 #include "RockPlayer.h"
 #include "RockDollHouse.h"
 
-const int HP = 20;
-const double ACCEL = 0.1;
-const double MAX_SPEED = 1.5;
+const int HP = 3;
 const double ANIM_SPEED = 0.9;
-const Vector SEARCH_RANGE( 10000, 10000, 10000 );
 
 RockEnemyMoth::RockEnemyMoth( const Vector& pos ) :
-RockEnemy( pos, DOLL_FACE_AND_HAND, HP, 1, 10, 10, false, true ),
+RockEnemy( pos, DOLL_MOTH, HP, 1, 10, 10, false, true ),
 _player_radius( 0 ) {
 }
 
-
 RockEnemyMoth::~RockEnemyMoth( ) {
-}
-
-void RockEnemyMoth::act( ) {
-	Vector near_distance = SEARCH_RANGE;
-	bool wait = true;
-	for (int i = 0; i < ROCK_PLAYER_NUM; i++) {
-		RockPlayerPtr player = RockFamily::getTask( )->getPlayer( i );
-		if ( !player->isActive( ) || player->isBubble( ) ) {
-			continue;
-		}
-		wait = false;
-		Vector distance = player->getPos( ) - getPos( );
-		if ( near_distance.getLength( ) > distance.getLength( ) ) {
-			near_distance = distance;
-		}
-	}
-	if ( near_distance != SEARCH_RANGE ) {
-		Vector dir = near_distance.normalize( );
-		Vector vec = getVec( ) + dir * ACCEL;
-		if ( vec.getLength2( ) > MAX_SPEED * MAX_SPEED ) {
-			vec = vec.normalize( ) * MAX_SPEED;
-		}
-		setVec( vec );
-	}
-	if ( wait ) {
-		setVec( Vector( ) );
-	}
 }
 
 double RockEnemyMoth::getAnimTime( ) const {

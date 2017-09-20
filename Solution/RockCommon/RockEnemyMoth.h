@@ -9,7 +9,7 @@ public:
 	double getAnimTime( ) const;
 	void dropItem( );
 protected:
-	void act( );
+	void act( ) { };
 private:
 	int _player_radius;
 };
