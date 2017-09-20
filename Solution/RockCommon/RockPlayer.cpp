@@ -277,7 +277,9 @@ void RockPlayer::actOnBubble( ) {
 	Vector check_pos = getPos( );
 	Vector vertical_up( 0, 500, 0 );
 	if ( col->isHitLine( check_pos, check_pos + vertical_up ) ) {
-		vec.y += col->getHitPos( ).y + BUBBLE_FOLLOW_RANGE;
+		vec.y = ( col->getHitPos( ).y - getPos( ).y ) + BUBBLE_FOLLOW_RANGE;
+		//‚±‚±‚Í‚¢‚Á‚½
+		Drawer::getTask()->drawString( 0,0, "–AC³" );
 	}
 	setVec( getApproachesVec( ) + vec );
 }
