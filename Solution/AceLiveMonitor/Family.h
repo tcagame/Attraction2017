@@ -35,7 +35,7 @@ private:
 	void setSynchronousData( ) const;
 	void shiftPos( );
 private:
-	double _camera_pos_x;
+	int _camera_pos_x;
 	std::array< PlayerPtr, MAX_PLAYER > _player;
 	MonmotaroPtr _monmo;
 	bool _updating_camera;
