@@ -47,10 +47,6 @@ void RockStorage::updateItem( ) {
 	RockFamilyPtr family( RockFamily::getTask( ) );
 	while ( ite != _items.end( ) ) {
 		RockItemPtr item = *ite;
-		if ( !item ) {
-			ite++;
-			continue;
-		}
 		item->update( );
 		bool col = false;
 		RockPlayerPtr overlapped_player = family->getOverLappedPlayer( item );
@@ -76,10 +72,6 @@ void RockStorage::updateAlter( ) {
 	RockFamilyPtr family( RockFamily::getTask( ) );
 	while ( ite != _alters.end( ) ) {
 		RockAlterPtr alter = *ite;
-		if ( !alter ) {
-			ite++;
-			continue;
-		}
 		if ( alter->isActive( ) ) {
 			for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 				RockPlayerPtr player = family->getPlayer( i );
@@ -99,10 +91,6 @@ void RockStorage::updateCasket( ) {
 	RockFamilyPtr family( RockFamily::getTask( ) );
 	while ( ite != _caskets.end( ) ) {
 		RockCasketPtr casket = *ite;
-		if ( !casket ) {
-			ite++;
-			continue;
-		}
 		casket->update( );
 		RockPlayerPtr overlapped_player = family->getOverLappedPlayer( casket );
 		if ( overlapped_player ) {
@@ -290,10 +278,6 @@ void RockStorage::updatePopItem( ) {
 	std::list< RockPopItemPtr >::iterator ite = _pop_items.begin( );
 	while ( ite != _pop_items.end( ) ) {
 		RockPopItemPtr pop_item = *ite;
-		if ( !pop_item ) {
-			ite++;
-			continue;
-		}
 		pop_item->update( );
 		if ( pop_item->isFinished( ) ) {
 			ite = _pop_items.erase( ite );
@@ -307,10 +291,6 @@ void RockStorage::updateBubble( ) {
 	std::list< RockItemBubblePtr >::iterator ite = _bubbles.begin( );
 	while ( ite != _bubbles.end( ) ) {
 		RockItemBubblePtr bubble = *ite;
-		if ( !bubble ) {
-			ite++;
-			continue;
-		}
 		if ( bubble->isFinished( ) ) {
 			if ( bubble->isRepop( ) ) {
 				_pop_items.push_back( RockPopItemPtr( new RockPopItem( bubble, true ) ) );
@@ -324,7 +304,49 @@ void RockStorage::updateBubble( ) {
 
 
 void RockStorage::clean( ) {
-	_items = { };
-	_pop_items = { };
-	_caskets = { };
+	{
+		std::list< RockItemPtr >::iterator ite = _items.begin( );
+		while ( ite != _items.end( ) ) {
+			RockItemPtr item = *ite;
+			item.reset( );
+			ite++;
+		}
+		_items = { };
+	}
+	{
+		std::list< RockPopItemPtr >::iterator ite = _pop_items.begin( );
+		while ( ite != _pop_items.end( ) ) {
+			RockPopItemPtr pop_item = *ite;
+			pop_item.reset( );
+			ite++;
+		}
+		_pop_items = { };
+	}
+	{
+		std::list< RockItemBubblePtr >::iterator ite = _bubbles.begin( );
+		while ( ite != _bubbles.end( ) ) {
+			RockItemBubblePtr bubble = *ite;
+			bubble.reset( );
+			ite++;
+		}
+		_bubbles = { };
+	}
+	{
+		std::list< RockCasketPtr >::iterator ite = _caskets.begin( );
+		while ( ite != _caskets.end( ) ) {
+			RockCasketPtr casket = *ite;
+			casket.reset( );
+			ite++;
+		}
+		_caskets = { };
+	}
+	{
+		std::list< RockAlterPtr >::iterator ite = _alters.begin( );
+		while ( ite != _alters.end( ) ) {
+			RockAlterPtr alter = *ite;
+			alter.reset( );
+			ite++;
+		}
+		_alters = { };
+	}
 }
