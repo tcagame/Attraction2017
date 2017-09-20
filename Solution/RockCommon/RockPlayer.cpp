@@ -63,7 +63,6 @@ _bubble_count( 0 ),
 _damage( 0 ),
 _interval( 0 ),
 _continue( false ),
-_speed_down( false ),
 _damage_count( DAMAGE_COUNT ) {
 	_id = id;
 	_status = status;
@@ -110,11 +109,6 @@ void RockPlayer::act( ) {
 	sendDamage( );
 	updateInCamera( );
 
-	if ( _speed_down ) {
-		Vector vec = getVec( ) * 0.5;
-		vec.y = getVec( ).y;
-		setVec( vec );
-	}
 	_damage_count++;
 	_interval++;
 
@@ -130,22 +124,33 @@ void RockPlayer::updateEffect( ) {
 			effect->stopEffect( _charge_effect_handle );
 		}
 	}
-	if ( _speed_down ) {
-		effect->updateEffectTransform( _speed_down_effect_handle, getPos( ) + SPEED_DOWN_EFFECT_ADJUST );
+	if ( _status->getPlayer( _id ).item & SPEED_DOWN ) {
+		if ( _speed_down_effect_handle > 0 ) {
+			effect->updateEffectTransform( _speed_down_effect_handle, getPos( ) + SPEED_DOWN_EFFECT_ADJUST );
+		} else {
+			_speed_down_effect_handle = effect->playEffect( RockStudio::getTask( )->getEffectHandle( EFFECT_SPEED_DOWN ) );
+		}
 	} else {
 		effect->stopEffect( _speed_down_effect_handle );
+		_speed_down_effect_handle = -1;
 	}
 }
 
 void RockPlayer::updeteState( ) {
-	if ( _status->getPlayer( _id ).power <= 0 || isBubble( ) ) {
+	Status::Player player = _status->getPlayer( _id );
+	if ( player.power <= 0 || isBubble( ) ) {
 		setCol( false );
 		setMass( false );
 	} else {
 		setCol( true );
 		setMass( true );
 	}
-	if ( _status->getPlayer( _id ).money >= TRANSITION_MONEY_NUM ) {
+	if ( player.item & SPEED_DOWN ) {
+		Vector vec = getVec( ) * 0.5;
+		vec.y = getVec( ).y;
+		setVec( vec );
+	}
+	if ( player.money >= TRANSITION_MONEY_NUM ) {
 		if ( _status->getPlayer( _id ).area == AREA_STREET_1 ) {
 			unsigned char state = AREA_STREET_2;
 			MessageSender::getTask( )->sendMessage( _id, Message::COMMAND_AREA, &state );
@@ -194,7 +199,6 @@ void RockPlayer::setAction( ACTION action ) {
 		_attack_count = 0;
 		_charge_effect_handle = -1;
 		_speed_down_effect_handle = -1;
-		_speed_down = false;
 		break;
 	case ACTION_CHARGE:
 		setDoll( ( DOLL )( DOLL_TAROSUKE_CHARGE + _id * ROCK_PLAYER_MOTION_NUM ) );
@@ -226,7 +230,6 @@ void RockPlayer::actOnBubble( ) {
 	SoundPtr sound = Sound::getTask( );
 	if ( status.area == AREA_RESULT ||
 		 status.area == AREA_ENTRY ) {
-		_speed_down = false;
 		//ŽQ‰ÁŽó•tó‘Ô‚Å‚Í‚È‚¢‚Ü‚½‚ÍƒŠƒUƒ‹ƒg‚É“ü‚Á‚½‚ç–A‚É“ü‚ç‚È‚¢
 		if ( isOnMapModel( ) ) {
 			setMass( true );
@@ -312,7 +315,7 @@ void RockPlayer::actOnWaiting( ) {
 		 _interval > INTERVAL_TIME ) {
 		if ( isStanding( ) ) {
 			setAction( ACTION_CHARGE );
-		} else {
+		} else if ( _attack_count == 0 ) {
 			_attack_count = 1;
 		}
 		return;
@@ -357,7 +360,8 @@ void RockPlayer::actOnJumping( ) {
 
 	//UŒ‚
 	if ( player.device_button & BUTTON_A &&
-		 _interval > INTERVAL_TIME ) {
+		 _interval > INTERVAL_TIME &&
+		 _attack_count == 0) {
 		_attack_count = 1;
 	}
 	//’…’n
@@ -393,7 +397,8 @@ void RockPlayer::actOnWalking( ) {
 	}
 	//UŒ‚
 	if ( player.device_button & BUTTON_A &&
-		 _interval > INTERVAL_TIME ) {
+		 _interval > INTERVAL_TIME &&
+		_attack_count == 0) {
 		_attack_count = 1;
 	}
 
@@ -773,11 +778,6 @@ void RockPlayer::setAdmissionPos( const Vector& camera_pos ) {
 
 int RockPlayer::getId( ) const {
 	return _id;
-}
-
-void RockPlayer::speedDown( ) {
-	_speed_down = true;
-	_speed_down_effect_handle = Effect::getTask( )->playEffect( RockStudio::getTask( )->getEffectHandle( EFFECT_SPEED_DOWN ) );
 }
 
 void RockPlayer::knockBack( RockEnemyPtr enemy ) {

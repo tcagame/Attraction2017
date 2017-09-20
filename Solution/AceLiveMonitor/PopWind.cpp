@@ -3,7 +3,7 @@
 #include "Military.h"
 
 const int MAX_POP_COUNT = 400;
-const int POP_RANGE = 250;
+const int POP_RANGE = 350;
 
 PopWind::PopWind( const Vector& pos ) :
 Pop( pos ),

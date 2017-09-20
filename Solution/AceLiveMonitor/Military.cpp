@@ -19,7 +19,7 @@
 #include "Sound.h"
 #include "Drawer.h"
 
-
+const int MAX_POP = 50;
 PTR( Player );
 
 MilitaryPtr Military::getTask( ) {
@@ -104,6 +104,9 @@ const std::list< EnemyPtr > Military::getEnemyList( ) const {
 }
 
 void Military::popUp( EnemyPtr enemy ) {
+	if ( ( int )_enemies.size( ) > MAX_POP ) {
+		return;
+	}
 	_enemies.push_back( enemy );
 }
 

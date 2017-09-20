@@ -10,7 +10,6 @@
     <ClCompile Include="RockEnemySkeleton.cpp" />
     <ClCompile Include="RockEnemySmallFrog.cpp" />
     <ClCompile Include="RockEnemyStone.cpp" />
-    <ClCompile Include="RockEnemyStoneFace.cpp" />
     <ClCompile Include="RockEnemyBossTreeNuts.cpp" />
     <ClCompile Include="RockEventCharacter.cpp" />
     <ClCompile Include="RockEventObaba.cpp" />
@@ -68,6 +67,7 @@
     <ClCompile Include="RockViewer.cpp" />
     <ClCompile Include="RockEnemyBossRockAttack.cpp" />
     <ClCompile Include="RockEnemyRedBirdAttack.cpp" />
+    <ClCompile Include="RockItemEnhanceCharge.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="define.h" />
@@ -80,7 +80,6 @@
     <ClInclude Include="RockEnemySkeleton.h" />
     <ClInclude Include="RockEnemySmallFrog.h" />
     <ClInclude Include="RockEnemyStone.h" />
-    <ClInclude Include="RockEnemyStoneFace.h" />
     <ClInclude Include="RockEnemyBossTreeNuts.h" />
     <ClInclude Include="RockEventCharacter.h" />
     <ClInclude Include="RockEventObaba.h" />
@@ -140,5 +139,6 @@
     <ClInclude Include="Status.h" />
     <ClInclude Include="RockEnemyBossRockAttack.h" />
     <ClInclude Include="RockEnemyRedBirdAttack.h" />
+    <ClInclude Include="RockItemEnhanceCharge.h" />
   </ItemGroup>
 </Project>

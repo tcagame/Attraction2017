@@ -46,7 +46,6 @@ void MessageReceiver::update( ) {
 		std::vector< std::string > command = getSprit( ( char* )_message->getPtr( ) );
 		excute( command );
 	}
-	updateFamily( );
 }
 
 std::vector< std::string > MessageReceiver::getSprit( std::string command ) const {
@@ -183,26 +182,6 @@ void MessageReceiver::excuteContinue( std::vector< std::string > command ) {
 			if ( _status->getPlayer( player_num ).power <= 0 ) {
 				_status->getPlayer( player_num ).power = MAX_POWER;
 				_status->getPlayer( player_num ).continue_num++;
-			}
-		}
-	}
-}
-
-void MessageReceiver::updateFamily( ) {
-	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
-		Status::Player status = _status->getPlayer( i );
-		if ( status.power == 0 ) {
-			if ( status.item & ITEM_DANGO ) {
-				status.power = MAX_POWER / 2;
-				status.item &= ~ITEM_DANGO;
-				_status->getPlayer( i ) = status;
-				break;
-			}
-			if ( status.item & ITEM_HEART ) {
-				status.power = MAX_POWER;
-				status.item &= ~ITEM_HEART;
-				_status->getPlayer( i ) = status;
-				break;
 			}
 		}
 	}

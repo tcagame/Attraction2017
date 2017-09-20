@@ -8,6 +8,7 @@
 #include "RockItemFire.h"
 #include "RockItemToku.h"
 #include "RockItemEnhancePower.h"
+#include "RockItemEnhanceCharge.h"
 #include "RockFamily.h"
 #include "RockPlayer.h"
 #include "MessageSender.h"
@@ -105,7 +106,8 @@ void RockStorage::updateCasket( ) {
 						MessageSender::getTask( )->sendMessage( player->getId( ), Message::COMMAND_MONEY, &money );
 					} else {
 						//速度低下
-						player->speedDown( );
+						unsigned char item = SPEED_DOWN;
+						MessageSender::getTask( )->sendMessage( player->getId( ), Message::COMMAND_ITEM, &item );
 					}
 				}
 			}
@@ -274,6 +276,25 @@ bool RockStorage::pickUpItem( RockItemPtr item, int player_id ) {
 			}
 			if ( result ) {
 				unsigned char item = ITEM_ENHANCED_ATTACK;
+				sender->sendMessage( player_id, Message::COMMAND_ITEM, &item );
+			}
+		}
+	}
+	{//チャージ強化
+		RockItemEnhanceChargePtr enhance_charge = std::dynamic_pointer_cast< RockItemEnhanceCharge >( item );
+		if ( enhance_charge ) {
+			if ( enhance_charge->isShopItem( ) ) {
+				int price = enhance_charge->getPrice( );
+				if ( (int)_status->getPlayer( player_id ).money >= price ) {
+					int value = -price;
+					sender->sendMessage( player_id, Message::COMMAND_MONEY, &value );
+					enhance_charge->eraseBubble( );
+				} else {
+					result = false;
+				}
+			}
+			if ( result ) {
+				unsigned char item = ITEM_ENHANCED_CHARGE;
 				sender->sendMessage( player_id, Message::COMMAND_ITEM, &item );
 			}
 		}
