@@ -114,7 +114,7 @@ void SynchronousData::setStatusPower( PLAYER player, int power ) {
 
 void SynchronousData::setStatusMoney( PLAYER player, int money ) {
 	assert( money >= 0 );
-	_data.status[ player ].money = ( unsigned long )money;
+	_data.status[ player ].money = money;
 }
 
 void SynchronousData::setInProssessionOfStatusItem( PLAYER player, unsigned char item, bool possession ) {
