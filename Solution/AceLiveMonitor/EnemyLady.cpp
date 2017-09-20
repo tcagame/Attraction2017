@@ -45,3 +45,7 @@ void EnemyLady::setSynchronousData( int camera_pos ) const {
 	unsigned char type = getType( );
 	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
 }
+
+Vector EnemyLady::getOverlappedPos( ) const {
+	return getPos( ) + Vector( -35, -65 );
+}

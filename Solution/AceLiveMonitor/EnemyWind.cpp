@@ -102,3 +102,7 @@ void EnemyWind::damage( int force ) {
 	}
 	Enemy::damage( force );
 }
+
+Vector EnemyWind::getOverlappedPos( ) const {
+	return getPos( ) + Vector( 0, -60, 0 );
+}

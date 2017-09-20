@@ -45,8 +45,7 @@ void Armoury::update( ) {
 				//エネミーが倒れなかったらショットが当たった位置で爆発
 				Sound::getTask( )->playSE( "yokai_se_25.wav" );
 				Vector impact_pos = _shot_list[ i ]->getPos( );
-				int impact_size = 32 * _shot_list[ i ]->getPower( );
-				Magazine::getTask( )->add( ImpactPtr( new Impact( impact_pos, _shot_list[ i ]->getArea( ), impact_size ) ) );
+				Magazine::getTask( )->add( ImpactPtr( new Impact( impact_pos, _shot_list[ i ]->getArea( ), 64 ) ) );
 				_shot_list[ i ]->erase( );
 			}
 		}

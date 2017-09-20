@@ -73,3 +73,7 @@ void EnemyJizo::setSynchronousData( int camera_pos ) const {
 		break;
 	}
 }
+
+Vector EnemyJizo::getOverlappedPos( ) const {
+	return Character::getOverlappedPos( ) + Vector( 0, -30, 0 );
+}

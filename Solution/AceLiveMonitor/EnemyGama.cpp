@@ -73,3 +73,12 @@ void EnemyGama::damage( int force ) {
 		setForce( 0 );
 	}
 }
+
+
+Vector EnemyGama::getOverlappedPos( ) const {
+	Vector adjust = Vector( -10, 0 );
+	if ( getDir( ) == DIR_RIGHT ) {
+		adjust.x *= -1;
+	}
+	return Character::getOverlappedPos( ) + adjust;
+}
