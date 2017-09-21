@@ -750,18 +750,22 @@ void Player::actOnEnding( ) {
 }
 
 void Player::actOnOpening( ) {
-	// 再登場のために初期化
-	appear( );
-	// アイテム初期化
-	for ( int i = 0; i < MAX_ITEM; i++ ) {
-		_item[ i ] = false;
-	}
+	if ( getDevicePush( ) & BUTTON_A ||
+		 getDevicePush( ) & BUTTON_B ||
+		 getDevicePush( ) & BUTTON_C ||
+		 getDevicePush( ) & BUTTON_D ) {
+		// 再登場のために初期化
+		appear( );
+		// アイテム初期化
+		for ( int i = 0; i < MAX_ITEM; i++ ) {
+			_item[ i ] = false;
+		}
 
-	_virtue = 0;
-	_money = 0;
-	_redo = 0;
-	_mode = MODE_NORMAL;
-	
+		_virtue = 0;
+		_money = 0;
+		_redo = 0;
+		_mode = MODE_NORMAL;
+	}
 }
 
 
@@ -889,6 +893,11 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		data->setStatusState( _player, SynchronousData::STATE_ENDING ); 
 		data->setStatusProgress( _player, SynchronousData::PROGRESS_ENDING, _progress_count );
 		break;
+	case ACTION_OPNING:
+		data->setStatusState( _player, SynchronousData::STATE_OPENING ); 
+		data->setStatusProgress( _player, SynchronousData::PROGRESS_ITEM_HYPERTROPHY, _progress_count );
+		break;
+
 	default:
 		if ( getArea( ) == AREA_STREET ) {
 			data->setStatusState( _player, SynchronousData::STATE_PLAY_STREET ); 
