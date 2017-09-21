@@ -83,8 +83,8 @@ void ViewerConsole::initialize( ) {
 	_image_device = drawer->createImage( "UI/ui_device.png" );
 	
 	_image_entry = drawer->createImage( "UI/ui_entry.png" );
-	_image_turorial = drawer->createImage( "UI/ui_tutorial.png" );
-
+	_image_opening = drawer->createImage( "UI/ui_tutorial.png" );
+	_image_opening->setPos( 0, 480 - 256 );
 	int w, h;
 	_image_device->getImageSize( w, h );
 	_image_device->setPos( ( 640 - w ) / 2, ( 480 - h ) / 2 );
@@ -197,7 +197,7 @@ void ViewerConsole::drawDevice( ) {
 }
 
 void ViewerConsole::drawOpening( ) {
-	_image_entry->draw( );
+	_image_opening->draw( );
 }
 
 void ViewerConsole::drawContinue( ) {
