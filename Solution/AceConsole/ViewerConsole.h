@@ -44,7 +44,7 @@ private:
 	ImagePtr _image_device;
 	ImagePtr _image_ending;
 	ImagePtr _image_entry;
-	ImagePtr _image_turorial;
+	ImagePtr _image_opening;
 	std::array< bool, MAX_PLAYER > _dead_se;
 };
 
