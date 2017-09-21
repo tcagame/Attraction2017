@@ -1,12 +1,12 @@
 #include "PopArcher.h"
 #include "EnemyArcher.h"
 #include "Military.h"
-
-const int MAX_POP_COUNT = 400;
+#include "Property.h"
 
 PopArcher::PopArcher( const Vector& pos ) :
-Pop( pos ),
-_count( MAX_POP_COUNT ) {
+Pop( pos ) {
+	_max_pop_time = Property::getTask( )->getData( "Archer_POP_TIME" );
+	_count = _max_pop_time;
 }
 
 
@@ -17,7 +17,7 @@ void PopArcher::update( ) {
 	if ( !_enemy.expired( ) ) {
 		return;
 	}
-	if ( _count > MAX_POP_COUNT ) {
+	if ( _count > _max_pop_time ) {
 		if ( isInScreen( ) ) {
 			EnemyPtr enemy = EnemyPtr( new EnemyArcher( getPos( ) ) );
 			Military::getTask( )->popUp( enemy );

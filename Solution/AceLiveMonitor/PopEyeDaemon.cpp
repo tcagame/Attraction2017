@@ -1,12 +1,12 @@
 #include "PopEyeDaemon.h"
 #include "EnemyEyeDaemon.h"
 #include "Military.h"
-
-const int MAX_POP_COUNT = 300;
+#include "Property.h"
 
 PopEyeDaemon::PopEyeDaemon( const Vector& pos ) :
-Pop( pos ),
-_count( MAX_POP_COUNT ) {
+Pop( pos ) {
+	_max_pop_time = Property::getTask( )->getData( "EyeDaemon_POP_TIME" );
+	_count = _max_pop_time;
 }
 
 
@@ -14,7 +14,7 @@ PopEyeDaemon::~PopEyeDaemon( ) {
 }
 
 void PopEyeDaemon::update( ) {
-	if ( _count > MAX_POP_COUNT ) {
+	if ( _count > _max_pop_time ) {
 		if ( isInScreen( ) ) {
 			Military::getTask( )->popUp( EnemyPtr( new EnemyEyeDaemon( getPos( ) ) ) );
 			_count = 0;

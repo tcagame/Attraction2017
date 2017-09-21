@@ -1,13 +1,14 @@
 #include "PopWaterGhost.h"
 #include "EnemyWaterGhost.h"
 #include "Military.h"
+#include "Property.h"
 
-const int MAX_POP_COUNT = 400;
 const int POP_RANGE = 300;
 
 PopWaterGhost::PopWaterGhost( const Vector& pos ) :
-Pop( pos ),
-_count( MAX_POP_COUNT ) {
+Pop( pos ) {
+	_max_pop_time = Property::getTask( )->getData( "WaterGhost_POP_TIME" );
+	_count = _max_pop_time;
 }
 
 
@@ -19,7 +20,7 @@ void PopWaterGhost::update( ) {
 	if ( !_enemy.expired( ) ) {
 		return;
 	}
-	if ( _count > MAX_POP_COUNT ) {
+	if ( _count > _max_pop_time ) {
 		if ( isInRangePlayer( POP_RANGE ) ) {
 			EnemyPtr enemy = EnemyPtr( new EnemyWaterGhost( getPos( ) ) );
 			Military::getTask( )->popUp( enemy );

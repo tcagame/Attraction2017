@@ -63,13 +63,15 @@ void RockViewer::initialize( ) {
 	_dummy_ui = drawer->createImage( "UI/item.png" );
 
 	//本番データ
-	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {		
-		char filename[ 256 ];
+	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+		char filename[256];
 		sprintf_s( filename, "UI/breast%d.png", i + 1 );
 		ImagePtr image = drawer->createImage( filename );
-		_breasts.push_back( image );
+		_start_menu.push_back( image );
 	}
 	
+	_gauge = drawer->createImage( "UI/ui_progress_bar.png" );
+	_continue_frame = drawer->createImage( "UI/ui_cover_continue.png" );
 	_image_frame.push_back( drawer->createImage( "UI/tarosuke_status_window.png" ) );
 	_image_frame.push_back( drawer->createImage( "UI/garisuke_status_window.png" ) );
 	_image_frame.push_back( drawer->createImage( "UI/tarojiro_status_window.png" ) );
@@ -320,14 +322,18 @@ void RockViewer::drawUI( ) const {
 			continue;
 		}
 		if ( family->getPlayer( i )->isBubble( ) &&
-			 info->isActiveState( AREA_ENTRY ) ) {
+			info->isActiveState( AREA_ENTRY ) ) {
+			_start_menu[ i ]->setRect( 0, 0, 320, 360 );
+			_start_menu[ i ]->setPos( i * ( SCREEN_WIDTH / 4 ), SCREEN_HEIGHT - 360, ( i + 1 ) * ( SCREEN_WIDTH / 4 ), SCREEN_HEIGHT );
+			_start_menu[ i ]->draw( );
 			double ratio = family->getPlayer( i )->getBubbleCountRatio( );
-			int ty = ( int )( 360 * ratio );
-			_breasts[ i ]->setRect( 0, ty, 320, 360 - ty );
-			_breasts[ i ]->setPos( i * ( SCREEN_WIDTH / 4 ), SCREEN_HEIGHT - 256 + ( 256 * ratio ), ( i + 1 ) * ( SCREEN_WIDTH / 4 ), SCREEN_HEIGHT );
-			_breasts[ i ]->draw( );
+			int ty = ( int )( 144 * ratio );
+			_gauge->setRect( 0, 0, ty, 20 );
+			_gauge->setPos( i * ( SCREEN_WIDTH / 4 ) + 88, SCREEN_HEIGHT - 74 );
+			_gauge->draw( );
 			continue;
 		}
+		//枠
 		int player_status_pos = i * ( SCREEN_WIDTH / 4 );
 		_image_frame[ i ]->setPos( player_status_pos, DRAW_UI_Y );
 		_image_frame[ i ]->draw( );
@@ -406,6 +412,19 @@ void RockViewer::drawUI( ) const {
 				_dummy_ui->setPos( sx - 16, sy - 16, sx + CONTINUE_DRAW_SIZE, sy + CONTINUE_DRAW_SIZE );
 				_dummy_ui->draw( );
 			}
+		}
+		if ( family->getPlayer( i )->isBubble( ) &&
+			_status->getPlayer( i ).power == 0 ) {
+			//ここ新規画像
+			_continue_frame->setRect( 0, 0, 320, 208 );
+			_continue_frame->setPos( i * ( SCREEN_WIDTH / 4 ), SCREEN_HEIGHT - 208, ( i + 1 ) * ( SCREEN_WIDTH / 4 ), SCREEN_HEIGHT );
+			_continue_frame->draw( );
+			double ratio = family->getPlayer( i )->getBubbleCountRatio( );
+			int ty = ( int )( 144 * ratio );
+			_gauge->setRect( 0, 0, ty, 20 );
+			_gauge->setPos( i * ( SCREEN_WIDTH / 4 ) + 88, SCREEN_HEIGHT - 74 );
+			_gauge->draw( );
+			continue;
 		}
 	}
 }

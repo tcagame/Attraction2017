@@ -1,12 +1,12 @@
 #include "PopShell.h"
 #include "EnemyShell.h"
 #include "Military.h"
-
-const int MAX_POP_COUNT = 300;
+#include "Property.h"
 
 PopShell::PopShell( const Vector& pos ) :
-Pop( pos ),
-_count( MAX_POP_COUNT ) {
+Pop( pos ) {
+	_max_pop_time = Property::getTask( )->getData( "Shell_POP_TIME" );
+	_count = _max_pop_time;
 }
 
 
@@ -17,7 +17,7 @@ void PopShell::update( ) {
 	if ( !_enemy.expired( ) ) {
 		return;
 	}
-	if ( _count > MAX_POP_COUNT ) {
+	if ( _count > _max_pop_time ) {
 		if ( isInScreen( ) ) {
 			EnemyPtr enemy = EnemyPtr( new EnemyShell( getPos( ) ) );
 			Military::getTask( )->popUp( enemy );

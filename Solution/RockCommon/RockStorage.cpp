@@ -174,11 +174,10 @@ bool RockStorage::pickUpItem( RockItemPtr item, int player_id ) {
 				RockFamily::getTask( )->getPlayer( player_id )->damage( ABSTINENCE_DAMAGE );
 				int value = money->getValue( );
 				sender->sendMessage( player_id, Message::COMMAND_MONEY, &value );
-			} else {
-				sound->playSE( "yokai_voice_30.wav" );
-				int value = money->getValue( );
-				sender->sendMessage( player_id, Message::COMMAND_MONEY, &value );
 			}
+			sound->playSE( "yokai_voice_30.wav" );
+			int value = money->getValue( );
+			sender->sendMessage( player_id, Message::COMMAND_MONEY, &value );
 		}
 	}
 
@@ -250,7 +249,8 @@ bool RockStorage::pickUpItem( RockItemPtr item, int player_id ) {
 		if ( dango ) {
 			if ( dango->isShopItem( ) ) {
 				int price = dango->getPrice( );
-				if ( (int)_status->getPlayer( player_id ).money >= price ) {
+				if ( (int)_status->getPlayer( player_id ).money >= price &&
+					 !( _status->getPlayer( player_id ).item & ITEM_DANGO ) ) {
 					int value = -price;
 					sender->sendMessage( player_id, Message::COMMAND_MONEY, &value );
 				} else {
@@ -268,7 +268,8 @@ bool RockStorage::pickUpItem( RockItemPtr item, int player_id ) {
 		if ( enhance_power ) {
 			if ( enhance_power->isShopItem( ) ) {
 				int price = enhance_power->getPrice( );
-				if ( (int)_status->getPlayer( player_id ).money >= price ) {
+				if ( (int)_status->getPlayer( player_id ).money >= price &&
+					 !( _status->getPlayer( player_id ).item & ITEM_ENHANCED_ATTACK ) ) {
 					int value = -price;
 					sender->sendMessage( player_id, Message::COMMAND_MONEY, &value );
 					enhance_power->eraseBubble( );
@@ -287,7 +288,8 @@ bool RockStorage::pickUpItem( RockItemPtr item, int player_id ) {
 		if ( enhance_charge ) {
 			if ( enhance_charge->isShopItem( ) ) {
 				int price = enhance_charge->getPrice( );
-				if ( (int)_status->getPlayer( player_id ).money >= price ) {
+				if ( (int)_status->getPlayer( player_id ).money >= price &&
+					 !( _status->getPlayer( player_id ).item & ITEM_ENHANCED_CHARGE ) ) {
 					int value = -price;
 					sender->sendMessage( player_id, Message::COMMAND_MONEY, &value );
 					enhance_charge->eraseBubble( );

@@ -37,7 +37,9 @@ private:
 private:
 	StatusPtr _status;
 	ImagePtr _dummy_ui;
-	std::vector< ImagePtr > _breasts;
+	ImagePtr _continue_frame;
+	ImagePtr _gauge;
+	std::vector< ImagePtr > _start_menu;
 	std::vector< ImagePtr > _image_frame;
 	std::vector< ImagePtr > _power;
 	std::vector< ImagePtr > _items;

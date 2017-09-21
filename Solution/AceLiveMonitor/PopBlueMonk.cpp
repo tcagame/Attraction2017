@@ -1,14 +1,13 @@
 #include "PopBlueMonk.h"
 #include "EnemyBlueMonk.h"
 #include "Military.h"
-
-const int MAX_POP_COUNT = 400;
+#include "Property.h"
 
 PopBlueMonk::PopBlueMonk( const Vector& pos ) :
-Pop( pos ),
-_count( MAX_POP_COUNT ) {
+Pop( pos ) {
+	_max_pop_time = Property::getTask( )->getData( "BlueMonk_POP_TIME" );
+	_count = _max_pop_time;
 }
-
 
 PopBlueMonk::~PopBlueMonk( ) {
 }
@@ -18,7 +17,7 @@ void PopBlueMonk::update( ) {
 	if ( !_enemy.expired( ) ) {
 		return;
 	}
-	if ( _count > MAX_POP_COUNT ) {
+	if ( _count > _max_pop_time ) {
 		if ( isInScreen( ) ) {
 			EnemyPtr enemy = EnemyPtr( new EnemyBlueMonk( getPos( ) ) );
 			Military::getTask( )->popUp( enemy );
