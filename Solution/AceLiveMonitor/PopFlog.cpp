@@ -17,9 +17,14 @@ PopFlog::~PopFlog( ) {
 
 void PopFlog::update( ) {
 	//ƒvƒŒƒCƒ„[‚ª‹ß‚­‚É‚«‚½‚ç•¦‚­
+	if ( !_enemy.expired( ) ) {
+		return;
+	}
 	if ( _count > _max_pop_time ) {
 		if ( isInRangePlayer( POP_RANGE ) ) {
-			Military::getTask( )->popUp( EnemyPtr( new EnemyFlog( getPos( ) ) ) );
+			EnemyPtr enemy = EnemyPtr( new EnemyFlog( getPos( ) ) );
+			Military::getTask( )->popUp( enemy );
+			_enemy = enemy;
 			_count = 0;
 		}
 	}

@@ -15,10 +15,14 @@ PopStoneFace::~PopStoneFace( ) {
 }
 
 void PopStoneFace::update( ) {
-	//ƒvƒŒƒCƒ„[‚ª‹ß‚­‚É‚«‚½‚ç•¦‚­
+	if ( !_enemy.expired( ) ) {
+		return;
+	}
 	if ( _count > _max_pop_time ) {
 		if ( isInRangePlayer( POP_RANGE ) ) {
-			Military::getTask( )->popUp( EnemyPtr( new EnemyStoneFace( getPos( ) ) ) );
+			EnemyPtr enemy = EnemyPtr( new EnemyStoneFace( getPos( ) ) );
+			Military::getTask( )->popUp( enemy );
+			_enemy = enemy;
 			_count = 0;
 		}
 	}

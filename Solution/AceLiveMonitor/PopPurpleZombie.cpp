@@ -21,6 +21,7 @@ void PopPurpleZombie::update( ) {
 		if ( isInScreen( ) ) {
 			EnemyPtr enemy = EnemyPtr( new EnemyPurpleZombie( getPos( ) ) );
 			Military::getTask( )->popUp( enemy );
+			_enemy = enemy;
 			_count = 0;
 		}
 	}
