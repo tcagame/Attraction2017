@@ -25,6 +25,7 @@ public:
 	int getId( ) const;
 	void knockBack( RockEnemyPtr enemy );
 	double getBubbleCountRatio( );
+	void stopEffect( );
 protected:
 	void act( );
 	void updateInCamera( );
