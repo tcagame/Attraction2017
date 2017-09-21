@@ -46,6 +46,7 @@ void StatusSender::updateFamily( ) {
 		if ( _reset_count[ i ] > RESET_TIME &&
 			 player.area != AREA_WAIT ) {
 			_status->resetPlayer( i );
+			player = _status->getPlayer( i );
 			player.area = AREA_WAIT;
 		}
 		//ƒŠƒUƒ‹ƒg”»’f
