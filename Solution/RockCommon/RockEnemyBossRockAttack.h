@@ -7,6 +7,7 @@ public:
 	virtual ~RockEnemyBossRockAttack( );
 public:
 	double getAnimTime( ) const;
+	void setPos( const Vector& pos );
 protected:
 	void act( );
 private:

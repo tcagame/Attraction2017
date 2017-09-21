@@ -149,6 +149,11 @@ void ViewerConsole::drawConsole( ) {
 		}
 		_image_ending->draw( );
 	}
+
+		
+	if ( state == SynchronousData::STATE_ENTRY ) {
+		_image_entry->draw( );
+	}
 }
 
 void ViewerConsole::drawAreaStreet( ) {
