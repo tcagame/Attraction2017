@@ -27,13 +27,13 @@ void RockEnemyBossTree::act( ) {
 
 	Vector attack_pos = getPos( );
 	const Vector ATTACK_FIRE_POS[ MAX_ATTACK_NUM ] = { 
-		Vector( attack_pos.x + 63, attack_pos.y + 53, attack_pos.z + 4 ),
-		Vector( attack_pos.x + 46, attack_pos.y + 68, attack_pos.z + 0 ),
-		Vector( attack_pos.x + 28, attack_pos.y + 85, attack_pos.z - 10 ),
-		Vector( attack_pos.x + 63, attack_pos.y + 53, attack_pos.z + 4 ),
-		Vector( attack_pos.x - 42, attack_pos.y + 49, attack_pos.z - 6 ),
-		Vector( attack_pos.x +  6, attack_pos.y + 76, attack_pos.z + 0 ),
-		Vector( attack_pos.x - 27, attack_pos.y + 72, attack_pos.z + 0 ),
+		Vector( attack_pos.x + 63, attack_pos.y + 53, attack_pos.z + 4 ) * 1.5,
+		Vector( attack_pos.x + 46, attack_pos.y + 68, attack_pos.z + 0 ) * 1.5,
+		Vector( attack_pos.x + 28, attack_pos.y + 85, attack_pos.z - 10 ) * 1.5,
+		Vector( attack_pos.x + 63, attack_pos.y + 53, attack_pos.z + 4 ) * 1.5,
+		Vector( attack_pos.x - 42, attack_pos.y + 49, attack_pos.z - 6 ) * 1.5,
+		Vector( attack_pos.x +  6, attack_pos.y + 76, attack_pos.z + 0 ) * 1.5,
+		Vector( attack_pos.x - 27, attack_pos.y + 72, attack_pos.z + 0 ) * 1.5,
 
 	};
 
