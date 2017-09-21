@@ -287,8 +287,6 @@ void RockPlayer::actOnBubble( ) {
 	Vector vertical_up( 0, 500, 0 );
 	if ( col->isHitLine( check_pos, check_pos + vertical_up ) ) {
 		vec.y = ( col->getHitPos( ).y - getPos( ).y ) + BUBBLE_FOLLOW_RANGE;
-		//‚±‚±‚Í‚¢‚Á‚½
-		Drawer::getTask()->drawString( 0,0, "–AC³" );
 	}
 	setVec( getApproachesVec( ) + vec );
 }
@@ -793,4 +791,8 @@ void RockPlayer::knockBack( RockEnemyPtr enemy ) {
 	if ( _status->getPlayer( _id ).power > 0 ) {
 		setVec( vec );
 	}
+}
+
+double RockPlayer::getBubbleCountRatio( ) {
+	return ( ( double )_bubble_count / ENTRY_TIME );
 }
