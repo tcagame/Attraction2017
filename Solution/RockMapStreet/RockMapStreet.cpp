@@ -346,6 +346,7 @@ void RockMapStreet::genarateStorage( STAGE next ) {
 		storage->addShopItem( RockItemPtr( new RockItemEnhancePower ( Vector( OBABA_POS.x + 50, OBABA_POS.y, OBABA_POS.z - 50 ) ) ) );
 		storage->addShopItem( RockItemPtr( new RockItemDango        ( Vector( OBABA_POS.x, OBABA_POS.y, OBABA_POS.z - 50 ) ) ) );
 		storage->addShopItem( RockItemPtr( new RockItemEnhanceCharge( Vector( OBABA_POS.x - 50, OBABA_POS.y, OBABA_POS.z - 50 ) ) ) );
+		//“¿‚Ü‚Ý‚ê
 		storage->addItem( RockItemPtr( new RockItemToku( Vector( 660,     10,   -623 ) ) ) );
 		storage->addItem( RockItemPtr( new RockItemToku( Vector( 2813,   343,   -615 ) ) ) );
 		storage->addItem( RockItemPtr( new RockItemToku( Vector( 7206,   -70,   -774 ) ) ) );
