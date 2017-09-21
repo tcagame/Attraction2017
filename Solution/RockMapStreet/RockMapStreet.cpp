@@ -45,6 +45,8 @@
 #include "RockEnemyLittleRedDaemon.h"
 #include "RockEnemyBossRedDaemon.h"
 
+#include "Drawer.h"
+
 PTR( RockEnemyBossRedDaemon );
 const int CAVE_REWORD = 50000;
 const int REMOVE_CAVE_TIME = 500;
@@ -131,24 +133,9 @@ void RockMapStreet::updateStreet( ) {
 				ite++;
 			}
 		}
-
-
-		//STREET3のプレイヤーがいれば徳アイテムをポップ
-		if ( !_virtue_pop ) {
-			Status::Player status = _status->getPlayer( i );
-			if ( status.area == AREA_STREET_3 ) {
-				_virtue_pop = true;
-				RockStoragePtr storage = RockStorage::getTask( );
-				for ( int j = 0; j < 30; j++ ) {
-					int interval = 200;
-					storage->addItem( RockItemPtr( new RockItemToku( Vector( j * interval + interval / 2, 500, -500 - j * 10 ) ) ) );
-				}
-			}
+		if ( !active ) {
+			RockArmoury::getTask( )->clearShot( );
 		}
-	}
-
-	if ( !active ) {
-		RockArmoury::getTask( )->clearShot( );
 	}
 }
 
@@ -314,15 +301,12 @@ void RockMapStreet::genarateStorage( STAGE next ) {
 	switch ( next ) {
 	case STAGE_STREET:
 	{
-		//const int INTERVAL = 200;
-		//for ( int i = 0; i < 30; i++ ) {
-		//	storage->addItem( RockItemPtr( new RockItemMoney( Vector( i * INTERVAL, 200, -500 - i * 10 ), 500 ) ) );
-		//}
 		storage->addAlter( RockAlterPtr( new RockAlter( Vector( 300, 0, -300 ), Vector( 0, 0, -1 ) ) ) );
 		//ショップアイテム
 		storage->addShopItem( RockItemPtr( new RockItemEnhancePower ( Vector( OBABA_POS.x + 50, OBABA_POS.y, OBABA_POS.z - 50 ) ) ) );
 		storage->addShopItem( RockItemPtr( new RockItemDango        ( Vector( OBABA_POS.x, OBABA_POS.y, OBABA_POS.z - 50 ) ) ) );
 		storage->addShopItem( RockItemPtr( new RockItemEnhanceCharge( Vector( OBABA_POS.x - 50, OBABA_POS.y, OBABA_POS.z - 50 ) ) ) );
+		storage->addItem( RockItemPtr( new RockItemToku( Vector( 200, 500, -500 ) ) ) );
 	}
 		break;
 	case STAGE_CAVE:
