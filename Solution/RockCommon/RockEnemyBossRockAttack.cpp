@@ -88,3 +88,9 @@ void RockEnemyBossRockAttack::assaultPlayer( ) {
 void RockEnemyBossRockAttack::setPos(const Vector& pos) {
 	RockCharacter::setPos( pos );
 }
+
+void RockEnemyBossRockAttack::damage( int force ) {
+	if ( force < 0 ) {
+		RockCharacter::damage( force );
+	}
+}

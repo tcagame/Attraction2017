@@ -8,6 +8,7 @@ public:
 public:
 	double getAnimTime( ) const;
 	void setPos( const Vector& pos );
+	void damage( int force );
 protected:
 	void act( );
 private:
