@@ -444,6 +444,10 @@ void RockViewer::drawDebug( ) const {
 
 	{//player
 		RockFamilyPtr family = RockFamily::getTask( );
+		RockPlayerPtr taro = family->getPlayer( 0 );
+		drawer->drawString( 500, 300, "X:%f" , taro->getPos( ).x );
+		drawer->drawString( 500, 325, "Y:%f" , taro->getPos( ).y );
+		drawer->drawString( 500, 350, "Z:%f" , taro->getPos( ).z );
 		for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 			RockPlayerPtr player = family->getPlayer( i );
 			if ( !player->isActive( ) ) {

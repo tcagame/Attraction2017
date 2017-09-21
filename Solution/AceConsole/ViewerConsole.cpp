@@ -157,6 +157,7 @@ void ViewerConsole::drawConsole( ) {
 }
 
 void ViewerConsole::drawAreaStreet( ) {
+	Sound::getTask( )->stopBGM( );
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
 
 	int camera_pos = data->getStatusX( _player ) - 320;
@@ -168,6 +169,7 @@ void ViewerConsole::drawAreaStreet( ) {
 }
 
 void ViewerConsole::drawAreaEvent( ) {
+	Sound::getTask( )->stopBGM( );
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
 
 	// ƒCƒxƒ“ƒg•`‰æ
@@ -197,12 +199,17 @@ void ViewerConsole::drawDevice( ) {
 }
 
 void ViewerConsole::drawOpening( ) {
+	SoundPtr sound = Sound::getTask( );
+	if ( !sound->isPlayingBGM( ) ) {
+		sound->playBGM( "yokai_music_05.wav" );
+	}
 	double ratio = SynchronousData::getTask( )->getStatusProgressCount( _player ) * 0.01;
 	_image_opening->setBlend( Image::BLEND_ALPHA, ratio );
 	_image_opening->draw( );
 }
 
 void ViewerConsole::drawContinue( ) {
+	Sound::getTask( )->stopBGM( );
 }
 
 
@@ -219,14 +226,12 @@ void ViewerConsole::playSe( ) {
 		sound->stopSE( "yokai_se_02.wav" );
 	}
 
-	if ( _dead_se[ _player ] ) {
-		_dead_se[ _player ] = false;
-	}
-
 	if ( data->getStatusPower( _player ) == 0 ) {
 		if ( !_dead_se[ _player ] ) {
-	//		sound->playSE( "yokai_se_31.wav" );
+			sound->playSE( "yokai_se_31.wav" );
 			_dead_se[ _player ] = true;
 		}
+	} else {
+		_dead_se[ _player ] = false;
 	}
 }
