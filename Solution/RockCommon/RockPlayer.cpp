@@ -796,3 +796,11 @@ void RockPlayer::knockBack( RockEnemyPtr enemy ) {
 double RockPlayer::getBubbleCountRatio( ) {
 	return ( ( double )_bubble_count / ENTRY_TIME );
 }
+
+void RockPlayer::stopEffect( ) {
+	EffectPtr effect = Effect::getTask( );
+	effect->stopEffect( _charge_effect_handle );
+	_charge_effect_handle = -1;
+	effect->stopEffect( _speed_down_effect_handle );
+	_speed_down_effect_handle = -1;
+}
