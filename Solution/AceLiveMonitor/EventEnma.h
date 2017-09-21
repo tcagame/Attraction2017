@@ -16,7 +16,8 @@ private:
 	enum PHASE {
 		PHASE_ENTER,
 		PHASE_MOVE,
-		PHASE_AUDIENCE
+		PHASE_AUDIENCE,
+		PHASE_FINISHED,
 	};
 private:
 	bool _audience;

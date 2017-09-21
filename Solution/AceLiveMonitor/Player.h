@@ -24,6 +24,7 @@ public:
 		ACTION_ENTERING_FADEOUT,
 		ACTION_ENTERING_SANZO,
 		ACTION_AUDIENCE,
+		ACTION_ENDING,
 		MAX_ACTION,
 	};
 	enum ITEM {
@@ -73,6 +74,7 @@ public:
 	bool isFinishedAutomoving( ) const;
 	void audience( );
 	void setModeVirtue( );
+	void setActionEnding( );
 	bool isLeaveAlone( ) const;
 private:
 	void actOnEntry( );
@@ -91,6 +93,7 @@ private:
 	void actOnEnteringFadeOut( );
 	void actOnEnteringSanzo( );
 	void actOnAudience( );
+	void actOnEnding( );
 	void setAction( ACTION action );
 	void adjustToCamera( );
 	void updateProgressBar( );
