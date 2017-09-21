@@ -63,11 +63,15 @@ void RockViewer::initialize( ) {
 	_dummy_ui = drawer->createImage( "UI/item.png" );
 
 	//本番データ
-	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {		
-		char filename[ 256 ];
+	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
+		char filename[256];
 		sprintf_s( filename, "UI/breast%d.png", i + 1 );
-		ImagePtr image = drawer->createImage( filename );
-		_breasts.push_back( image );
+		std::string cover_img = filename;
+		std::string gauge_img = "UI/ui_progress_bar.png";
+		ImagePtr image = drawer->createImage( cover_img.c_str( ) );
+		_start_menu.push_back( image );
+		ImagePtr gauge = drawer->createImage( gauge_img.c_str( ) );
+		_start_gauge.push_back( gauge );
 	}
 	
 	_image_frame.push_back( drawer->createImage( "UI/tarosuke_status_window.png" ) );
@@ -320,12 +324,15 @@ void RockViewer::drawUI( ) const {
 			continue;
 		}
 		if ( family->getPlayer( i )->isBubble( ) &&
-			 info->isActiveState( AREA_ENTRY ) ) {
+			info->isActiveState( AREA_ENTRY ) ) {
+			_start_menu[ i ]->setRect( 0, 0, 320, 360 );
+			_start_menu[ i ]->setPos( i * ( SCREEN_WIDTH / 4 ), SCREEN_HEIGHT - 360, ( i + 1 ) * ( SCREEN_WIDTH / 4 ), SCREEN_HEIGHT );
+			_start_menu[ i ]->draw( );
 			double ratio = family->getPlayer( i )->getBubbleCountRatio( );
-			int ty = ( int )( 360 * ratio );
-			_breasts[ i ]->setRect( 0, ty, 320, 360 - ty );
-			_breasts[ i ]->setPos( i * ( SCREEN_WIDTH / 4 ), SCREEN_HEIGHT - 256 + ( 256 * ratio ), ( i + 1 ) * ( SCREEN_WIDTH / 4 ), SCREEN_HEIGHT );
-			_breasts[ i ]->draw( );
+			int ty = ( int )( 144 * ratio );
+			_start_gauge[ i ]->setRect( 0, 0, ty, 20 );
+			_start_gauge[ i ]->setPos( i * ( SCREEN_WIDTH / 4 ) + 88, SCREEN_HEIGHT - 74 );
+			_start_gauge[ i ]->draw( );
 			continue;
 		}
 		int player_status_pos = i * ( SCREEN_WIDTH / 4 );
