@@ -19,7 +19,7 @@ ViewerObject::ViewerObject( ) {
 	_image[ GRAPH_IMPACT			] = drawer->createImage( "Effect/impact.png"				);
 	_image[ GRAPH_ITEM				] = drawer->createImage( "Item/item.png"					);
 	_image[ GRAPH_NPC				] = drawer->createImage( "Event/character/character.png"	);
-	_image[ GRAPH_SHADOW			] = drawer->createImage( "Event/Effect/effect_shadow.png"	);
+	_image[ GRAPH_SHADOW			] = drawer->createImage( "Effect/effect_shadow.png"	);
 }
 
 
@@ -85,6 +85,9 @@ void ViewerObject::drawSprite( int x, int y, unsigned char type, unsigned char a
 		break;
 	case SynchronousData::TYPE_SANZO:
 		sprite = getSpriteSanzo( GRAPH_SANZO            , x, y, attribute, pattern, size );
+		break;
+	case SynchronousData::TYPE_SHADOW:
+		sprite = getSpriteShadow( GRAPH_SHADOW          , x, y, attribute, pattern, size );
 		break;
 	default: assert( 0 );
 	};

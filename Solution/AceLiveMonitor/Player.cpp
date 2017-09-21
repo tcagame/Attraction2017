@@ -1229,6 +1229,9 @@ bool Player::isLeaveAlone( ) const {
 }
 
 void Player::checkSandwichedWall( ) {
+	if ( getArea( ) == AREA_EVENT ) {
+		return;
+	}
 	if ( getPos( ).x - Family::getTask( )->getCameraPosX( ) < 80 ) {
 		_sandwiched_count++;
 	} else {
