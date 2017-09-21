@@ -37,7 +37,7 @@ static const Vector STONE_DIR[ 9 ] = {
 };
 
 RockEnemyBossRock::RockEnemyBossRock( const Vector& pos ) :
-RockEnemyBoss( pos, DOLL_BOSS_ROCK, HP, 1, 30, 10, true, false ),
+RockEnemyBoss( pos, DOLL_BOSS_ROCK, HP, 1, 60, 10, true, false ),
 _soul_handle( -1 ) {
 	setDir( Vector( -1, 0, 0 ) );
 	RockMilitaryPtr military = RockMilitary::getTask( );
@@ -59,6 +59,12 @@ void RockEnemyBossRock::act( ) {
 		_soul_handle = effect->playEffect( studio->getEffectHandle( EFFECT_ROCK_SOUL ) );
 	}
 	effect->updateEffectTransform( _soul_handle, getPos( ) + SOUL_FOOT );
+
+	if (!isStanding()) {
+		for (int i = 0; i < STONE_NUM; i++) {
+			_stones[i]->setPos(getPos());
+		}
+	}
 }
 
 double RockEnemyBossRock::getAnimTime( ) const {
@@ -73,6 +79,9 @@ void RockEnemyBossRock::dropItem( ) {
 	RockStoragePtr storage( RockStorage::getTask( ) );
 	
 	storage->addDropItem( RockItemPtr( new RockItemRock( getPos( ) + Vector( 20, getOverlappedRadius( ), 0 ) ) ) );
+	for ( int i = 0; i < STONE_NUM; i++ ) {
+		_stones[ i ]->damage( -1 );
+	}
 }
 
 void RockEnemyBossRock::stopEffect( ) {
