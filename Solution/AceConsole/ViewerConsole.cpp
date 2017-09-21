@@ -192,6 +192,8 @@ void ViewerConsole::drawDevice( ) {
 }
 
 void ViewerConsole::drawOpening( ) {
+	double ratio = SynchronousData::getTask( )->getStatusProgressCount( _player ) * 0.01;
+	_image_opening->setBlend( Image::BLEND_ALPHA, ratio );
 	_image_opening->draw( );
 }
 

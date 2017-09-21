@@ -50,6 +50,7 @@ public:
 	static const unsigned char PROGRESS_ITEM_MINERAL     = 0x08;	
 	static const unsigned char PROGRESS_ITEM_VIRTUE      = 0x09;
 	static const unsigned char PROGRESS_ENDING           = 0x0A;
+	static const unsigned char PROGRESS_OPENING          = 0x0B;
 public:
 	static std::string getTag( ) { return "SYNCHRONOUSDATA"; };
 	static SynchronousDataPtr getTask( );

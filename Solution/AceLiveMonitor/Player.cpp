@@ -189,7 +189,7 @@ bool Player::isExist( ) const {
 		_action != ACTION_ENTERING_FADEOUT &&
 		_action != ACTION_ENTERING_SANZO &&
 		_action != ACTION_ENDING &&
-		_action != ACTION_OPNING;
+		_action != ACTION_OPENING;
 }
 
 int Player::getDeviceId( ) const {
@@ -284,7 +284,7 @@ void Player::act( ) {
 	case ACTION_ENDING:
 		actOnEnding( );
 		break;
-	case ACTION_OPNING:
+	case ACTION_OPENING:
 		actOnOpening( );
 		break;
 	}
@@ -363,7 +363,8 @@ void Player::actOnEntry( ) {
 	updateProgressBar( );
 
 	if ( _progress_count >= 100 ) {
-		setAction( ACTION_OPNING );
+		_progress_count = 0;
+		setAction( ACTION_OPENING );
 	}
 }
 
@@ -750,21 +751,26 @@ void Player::actOnEnding( ) {
 }
 
 void Player::actOnOpening( ) {
-	if ( getDevicePush( ) & BUTTON_A ||
-		 getDevicePush( ) & BUTTON_B ||
-		 getDevicePush( ) & BUTTON_C ||
-		 getDevicePush( ) & BUTTON_D ) {
-		// 再登場のために初期化
-		appear( );
-		// アイテム初期化
-		for ( int i = 0; i < MAX_ITEM; i++ ) {
-			_item[ i ] = false;
+	_progress_count++;
+	_progress_type = SynchronousData::PROGRESS_OPENING;
+	if ( _progress_count >= 100 ) {
+		_progress_count = 100;
+		if ( getDevicePush( ) & BUTTON_A ||
+			 getDevicePush( ) & BUTTON_B ||
+			 getDevicePush( ) & BUTTON_C ||
+			 getDevicePush( ) & BUTTON_D ) {
+			_progress_count = 0;
+			// 再登場のために初期化
+			appear( );
+			// アイテム初期化
+			for ( int i = 0; i < MAX_ITEM; i++ ) {
+				_item[ i ] = false;
+			}
+			_virtue = 0;
+			_money = 0;
+			_redo = 0;
+			_mode = MODE_NORMAL;
 		}
-
-		_virtue = 0;
-		_money = 0;
-		_redo = 0;
-		_mode = MODE_NORMAL;
 	}
 }
 
@@ -893,9 +899,9 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		data->setStatusState( _player, SynchronousData::STATE_ENDING ); 
 		data->setStatusProgress( _player, SynchronousData::PROGRESS_ENDING, _progress_count );
 		break;
-	case ACTION_OPNING:
+	case ACTION_OPENING:
 		data->setStatusState( _player, SynchronousData::STATE_OPENING ); 
-		data->setStatusProgress( _player, SynchronousData::PROGRESS_ITEM_HYPERTROPHY, _progress_count );
+		data->setStatusProgress( _player, SynchronousData::PROGRESS_OPENING, _progress_count );
 		break;
 
 	default:
@@ -964,7 +970,7 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 	case ACTION_ENTRY:
 	case ACTION_CONTINUE:
 	case ACTION_ENDING:
-	case ACTION_OPNING:
+	case ACTION_OPENING:
 		return;
 	case ACTION_WALK:
 		motion = ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT / 4;
