@@ -321,8 +321,10 @@ void RockViewer::drawUI( ) const {
 		}
 		if ( family->getPlayer( i )->isBubble( ) &&
 			 info->isActiveState( AREA_ENTRY ) ) {
-			_breasts[ i ]->setRect( 0, 0, 320, 360 );
-			_breasts[ i ]->setPos( i * ( SCREEN_WIDTH / 4 ), SCREEN_HEIGHT - 256, ( i + 1 ) * ( SCREEN_WIDTH / 4 ), SCREEN_HEIGHT );
+			double ratio = family->getPlayer( i )->getBubbleCountRatio( );
+			int ty = ( int )( 360 * ratio );
+			_breasts[ i ]->setRect( 0, ty, 320, 360 - ty );
+			_breasts[ i ]->setPos( i * ( SCREEN_WIDTH / 4 ), SCREEN_HEIGHT - 256 + ( 256 * ratio ), ( i + 1 ) * ( SCREEN_WIDTH / 4 ), SCREEN_HEIGHT );
 			_breasts[ i ]->draw( );
 			continue;
 		}

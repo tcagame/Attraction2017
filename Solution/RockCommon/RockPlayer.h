@@ -24,6 +24,7 @@ public:
 	void setAdmissionPos( const Vector& camera_pos );
 	int getId( ) const;
 	void knockBack( RockEnemyPtr enemy );
+	double getBubbleCountRatio( );
 protected:
 	void act( );
 	void updateInCamera( );
