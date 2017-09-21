@@ -67,6 +67,14 @@ void ViewerConsole::initialize( ) {
 	_viewer_street = ViewerStreetPtr( new ViewerStreet );
 	_viewer_event  = ViewerEventPtr	( new ViewerEvent );
 	_viewer_status = ViewerStatusPtr( new ViewerStatus );
+	
+	_image_bustup[ PLAYER_TAROSUKE ] = drawer->createImage( "UI/ui_bustup_tarosuke.png" );
+	_image_bustup[ PLAYER_TAROJIRO ] = drawer->createImage( "UI/ui_bustup_tarojiro.png" );
+	_image_bustup[ PLAYER_GARISUKE ] = drawer->createImage( "UI/ui_bustup_garisuke.png" );
+	_image_bustup[ PLAYER_TAROMI   ] = drawer->createImage( "UI/ui_bustup_taromi.png"   );
+	for ( int i = 0; i < MAX_PLAYER; i++ ) {
+		_image_bustup[ i ]->setPos( ( 640 - 122 ) / 2, 100 );
+	}
 
 	_image_bar_upper = drawer->createImage( "UI/ui_bar.png" );
 	_image_bar_upper->setRect( 0, 0, 640, 8 );
@@ -83,8 +91,13 @@ void ViewerConsole::initialize( ) {
 	_image_device = drawer->createImage( "UI/ui_device.png" );
 	
 	_image_entry = drawer->createImage( "UI/ui_entry.png" );
+
 	_image_opening = drawer->createImage( "UI/ui_tutorial.png" );
 	_image_opening->setPos( 0, 480 - 256 );
+
+	_image_continue = drawer->createImage( "UI/ui_continue.png" );
+	_image_continue->setPos( 0, 480 - 256 );
+
 	int w, h;
 	_image_device->getImageSize( w, h );
 	_image_device->setPos( ( 640 - w ) / 2, ( 480 - h ) / 2 );
@@ -151,8 +164,21 @@ void ViewerConsole::drawConsole( ) {
 	}
 
 		
+	int count = data->getStatusProgressCount( _player );
 	if ( state == SynchronousData::STATE_ENTRY ) {
 		_image_entry->draw( );
+		_image_bustup[ _player ]->setBlend( Image::BLEND_NONE, count * 1.0 / 100 );
+		_image_bustup[ _player ]->draw( );
+		_image_bustup[ _player ]->setBlend( Image::BLEND_ADD, count * 1.0 / 100 );
+		_image_bustup[ _player ]->draw( );
+	}
+	if ( state == SynchronousData::STATE_CONTINUE ) {
+		_image_continue->draw( );
+		int x = 640 / 2;
+		int y = 480 - 256 + 100;
+		_image_redo->setRect( 0, 0, 32, 32 );
+		_image_redo->setPos( x - count, y - count, x + count, y + count );
+		_image_redo->draw( );
 	}
 }
 

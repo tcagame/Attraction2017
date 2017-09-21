@@ -45,6 +45,9 @@ private:
 	ImagePtr _image_ending;
 	ImagePtr _image_entry;
 	ImagePtr _image_opening;
+	ImagePtr _image_continue;
 	std::array< bool, MAX_PLAYER > _dead_se;
+	ImagePtr _image_redo;
+	std::array< ImagePtr, MAX_PLAYER > _image_bustup;
 };
 

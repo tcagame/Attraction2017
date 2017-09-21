@@ -37,24 +37,29 @@ void ViewerLive::initialize( ) {
 	_viewer_event    = ViewerEventPtr	   ( new ViewerEvent    );
 	_viewer_title    = ViewerTitlePtr      ( new ViewerTitle    );
 	_viewer_status   = ViewerStatusPtr     ( new ViewerStatus   );
-	_viewer_progress = ViewerProgressBarPtr( new ViewerProgressBar );
 	_viewer_debug    = ViewerDebugPtr      ( new ViewerDebug    );
 	_viewer_object   = ViewerObjectPtr     ( new ViewerObject   );
-
-	DrawerPtr drawer = Drawer::getTask( );
 	
+	DrawerPtr drawer = Drawer::getTask( );
+
+	_image_bustup[ PLAYER_TAROSUKE ] = drawer->createImage( "UI/ui_bustup_tarosuke.png" );
+	_image_bustup[ PLAYER_TAROJIRO ] = drawer->createImage( "UI/ui_bustup_tarojiro.png" );
+	_image_bustup[ PLAYER_GARISUKE ] = drawer->createImage( "UI/ui_bustup_garisuke.png" );
+	_image_bustup[ PLAYER_TAROMI   ] = drawer->createImage( "UI/ui_bustup_taromi.png"   );
+
 	_image_frame = drawer->createImage( "UI/area_event_frame.png" );
 	_image_frame->setRect( 0, 0, 1280, 256 );
 	_image_frame->setPos( 0, 0 );
 	
-	_image_cover_entry    = drawer->createImage( "UI/ui_cover_entry.png" );
-	_image_cover_continue = drawer->createImage( "UI/ui_cover_continue2.png" );
-
 	_image_device = drawer->createImage( "UI/ui_device.png" );
 
 	_image_fade = drawer->createImage( "UI/ui_fade.png" );
 	_image_fade->setRect( 0, 0, 256, 256 );
 	_image_fade->setPos( 0, 0, 1280, 256 );
+
+	_image_redo = drawer->createImage( "UI/ui_continue_picture.png" );
+	_image_entry = drawer->createImage( "UI/ui_entry1.png" );
+	_image_continue = drawer->createImage( "UI/ui_continue1.png" );
 }
 
 void ViewerLive::update( ) {
@@ -99,16 +104,31 @@ void ViewerLive::update( ) {
 		PLAYER target = ( PLAYER )i;
 		_viewer_status->draw( target, i * VIEW_STATUS_WIDTH, VIEW_STATUS_Y );
 
+		int count = data->getStatusProgressCount( target );
+
 		switch ( data->getStatusState( target ) ) {
 		case SynchronousData::STATE_ENTRY:
-			_image_cover_entry->setPos( i * VIEW_STATUS_WIDTH, VIEW_STATUS_Y );
-			_image_cover_entry->draw( );
-			_viewer_progress->draw( target );
+			{
+				_image_entry->setPos( i * VIEW_STATUS_WIDTH, VIEW_STATUS_Y );
+				_image_entry->draw( );
+				_image_bustup[ target ]->setPos( i * VIEW_STATUS_WIDTH + ( 320 - 122 ) / 2, VIEW_STATUS_Y + 10 );
+				_image_bustup[ target ]->setBlend( Image::BLEND_NONE, 0 );
+				_image_bustup[ target ]->draw( );
+				_image_bustup[ target ]->setBlend( Image::BLEND_ADD, count * 1.0 / 100 );
+				_image_bustup[ target ]->draw( );
+			}
 			break;
 		case SynchronousData::STATE_CONTINUE:
-			_image_cover_continue->setPos( i * VIEW_STATUS_WIDTH, VIEW_STATUS_Y );
-			_image_cover_continue->draw( );
-			//_viewer_progress->draw( target );
+			{
+				_image_continue->setPos( i * VIEW_STATUS_WIDTH, VIEW_STATUS_Y );
+				_image_continue->draw( );
+				int od = count * 50 / 100;
+				int x = i * VIEW_STATUS_WIDTH + 160;
+				int y = VIEW_STATUS_Y + 80;
+				_image_redo->setRect( 0, 0, 32, 32 );
+				_image_redo->setPos( x - od, y - od, x + od, y + od );
+				_image_redo->draw( );
+			}
 			break;
 		}
 

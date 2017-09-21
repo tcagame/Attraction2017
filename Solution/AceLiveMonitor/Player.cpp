@@ -206,10 +206,10 @@ void Player::updatetDevice( ) {
 
 	if ( _device_id < 0 ) {
 		unsigned char button[ MAX_PLAYER ];
-		button[ PLAYER_TAROSUKE ] = BUTTON_C;
-		button[ PLAYER_TAROJIRO ] = BUTTON_D;
-		button[ PLAYER_GARISUKE ] = BUTTON_A;
-		button[ PLAYER_TAROMI   ] = BUTTON_B;
+		button[ PLAYER_TAROSUKE ] = BUTTON_A;
+		button[ PLAYER_TAROJIRO ] = BUTTON_B;
+		button[ PLAYER_GARISUKE ] = BUTTON_C;
+		button[ PLAYER_TAROMI   ] = BUTTON_D;
 
 		int num = device->getDeviceNum( );
 		if ( num == 0 ) {
@@ -370,7 +370,7 @@ void Player::actOnEntry( ) {
 
 void Player::actOnContinue( ) {
 	adjustToCamera( );
-	//updateProgressBar( );
+	updateProgressBar( );
 
 	if ( _progress_count >= 100 ) {
 		// Ä“oê‚Ì‚½‚ß‚É‰Šú‰»

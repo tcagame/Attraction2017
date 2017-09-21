@@ -1,7 +1,9 @@
 #pragma once
 #include "Task.h"
-#include <string>
 #include "smart_ptr.h"
+#include "ace_define.h"
+#include <string>
+#include <array>
 
 PTR( ViewerLive );
 PTR( ViewerStreet );
@@ -28,14 +30,15 @@ private:
 	ViewerStreetPtr _viewer_street;
 	ViewerEventPtr _viewer_event;
 	ViewerStatusPtr _viewer_status;
-	ViewerProgressBarPtr _viewer_progress;
 	ViewerTitlePtr _viewer_title;
 	ViewerObjectPtr _viewer_object;
 	ViewerDebugPtr _viewer_debug;
+	ImagePtr _image_entry;
+	ImagePtr _image_continue;
 	ImagePtr _image_frame;
-	ImagePtr _image_cover_entry;
-	ImagePtr _image_cover_continue;
 	ImagePtr _image_device;
 	ImagePtr _image_fade;
+	ImagePtr _image_redo;
+	std::array< ImagePtr, MAX_PLAYER > _image_bustup;
 };
 
