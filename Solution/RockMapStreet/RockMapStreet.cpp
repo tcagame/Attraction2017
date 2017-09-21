@@ -346,7 +346,27 @@ void RockMapStreet::genarateStorage( STAGE next ) {
 		storage->addShopItem( RockItemPtr( new RockItemEnhancePower ( Vector( OBABA_POS.x + 50, OBABA_POS.y, OBABA_POS.z - 50 ) ) ) );
 		storage->addShopItem( RockItemPtr( new RockItemDango        ( Vector( OBABA_POS.x, OBABA_POS.y, OBABA_POS.z - 50 ) ) ) );
 		storage->addShopItem( RockItemPtr( new RockItemEnhanceCharge( Vector( OBABA_POS.x - 50, OBABA_POS.y, OBABA_POS.z - 50 ) ) ) );
-		storage->addItem( RockItemPtr( new RockItemToku( Vector( 200, 500, -500 ) ) ) );
+		//“¿‚Ü‚Ý‚ê
+		storage->addItem( RockItemPtr( new RockItemToku( Vector( 660,     10,   -623 ) ) ) );
+		storage->addItem( RockItemPtr( new RockItemToku( Vector( 2813,   343,   -615 ) ) ) );
+		storage->addItem( RockItemPtr( new RockItemToku( Vector( 7206,   -70,   -774 ) ) ) );
+		storage->addItem( RockItemPtr( new RockItemToku( Vector( 6903,   -70,  -1623 ) ) ) );
+		storage->addItem( RockItemPtr( new RockItemToku( Vector( 5300,   -230, -2165 ) ) ) );
+		storage->addItem( RockItemPtr( new RockItemToku( Vector( 3463,   -560, -2311 ) ) ) );
+		storage->addItem( RockItemPtr( new RockItemToku( Vector( 4544,   -820, -3122 ) ) ) );
+		storage->addItem( RockItemPtr( new RockItemToku( Vector( 6616,  -1000, -3056 ) ) ) );
+		storage->addItem( RockItemPtr( new RockItemToku( Vector( 8401,  -1356, -3056 ) ) ) );
+		storage->addItem( RockItemPtr( new RockItemToku( Vector( 13963, -1290, -1218 ) ) ) );
+		storage->addItem( RockItemPtr( new RockItemToku( Vector( 15045, -1095,  -693 ) ) ) );
+		storage->addItem( RockItemPtr( new RockItemToku( Vector( 16224, -1095,   267 ) ) ) );
+		storage->addItem( RockItemPtr( new RockItemToku( Vector( 15664, -1081,  1113 ) ) ) );
+		storage->addItem( RockItemPtr( new RockItemToku( Vector( 15260, -1079,  1649 ) ) ) );
+		storage->addItem( RockItemPtr( new RockItemToku( Vector( 14827, -1078,  2190 ) ) ) );
+		storage->addItem( RockItemPtr( new RockItemToku( Vector( 14587, -1095,  2830 ) ) ) );
+		storage->addItem( RockItemPtr( new RockItemToku( Vector( 17363, -1095,  4694 ) ) ) );
+		storage->addItem( RockItemPtr( new RockItemToku( Vector( 17722, -1095,  5772 ) ) ) );
+		storage->addItem( RockItemPtr( new RockItemToku( Vector( 17692, -1095,  5772 ) ) ) );
+		storage->addItem( RockItemPtr( new RockItemToku( Vector( 17662, -1095,  5772 ) ) ) );
 	}
 		break;
 	case STAGE_CAVE:

@@ -18,7 +18,7 @@ ShotReflect::~ShotReflect( ) {
 }
 
 void ShotReflect::setSynchronousData( int camera_pos ) const {
-	const int ANIM = 16;
+	const int ANIM = 12;
 
 	Vector pos = getPos( );
 	int x = ( int )pos.x;
