@@ -4,6 +4,8 @@
 #include "Application.h"
 #include "ace_define.h"
 #include "Military.h"
+#include "Family.h"
+#include "Player.h"
 
 #include "PopPurpleZombie.h"
 #include "PopFaceAndHand.h"
@@ -207,6 +209,17 @@ void Popper::initialize( ) {
 }
 
 void Popper::update( ) {
+	FamilyPtr family( Family::getTask( ) );
+	bool exist = false;
+	for ( int i = 0; i < MAX_PLAYER; i++ ) {
+		if ( family->getPlayer( i )->isExist( ) ) {
+			exist = true;
+			break;
+		}
+	}
+	if ( !exist ) {
+		return;
+	}
 	for ( int i = 0; i < _pops.size( ); i++ ) {
 		_pops[ i ]->update( );
 	}
