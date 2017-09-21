@@ -871,8 +871,9 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		data->setStatusProgress( _player, SynchronousData::PROGRESS_BAR, _progress_count );
 		break;
 	case ACTION_ENDING:
-		data->setStatusState( _player, SynchronousData::STATE_CONTINUE ); 
+		data->setStatusState( _player, SynchronousData::STATE_ENDING ); 
 		data->setStatusProgress( _player, SynchronousData::PROGRESS_ENDING, _progress_count );
+		break;
 	default:
 		if ( getArea( ) == AREA_STREET ) {
 			data->setStatusState( _player, SynchronousData::STATE_PLAY_STREET ); 
@@ -1162,7 +1163,7 @@ void Player::setModeVirtue( ) {
 }
 
 void Player::setActionEnding( ) {
-	_action = ACTION_ENDING;
+	setAction( ACTION_ENDING );
 }
 
 

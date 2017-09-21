@@ -24,13 +24,13 @@ public:
 	void initialize( );
 	void update( );
 private:
-	void drawArea( );
-	void drawUI( );
+	void drawConsole( );
 	void drawDevice( );
 	void drawAreaEvent( );
 	void drawAreaStreet( );
 	void playSe( );
 private:
+	int _ending_type;
 	const PLAYER _player;
 	ViewerObjectPtr _viewer_object;
 	ViewerStreetPtr _viewer_street;
@@ -40,6 +40,7 @@ private:
 	ImagePtr _image_bar_lower;
 	ImagePtr _image_minimap;
 	ImagePtr _image_device;
+	ImagePtr _image_ending;
 	std::array< bool, MAX_PLAYER > _dead_se;
 };
 
