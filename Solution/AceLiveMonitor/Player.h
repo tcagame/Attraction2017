@@ -25,6 +25,7 @@ public:
 		ACTION_ENTERING_SANZO,
 		ACTION_AUDIENCE,
 		ACTION_ENDING,
+		ACTION_OPNING,
 		MAX_ACTION,
 	};
 	enum ITEM {
@@ -94,6 +95,7 @@ private:
 	void actOnEnteringSanzo( );
 	void actOnAudience( );
 	void actOnEnding( );
+	void actOnOpening( );
 	void setAction( ACTION action );
 	void adjustToCamera( );
 	void updateProgressBar( );

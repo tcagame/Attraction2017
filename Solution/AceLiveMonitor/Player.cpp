@@ -68,7 +68,8 @@ const int MOTION_OFFSET[Player::MAX_ACTION] = {
 	14 * 16,   //ACTION_ENTERING_FADEOUT,
 	0,   //ACTION_ENTERING_SANZO,
 	3 * 16 + 14,   //ACTION_AUDIENCE
-	1,   //ACTION_ENDING
+	0,   //ACTION_ENDING
+	0,   //ACTION_OPENING
 };
 
 const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
@@ -89,6 +90,7 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		1,  //ACTION_ENTERING_SANZO,
 		1,  //ACTION_AUDIENCE
 		1,  //ACTION_ENDING
+		1,  //ACTION_OPENING
 	},
 	{ // たろじろー
 		1 , // ACTION_ENTRY,
@@ -107,6 +109,7 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		1,  //ACTION_ENTERING_SANZO,
 		1,  //ACTION_AUDIENCE
 		1,  //ACTION_ENDING
+		1,  //ACTION_OPENING
 	},
 	{ // ガりすけ
 		1 , // ACTION_ENTRY,
@@ -125,6 +128,7 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		1,  //ACTION_ENTERING_SANZO,
 		1,  //ACTION_AUDIENCE
 		1,  //ACTION_ENDING
+		1,  //ACTION_OPENING
 	},
 	{ // たろみ
 		1 , // ACTION_ENTRY,
@@ -143,6 +147,7 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		1,  //ACTION_ENTERING_SANZO,
 		1,  //ACTION_AUDIENCE
 		1,  //ACTION_ENDING
+		1,  //ACTION_OPENING
 	}
 };
 
@@ -183,7 +188,8 @@ bool Player::isExist( ) const {
 		_action != ACTION_BLOW_AWAY &&
 		_action != ACTION_ENTERING_FADEOUT &&
 		_action != ACTION_ENTERING_SANZO &&
-		_action != ACTION_ENDING;
+		_action != ACTION_ENDING &&
+		_action != ACTION_OPNING;
 }
 
 int Player::getDeviceId( ) const {
@@ -278,6 +284,9 @@ void Player::act( ) {
 	case ACTION_ENDING:
 		actOnEnding( );
 		break;
+	case ACTION_OPNING:
+		actOnOpening( );
+		break;
 	}
 
 	actOnCamera( );
@@ -354,17 +363,7 @@ void Player::actOnEntry( ) {
 	updateProgressBar( );
 
 	if ( _progress_count >= 100 ) {
-		// 再登場のために初期化
-		appear( );
-		// アイテム初期化
-		for ( int i = 0; i < MAX_ITEM; i++ ) {
-			_item[ i ] = false;
-		}
-
-		_virtue = 0;
-		_money = 0;
-		_redo = 0;
-		_mode = MODE_NORMAL;
+		setAction( ACTION_OPNING );
 	}
 }
 
@@ -749,6 +748,22 @@ void Player::actOnEnding( ) {
 		_progress_count = 0;
 	}
 }
+
+void Player::actOnOpening( ) {
+	// 再登場のために初期化
+	appear( );
+	// アイテム初期化
+	for ( int i = 0; i < MAX_ITEM; i++ ) {
+		_item[ i ] = false;
+	}
+
+	_virtue = 0;
+	_money = 0;
+	_redo = 0;
+	_mode = MODE_NORMAL;
+	
+}
+
 
 void Player::damage( int force ) {
 	if ( Debug::getTask( )->isDebug( ) ) {
