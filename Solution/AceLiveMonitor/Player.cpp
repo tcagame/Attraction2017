@@ -1019,7 +1019,7 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 	pattern = off + motion % num;
 	
 	if ( isStanding( ) ) {
-		data->addObject( area, SynchronousData::TYPE_SHADOW, 0, 0, x, y );
+		data->addObject( area, SynchronousData::TYPE_SHADOW, 0, 0, x, y + 32 );
 	}
 
 	unsigned char attribute = 0;

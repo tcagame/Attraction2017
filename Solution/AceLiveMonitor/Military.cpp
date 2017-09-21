@@ -51,8 +51,8 @@ void Military::updateEnemy( ) {
 	while ( ite != _enemies.end( ) ) {
 		EnemyPtr enemy = (*ite);
 		enemy->update( );
-		enemy->setSynchronousData( camera_pos );
 		enemy->setSynchronousDataShadow( camera_pos );
+		enemy->setSynchronousData( camera_pos );
 		//エネミーが倒れたときの処理
 		if ( enemy->getPower( ) <= 0 ) {
 			if ( !std::dynamic_pointer_cast< EnemyAttack >( enemy ) ) {

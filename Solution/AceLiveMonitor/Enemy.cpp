@@ -72,7 +72,7 @@ void Enemy::setSynchronousDataShadow( int camera_pos ) {
 	}
 	Vector pos = getPos( );
 	int x = ( int )pos.x;
-	int y = ( int )pos.y;
+	int y = ( int )pos.y + 32;
 	if ( getArea( ) == AREA_STREET ) {
 		x -= camera_pos;
 	}
