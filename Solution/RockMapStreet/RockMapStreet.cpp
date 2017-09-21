@@ -46,7 +46,7 @@
 #include "RockEnemyBossRedDaemon.h"
 
 PTR( RockEnemyBossRedDaemon );
-
+const int CAVE_REWORD = 50000;
 const int REMOVE_CAVE_TIME = 500;
 const int DROP_TIMING = 1800;
 const Vector OBABA_POS( 7200, 750, -110 );
@@ -178,8 +178,13 @@ void RockMapStreet::updateCave( ) {
 	}
 
 	if ( load ) {
+		RockFamilyPtr family = RockFamily::getTask( );
 		for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
-			int value = 50000;
+			RockPlayerPtr player = family->getPlayer( i );
+			if ( !player->isActive( ) ) {
+				continue;
+			}
+			int value = CAVE_REWORD;
 			 MessageSender::getTask( )->sendMessage( i, Message::COMMAND_MONEY, &value );
 		}
 		Sound::getTask( )->playSE( "yokai_se_32.wav" );
