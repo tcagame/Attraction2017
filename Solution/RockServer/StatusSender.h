@@ -25,6 +25,7 @@ public:
 	bool setItem( int idx, int item );
 	bool setArea( int idx, unsigned int area );
 private:
+	std::array< int, Status::PLAYER_NUM > _speed_down_count;
 	StatusPtr _status;
 	std::array< int, Status::PLAYER_NUM > _reset_count;//ボタンのカウント
 };

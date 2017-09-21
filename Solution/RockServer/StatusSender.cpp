@@ -4,6 +4,7 @@
 #include "Server.h"
 
 const int RESET_TIME = 15;//そのうち削除する
+const int MAX_SPEED_DOWM_TIME = 1800;
 
 
 StatusSenderPtr StatusSender::getTask( ) {
@@ -54,9 +55,15 @@ void StatusSender::updateFamily( ) {
 			is_result = false;
 		}
 		// スピードダウン効果
+		if ( player.item & SPEED_DOWN ) {
+			_speed_down_count[ i ]++;
+		} else {
+			_speed_down_count[ i ] = 0;
+		}
 		if ( player.area == AREA_WAIT ||
 			 player.area == AREA_ENTRY || 
-			 player.area == AREA_RESULT ) {
+			 player.area == AREA_RESULT ||
+			 _speed_down_count[ i ] > MAX_SPEED_DOWM_TIME ) {
 			if ( player.item & SPEED_DOWN ) {
 				player.item ^= SPEED_DOWN;
 			}

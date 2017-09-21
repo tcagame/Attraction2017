@@ -69,6 +69,7 @@ void RockDollHouse::initialize( ) {
 	_dolls[ DOLL_LITTLE_RED_DAMON       ]->setScale( Matrix::makeTransformScaling( Vector( 1.5, 1.5, 1.5 ) ) );
 	_dolls[ DOLL_BOSS_FIRE             ]->load( "Resource/Rock/enemy/enm20_fire/enm20_fire.mv1" );
 	_dolls[ DOLL_BOSS_TREE             ]->load( "Resource/Rock/enemy/enm21_tree/enm21_tree.mv1" );
+	_dolls[ DOLL_BOSS_TREE             ]->setScale( Matrix::makeTransformScaling( Vector( 1.5, 1.5, 1.5 ) ) );
 	_dolls[ DOLL_BOSS_ROCK	           ]->load( "Resource/Rock/enemy/enm22_rock/enm22_rock/enm22_rock.mv1" );
 	_dolls[ DOLL_BOSS_ROCK_ATTACK_1    ]->load( "Resource/Rock/enemy/enm22_rock/enm22_rock/enm22_01.mv1" );
 	_dolls[ DOLL_BOSS_ROCK_ATTACK_2    ]->load( "Resource/Rock/enemy/enm22_rock/enm22_rock/enm22_02.mv1" );
@@ -84,6 +85,9 @@ void RockDollHouse::initialize( ) {
 	_dolls[ DOLL_FLOG_1                ]->load( "Resource/Rock/enemy/enm25_flog/enm25_a01.mv1" );
 	_dolls[ DOLL_FLOG_2                ]->load( "Resource/Rock/enemy/enm25_flog/enm25_a02.mv1" );
 	_dolls[ DOLL_TREE_NUTS             ]->load( "Resource/Rock/enemy/enm40_tree_nuts/enm40_a01.mv1" );
+	_dolls[ DOLL_TREE_NUTS             ]->setScale( Matrix::makeTransformScaling( Vector( 1.5, 1.5, 1.5 ) ) );
+
+
 
 	//item
 	_dolls[ DOLL_DANGO	 ]->load( "Resource/Rock/item/itm01/itm01.mv1" );
