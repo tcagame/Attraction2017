@@ -46,7 +46,10 @@ void EventEnma::update( ) {
 		if ( _count > AUDIENCE_COUNT ) {
 			_player->setModeVirtue( );
 			exit( );
+			_phase = PHASE_FINISHED;
 		}
+		break;
+	case PHASE_FINISHED:
 		break;
 	}
 }

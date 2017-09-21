@@ -68,6 +68,7 @@ const int MOTION_OFFSET[Player::MAX_ACTION] = {
 	14 * 16,   //ACTION_ENTERING_FADEOUT,
 	0,   //ACTION_ENTERING_SANZO,
 	3 * 16 + 14,   //ACTION_AUDIENCE
+	1,   //ACTION_ENDING
 };
 
 const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
@@ -87,6 +88,7 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		8,  //ACTION_ENTERING_FADEOUT,
 		1,  //ACTION_ENTERING_SANZO,
 		1,  //ACTION_AUDIENCE
+		1,  //ACTION_ENDING
 	},
 	{ // ‚½‚ë‚¶‚ë[
 		1 , // ACTION_ENTRY,
@@ -104,6 +106,7 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		8,  //ACTION_ENTERING_FADEOUT,
 		1,  //ACTION_ENTERING_SANZO,
 		1,  //ACTION_AUDIENCE
+		1,  //ACTION_ENDING
 	},
 	{ // ƒK‚è‚·‚¯
 		1 , // ACTION_ENTRY,
@@ -121,6 +124,7 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		8,  //ACTION_ENTERING_FADEOUT,
 		1,  //ACTION_ENTERING_SANZO,
 		1,  //ACTION_AUDIENCE
+		1,  //ACTION_ENDING
 	},
 	{ // ‚½‚ë‚Ý
 		1 , // ACTION_ENTRY,
@@ -138,6 +142,7 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		8,  //ACTION_ENTERING_FADEOUT,
 		1,  //ACTION_ENTERING_SANZO,
 		1,  //ACTION_AUDIENCE
+		1,  //ACTION_ENDING
 	}
 };
 
@@ -177,7 +182,8 @@ bool Player::isExist( ) const {
 		_action != ACTION_DAMEGE &&
 		_action != ACTION_BLOW_AWAY &&
 		_action != ACTION_ENTERING_FADEOUT &&
-		_action != ACTION_ENTERING_SANZO;
+		_action != ACTION_ENTERING_SANZO &&
+		_action != ACTION_ENDING;
 }
 
 int Player::getDeviceId( ) const {
@@ -269,6 +275,9 @@ void Player::act( ) {
 	case ACTION_AUDIENCE:
 		actOnAudience( );
 		break;
+	case ACTION_ENDING:
+		actOnEnding( );
+		break;
 	}
 
 	actOnCamera( );
@@ -328,7 +337,8 @@ void Player::updateShowMoney( ) {
 
 void Player::updateProgressEffect( ) {
 	if ( _action == ACTION_ENTRY ||
-		 _action == ACTION_CONTINUE ) {
+		 _action == ACTION_CONTINUE ||
+		 _action == ACTION_ENDING ) {
 		return;
 	}
 
@@ -726,6 +736,20 @@ void Player::actOnEnteringSanzo( ) {
 void Player::actOnAudience( ) {
 }
 
+void Player::actOnEnding( ) {
+	if ( getDeviceButton( ) & BUTTON_A ||
+		 getDeviceButton( ) & BUTTON_B ||
+		 getDeviceButton( ) & BUTTON_C ||
+		 getDeviceButton( ) & BUTTON_D ) {
+		_progress_count++;
+		if ( _progress_count > 100 ) {
+			_progress_count = 100;
+		}
+	} else {
+		_progress_count = 0;
+	}
+}
+
 void Player::damage( int force ) {
 	if ( Debug::getTask( )->isDebug( ) ) {
 		return;
@@ -846,6 +870,9 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		data->setStatusState( _player, SynchronousData::STATE_CONTINUE ); 
 		data->setStatusProgress( _player, SynchronousData::PROGRESS_BAR, _progress_count );
 		break;
+	case ACTION_ENDING:
+		data->setStatusState( _player, SynchronousData::STATE_CONTINUE ); 
+		data->setStatusProgress( _player, SynchronousData::PROGRESS_ENDING, _progress_count );
 	default:
 		if ( getArea( ) == AREA_STREET ) {
 			data->setStatusState( _player, SynchronousData::STATE_PLAY_STREET ); 
@@ -911,6 +938,7 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		break;
 	case ACTION_ENTRY:
 	case ACTION_CONTINUE:
+	case ACTION_ENDING:
 		return;
 	case ACTION_WALK:
 		motion = ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT / 4;
@@ -1036,10 +1064,9 @@ void Player::leaveEvent( ) {
 EVENT Player::getOnEvent( ) const {
 	if ( !isStanding( ) ||
 		 getArea( ) == AREA_EVENT ||
-		 !isExist( ) ) {
+		 !isExist( )  ) {
 		return EVENT_NONE;
 	}
-
 	MapPtr map = World::getTask( )->getMap( AREA_STREET );
 	unsigned char obj = map->getObject( getPos( ) );
 	EVENT event = EVENT_NONE;
@@ -1077,7 +1104,7 @@ EVENT Player::getOnEvent( ) const {
 	if ( _mode == MODE_ENMA ) {
 		event = EVENT_ENMA;
 	}
-	if ( _virtue > _max_virtue ) {
+	if ( _virtue >= _max_virtue ) {
 		event = EVENT_BUDHA;
 	}
 
@@ -1132,6 +1159,10 @@ void Player::audience( ) {
 
 void Player::setModeVirtue( ) {
 	_mode = MODE_VIRTUE;
+}
+
+void Player::setActionEnding( ) {
+	_action = ACTION_ENDING;
 }
 
 
