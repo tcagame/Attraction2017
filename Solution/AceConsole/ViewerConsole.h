@@ -28,6 +28,8 @@ private:
 	void drawDevice( );
 	void drawAreaEvent( );
 	void drawAreaStreet( );
+	void drawOpening( );
+	void drawContinue( );
 	void playSe( );
 private:
 	int _ending_type;
@@ -41,6 +43,8 @@ private:
 	ImagePtr _image_minimap;
 	ImagePtr _image_device;
 	ImagePtr _image_ending;
+	ImagePtr _image_entry;
+	ImagePtr _image_opening;
 	std::array< bool, MAX_PLAYER > _dead_se;
 };
 

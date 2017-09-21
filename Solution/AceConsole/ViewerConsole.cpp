@@ -30,7 +30,6 @@ const char * FILENAME[ ] = {
 	"Result/hell/hell_tarojiro.png",
 	"Result/hell/hell_tgarisuke.png",
 	"Result/hell/hell_taromi.png",
-
 };
 
 
@@ -82,6 +81,10 @@ void ViewerConsole::initialize( ) {
 	_image_minimap->setPos( 320, 8 );
 	
 	_image_device = drawer->createImage( "UI/ui_device.png" );
+	
+	_image_entry = drawer->createImage( "UI/ui_entry.png" );
+	_image_opening = drawer->createImage( "UI/ui_tutorial.png" );
+	_image_opening->setPos( 0, 480 - 256 );
 	int w, h;
 	_image_device->getImageSize( w, h );
 	_image_device->setPos( ( 640 - w ) / 2, ( 480 - h ) / 2 );
@@ -120,6 +123,12 @@ void ViewerConsole::drawConsole( ) {
 	case SynchronousData::STATE_PLAY_EVENT:
 		drawAreaEvent( );
 		break;
+	case SynchronousData::STATE_OPENING:
+		drawOpening( );
+		break;
+	case SynchronousData::STATE_CONTINUE:
+		drawContinue( );
+		break;
 	}	
 
 	_image_bar_upper->draw( );
@@ -139,6 +148,11 @@ void ViewerConsole::drawConsole( ) {
 			_ending_type = type;
 		}
 		_image_ending->draw( );
+	}
+
+		
+	if ( state == SynchronousData::STATE_ENTRY ) {
+		_image_entry->draw( );
 	}
 }
 
@@ -182,6 +196,13 @@ void ViewerConsole::drawDevice( ) {
 	}
 }
 
+void ViewerConsole::drawOpening( ) {
+	_image_opening->draw( );
+}
+
+void ViewerConsole::drawContinue( ) {
+}
+
 
 void ViewerConsole::playSe( ) {
 	SynchronousDataPtr data = SynchronousData::getTask( );
@@ -202,7 +223,7 @@ void ViewerConsole::playSe( ) {
 
 	if ( data->getStatusPower( _player ) == 0 ) {
 		if ( !_dead_se[ _player ] ) {
-			sound->playSE( "yokai_se_31.wav" );
+	//		sound->playSE( "yokai_se_31.wav" );
 			_dead_se[ _player ] = true;
 		}
 	}
