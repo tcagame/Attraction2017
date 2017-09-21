@@ -32,6 +32,7 @@ protected:
 	void setPos( const Vector& pos );
 	void setPower( int power );
 	bool isStanding( ) const;
+	bool isMass( ) const;
 	virtual void act( ) = 0;
 	int getActCount( ) const;
 	void setOverlappedRadius( int radius );

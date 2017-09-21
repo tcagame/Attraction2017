@@ -26,6 +26,7 @@ private:
 		GRAPH_ITEM,
 		GRAPH_NPC,
 		GRAPH_SANZO,
+		GRAPH_SHADOW,
 		MAX_GRAPH,
 	};
 	struct Sprite {
@@ -49,6 +50,7 @@ private:
 	Sprite getSpriteItem( GRAPH graph, int x, int y, unsigned char attribute, int pattern, int size ) const;
 	Sprite getSpriteNPC( GRAPH graph, int x, int y, unsigned char attribute, int pattern, int size ) const;
 	Sprite getSpriteSanzo( GRAPH graph, int x, int y, unsigned char attribute, int pattern, int size ) const;
+	Sprite getSpriteShadow( GRAPH graph, int x, int y, unsigned char attribute, int pattern, int size ) const;
 private:
 	std::array< ImagePtr, MAX_GRAPH > _image;
 };

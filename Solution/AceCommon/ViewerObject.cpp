@@ -19,6 +19,7 @@ ViewerObject::ViewerObject( ) {
 	_image[ GRAPH_IMPACT			] = drawer->createImage( "Effect/impact.png"				);
 	_image[ GRAPH_ITEM				] = drawer->createImage( "Item/item.png"					);
 	_image[ GRAPH_NPC				] = drawer->createImage( "Event/character/character.png"	);
+	_image[ GRAPH_SHADOW			] = drawer->createImage( "Event/Effect/effect_shadow.png"	);
 }
 
 
@@ -284,6 +285,22 @@ ViewerObject::Sprite ViewerObject::getSpriteSanzo( GRAPH graph, int x, int y, un
 	sprite.ty = pattern / 6 * 64;
 	sprite.tw = 64;
 	sprite.th = 64;
+
+	sprite.sx1 = x - 64 / 2;
+	sprite.sy1 = y - 64;
+	sprite.sx2 = sprite.sx1 + 64;
+	sprite.sy2 = sprite.sy1 + 64;
+
+	return sprite;
+}
+
+ViewerObject::Sprite ViewerObject::getSpriteShadow( GRAPH graph, int x, int y, unsigned char attribute, int pattern, int size ) const {
+	Sprite sprite;
+	sprite.graph = graph;
+	sprite.tx = -1;
+	sprite.ty = -1;
+	sprite.tw = -1;
+	sprite.th = -1;
 
 	sprite.sx1 = x - 64 / 2;
 	sprite.sy1 = y - 64;

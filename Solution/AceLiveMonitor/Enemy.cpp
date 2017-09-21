@@ -62,3 +62,21 @@ unsigned char Enemy::getType( ) const {
 
 	return type;
 }
+
+void Enemy::setSynchronousDataShadow( int camera_pos ) {
+	if ( !isMass( ) ) {
+		return;
+	}
+	if ( !isStanding( ) ) {
+		return;
+	}
+	Vector pos = getPos( );
+	int x = ( int )pos.x;
+	int y = ( int )pos.y;
+	if ( getArea( ) == AREA_STREET ) {
+		x -= camera_pos;
+	}
+	if ( isStanding( ) ) {
+		SynchronousData::getTask( )->addObject( getArea( ), SynchronousData::TYPE_SHADOW, 0, 0, x, y );
+	}
+}

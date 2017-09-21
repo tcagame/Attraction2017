@@ -135,6 +135,10 @@ bool Character::isStanding( ) const {
 	return _standing;
 }
 
+bool Character::isMass( ) const {
+	return _mass;
+}
+
 AREA Character::getArea( ) const {
 	return _area;
 }

@@ -955,6 +955,7 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 	case ACTION_ENTRY:
 	case ACTION_CONTINUE:
 	case ACTION_ENDING:
+	case ACTION_OPNING:
 		return;
 	case ACTION_WALK:
 		motion = ( int )getPos( ).x / PLAYER_ANIM_WAIT_COUNT / 4;
@@ -1016,6 +1017,10 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 	}
 
 	pattern = off + motion % num;
+	
+	if ( isStanding( ) ) {
+		data->addObject( area, SynchronousData::TYPE_SHADOW, 0, 0, x, y );
+	}
 
 	unsigned char attribute = 0;
 	if ( getDir( ) == DIR_RIGHT ) {
