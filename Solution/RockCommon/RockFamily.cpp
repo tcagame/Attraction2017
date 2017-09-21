@@ -7,6 +7,7 @@
 #include "RockArmoury.h"
 #include "RockMilitary.h"
 #include "RockEnemy.h"
+#include "Sound.h"
 #include <assert.h>
 
 RockFamilyPtr RockFamily::getTask( ) {
@@ -40,6 +41,10 @@ void RockFamily::updatePlayer( ) {
 	RockMilitaryPtr military( RockMilitary::getTask( ) );
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		if ( !_player[ i ]->isActive( ) ) {
+			if ( _before_active[ i ] ) {
+				Sound::getTask( )->stopAllSE( );
+				_player[ i ]->stopEffect( );
+			}
 			_player[ i ]->resetPos( Vector( i * 50, 60 ) + getBeforeCameraPos( ) );
 			_player[ i ]->resetBubble( );
 			_before_active[ i ] = false;

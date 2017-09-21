@@ -1,12 +1,12 @@
 #include "PopRay.h"
 #include "EnemyRay.h"
 #include "Military.h"
-
-const int MAX_POP_COUNT = 400;
+#include "Property.h"
 
 PopRay::PopRay( const Vector& pos ) :
-Pop( pos ),
-_count( MAX_POP_COUNT ) {
+Pop( pos ) {
+	_max_pop_time = Property::getTask( )->getData( "Ray_POP_TIME" );
+	_count = _max_pop_time;
 }
 
 PopRay::~PopRay( ) {
@@ -16,7 +16,7 @@ void PopRay::update( ) {
 	if ( !_enemy.expired( ) ) {
 		return;
 	}
-	if ( _count > MAX_POP_COUNT ) {
+	if ( _count > _max_pop_time ) {
 		if ( isInScreen( ) ) {
 			EnemyPtr enemy = EnemyPtr( new EnemyRay( getPos( ) ) );
 			Military::getTask( )->popUp( enemy );

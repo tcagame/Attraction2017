@@ -25,7 +25,7 @@ RockMapBoss::~RockMapBoss( ) {
 }
 
 void RockMapBoss::initialize( ) {
-	_drawer = RockMapBossDrawerPtr( new RockMapBossDrawer( STAGE_ROCK_TO_TREE ) );
+	_drawer = RockMapBossDrawerPtr( new RockMapBossDrawer( STAGE_ROCK ) );
 	Sound::getTask( )->stopBGM( );
 }
 

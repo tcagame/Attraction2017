@@ -66,14 +66,12 @@ void RockViewer::initialize( ) {
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		char filename[256];
 		sprintf_s( filename, "UI/breast%d.png", i + 1 );
-		std::string cover_img = filename;
-		std::string gauge_img = "UI/ui_progress_bar.png";
-		ImagePtr image = drawer->createImage( cover_img.c_str( ) );
+		ImagePtr image = drawer->createImage( filename );
 		_start_menu.push_back( image );
-		ImagePtr gauge = drawer->createImage( gauge_img.c_str( ) );
-		_start_gauge.push_back( gauge );
 	}
 	
+	_gauge = drawer->createImage( "UI/ui_progress_bar.png" );
+	_continue_frame = drawer->createImage( "UI/ui_cover_continue.png" );
 	_image_frame.push_back( drawer->createImage( "UI/tarosuke_status_window.png" ) );
 	_image_frame.push_back( drawer->createImage( "UI/garisuke_status_window.png" ) );
 	_image_frame.push_back( drawer->createImage( "UI/tarojiro_status_window.png" ) );
@@ -330,11 +328,12 @@ void RockViewer::drawUI( ) const {
 			_start_menu[ i ]->draw( );
 			double ratio = family->getPlayer( i )->getBubbleCountRatio( );
 			int ty = ( int )( 144 * ratio );
-			_start_gauge[ i ]->setRect( 0, 0, ty, 20 );
-			_start_gauge[ i ]->setPos( i * ( SCREEN_WIDTH / 4 ) + 88, SCREEN_HEIGHT - 74 );
-			_start_gauge[ i ]->draw( );
+			_gauge->setRect( 0, 0, ty, 20 );
+			_gauge->setPos( i * ( SCREEN_WIDTH / 4 ) + 88, SCREEN_HEIGHT - 74 );
+			_gauge->draw( );
 			continue;
 		}
+		//˜g
 		int player_status_pos = i * ( SCREEN_WIDTH / 4 );
 		_image_frame[ i ]->setPos( player_status_pos, DRAW_UI_Y );
 		_image_frame[ i ]->draw( );
@@ -413,6 +412,19 @@ void RockViewer::drawUI( ) const {
 				_dummy_ui->setPos( sx - 16, sy - 16, sx + CONTINUE_DRAW_SIZE, sy + CONTINUE_DRAW_SIZE );
 				_dummy_ui->draw( );
 			}
+		}
+		if ( family->getPlayer( i )->isBubble( ) &&
+			_status->getPlayer( i ).power == 0 ) {
+			//‚±‚±V‹K‰æ‘œ
+			_continue_frame->setRect( 0, 0, 320, 208 );
+			_continue_frame->setPos( i * ( SCREEN_WIDTH / 4 ), SCREEN_HEIGHT - 208, ( i + 1 ) * ( SCREEN_WIDTH / 4 ), SCREEN_HEIGHT );
+			_continue_frame->draw( );
+			double ratio = family->getPlayer( i )->getBubbleCountRatio( );
+			int ty = ( int )( 144 * ratio );
+			_gauge->setRect( 0, 0, ty, 20 );
+			_gauge->setPos( i * ( SCREEN_WIDTH / 4 ) + 88, SCREEN_HEIGHT - 74 );
+			_gauge->draw( );
+			continue;
 		}
 	}
 }

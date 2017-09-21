@@ -1,13 +1,14 @@
 #include "PopJizo.h"
 #include "EnemyJizo.h"
 #include "Military.h"
+#include "Property.h"
 
-const int MAX_POP_COUNT = 1000;
 const int POP_RANGE = 400;
 
 PopJizo::PopJizo( const Vector& pos ) :
-Pop( pos ),
-_count( MAX_POP_COUNT ) {
+Pop( pos ) {
+	_max_pop_time = Property::getTask( )->getData( "Jizo_POP_TIME" );
+	_count = _max_pop_time;
 }
 
 PopJizo::~PopJizo( ) {
@@ -18,7 +19,7 @@ void PopJizo::update( ) {
 	if ( !_enemy.expired( ) ) {
 		return;
 	}
-	if ( _count > MAX_POP_COUNT ) {
+	if ( _count > _max_pop_time ) {
 		if ( isInRangePlayer( POP_RANGE ) ) {
 			EnemyPtr enemy = EnemyPtr( new EnemyJizo( getPos( ) ) );
 			Military::getTask( )->popUp( enemy );

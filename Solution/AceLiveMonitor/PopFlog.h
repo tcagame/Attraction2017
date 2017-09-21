@@ -9,6 +9,7 @@ public:
 public:
 	void update( );
 private:
+	int _max_pop_time;
 	int _count;
 };
 

@@ -1,12 +1,12 @@
 #include "PopCrocoSnake.h"
 #include "EnemyCrocoSnake.h"
 #include "Military.h"
-
-const int MAX_POP_COUNT = 400;
+#include "Property.h"
 
 PopCrocoSnake::PopCrocoSnake( const Vector& pos ) :
-Pop( pos ),
-_count( MAX_POP_COUNT ) {
+Pop( pos ) {
+	_max_pop_time = Property::getTask( )->getData( "CrocoSnake_POP_TIME" );
+	_count = _max_pop_time;
 }
 
 
@@ -17,7 +17,7 @@ void PopCrocoSnake::update( ) {
 	if ( !_enemy.expired( ) ) {
 		return;
 	}
-	if ( _count > MAX_POP_COUNT ) {
+	if ( _count > _max_pop_time ) {
 		if ( isInScreen( ) ) {
 			Military::getTask( )->popUp( EnemyPtr( new EnemyCrocoSnake( getPos( ) ) ) );
 			_count = 0;
