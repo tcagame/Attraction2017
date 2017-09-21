@@ -9,6 +9,42 @@
 #include "Client.h"
 #include "Sound.h"
 
+const char * FILENAME[ ] = {
+	"Result/heaven/heaven_tarosuke.png",
+	"Result/heaven/heaven_tarojiro.png",
+	"Result/heaven/heaven_tgarisuke.png",
+	"Result/heaven/heaven_taromi.png",
+	"Result/human/human_tarosuke.png",
+	"Result/human/human_tarojiro.png",
+	"Result/human/human_tgarisuke.png",
+	"Result/human/human_taromi.png",
+	"Result/hungry/hungry_tarosuke.png",
+	"Result/hungry/hungry_tarojiro.png",
+	"Result/hungry/hungry_tgarisuke.png",
+	"Result/hungry/hungry_taromi.png",
+	"Result/damn/damn_tarosuke.png",
+	"Result/damn/damn_tarojiro.png",
+	"Result/damn/damn_tgarisuke.png",
+	"Result/damn/damn_taromi.png",
+	"Result/hell/hell_tarosuke.png",
+	"Result/hell/hell_tarojiro.png",
+	"Result/hell/hell_tgarisuke.png",
+	"Result/hell/hell_taromi.png",
+
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
 const int AREA_SX  = 0;
 const int AREA_SY  = 480 - 256;
 
@@ -17,7 +53,8 @@ ViewerConsolePtr ViewerConsole::getTask( ) {
 }
 
 ViewerConsole::ViewerConsole( PLAYER player ) :
-_player( player ) {
+_player( player ),
+_ending_type( -1 ) {
 	_dead_se = { false };
 }
 
@@ -47,7 +84,7 @@ void ViewerConsole::initialize( ) {
 	_image_device = drawer->createImage( "UI/ui_device.png" );
 	int w, h;
 	_image_device->getImageSize( w, h );
-	_image_device->setPos( ( 640 - w ) / 2, ( 480 - h ) / 2 ); 
+	_image_device->setPos( ( 640 - w ) / 2, ( 480 - h ) / 2 );
 }
 
 void ViewerConsole::update( ) {
@@ -55,27 +92,24 @@ void ViewerConsole::update( ) {
 	DrawerPtr drawer( Drawer::getTask( ) );
 	
 	// ステータス描画
-	//_viewer_status->draw( );
 	if ( Client::getTask( )->getPhase( ) != "PHASE_CONNECTING" ) {
 		Drawer::getTask( )->drawString( 0, 0, "NOT_CONNECTING" );
 		drawer->flip( );
 		return;
 	}
-
 	if ( !client->isRecievingUDP( ) ) {
 		return;
 	}
 
 	drawer->flip( );
 
-	drawArea( );
-	drawUI( );
+	drawConsole( );
 	drawDevice( );
 
 	playSe( );
 }
 
-void ViewerConsole::drawArea( ) {
+void ViewerConsole::drawConsole( ) {
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
 	unsigned char state = data->getStatusState( _player );
 
@@ -86,6 +120,25 @@ void ViewerConsole::drawArea( ) {
 	case SynchronousData::STATE_PLAY_EVENT:
 		drawAreaEvent( );
 		break;
+	}	
+
+	_image_bar_upper->draw( );
+	_image_bar_lower->draw( );
+
+	_viewer_status->draw( _player, 0, 8 );
+	_image_minimap->draw( );
+	
+	if ( state == SynchronousData::STATE_ENDING ) {
+		int type = data->getStatusRedo( _player );
+		if ( type > 4 ) {
+			type = 4;
+		}
+		type = _player + type * MAX_PLAYER;
+		if ( _ending_type != type ) {
+			_image_ending = Drawer::getTask( )->createImage( FILENAME[ type ] );
+			_ending_type = type;
+		}
+		_image_ending->draw( );
 	}
 }
 
@@ -119,14 +172,6 @@ void ViewerConsole::drawAreaEvent( ) {
 
 	_viewer_event->draw( event, AREA_SX - camera_pos, AREA_SY );
 	_viewer_object->draw( AREA_EVENT, AREA_SX - camera_pos, AREA_SY );
-}
-
-void ViewerConsole::drawUI( ) {
-	_image_bar_upper->draw( );
-	_image_bar_lower->draw( );
-
-	_viewer_status->draw( _player, 0, 8 );
-	_image_minimap->draw( );
 }
 
 void ViewerConsole::drawDevice( ) {
