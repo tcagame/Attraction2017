@@ -1,12 +1,12 @@
 #include "PopShishimai.h"
 #include "EnemyShishimai.h"
 #include "Military.h"
-
-const int MAX_POP_COUNT = 400;
+#include "Property.h"
 
 PopShishimai::PopShishimai( const Vector& pos ) :
-Pop( pos ),
-_count( MAX_POP_COUNT ) {
+Pop( pos ) {
+	_max_pop_time = Property::getTask( )->getData( "Shishimai_POP_TIME" );
+	_count = _max_pop_time;
 }
 
 
@@ -18,7 +18,7 @@ void PopShishimai::update( ) {
 	if ( !_enemy.expired( ) ) {
 		return;
 	}
-	if ( _count > MAX_POP_COUNT ) {
+	if ( _count > _max_pop_time ) {
 		if ( isInScreen( ) ) {
 			EnemyPtr enemy = EnemyPtr( new EnemyShishimai( getPos( ) ) );
 			Military::getTask( )->popUp( enemy );

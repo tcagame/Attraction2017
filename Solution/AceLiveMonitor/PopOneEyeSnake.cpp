@@ -1,12 +1,12 @@
 #include "PopOneEyeSnake.h"
 #include "EnemyOneEyeSnake.h"
 #include "Military.h"
-
-const int MAX_POP_COUNT = 400;
+#include "Property.h"
 
 PopOneEyeSnake::PopOneEyeSnake( const Vector& pos ) :
-Pop( pos ),
-_count( MAX_POP_COUNT ) {
+Pop( pos ) {
+	_max_pop_time = Property::getTask( )->getData( "OneEyeSnake_POP_TIME" );
+	_count = _max_pop_time;
 }
 
 
@@ -17,7 +17,7 @@ void PopOneEyeSnake::update( ) {
 	if ( !_enemy.expired( ) ) {
 		return;
 	}
-	if ( _count > MAX_POP_COUNT ) {
+	if ( _count > _max_pop_time ) {
 		if ( isInScreen( ) ) {
 			EnemyPtr enemy = EnemyPtr( new EnemyOneEyeSnake( getPos( ) ) );
 			Military::getTask( )->popUp( enemy );

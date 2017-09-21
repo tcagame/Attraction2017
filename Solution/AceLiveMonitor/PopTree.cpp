@@ -1,12 +1,12 @@
 #include "PopTree.h"
 #include "EnemyTree.h"
 #include "Military.h"
-
-const int MAX_POP_COUNT = 2000;
+#include "Property.h"
 
 PopTree::PopTree( const Vector& pos ) :
-Pop( pos ),
-_count( MAX_POP_COUNT ) {
+Pop( pos ) {
+	_max_pop_time = Property::getTask( )->getData( "Tree_POP_TIME" );
+	_count = _max_pop_time;
 }
 
 
@@ -17,7 +17,7 @@ void PopTree::update( ) {
 	if ( !_enemy.expired( ) ) {
 		return;
 	}
-	if ( _count > MAX_POP_COUNT ) {
+	if ( _count > _max_pop_time ) {
 		if ( isInScreen( ) ) {
 			EnemyPtr enemy = EnemyPtr( new EnemyTree( getPos( ) ) );
 			Military::getTask( )->popUp( enemy );
