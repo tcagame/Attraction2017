@@ -29,3 +29,7 @@ void RockItemRock::eraseBubble( ) {
 double RockItemRock::getAnimTime( ) const {
 	return 0;
 }
+
+void RockItemRock::act() {
+	_bubble->setPos( getPos( ) );
+}

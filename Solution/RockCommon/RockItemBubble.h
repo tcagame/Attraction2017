@@ -7,6 +7,7 @@ public:
 public:
 	void setFinished( bool finish );
 	bool isFinished( ) const;
+	void setPos( const Vector& pos );
 	ModelMV1Ptr getModel( ) const;
 	double getAnimTime( ) const;
 private:

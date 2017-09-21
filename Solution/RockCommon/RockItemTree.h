@@ -9,9 +9,11 @@ public:
 	virtual ~RockItemTree( );
 public:
 	double getAnimTime( ) const;
-public:
 	void eraseBubble( );
 	ModelMV1Ptr getModel( ) const;
+private:
+	void act( );
+private:
 	RockItemBubblePtr _bubble;
 };
 

@@ -12,6 +12,8 @@ public:
 	ModelMV1Ptr getModel( ) const;
 	double getAnimTime( ) const;
 private:
+	void act( );
+private:
 	RockItemBubblePtr _bubble;
 };
 

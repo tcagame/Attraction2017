@@ -28,3 +28,7 @@ void RockItemTree::eraseBubble( ) {
 double RockItemTree::getAnimTime( ) const {
 	return 0;
 }
+
+void RockItemTree::act() {
+	_bubble->setPos(getPos());
+}

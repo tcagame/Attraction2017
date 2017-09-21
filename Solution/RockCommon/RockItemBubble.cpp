@@ -26,3 +26,7 @@ bool RockItemBubble::isFinished( ) const {
 double RockItemBubble::getAnimTime( ) const {
 	return 0;
 }
+
+void RockItemBubble::setPos(const Vector& pos) {
+	RockCharacter::setPos( pos );
+}
