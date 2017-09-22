@@ -35,12 +35,12 @@ Military::~Military( ) {
 }
 
 void Military::initialize( ) {
-	_hell_fire = EnemyPtr( new EnemyHellFire( Vector( 64, 64 ) ) );
+	//_hell_fire = EnemyPtr( new EnemyHellFire( Vector( 64, 64 ) ) );
 }
 
 void Military::update( ) {
 	updateEnemy( );
-	updateHellFire( );
+	//updateHellFire( );
 }
 
 
