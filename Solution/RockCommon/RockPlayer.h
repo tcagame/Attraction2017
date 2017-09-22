@@ -21,6 +21,7 @@ public:
 	void resetPos( const Vector& pos );
 	bool isDead( ) const;
 	bool isBubble( ) const;
+	bool isInvincible( ) const;
 	void setAdmissionPos( const Vector& camera_pos );
 	int getId( ) const;
 	void knockBack( RockEnemyPtr enemy );
