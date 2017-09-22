@@ -86,3 +86,17 @@ void Armoury::eraseEventShot( ) {
 		}
 	}
 }
+
+void Armoury::setSynchronousData( ) {
+	int camera_pos = Family::getTask( )->getCameraPosX( );
+	for ( int i = 0; i < MAX_SHOT_NUM; i ++ ) {
+		if ( !_shot_list[ i ] ) {
+			continue;
+		}
+		if ( _shot_list[ i ]->isFinished( ) ) {
+			continue;
+		}
+		_shot_list[ i ]->setSynchronousData( camera_pos );
+	}
+}
+

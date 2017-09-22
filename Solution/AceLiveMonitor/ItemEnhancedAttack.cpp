@@ -1,7 +1,7 @@
 #include "ItemEnhancedAttack.h"
 #include "SynchronousData.h"
 
-const int PRICE = 100;
+const int PRICE = 10000;
 
 ItemEnhancedAttack::ItemEnhancedAttack( const Vector& pos ) :
 ShopItem( pos, PRICE ) {
@@ -26,5 +26,5 @@ void ItemEnhancedAttack::setSynchronousData( int camera_pos ) const {
 	}
 	unsigned char attribute = 0;
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
-	data->addObject( area, SynchronousData::TYPE_ITEM, 8, attribute, x, y, 64 );
+	data->addObject( area, SynchronousData::TYPE_ITEM, 8, attribute, x, y, 32 );
 }

@@ -705,6 +705,7 @@ void Player::actOnBlowAway( ) {
 
 void Player::actOnDead( ) {
 	_unrivaled_count = MAX_UNRIVALED_COUNT;
+	_charge_count = 0;
 	int act_count = getActCount( );
 	AREA area = getArea( );
 	if ( act_count > MAX_DEAD_ACTCOUNT ) {
@@ -713,8 +714,8 @@ void Player::actOnDead( ) {
 		Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, chip_size / 2 ), area, chip_size * 2 ) ) );
 		// コンティニューへ
 		_progress_count = 0;
-		setAction( ACTION_CONTINUE );
 		setArea( AREA_STREET );
+		setAction( ACTION_CONTINUE );
 	}
 }
 
@@ -1143,7 +1144,6 @@ EVENT Player::getOnEvent( ) const {
 	if ( _virtue >= _max_virtue ) {
 		event = EVENT_BUDHA;
 	}
-
 	return event;
 }
 
@@ -1256,4 +1256,9 @@ void Player::checkSandwichedWall( ) {
 		damage( 1 );
 		blowAway( );
 	}
+}
+
+
+void Player::recoverPower( ) {
+	setPower( 16 );
 }

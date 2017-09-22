@@ -212,5 +212,8 @@ void Character::shiftPos( int map_width ) {
 
 
 bool Character::isOutRange( ) const {
+	if ( getArea( ) == AREA_EVENT ) {
+		return false;
+	}
 	return getPos( ).x - Family::getTask( )->getCameraPosX( ) < -GRAPH_SIZE;
 }

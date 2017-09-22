@@ -31,7 +31,6 @@ void Magazine::update( ) {
 			continue;
 		}
 		impact->update( );
-		impact->setSynchronousData( Family::getTask( )->getCameraPosX( ) );
 		ite++;
 	}
 }
@@ -42,4 +41,11 @@ void Magazine::add( ImpactPtr impact ) {
 
 std::list< ImpactPtr > Magazine::getImpactList( ) const {
 	return _impacts;
+}
+
+void Magazine::setSynchronousData( ) {
+	int camera_pos_x = Family::getTask( )->getCameraPosX( );
+	for ( ImpactPtr impact : _impacts ) {
+		impact->setSynchronousData( camera_pos_x );
+	}
 }

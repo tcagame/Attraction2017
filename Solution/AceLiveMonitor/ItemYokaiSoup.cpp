@@ -1,20 +1,21 @@
-#include "ItemDango.h"
+#include "ItemYokaiSoup.h"
 #include "SynchronousData.h"
 
-const int PRICE = 100;
+const int PRICE = 500;
 
-ItemDango::ItemDango( const Vector& pos ) :
+
+ItemYokaiSoup::ItemYokaiSoup( const Vector& pos ) :
 ShopItem( pos, PRICE ) {
 }
 
 
-ItemDango::~ItemDango( ) {
+ItemYokaiSoup::~ItemYokaiSoup( ) {
 }
 
-void ItemDango::act( ) {
+void ItemYokaiSoup::act( ) {
 }
 
-void ItemDango::setSynchronousData( int camera_pos ) const {
+void ItemYokaiSoup::setSynchronousData( int camera_pos ) const {
 	Vector pos = getPos( );
 	int x = ( int )pos.x;
 	int y = ( int )pos.y;
@@ -26,5 +27,5 @@ void ItemDango::setSynchronousData( int camera_pos ) const {
 	}
 	unsigned char attribute = 0;
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
-	data->addObject( area, SynchronousData::TYPE_ITEM, 11, attribute, x, y, 32 );
+	data->addObject( area, SynchronousData::TYPE_ITEM, 10, attribute, x, y, 32 );
 }

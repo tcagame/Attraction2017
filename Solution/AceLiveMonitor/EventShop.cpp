@@ -6,6 +6,7 @@
 #include "ItemDango.h"
 #include "ItemEnhancedAttack.h"
 #include "ItemEnhancedCharge.h"
+#include "ItemYokaiSoup.h"
 
 const int START_POS_X = 256 + ( 1280 / 2 - 256 ) / 2;
 const int START_POS_Y = 128;
@@ -15,9 +16,10 @@ Event( EVENT_SHOP, DIR_LEFT ) {
 	Office::getTask( )->popUpNPC( EVENT_SHOP );
 	// ここにショップのアイテムを設定
 	StoragePtr storage = Storage::getTask( );
-	storage->add( ShopItemPtr( new ItemDango( Vector( 500, 0 ) ) ) );
-	storage->add( ShopItemPtr( new ItemEnhancedAttack( Vector( 600, 0 ) ) ) );
-	storage->add( ShopItemPtr( new ItemEnhancedCharge( Vector( 700, 0 ) ) ) );
+	storage->add( ShopItemPtr( new ItemDango( Vector( 450, 0 ) ) ) );
+ 	storage->add( ShopItemPtr( new ItemEnhancedAttack( Vector( 530, 0 ) ) ) );
+	storage->add( ShopItemPtr( new ItemEnhancedCharge( Vector( 610, 0 ) ) ) );
+	storage->add( ShopItemPtr( new ItemYokaiSoup( Vector( 690, 0 ) ) ) );
 }
 
 

@@ -77,6 +77,7 @@ public:
 	void setModeVirtue( );
 	void setActionEnding( );
 	bool isLeaveAlone( ) const;
+	void recoverPower( );
 private:
 	void actOnEntry( );
 	void actOnContinue( );
