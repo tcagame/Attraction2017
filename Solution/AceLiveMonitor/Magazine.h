@@ -16,6 +16,7 @@ public:
 public:
 	void update( );
 	void add( ImpactPtr impact );
+	void setSynchronousData( );
 	std::list< ImpactPtr > getImpactList( ) const;
 private:
 	std::list< ImpactPtr > _impacts;

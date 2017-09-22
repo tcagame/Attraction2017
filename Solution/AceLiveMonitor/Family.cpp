@@ -59,9 +59,6 @@ void Family::update( ) {
 	updateCameraPos( );
 
 	_monmo->update( );
-
-	// “¯Šúƒf[ƒ^
-	setSynchronousData( );
 }
 
 void Family::updatePlayer( PLAYER target ) {
@@ -155,16 +152,6 @@ int Family::getCameraPosX( ) const {
 	return _camera_pos_x;
 }
 
-void Family::setSynchronousData( ) const {
-	SynchronousDataPtr data( SynchronousData::getTask( ) );
-	data->setCameraX( getCameraPosX( ) );
-
-	for ( int i = 0; i < MAX_PLAYER; i++ ) {
-		PlayerConstPtr player = getPlayer( i );
-		player->setSynchronousData( ( PLAYER )i, getCameraPosX( ) );
-	}
-}
-
 MonmotaroConstPtr Family::getMonmotaro( ) const {
 	return _monmo;
 }
@@ -232,4 +219,14 @@ PlayerPtr Family::getOverlappedPlayer( CharacterConstPtr target ) const {
 		}
 	}
 	return result;
+}
+
+void Family::setSynchronousData( ) const {
+	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	data->setCameraX( getCameraPosX( ) );
+
+	for ( int i = 0; i < MAX_PLAYER; i++ ) {
+		PlayerConstPtr player = getPlayer( i );
+		player->setSynchronousData( ( PLAYER )i, getCameraPosX( ) );
+	}
 }

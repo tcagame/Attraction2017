@@ -6,7 +6,7 @@
 
 
 RockShot::RockShot( const Vector& pos, const Vector& dir, const int power ) :
-RockCharacter( pos, DOLL_NONE, 32, 32, false, false, false, false ),
+RockCharacter( pos, DOLL_NONE, 24, 32, false, false, false, false ),
 _finished( false ),
 _power( power ),
 _size( 1.0 ),

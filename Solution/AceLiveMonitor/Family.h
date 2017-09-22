@@ -29,10 +29,10 @@ public:
 	void pushDebugData( ViewerDebug::Data& data ) const;
 	bool isModeVirtue( ) const;
 	PlayerPtr getOverlappedPlayer( CharacterConstPtr target ) const;
+	void setSynchronousData( ) const;
 private:
 	void updatePlayer( PLAYER taget );
 	void updateCameraPos( );
-	void setSynchronousData( ) const;
 	void shiftPos( );
 private:
 	int _camera_pos_x;

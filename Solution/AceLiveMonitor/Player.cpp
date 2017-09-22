@@ -705,6 +705,7 @@ void Player::actOnBlowAway( ) {
 
 void Player::actOnDead( ) {
 	_unrivaled_count = MAX_UNRIVALED_COUNT;
+	_charge_count = 0;
 	int act_count = getActCount( );
 	AREA area = getArea( );
 	if ( act_count > MAX_DEAD_ACTCOUNT ) {

@@ -23,6 +23,7 @@ public:
 	void eraseEventItem( );
 	void shiftPos( int map_width );
 	void pushDebugData( ViewerDebug::Data& data );
+	void setSynchronousData( );
 private:
 	bool pickUpItem( ItemPtr item, PlayerPtr player );
 private:
