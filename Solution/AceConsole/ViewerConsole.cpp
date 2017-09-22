@@ -97,6 +97,8 @@ void ViewerConsole::initialize( ) {
 
 	_image_continue = drawer->createImage( "UI/ui_continue.png" );
 	_image_continue->setPos( 0, 480 - 256 );
+	
+	_image_redo = drawer->createImage( "UI/ui_continue_picture.png" );
 
 	int w, h;
 	_image_device->getImageSize( w, h );
