@@ -26,14 +26,12 @@ public:
 	void popUp( EnemyPtr enemy );
 	void pushDebugData( ViewerDebug::Data& data ) const;
 	void eraseEventEnemy( );
-	EnemyPtr getHellFire( ) const;
 	void shiftPos( int map_width );
+	void setSynchronousData( ) const;
 private:
 	void updateEnemy( );
-	void updateHellFire( );
 	void dropMoney( EnemyConstPtr enemy );
 private:
 	std::list< EnemyPtr > _enemies;
-	EnemyPtr _hell_fire;
 };
 

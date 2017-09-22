@@ -26,6 +26,7 @@ public:
 	int getMaxShotNum( ) const;
 	void pushDebugData( ViewerDebug::Data& data );
 	void eraseEventShot( );
+	void setSynchronousData( );
 private:
 	static const int MAX_SHOT_NUM = 100;
 	int _shot_id;

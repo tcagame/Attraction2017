@@ -51,8 +51,6 @@ void Military::updateEnemy( ) {
 	while ( ite != _enemies.end( ) ) {
 		EnemyPtr enemy = (*ite);
 		enemy->update( );
-		//enemy->setSynchronousDataShadow( camera_pos );
-		enemy->setSynchronousData( camera_pos );
 		//エネミーが倒れたときの処理
 		if ( enemy->getPower( ) <= 0 ) {
 			if ( !std::dynamic_pointer_cast< EnemyAttack >( enemy ) ) {
@@ -84,21 +82,6 @@ void Military::updateEnemy( ) {
 		}
 		ite++;
 	}
-}
-
-void Military::updateHellFire( ) {
-	FamilyPtr family( Family::getTask( ) );
-	int camera_pos = family->getCameraPosX( );
-
-	_hell_fire->update( );
-	for ( int i = 0; i < MAX_PLAYER; i++ ) {
-		PlayerPtr player( family->getPlayer( i ) );
-		if ( player->isOverlapped( _hell_fire ) ) {
-			//player->damage( 3 );
-			player->blowAway( );
-		}
-	}
-	_hell_fire->setSynchronousData( camera_pos );
 }
 
 const std::list< EnemyPtr > Military::getEnemyList( ) const {
@@ -142,10 +125,6 @@ void Military::eraseEventEnemy( ) {
 		}
 		ite++;
 	}
-}
-
-EnemyPtr Military::getHellFire( ) const {
-	return _hell_fire;
 }
 
 void Military::dropMoney( EnemyConstPtr enemy ) {
@@ -194,5 +173,12 @@ void Military::shiftPos( int map_width ) {
 		enemy->shiftPos( map_width );
 		ite++;
 	}
-	_hell_fire->shiftPos( map_width );
+}
+
+void Military::setSynchronousData( ) const {
+	int camera_pos_x = Family::getTask( )->getCameraPosX( );
+
+	for ( EnemyPtr enemy : _enemies ) {
+		enemy->setSynchronousData( camera_pos_x );
+	}
 }

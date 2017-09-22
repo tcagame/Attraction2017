@@ -13,6 +13,10 @@
 #include "ViewerObject.h"
 #include "SynchronousData.h"
 #include "Family.h"
+#include "Military.h"
+#include "Storage.h"
+#include "Magazine.h"
+#include "Armoury.h"
 
 #include "World.h"
 #include "Map.h"
@@ -64,6 +68,14 @@ void ViewerLive::initialize( ) {
 
 void ViewerLive::update( ) {
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	
+	// オブジェクトデータ同期
+	data->resetObject( );
+	Military::getTask( )->setSynchronousData( );
+	Storage::getTask( )->setSynchronousData( );
+	Family::getTask( )->setSynchronousData( );
+	Magazine::getTask( )->setSynchronousData( );
+	Armoury::getTask( )->setSynchronousData( );
 
 	DrawerPtr drawer( Drawer::getTask( ) );
 	drawer->waitForSync( );
@@ -142,7 +154,4 @@ void ViewerLive::update( ) {
 	if ( Debug::getTask( )->isDebug( ) ) {
 		_viewer_debug->draw( );
 	}
-
-	// 同期データ初期化
-	data->resetObject( );
 }

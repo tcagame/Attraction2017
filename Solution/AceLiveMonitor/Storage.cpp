@@ -26,16 +26,13 @@ Storage::~Storage( ) {
 }
 
 void Storage::update( ) {
-	FamilyPtr family( Family::getTask( ) );
-	int camera_pos = family->getCameraPosX( );
 	std::list< ItemPtr >::iterator ite = _items.begin( );
 	while ( ite != _items.end( ) ) {
 		ItemPtr item = *ite;
 		item->update( );
-		item->setSynchronousData( camera_pos );
 
 		//プレイヤーと当たる
-		PlayerPtr hit_player = family->getOverlappedPlayer( item );
+		PlayerPtr hit_player = Family::getTask( )->getOverlappedPlayer( item );
 		if ( hit_player ) {
 			//アイテム取得
 			if ( pickUpItem( item, hit_player ) ) {
@@ -150,3 +147,12 @@ void Storage::pushDebugData( ViewerDebug::Data& data ) {
 	}
 	data.message.push_back( "Item:" + std::to_string( ( int )_items.size( ) ) );
 }
+
+void Storage::setSynchronousData( ) {
+	FamilyPtr family( Family::getTask( ) );
+	int camera_pos = family->getCameraPosX( );
+	for ( ItemPtr item : _items ) {
+		item->setSynchronousData( camera_pos );
+	}
+}
+
