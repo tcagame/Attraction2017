@@ -144,6 +144,7 @@ void Military::dropMoney( EnemyConstPtr enemy ) {
 	}
 	Vector pos = enemy->getPos( ) + Vector( 0, -size );
 	ItemPtr item = ItemPtr( new ItemMoney( pos, type, enemy->getArea( ) ) );
+	item->setDrop( );
 	Storage::getTask( )->add( item );
 }
 

@@ -20,6 +20,7 @@ ViewerObject::ViewerObject( ) {
 	_image[ GRAPH_ITEM				] = drawer->createImage( "Item/item.png"					);
 	_image[ GRAPH_NPC				] = drawer->createImage( "Event/character/character.png"	);
 	_image[ GRAPH_SHADOW			] = drawer->createImage( "Effect/effect_shadow.png"	);
+	_image[ GRAPH_RYUGU			    ] = drawer->createImage( "Event/character/ryugu.png"     	);
 }
 
 
@@ -88,6 +89,9 @@ void ViewerObject::drawSprite( int x, int y, unsigned char type, unsigned char a
 		break;
 	case SynchronousData::TYPE_SHADOW:
 		sprite = getSpriteShadow( GRAPH_SHADOW          , x, y, attribute, pattern, size );
+		break;
+	case SynchronousData::TYPE_RYUGU:
+		sprite = getSpriteRyugu( GRAPH_RYUGU            , x, y, attribute, pattern, size );
 		break;
 	default: assert( 0 );
 	};
@@ -309,6 +313,26 @@ ViewerObject::Sprite ViewerObject::getSpriteShadow( GRAPH graph, int x, int y, u
 	sprite.sy1 = y - 64;
 	sprite.sx2 = sprite.sx1 + 64;
 	sprite.sy2 = sprite.sy1 + 64;
+
+	return sprite;
+}
+
+ViewerObject::Sprite ViewerObject::getSpriteRyugu( GRAPH graph, int x, int y, unsigned char attribute, int pattern, int size ) const {
+	Sprite sprite;
+	sprite.graph = graph;
+	if ( size < 0 ) {
+		size = 32;
+	}
+	int width_num = 2048 / size;
+	sprite.tx = pattern % width_num * size;
+	sprite.ty = pattern / width_num * size;
+	sprite.tw = size;
+	sprite.th = size;
+	
+	sprite.sx1 = x - size / 2;
+	sprite.sy1 = y - size;
+	sprite.sx2 = sprite.sx1 + size;
+	sprite.sy2 = sprite.sy1 + size;
 
 	return sprite;
 }

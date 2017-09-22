@@ -34,6 +34,7 @@ private:
 	void updatePlayer( PLAYER taget );
 	void updateCameraPos( );
 	void shiftPos( );
+	bool isInScrollRange( ) const;
 private:
 	int _camera_pos_x;
 	std::array< PlayerPtr, MAX_PLAYER > _player;

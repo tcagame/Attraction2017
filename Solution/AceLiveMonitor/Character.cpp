@@ -139,6 +139,11 @@ bool Character::isMass( ) const {
 	return _mass;
 }
 
+void Character::setMass( bool mass ) {
+	_mass = mass;
+}
+
+
 AREA Character::getArea( ) const {
 	return _area;
 }

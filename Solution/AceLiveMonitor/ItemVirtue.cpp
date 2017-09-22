@@ -7,7 +7,7 @@ const double ACCEL_SPEED = 0.2;
 const int SPEED = 1;
 
 ItemVirtue::ItemVirtue( int target_x ) :
-Item( Vector( target_x, 0 ), AREA_STREET, 32, false ),
+Item( Vector( target_x, 0 ), AREA_STREET, 32 ),
 _target( Vector( target_x, 128 - 64 ) ) {
 }
 

@@ -33,6 +33,7 @@ protected:
 	void setPower( int power );
 	bool isStanding( ) const;
 	bool isMass( ) const;
+	void setMass( bool mass );
 	virtual void act( ) = 0;
 	int getActCount( ) const;
 	void setOverlappedRadius( int radius );

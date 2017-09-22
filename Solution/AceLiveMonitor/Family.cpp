@@ -113,6 +113,9 @@ void Family::updateCameraPos( ) {
 	if ( !updating ) {
 		return;
 	}
+	if ( !isInScrollRange( ) ) {
+		return;
+	}
 
 	//座標調整
 	int map_width = World::getTask( )->getMap( AREA_STREET )->getPageNum( ) * GRAPH_SIZE;
@@ -120,7 +123,6 @@ void Family::updateCameraPos( ) {
 		_camera_pos_x -= map_width;
 		shiftPos( );
 	}
-
 	double total = 0;
 	//プレイヤーの平均を出すための値
 	int num = 0;
@@ -229,4 +231,19 @@ void Family::setSynchronousData( ) const {
 		PlayerConstPtr player = getPlayer( i );
 		player->setSynchronousData( ( PLAYER )i, getCameraPosX( ) );
 	}
+}
+
+bool Family::isInScrollRange( ) const {
+	//プレイヤーが2人以上のとき
+	//コンソールの画面内に仲間キャラクターが映るときのみスクロール
+	//コンソールのプレイヤーが映らなくなる範囲は320から
+	//int tmp_x = -1;
+	//int right_second = -1;
+	//for ( int i = 0; i < MAX_PLAYER; i++ ) {
+	//	if ( !_player[ i ]->isExist( ) ) {
+	//		continue;
+	//	}
+	//	if ( _player[ i ]->getPos( ).x
+	//}
+	return true;
 }

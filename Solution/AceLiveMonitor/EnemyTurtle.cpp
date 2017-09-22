@@ -1,10 +1,11 @@
 #include "EnemyTurtle.h"
 #include "SynchronousData.h"
 
-const int WAIT_ANIM_TIME = 3;
+const int WAIT_ANIM_TIME = 10;
 
 EnemyTurtle::EnemyTurtle( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ) {
+	setPower( 999 );
 }
 
 
@@ -17,7 +18,7 @@ void EnemyTurtle::act( ) {
 
 void EnemyTurtle::setSynchronousData( int camera_pos ) const {
 	const int ANIM[ ] = {
-		0, 1, 2, 3, 4, 5, 6, 7
+		24, 25, 26, 27, 28
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	
@@ -35,6 +36,5 @@ void EnemyTurtle::setSynchronousData( int camera_pos ) const {
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
-	unsigned char type = getType( );
-	data->addObject( area, type, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y );
+	data->addObject( area, SynchronousData::TYPE_RYUGU, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y, 64 );
 }

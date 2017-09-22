@@ -10,4 +10,12 @@ PopTurtle::~PopTurtle( ) {
 }
 
 void PopTurtle::update( ) {
+	if ( !_enemy.expired( ) ) {
+		return;
+	}
+	if ( isInScreen( ) ) {
+		EnemyPtr enemy = EnemyPtr( new EnemyTurtle( getPos( ) ) );
+		Military::getTask( )->popUp( enemy );
+		_enemy = enemy;
+	}
 }

@@ -39,6 +39,7 @@ public:
 	static const unsigned char TYPE_NPC 			= 0x28;
 	static const unsigned char TYPE_SANZO 			= 0x29;
 	static const unsigned char TYPE_SHADOW 			= 0x30;
+	static const unsigned char TYPE_RYUGU 			= 0x31;
 	static const unsigned char PROGRESS_NONE             = 0x00;
 	static const unsigned char PROGRESS_BAR              = 0x01;
 	static const unsigned char PROGRESS_ITEM_DANGO       = 0x02;
