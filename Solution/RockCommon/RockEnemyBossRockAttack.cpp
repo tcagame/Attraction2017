@@ -91,6 +91,6 @@ void RockEnemyBossRockAttack::setPos(const Vector& pos) {
 
 void RockEnemyBossRockAttack::damage( int force ) {
 	if ( force < 0 ) {
-		RockCharacter::damage( force );
+		RockEnemy::damage( force );
 	}
 }
