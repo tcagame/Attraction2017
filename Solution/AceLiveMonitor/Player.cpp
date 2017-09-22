@@ -189,7 +189,8 @@ bool Player::isExist( ) const {
 		_action != ACTION_ENTERING_FADEOUT &&
 		_action != ACTION_ENTERING_SANZO &&
 		_action != ACTION_ENDING &&
-		_action != ACTION_OPENING;
+		_action != ACTION_OPENING &&
+		_unrivaled_count >= MAX_UNRIVALED_COUNT;
 }
 
 int Player::getDeviceId( ) const {
@@ -631,9 +632,14 @@ void Player::actOnOverCharge( ) {
 
 
 void Player::actOnCamera( ) {
+	AREA area = getArea( );
+	if ( _action == ACTION_ENTERING_FADEOUT ||
+		 _action == ACTION_ENTERING_SANZO ) {
+		area = AREA_STREET;
+	}
 	FamilyConstPtr family( Family::getTask( ) );
 	int x = 0;
-	if ( getArea( ) != AREA_EVENT ) {
+	if ( area == AREA_STREET ) {
 		x += family->getCameraPosX( );
 	}
 	Vector pos = getPos( );
@@ -646,7 +652,7 @@ void Player::actOnCamera( ) {
 		setPos( pos );
 		setVec( vec );
 		//•Ç‚É‹²‚Ü‚ê‚Ä‚¢‚½‚ç‚Á”ò‚Ô
-		if ( getArea( ) == AREA_STREET ) {
+		if ( area == AREA_STREET ) {
 			if ( World::getTask( )->getMap( AREA_STREET )->getObject( getPos( ) ) == OBJECT_BLOCK ) {
 				damage( 1 );
 				blowAway( );
@@ -728,10 +734,18 @@ void Player::actOnCall( ) {
 }
 
 void Player::actOnEnteringFadeOut( ) {
-
+	if ( getActCount( ) >= ENTERING_FADE_COUNT ) {
+		setAction( ACTION_FLOAT );
+		setPos( _entering_pos );
+	}
 }
 
 void Player::actOnEnteringSanzo( ) {
+	
+	if ( getActCount( ) >= ENTERING_SANZO_COUNT ) {
+		setAction( ACTION_FLOAT );
+		setPos( _entering_pos );
+	}
 }
 
 void Player::actOnAudience( ) {
@@ -780,8 +794,7 @@ void Player::damage( int force ) {
 	if ( Debug::getTask( )->isDebug( ) ) {
 		return;
 	}
-	if ( !isExist( ) ||
-		 _unrivaled_count < MAX_UNRIVALED_COUNT ) {
+	if ( !isExist( ) ) {
 		return;
 	}
 
@@ -887,6 +900,12 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 	
 	data->setStatusDevice( _player, _device_id );
 	
+	AREA area = getArea( );
+	if ( _action == ACTION_ENTERING_FADEOUT ||
+		 _action == ACTION_ENTERING_SANZO ) {
+		area = AREA_STREET;
+	}
+
 	switch ( _action ) {
 	case ACTION_ENTRY:
 		data->setStatusState( _player, SynchronousData::STATE_ENTRY );
@@ -906,7 +925,7 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		break;
 
 	default:
-		if ( getArea( ) == AREA_STREET ) {
+		if ( area == AREA_STREET ) {
 			data->setStatusState( _player, SynchronousData::STATE_PLAY_STREET ); 
 		} else {
 			data->setStatusState( _player, SynchronousData::STATE_PLAY_EVENT );
@@ -943,7 +962,6 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		}
 	}
 
-	AREA area = getArea( );
 	unsigned char type;
 	switch ( player ) {
 	case PLAYER_TAROSUKE: type = SynchronousData::TYPE_TAROSUKE; break;
@@ -1034,9 +1052,11 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 
 	pattern = off + motion % num;
 	
+	/*
 	if ( isStanding( ) ) {
 		data->addObject( area, SynchronousData::TYPE_SHADOW, 0, 0, x, y + 32 );
 	}
+	*/
 
 	unsigned char attribute = 0;
 	if ( getDir( ) == DIR_RIGHT ) {
@@ -1055,37 +1075,18 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 	}
 }
 
-void Player::setActionEnteringFadeOut( ) {
-	setVec( Vector( ) );
-	setAction( ACTION_ENTERING_FADEOUT );
-}
-
-void Player::setActionEnteringSanzo( ) {
-	setVec( Vector( ) );
-	setAction( ACTION_ENTERING_SANZO );
-}
-
-bool Player::isEntering( ) const {
-	if ( _action == ACTION_ENTERING_FADEOUT ) {
-		return getActCount( ) >= ENTERING_FADE_COUNT;
-	}
-
-	if ( _action == ACTION_ENTERING_SANZO ) {
-		return getActCount( ) >= ENTERING_SANZO_COUNT;
-	}
-
-	return false;
-}
-
 bool Player::isWearingItem( ITEM item ) const {
 	return _item[ item ];
 }
 
-void Player::enterEvent( int x, int y ) {
+void Player::enterEvent( const Vector& pos, ENTER enter ) {
 	setArea( AREA_EVENT );
-	setPos( Vector( x, y ) );
+	_entering_pos = pos;
 	setVec( Vector( ) );
-	setAction( ACTION_FLOAT );
+	switch ( enter ) {
+	case ENTER_SANZO  : setAction( ACTION_ENTERING_SANZO   ); break;
+	case ENTER_FADEOUT: setAction( ACTION_ENTERING_FADEOUT ); break;
+	}
 }
 
 

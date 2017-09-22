@@ -43,6 +43,10 @@ public:
 		MODE_ENMA,
 		MODE_VIRTUE,
 	};
+	enum ENTER {
+		ENTER_SANZO,
+		ENTER_FADEOUT,
+	};
 public:
 	Player( PLAYER player, Vector pos );
 	virtual ~Player( );
@@ -62,13 +66,10 @@ public:
 	void pickUpVirtue( );
 	void setSynchronousData( PLAYER player, int camera_pos ) const;
 	bool isExist( ) const;
-	void enterEvent( int x, int y );
+	void enterEvent( const Vector& pos, ENTER enter );
 	void leaveEvent( );
 	EVENT getOnEvent( ) const;
 	void pickUpItem( ITEM item );
-	void setActionEnteringFadeOut( );
-	void setActionEnteringSanzo( );
-	bool isEntering( ) const;
 	bool isWearingItem( ITEM item ) const;
 	MODE getMode( ) const;
 	void autoMove( int target_x );
@@ -131,5 +132,6 @@ private:
 	int _max_virtue;
 	int _sandwiched_count;
 	std::array< bool, MAX_ITEM > _item;
+	Vector _entering_pos;
 };
 

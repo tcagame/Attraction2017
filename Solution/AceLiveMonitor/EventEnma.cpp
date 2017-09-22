@@ -25,8 +25,9 @@ void EventEnma::update( ) {
 	case PHASE_ENTER:
 		for ( int i = 0; i < MAX_PLAYER; i++ ) {
 			PlayerPtr player = Family::getTask( )->getPlayer( i );
-			if ( player->isEntering( ) ) {
-				player->enterEvent( START_POS_X, START_POS_Y );
+			Player::ACTION action = player->getAction( );
+			if ( action != Player::ACTION_ENTERING_FADEOUT &&
+			     action != Player::ACTION_ENTERING_SANZO ) {
 				_player = player;
 			}
 		}
@@ -63,8 +64,8 @@ void EventEnma::join( PLAYER target ) {
 	if ( _audience ) {
 		return;
 	}
-	FamilyPtr family( Family::getTask( ) );
-	family->getPlayer( target )->setActionEnteringSanzo( );
+	PlayerPtr player = Family::getTask( )->getPlayer( target );
+	player->enterEvent( Vector( START_POS_X, START_POS_Y ), Player::ENTER_SANZO );
 	start( );
 	_audience = true;
 }

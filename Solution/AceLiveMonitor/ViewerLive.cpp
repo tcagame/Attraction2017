@@ -123,10 +123,16 @@ void ViewerLive::update( ) {
 			{
 				_image_entry->setPos( i * VIEW_STATUS_WIDTH, VIEW_STATUS_Y );
 				_image_entry->draw( );
-				_image_bustup[ target ]->setPos( i * VIEW_STATUS_WIDTH + ( 320 - 122 ) / 2, VIEW_STATUS_Y + 10 );
+				int x = i * VIEW_STATUS_WIDTH + ( 320 - 122 ) / 2;
+				int y = VIEW_STATUS_Y + 10;
+				int height = 138 * count / 100;
+				_image_bustup[ target ]->setRect( 0, 0, 122, 138 );
+				_image_bustup[ target ]->setPos( x, y );
 				_image_bustup[ target ]->setBlend( Image::BLEND_NONE, 0 );
 				_image_bustup[ target ]->draw( );
-				_image_bustup[ target ]->setBlend( Image::BLEND_ADD, count * 1.0 / 100 );
+				_image_bustup[ target ]->setRect( 0, 138 - height, 122, height);
+				_image_bustup[ target ]->setPos( x, y + 138 - height );
+				_image_bustup[ target ]->setBlend( Image::BLEND_ADD, 1.0 );
 				_image_bustup[ target ]->draw( );
 			}
 			break;

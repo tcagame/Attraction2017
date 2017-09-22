@@ -22,8 +22,9 @@ void EventBudha::update( ) {
 	case PHASE_ENTER:
 		for ( int i = 0; i < MAX_PLAYER; i++ ) {
 			PlayerPtr player = Family::getTask( )->getPlayer( i );
-			if ( player->isEntering( ) ) {
-				player->enterEvent( START_POS_X, START_POS_Y );
+			Player::ACTION action = player->getAction( );
+			if ( action != Player::ACTION_ENTERING_FADEOUT &&
+			     action != Player::ACTION_ENTERING_SANZO ) {
 				_player = player;
 			}
 		}
@@ -61,7 +62,7 @@ void EventBudha::join( PLAYER target ) {
 		return;
 	}
 	FamilyPtr family( Family::getTask( ) );
-	family->getPlayer( target )->setActionEnteringSanzo( );
+	family->getPlayer( target )->enterEvent( Vector( START_POS_X, START_POS_Y ), Player::ENTER_SANZO );
 	start( );
 	_audience = true;
 }

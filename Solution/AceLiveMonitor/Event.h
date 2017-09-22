@@ -29,6 +29,5 @@ private:
 	int _fade_count;
 	bool _exiting;
 	bool _finished;
-	int _nobody_count;
 };
 

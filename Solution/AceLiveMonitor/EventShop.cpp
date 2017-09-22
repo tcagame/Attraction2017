@@ -27,12 +27,6 @@ EventShop::~EventShop( ) {
 }
 
 void EventShop::update( ) {
-	for ( int i = 0; i < MAX_PLAYER; i++ ) {
-		PlayerPtr player = Family::getTask( )->getPlayer( i );
-		if ( player->isEntering( ) ) {
-			player->enterEvent( START_POS_X, START_POS_Y ); // –{—ˆ‚ÍoŒ»ˆÊ’u‚âŽ©“®ˆÚ“®‚È‚Ç‚ðÝ’è‚·‚é
-		}
-	}
 }
 
 bool EventShop::isJoining( ) const {
@@ -42,6 +36,6 @@ bool EventShop::isJoining( ) const {
 
 void EventShop::join( PLAYER target ) {
 	PlayerPtr player = Family::getTask( )->getPlayer( target );
-	player->setActionEnteringFadeOut( );
+	player->enterEvent( Vector( START_POS_X, START_POS_Y ), Player::ENTER_FADEOUT );
 	start( );
 }

@@ -18,14 +18,6 @@ EventMineral::~EventMineral( ) {
 }
 
 void EventMineral::update( ) {
-	// 透明化し切ったら、イベントへ
-	for ( int i = 0; i < MAX_PLAYER; i++ ) {
-		PlayerPtr player = Family::getTask( )->getPlayer( i );
-		if ( player->isEntering( ) ) {
-			player->enterEvent( START_POS_X, START_POS_Y );
-		}
-	}
-
 	// ボスを倒した
 	if ( _boss->getPower( ) <= 0 ) {
 		_boss->dropItem( );//神器(岩)を配る
@@ -40,7 +32,7 @@ bool EventMineral::isJoining( ) const {
 void EventMineral::join( PLAYER target ) {
 	PlayerPtr player = Family::getTask( )->getPlayer( target );
 	if ( !player->isWearingItem( Player::ITEM_MINERAL ) ) {
-		player->setActionEnteringFadeOut( );
+		player->enterEvent( Vector( START_POS_X, START_POS_Y ), Player::ENTER_SANZO );
 		start( );
 	}
 }

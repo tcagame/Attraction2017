@@ -72,9 +72,6 @@ void ViewerConsole::initialize( ) {
 	_image_bustup[ PLAYER_TAROJIRO ] = drawer->createImage( "UI/ui_bustup_tarojiro.png" );
 	_image_bustup[ PLAYER_GARISUKE ] = drawer->createImage( "UI/ui_bustup_garisuke.png" );
 	_image_bustup[ PLAYER_TAROMI   ] = drawer->createImage( "UI/ui_bustup_taromi.png"   );
-	for ( int i = 0; i < MAX_PLAYER; i++ ) {
-		_image_bustup[ i ]->setPos( ( 640 - 122 ) / 2, 100 );
-	}
 
 	_image_bar_upper = drawer->createImage( "UI/ui_bar.png" );
 	_image_bar_upper->setRect( 0, 0, 640, 8 );
@@ -165,13 +162,19 @@ void ViewerConsole::drawConsole( ) {
 		_image_ending->draw( );
 	}
 
-		
 	int count = data->getStatusProgressCount( _player );
 	if ( state == SynchronousData::STATE_ENTRY ) {
 		_image_entry->draw( );
-		_image_bustup[ _player ]->setBlend( Image::BLEND_NONE, count * 1.0 / 100 );
+		int x = ( 640 - 122 ) / 2;
+		int y = 100;
+		int height = 138 * count / 100;
+		_image_bustup[ _player ]->setRect( 0, 0, 122, 138 );
+		_image_bustup[ _player ]->setPos( x, y );
+		_image_bustup[ _player ]->setBlend( Image::BLEND_NONE, 0 );
 		_image_bustup[ _player ]->draw( );
-		_image_bustup[ _player ]->setBlend( Image::BLEND_ADD, count * 1.0 / 100 );
+		_image_bustup[ _player ]->setRect( 0, 138 - height, 122, height);
+		_image_bustup[ _player ]->setPos( x, y + 138 - height );
+		_image_bustup[ _player ]->setBlend( Image::BLEND_ADD, 1.0 );
 		_image_bustup[ _player ]->draw( );
 	}
 	if ( state == SynchronousData::STATE_CONTINUE ) {

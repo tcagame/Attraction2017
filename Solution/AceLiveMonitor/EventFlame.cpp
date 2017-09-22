@@ -18,14 +18,6 @@ EventFlame::~EventFlame( ) {
 }
 
 void EventFlame::update( ) {
-	// 透明化し切ったら、イベントへ
-	for ( int i = 0; i < MAX_PLAYER; i++ ) {
-		PlayerPtr player = Family::getTask( )->getPlayer( i );
-		if ( player->isEntering( ) ) {
-			player->enterEvent( START_POS_X, START_POS_Y );
-		}
-	}
-
 	// ボスを倒した
 	if ( _boss->getPower( ) <= 0 ) {
 		_boss->dropItem( );//神器(火)を配る
@@ -40,7 +32,7 @@ bool EventFlame::isJoining( ) const {
 void EventFlame::join( PLAYER target ) {
 	PlayerPtr player = Family::getTask( )->getPlayer( target );
 	if ( !player->isWearingItem( Player::ITEM_FLAME ) ) {
-		player->setActionEnteringFadeOut( );
+		player->enterEvent( Vector( START_POS_X, START_POS_Y ), Player::ENTER_SANZO );
 		start( );
 	}
 }

@@ -4,7 +4,6 @@
 #include "SynchronousData.h"
 
 const int OVERAREA = 1280 / 2 - 256;
-const int NOBODY_COUNT = 100;
 
 Event::Event( EVENT type, DIR exit_dir ) :
 _type( type ),
@@ -12,8 +11,7 @@ _exist_dir( exit_dir ),
 _fade_type( FADE_IN ),
 _fade_count( 100 ),
 _exiting( false ),
-_finished( true ),
-_nobody_count( 0 ) {
+_finished( true ) {
 }
 
 
@@ -54,12 +52,7 @@ void Event::escape( ) {
 		}
 	}
 	if ( !family->isExistOnEvent( ) ) {
-		_nobody_count++;
-		if ( _nobody_count > NOBODY_COUNT ) {
-			_exiting = true;
-		}
-	} else {
-		_nobody_count = 0;
+		_exiting = true;
 	}
 }
 
@@ -97,7 +90,6 @@ Event::FADE Event::getFade( ) const {
 
 void Event::start( bool nofade ) {
 	_finished = false;
-	_nobody_count = 0;
 	if ( nofade ) {
 		_fade_count = 0;
 	}
