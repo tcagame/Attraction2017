@@ -129,6 +129,9 @@ void ViewerConsole::drawConsole( ) {
 	unsigned char state = data->getStatusState( _player );
 
 	switch ( state ) {
+	case SynchronousData::STATE_CONTINUE:
+	case SynchronousData::STATE_CONTINUE_FADE:
+		Sound::getTask( )->stopBGM( );
 	case SynchronousData::STATE_PLAY_STREET:
 		drawAreaStreet( );
 		break;
@@ -137,9 +140,6 @@ void ViewerConsole::drawConsole( ) {
 		break;
 	case SynchronousData::STATE_OPENING:
 		drawOpening( );
-		break;
-	case SynchronousData::STATE_CONTINUE:
-		drawContinue( );
 		break;
 	}	
 
@@ -177,7 +177,12 @@ void ViewerConsole::drawConsole( ) {
 		_image_bustup[ _player ]->setBlend( Image::BLEND_ADD, 1.0 );
 		_image_bustup[ _player ]->draw( );
 	}
+	if ( state == SynchronousData::STATE_CONTINUE_FADE ) {
+		_image_continue->setBlend( Image::BLEND_ALPHA, 0.8 * count / 100 );
+		_image_continue->draw( );
+	}
 	if ( state == SynchronousData::STATE_CONTINUE ) {
+		_image_continue->setBlend( Image::BLEND_NONE, 0 );
 		_image_continue->draw( );
 		int x = 640 / 2;
 		int y = 480 - 256 + 100;
@@ -238,11 +243,6 @@ void ViewerConsole::drawOpening( ) {
 	_image_opening->setBlend( Image::BLEND_ALPHA, ratio );
 	_image_opening->draw( );
 }
-
-void ViewerConsole::drawContinue( ) {
-	Sound::getTask( )->stopBGM( );
-}
-
 
 void ViewerConsole::playSe( ) {
 	SynchronousDataPtr data = SynchronousData::getTask( );

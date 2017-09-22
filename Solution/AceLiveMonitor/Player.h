@@ -11,6 +11,7 @@ public:
 	enum ACTION {
 		ACTION_ENTRY,
 		ACTION_CONTINUE,
+		ACTION_CONTINUE_FADE,
 		ACTION_WAIT,
 		ACTION_WALK,
 		ACTION_FLOAT,
@@ -82,6 +83,7 @@ public:
 private:
 	void actOnEntry( );
 	void actOnContinue( );
+	void actOnContinueFade( );
 	void actOnWaiting( );
 	void actOnWalking( );
 	void actOnFloating( );

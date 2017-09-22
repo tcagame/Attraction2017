@@ -55,6 +55,7 @@ const int HEAL_DANGO = 6;
 const int MOTION_OFFSET[Player::MAX_ACTION] = {
 	0,   // ACTION_ENTRY,
 	0,   // ACTION_CONTINUE,
+	0,   // ACTION_CONTINUE_FADE,
 	0,   // ACTION_WAIT,
 	32,  // ACTION_WALK,
 	160,  // ACTION_FLOAT,
@@ -76,6 +77,7 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 	{ // たろすけ
 		1 , // ACTION_ENTRY,
 		1 , // ACTION_CONTINUE,
+		1 , // ACTION_CONTINUE_FADE,
 		17, // ACTION_WAIT,
 		16, // ACTION_WALK,
 		11, // ACTION_FLOAT,
@@ -95,6 +97,7 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 	{ // たろじろー
 		1 , // ACTION_ENTRY,
 		1 , // ACTION_CONTINUE,
+		1 , // ACTION_CONTINUE_FADE,
 		21, // ACTION_WAIT,
 		12, // ACTION_WALK,
 		11, // ACTION_FLOAT,
@@ -114,6 +117,7 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 	{ // ガりすけ
 		1 , // ACTION_ENTRY,
 		1 , // ACTION_CONTINUE,
+		1 , // ACTION_CONTINUE_FADE,
 		16, // ACTION_WAIT,
 		16, // ACTION_WALK,
 		11, // ACTION_FLOAT,
@@ -133,6 +137,7 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 	{ // たろみ
 		1 , // ACTION_ENTRY,
 		1 , // ACTION_CONTINUE,
+		1 , // ACTION_CONTINUE_FADE,
 		16, // ACTION_WAIT,
 		16, // ACTION_WALK,
 		11, // ACTION_FLOAT,
@@ -183,6 +188,7 @@ bool Player::isExist( ) const {
 	return
 		_action != ACTION_ENTRY &&
 		_action != ACTION_CONTINUE &&
+		_action != ACTION_CONTINUE_FADE &&
 		_action != ACTION_CALL &&
 		_action != ACTION_DAMEGE &&
 		_action != ACTION_BLOW_AWAY &&
@@ -190,6 +196,7 @@ bool Player::isExist( ) const {
 		_action != ACTION_ENTERING_SANZO &&
 		_action != ACTION_ENDING &&
 		_action != ACTION_OPENING &&
+		_action != ACTION_DEAD &&
 		_unrivaled_count >= MAX_UNRIVALED_COUNT;
 }
 
@@ -239,6 +246,9 @@ void Player::act( ) {
 	switch ( _action ) {
 	case ACTION_ENTRY:
 		actOnEntry( );
+		break;
+	case ACTION_CONTINUE_FADE:
+		actOnContinueFade();
 		break;
 	case ACTION_CONTINUE:
 		actOnContinue();
@@ -348,6 +358,7 @@ void Player::updateShowMoney( ) {
 void Player::updateProgressEffect( ) {
 	if ( _action == ACTION_ENTRY ||
 		 _action == ACTION_CONTINUE ||
+		 _action == ACTION_CONTINUE_FADE ||
 		 _action == ACTION_ENDING ) {
 		return;
 	}
@@ -366,6 +377,14 @@ void Player::actOnEntry( ) {
 	if ( _progress_count >= 100 ) {
 		_progress_count = 0;
 		setAction( ACTION_OPENING );
+	}
+}
+
+void Player::actOnContinueFade( ) {
+	adjustToCamera( );
+	_progress_count = getActCount( );
+	if ( getActCount( ) >= 100 ) {
+		setAction( ACTION_CONTINUE );
 	}
 }
 
@@ -721,7 +740,7 @@ void Player::actOnDead( ) {
 		// コンティニューへ
 		_progress_count = 0;
 		setArea( AREA_STREET );
-		setAction( ACTION_CONTINUE );
+		setAction( ACTION_CONTINUE_FADE );
 	}
 }
 
@@ -911,6 +930,10 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		data->setStatusState( _player, SynchronousData::STATE_ENTRY );
 		data->setStatusProgress( _player, SynchronousData::PROGRESS_BAR, _progress_count );
 		break;
+	case ACTION_CONTINUE_FADE:
+		data->setStatusState( _player, SynchronousData::STATE_CONTINUE_FADE ); 
+		data->setStatusProgress( _player, SynchronousData::PROGRESS_BAR, _progress_count );
+		break;
 	case ACTION_CONTINUE:
 		data->setStatusState( _player, SynchronousData::STATE_CONTINUE ); 
 		data->setStatusProgress( _player, SynchronousData::PROGRESS_BAR, _progress_count );
@@ -988,6 +1011,7 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		break;
 	case ACTION_ENTRY:
 	case ACTION_CONTINUE:
+	case ACTION_CONTINUE_FADE:
 	case ACTION_ENDING:
 	case ACTION_OPENING:
 		return;

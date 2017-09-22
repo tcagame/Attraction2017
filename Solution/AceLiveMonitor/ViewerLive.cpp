@@ -136,6 +136,12 @@ void ViewerLive::update( ) {
 				_image_bustup[ target ]->draw( );
 			}
 			break;
+		case SynchronousData::STATE_CONTINUE_FADE:
+			{
+				_image_continue->setPos( i * VIEW_STATUS_WIDTH, VIEW_STATUS_Y );
+				_image_continue->draw( );
+			}
+			break;
 		case SynchronousData::STATE_CONTINUE:
 			{
 				_image_continue->setPos( i * VIEW_STATUS_WIDTH, VIEW_STATUS_Y );
