@@ -200,10 +200,8 @@ void RockPlayer::setAction( ACTION action ) {
 	case ACTION_DEAD:
 		setDoll( ( DOLL )( DOLL_TAROSUKE_DEAD + _id * ROCK_PLAYER_MOTION_NUM ) );
 		setVec( Vector( ) );
-		effect->stopEffect( _speed_down_effect_handle );
 		_attack_count = 0;
-		_charge_effect_handle = -1;
-		_speed_down_effect_handle = -1;
+		stopEffect( );
 		break;
 	case ACTION_CHARGE:
 		setDoll( ( DOLL )( DOLL_TAROSUKE_CHARGE + _id * ROCK_PLAYER_MOTION_NUM ) );
@@ -576,7 +574,6 @@ void RockPlayer::actOnBraking( ) {
 }
 
 void RockPlayer::actOnDead( ) {
-	stopEffect( );
 	if ( getActCount( ) < DEAD_ANIM_TIME ) {
 		return;
 	}
