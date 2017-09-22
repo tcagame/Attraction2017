@@ -576,6 +576,7 @@ void RockPlayer::actOnBraking( ) {
 }
 
 void RockPlayer::actOnDead( ) {
+	stopEffect( );
 	if ( getActCount( ) < DEAD_ANIM_TIME ) {
 		return;
 	}

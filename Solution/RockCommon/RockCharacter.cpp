@@ -177,17 +177,12 @@ bool RockCharacter::isOnHead( RockCharacterConstPtr target ) const {
 bool RockCharacter::isOverLapped( RockCharacterConstPtr target ) const {
 	bool result = false;
 
-	Vector distance = target->getPos( ) - _pos;
-	double distance_y = fabs( distance.y );
-	distance.y = 0;
-
-	double length = distance.getLength2( );
+	Vector self = getPos( ) + Vector( 0, getHeight( ), 0 );
+	Vector own = target->getPos( ) + Vector( 0, target->getHeight( ), 0 );
+	Vector diff = own - self;
 	double range_hol = target->getOverlappedRadius( ) + getOverlappedRadius( );
-	double range_vir = target->getHeight( ) + getHeight( );
-	if ( length < range_hol * range_hol ) {
-		if ( distance_y < range_vir ) {
-			result = true;
-		}
+	if ( diff.getLength2( ) < range_hol * range_hol ) {
+		result = true;
 	}
 	return result;
 }
