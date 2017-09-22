@@ -6,9 +6,9 @@ ArcherAttack_POWER,2
 Branch_POWER,16
 HandAttack_POWER,2
 RedBirdAttack_POWER,2
-Seed_POWER,4
+Seed_POWER,6
 BloodDaemon_POWER,32
-MonsterTree_POWER,32
+MonsterTree_POWER,16
 RedDaemon_POWER,32
 Rock_POWER,32
 Archer_POWER,4
