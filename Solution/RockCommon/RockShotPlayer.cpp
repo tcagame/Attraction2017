@@ -24,7 +24,7 @@ _target_id( id ) {
 		setSize( EFFECT_NORMAL_SIZE * ( ( double )power / MAX_PLAYER_SHOT_POWER ) );
 		setEffectHandle( effect->playEffect( studio->getEffectHandle( EFFECT_SHOT ) ) );
 	}
-
+	setOverlappedRadius( power * 5 + 10 );
 	setVec( dir * MOVE_SPEED );
 	act( );
 }

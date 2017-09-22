@@ -804,3 +804,7 @@ void RockPlayer::stopEffect( ) {
 	effect->stopEffect( _speed_down_effect_handle );
 	_speed_down_effect_handle = -1;
 }
+
+bool RockPlayer::isInvincible( ) const {
+	return _damage_count <= DAMAGE_COUNT;
+}
