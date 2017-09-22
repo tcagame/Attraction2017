@@ -195,6 +195,7 @@
     <ClCompile Include="EnemyStone.cpp" />
     <ClCompile Include="ItemMoney.cpp" />
     <ClCompile Include="ItemVirtue.cpp" />
+    <ClCompile Include="ItemYokaiSoup.cpp" />
     <ClCompile Include="Magazine.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Monmotaro.cpp" />
@@ -344,6 +345,7 @@
     <ClInclude Include="EnemyStone.h" />
     <ClInclude Include="ItemMoney.h" />
     <ClInclude Include="ItemVirtue.h" />
+    <ClInclude Include="ItemYokaiSoup.h" />
     <ClInclude Include="Magazine.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Monmotaro.h" />

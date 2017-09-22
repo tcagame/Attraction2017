@@ -8,6 +8,7 @@
 #include "ItemDango.h"
 #include "ItemEnhancedAttack.h"
 #include "ItemEnhancedCharge.h"
+#include "ItemYokaiSoup.h"
 #include "SynchronousData.h"
 #include "World.h"
 
@@ -97,6 +98,24 @@ bool Storage::pickUpItem( ItemPtr item, PlayerPtr player ) {
 			} else {
 				//取得できない
 				result = false;
+			}
+			if ( result ) {
+				//だんご
+				if ( std::dynamic_pointer_cast< ItemDango >( item ) ) {
+					player->pickUpItem( Player::ITEM_DANGO );
+				}
+				//攻撃強化
+				if ( std::dynamic_pointer_cast< ItemEnhancedAttack >( item ) ) {
+					player->pickUpItem( Player::ITEM_HYPERTROPHY );
+				}
+				//チャージ強化
+				if ( std::dynamic_pointer_cast< ItemEnhancedAttack >( item ) ) {
+					player->pickUpItem( Player::ITEM_SHORTENING );
+				}
+				//すーぷ
+				if ( std::dynamic_pointer_cast< ItemYokaiSoup >( item ) ) {
+					player->recoverPower( );
+				}
 			}
 		}
 	}

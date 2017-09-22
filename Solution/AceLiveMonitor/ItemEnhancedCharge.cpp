@@ -1,7 +1,7 @@
 #include "ItemEnhancedCharge.h"
 #include "SynchronousData.h"
 
-const int PRICE = 100;
+const int PRICE = 50000;
 
 ItemEnhancedCharge::ItemEnhancedCharge( const Vector& pos ) :
 ShopItem( pos, PRICE ) {
@@ -26,5 +26,5 @@ void ItemEnhancedCharge::setSynchronousData( int camera_pos ) const {
 	}
 	unsigned char attribute = 0;
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
-	data->addObject( area, SynchronousData::TYPE_ITEM, 9, attribute, x, y, 64 );
+	data->addObject( area, SynchronousData::TYPE_ITEM, 9, attribute, x, y, 32 );
 }

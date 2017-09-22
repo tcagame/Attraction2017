@@ -448,6 +448,7 @@
     <ClCompile Include="EnemyBloodDaemonAttack.cpp">
       <Filter>Character\Enemy\Attack</Filter>
     </ClCompile>
+    <ClCompile Include="ItemYokaiSoup.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy.h">
@@ -894,6 +895,7 @@
     <ClInclude Include="EnemyBloodDaemonAttack.h">
       <Filter>Character\Enemy\Attack</Filter>
     </ClInclude>
+    <ClInclude Include="ItemYokaiSoup.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">
