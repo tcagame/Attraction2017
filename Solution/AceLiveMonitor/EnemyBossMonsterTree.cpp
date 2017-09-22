@@ -11,9 +11,9 @@ const int ATTACK_TIME = 50;
 
 EnemyBossMonsterTree::EnemyBossMonsterTree( const Vector& pos ) :
 EnemyBoss( pos, 192 ) {
-	EnemyPtr branch = EnemyPtr( new EnemyBranch( getPos( ) + Vector( -70, -20 ) ) );
-	branch->setArea( AREA_EVENT );
-	Military::getTask( )->popUp( branch );
+	_branch = EnemyPtr( new EnemyBranch( getPos( ) + Vector( -70, -20 ) ) );
+	_branch->setArea( AREA_EVENT );
+	Military::getTask( )->popUp( _branch );
 
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "MonsterTree_POWER" ) );
@@ -23,6 +23,9 @@ EnemyBoss( pos, 192 ) {
 
 
 EnemyBossMonsterTree::~EnemyBossMonsterTree( ) {
+	if ( _branch ) {
+		_branch->damage( 10000 );
+	}
 }
 
 void EnemyBossMonsterTree::act( ) {

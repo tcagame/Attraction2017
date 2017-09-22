@@ -13,5 +13,7 @@ public:
 	void dropItem( );
 protected:
 	void act( );
+private:
+	EnemyPtr _branch;
 };
 
