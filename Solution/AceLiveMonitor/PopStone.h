@@ -12,6 +12,8 @@ public:
 public:
 	void update( );
 private:
+	int _count;
+	int _max_pop_time;
 	EnemyWeakPtr _enemy;
 };
 
