@@ -4,7 +4,7 @@
 class EnemyArcherAttack : public Enemy {
 public:
 	EnemyArcherAttack( const Vector& pos );
-	virtual ~EnemyArcherAttack();
+	virtual ~EnemyArcherAttack( );
 public:
 	void setSynchronousData( int camera_pos ) const;
 protected:

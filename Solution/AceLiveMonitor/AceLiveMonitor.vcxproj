@@ -163,6 +163,7 @@
     <ClCompile Include="Debug.cpp" />
     <ClCompile Include="EnemyArcherAttack.cpp" />
     <ClCompile Include="EnemyAttack.cpp" />
+    <ClCompile Include="EnemyBloodDaemonAttack.cpp" />
     <ClCompile Include="EnemyHellFire.cpp" />
     <ClCompile Include="EnemyRay.cpp" />
     <ClCompile Include="EnemyShell.cpp" />
@@ -311,6 +312,7 @@
     <ClInclude Include="Debug.h" />
     <ClInclude Include="EnemyArcherAttack.h" />
     <ClInclude Include="EnemyAttack.h" />
+    <ClInclude Include="EnemyBloodDaemonAttack.h" />
     <ClInclude Include="EnemyHellFire.h" />
     <ClInclude Include="EnemyRay.h" />
     <ClInclude Include="EnemyShell.h" />

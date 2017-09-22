@@ -183,7 +183,7 @@ void Military::pushDebugData( ViewerDebug::Data& data ) const {
 		ite++;
 	}
 
-	data.circle.push_back( _hell_fire->getDebugDataCircle( ) );
+	//data.circle.push_back( _hell_fire->getDebugDataCircle( ) );
 	data.message.push_back( "Enemy:" + std::to_string( _enemies.size( ) ) );
 }
 

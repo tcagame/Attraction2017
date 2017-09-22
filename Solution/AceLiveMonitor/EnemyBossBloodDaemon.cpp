@@ -4,8 +4,11 @@
 #include "Family.h"
 #include "Player.h"
 #include "Property.h"
+#include "EnemyBloodDaemonAttack.h"
+#include "Military.h"
 
 const int WAIT_ANIM_TIME = 7;
+const int ATTACK_INTERVAL = 60;
 
 EnemyBossBloodDaemon::EnemyBossBloodDaemon( const Vector& pos ) :
 EnemyBoss( pos, 128 ) {
@@ -21,7 +24,17 @@ EnemyBossBloodDaemon::~EnemyBossBloodDaemon( ) {
 }
 
 void EnemyBossBloodDaemon::act( ) {
-
+	if ( getActCount( ) % ATTACK_INTERVAL == 0 ) {
+		//EnemyPtr attack1 = EnemyPtr( new EnemyBloodDaemonAttack( getPos( ) + Vector( -10, 0 ), 0 ) );
+		EnemyPtr attack2 = EnemyPtr( new EnemyBloodDaemonAttack( getPos( ) + Vector( -10, 0 ), 1 ) );
+		//attack1->setArea( getArea( ) );
+		attack2->setArea( getArea( ) );
+		//attack3->setArea( getArea( ) );
+		MilitaryPtr military( Military::getTask( ) );
+		//military->popUp( attack1 );
+		military->popUp( attack2 );
+		//military->popUp( attack3 );
+	}
 }
 
 void EnemyBossBloodDaemon::setSynchronousData( int camera_pos ) const {

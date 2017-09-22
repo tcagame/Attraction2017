@@ -445,6 +445,7 @@
     <ClCompile Include="PopWind.cpp">
       <Filter>Pop\Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyBloodDaemonAttack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy.h">
@@ -888,6 +889,7 @@
     <ClInclude Include="PopWind.h">
       <Filter>Pop\Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="EnemyBloodDaemonAttack.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">
