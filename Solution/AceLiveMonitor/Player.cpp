@@ -823,7 +823,7 @@ int Player::getChargeCount( ) const {
 
 
 bool Player::isOnHead( CharacterPtr target ) const {
-	if ( _action != ACTION_FLOAT ) {
+	if ( isStanding( ) ) {
 		return false;
 	}
 	Vector self = getOverlappedPos( );
