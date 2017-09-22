@@ -14,7 +14,8 @@ EnemyAttack( pos, NORMAL_CHAR_GRAPH_SIZE, false ) {
 	PropertyPtr property( Property::getTask( ) );
 	setPower( property->getData( "Branch_POWER" ) );
 	setForce( property->getData( "Branch_FORCE" ) );
-	setOverlappedRadius( property->getData( "Branch_RADIUS" ) );
+	//setOverlappedRadius( property->getData( "Branch_RADIUS" ) );
+	setOverlappedRadius( 0 );
 }
 
 EnemyBranch::~EnemyBranch( ) {
