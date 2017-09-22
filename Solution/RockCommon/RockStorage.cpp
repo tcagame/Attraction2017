@@ -235,7 +235,7 @@ bool RockStorage::pickUpItem( RockItemPtr item, int player_id ) {
 		RockItemTokuPtr toku = std::dynamic_pointer_cast< RockItemToku >( item );
 		if ( toku ) {
 			Status::Player player = _status->getPlayer( player_id );
-			if ( player.money >= TRANSITION_MONEY_NUM ) {
+			if ( player.area == AREA_STREET_3 ) {
 				int virtue = 1;
 				sender->sendMessage( player_id, Message::COMMAND_TOKU, &virtue );
 			} else {

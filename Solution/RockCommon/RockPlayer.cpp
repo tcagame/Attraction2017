@@ -278,7 +278,10 @@ void RockPlayer::actOnBubble( ) {
 	}
 	int dir =  _id % 2 ? -1 : 1;
 	double vertical_vec = sin( PI2 / 180 * getActCount( ) ) * FLOAT_HEIGHT * dir;
-	double horizontal_vec = sin( PI2 / 360 * getActCount( ) + 120 ) * FLOAT_HEIGHT * 2 * dir;
+	double horizontal_vec = 0;
+	if ( _status->getPlayer( _id ).area == AREA_WAIT ) {
+		horizontal_vec = sin( PI2 / 360 * getActCount( ) + 120 ) * FLOAT_HEIGHT * 2 * dir;
+	}
 	Vector vec = Vector( horizontal_vec, vertical_vec, 0 );
 	ModelMV1Ptr col = RockMap::getTask( )->getColModels( )[ 0 ];
 	Vector check_pos = getPos( );

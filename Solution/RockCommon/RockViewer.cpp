@@ -65,7 +65,7 @@ void RockViewer::initialize( ) {
 	//本番データ
 	for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 		char filename[256];
-		sprintf_s( filename, "UI/start_menu%d.png", i + 1 );
+		sprintf_s( filename, "UI/bustup%d.png", i + 1 );
 		ImagePtr image = drawer->createImage( filename );
 		_start_menu.push_back( image );
 	}
