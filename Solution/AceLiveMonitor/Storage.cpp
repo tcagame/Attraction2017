@@ -102,25 +102,6 @@ bool Storage::pickUpItem( ItemPtr item, PlayerPtr player ) {
 	}
 	return result;
 }
-/*
-void Storage::createShopItem( ) {
-	{
-		ItemPtr item = ShopItemPtr( new ItemDango( Vector( 500, 0 ) ) );
-		item->setArea( AREA_EVENT );
-		_items.push_back( item );
-	}
-	{
-		ItemPtr item = ShopItemPtr( new ItemEnhancedAttack( Vector( 600, 0 ) ) );
-		item->setArea( AREA_EVENT );
-		_items.push_back( item );
-	}
-	{
-		ItemPtr item = ShopItemPtr( new ItemEnhancedCharge( Vector( 700, 0 ) ) );
-		item->setArea( AREA_EVENT );
-		_items.push_back( item );
-	}
-}
-*/
 
 void Storage::eraseEventItem( ) {
 	std::list< ItemPtr >::iterator ite = _items.begin( );

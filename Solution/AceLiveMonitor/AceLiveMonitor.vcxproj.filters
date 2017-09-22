@@ -445,7 +445,9 @@
     <ClCompile Include="PopWind.cpp">
       <Filter>Pop\Enemy</Filter>
     </ClCompile>
-    <ClCompile Include="EnemyBloodDaemonAttack.cpp" />
+    <ClCompile Include="EnemyBloodDaemonAttack.cpp">
+      <Filter>Character\Enemy\Attack</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy.h">
@@ -889,7 +891,9 @@
     <ClInclude Include="PopWind.h">
       <Filter>Pop\Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="EnemyBloodDaemonAttack.h" />
+    <ClInclude Include="EnemyBloodDaemonAttack.h">
+      <Filter>Character\Enemy\Attack</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">
