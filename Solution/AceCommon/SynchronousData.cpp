@@ -8,7 +8,7 @@ SynchronousDataPtr SynchronousData::getTask( ) {
 
 SynchronousData::SynchronousData( ) {
 	resetObject( );
-
+	setEvent( EVENT_NONE );
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		_data.status[ i ].items = 0;
 	}
@@ -146,7 +146,6 @@ void SynchronousData::setFade( int fade ) {
 void SynchronousData::resetObject( ) {
 	_data.idx[ AREA_STREET ] = 0;
 	_data.idx[ AREA_EVENT ] = OBJECT_NUM - 1;
-	_data.event = ( char )EVENT_NONE;
 	_data.camera_x = 0;
 }
 
