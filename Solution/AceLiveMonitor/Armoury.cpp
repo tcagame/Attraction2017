@@ -37,7 +37,6 @@ void Armoury::update( ) {
 			continue;
 		}
 		_shot_list[ i ]->update( );
-		_shot_list[ i ]->setSynchronousData( camera_pos );
 		EnemyPtr hit_enemy = militari->getOverlappedEnemy( _shot_list[ i ] );
 		if ( hit_enemy ) {
 			hit_enemy->damage( _shot_list[ i ]->getPower( ) );
