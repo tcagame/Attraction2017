@@ -3,7 +3,7 @@
 #include "RockPlayer.h"
 
 static const int MAX_HP = 5;
-static const int RADIUS = 20;
+static const int RADIUS = 10;
 static const int HEIGHT = 10;
 static const int ACTION_TIME = 90;
 static const double MOVE_SPEED = 0.5;
