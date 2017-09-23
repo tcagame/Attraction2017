@@ -72,7 +72,8 @@ const int MOTION_OFFSET[Player::MAX_ACTION] = {
 	192, // ACTION_CALL,
 	14 * 16,   //ACTION_ENTERING_FADEOUT,
 	0,   //ACTION_ENTERING_SANZO,
-	3 * 16 + 14,   //ACTION_AUDIENCE
+	0, //ACTION_AUDIENCE_NORMAL
+	3 * 16 + 14,   //ACTION_AUDIENCE_BACK
 	0,   //ACTION_ENDING
 	0,   //ACTION_OPENING
 };
@@ -94,7 +95,8 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		18, // ACTION_CALL,
 		8,  //ACTION_ENTERING_FADEOUT,
 		1,  //ACTION_ENTERING_SANZO,
-		1,  //ACTION_AUDIENCE
+		1,  //ACTION_AUDIENCE_NORMAL
+		1,  //ACTION_AUDIENCE_BACK
 		1,  //ACTION_ENDING
 		1,  //ACTION_OPENING
 	},
@@ -114,7 +116,8 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		18, // ACTION_CALL,
 		8,  //ACTION_ENTERING_FADEOUT,
 		1,  //ACTION_ENTERING_SANZO,
-		1,  //ACTION_AUDIENCE
+		1,  //ACTION_AUDIENCE_NORMAL
+		1,  //ACTION_AUDIENCE_BACK
 		1,  //ACTION_ENDING
 		1,  //ACTION_OPENING
 	},
@@ -134,7 +137,8 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		12, // ACTION_CALL,
 		8,  //ACTION_ENTERING_FADEOUT,
 		1,  //ACTION_ENTERING_SANZO,
-		1,  //ACTION_AUDIENCE
+		1,  //ACTION_AUDIENCE_NORMAL
+		1,  //ACTION_AUDIENCE_BACK
 		1,  //ACTION_ENDING
 		1,  //ACTION_OPENING
 	},
@@ -154,7 +158,8 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		12, // ACTION_CALL,
 		8,  //ACTION_ENTERING_FADEOUT,
 		1,  //ACTION_ENTERING_SANZO,
-		1,  //ACTION_AUDIENCE
+		1,  //ACTION_AUDIENCE_NORMAL
+		1,  //ACTION_AUDIENCE_BACK
 		1,  //ACTION_ENDING
 		1,  //ACTION_OPENING
 	}
@@ -293,7 +298,8 @@ void Player::act( ) {
 	case ACTION_ENTERING_SANZO:
 		actOnEnteringSanzo( );
 		break;
-	case ACTION_AUDIENCE:
+	case ACTION_AUDIENCE_NORMAL:
+	case ACTION_AUDIENCE_BACK:
 		actOnAudience( );
 		break;
 	case ACTION_ENDING:
@@ -765,6 +771,7 @@ void Player::actOnEnteringFadeOut( ) {
 		setAction( ACTION_FLOAT );
 		setPos( _entering_pos );
 		_entering = true;
+		setMass( true );
 	}
 }
 
@@ -774,6 +781,7 @@ void Player::actOnEnteringSanzo( ) {
 		setAction( ACTION_FLOAT );
 		setPos( _entering_pos );
 		_entering = true;
+		setMass(true);
 	}
 }
 
@@ -1079,7 +1087,8 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 			}
 			break;
 		}
-	case ACTION_AUDIENCE:
+	case ACTION_AUDIENCE_BACK:
+	case ACTION_AUDIENCE_NORMAL:
 		motion = 0;
 		break;
 	}
@@ -1122,6 +1131,7 @@ void Player::enterEvent( const Vector& pos, ENTER enter ) {
 	_entering_pos = pos;
 	_entering = false;
 	setVec( Vector( ) );
+	setMass( false );
 	switch ( enter ) {
 	case ENTER_SANZO  : setAction( ACTION_ENTERING_SANZO   ); break;
 	case ENTER_FADEOUT: setAction( ACTION_ENTERING_FADEOUT ); break;
@@ -1235,9 +1245,13 @@ bool Player::isFinishedAutomoving( ) const {
 	return _auto_move_target_x < 0;
 }
 
-void Player::audience( ) {
+void Player::audience( bool is_back ) {
 	setVec( Vector( ) );
-	setAction( ACTION_AUDIENCE );
+	if (is_back) {
+		setAction( ACTION_AUDIENCE_BACK );
+	} else {
+		setAction(ACTION_AUDIENCE_NORMAL);
+	}
 }
 
 void Player::free( ) {

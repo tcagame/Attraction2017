@@ -28,6 +28,7 @@ private:
 		GRAPH_SANZO,
 		GRAPH_SHADOW,
 		GRAPH_RYUGU,
+		GRAPH_LAKE,
 		MAX_GRAPH,
 	};
 	struct Sprite {
@@ -53,6 +54,7 @@ private:
 	Sprite getSpriteSanzo( GRAPH graph, int x, int y, unsigned char attribute, int pattern, int size ) const;
 	Sprite getSpriteShadow( GRAPH graph, int x, int y, unsigned char attribute, int pattern, int size ) const;
 	Sprite getSpriteRyugu( GRAPH graph, int x, int y, unsigned char attribute, int pattern, int size ) const;
+	Sprite getSpriteLake( GRAPH graph, int x, int y, unsigned char attribute, int pattern, int size ) const;
 private:
 	std::array< ImagePtr, MAX_GRAPH > _image;
 };

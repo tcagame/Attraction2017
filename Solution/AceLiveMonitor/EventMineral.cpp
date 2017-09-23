@@ -23,6 +23,7 @@ void EventMineral::update( ) {
 		_boss->dropItem( );//_Ší(Šâ)‚ğ”z‚é
 		exit( );
 	}
+	escape( );
 }
 
 void EventMineral::join( PLAYER target ) {
