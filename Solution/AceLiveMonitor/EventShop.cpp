@@ -27,6 +27,7 @@ EventShop::~EventShop( ) {
 }
 
 void EventShop::update( ) {
+	escape( );
 }
 
 void EventShop::join( PLAYER target ) {

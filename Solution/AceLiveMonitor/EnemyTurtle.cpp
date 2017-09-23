@@ -6,6 +6,7 @@ const int WAIT_ANIM_TIME = 10;
 EnemyTurtle::EnemyTurtle( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ) {
 	setPower( 999 );
+	setForce( 0 );
 }
 
 

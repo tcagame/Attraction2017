@@ -114,7 +114,7 @@ bool Storage::pickUpItem( ItemPtr item, PlayerPtr player ) {
 					player->pickUpItem( Player::ITEM_HYPERTROPHY );
 				}
 				//チャージ強化
-				if ( std::dynamic_pointer_cast< ItemEnhancedAttack >( item ) ) {
+				if ( std::dynamic_pointer_cast< ItemEnhancedCharge >( item ) ) {
 					player->pickUpItem( Player::ITEM_SHORTENING );
 				}
 				//すーぷ

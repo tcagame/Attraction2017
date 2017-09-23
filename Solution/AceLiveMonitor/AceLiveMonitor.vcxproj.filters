@@ -452,7 +452,9 @@
       <Filter>Item</Filter>
     </ClCompile>
     <ClCompile Include="ItemYokaiSoup.cpp" />
-    <ClCompile Include="ItemBox.cpp" />
+    <ClCompile Include="ItemBox.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy.h">
@@ -903,7 +905,9 @@
       <Filter>Item</Filter>
     </ClInclude>
     <ClInclude Include="ItemYokaiSoup.h" />
-    <ClInclude Include="ItemBox.h" />
+    <ClInclude Include="ItemBox.h">
+      <Filter>Item</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Pop">
