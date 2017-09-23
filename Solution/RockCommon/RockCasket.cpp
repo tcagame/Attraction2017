@@ -35,7 +35,7 @@ RockCasket::RESULT RockCasket::getOpenResult( ) const {
 	RESULT result = RESULT_SUCCESS;
 	EffectPtr effect = Effect::getTask( );
 	srand( 3 );
-	if( rand( ) % 3 == 0 ) {
+	if( rand( ) % 7 == 0 ) {
 		effect->updateEffectTransform( effect->playEffect( RockStudio::getTask( )->getEffectHandle( EFFECT_CASKET_BAD ) ), getPos( ) );
 		result = RESULT_BAD;
 	} else {

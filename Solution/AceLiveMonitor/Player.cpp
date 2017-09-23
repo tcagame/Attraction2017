@@ -240,6 +240,7 @@ void Player::updatetDevice( ) {
 	} else {
 		if ( device->getButton( _device_id ) == BUTTON_B + BUTTON_C + BUTTON_D ) {
 			setAction( ACTION_ENTRY );
+			setPower( MAX_HP ); // サウンドバグ回避
 			_progress_count = 0;
 		}
 		if ( device->getDirY( _device_id ) < 0 &&
@@ -477,6 +478,13 @@ void Player::actOnWaiting( ) {
 	if ( _charge_count < 0 ) {
 		_charge_count = 0;
 	}
+	
+	// 水の中
+	if ( isStanding( ) &&
+		World::getTask( )->getMap( getArea( ) )->getObject( getPos( ) ) == OBJECT_WATER ) {
+		_charge_count = 0;
+	}
+
 }
 
 void Player::actOnWalking( ) {
@@ -541,9 +549,10 @@ void Player::actOnWalking( ) {
 		setAction( ACTION_ATTACK );
 	}
 	
-	// 歩く音
+	// 水の中
 	MapPtr map = World::getTask( )->getMap( getArea( ) );
 	if ( map->getObject( getPos( ) ) == OBJECT_WATER ) {
+		_charge_count = 0;
 		if ( !sound->isPlayingSE( "yokai_voice_14.wav" ) ) {
 			sound->playSE( "yokai_voice_14.wav" );
 		}
@@ -599,7 +608,11 @@ void Player::actOnAttack( ) {
 	_charge_count = 0;
 	_cool_time = 0;
 	
-	setAction( ACTION_FLOAT );
+	if ( isStanding( ) ) {
+		setAction( ACTION_WAIT );
+	} else {
+		setAction( ACTION_FLOAT );
+	}
 }
 
 void Player::actOnCharge( ) {
@@ -765,6 +778,10 @@ void Player::actOnCall( ) {
 
 bool Player::isEntering( ) const {
 	return _entering;
+}
+
+PLAYER Player::getPlayer( ) const {
+	return _player;
 }
 
 void Player::actOnEnteringFadeOut( ) {
@@ -1138,11 +1155,12 @@ void Player::enterEvent( const Vector& pos, ENTER enter ) {
 
 void Player::leaveEvent( ) {
 	Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, getOverlappedRadius( ) ), getArea( ), ( int )getOverlappedRadius( ) * 2 ) ) );
-
+	setMass( true );
 	setArea( AREA_STREET );
 	setPos( Vector( Family::getTask( )->getCameraPosX( ) + SCREEN_WIDTH / 2, 0 ) );
 	setVec( Vector( ) );
 	setAction( ACTION_FLOAT );
+	_unrivaled_count = 0;
 }
 
 EVENT Player::getOnEvent( ) const {

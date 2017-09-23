@@ -371,16 +371,23 @@ void RockMapStreet::genarateStorage( STAGE next ) {
 	case STAGE_STREET:
 	{
 		storage->addAlter( RockAlterPtr( new RockAlter( Vector( 300, 0, -300 ), Vector( 0, 0, -1 ) ) ) );
+		storage->addAlter( RockAlterPtr( new RockAlter( Vector( 2988, -593, -2470 ), Vector( 1, 0, 0 ) ) ) );
 		//ショップアイテム
 		storage->addShopItem( RockItemPtr( new RockItemEnhancePower ( Vector( OBABA_POS.x + 50, OBABA_POS.y, OBABA_POS.z - 50 ) ) ) );
 		storage->addShopItem( RockItemPtr( new RockItemDango        ( Vector( OBABA_POS.x, OBABA_POS.y, OBABA_POS.z - 50 ) ) ) );
 		storage->addShopItem( RockItemPtr( new RockItemEnhanceCharge( Vector( OBABA_POS.x - 50, OBABA_POS.y, OBABA_POS.z - 50 ) ) ) );
 		//徳まみれ
+		storage->addItem( RockItemPtr( new RockItemToku( Vector( 555,     10,   -500 ) ) ) );
+		storage->addItem( RockItemPtr( new RockItemToku( Vector( 555,     10,   -758 ) ) ) );
 		storage->addItem( RockItemPtr( new RockItemToku( Vector( 660,     10,   -623 ) ) ) );
+		storage->addItem( RockItemPtr( new RockItemToku( Vector( 1849,    10,   -705 ) ) ) );
 		storage->addItem( RockItemPtr( new RockItemToku( Vector( 2813,   343,   -615 ) ) ) );
+		storage->addItem( RockItemPtr( new RockItemToku( Vector( 5656,   381,   -623 ) ) ) );
+		storage->addItem( RockItemPtr( new RockItemToku( Vector( 6506,     0,   -623 ) ) ) );
 		storage->addItem( RockItemPtr( new RockItemToku( Vector( 7206,   -70,   -774 ) ) ) );
 		storage->addItem( RockItemPtr( new RockItemToku( Vector( 6903,   -70,  -1623 ) ) ) );
 		storage->addItem( RockItemPtr( new RockItemToku( Vector( 5300,   -230, -2165 ) ) ) );
+		storage->addItem( RockItemPtr( new RockItemToku( Vector( 5740,   -155, -2034 ) ) ) );
 		storage->addItem( RockItemPtr( new RockItemToku( Vector( 3463,   -560, -2311 ) ) ) );
 		storage->addItem( RockItemPtr( new RockItemToku( Vector( 4544,   -820, -3122 ) ) ) );
 		storage->addItem( RockItemPtr( new RockItemToku( Vector( 6616,  -1000, -3056 ) ) ) );

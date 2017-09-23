@@ -4,6 +4,8 @@
 #include "Magazine.h"
 #include "Impact.h"
 #include "SynchronousData.h"
+#include "ItemDice.h"
+#include "Storage.h"
 
 const int START_POS_X = 256 + 100;
 const int START_POS_Y = 200;
@@ -12,6 +14,10 @@ const int BET_POS_Y = 210;
 const int FEVER_COUNT = 10;
 const int SUCCESS_COUNT = 100;
 const int FINISHED_COUNT = 60;
+const int SHAKE_COUNT = 100;
+
+const int START_DICE_X = 640;
+const int START_DICE_Y = 100;
 
 EventGamble::EventGamble( ) :
 Event( EVENT_GAMBLE, DIR_LEFT ),
@@ -31,36 +37,49 @@ void EventGamble::update( ) {
 		}
 		_count++;
 		if ( _count > AUDIENCE_COUNT ) {
-			SynchronousData::getTask( )->setMessage( SynchronousData::MES_GAMBLE0 );
+			SynchronousData::getTask( )->setStatusMessage( _player->getPlayer( ), SynchronousData::MES_GAMBLE0 );
 			_phase = PHASE_BET;
 			_player->free( );
 		}
 		break;
 	case PHASE_BET:
 		if ( _player->getArea( ) == AREA_STREET ) {
-			SynchronousData::getTask( )->setMessage( SynchronousData::MES_NONE );
+			SynchronousData::getTask( )->setStatusMessage( _player->getPlayer( ), SynchronousData::MES_NONE );
 			break;
 		}
 		if ( _player->isStanding( ) ) {
 			if ( _player->getPos( ).y < BET_POS_Y ) {
 				_player->audience( false );
-				_phase = PHASE_DICE;
+				_phase = PHASE_SHAKE;
+				_count = 0;
+				_dice[ 0 ] = ItemDicePtr( new ItemDice( Vector( START_DICE_X - 20, START_DICE_Y ), AREA_EVENT ) );
+				_dice[ 1 ] = ItemDicePtr( new ItemDice( Vector( START_DICE_X + 20, START_DICE_Y ), AREA_EVENT ) );
+				Storage::getTask( )->add( _dice[ 0 ] );
+				Storage::getTask( )->add( _dice[ 1 ] );
 			}
 		}
 		escape( );
 		break;
+	case PHASE_SHAKE:
+		_count++;
+	 	if ( _count > SHAKE_COUNT ) {
+			_phase = PHASE_DICE;
+			_dice[ 0 ]->stop( );
+			_dice[ 1 ]->stop( );
+		}
+		break;
 	case PHASE_DICE:
 		{
 			// ¡‰ñ‚ÌŒ‹‰Ê‚ðƒ‰ƒ“ƒ_ƒ€‚ÅŒˆ’è
-			int dice = rand( ) % 2;
+			int dice = ( _dice[ 0 ]->getNum( ) + _dice[ 1 ]->getNum( ) ) % 2;
 			if ( dice == 0 ) {
-				SynchronousData::getTask( )->setMessage( SynchronousData::MES_GAMBLE2 );
+				SynchronousData::getTask( )->setStatusMessage( _player->getPlayer( ), SynchronousData::MES_GAMBLE1 );
 			} else {
-				SynchronousData::getTask( )->setMessage( SynchronousData::MES_GAMBLE1 );
+				SynchronousData::getTask( )->setStatusMessage( _player->getPlayer( ), SynchronousData::MES_GAMBLE2 );
 			}
 			// ‘I‘ð‚µ‚½BET‚ðŽæ“¾
 			int bet = 0;
-			if ( _player->getPos( ).x > 1280 / 2 ) {
+			if ( _player->getPos( ).x < 1280 / 2 ) {
 				bet = 1;
 			}
 			// ³‰ð‚©’²‚×‚é
@@ -89,7 +108,7 @@ void EventGamble::update( ) {
 		_count++;
 		if ( _count > FINISHED_COUNT ) {
 			exit( );
-			SynchronousData::getTask( )->setMessage( SynchronousData::MES_NONE );
+			SynchronousData::getTask( )->setStatusMessage( _player->getPlayer( ), SynchronousData::MES_NONE );
 		}
 		break;
 	}

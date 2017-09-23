@@ -185,6 +185,7 @@
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemBox.cpp" />
     <ClCompile Include="ItemDango.cpp" />
+    <ClCompile Include="ItemDice.cpp" />
     <ClCompile Include="ItemEnhancedAttack.cpp" />
     <ClCompile Include="ItemEnhancedCharge.cpp" />
     <ClCompile Include="EnemyBat.cpp" />
@@ -336,6 +337,7 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemBox.h" />
     <ClInclude Include="ItemDango.h" />
+    <ClInclude Include="ItemDice.h" />
     <ClInclude Include="ItemEnhancedAttack.h" />
     <ClInclude Include="ItemEnhancedCharge.h" />
     <ClInclude Include="EnemyBat.h" />

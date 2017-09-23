@@ -12,23 +12,23 @@
 const char * FILENAME[ ] = {
 	"Result/heaven/heaven_tarosuke.png",
 	"Result/heaven/heaven_tarojiro.png",
-	"Result/heaven/heaven_tgarisuke.png",
+	"Result/heaven/heaven_garisuke.png",
 	"Result/heaven/heaven_taromi.png",
 	"Result/human/human_tarosuke.png",
 	"Result/human/human_tarojiro.png",
-	"Result/human/human_tgarisuke.png",
+	"Result/human/human_garisuke.png",
 	"Result/human/human_taromi.png",
 	"Result/hungry/hungry_tarosuke.png",
 	"Result/hungry/hungry_tarojiro.png",
-	"Result/hungry/hungry_tgarisuke.png",
+	"Result/hungry/hungry_garisuke.png",
 	"Result/hungry/hungry_taromi.png",
 	"Result/damn/damn_tarosuke.png",
 	"Result/damn/damn_tarojiro.png",
-	"Result/damn/damn_tgarisuke.png",
+	"Result/damn/damn_garisuke.png",
 	"Result/damn/damn_taromi.png",
 	"Result/hell/hell_tarosuke.png",
 	"Result/hell/hell_tarojiro.png",
-	"Result/hell/hell_tgarisuke.png",
+	"Result/hell/hell_garisuke.png",
 	"Result/hell/hell_taromi.png",
 };
 
@@ -83,7 +83,7 @@ void ViewerConsole::initialize( ) {
 	
 	for ( int i = 0; i < MAX_MESSAGE; i++ ) {
 		_image_message[ i ]->setRect( 0, 0, 320, 208 );
-		_image_message[ i ]->setPos( 640 / 2, 7 );
+		_image_message[ i ]->setPos( 640 / 4, 7 );
 	}
 
 	_image_bar_upper = drawer->createImage( "UI/ui_bar.png" );
@@ -260,7 +260,7 @@ void ViewerConsole::drawOpening( ) {
 
 void ViewerConsole::drawMessage( ) {
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
-	switch ( data->getMessage( ) ) {
+	switch ( data->getStatusMessage( _player ) ) {
 	case SynchronousData::MES_NONE:
 		break;
 	case SynchronousData::MES_GAMBLE0:

@@ -68,13 +68,12 @@ void Family::updatePlayer( PLAYER target ) {
 	if ( !_player[ target ]->isExist( ) ) {
 		return;
 	}
-	if ( _player[ target ]->getArea( ) == AREA_EVENT ) {
-		return;
-	}
 		
 	//キャラクターが右端にいる場合、カメラのポジションを変えない
-	if ( ( _camera_pos_x - SCREEN_WIDTH / 2 ) + SCROLL_BUFFER > _player[ target ]->getPos( ).x ) {
-		_updating_camera = false;
+	if ( _player[ target ]->getArea( ) == AREA_STREET ) {
+		if ( ( _camera_pos_x - SCREEN_WIDTH / 2 ) + SCROLL_BUFFER > _player[ target ]->getPos( ).x ) {
+			_updating_camera = false;
+		}
 	}
 
 	// playerの頭の上で跳ねる
@@ -82,7 +81,7 @@ void Family::updatePlayer( PLAYER target ) {
 		if ( !_player[ j ]->isExist( ) ) {
 			continue;
 		}
-		if ( _player[ j ]->getArea( ) != AREA_STREET ) {
+		if ( _player[ j ]->getArea( ) != _player[ target ]->getArea( ) ) {
 			continue;
 		}
 		if ( target == j ) {

@@ -11,6 +11,7 @@ SynchronousData::SynchronousData( ) {
 	setEvent( EVENT_NONE );
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		_data.status[ i ].items = 0;
+		_data.status[ i ].message = 0;
 	}
 }
 
@@ -86,12 +87,12 @@ int SynchronousData::getStatusDevice( PLAYER player ) const {
 	return _data.status[ player ].device;
 }
 
-int SynchronousData::getFade( ) const {
-	return _data.fade;
+unsigned char SynchronousData::getStatusMessage( PLAYER player ) const {
+	return _data.status[ player ].message;
 }
 
-unsigned char SynchronousData::getMessage( ) const {
-	return _data.message;
+int SynchronousData::getFade( ) const {
+	return _data.fade;
 }
 
 void SynchronousData::setStatusDevice( PLAYER player, int id ) {
@@ -142,12 +143,12 @@ void SynchronousData::setStatusState( PLAYER player, unsigned char area ) {
 	_data.status[ player ].state = ( unsigned char )area;
 }
 
-void SynchronousData::setFade( int fade ) {
-	_data.fade = fade;
+void SynchronousData::setStatusMessage( PLAYER player, unsigned char message ) {
+	_data.status[ player ].message = message;
 }
 
-void SynchronousData::setMessage( unsigned char message ) {
-	_data.message = message;
+void SynchronousData::setFade( int fade ) {
+	_data.fade = fade;
 }
 
 void SynchronousData::resetObject( ) {

@@ -166,7 +166,7 @@ void World::updateEvent( ) {
 		PlayerPtr player = family->getPlayer( i );
 		EVENT event = player->getOnEvent( );
 
-		if ( player->isExist( ) ) {
+		if ( player->isExist( ) && player->getArea( ) == AREA_STREET ) {
 			if ( keyboard->isHoldKey( "1" ) ) event = EVENT_FLAME;
 			if ( keyboard->isHoldKey( "2" ) ) event = EVENT_WOOD;
 			if ( keyboard->isHoldKey( "3" ) ) event = EVENT_MINERAL;
@@ -174,6 +174,7 @@ void World::updateEvent( ) {
 			if ( keyboard->isHoldKey( "5" ) ) event = EVENT_GAMBLE;
 			if ( keyboard->isHoldKey( "6" ) ) event = EVENT_RYUGU;
 			if ( keyboard->isHoldKey( "7" ) ) event = EVENT_LAKE;
+			if ( keyboard->isHoldKey( "8" ) ) event = EVENT_REDDAEMON;
 		}
 
 		// イベントを踏んでいない
@@ -182,7 +183,8 @@ void World::updateEvent( ) {
 		}
 
 		// 前回同じイベントだったか？
-		if ( _passed_event == event ) {
+		if ( _passed_event == event &&
+			 _event->getType( ) != event ) {
 			continue;
 		}
 
