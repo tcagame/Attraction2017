@@ -12,6 +12,13 @@ public:
 	void update( );
 	void join( PLAYER target );
 private:
+	enum PHASE {
+		PHASE_NORMAL,
+		PHASE_FINISHED,
+		PHASE_WAIT,
+	};
+private:
+	PHASE _phase;
 	EnemyBossPtr _boss;
 	int _count;
 };
