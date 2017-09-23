@@ -3,6 +3,7 @@
 #include "smart_ptr.h"
 
 PTR( Player );
+PTR( Item );
 
 class EventRyugu : public Event {
 public:
@@ -16,12 +17,13 @@ private:
 		PHASE_ENTER,
 		PHASE_MOVE,
 		PHASE_AUDIENCE,
+		PHASE_FREE,
 		PHASE_FINISHED,
 	};
 private:
-	bool _audience;
 	PHASE _phase;
 	PlayerPtr _player;
+	ItemWeakPtr _box;
 	int _count;
 };
 

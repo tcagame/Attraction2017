@@ -51,6 +51,10 @@ const int MAX_SANDWICHED_COUNT = 300;
 const int AUTO_FINISH_RANGE = 5;
 const int HEAL_DANGO = 6;
 
+//玉手箱
+const int BOX_DAMAGE = 5;
+const int BOX_MONEY = 5000;
+
 // モーションテーブル
 const int MOTION_OFFSET[Player::MAX_ACTION] = {
 	0,   // ACTION_ENTRY,
@@ -1194,6 +1198,13 @@ void Player::pickUpItem( ITEM item ) {
 	case ITEM_WOOD	     : setProgressType( SynchronousData::PROGRESS_ITEM_WOOD	      ); break;
 	case ITEM_FLAME	     : setProgressType( SynchronousData::PROGRESS_ITEM_FLAME	      ); break;
 	case ITEM_MINERAL    : setProgressType( SynchronousData::PROGRESS_ITEM_MINERAL     ); break;
+	case ITEM_BOX        :
+		if ( rand( ) % 2 ) {
+			damage( BOX_DAMAGE );
+		} else {
+			addMoney( BOX_MONEY );
+		}
+		break;
 	}
 
 	if ( _item[ ITEM_WOOD ] &&
@@ -1227,6 +1238,10 @@ bool Player::isFinishedAutomoving( ) const {
 void Player::audience( ) {
 	setVec( Vector( ) );
 	setAction( ACTION_AUDIENCE );
+}
+
+void Player::free( ) {
+	setAction( ACTION_FLOAT );
 }
 
 void Player::setModeVirtue( ) {

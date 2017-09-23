@@ -37,6 +37,7 @@ public:
 		ITEM_WOOD,
 		ITEM_FLAME,
 		ITEM_MINERAL,
+		ITEM_BOX,
 		MAX_ITEM,
 	};
 	enum MODE {
@@ -76,6 +77,7 @@ public:
 	void autoMove( int target_x );
 	bool isFinishedAutomoving( ) const;
 	void audience( );
+	void free( );
 	void setModeVirtue( );
 	void setActionEnding( );
 	bool isLeaveAlone( ) const;
