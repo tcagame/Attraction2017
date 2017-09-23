@@ -599,7 +599,11 @@ void Player::actOnAttack( ) {
 	_charge_count = 0;
 	_cool_time = 0;
 	
-	setAction( ACTION_FLOAT );
+	if ( isStanding( ) ) {
+		setAction( ACTION_WAIT );
+	} else {
+		setAction( ACTION_FLOAT );
+	}
 }
 
 void Player::actOnCharge( ) {
