@@ -240,6 +240,7 @@ void Player::updatetDevice( ) {
 	} else {
 		if ( device->getButton( _device_id ) == BUTTON_B + BUTTON_C + BUTTON_D ) {
 			setAction( ACTION_ENTRY );
+			setPower( MAX_HP ); // サウンドバグ回避
 			_progress_count = 0;
 		}
 		if ( device->getDirY( _device_id ) < 0 &&
