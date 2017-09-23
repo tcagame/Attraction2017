@@ -477,6 +477,12 @@ void Player::actOnWaiting( ) {
 	if ( _charge_count < 0 ) {
 		_charge_count = 0;
 	}
+	
+	// …‚Ì’†
+	if ( isStanding( ) && map->getObject( getPos( ) ) == OBJECT_WATER ) {
+		_charge_count = 0;
+	}
+
 }
 
 void Player::actOnWalking( ) {
@@ -541,9 +547,10 @@ void Player::actOnWalking( ) {
 		setAction( ACTION_ATTACK );
 	}
 	
-	// •à‚­‰¹
+	// …‚Ì’†
 	MapPtr map = World::getTask( )->getMap( getArea( ) );
 	if ( map->getObject( getPos( ) ) == OBJECT_WATER ) {
+		_charge_count = 0;
 		if ( !sound->isPlayingSE( "yokai_voice_14.wav" ) ) {
 			sound->playSE( "yokai_voice_14.wav" );
 		}
