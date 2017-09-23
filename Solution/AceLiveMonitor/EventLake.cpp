@@ -38,7 +38,6 @@ void EventLake::update( ) {
 	case PHASE_AUDIENCE:
 		_count++;
 		if ( _count > AUDIENCE_COUNT ) {
-			_player->setModeVirtue( );
 			exit( );
 			_phase = PHASE_FINISHED;
 		} else {

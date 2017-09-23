@@ -14,7 +14,6 @@ EnemyTurtle::~EnemyTurtle( ) {
 }
 
 void EnemyTurtle::act( ) {
-	int a = 0;
 }
 
 void EnemyTurtle::setSynchronousData( int camera_pos ) const {
