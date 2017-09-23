@@ -39,6 +39,12 @@ void ShotReflect::setSynchronousData( int camera_pos ) const {
 
 void ShotReflect::act( ) {
 	PlayerPtr target = Family::getTask( )->getPlayer( _player );
+
+	if ( target->getArea( ) != getArea( ) ) {
+		erase( );
+		return;
+	}
+
 	if ( !target ->isExist( ) ) {
 		erase( );
 		return;

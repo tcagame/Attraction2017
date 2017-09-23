@@ -240,6 +240,7 @@ void Player::updatetDevice( ) {
 	} else {
 		if ( device->getButton( _device_id ) == BUTTON_B + BUTTON_C + BUTTON_D ) {
 			setAction( ACTION_ENTRY );
+			setPower( MAX_HP ); // サウンドバグ回避
 			_progress_count = 0;
 		}
 		if ( device->getDirY( _device_id ) < 0 &&
@@ -479,7 +480,8 @@ void Player::actOnWaiting( ) {
 	}
 	
 	// 水の中
-	if ( isStanding( ) && map->getObject( getPos( ) ) == OBJECT_WATER ) {
+	if ( isStanding( ) &&
+		World::getTask( )->getMap( getArea( ) )->getObject( getPos( ) ) == OBJECT_WATER ) {
 		_charge_count = 0;
 	}
 
