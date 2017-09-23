@@ -86,6 +86,17 @@ void StatusSender::updateFamily( ) {
 				player.item ^= SPEED_DOWN;
 			}
 		}
+		//‚¨‹à‚ª‚½‚­‚³‚ñ‚ ‚é‚ÆASTEET2‚ÖˆÚ“®
+		if ( player.money >= TRANSITION_MONEY_NUM &&
+			 player.area == AREA_STREET_1 ) {
+			player.area = AREA_STREET_2;
+		}
+		//_Ší‚ðŽ‚Á‚Ä‚¢‚é‚ÆASTREET_3‚ÖˆÚ“®
+		if ( ( player.item & ITEM_FIRE ) &&
+			 ( player.item & ITEM_ROCK ) &&
+			 ( player.item & ITEM_TREE ) ) {
+			player.area = AREA_STREET_3;
+		}
 		_status->getPlayer( i ) = player;
 	}
 	

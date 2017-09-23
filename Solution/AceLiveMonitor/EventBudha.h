@@ -19,7 +19,6 @@ private:
 		PHASE_FINISHED,
 	};
 private:
-	bool _audience;
 	int _count;
 	PHASE _phase;
 	PlayerPtr _player;

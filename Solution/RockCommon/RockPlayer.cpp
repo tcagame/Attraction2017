@@ -150,13 +150,6 @@ void RockPlayer::updeteState( ) {
 		vec.y = getVec( ).y;
 		setVec( vec );
 	}
-	if ( player.money >= TRANSITION_MONEY_NUM ) {
-		if ( _status->getPlayer( _id ).area == AREA_STREET_1 ) {
-			unsigned char state = AREA_STREET_2;
-			MessageSender::getTask( )->sendMessage( _id, Message::COMMAND_AREA, &state );
-			return;
-		}
-	}
 	if ( player.area == AREA_RESULT || 
 		 player.area == AREA_WAIT   ||
 		 player.area == AREA_ENTRY ) {
