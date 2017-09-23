@@ -22,6 +22,7 @@ void EventFlame::update( ) {
 		_boss->dropItem( );//_Ší(‰Î)‚ğ”z‚é
 		exit( );
 	}
+	escape( );
 }
 
 void EventFlame::join( PLAYER target ) {

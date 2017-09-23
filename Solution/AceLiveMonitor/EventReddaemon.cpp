@@ -22,6 +22,7 @@ void EventReddaemon::update( ) {
 	if ( _boss->getPower( ) <= 0 ) {
 		exit( );
 	}
+	escape( );
 }
 
 void EventReddaemon::join( PLAYER target ) {

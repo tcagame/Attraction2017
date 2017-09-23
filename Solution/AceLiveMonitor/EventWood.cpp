@@ -23,6 +23,7 @@ void EventWood::update( ) {
 		_boss->dropItem( );//_Ší(–Ø)‚ğ”z‚é
 		exit( );
 	}
+	escape( );
 }
 
 void EventWood::join( PLAYER target ) {

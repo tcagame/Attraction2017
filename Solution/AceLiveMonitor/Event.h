@@ -17,8 +17,8 @@ public:
 	bool isFinished( );
 	void fade( );
 	FADE getFade( ) const;
-	void escape( );
 protected:
+	void escape( );
 	void exit( );
 	void start( bool nofade = false );
 private:

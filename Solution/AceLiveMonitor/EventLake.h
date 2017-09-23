@@ -1,12 +1,26 @@
 #pragma once
 #include "Event.h"
+#include "smart_ptr.h"
+
+PTR( Player );
+
 class EventLake : public Event {
 public:
 	EventLake( );
 	virtual ~EventLake( );
 public:
 	void update( );
-	bool isFinished( ) const;
 	void join( PLAYER target );
+private:
+	enum PHASE {
+		PHASE_ENTER,
+		PHASE_MOVE,
+		PHASE_AUDIENCE,
+		PHASE_FINISHED,
+	};
+private:
+	int _count;
+	PHASE _phase;
+	PlayerPtr _player;
 };
 

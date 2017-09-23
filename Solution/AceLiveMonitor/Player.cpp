@@ -761,6 +761,7 @@ void Player::actOnEnteringFadeOut( ) {
 		setAction( ACTION_FLOAT );
 		setPos( _entering_pos );
 		_entering = true;
+		setMass( true );
 	}
 }
 
@@ -770,6 +771,7 @@ void Player::actOnEnteringSanzo( ) {
 		setAction( ACTION_FLOAT );
 		setPos( _entering_pos );
 		_entering = true;
+		setMass(true);
 	}
 }
 
@@ -1118,6 +1120,7 @@ void Player::enterEvent( const Vector& pos, ENTER enter ) {
 	_entering_pos = pos;
 	_entering = false;
 	setVec( Vector( ) );
+	setMass( false );
 	switch ( enter ) {
 	case ENTER_SANZO  : setAction( ACTION_ENTERING_SANZO   ); break;
 	case ENTER_FADEOUT: setAction( ACTION_ENTERING_FADEOUT ); break;

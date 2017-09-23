@@ -156,7 +156,6 @@ void World::updateBGM ( ) {
 void World::updateEvent( ) {
 	// イベント更新
 	_event->update( );
-	_event->escape( );
 	_event->fade( );
 
 	KeyboardPtr keyboard = Keyboard::getTask( );
