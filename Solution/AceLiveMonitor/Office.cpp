@@ -32,30 +32,36 @@ void Office::update( ) {
 	}
 }
 
-void Office::popUpNPC( EVENT type ) {
+NPCPtr Office::popUpNPC( EVENT type ) {
+	NPCPtr npc;
 	switch ( type ) {
 	case EVENT_SHOP:
-		addEventNPC( NPCPtr( new NPCObaba( Vector( 800, 225 ) ) ) );
+		npc = NPCPtr(new NPCObaba(Vector(800, 225)));
+		addEventNPC( npc );
 		break;
 	case EVENT_LAKE:
-		addEventNPC( NPCPtr( new NPCMiko( Vector( 200, 225 ) ) ) );
+		npc = NPCPtr(new NPCMiko(Vector(200, 225)));
+		addEventNPC( npc );
 		break;
 	case EVENT_RYUGU:
 		//ìVèó
 		addEventNPC( NPCPtr( new NPCAngel( Vector( 325, 225 ) ) ) );
 		addEventNPC( NPCPtr( new NPCAngel( Vector( 700, 225 ) ) ) );
 		//â≥ïP
-		addEventNPC( NPCPtr( new NPCOtohime( Vector( 510, 150 ) ) ) );
+		npc = NPCPtr(new NPCOtohime(Vector(510, 150)));
+		addEventNPC( npc );
 		//êlãõ
 		addEventNPC( NPCPtr( new NPCMermaid( Vector( 225, 250 ) ) ) );
 		addEventNPC( NPCPtr( new NPCMermaid( Vector( 864, 250 ) ) ) );
 		break;
 	case EVENT_GAMBLE:
+		npc = NPCPtr(new NPCShaker(Vector(650, 225)));
 		//ÉcÉ{êUÇË
-		addEventNPC( NPCPtr( new NPCShaker( Vector( 650, 225 ) ) ) );
+		addEventNPC( npc );
 		//íÜñ~
 		break;
 	}
+	return npc;
 }
 
 std::list< NPCPtr > Office::getNPC( ) const {
@@ -84,6 +90,15 @@ void Office::shiftPos( int map_width ) {
 	while( ite != _npc.end( ) ) {
 		NPCPtr npc = (*ite);
 		npc->shiftPos( map_width );
+		ite++;
+	}
+}
+
+void Office::setSynchronousData( ) {
+	std::list< NPCPtr >::iterator ite = _npc.begin();
+	while ( ite != _npc.end( ) ) {
+		NPCPtr npc = (*ite);
+		npc->setSynchronousData( );
 		ite++;
 	}
 }

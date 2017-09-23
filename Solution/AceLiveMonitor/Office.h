@@ -17,7 +17,8 @@ public:
 	virtual ~Office( );
 public:
 	void update( );
-	void popUpNPC( EVENT type );
+	void setSynchronousData( );
+	NPCPtr popUpNPC( EVENT type );
 	std::list< NPCPtr > getNPC( ) const;
 	void eraseEventNPC( );
 	void addEventNPC( NPCPtr npc );

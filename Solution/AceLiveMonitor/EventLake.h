@@ -2,6 +2,7 @@
 #include "Event.h"
 #include "smart_ptr.h"
 
+PTR( NPCMiko );
 PTR( Player );
 
 class EventLake : public Event {
@@ -22,5 +23,6 @@ private:
 	int _count;
 	PHASE _phase;
 	PlayerPtr _player;
+	NPCMikoPtr _npc;
 };
 
