@@ -18,6 +18,7 @@ void EventGamble::update( ) {
 }
 
 void EventGamble::join( PLAYER target ) {
+	return; //‰c‹Æ’âŽ~
 	//’èˆõˆê–¼
 	if ( _audience ) {
 		return;
