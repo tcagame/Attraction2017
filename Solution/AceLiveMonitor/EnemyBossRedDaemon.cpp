@@ -50,7 +50,7 @@ void EnemyBossRedDaemon::setSynchronousData( int camera_pos ) const {
 	//–{‘Ì
 	data->addObject( area, SynchronousData::TYPE_ENEMY_BOSS, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], 0, x, y, chip_size );
 	//˜r
-	y -= ( int )( sin( ( double )getActCount( ) / PI * 1 ) * 40 ) - 20;
+	y -= ( int )abs( ( pow( 3, sin( ( double )getActCount( ) / PI * 1 ) * 3.5 ) ) );
 	data->addObject( area, SynchronousData::TYPE_ENEMY_BOSS, 42, 0, x, y, chip_size );
 	
 }
