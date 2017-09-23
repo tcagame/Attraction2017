@@ -767,6 +767,10 @@ bool Player::isEntering( ) const {
 	return _entering;
 }
 
+PLAYER Player::getPlayer( ) const {
+	return _player;
+}
+
 void Player::actOnEnteringFadeOut( ) {
 	if ( getActCount( ) >= ENTERING_FADE_COUNT ) {
 		setAction( ACTION_FLOAT );

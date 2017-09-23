@@ -84,6 +84,7 @@ public:
 	bool isLeaveAlone( ) const;
 	void recoverPower( );
 	bool isEntering( ) const;
+	PLAYER getPlayer( ) const;
 private:
 	void actOnEntry( );
 	void actOnContinue( );

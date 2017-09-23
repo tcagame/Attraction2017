@@ -82,6 +82,7 @@ public:
 	int getStatusRedo( PLAYER player ) const;
 	unsigned char getStatusState( PLAYER player ) const;
 	int getStatusDevice( PLAYER player ) const;
+	unsigned char getStatusMessage( PLAYER player ) const;
 	int getObjectNum( AREA area ) const;
 	int getObjectAX( int idx ) const;
 	int getObjectAY( int idx ) const;
@@ -91,7 +92,6 @@ public:
 	int getObjectSize( int idx ) const;
 	int getIdx( AREA area, int relative_idx ) const;
 	int getFade( ) const;
-	unsigned char getMessage( ) const;
 public:
 	void * getPtr( );
 	int getSize( );
@@ -106,8 +106,8 @@ public:
 	void setStatusVirtue( PLAYER player, int virtue );
 	void setStatusRedo( PLAYER player, int redo );
 	void setStatusState( PLAYER player, unsigned char area );
+	void setStatusMessage( PLAYER player, unsigned char message );
 	void setFade( int fade );
-	void setMessage( unsigned char message );
 	void resetObject( );
 	void addObject( AREA area, unsigned char type, int pattern, unsigned char attribute, int ax, int ay, int size = -1 );
 private:
@@ -119,7 +119,6 @@ private:
 			unsigned char event;
 			unsigned char fade; // 0 - 99
 			unsigned char escape;
-			unsigned char message;
 			struct Status {
 				char          device;
 				unsigned char progress_type;
@@ -131,6 +130,7 @@ private:
 				unsigned char virtue;
 				unsigned char redo;
 				unsigned char state;
+				unsigned char message;
 			} status[ MAX_PLAYER ];
 			struct Object {
 				unsigned char type;

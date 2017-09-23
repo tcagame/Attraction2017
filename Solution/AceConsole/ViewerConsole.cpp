@@ -260,7 +260,7 @@ void ViewerConsole::drawOpening( ) {
 
 void ViewerConsole::drawMessage( ) {
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
-	switch ( data->getMessage( ) ) {
+	switch ( data->getStatusMessage( _player ) ) {
 	case SynchronousData::MES_NONE:
 		break;
 	case SynchronousData::MES_GAMBLE0:
