@@ -33,7 +33,7 @@ void Storage::update( ) {
 	while ( ite != _items.end( ) ) {
 		ItemPtr item = *ite;
 		item->update( );
-
+		item->updateDropItem( );
 		//プレイヤーと当たる
 		PlayerPtr hit_player = Family::getTask( )->getOverlappedPlayer( item );
 		if ( hit_player ) {
@@ -45,7 +45,8 @@ void Storage::update( ) {
 		}
 
 		//画面より左に行ったら削除
-		if ( item->isOutRange( ) ) {
+		if ( item->isOutRange( ) ||
+			 item->isFinished( ) ) {
 			ite = _items.erase( ite );
 			continue;
 		}

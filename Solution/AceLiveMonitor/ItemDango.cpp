@@ -15,6 +15,11 @@ void ItemDango::act( ) {
 }
 
 void ItemDango::setSynchronousData( int camera_pos ) const {
+	if ( getPhase( ) == PHASE_FLASH ) {
+		if ( getActCount( ) / getFlashWaitTime( ) % 2 == 0 ) {
+			return;
+		}
+	}
 	Vector pos = getPos( );
 	int x = ( int )pos.x;
 	int y = ( int )pos.y;
