@@ -26,12 +26,12 @@ public:
 	virtual Vector getOverlappedPos( ) const;
 	void shiftPos( int map_width );
 	bool isOutRange( ) const;
+	bool isStanding( ) const;
 protected:
 	void setDir( DIR dir );
 	void setVec( const Vector& vec );
 	void setPos( const Vector& pos );
 	void setPower( int power );
-	bool isStanding( ) const;
 	bool isMass( ) const;
 	void setMass( bool mass );
 	virtual void act( ) = 0;

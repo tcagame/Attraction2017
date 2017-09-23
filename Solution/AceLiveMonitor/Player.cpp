@@ -1217,6 +1217,9 @@ void Player::pickUpItem( ITEM item ) {
 void Player::pickUpMoney( int money ) {
 	Sound::getTask( )->playSE( "yokai_voice_30.wav" );
 	_money += money;
+	if ( _money < 0 ) {
+		_money = 0;
+	}
 }
 
 void Player::pickUpBox( ) {
