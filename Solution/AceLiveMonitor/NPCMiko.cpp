@@ -35,8 +35,8 @@ void NPCMiko::setSynchronousData( ) const {
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
 	int change_anim = _solt ? 1 : 0;
-	data->addObject( AREA_EVENT, SynchronousData::TYPE_LAKE, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ] + ( 4 * change_anim ), attribute, x, y, getChipSize( ) );
+	data->addObject( AREA_EVENT, SynchronousData::TYPE_LAKE, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ] + ( 4 * change_anim ), attribute, x, y, 128 );
 	if ( _solt ) {
-		data->addObject( AREA_EVENT, SynchronousData::TYPE_LAKE, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ] + 8, attribute, x, y, getChipSize( ) );
+		data->addObject( AREA_EVENT, SynchronousData::TYPE_LAKE, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ] + 8, attribute, x + 90, y, 128 );
 	}
 }
