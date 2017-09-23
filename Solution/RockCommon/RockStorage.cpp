@@ -74,6 +74,12 @@ void RockStorage::updateAlter( ) {
 	RockFamilyPtr family( RockFamily::getTask( ) );
 	while ( ite != _alters.end( ) ) {
 		RockAlterPtr alter = *ite;
+		if ( _status->getPlayer( 0 ).area == AREA_WAIT &&
+		     _status->getPlayer( 1 ).area == AREA_WAIT &&
+		     _status->getPlayer( 2 ).area == AREA_WAIT &&
+		     _status->getPlayer( 3 ).area == AREA_WAIT ) {
+			alter->setActive( true );
+		}
 		if ( alter->isActive( ) ) {
 			for ( int i = 0; i < ROCK_PLAYER_NUM; i++ ) {
 				RockPlayerPtr player = family->getPlayer( i );
