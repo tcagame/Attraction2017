@@ -24,6 +24,7 @@ private:
 		GRAPH_ENEMY_BOSS,
 		GRAPH_IMPACT,
 		GRAPH_ITEM,
+		GRAPH_ITEM2,
 		GRAPH_NPC,
 		GRAPH_SANZO,
 		GRAPH_SHADOW,
@@ -50,6 +51,7 @@ private:
 	Sprite getSpriteEnemyBoss( GRAPH graph, int x, int y, unsigned char attribute, int pattern, int size ) const;
 	Sprite getSpriteImpact( GRAPH graph, int x, int y, unsigned char attribute, int pattern, int size ) const;
 	Sprite getSpriteItem( GRAPH graph, int x, int y, unsigned char attribute, int pattern, int size ) const;
+	Sprite getSpriteItem2( GRAPH graph, int x, int y, unsigned char attribute, int pattern, int size ) const;
 	Sprite getSpriteNPC( GRAPH graph, int x, int y, unsigned char attribute, int pattern, int size ) const;
 	Sprite getSpriteSanzo( GRAPH graph, int x, int y, unsigned char attribute, int pattern, int size ) const;
 	Sprite getSpriteShadow( GRAPH graph, int x, int y, unsigned char attribute, int pattern, int size ) const;
