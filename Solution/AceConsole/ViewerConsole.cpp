@@ -83,7 +83,7 @@ void ViewerConsole::initialize( ) {
 	
 	for ( int i = 0; i < MAX_MESSAGE; i++ ) {
 		_image_message[ i ]->setRect( 0, 0, 320, 208 );
-		_image_message[ i ]->setPos( 640 / 2, 7 );
+		_image_message[ i ]->setPos( 640 / 4, 7 );
 	}
 
 	_image_bar_upper = drawer->createImage( "UI/ui_bar.png" );
@@ -260,7 +260,7 @@ void ViewerConsole::drawOpening( ) {
 
 void ViewerConsole::drawMessage( ) {
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
-	switch ( data->getMessage( ) ) {
+	switch ( data->getStatusMessage( _player ) ) {
 	case SynchronousData::MES_NONE:
 		break;
 	case SynchronousData::MES_GAMBLE0:

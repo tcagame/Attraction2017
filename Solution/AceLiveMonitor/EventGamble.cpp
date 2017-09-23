@@ -31,14 +31,14 @@ void EventGamble::update( ) {
 		}
 		_count++;
 		if ( _count > AUDIENCE_COUNT ) {
-			SynchronousData::getTask( )->setMessage( SynchronousData::MES_GAMBLE0 );
+			SynchronousData::getTask( )->setStatusMessage( _player->getPlayer( ), SynchronousData::MES_GAMBLE0 );
 			_phase = PHASE_BET;
 			_player->free( );
 		}
 		break;
 	case PHASE_BET:
 		if ( _player->getArea( ) == AREA_STREET ) {
-			SynchronousData::getTask( )->setMessage( SynchronousData::MES_NONE );
+			SynchronousData::getTask( )->setStatusMessage( _player->getPlayer( ), SynchronousData::MES_NONE );
 			break;
 		}
 		if ( _player->isStanding( ) ) {
@@ -54,9 +54,9 @@ void EventGamble::update( ) {
 			// ¡‰ñ‚ÌŒ‹‰Ê‚ðƒ‰ƒ“ƒ_ƒ€‚ÅŒˆ’è
 			int dice = rand( ) % 2;
 			if ( dice == 0 ) {
-				SynchronousData::getTask( )->setMessage( SynchronousData::MES_GAMBLE2 );
+				SynchronousData::getTask( )->setStatusMessage( _player->getPlayer( ), SynchronousData::MES_GAMBLE2 );
 			} else {
-				SynchronousData::getTask( )->setMessage( SynchronousData::MES_GAMBLE1 );
+				SynchronousData::getTask( )->setStatusMessage( _player->getPlayer( ), SynchronousData::MES_GAMBLE1 );
 			}
 			// ‘I‘ð‚µ‚½BET‚ðŽæ“¾
 			int bet = 0;
@@ -89,7 +89,7 @@ void EventGamble::update( ) {
 		_count++;
 		if ( _count > FINISHED_COUNT ) {
 			exit( );
-			SynchronousData::getTask( )->setMessage( SynchronousData::MES_NONE );
+			SynchronousData::getTask( )->setStatusMessage( _player->getPlayer( ), SynchronousData::MES_NONE );
 		}
 		break;
 	}

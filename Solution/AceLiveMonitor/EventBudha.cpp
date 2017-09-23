@@ -26,14 +26,14 @@ void EventBudha::update( ) {
 	case PHASE_MOVE:
 		if ( _player->isFinishedAutomoving( ) ) {
 			_player->audience( );
-			SynchronousData::getTask( )->setMessage( SynchronousData::MES_BUDHA );
+			SynchronousData::getTask( )->setStatusMessage( _player->getPlayer( ), SynchronousData::MES_BUDHA );
 			_phase = PHASE_AUDIENCE;
 		}
 		break;
 	case PHASE_AUDIENCE:
 		_count++;
 		if ( _count > AUDIENCE_COUNT ) {
-			SynchronousData::getTask( )->setMessage( SynchronousData::MES_NONE );
+			SynchronousData::getTask( )->setStatusMessage( _player->getPlayer( ), SynchronousData::MES_NONE );
 			exit( );
 			_player->setActionEnding( );
 			_phase = PHASE_FINISHED;

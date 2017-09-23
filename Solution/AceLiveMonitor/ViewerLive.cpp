@@ -205,7 +205,14 @@ void ViewerLive::update( ) {
 
 void ViewerLive::drawMessage( ) {
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
-	switch ( data->getMessage( ) ) {
+	unsigned char message = SynchronousData::MES_NONE;
+	for ( int i = 0; i < MAX_PLAYER; i++ ) {
+		message = data->getStatusMessage( ( PLAYER )i );
+		if ( message != SynchronousData::MES_NONE ) {
+			break;
+		}
+	}
+	switch ( message ) {
 	case SynchronousData::MES_NONE:
 		break;
 	case SynchronousData::MES_GAMBLE0:
