@@ -2,19 +2,24 @@
 #include "Office.h"
 #include "Family.h"
 #include "Player.h"
+#include "Storage.h"
+#include "ItemBox.h"
 
-const int START_POS_X = 1280 / 2 - 100;
+const int START_POS_X = 256 + 128;
 const int START_POS_Y = 128;
 const int AUDIENCE_COUNT = 100;
-const int AUDIENCE_POS_X = 1280 / 2;
+const int AUDIENCE_POS_X = 1280 / 2 - 100;
 
 EventRyugu::EventRyugu( ) :
 Event( EVENT_RYUGU, DIR_RIGHT ),
-_audience( false ),
 _count( 0 ),
 _phase( PHASE_ENTER ) {
 	Office::getTask( )->popUpNPC( EVENT_RYUGU );
 	//‹ÊŽè” ‚ð‰æ–Ê’†‰›‚ÉB1
+	StoragePtr storage = Storage::getTask( );
+	ItemPtr box = ItemPtr( new ItemBox( ) );
+	_box = box;
+	storage->add( box );
 }
 
 
@@ -22,17 +27,9 @@ EventRyugu::~EventRyugu( ) {
 }
 
 void EventRyugu::update( ) {
-		switch ( _phase ) {
+	switch ( _phase ) {
 	case PHASE_ENTER:
-		for ( int i = 0; i < MAX_PLAYER; i++ ) {
-			PlayerPtr player = Family::getTask( )->getPlayer( i );
-			Player::ACTION action = player->getAction( );
-			if ( action != Player::ACTION_ENTERING_FADEOUT &&
-			     action != Player::ACTION_ENTERING_SANZO ) {
-				_player = player;
-			}
-		}
-		if ( _player ) {
+		if ( _player->isEntering( ) ) {
 			_player->autoMove( AUDIENCE_POS_X );
 			_phase = PHASE_MOVE;
 		}
@@ -46,9 +43,13 @@ void EventRyugu::update( ) {
 	case PHASE_AUDIENCE:
 		_count++;
 		if ( _count > AUDIENCE_COUNT ) {
-			_player->setModeVirtue( );
+			_player->free( );
+			_phase = PHASE_FREE;
+		}
+		break;
+	case PHASE_FREE:
+		if ( !_box.lock( ) ) {
 			exit( );
-			_phase = PHASE_FINISHED;
 		}
 		break;
 	case PHASE_FINISHED:
@@ -57,12 +58,15 @@ void EventRyugu::update( ) {
 }
 
 void EventRyugu::join( PLAYER target ) {
-	//’èˆõˆê–¼
-	if ( _audience ) {
+	if ( getFade( ) == Event::FADE_OUT ) {
 		return;
 	}
-	PlayerPtr player = Family::getTask( )->getPlayer( target );
-	player->enterEvent( Vector( START_POS_X, START_POS_Y ), Player::ENTER_FADEOUT );
+
+	//’èˆõˆê–¼
+	if ( _player ) {
+		return;
+	}
+	_player = Family::getTask( )->getPlayer( target );
+	_player->enterEvent( Vector( START_POS_X, START_POS_Y ), Player::ENTER_FADEOUT );
 	start( );
-	_audience = true;
 }
