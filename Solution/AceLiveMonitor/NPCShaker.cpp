@@ -22,7 +22,7 @@ void NPCShaker::damage( int force ) {
 
 void NPCShaker::setSynchronousData( ) const {
 	const int ANIM[ ] = {
-		16, 17, 18, 19, 20
+		16, 17, 18, 19, 20, 21
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	

@@ -1,7 +1,7 @@
 #include "NPCAngel.h"
 #include "SynchronousData.h"
 
-const int WAIT_ANIM_TIME = 10;
+const int WAIT_ANIM_TIME = 5;
 
 
 NPCAngel::NPCAngel( const Vector& pos ) :
@@ -17,7 +17,7 @@ void NPCAngel::act( ) {
 
 void NPCAngel::setSynchronousData( ) const {
 	const int ANIM[ ] = {
-		24, 25, 26, 27
+		16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35
 	};
 	int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 	
@@ -30,5 +30,5 @@ void NPCAngel::setSynchronousData( ) const {
 		attribute |= SynchronousData::ATTRIBUTE_REVERSE;
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
-	data->addObject( AREA_EVENT, SynchronousData::TYPE_NPC, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y, getChipSize( ) );
+	data->addObject( AREA_EVENT, SynchronousData::TYPE_RYUGU, ANIM[ getActCount( ) / WAIT_ANIM_TIME % anim_size ], attribute, x, y, getChipSize( ) );
 }

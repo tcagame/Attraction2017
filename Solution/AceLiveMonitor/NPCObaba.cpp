@@ -2,7 +2,7 @@
 #include "SynchronousData.h"
 
 const int TIME = 60;
-const int WAIT_ANIM_TIME = 10;
+const int WAIT_ANIM_TIME = 7;
 
 NPCObaba::NPCObaba( const Vector& pos ) :
 NPC( pos, BIG_CHAR_GRAPH_SIZE ) {
@@ -29,13 +29,13 @@ void NPCObaba::setSynchronousData( ) const {
 	int anim = 0;
 	if ( getDir( ) == DIR_LEFT ) {
 		const int ANIM[ ] = {
-			18, 19
+			21, 22, 23, 24, 25
 		};
 		const int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 		anim = ANIM[ ( getActCount( ) / WAIT_ANIM_TIME ) % anim_size ];
 	} else {
 		const int ANIM[ ] = {
-			16, 17
+			16, 17, 18
 		};
 		const int anim_size = sizeof( ANIM ) / sizeof( ANIM[ 0 ] );
 		anim = ANIM[ ( getActCount( ) / WAIT_ANIM_TIME ) % anim_size ];
