@@ -11,7 +11,8 @@ const int AUDIENCE_POS_X = 1280 / 2;
 EventRyugu::EventRyugu( ) :
 Event( EVENT_RYUGU, DIR_RIGHT ),
 _audience( false ),
-_count( 0 ) {
+_count( 0 ),
+_phase( PHASE_ENTER ) {
 	Office::getTask( )->popUpNPC( EVENT_RYUGU );
 	//‹ÊŽè” ‚ð‰æ–Ê’†‰›‚ÉB1
 }
