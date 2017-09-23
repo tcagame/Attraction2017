@@ -82,7 +82,7 @@ void Family::updatePlayer( PLAYER target ) {
 		if ( !_player[ j ]->isExist( ) ) {
 			continue;
 		}
-		if ( _player[ j ]->getArea( ) != AREA_STREET ) {
+		if ( _player[ j ]->getArea( ) != _player[ target ]->getArea( ) ) {
 			continue;
 		}
 		if ( target == j ) {
