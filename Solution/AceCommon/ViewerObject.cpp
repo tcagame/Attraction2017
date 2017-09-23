@@ -95,7 +95,7 @@ void ViewerObject::drawSprite( int x, int y, unsigned char type, unsigned char a
 		sprite = getSpriteRyugu( GRAPH_RYUGU            , x, y, attribute, pattern, size );
 		break;
 	case SynchronousData::TYPE_LAKE:
-		sprite = getSpriteRyugu( GRAPH_LAKE            , x, y, attribute, pattern, size );
+		sprite = getSpriteLake( GRAPH_LAKE            , x, y, attribute, pattern, size );
 		break;
 	default: assert( 0 );
 	};
