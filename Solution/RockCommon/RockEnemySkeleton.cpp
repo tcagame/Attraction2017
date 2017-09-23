@@ -12,7 +12,7 @@ const double ANIM_SPEED = 0.9;
 const Vector SEARCH_RANGE( 10000, 10000, 10000 );
 
 RockEnemySkeleton::RockEnemySkeleton( const Vector& pos ) :
-RockEnemy( pos, DOLL_SKELETON, HP, 1, 10, 10, true, true ),
+RockEnemy( pos, DOLL_SKELETON, HP, 1, 30, 15 ),
 _player_radius( 0 ) {
 	setVec( Vector( 0, -5, 0 ) );
 }
