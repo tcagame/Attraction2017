@@ -11,6 +11,7 @@ SynchronousData::SynchronousData( ) {
 	setEvent( EVENT_NONE );
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		_data.status[ i ].items = 0;
+		_data.status[ i ].message = 0;
 	}
 }
 
