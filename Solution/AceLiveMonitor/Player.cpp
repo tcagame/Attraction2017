@@ -1160,6 +1160,7 @@ void Player::leaveEvent( ) {
 	setPos( Vector( Family::getTask( )->getCameraPosX( ) + SCREEN_WIDTH / 2, 0 ) );
 	setVec( Vector( ) );
 	setAction( ACTION_FLOAT );
+	_unrivaled_count = 0;
 }
 
 EVENT Player::getOnEvent( ) const {
