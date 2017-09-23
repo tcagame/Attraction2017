@@ -20,7 +20,6 @@ EventEnma::~EventEnma( ) {
 }
 
 void EventEnma::update( ) {
-	
 	switch ( _phase ) {
 	case PHASE_ENTER:
 		for ( int i = 0; i < MAX_PLAYER; i++ ) {
