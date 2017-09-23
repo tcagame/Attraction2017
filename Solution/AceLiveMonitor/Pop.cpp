@@ -40,6 +40,9 @@ bool Pop::isInRangePlayer( int range ) const {
 		if ( !player->isExist( ) ) {
 			continue;
 		}
+		if ( player->getArea( ) == AREA_EVENT ) {
+			continue;
+		}
 		if ( abs( player->getPos( ).x - getPos( ).x ) < range ) {
 			exist = true;
 			break;

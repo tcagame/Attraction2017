@@ -19,7 +19,6 @@ EventEnma::~EventEnma( ) {
 }
 
 void EventEnma::update( ) {
-	
 	switch ( _phase ) {
 	case PHASE_ENTER:
 		if ( _player->isEntering( ) ) {
