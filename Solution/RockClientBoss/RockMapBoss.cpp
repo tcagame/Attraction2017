@@ -37,15 +37,6 @@ void RockMapBoss::update( ) {
 			continue;
 		}
 		reset_stage = false;
-		Status::Player player = _status->getPlayer( i );
-		unsigned char item = player.item;
-		//_Ší‚ğ‚Á‚Ä‚¢‚é‚ÆASTREET_3‚ÖˆÚ“®
-		if ( ( item & ITEM_FIRE ) &&
-			 ( item & ITEM_ROCK ) &&
-			 ( item & ITEM_TREE ) ) {
-			unsigned char area = AREA_STREET_3;
-			MessageSender::getTask( )->sendMessage( i, Message::COMMAND_AREA, &area );
-		}
 	}
 
 	if ( reset_stage ) {
