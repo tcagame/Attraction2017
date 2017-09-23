@@ -41,10 +41,13 @@ void RockArmoury::update( ) {
 		RockEnemyPtr enemy = getOverLappedEnemy( shot );
 		if ( enemy ) {
 			Sound::getTask( )->playSE( "yokai_se_25.wav" );
-			enemy->damage( shot->getPower( ) );
-			RockShotPlayerPtr player_shot = std::dynamic_pointer_cast< RockShotPlayer >( shot );
-			if ( player_shot ) {
-				player_shot->setBack( );
+			int pow = shot->getPower( );
+			enemy->damage( pow );
+			if ( !enemy->isFinished( ) && pow < 3 ) {
+				RockShotPlayerPtr player_shot = std::dynamic_pointer_cast< RockShotPlayer >( shot );
+				if ( player_shot ) {
+					player_shot->setBack( );
+				}
 			}
 		}
 		ite++;
