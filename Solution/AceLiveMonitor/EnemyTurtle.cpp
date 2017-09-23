@@ -7,6 +7,7 @@ EnemyTurtle::EnemyTurtle( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ) {
 	setPower( 999 );
 	setForce( 0 );
+	setOverlappedRadius( 0 );
 }
 
 

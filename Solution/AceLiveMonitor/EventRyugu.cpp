@@ -9,6 +9,7 @@ const int START_POS_X = 256 + 128;
 const int START_POS_Y = 128;
 const int AUDIENCE_COUNT = 100;
 const int AUDIENCE_POS_X = 1280 / 2 - 100;
+const int FINISHED_COUNT = 60;
 
 EventRyugu::EventRyugu( ) :
 Event( EVENT_RYUGU, DIR_LEFT ),
@@ -49,11 +50,16 @@ void EventRyugu::update( ) {
 		break;
 	case PHASE_FREE:
 		if ( !_box.lock( ) ) {
-			exit( );
+			_count = 0;
+			_phase= PHASE_FINISHED;
 		}
 		escape( );
 		break;
 	case PHASE_FINISHED:
+		_count++;
+		if ( _count > FINISHED_COUNT ) {
+			exit( );
+		}
 		break;
 	}
 }
@@ -69,5 +75,4 @@ void EventRyugu::join( PLAYER target ) {
 	}
 	_player = Family::getTask( )->getPlayer( target );
 	_player->enterEvent( Vector( START_POS_X, START_POS_Y ), Player::ENTER_FADEOUT );
-	start( );
 }

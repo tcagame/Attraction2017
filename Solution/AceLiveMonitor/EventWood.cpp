@@ -33,6 +33,5 @@ void EventWood::join( PLAYER target ) {
 	PlayerPtr player = Family::getTask( )->getPlayer( target );
 	if ( !player->isWearingItem( Player::ITEM_WOOD ) ) {
 		player->enterEvent( Vector( START_POS_X, START_POS_Y ), Player::ENTER_SANZO );
-		start( );
 	}
 }

@@ -76,7 +76,7 @@ bool Storage::pickUpItem( ItemPtr item, PlayerPtr player ) {
 	{//‚¨‹à
 		ItemMoneyPtr money = std::dynamic_pointer_cast< ItemMoney >( item );
 		if ( money ) {
-			player->addMoney( money->getValue( ) );
+			player->pickUpMoney( money->getValue( ) );
 			if ( player->getMode( ) == Player::MODE_VIRTUE ) {
 				player->damage( 1 );
 			}
@@ -85,7 +85,7 @@ bool Storage::pickUpItem( ItemPtr item, PlayerPtr player ) {
 	{//‹ÊŽè” 
 		ItemBoxPtr box = std::dynamic_pointer_cast< ItemBox >( item );
 		if ( box ) {
-			player->pickUpItem( Player::ITEM_BOX );
+			player->pickUpBox( );
 		}
 	}
 	{//“¿
@@ -99,7 +99,7 @@ bool Storage::pickUpItem( ItemPtr item, PlayerPtr player ) {
 		if ( shop_item ) {
 			int price = shop_item->getPrice( );
 			if ( player->getMoney( ) >= price ) {
-				player->addMoney( -price );
+				player->pickUpMoney( -price );
 			} else {
 				//Žæ“¾‚Å‚«‚È‚¢
 				result = false;

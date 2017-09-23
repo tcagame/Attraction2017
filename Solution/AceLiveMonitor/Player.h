@@ -38,7 +38,6 @@ public:
 		ITEM_WOOD,
 		ITEM_FLAME,
 		ITEM_MINERAL,
-		ITEM_BOX,
 		MAX_ITEM,
 	};
 	enum MODE {
@@ -65,14 +64,15 @@ public:
 	void blowAway( );
 	int getMoney( ) const;
 	int getVirtue( ) const;
-	void addMoney( int money );
-	bool pickUpVirtue( );
 	void setSynchronousData( PLAYER player, int camera_pos ) const;
 	bool isExist( ) const;
 	void enterEvent( const Vector& pos, ENTER enter );
 	void leaveEvent( );
 	EVENT getOnEvent( ) const;
+	void pickUpMoney( int money );
 	void pickUpItem( ITEM item );
+	bool pickUpVirtue( );
+	void pickUpBox( );
 	bool isWearingItem( ITEM item ) const;
 	MODE getMode( ) const;
 	void autoMove( int target_x );

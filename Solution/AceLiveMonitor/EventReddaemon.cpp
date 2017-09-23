@@ -31,5 +31,4 @@ void EventReddaemon::join( PLAYER target ) {
 	}
 	PlayerPtr player = Family::getTask( )->getPlayer( target );
 	player->enterEvent( Vector( START_POS_X, START_POS_Y ), Player::ENTER_FADEOUT );
-	start( );
 }

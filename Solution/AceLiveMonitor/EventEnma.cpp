@@ -56,5 +56,4 @@ void EventEnma::join( PLAYER target ) {
 	}
 	_player = Family::getTask( )->getPlayer( target );
 	_player->enterEvent( Vector( START_POS_X, START_POS_Y ), Player::ENTER_SANZO );
-	start( );
 }

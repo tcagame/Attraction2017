@@ -56,7 +56,6 @@ void ItemMoney::setSynchronousData( int camera_pos ) const {
 
 int ItemMoney::getValue( ) const {
 	int value = 0;
-	Sound::getTask( )->playSE( "yokai_voice_30.wav" );
 	switch ( _type ) {
 	case OBJECT_MONEY_PURSE:
 		value = 100;

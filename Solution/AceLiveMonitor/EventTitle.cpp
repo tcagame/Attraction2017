@@ -1,7 +1,6 @@
 #include "EventTitle.h"
 EventTitle::EventTitle( ) :
 Event( EVENT_NONE, DIR_LEFT ) {
-	start( true );
 }
 
 

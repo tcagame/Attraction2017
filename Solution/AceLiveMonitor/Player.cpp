@@ -912,10 +912,6 @@ int Player::getMoney( ) const {
 	return _money;
 }
 
-void Player::addMoney( int money ) {
-	_money += money;
-}
-
 int Player::getVirtue( ) const {
 	return _virtue;
 }
@@ -1208,20 +1204,27 @@ void Player::pickUpItem( ITEM item ) {
 	case ITEM_WOOD	     : setProgressType( SynchronousData::PROGRESS_ITEM_WOOD	      ); break;
 	case ITEM_FLAME	     : setProgressType( SynchronousData::PROGRESS_ITEM_FLAME	      ); break;
 	case ITEM_MINERAL    : setProgressType( SynchronousData::PROGRESS_ITEM_MINERAL     ); break;
-	case ITEM_BOX        :
-		if ( rand( ) % 2 ) {
-			damage( BOX_DAMAGE );
-		} else {
-			addMoney( BOX_MONEY );
-		}
-		break;
 	}
 
-	if ( _item[ ITEM_WOOD ] &&
-		 _item[ ITEM_FLAME ] &&
+	if ( _item[ ITEM_WOOD ]    &&
+		 _item[ ITEM_FLAME ]   &&
 		 _item[ ITEM_MINERAL ] &&
 		 _mode == MODE_NORMAL ) {
 		_mode = MODE_ENMA;
+	}
+}
+
+void Player::pickUpMoney( int money ) {
+	Sound::getTask( )->playSE( "yokai_voice_30.wav" );
+	_money += money;
+}
+
+void Player::pickUpBox( ) {
+	if ( rand( ) % 2 ) {
+		damage( BOX_DAMAGE );
+		Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ), getArea( ) ) ) );
+	} else {
+		pickUpMoney( BOX_MONEY );
 	}
 }
 

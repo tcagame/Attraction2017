@@ -14,19 +14,17 @@ public:
 	EVENT getType( ) const;
 	virtual void update( ) = 0;
 	virtual void join( PLAYER target ) = 0;
-	bool isFinished( );
 	void fade( );
+	bool isFinished( );
 	FADE getFade( ) const;
 protected:
 	void escape( );
 	void exit( );
-	void start( bool nofade = false );
 private:
 	const EVENT _type;
 	const DIR _exist_dir;
 	FADE _fade_type;
 	int _fade_count;
 	bool _exiting;
-	bool _finished;
 };
 

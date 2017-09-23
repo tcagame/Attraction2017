@@ -169,7 +169,7 @@ Vector Character::getOverlappedPos( ) const {
 }
 
 bool Character::isOverlapped( CharacterConstPtr target ) const {
-	if ( _area != target->getArea( ) || _power <= 0 ) {
+	if ( _area != target->getArea( ) ) {
 		return false;
 	}
 	Vector self = getOverlappedPos( );
