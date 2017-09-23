@@ -480,7 +480,8 @@ void Player::actOnWaiting( ) {
 	}
 	
 	// …‚Ì’†
-	if ( isStanding( ) && map->getObject( getPos( ) ) == OBJECT_WATER ) {
+	if ( isStanding( ) &&
+		World::getTask( )->getMap( getArea( ) )->getObject( getPos( ) ) == OBJECT_WATER ) {
 		_charge_count = 0;
 	}
 
