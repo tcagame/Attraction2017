@@ -32,6 +32,7 @@ private:
 private:
 	int _virtue_pos_x;
 	EventPtr _event;
+	EVENT _passed_event;
 	MapPtr _map_street;
 	std::array< MapPtr, MAX_EVENT > _map_event;
 };

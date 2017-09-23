@@ -10,8 +10,7 @@ _type( type ),
 _exist_dir( exit_dir ),
 _fade_type( FADE_IN ),
 _fade_count( 100 ),
-_exiting( false ),
-_finished( true ) {
+_exiting( false ) {
 }
 
 
@@ -73,7 +72,6 @@ void Event::fade( ) {
 		_fade_count++;
 		if ( _fade_count >= 100 ) {
 			_fade_count = 100;
-			_finished = true;
 		}
 		break;
 	}
@@ -81,16 +79,9 @@ void Event::fade( ) {
 }
 
 bool Event::isFinished( ) {
-	return _finished;
+	return _fade_type == FADE_OUT && _fade_count >= 100;
 }
 
 Event::FADE Event::getFade( ) const {
 	return _fade_type;
-}
-
-void Event::start( bool nofade ) {
-	_finished = false;
-	if ( nofade ) {
-		_fade_count = 0;
-	}
 }

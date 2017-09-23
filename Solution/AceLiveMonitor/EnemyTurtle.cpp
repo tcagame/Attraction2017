@@ -7,6 +7,7 @@ EnemyTurtle::EnemyTurtle( const Vector& pos ) :
 Enemy( pos, NORMAL_CHAR_GRAPH_SIZE ) {
 	setPower( 999 );
 	setForce( 0 );
+	setOverlappedRadius( 0 );
 }
 
 
@@ -14,7 +15,6 @@ EnemyTurtle::~EnemyTurtle( ) {
 }
 
 void EnemyTurtle::act( ) {
-	int a = 0;
 }
 
 void EnemyTurtle::setSynchronousData( int camera_pos ) const {

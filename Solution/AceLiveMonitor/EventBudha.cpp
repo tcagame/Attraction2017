@@ -59,6 +59,5 @@ void EventBudha::join( PLAYER target ) {
 	}
 	FamilyPtr family( Family::getTask( ) );
 	family->getPlayer( target )->enterEvent( Vector( START_POS_X, START_POS_Y ), Player::ENTER_SANZO );
-	start( );
 	_audience = true;
 }

@@ -18,6 +18,7 @@
 #include "World.h"
 #include "Sound.h"
 #include "Drawer.h"
+#include "EnemyFlog.h"
 
 const int MAX_POP = 50;
 PTR( Player );
@@ -73,6 +74,9 @@ void Military::updateEnemy( ) {
 		if ( overlapped_player ) {
 			if ( overlapped_player->isOnHead( enemy ) ) {
 				overlapped_player->bound( );
+				if ( std::dynamic_pointer_cast< EnemyFlog >( enemy ) ) {
+					enemy->damage( -1 );
+				}
 			} else {
 				int force = enemy->getForce( );
 				if ( force > 0 ) {

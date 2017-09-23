@@ -33,6 +33,5 @@ void EventMineral::join( PLAYER target ) {
 	PlayerPtr player = Family::getTask( )->getPlayer( target );
 	if ( !player->isWearingItem( Player::ITEM_MINERAL ) ) {
 		player->enterEvent( Vector( START_POS_X, START_POS_Y ), Player::ENTER_SANZO );
-		start( );
 	}
 }

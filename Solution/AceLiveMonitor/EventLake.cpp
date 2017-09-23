@@ -38,7 +38,6 @@ void EventLake::update( ) {
 	case PHASE_AUDIENCE:
 		_count++;
 		if ( _count > AUDIENCE_COUNT ) {
-			_player->setModeVirtue( );
 			exit( );
 			_phase = PHASE_FINISHED;
 		} else {
@@ -64,5 +63,4 @@ void EventLake::join( PLAYER target ) {
 	}
 	_player = Family::getTask( )->getPlayer( target );
 	_player->enterEvent( Vector( START_POS_X, START_POS_Y ), Player::ENTER_FADEOUT );
-	start( );
 }

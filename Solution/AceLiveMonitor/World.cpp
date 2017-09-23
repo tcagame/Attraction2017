@@ -46,7 +46,8 @@ WorldPtr World::getTask( ) {
 }
 
 World::World( ) :
-_virtue_pos_x( 0 ) {
+_virtue_pos_x( 0 ),
+_passed_event( EVENT_NONE ) {
 	_map_street = MapPtr( new Map( FILENAME_STREET ) );
 	_map_event[ EVENT_REDDAEMON ] = MapPtr( new Map( FILENAME_EVENT_REDDAEMON ) );
 	_map_event[ EVENT_FLAME     ] = MapPtr( new Map( FILENAME_EVENT_FIRE      ) );
@@ -180,10 +181,16 @@ void World::updateEvent( ) {
 			continue;
 		}
 
+		// 前回同じイベントだったか？
+		if ( _passed_event == event ) {
+			continue;
+		}
+
 		// 現在イベント
 		if ( _event->getType( ) == EVENT_NONE ) {
 			// イベントチェンジs
 			changeEvent( event );
+			_passed_event = event;
 		}
 
 		// 別のイベントが実行中
