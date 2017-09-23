@@ -13,4 +13,5 @@ public:
 	void join( PLAYER target );
 private:
 	EnemyBossPtr _boss;
+	int _count;
 };

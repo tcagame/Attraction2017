@@ -15,5 +15,6 @@ protected:
 	int getLeavePosX( ) const;
 private:
 	EnemyBossPtr _boss;
+	int _count;
 };
 

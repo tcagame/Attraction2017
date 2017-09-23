@@ -18,6 +18,7 @@ ViewerObject::ViewerObject( ) {
 	_image[ GRAPH_ENEMY_BOSS		] = drawer->createImage( "Enemy/enemy_boss.png"				);
 	_image[ GRAPH_IMPACT			] = drawer->createImage( "Effect/impact.png"				);
 	_image[ GRAPH_ITEM				] = drawer->createImage( "Item/item.png"					);
+	_image[ GRAPH_ITEM2				] = drawer->createImage( "Item/item2.png"					);
 	_image[ GRAPH_NPC				] = drawer->createImage( "Event/character/character.png"	);
 	_image[ GRAPH_SHADOW			] = drawer->createImage( "Effect/effect_shadow.png"	);
 	_image[ GRAPH_RYUGU			    ] = drawer->createImage( "Event/character/ryugu.png"     	);
@@ -81,6 +82,9 @@ void ViewerObject::drawSprite( int x, int y, unsigned char type, unsigned char a
 		break;
 	case SynchronousData::TYPE_ITEM:
 		sprite = getSpriteItem( GRAPH_ITEM				, x, y, attribute, pattern, size );
+		break;
+	case SynchronousData::TYPE_ITEM2:
+		sprite = getSpriteItem2( GRAPH_ITEM2			, x, y, attribute, pattern, size );
 		break;
 	case SynchronousData::TYPE_NPC:
 		sprite = getSpriteNPC( GRAPH_NPC				, x, y, attribute, pattern, size );
@@ -266,10 +270,31 @@ ViewerObject::Sprite ViewerObject::getSpriteItem( GRAPH graph, int x, int y, uns
 	return sprite;
 }
 
+ViewerObject::Sprite ViewerObject::getSpriteItem2( GRAPH graph, int x, int y, unsigned char attribute, int pattern, int size ) const {
+	Sprite sprite;
+	sprite.graph = graph;
+	const int WIDTH_NUM = 4;
+	const int CHIP_SIZE = 32;
+
+	sprite.tx = pattern % WIDTH_NUM * CHIP_SIZE;
+	sprite.ty = pattern / WIDTH_NUM * CHIP_SIZE;
+	sprite.tw = size;
+	sprite.th = size;
+	
+	sprite.sx1 = x - size / 2;
+	sprite.sy1 = y - size;
+	sprite.sx2 = sprite.sx1 + size;
+	sprite.sy2 = sprite.sy1 + size;
+
+	return sprite;
+}
 ViewerObject::Sprite ViewerObject::getSpriteNPC( GRAPH graph, int x, int y, unsigned char attribute, int pattern, int size ) const {
 	Sprite sprite;
 	sprite.graph = graph;
-	int width_num = 1024 / size;
+
+	const int GRAPH_SIZE = 1024;
+
+	int width_num = GRAPH_SIZE / size;
 	sprite.tx = pattern % width_num * size;
 	sprite.ty = pattern / width_num * size;
 	sprite.tw = size;

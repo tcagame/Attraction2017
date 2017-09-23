@@ -455,6 +455,9 @@
     <ClCompile Include="ItemBox.cpp">
       <Filter>Item</Filter>
     </ClCompile>
+    <ClCompile Include="ItemDice.cpp">
+      <Filter>Item</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Enemy.h">
@@ -906,6 +909,9 @@
     </ClInclude>
     <ClInclude Include="ItemYokaiSoup.h" />
     <ClInclude Include="ItemBox.h">
+      <Filter>Item</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemDice.h">
       <Filter>Item</Filter>
     </ClInclude>
   </ItemGroup>
