@@ -166,7 +166,7 @@ void World::updateEvent( ) {
 		PlayerPtr player = family->getPlayer( i );
 		EVENT event = player->getOnEvent( );
 
-		if ( player->isExist( ) ) {
+		if ( player->isExist( ) && player->getArea( ) == AREA_STREET ) {
 			if ( keyboard->isHoldKey( "1" ) ) event = EVENT_FLAME;
 			if ( keyboard->isHoldKey( "2" ) ) event = EVENT_WOOD;
 			if ( keyboard->isHoldKey( "3" ) ) event = EVENT_MINERAL;
