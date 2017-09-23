@@ -2,13 +2,16 @@
 #include "SynchronousData.h"
 #include "Armoury.h"
 #include "ShotReflect.h"
+#include "Family.h"
+#include "Player.h"
 
 const int SHOT_SPEED = 15;
 const int VANISH_LENGTH = 320;
 
-ShotPlayer::ShotPlayer( const PLAYER player, const Vector& pos, DIR dir, int level ) :
+ShotPlayer::ShotPlayer( const PLAYER player, const Vector& pos, DIR dir, int level, bool normal ) :
 Shot( pos, ( int )( pow( 2, level - 1 ) + 1 ) ),
 _level( level ), 
+_normal( normal ),
 _player( player ) {
 	Vector vec = Vector( SHOT_SPEED, 0 );
 	if ( dir == DIR_LEFT ) {
@@ -53,4 +56,8 @@ void ShotPlayer::setSynchronousData( int camera_pos ) const {
 	}
 	SynchronousDataPtr data( SynchronousData::getTask( ) );
 	data->addObject( area, SynchronousData::TYPE_SHOT, ANIM[ ( _level - 1 ) * 2 + ( getActCount( ) % 2 ) ], attribute, x, y );
+}
+
+bool ShotPlayer::isNormal( ) {
+	return _normal;
 }

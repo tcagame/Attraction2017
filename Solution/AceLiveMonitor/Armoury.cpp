@@ -11,6 +11,7 @@
 #include "Player.h"
 #include "EnemyGama.h"
 #include "Sound.h"
+#include "ShotPlayer.h"
 
 PTR( EnemyGama );
 
@@ -39,6 +40,12 @@ void Armoury::update( ) {
 		_shot_list[ i ]->update( );
 		EnemyPtr hit_enemy = militari->getOverlappedEnemy( _shot_list[ i ] );
 		if ( hit_enemy ) {
+			ShotPlayerPtr shot_player = std::dynamic_pointer_cast< ShotPlayer >( _shot_list[ i ] );
+			if ( shot_player ) {
+				if ( shot_player->isNormal( ) ) {
+					shot_player->erase( );
+				}
+			}
 			hit_enemy->damage( _shot_list[ i ]->getPower( ) );
 			if ( hit_enemy->getPower( ) > 0 ) {
 				//エネミーが倒れなかったらショットが当たった位置で爆発

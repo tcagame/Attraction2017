@@ -588,11 +588,12 @@ void Player::actOnFloating( ) {
 
 void Player::actOnAttack( ) {
 	int level = ( _charge_count / _max_charge_phase_count ) + 1;
+	bool normal = ( level == 1 );
 	if ( _item[ ITEM_HYPERTROPHY ] ) {
 		level++;
 	}
 	Sound::getTask( )->playSE( "yokai_se_20.wav" );
-	ShotPlayerPtr shot( new ShotPlayer( _player, getPos( ), getDir( ), level ) );
+	ShotPlayerPtr shot( new ShotPlayer( _player, getPos( ), getDir( ), level, normal ) );
 	shot->setArea( getArea( ) );
 	Armoury::getTask( )->add( shot );
 	_charge_count = 0;
