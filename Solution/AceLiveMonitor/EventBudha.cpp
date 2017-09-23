@@ -52,10 +52,6 @@ void EventBudha::update( ) {
 	}
 }
 
-bool EventBudha::isJoining( ) const {
-	return !_audience;
-}
-
 void EventBudha::join( PLAYER target ) {
 	//’èˆõˆê–¼
 	if ( _audience ) {

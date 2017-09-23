@@ -56,10 +56,6 @@ void EventRyugu::update( ) {
 	}
 }
 
-bool EventRyugu::isJoining( ) const {
-	return !_audience;
-}
-
 void EventRyugu::join( PLAYER target ) {
 	//’èˆõˆê–¼
 	if ( _audience ) {

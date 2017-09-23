@@ -752,10 +752,15 @@ void Player::actOnCall( ) {
 	}
 }
 
+bool Player::isEntering( ) const {
+	return _entering;
+}
+
 void Player::actOnEnteringFadeOut( ) {
 	if ( getActCount( ) >= ENTERING_FADE_COUNT ) {
 		setAction( ACTION_FLOAT );
 		setPos( _entering_pos );
+		_entering = true;
 	}
 }
 
@@ -764,6 +769,7 @@ void Player::actOnEnteringSanzo( ) {
 	if ( getActCount( ) >= ENTERING_SANZO_COUNT ) {
 		setAction( ACTION_FLOAT );
 		setPos( _entering_pos );
+		_entering = true;
 	}
 }
 
@@ -902,11 +908,15 @@ int Player::getVirtue( ) const {
 	return _virtue;
 }
 
-void Player::pickUpVirtue( ) {
+bool Player::pickUpVirtue( ) {
+	if ( _mode != MODE_VIRTUE ) {
+		return false;
+	}
 	_virtue++;
 	if ( _virtue > 9 ) {
 		_virtue = 9;
 	}
+	return true;
 }
 
 void Player::setAction( ACTION action ) {
@@ -1106,6 +1116,7 @@ bool Player::isWearingItem( ITEM item ) const {
 void Player::enterEvent( const Vector& pos, ENTER enter ) {
 	setArea( AREA_EVENT );
 	_entering_pos = pos;
+	_entering = false;
 	setVec( Vector( ) );
 	switch ( enter ) {
 	case ENTER_SANZO  : setAction( ACTION_ENTERING_SANZO   ); break;

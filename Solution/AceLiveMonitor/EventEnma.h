@@ -10,7 +10,6 @@ public:
 	virtual ~EventEnma( );
 public:
 	void update( );
-	bool isJoining( ) const;
 	void join( PLAYER target );
 private:
 	enum PHASE {
@@ -20,7 +19,6 @@ private:
 		PHASE_FINISHED,
 	};
 private:
-	bool _audience;
 	int _count;
 	PHASE _phase;
 	PlayerPtr _player;

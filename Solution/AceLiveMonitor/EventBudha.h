@@ -10,7 +10,6 @@ public:
 	virtual ~EventBudha( );
 public:
 	void update( );
-	bool isJoining( ) const;
 	void join( PLAYER target );
 private:
 	enum PHASE {

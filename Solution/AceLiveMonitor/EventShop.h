@@ -6,7 +6,6 @@ public:
 	virtual ~EventShop( );
 public:
 	void update( );
-	bool isJoining( ) const;
 	void join( PLAYER target );
 };
 

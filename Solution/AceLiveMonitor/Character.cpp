@@ -33,7 +33,6 @@ void Character::update( ) {
 	updateDir( );
 
 	_pos += _vec;
-
 }
 
 void Character::updateMass( ) {

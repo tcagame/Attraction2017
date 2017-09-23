@@ -13,7 +13,6 @@ Event( EVENT_FLAME, DIR_LEFT ) {
 	Military::getTask( )->popUp( _boss );
 }
 
-
 EventFlame::~EventFlame( ) {
 }
 
@@ -25,11 +24,10 @@ void EventFlame::update( ) {
 	}
 }
 
-bool EventFlame::isJoining( ) const {
-	return getFade( ) != FADE_OUT;
-}
-
 void EventFlame::join( PLAYER target ) {
+	if ( getFade( ) == FADE_OUT ) {
+		return;
+	}
 	PlayerPtr player = Family::getTask( )->getPlayer( target );
 	if ( !player->isWearingItem( Player::ITEM_FLAME ) ) {
 		player->enterEvent( Vector( START_POS_X, START_POS_Y ), Player::ENTER_SANZO );

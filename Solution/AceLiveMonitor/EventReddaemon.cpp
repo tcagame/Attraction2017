@@ -24,11 +24,10 @@ void EventReddaemon::update( ) {
 	}
 }
 
-bool EventReddaemon::isJoining( ) const {
-	return getFade( ) != FADE_OUT;
-}
-
 void EventReddaemon::join( PLAYER target ) {
+	if ( getFade( ) == FADE_OUT ) {
+		return;
+	}
 	PlayerPtr player = Family::getTask( )->getPlayer( target );
 	player->enterEvent( Vector( START_POS_X, START_POS_Y ), Player::ENTER_FADEOUT );
 	start( );
