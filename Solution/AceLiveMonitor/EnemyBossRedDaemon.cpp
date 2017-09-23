@@ -3,6 +3,7 @@
 #include "Military.h"
 #include "SynchronousData.h"
 #include "Property.h"
+#include "Sound.h"
 
 const int WAIT_ANIM_TIME = 10;
 const int WAIT_POP_TIME = 300;
@@ -55,5 +56,4 @@ void EnemyBossRedDaemon::setSynchronousData( int camera_pos ) const {
 }
 
 void EnemyBossRedDaemon::dropItem( ) {
-
 }

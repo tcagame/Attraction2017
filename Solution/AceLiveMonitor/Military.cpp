@@ -57,6 +57,11 @@ void Military::updateEnemy( ) {
 			if ( !std::dynamic_pointer_cast< EnemyAttack >( enemy ) ) {
 				dropMoney( enemy );
 			}
+			if ( std::dynamic_pointer_cast< EnemyBoss >( enemy ) ) {
+				Sound::getTask( )->playSE( "yokai_se_32.wav" );
+				Sound::getTask( )->playSE( "yokai_voice_29.wav" );
+			}
+
 			int impact_chip_size = enemy->getChipSize( ) * 2;
 			Magazine::getTask( )->add( ImpactPtr( new Impact( enemy->getPos( ) + Vector( 0, enemy->getChipSize( ) / 2 ), enemy->getArea( ), impact_chip_size ) ) );
 			ite = _enemies.erase( ite );

@@ -251,7 +251,7 @@ void ViewerConsole::drawDevice( ) {
 void ViewerConsole::drawOpening( ) {
 	SoundPtr sound = Sound::getTask( );
 	if ( !sound->isPlayingBGM( ) ) {
-		sound->playBGM( "yokai_music_05.wav" );
+		sound->playBGM( "yokai_se_30.wav" );
 	}
 	double ratio = SynchronousData::getTask( )->getStatusProgressCount( _player ) * 0.01;
 	_image_opening->setBlend( Image::BLEND_ALPHA, ratio );
