@@ -1,7 +1,7 @@
 #include "EventEnma.h"
 #include "Family.h"
 #include "Player.h"
-
+#include "SynchronousData.h"
 
 const int START_POS_X = 256 + ( 1280 / 2 - 256 ) / 2;
 const int START_POS_Y = 128;
@@ -28,6 +28,7 @@ void EventEnma::update( ) {
 		break;
 	case PHASE_MOVE:
 		if ( _player->isFinishedAutomoving( ) ) {
+			SynchronousData::getTask( )->setMessage( SynchronousData::MES_ENMA );
 			_player->audience( );
 			_phase = PHASE_AUDIENCE;
 		}
@@ -36,6 +37,7 @@ void EventEnma::update( ) {
 		_count++;
 		if ( _count > AUDIENCE_COUNT ) {
 			_player->setModeVirtue( );
+			SynchronousData::getTask( )->setMessage( SynchronousData::MES_NONE );
 			exit( );
 			_phase = PHASE_FINISHED;
 		}

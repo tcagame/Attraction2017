@@ -51,6 +51,36 @@ void ViewerLive::initialize( ) {
 	_image_bustup[ PLAYER_TAROJIRO ] = drawer->createImage( "UI/ui_bustup_tarojiro.png" );
 	_image_bustup[ PLAYER_GARISUKE ] = drawer->createImage( "UI/ui_bustup_garisuke.png" );
 	_image_bustup[ PLAYER_TAROMI   ] = drawer->createImage( "UI/ui_bustup_taromi.png"   );
+	
+	_image_message[ MESSAGE_GAMBLE0 ] = drawer->createImage( "UI/ui_dialogue_gamble.png" );
+	_image_message[ MESSAGE_GAMBLE1 ] = drawer->createImage( "UI/ui_dialogue_gamble_han.png" );
+	_image_message[ MESSAGE_GAMBLE2 ] = drawer->createImage( "UI/ui_dialogue_gamble_tyou.png" );
+	_image_message[ MESSAGE_MIKO    ] = drawer->createImage( "UI/ui_dialogue_miko.png" );
+	_image_message[ MESSAGE_RYUGU   ] = drawer->createImage( "UI/ui_dialogue_otohime.png" );
+	_image_message[ MESSAGE_ENMA    ] = drawer->createImage( "UI/ui_dialogue1.png" );
+	_image_message[ MESSAGE_BUDHA   ] = drawer->createImage( "UI/ui_dialogue2.png" );
+
+
+	for ( int i = 0; i < MAX_MESSAGE; i++ ) {
+		switch ( ( MESSAGE )i ) {
+		case MESSAGE_GAMBLE0:
+		case MESSAGE_GAMBLE1:
+		case MESSAGE_GAMBLE2:
+		case MESSAGE_RYUGU  :
+			_image_message[ i ]->setRect( 0, 0, 320, 208 );
+			_image_message[ i ]->setPos( 1280 - 320 - 7, 7 );
+			break;
+		case MESSAGE_MIKO   :
+			_image_message[ i ]->setRect( 0, 0, 320, 208 );
+			_image_message[ i ]->setPos( 400, 7 );
+			break;
+		case MESSAGE_ENMA   :
+		case MESSAGE_BUDHA  :
+			_image_message[ i ]->setRect( 0, 0, 320, 208 );
+			_image_message[ i ]->setPos( 150, 10 );
+			break;
+		}
+	}
 
 	_image_frame = drawer->createImage( "UI/area_event_frame.png" );
 	_image_frame->setRect( 0, 0, 1280, 256 );
@@ -164,8 +194,40 @@ void ViewerLive::update( ) {
 		}
 	}
 
+	//メッセージ
+	drawMessage( );
+
 	// デバッグ
 	if ( Debug::getTask( )->isDebug( ) ) {
 		_viewer_debug->draw( );
+	}
+}
+
+void ViewerLive::drawMessage( ) {
+	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	switch ( data->getMessage( ) ) {
+	case SynchronousData::MES_NONE:
+		break;
+	case SynchronousData::MES_GAMBLE0:
+		_image_message[ MESSAGE_GAMBLE0 ]->draw( );
+		break;
+	case SynchronousData::MES_GAMBLE1:
+		_image_message[ MESSAGE_GAMBLE1 ]->draw( );
+		break;
+	case SynchronousData::MES_GAMBLE2:
+		_image_message[ MESSAGE_GAMBLE2 ]->draw( );
+		break;
+	case SynchronousData::MES_MIKO:
+		_image_message[ MESSAGE_MIKO ]->draw( );
+		break;
+	case SynchronousData::MES_RYUGU:
+		_image_message[ MESSAGE_RYUGU ]->draw( );
+		break;
+	case SynchronousData::MES_ENMA:
+		_image_message[ MESSAGE_ENMA ]->draw( );
+		break;
+	case SynchronousData::MES_BUDHA:
+		_image_message[ MESSAGE_BUDHA ]->draw( );
+		break;
 	}
 }

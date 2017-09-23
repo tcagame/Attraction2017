@@ -73,6 +73,19 @@ void ViewerConsole::initialize( ) {
 	_image_bustup[ PLAYER_GARISUKE ] = drawer->createImage( "UI/ui_bustup_garisuke.png" );
 	_image_bustup[ PLAYER_TAROMI   ] = drawer->createImage( "UI/ui_bustup_taromi.png"   );
 
+	_image_message[ MESSAGE_GAMBLE0 ] = drawer->createImage( "UI/ui_dialogue_gamble.png" );
+	_image_message[ MESSAGE_GAMBLE1 ] = drawer->createImage( "UI/ui_dialogue_gamble_han.png" );
+	_image_message[ MESSAGE_GAMBLE2 ] = drawer->createImage( "UI/ui_dialogue_gamble_tyou.png" );
+	_image_message[ MESSAGE_MIKO    ] = drawer->createImage( "UI/ui_dialogue_miko.png" );
+	_image_message[ MESSAGE_RYUGU   ] = drawer->createImage( "UI/ui_dialogue_otohime.png" );
+	_image_message[ MESSAGE_ENMA    ] = drawer->createImage( "UI/ui_dialogue1.png" );
+	_image_message[ MESSAGE_BUDHA   ] = drawer->createImage( "UI/ui_dialogue2.png" );
+	
+	for ( int i = 0; i < MAX_MESSAGE; i++ ) {
+		_image_message[ i ]->setRect( 0, 0, 320, 208 );
+		_image_message[ i ]->setPos( 640 / 2, 7 );
+	}
+
 	_image_bar_upper = drawer->createImage( "UI/ui_bar.png" );
 	_image_bar_upper->setRect( 0, 0, 640, 8 );
 	_image_bar_upper->setPos( 0, 0 );
@@ -190,6 +203,7 @@ void ViewerConsole::drawConsole( ) {
 		_image_redo->setPos( x - count, y - count, x + count, y + count );
 		_image_redo->draw( );
 	}
+	drawMessage( );
 }
 
 void ViewerConsole::drawAreaStreet( ) {
@@ -243,6 +257,36 @@ void ViewerConsole::drawOpening( ) {
 	_image_opening->setBlend( Image::BLEND_ALPHA, ratio );
 	_image_opening->draw( );
 }
+
+void ViewerConsole::drawMessage( ) {
+	SynchronousDataPtr data( SynchronousData::getTask( ) );
+	switch ( data->getMessage( ) ) {
+	case SynchronousData::MES_NONE:
+		break;
+	case SynchronousData::MES_GAMBLE0:
+		_image_message[ MESSAGE_GAMBLE0 ]->draw( );
+		break;
+	case SynchronousData::MES_GAMBLE1:
+		_image_message[ MESSAGE_GAMBLE1 ]->draw( );
+		break;
+	case SynchronousData::MES_GAMBLE2:
+		_image_message[ MESSAGE_GAMBLE2 ]->draw( );
+		break;
+	case SynchronousData::MES_MIKO:
+		_image_message[ MESSAGE_MIKO ]->draw( );
+		break;
+	case SynchronousData::MES_RYUGU:
+		_image_message[ MESSAGE_RYUGU ]->draw( );
+		break;
+	case SynchronousData::MES_ENMA:
+		_image_message[ MESSAGE_ENMA ]->draw( );
+		break;
+	case SynchronousData::MES_BUDHA:
+		_image_message[ MESSAGE_BUDHA ]->draw( );
+		break;
+	}
+}
+
 
 void ViewerConsole::playSe( ) {
 	SynchronousDataPtr data = SynchronousData::getTask( );

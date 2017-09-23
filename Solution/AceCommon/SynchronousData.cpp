@@ -90,6 +90,10 @@ int SynchronousData::getFade( ) const {
 	return _data.fade;
 }
 
+unsigned char SynchronousData::getMessage( ) const {
+	return _data.message;
+}
+
 void SynchronousData::setStatusDevice( PLAYER player, int id ) {
 	_data.status[ player ].device = ( char )id;
 }
@@ -142,6 +146,9 @@ void SynchronousData::setFade( int fade ) {
 	_data.fade = fade;
 }
 
+void SynchronousData::setMessage( unsigned char message ) {
+	_data.message = message;
+}
 
 void SynchronousData::resetObject( ) {
 	_data.idx[ AREA_STREET ] = 0;

@@ -54,6 +54,14 @@ public:
 	static const unsigned char PROGRESS_ITEM_VIRTUE      = 0x09;
 	static const unsigned char PROGRESS_ENDING           = 0x0A;
 	static const unsigned char PROGRESS_OPENING          = 0x0B;
+	static const unsigned char MES_NONE             = 0x00;
+	static const unsigned char MES_GAMBLE0          = 0x01;
+	static const unsigned char MES_GAMBLE1          = 0x02;
+	static const unsigned char MES_GAMBLE2          = 0x03;
+	static const unsigned char MES_MIKO             = 0x04;
+	static const unsigned char MES_RYUGU            = 0x05;
+	static const unsigned char MES_ENMA             = 0x06;
+	static const unsigned char MES_BUDHA            = 0x07;
 public:
 	static std::string getTag( ) { return "SYNCHRONOUSDATA"; };
 	static SynchronousDataPtr getTask( );
@@ -83,6 +91,7 @@ public:
 	int getObjectSize( int idx ) const;
 	int getIdx( AREA area, int relative_idx ) const;
 	int getFade( ) const;
+	unsigned char getMessage( ) const;
 public:
 	void * getPtr( );
 	int getSize( );
@@ -98,6 +107,7 @@ public:
 	void setStatusRedo( PLAYER player, int redo );
 	void setStatusState( PLAYER player, unsigned char area );
 	void setFade( int fade );
+	void setMessage( unsigned char message );
 	void resetObject( );
 	void addObject( AREA area, unsigned char type, int pattern, unsigned char attribute, int ax, int ay, int size = -1 );
 private:
@@ -109,6 +119,7 @@ private:
 			unsigned char event;
 			unsigned char fade; // 0 - 99
 			unsigned char escape;
+			unsigned char message;
 			struct Status {
 				char          device;
 				unsigned char progress_type;

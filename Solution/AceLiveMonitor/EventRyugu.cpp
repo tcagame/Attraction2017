@@ -4,6 +4,7 @@
 #include "Player.h"
 #include "Storage.h"
 #include "ItemBox.h"
+#include "SynchronousData.h"
 
 const int START_POS_X = 256 + 128;
 const int START_POS_Y = 128;
@@ -39,6 +40,7 @@ void EventRyugu::update( ) {
 		if ( _player->isFinishedAutomoving( ) ) {
 			_player->audience( );
 			_phase = PHASE_AUDIENCE;
+			SynchronousData::getTask( )->setMessage( SynchronousData::MES_RYUGU );
 		}
 		break;
 	case PHASE_AUDIENCE:
@@ -52,6 +54,7 @@ void EventRyugu::update( ) {
 		if ( !_box.lock( ) ) {
 			_count = 0;
 			_phase= PHASE_FINISHED;
+			SynchronousData::getTask( )->setMessage( SynchronousData::MES_NONE );
 		}
 		escape( );
 		break;

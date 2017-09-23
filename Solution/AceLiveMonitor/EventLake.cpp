@@ -3,6 +3,7 @@
 #include "Player.h"
 #include "NPCMiko.h"
 #include "Office.h"
+#include "SynchronousData.h"
 
 const int START_POS_X = 1280 / 2 + 300;
 const int START_POS_Y = 128;
@@ -33,12 +34,14 @@ void EventLake::update( ) {
 		if ( _player->isFinishedAutomoving( ) ) {
 			_player->audience( false );
 			_phase = PHASE_AUDIENCE;
+			SynchronousData::getTask( )->setMessage( SynchronousData::MES_MIKO );
 		}
 		break;
 	case PHASE_AUDIENCE:
 		_count++;
 		if ( _count > AUDIENCE_COUNT ) {
 			exit( );
+			SynchronousData::getTask( )->setMessage( SynchronousData::MES_NONE );
 			_phase = PHASE_FINISHED;
 		} else {
 			if ( _count == HEART_COUNT ) {

@@ -29,7 +29,7 @@ private:
 	void drawAreaEvent( );
 	void drawAreaStreet( );
 	void drawOpening( );
-	void drawContinue( );
+	void drawMessage( );
 	void playSe( );
 private:
 	int _ending_type;
@@ -49,5 +49,6 @@ private:
 	std::array< bool, MAX_PLAYER > _dead_se;
 	ImagePtr _image_redo;
 	std::array< ImagePtr, MAX_PLAYER > _image_bustup;
+	std::array< ImagePtr, MAX_MESSAGE > _image_message;
 };
 

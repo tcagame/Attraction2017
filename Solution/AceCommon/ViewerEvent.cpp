@@ -76,10 +76,6 @@ void ViewerEvent::draw( EVENT event, int sx, int sy ) const {
 		_image_escape->draw( );
 		break;
 	case EVENT_LAKE     :
-		_image_escape->setRect( 0, 64, 128, 64 );
-		_image_escape->setPos( 1280 - ( 256 - 64 ), 0  );
-		_image_escape->draw( );
-		break;
 	case EVENT_CALL     :
 	case EVENT_ENMA     :
 	case EVENT_BUDHA    : 

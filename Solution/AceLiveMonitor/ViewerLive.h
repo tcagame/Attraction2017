@@ -27,6 +27,8 @@ public:
 	void initialize( );
 	void update( );
 private:
+	void drawMessage( );
+private:
 	ViewerStreetPtr _viewer_street;
 	ViewerEventPtr _viewer_event;
 	ViewerStatusPtr _viewer_status;
@@ -40,5 +42,6 @@ private:
 	ImagePtr _image_fade;
 	ImagePtr _image_redo;
 	std::array< ImagePtr, MAX_PLAYER > _image_bustup;
+	std::array< ImagePtr, MAX_MESSAGE > _image_message;
 };
 
