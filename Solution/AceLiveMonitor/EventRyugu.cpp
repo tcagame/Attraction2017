@@ -11,7 +11,7 @@ const int AUDIENCE_COUNT = 100;
 const int AUDIENCE_POS_X = 1280 / 2 - 100;
 
 EventRyugu::EventRyugu( ) :
-Event( EVENT_RYUGU, DIR_RIGHT ),
+Event( EVENT_RYUGU, DIR_LEFT ),
 _count( 0 ),
 _phase( PHASE_ENTER ) {
 	Office::getTask( )->popUpNPC( EVENT_RYUGU );
@@ -51,6 +51,7 @@ void EventRyugu::update( ) {
 		if ( !_box.lock( ) ) {
 			exit( );
 		}
+		escape( );
 		break;
 	case PHASE_FINISHED:
 		break;
