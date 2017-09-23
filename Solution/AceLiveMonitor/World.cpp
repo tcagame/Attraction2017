@@ -182,7 +182,8 @@ void World::updateEvent( ) {
 		}
 
 		// 前回同じイベントだったか？
-		if ( _passed_event == event ) {
+		if ( _passed_event == event &&
+			 _event->getType( ) != event ) {
 			continue;
 		}
 

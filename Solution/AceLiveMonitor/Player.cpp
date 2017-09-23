@@ -1138,7 +1138,7 @@ void Player::enterEvent( const Vector& pos, ENTER enter ) {
 
 void Player::leaveEvent( ) {
 	Magazine::getTask( )->add( ImpactPtr( new Impact( getPos( ) + Vector( 0, getOverlappedRadius( ) ), getArea( ), ( int )getOverlappedRadius( ) * 2 ) ) );
-
+	setMass( true );
 	setArea( AREA_STREET );
 	setPos( Vector( Family::getTask( )->getCameraPosX( ) + SCREEN_WIDTH / 2, 0 ) );
 	setVec( Vector( ) );
