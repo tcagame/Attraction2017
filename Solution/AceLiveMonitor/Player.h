@@ -24,7 +24,8 @@ public:
 		ACTION_CALL,
 		ACTION_ENTERING_FADEOUT,
 		ACTION_ENTERING_SANZO,
-		ACTION_AUDIENCE,
+		ACTION_AUDIENCE_NORMAL,
+		ACTION_AUDIENCE_BACK,
 		ACTION_ENDING,
 		ACTION_OPENING,
 		MAX_ACTION,
@@ -37,6 +38,7 @@ public:
 		ITEM_WOOD,
 		ITEM_FLAME,
 		ITEM_MINERAL,
+		ITEM_BOX,
 		MAX_ITEM,
 	};
 	enum MODE {
@@ -75,7 +77,8 @@ public:
 	MODE getMode( ) const;
 	void autoMove( int target_x );
 	bool isFinishedAutomoving( ) const;
-	void audience( );
+	void free( );
+	void audience( bool is_back = true );
 	void setModeVirtue( );
 	void setActionEnding( );
 	bool isLeaveAlone( ) const;

@@ -9,11 +9,13 @@
 #include "ItemEnhancedAttack.h"
 #include "ItemEnhancedCharge.h"
 #include "ItemYokaiSoup.h"
+#include "ItemBox.h"
 #include "SynchronousData.h"
 #include "World.h"
 
 PTR( ItemMoney );
 PTR( ItemVirtue );
+PTR( ItemBox );
 
 StoragePtr Storage::getTask( ) {
 	return std::dynamic_pointer_cast< Storage >( Application::getInstance( )->getTask( getTag( ) ) );
@@ -78,6 +80,12 @@ bool Storage::pickUpItem( ItemPtr item, PlayerPtr player ) {
 			if ( player->getMode( ) == Player::MODE_VIRTUE ) {
 				player->damage( 1 );
 			}
+		}
+	}
+	{//‹ÊŽè” 
+		ItemBoxPtr box = std::dynamic_pointer_cast< ItemBox >( item );
+		if ( box ) {
+			player->pickUpItem( Player::ITEM_BOX );
 		}
 	}
 	{//“¿

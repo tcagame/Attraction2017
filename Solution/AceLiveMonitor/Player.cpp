@@ -51,6 +51,10 @@ const int MAX_SANDWICHED_COUNT = 300;
 const int AUTO_FINISH_RANGE = 5;
 const int HEAL_DANGO = 6;
 
+//玉手箱
+const int BOX_DAMAGE = 5;
+const int BOX_MONEY = 5000;
+
 // モーションテーブル
 const int MOTION_OFFSET[Player::MAX_ACTION] = {
 	0,   // ACTION_ENTRY,
@@ -68,7 +72,8 @@ const int MOTION_OFFSET[Player::MAX_ACTION] = {
 	192, // ACTION_CALL,
 	14 * 16,   //ACTION_ENTERING_FADEOUT,
 	0,   //ACTION_ENTERING_SANZO,
-	3 * 16 + 14,   //ACTION_AUDIENCE
+	0, //ACTION_AUDIENCE_NORMAL
+	3 * 16 + 14,   //ACTION_AUDIENCE_BACK
 	0,   //ACTION_ENDING
 	0,   //ACTION_OPENING
 };
@@ -90,7 +95,8 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		18, // ACTION_CALL,
 		8,  //ACTION_ENTERING_FADEOUT,
 		1,  //ACTION_ENTERING_SANZO,
-		1,  //ACTION_AUDIENCE
+		1,  //ACTION_AUDIENCE_NORMAL
+		1,  //ACTION_AUDIENCE_BACK
 		1,  //ACTION_ENDING
 		1,  //ACTION_OPENING
 	},
@@ -110,7 +116,8 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		18, // ACTION_CALL,
 		8,  //ACTION_ENTERING_FADEOUT,
 		1,  //ACTION_ENTERING_SANZO,
-		1,  //ACTION_AUDIENCE
+		1,  //ACTION_AUDIENCE_NORMAL
+		1,  //ACTION_AUDIENCE_BACK
 		1,  //ACTION_ENDING
 		1,  //ACTION_OPENING
 	},
@@ -130,7 +137,8 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		12, // ACTION_CALL,
 		8,  //ACTION_ENTERING_FADEOUT,
 		1,  //ACTION_ENTERING_SANZO,
-		1,  //ACTION_AUDIENCE
+		1,  //ACTION_AUDIENCE_NORMAL
+		1,  //ACTION_AUDIENCE_BACK
 		1,  //ACTION_ENDING
 		1,  //ACTION_OPENING
 	},
@@ -150,7 +158,8 @@ const int MOTION_NUM[MAX_PLAYER][Player::MAX_ACTION] = {
 		12, // ACTION_CALL,
 		8,  //ACTION_ENTERING_FADEOUT,
 		1,  //ACTION_ENTERING_SANZO,
-		1,  //ACTION_AUDIENCE
+		1,  //ACTION_AUDIENCE_NORMAL
+		1,  //ACTION_AUDIENCE_BACK
 		1,  //ACTION_ENDING
 		1,  //ACTION_OPENING
 	}
@@ -289,7 +298,8 @@ void Player::act( ) {
 	case ACTION_ENTERING_SANZO:
 		actOnEnteringSanzo( );
 		break;
-	case ACTION_AUDIENCE:
+	case ACTION_AUDIENCE_NORMAL:
+	case ACTION_AUDIENCE_BACK:
 		actOnAudience( );
 		break;
 	case ACTION_ENDING:
@@ -1077,7 +1087,8 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 			}
 			break;
 		}
-	case ACTION_AUDIENCE:
+	case ACTION_AUDIENCE_BACK:
+	case ACTION_AUDIENCE_NORMAL:
 		motion = 0;
 		break;
 	}
@@ -1197,6 +1208,13 @@ void Player::pickUpItem( ITEM item ) {
 	case ITEM_WOOD	     : setProgressType( SynchronousData::PROGRESS_ITEM_WOOD	      ); break;
 	case ITEM_FLAME	     : setProgressType( SynchronousData::PROGRESS_ITEM_FLAME	      ); break;
 	case ITEM_MINERAL    : setProgressType( SynchronousData::PROGRESS_ITEM_MINERAL     ); break;
+	case ITEM_BOX        :
+		if ( rand( ) % 2 ) {
+			damage( BOX_DAMAGE );
+		} else {
+			addMoney( BOX_MONEY );
+		}
+		break;
 	}
 
 	if ( _item[ ITEM_WOOD ] &&
@@ -1227,9 +1245,17 @@ bool Player::isFinishedAutomoving( ) const {
 	return _auto_move_target_x < 0;
 }
 
-void Player::audience( ) {
+void Player::audience( bool is_back ) {
 	setVec( Vector( ) );
-	setAction( ACTION_AUDIENCE );
+	if (is_back) {
+		setAction( ACTION_AUDIENCE_BACK );
+	} else {
+		setAction(ACTION_AUDIENCE_NORMAL);
+	}
+}
+
+void Player::free( ) {
+	setAction( ACTION_FLOAT );
 }
 
 void Player::setModeVirtue( ) {

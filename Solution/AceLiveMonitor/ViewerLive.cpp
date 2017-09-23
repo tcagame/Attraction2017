@@ -17,6 +17,7 @@
 #include "Storage.h"
 #include "Magazine.h"
 #include "Armoury.h"
+#include "Office.h"
 
 #include "World.h"
 #include "Map.h"
@@ -73,6 +74,7 @@ void ViewerLive::update( ) {
 	data->resetObject( );
 	Military::getTask( )->setSynchronousData( );
 	Storage::getTask( )->setSynchronousData( );
+	Office::getTask( )->setSynchronousData( );
 	Family::getTask( )->setSynchronousData( );
 	Magazine::getTask( )->setSynchronousData( );
 	Armoury::getTask( )->setSynchronousData( );

@@ -21,6 +21,7 @@ ViewerObject::ViewerObject( ) {
 	_image[ GRAPH_NPC				] = drawer->createImage( "Event/character/character.png"	);
 	_image[ GRAPH_SHADOW			] = drawer->createImage( "Effect/effect_shadow.png"	);
 	_image[ GRAPH_RYUGU			    ] = drawer->createImage( "Event/character/ryugu.png"     	);
+	_image[ GRAPH_LAKE			    ] = drawer->createImage( "Event/character/miko.png"     	);
 }
 
 
@@ -92,6 +93,9 @@ void ViewerObject::drawSprite( int x, int y, unsigned char type, unsigned char a
 		break;
 	case SynchronousData::TYPE_RYUGU:
 		sprite = getSpriteRyugu( GRAPH_RYUGU            , x, y, attribute, pattern, size );
+		break;
+	case SynchronousData::TYPE_LAKE:
+		sprite = getSpriteRyugu( GRAPH_LAKE            , x, y, attribute, pattern, size );
 		break;
 	default: assert( 0 );
 	};
@@ -324,6 +328,26 @@ ViewerObject::Sprite ViewerObject::getSpriteRyugu( GRAPH graph, int x, int y, un
 		size = 32;
 	}
 	int width_num = 2048 / size;
+	sprite.tx = pattern % width_num * size;
+	sprite.ty = pattern / width_num * size;
+	sprite.tw = size;
+	sprite.th = size;
+	
+	sprite.sx1 = x - size / 2;
+	sprite.sy1 = y - size;
+	sprite.sx2 = sprite.sx1 + size;
+	sprite.sy2 = sprite.sy1 + size;
+
+	return sprite;
+}
+
+ViewerObject::Sprite ViewerObject::getSpriteLake( GRAPH graph, int x, int y, unsigned char attribute, int pattern, int size ) const {
+	Sprite sprite;
+	sprite.graph = graph;
+	if ( size < 0 ) {
+		size = 32;
+	}
+	int width_num = 1024 / size;
 	sprite.tx = pattern % width_num * size;
 	sprite.ty = pattern / width_num * size;
 	sprite.tw = size;
