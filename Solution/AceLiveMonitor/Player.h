@@ -64,7 +64,7 @@ public:
 	int getMoney( ) const;
 	int getVirtue( ) const;
 	void addMoney( int money );
-	void pickUpVirtue( );
+	bool pickUpVirtue( );
 	void setSynchronousData( PLAYER player, int camera_pos ) const;
 	bool isExist( ) const;
 	void enterEvent( const Vector& pos, ENTER enter );
@@ -80,6 +80,7 @@ public:
 	void setActionEnding( );
 	bool isLeaveAlone( ) const;
 	void recoverPower( );
+	bool isEntering( ) const;
 private:
 	void actOnEntry( );
 	void actOnContinue( );
@@ -135,5 +136,6 @@ private:
 	int _sandwiched_count;
 	std::array< bool, MAX_ITEM > _item;
 	Vector _entering_pos;
+	bool _entering;
 };
 

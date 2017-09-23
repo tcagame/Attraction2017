@@ -10,7 +10,6 @@ const int AUDIENCE_POS_X = 1280 / 2 - 5;
 
 EventEnma::EventEnma( ) :
 Event( EVENT_ENMA, DIR_RIGHT ),
-_audience( false ),
 _phase( PHASE_ENTER ),
 _count( 0 ) {
 }
@@ -23,15 +22,7 @@ void EventEnma::update( ) {
 	
 	switch ( _phase ) {
 	case PHASE_ENTER:
-		for ( int i = 0; i < MAX_PLAYER; i++ ) {
-			PlayerPtr player = Family::getTask( )->getPlayer( i );
-			Player::ACTION action = player->getAction( );
-			if ( action != Player::ACTION_ENTERING_FADEOUT &&
-			     action != Player::ACTION_ENTERING_SANZO ) {
-				_player = player;
-			}
-		}
-		if ( _player ) {
+		if ( _player->isEntering( ) ) {
 			_player->autoMove( AUDIENCE_POS_X );
 			_phase = PHASE_MOVE;
 		}
@@ -55,17 +46,16 @@ void EventEnma::update( ) {
 	}
 }
 
-bool EventEnma::isJoining( ) const {
-	return !_audience;
-}
-
 void EventEnma::join( PLAYER target ) {
-	//’èˆõˆê–¼
-	if ( _audience ) {
+	if ( getFade( ) == Event::FADE_OUT ) {
 		return;
 	}
-	PlayerPtr player = Family::getTask( )->getPlayer( target );
-	player->enterEvent( Vector( START_POS_X, START_POS_Y ), Player::ENTER_SANZO );
+
+	//’èˆõˆê–¼
+	if ( _player ) {
+		return;
+	}
+	_player = Family::getTask( )->getPlayer( target );
+	_player->enterEvent( Vector( START_POS_X, START_POS_Y ), Player::ENTER_SANZO );
 	start( );
-	_audience = true;
 }

@@ -6,7 +6,6 @@ public:
 	virtual ~EventTitle( );
 public:
 	void update( );
-	bool isJoining( ) const;
 	void join( PLAYER target );
 };
 

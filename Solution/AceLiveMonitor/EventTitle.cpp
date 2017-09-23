@@ -11,10 +11,6 @@ EventTitle::~EventTitle( ) {
 void EventTitle::update( ) {
 }
 
-bool EventTitle::isJoining( ) const {
-	return false;
-}
-
 void EventTitle::join( PLAYER target ) {
 
 }

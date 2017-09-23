@@ -10,6 +10,7 @@
 #include "Storage.h"
 #include "Armoury.h"
 #include "ItemVirtue.h"
+#include "Keyboard.h"
 
 #include "EventTitle.h"
 #include "EventReddaemon.h"
@@ -158,10 +159,22 @@ void World::updateEvent( ) {
 	_event->escape( );
 	_event->fade( );
 
+	KeyboardPtr keyboard = Keyboard::getTask( );
+
 	FamilyPtr family( Family::getTask( ) );
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		PlayerPtr player = family->getPlayer( i );
 		EVENT event = player->getOnEvent( );
+
+		if ( player->isExist( ) ) {
+			if ( keyboard->isHoldKey( "1" ) ) event = EVENT_FLAME;
+			if ( keyboard->isHoldKey( "2" ) ) event = EVENT_WOOD;
+			if ( keyboard->isHoldKey( "3" ) ) event = EVENT_MINERAL;
+			if ( keyboard->isHoldKey( "4" ) ) event = EVENT_SHOP;
+			if ( keyboard->isHoldKey( "5" ) ) event = EVENT_GAMBLE;
+			if ( keyboard->isHoldKey( "6" ) ) event = EVENT_RYUGU;
+			if ( keyboard->isHoldKey( "7" ) ) event = EVENT_LAKE;
+		}
 
 		// イベントを踏んでいない
 		if ( event == EVENT_NONE ) {
@@ -179,11 +192,6 @@ void World::updateEvent( ) {
 			continue;
 		}
 		
-		// 現在参加できない
-		if ( !_event->isJoining( ) ) {
-			continue;
-		}
-
 		// 参加
 		_event->join( ( PLAYER )i );
 	}

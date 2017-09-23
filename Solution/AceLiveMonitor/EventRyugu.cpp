@@ -13,10 +13,6 @@ EventRyugu::~EventRyugu( ) {
 void EventRyugu::update( ) {
 }
 
-bool EventRyugu::isJoining( ) const {
-	return false;
-}
-
 void EventRyugu::join( PLAYER target ) {
 
 }

@@ -25,11 +25,10 @@ void EventMineral::update( ) {
 	}
 }
 
-bool EventMineral::isJoining( ) const {
-	return getFade( ) != FADE_OUT;
-}
-
 void EventMineral::join( PLAYER target ) {
+	if ( getFade( ) == FADE_OUT ) {
+		return;
+	}
 	PlayerPtr player = Family::getTask( )->getPlayer( target );
 	if ( !player->isWearingItem( Player::ITEM_MINERAL ) ) {
 		player->enterEvent( Vector( START_POS_X, START_POS_Y ), Player::ENTER_SANZO );

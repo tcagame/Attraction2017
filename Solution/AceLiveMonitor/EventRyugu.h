@@ -7,7 +7,6 @@ public:
 	virtual ~EventRyugu( );
 public:
 	void update( );
-	bool isJoining( ) const;
 	void join( PLAYER target );
 };
 

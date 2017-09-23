@@ -25,11 +25,10 @@ void EventWood::update( ) {
 	}
 }
 
-bool EventWood::isJoining( ) const {
-	return getFade( ) != FADE_OUT;
-}
-
 void EventWood::join( PLAYER target ) {
+	if ( getFade( ) == FADE_OUT ) {
+		return;
+	}
 	PlayerPtr player = Family::getTask( )->getPlayer( target );
 	if ( !player->isWearingItem( Player::ITEM_WOOD ) ) {
 		player->enterEvent( Vector( START_POS_X, START_POS_Y ), Player::ENTER_SANZO );

@@ -83,7 +83,7 @@ bool Storage::pickUpItem( ItemPtr item, PlayerPtr player ) {
 	{//徳
 		ItemVirtuePtr virtue = std::dynamic_pointer_cast< ItemVirtue >( item );
 		if ( virtue ) {
-			player->pickUpVirtue( );
+			result = player->pickUpVirtue( );
 		}
 	}
 	{//ショップアイテム
