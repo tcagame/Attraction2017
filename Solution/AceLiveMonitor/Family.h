@@ -8,8 +8,8 @@
 
 PTR( Family );
 PTR( Player );
-PTR( Monmotaro );
 PTR( Character );
+PTR( Monmotaro );
 
 class Family : public Task {
 public:
@@ -24,12 +24,12 @@ public:
 	PlayerConstPtr getPlayer( int player_id ) const;
 	PlayerPtr getPlayer( int player_id );
 	int getCameraPosX( ) const;
-	MonmotaroConstPtr getMonmotaro( ) const;
 	bool isExistOnEvent( ) const;
 	void pushDebugData( ViewerDebug::Data& data ) const;
 	bool isModeVirtue( ) const;
 	PlayerPtr getOverlappedPlayer( CharacterConstPtr target ) const;
 	void setSynchronousData( ) const;
+	void call( PlayerPtr player );
 private:
 	void updatePlayer( PLAYER taget );
 	void updateCameraPos( );
@@ -38,7 +38,7 @@ private:
 private:
 	int _camera_pos_x;
 	std::array< PlayerPtr, MAX_PLAYER > _player;
-	MonmotaroPtr _monmo;
 	bool _updating_camera;
+	MonmotaroPtr _monmotaro;
 };
 

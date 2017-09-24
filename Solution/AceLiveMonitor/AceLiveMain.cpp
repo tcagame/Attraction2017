@@ -18,7 +18,7 @@
 #include "Magazine.h"
 #include "Sound.h"
 #include "Property.h"
-
+#include "Monmotaro.h"
 
 void main( ) {
 	ApplicationPtr app( Application::getInstance( ) ); 

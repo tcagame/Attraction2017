@@ -55,6 +55,8 @@ const int HEAL_DANGO = 6;
 const int BOX_DAMAGE = 5;
 const int BOX_MONEY = 5000;
 
+const int CALL_COUNT = 90;
+
 // モーションテーブル
 const int MOTION_OFFSET[Player::MAX_ACTION] = {
 	0,   // ACTION_ENTRY,
@@ -769,11 +771,6 @@ void Player::actOnDead( ) {
 }
 
 void Player::actOnCall( ) {
-	MonmotaroConstPtr monmo( Family::getTask( )->getMonmotaro( ) );
-	
-	if ( monmo->getAction( ) == Monmotaro::ACTION_MOVE ) {
-		setAction( ACTION_WAIT );
-	}
 }
 
 bool Player::isEntering( ) const {
@@ -1058,8 +1055,16 @@ void Player::setSynchronousData( PLAYER player, int camera_pos ) const {
 		motion = getActCount( ) / PLAYER_ANIM_WAIT_COUNT;
 		break;
 	case ACTION_WAIT:
+		motion = getActCount( ) / PLAYER_ANIM_WAIT_COUNT;
+		break;
 	case ACTION_CALL:
 		motion = getActCount( ) / PLAYER_ANIM_WAIT_COUNT;
+		{
+			// もんも顔饅頭
+			Matrix mat = Matrix::makeTransformRotation( Vector( 0, 0, -1 ), PI / 2 * getActCount( ) / CALL_COUNT );
+			Vector pos = Vector( x, y - 256 ) + mat.multiply( Vector( 256, 0 ) );
+			data->addObject( AREA_EVENT, SynchronousData::TYPE_MONMOTARO, getActCount( ) / PLAYER_ANIM_WAIT_COUNT % 8 + 32 * _player ,0 ,( int )pos.x, ( int )pos.y );
+		}
 		break;
 	case ACTION_OVER_CHARGE:
 		motion = getActCount( ) * num / BURST_TIME;
@@ -1348,7 +1353,15 @@ void Player::checkSandwichedWall( ) {
 	}
 }
 
-
 void Player::recoverPower( ) {
 	setPower( 16 );
+}
+
+void Player::call( ) {
+	setAction( ACTION_CALL );
+	setVec( Vector( ) );
+}
+
+bool Player::isFinishedCalling( ) const {
+	return _action == ACTION_CALL && getActCount( ) >= CALL_COUNT;
 }

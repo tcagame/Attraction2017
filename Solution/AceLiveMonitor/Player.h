@@ -85,6 +85,8 @@ public:
 	void recoverPower( );
 	bool isEntering( ) const;
 	PLAYER getPlayer( ) const;
+	void call( );
+	bool isFinishedCalling( ) const;
 private:
 	void actOnEntry( );
 	void actOnContinue( );

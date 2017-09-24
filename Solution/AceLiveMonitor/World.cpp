@@ -175,6 +175,7 @@ void World::updateEvent( ) {
 			if ( keyboard->isHoldKey( "6" ) ) event = EVENT_RYUGU;
 			if ( keyboard->isHoldKey( "7" ) ) event = EVENT_LAKE;
 			if ( keyboard->isHoldKey( "8" ) ) event = EVENT_REDDAEMON;
+			if ( keyboard->isHoldKey( "9" ) ) event = EVENT_CALL;
 		}
 
 		// ƒCƒxƒ“ƒg‚ð“¥‚ñ‚Å‚¢‚È‚¢

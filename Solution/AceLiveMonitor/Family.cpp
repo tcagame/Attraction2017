@@ -41,13 +41,13 @@ void Family::initialize( ) {
 		_player[ i ] = PlayerPtr( new Player( ( PLAYER )i, INIT_PLAYER_POS[ i ] ) );
 	}
 	
-	_monmo = MonmotaroPtr( new Monmotaro( Vector( ) ) );
 	double camera_pos = 0.0;
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
 		camera_pos += _player[ i ]->getPos( ).x;
 	}
 	_camera_pos_x = ( int )( camera_pos * 0.25 ) - SCREEN_WIDTH / 2;
-
+	
+	_monmotaro = MonmotaroPtr( new Monmotaro );
 }
 
 void Family::update( ) {
@@ -57,8 +57,7 @@ void Family::update( ) {
 	}
 	
 	updateCameraPos( );
-
-	_monmo->update( );
+	_monmotaro->update( );
 }
 
 void Family::updatePlayer( PLAYER target ) {
@@ -153,11 +152,6 @@ int Family::getCameraPosX( ) const {
 	return _camera_pos_x;
 }
 
-MonmotaroConstPtr Family::getMonmotaro( ) const {
-	return _monmo;
-}
-
-
 bool Family::isExistOnEvent( ) const {
 	bool exist = false;
 	for ( int i = 0; i < MAX_PLAYER; i++ ) {
@@ -230,6 +224,8 @@ void Family::setSynchronousData( ) const {
 		PlayerConstPtr player = getPlayer( i );
 		player->setSynchronousData( ( PLAYER )i, getCameraPosX( ) );
 	}
+
+	_monmotaro->setSynchronousData( );
 }
 
 bool Family::isInScrollRange( ) const {
@@ -245,4 +241,8 @@ bool Family::isInScrollRange( ) const {
 	//	if ( _player[ i ]->getPos( ).x
 	//}
 	return true;
+}
+
+void Family::call( PlayerPtr player ) {
+	_monmotaro->appear( player );
 }

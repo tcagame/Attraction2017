@@ -1,33 +1,36 @@
 #pragma once
 #include "Character.h"
 
+PTR( Monmotaro );
+PTR( Player );
+
 class Monmotaro : public Character {
 public:
 	enum ACTION {
 		ACTION_HIDE,
-		ACTION_ENTRY,
-		ACTION_FADE_IN,
+		ACTION_APPEAR,
+		ACTION_FADEIN,
 		ACTION_MOVE,
 		ACTION_ATTACK,
-		ACTION_FADE_OUT,
+		ACTION_FADEOUT,
 	};
 public:
-	Monmotaro( const Vector& pos );
+	Monmotaro( );
 	virtual ~Monmotaro( );
 public:
-	ACTION getAction( ) const;
+	void appear( PlayerPtr player );
+	void setSynchronousData( );
 private:
 	void act( );
 	void actOnHide( );
-	void actOnEntry( );
+	void actOnAppear( );
 	void actOnFadeIn( );
 	void actOnMove( );
 	void actOnFadeOut( );
 	void setAction( ACTION action );
-	void damage( int force );
-	void setSynchronousData( );
 private:
-	int _tracking;
+	PlayerConstPtr _player;
+	int _capture_power;
 	ACTION _action;
 };
 
