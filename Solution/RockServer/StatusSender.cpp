@@ -94,7 +94,8 @@ void StatusSender::updateFamily( ) {
 		//_Ší‚ðŽ‚Á‚Ä‚¢‚é‚ÆASTREET_3‚ÖˆÚ“®
 		if ( ( player.item & ITEM_FIRE ) &&
 			 ( player.item & ITEM_ROCK ) &&
-			 ( player.item & ITEM_TREE ) ) {
+			 ( player.item & ITEM_TREE ) &&
+			 ( player.area & AREA_STREET_2 ) ) {
 			player.area = AREA_STREET_3;
 		}
 		_status->getPlayer( i ) = player;
