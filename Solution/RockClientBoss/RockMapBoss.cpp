@@ -43,6 +43,7 @@ void RockMapBoss::update( ) {
 		Sound::getTask( )->stopBGM( );
 		RockArmoury::getTask( )->clearShot( );
 		RockMilitary::getTask( )->clean( );
+		RockStorage::getTask( )->clean( );
 	}
 
 	STAGE now = _drawer->getStage( );
